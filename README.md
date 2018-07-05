@@ -1,2 +1,2 @@
-# paxstore-3rd-sys-java-sdk
+# PAXSTORE 3rd System Java SDK
 This is the 3rd system java SDK of PAXSTORE
