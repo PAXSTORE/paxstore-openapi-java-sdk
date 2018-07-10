@@ -73,6 +73,7 @@ Constructor parameters
 |locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object is depend on locale|
 
 <br>
+
 ### Search resellers
 
 API
