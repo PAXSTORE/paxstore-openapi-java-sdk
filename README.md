@@ -41,9 +41,12 @@ Structure of PageInfo
 
 
 ## Apply access rights
+
 <br>
 <br>
+
 ## Intergrate with SDK
+
 Update pom.xml add SDK dependency for your java project.
 
 ```
@@ -55,6 +58,7 @@ Update pom.xml add SDK dependency for your java project.
 ```
 
 <br/>
+
 ## Manage resellers
 
 All the reseller related APIs are encapsulated in the class com.pax.market.api.sdk.java.api.reseller.ResellerApi.
@@ -105,6 +109,7 @@ Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super"
 
 <br>
 Sample result(JSON formatted)
+
 ```
 {
 	"businessCode": 0,
@@ -134,7 +139,9 @@ Sample result(JSON formatted)
 	}
 }
 ```
+
 <br>
+
 The type of object in dataSet is ResellerPageDTO. And the structure shows like below.
 
 |Property Name|Type|Description|
@@ -158,12 +165,15 @@ Possible validation errors
 
 
 ### Get a reseller
+
 Get reseller by reseller id. 
 
 API
+
 ```
 public Result<ResellerDTO>  getReseller(Long resellerId)
 ```
+
 Input parameter(s) description
 
 |Parameter Name|Type|Nullable|Description|
@@ -171,12 +181,14 @@ Input parameter(s) description
 |resellerId|Long|false|the id of reseller|
 
 Sample codes
+
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerDTO> result = resellerApi.getReseller(17850L);
 ```
 
 Sample result(JSON formatted)
+
 ```
 {
 	"businessCode": 0,
@@ -198,6 +210,7 @@ Sample result(JSON formatted)
 	}
 }
 ```
+
 <br>
 The type of data is ResellerDTO, and the structure shows below.
 
@@ -237,6 +250,7 @@ Possible business codes
 ### Create a reseller
 
 API
+
 ```
 public Result<ResellerDTO>  createReseller(ResellerCreateRequest resellerCreateRequest) 
 ```
@@ -280,6 +294,7 @@ Result<ResellerDTO> result = resellerApi.createReseller(request);
 ```
 
 Sample result(JSON formatted)
+
 ```
 {
 	"businessCode": 0,
@@ -301,6 +316,7 @@ Sample result(JSON formatted)
 	}
 }
 ```
+
 Type of data is ResellerDTO, same as the API get reseller.
 
 Possible validation errors
@@ -346,7 +362,9 @@ Possible business codes
 |3400|Country code is invalid|&nbsp;|
 
 ### Update a reseller
+
 API
+
 ```
 public Result<ResellerDTO>  updateReseller(Long resellerId, ResellerUpdateRequest resellerUpdateRequest)
 ```
@@ -374,6 +392,7 @@ Structure of class ResellerUpdateRequest
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
 
 Sample codes
+
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 ResellerUpdateRequest request = new ResellerUpdateRequest();
@@ -390,6 +409,7 @@ Result<ResellerDTO> result = resellerApi.updateReseller(17850L, request);
 ```
 
 Sample result
+
 ```
 {
 	"businessCode": 0,
@@ -411,6 +431,7 @@ Sample result
 	}
 }
 ```
+
 Type of data is ResellerDTO, same as the API get reseller.
 
 Possible validation errors
@@ -460,7 +481,9 @@ Possible business codes
 
 
 ### Activate a reseller
+
 API
+
 ```
 public Result<String> activateReseller(Long resellerId)
 ```
@@ -472,12 +495,14 @@ Input parameter(s) description
 |resellerId|Long|false|The reseller's id.|
 
 Sample codes
+
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = resellerApi.activateReseller(51739L);
 ```
 
 Sample result
+
 ```
 {
 	"businessCode": 0
@@ -502,7 +527,9 @@ Possible business codes
 
 
 ### Disable a reseller
+
 API
+
 ```
 public Result<String> disableReseller(Long resellerId)
 ```
@@ -514,12 +541,14 @@ Input parameter(s) description
 |resellerId|Long|false|The reseller's id.|
 
 Sample codes
+
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = resellerApi.disableReseller(51739L);
 ```
 
 Sample result
+
 ```
 {
 	"businessCode": 0
@@ -545,10 +574,13 @@ Possible business codes
 |1781|The reseller has active sub-resellers|&nbsp;|
 
 ### Delete a reseller
+
 API
+
 ```
 public Result<String> deleteReseller(Long resellerId)
 ```
+
 Input parameter(s) description
 
 |Parameter Name|Type|Nullable|Description|
@@ -556,12 +588,14 @@ Input parameter(s) description
 |resellerId|Long|false|The reseller's id.|
 
 Sample codes
+
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = resellerApi.deleteReseller(51739L);
 ```
 
 Sample result
+
 ```
 {
 	"businessCode": 0
