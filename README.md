@@ -621,6 +621,7 @@ Possible business codes
 |1780|The reseller has sub-resellers|&nbsp;|
 
 
+【merchant】(merchant_api.md)
 
 
 
