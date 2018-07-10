@@ -10,11 +10,13 @@
 7. Global business codes
 
 ## Introduction
+
 PAXSTORE exposes some reseller, merchant and terminal related APIs so that the external application can do operations on reseller, merchant and terminal without logging into PAXSTORE'a admin console. The exposed API is REST formatted. PAXSTORE provides the SDK to simplify the remote invoke.
 <br>
 <br>
 
 ## Overview
+
 Description of SDK return object *com.pax.market.api.sdk.java.api.base.dto.Result*
 
 |Property|Type|Description|
@@ -63,6 +65,7 @@ Constructores of ResellerAPI
 public ResellerApi(String baseUrl, String appKey, String appSecret);
 public ResellerApi(String baseUrl, String appKey, String appSecret, Locale locale);
 ```
+
 Constructor parameters
 
 |Name|Type|Description|
@@ -77,9 +80,11 @@ Constructor parameters
 ### Search resellers
 
 API
+
 ```
 public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, String orderBy, String name, ResellerStatus status)
 ```
+
 <br>
 Input parameter(s) description
 
@@ -97,6 +102,7 @@ Sample codes
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super", ResellerStatus.Suspend);
 ```
+
 <br>
 Sample result(JSON formatted)
 ```
@@ -141,7 +147,9 @@ The type of object in dataSet is ResellerPageDTO. And the structure shows like b
 |email|String|the email of reseller|
 |status|String|the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)|
 <br>
+
 Possible validation errors
+
 > <font color="red">pageSize:must be greater than or equal to 1</font><br>
 > <font color="red">pageNo:must be greater than or equal to 1</font><br>
 > <font color="red">pageSize:must be less than or equal to 1000</font>
