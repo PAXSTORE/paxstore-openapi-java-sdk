@@ -54,6 +54,7 @@ Update pom.xml add SDK dependency for your java project.
 
 <br/>
 ## Manage resellers
+
 All the reseller related APIs are encapsulated in the class com.pax.market.api.sdk.java.api.reseller.ResellerApi.
 
 Constructores of ResellerAPI
@@ -73,6 +74,7 @@ Constructor parameters
 
 <br>
 ### Search resellers
+
 API
 ```
 public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, String orderBy, String name, ResellerStatus status)
@@ -89,6 +91,7 @@ Input parameter(s) description
 
 <br>
 Sample codes
+
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super", ResellerStatus.Suspend);
