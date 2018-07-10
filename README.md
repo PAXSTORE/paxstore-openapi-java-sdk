@@ -43,6 +43,7 @@ Structure of PageInfo
 <br>
 ## Intergrate with SDK
 Update pom.xml add SDK dependency for your java project.
+
 ```
 <dependency>
 	<groupId>p-market-sdk</groupId>
@@ -50,6 +51,7 @@ Update pom.xml add SDK dependency for your java project.
     <version>6.00.00</version>
 </dependency>
 ```
+
 <br/>
 ## Manage resellers
 All the reseller related APIs are encapsulated in the class com.pax.market.api.sdk.java.api.reseller.ResellerApi.
