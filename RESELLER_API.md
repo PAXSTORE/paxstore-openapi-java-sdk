@@ -9,14 +9,14 @@ public ResellerApi(String baseUrl, String appKey, String appSecret);
 public ResellerApi(String baseUrl, String appKey, String appSecret, Locale locale);
 ```
 
-Constructor parameters
+Constructor parameters description
 
 |Name|Type|Description|
 |:--|:--|:--|
 |baseUrl|String|the base url of REST API|
 |appKey|String|the appkey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
 |appSecret|String|appSecret, get app secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object is depend on locale|
+|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
 <br>
 
@@ -36,6 +36,7 @@ Input parameter(s) description
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
 |orderBy|String|true|the sort order property|
+|name|String|true|search by name|
 |status|ResellerStatus|true|the reseller status<br/> the value can be ResellerStatus.Active, ResellerStatus.Inactive, ResellerStatus.Suspend|
 
 <br>
