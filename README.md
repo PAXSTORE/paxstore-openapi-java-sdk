@@ -83,7 +83,7 @@ After click OK button the external system access is enabled and the access key i
 
 ### Step 3
 
-Click the eye icon in external system access configuration page to get the access secret.  It will show a dialog like below screenshot. 
+Click the eye icon in external system configuration page to get the access secret.  It will show a dialog like below screenshot. 
 
 ![](/assets/sc-5.png)
 
@@ -93,7 +93,7 @@ Please click OK button. And it will show the access secret instead of asterisks.
 
 For security purpose it only allow user to see the access secret one time. When user next time log in the access secret is replaced by asterisks again and no eye icon beside it. If user want to get the access secret again he/she must click the RESET button to get the new access key and access secret.  
 
-Please keep the access key and access secret safely. Once the access key or access secret leaks please goto external system access configuration page to disable external system access or reset the access key and access secret.
+Please keep the access key and access secret safely. Once the access key or access secret leaks please goto external system configuration page to disable external system access or reset the access key and access secret.
 
 
 
