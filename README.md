@@ -55,6 +55,17 @@ Below figure listed the global business codes, those business codes may appear i
 
 ## Apply access rights
 
+If the thirdparty systems want to call the REST APIs they must enable external system access in PAXSTORE admin console for the certain marketplaces and get the access key and access secret.  
+
+Below are the step for enabling external system access and get access key and access secret.
+
+### 1. Step 1
+
+Log in to PAXSTORE admin console and click General Setting in left menu.
+
+![](/assets/sc-1.png)
+
+
 <br>
 <br>
 
