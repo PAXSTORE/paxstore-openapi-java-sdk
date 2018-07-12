@@ -61,7 +61,9 @@ Update pom.xml add SDK dependency for your java project.
 
 ## [Reseller APIs](RESELLER_API.md)  
 
-## [Merchant APIs](MERCHANT_API.md)
+## [Merchant APIs](MERCHANT_API.md)  
+
+## [Terminal APIs](TERMINAL_API.md)
 
 ## [Country Code](COUNTRY_CODE.md)
 

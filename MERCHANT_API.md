@@ -3,7 +3,7 @@
 The merchant APIs allow thirdparty system search resellers, get a reseller, create/update a reseller, activate/disable a reseller and delete a exist reseller.
 All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.reseller.ResellerApi*.   
 
-Constructors of ResellerAPI
+**Constructors of ResellerAPI**
 
 ```
 public MerchantApi(String baseUrl, String appKey, String appSecret);
