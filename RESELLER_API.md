@@ -2,14 +2,14 @@
 
 All the reseller related APIs are encapsulated in the class com.pax.market.api.sdk.java.api.reseller.ResellerApi.
 
-Constructores of ResellerAPI
+**Constructors of ResellerAPI**
 
 ```
 public ResellerApi(String baseUrl, String appKey, String appSecret);
 public ResellerApi(String baseUrl, String appKey, String appSecret, Locale locale);
 ```
 
-Constructor parameters description
+**Constructor parameters description**
 
 |Name|Type|Description|
 |:--|:--|:--|
@@ -22,14 +22,14 @@ Constructor parameters description
 
 ### Search resellers
 
-API
+**API**
 
 ```
 public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, String orderBy, String name, ResellerStatus status)
 ```
 
 <br>
-Input parameter(s) description
+**Input parameter(s) description**
 
 | Name| Type | Nullable|Description |
 |:--- | :---|:---|:---|
@@ -39,16 +39,24 @@ Input parameter(s) description
 |name|String|true|search by name|
 |status|ResellerStatus|true|the reseller status<br/> the value can be ResellerStatus.Active, ResellerStatus.Inactive, ResellerStatus.Suspend|
 
-<br>
-Sample codes
+<br/>
+**Sample codes**
 
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super", ResellerStatus.Suspend);
 ```
 
-<br>
-Sample result(JSON formatted)
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageSize:must be greater than or equal to 1"]
+}
+```
+
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -82,7 +90,7 @@ Sample result(JSON formatted)
 
 <br>
 
-The type of object in dataSet is ResellerPageDTO. And the structure shows like below.
+The type in dataSet of is ResellerPageDTO. And the structure shows like below.
 
 |Property Name|Type|Description|
 |:--|:--|:--|
@@ -95,7 +103,7 @@ The type of object in dataSet is ResellerPageDTO. And the structure shows like b
 |status|String|the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)|
 <br>
 
-Possible validation errors
+**Possible client validation errors**
 
 > <font color="red">pageSize:must be greater than or equal to 1</font><br>
 > <font color="red">pageNo:must be greater than or equal to 1</font><br>
@@ -108,26 +116,45 @@ Possible validation errors
 
 Get reseller by reseller id. 
 
-API
+**API**
 
 ```
 public Result<ResellerDTO>  getReseller(Long resellerId)
 ```
 
-Input parameter(s) description
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |resellerId|Long|false|the id of reseller|
 
-Sample codes
+**Sample codes**
 
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerDTO> result = resellerApi.getReseller(17850L);
 ```
 
-Sample result(JSON formatted)
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["email:not a well-formed email address", "contact:may not be empty", "country:may not be empty"]
+}
+```
+
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1760,
+	"message": "Reseller name already exists"
+}
+```
+
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -175,13 +202,13 @@ Structure of SimpleResellerDTO
 
 
 
-Possible validation errors
+**Possible client validation errors**
 
 
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font>
 
 
-Possible business codes
+**Possible business codes**
 
 |Business Code|Message|Description|
 |:--|:--|:--|
@@ -189,13 +216,13 @@ Possible business codes
 
 ### Create a reseller
 
-API
+**API**
 
 ```
 public Result<ResellerDTO>  createReseller(ResellerCreateRequest resellerCreateRequest) 
 ```
 
-Input parameter(s) description
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
@@ -216,7 +243,7 @@ Structure of class ResellerCreateRequest
 |parentResellerName|String|true|Parent reseller name, if it is empty will set the root reseller of current marketplace as the parent reseller|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
 
-Sample codes
+**Sample codes**
 
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
@@ -233,7 +260,25 @@ request.setEntityAttributeValues(attrs);
 Result<ResellerDTO> result = resellerApi.createReseller(request);
 ```
 
-Sample result(JSON formatted)
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["email:may not be empty", "country:may not be empty"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1760,
+	"message": "Reseller name already exists"
+}
+```
+
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -259,7 +304,8 @@ Sample result(JSON formatted)
 
 Type of data is ResellerDTO, same as the API get reseller.
 
-Possible validation errors
+**Possible client validation errors**
+
 > <font color="red">Parameter resellerCreateRequest cannot be null!</font><br/>
 > <font color="red">contact:may not be empty</font><br/>
 > <font color="red">email:may not be empty</font><br/>
@@ -277,7 +323,7 @@ Possible validation errors
 > <font color="red">email:not a well-formed email address</font>
 
 
-Possible business codes
+**Possible business codes**
 
 |Business Code|Message|Description|
 |:--|:--|:--|
@@ -303,13 +349,13 @@ Possible business codes
 
 ### Update a reseller
 
-API
+**API**
 
 ```
 public Result<ResellerDTO>  updateReseller(Long resellerId, ResellerUpdateRequest resellerUpdateRequest)
 ```
 
-Input parameter(s) description
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
@@ -329,9 +375,10 @@ Structure of class ResellerUpdateRequest
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
 |parentResellerName|String|true|Parent reseller name, if it is empty will set the root reseller of current marketplace as the parent reseller|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
+|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|  
 
-Sample codes
+
+**Sample codes**
 
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
@@ -348,7 +395,28 @@ request.setEntityAttributeValues(attrs);
 Result<ResellerDTO> result = resellerApi.updateReseller(17850L, request);
 ```
 
-Sample result
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["email:may not be empty", "country:may not be empty", "contact:may not be empty", "name:may not be empty"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 12000,
+	"message": "code is mandatory"
+}
+```
+
+Note: the code in message is the dynamic attribute for the above failed sample result   
+
+
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -374,7 +442,8 @@ Sample result
 
 Type of data is ResellerDTO, same as the API get reseller.
 
-Possible validation errors
+**Possible client validation errors**  
+
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font><br/>
 > <font color="red">Parameter resellerUpdateRequest cannot be null!</font><br/>
 > <font color="red">contact:may not be empty</font><br/>
@@ -393,7 +462,8 @@ Possible validation errors
 > <font color="red">email:not a well-formed email address</font>
 
 <br>
-Possible business codes
+
+**Possible business codes**
 
 |Business Code|Message|Description|
 |:--|:--|:--|
@@ -422,26 +492,46 @@ Possible business codes
 
 ### Activate a reseller
 
-API
+**API**
+
+If activate reseller successfully there's not response content from remote server. So the data field in result is null whether activate sucessfully not not.
 
 ```
 public Result<String> activateReseller(Long resellerId)
 ```
 
-Input parameter(s) description
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |resellerId|Long|false|The reseller's id.|
 
-Sample codes
+**Sample codes**
 
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = resellerApi.activateReseller(51739L);
 ```
 
-Sample result
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter resellerId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formaatted)**
+
+```
+{
+	"businessCode": 1891,
+	"message": "The reseller has already been activated!"
+}
+```
+
+**Succssful sample result(JSON formatted)**
 
 ```
 {
@@ -449,14 +539,14 @@ Sample result
 }
 ```
 
-Note: There's no response from remote server if activate operation success
 
-Possible validation errors
+**Possible client validation errors**
+
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font>
 
 
 
-Possible business codes
+**Possible business codes**
 
 |BusinessCode|Message|Description|
 |:--|:--|:--|
@@ -468,26 +558,46 @@ Possible business codes
 
 ### Disable a reseller
 
-API
+**API**
+
+If disable successfully there's no response content from remote server. So the data field in result is null whether disable successfully or not.
 
 ```
 public Result<String> disableReseller(Long resellerId)
 ```
 
-Input parameter(s) description
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |resellerId|Long|false|The reseller's id.|
 
-Sample codes
+**Sample codes**
 
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = resellerApi.disableReseller(51739L);
 ```
 
-Sample result
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter resellerId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1886,
+	"message": "The reseller is not active,unable to disable!"
+}
+```
+
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -495,14 +605,15 @@ Sample result
 }
 ```
 
-Note: There's no response from remote server if disable operation success
 
-Possible validation errors
+
+**Possible client validation errors**
+
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font>
 
 
 
-Possible business codes
+**Possible business codes**
 
 |BusinessCode|Message|Description|
 |:--|:--|:--|
@@ -515,26 +626,46 @@ Possible business codes
 
 ### Delete a reseller
 
-API
+**API**
+
+If delete reseller successfully there's not response content from remote server. And the data field in result is always null.
 
 ```
 public Result<String> deleteReseller(Long resellerId)
 ```
 
-Input parameter(s) description
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |resellerId|Long|false|The reseller's id.|
 
-Sample codes
+**Sample codes**
 
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = resellerApi.deleteReseller(51739L);
 ```
 
-Sample result
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter resellerId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1759,
+	"message": "Reseller doesn't exist"
+}
+```
+
+**Successful sample result**
 
 ```
 {
@@ -542,13 +673,12 @@ Sample result
 }
 ```
 
-Note: There's no response from remote server if delete operation success
 
-Possible validation errors
+**Possible client validation errors**
 
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font>
 
-Possible business codes
+**Possible business codes**
 
 |BusinessCode|Message|Description|
 |:--|:--|:--|

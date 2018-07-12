@@ -46,7 +46,16 @@ MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api",
 Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, null, "2fecc", MerchantStatus.Active);
 ```
 
-**Sample result**
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageNo:must be greater than or equal to 1"]
+}
+```
+
+**Successful sample result**
 
 ```
 {
@@ -94,7 +103,8 @@ The structure of class SimpleResellerDTO
 |name|String|The name of reseller.|
 
 
-**Possible validation errors**  
+**Possible client validation errors**  
+
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 1000</font>  
@@ -124,7 +134,25 @@ MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api",
 Result<MerchantDTO> result = merchantApi.getMerchant(72590L);
 ```
 
-**Sample result(JSON formatted)**
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter merchantId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1720,
+	"message": "Merchant doesn't exist"
+}
+```
+
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -169,7 +197,7 @@ The type of data in result is MerchantDTO, and the structure shows below.
 
 The structure of SimpleResellerDTO already described in Search Merchants chapter.
 
-**Possible validation errors**
+**Possible client validation errors**
 
 > <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
 
@@ -232,7 +260,25 @@ request.setMerchantCategoryNames(Arrays.asList(categoryNames));
 Result<MerchantDTO> result = merchantApi.createMerchant(request);
 ```
 
-**Sample result(JSON formatted)**
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["name:may not be empty", "country:may not be empty", "email:may not be empty", "resellerName:may not be empty", "contact:may not be empty"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1721,
+	"message": "Merchant name already exists"
+}
+```
+
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -262,7 +308,7 @@ Result<MerchantDTO> result = merchantApi.createMerchant(request);
 
 The type of data in result is same as the get reseller API.
 
-**Possible validation errors**
+**Possible client validation errors**
 > <font color=red>Parameter merchantCreateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
 > <font color=red>country:may not be empty</font>  
@@ -359,7 +405,25 @@ request.setEntityAttributeValues(attrs);
 Result<MerchantDTO> result = merchantApi.updateMerchant(72594L, request);
 ```
 
-**Succsss sample result(JSON formatted)**
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["country:may not be empty"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1112,
+	"message": "Phone No. is invalid"
+}
+```
+
+**Succsssful sample result(JSON formatted)**
 
 ```
 {
@@ -387,19 +451,11 @@ Result<MerchantDTO> result = merchantApi.updateMerchant(72594L, request);
 }
 ```
 
-**Failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 1721,
-	"message": "Merchant name already exists"
-}
-```
 
 
 The data type in result is same as get merchant API.
 
-**Possible validation errors**
+**Possible client validation errors**
 
 > <font color=red>Parameter merchantCreateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
@@ -453,7 +509,8 @@ The data type in result is same as get merchant API.
 
 ### Activate a merchant
 
-Activate merchant API allows the thirdparty system activate a inactive merchant. If activate successful there's no response content from remote server.
+Activate merchant API allows the thirdparty system activate a inactive merchant. 
+If activate successfully there's no response content from remote server.
 
 **API**
 
@@ -474,15 +531,16 @@ MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api",
 Result<String> result = merchantApi.activateMerchant(72590L);
 ```
 
-**Success sample result(JSON formatted)**
+**Client side validation failed sample result(JSON formatted)**
 
 ```
 {
-	"businessCode": 0
+	"businessCode": -1,
+	"validationErrors": ["Parameter merchantId cannot be null and cannot be less than 1!"]
 }
 ```
 
-**Failed sample result(JSON formatted)**
+**Server side validation failed sample result(JSON formatted)**
 
 ```
 {
@@ -491,7 +549,17 @@ Result<String> result = merchantApi.activateMerchant(72590L);
 }
 ```
 
-**Possible validation errors**
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+
+**Possible client validation errors**
 > <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
 
 
@@ -508,7 +576,7 @@ Result<String> result = merchantApi.activateMerchant(72590L);
 ### Disable a merchant
 
 Disable merchant API allows the thirdparty system disable a Active/Pendding merchant.
-If disable successful there's not response content from remote server.
+If disable successfully there's not response content from remote server.
 
 **API**
 
@@ -530,15 +598,16 @@ MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api",
 Result<String> result = merchantApi.disableMerchant(72594L);
 ```
 
-**Success sample result(JSON formatted)**
+**Client side validation failed sample result(JSON formatted)**
 
 ```
 {
-	"businessCode": 0
+	"businessCode": -1,
+	"validationErrors": ["Parameter merchantId cannot be null and cannot be less than 1!"]
 }
 ```
 
-**Failed sample result(JSON formatted)**
+**Server side validation failed sample result(JSON formatted)**
 
 ```
 {
@@ -547,7 +616,17 @@ Result<String> result = merchantApi.disableMerchant(72594L);
 }
 ```
 
-**Possible validation errors**
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+
+
+**Possible client validation errors**
 
 > <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
 
@@ -565,6 +644,7 @@ Result<String> result = merchantApi.disableMerchant(72594L);
 ### Delete a merchant
 
 Delete merchant API allows the thirdparty system delete a exist merchant.
+If delete successfully there's no response content from remote server.
 
 **API**
 
@@ -586,15 +666,16 @@ MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api",
 Result<String> result = merchantApi.deleteMerchant(72593L);
 ```
 
-**Success sample result(JSON formatted)**
+**Client side validation failed sample result(JSON formatted)**
 
 ```
 {
-	"businessCode": 0
+	"businessCode": -1,
+	"validationErrors": ["Parameter merchantId cannot be null and cannot be less than 1!"]
 }
 ```
 
-**Failed sample result(JSON formatted)**
+**Server side validation failed sample result(JSON formatted)**
 
 ```
 {
@@ -603,7 +684,15 @@ Result<String> result = merchantApi.deleteMerchant(72593L);
 }
 ```
 
-**Possible validation errors**
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
 
 > <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
 
