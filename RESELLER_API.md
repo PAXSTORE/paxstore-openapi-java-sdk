@@ -45,7 +45,9 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, String 
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super", ResellerStatus.Suspend);
-```
+```    
+
+
 
 **Client side validation failed sample result(JSON formatted)**
 
