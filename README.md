@@ -11,7 +11,8 @@ PAXSTORE exposes reseller, merchant and terminal related APIs for thridparty sys
 
 ## Overview
 
-All the APIs of this SDK will return the object *com.pax.market.api.sdk.java.api.base.dto.Result*. When using the SDK to call the REST APIs it will do basic validations like required validation and length validation for the inputted parameter(s). And if the basic validation failed SDK will return the *Result* object with businessCode=-1 and the validationErrors.  
+All the APIs of this SDK will return the object *com.pax.market.api.sdk.java.api.base.dto.Result*.   
+When using the SDK to call the REST APIs it will do basic validations like required validation and length validation for the inputted parameter(s) before the SDK send the request to remote server. And if the basic validation failed SDK will return the *Result* object with businessCode=-1 and the validationErrors.  
 
 Below is the structure of class *com.pax.market.api.sdk.java.api.base.dto.Result*
 
@@ -40,7 +41,9 @@ Below figure listed the global business codes, those business codes may appear i
 |:--|:--|:--|
 |0||Successful API call.
 |16105|Cannot connect to remote server!|The remote server is down or the constructor argument *baseUrl* is not correct.|
-|16104|Connection timeout!||
+|16104|Connection timeout!|Encounter SocketTimeoutException.|
+|16106|Request error!|Please check the error log or send the error log to support.|
+|16103|JSON error!||
 |129|Authentication failed||
 |104|Client key is missing or invalid||
 |108|Marketplace is not available||
