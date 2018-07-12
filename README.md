@@ -59,11 +59,42 @@ If the thirdparty systems want to call the REST APIs they must enable external s
 
 Below are the step for enabling external system access and get access key and access secret.
 
-### 1. Step 1
+### Step 1
 
 Log in to PAXSTORE admin console and click General Setting in left menu.
 
 ![](/assets/sc-1.png)
+
+### Step 2
+
+Click the left tab External System to show the external system configuration page like below screenshot.
+
+![](/assets/sc-2.png)
+
+From above screenshot we know the external system access is disabled by default. To enable it please click the enable/disable switch. And once user clicked the switch it will pop up a confirm dialog to let user confirm.
+
+![](/assets/sc-3.png)
+
+Click OK button to continue enabling the external system access. Click the CANCEL button to cancel current operation to keep external system access disabled.
+
+After click OK button the external system access is enabled and the access key is shown in the page. But the access secret is replaced by asterisks for security purpose.
+
+![](/assets/sc-4.png)
+
+### Step 3
+
+Click the eye icon in external system access configuration page to get the access secret.  It will show a dialog like below screenshot. 
+
+![](/assets/sc-5.png)
+
+Please click OK button. And it will show the access secret instead of asterisks.
+
+![](/assets/sc-6.png)
+
+For security purpose it only allow user to see the access secret one time. When user next time log in the access secret is replaced by asterisks again and no eye icon beside it. If user want to get the access secret again he/she must click the RESET button to get the new access key and access secret.  
+
+Please keep the access key and access secret safely. Once the access key or access secret leaks please goto external system access configuration page to disable external system access or reset the access key and access secret.
+
 
 
 <br>
