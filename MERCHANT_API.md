@@ -26,7 +26,7 @@ The search merchants API allows thirdparty system to search merchants by page.
 **API**
 
 ```
-public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, String orderBy, String name, MerchantStatus status)
+public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, MerchantSearchOrderBy orderBy, String name, MerchantStatus status)
 ```
 
 **Input parameter(s) description**
@@ -35,7 +35,7 @@ public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, String 
 |:--- | :---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
-|orderBy|String|true|the sort order property|
+|orderBy|MerchantSearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of MerchantSearchOrderBy.Name, MerchantSearchOrderBy.Phone and MerchantSearchOrderBy.Contact.|
 |name|String|true|search by name|
 |status|MerchantStatus|true|the reseller status<br/> the value can be MerchantStatus.Active, MerchantStatus.Inactive, MerchantStatus.Suspend|
 

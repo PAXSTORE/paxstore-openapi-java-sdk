@@ -25,7 +25,7 @@ public ResellerApi(String baseUrl, String appKey, String appSecret, Locale local
 **API**
 
 ```
-public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, String orderBy, String name, ResellerStatus status)
+public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, ResellerSearchOrderBy orderBy, String name, ResellerStatus status)
 ```
 
 <br>
@@ -35,7 +35,7 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, String 
 |:--- | :---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
-|orderBy|String|true|the sort order property|
+|orderBy|ResellerSearchOrderBy|true|the sort order by field name, if it is null the search result will sort by id by default, and the value of thie parameter can be one of ResellerSearchOrderBy.Name, ResellerSearchOrderBy.Phone and ResellerSearchOrderBy.Contact|
 |name|String|true|search by name|
 |status|ResellerStatus|true|the reseller status<br/> the value can be ResellerStatus.Active, ResellerStatus.Inactive, ResellerStatus.Suspend|
 

@@ -28,7 +28,7 @@ The search terminal API allow the thirdparty system search terminals by page.
 **API**
 
 ```
-public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, String orderBy, TerminalStatus status, String serialNo)
+public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String serialNo)
 ```
 
 **Input parameter(s) description**
@@ -37,8 +37,8 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, String order
 |:--- | :---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
-|orderBy|String|true|the sort order property|
-|status|MerchantStatus|true|the reseller status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
+|orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
+|status|TerminalStatus|true|the reseller status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
 |serialNo|String|true|search by serial number|
 
 **Sample codes**
