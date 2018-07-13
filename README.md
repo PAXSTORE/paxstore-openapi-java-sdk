@@ -1,4 +1,4 @@
-# PAXSTORE 3rd System Java SDK
+# PAXSTORE Open API Java SDK
 
 <br/>
 <br/>
