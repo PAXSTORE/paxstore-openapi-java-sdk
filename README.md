@@ -22,7 +22,7 @@ Below is the structure of class *com.pax.market.api.sdk.java.api.base.dto.Result
 |message|String|The description of businessCode|
 |validationErrors|List|Client side validation errors.|
 |data|T(generic)|The actural DTO, the structure will be described in each APIs. And for pagination search the search result data will be in another property *pageInfo&lt;T&gt;*|
-|pageInfo|PageInfo&lg;T&gt;|The search result. If the operation is a search operation the data property is null. For the structure of PageInfo please refer to below|
+|pageInfo|PageInfo&lt;T&gt;|The search result. If the operation is a search operation the data property is null. For the structure of PageInfo please refer to below|
 <br>
 Structure of PageInfo
 
@@ -33,7 +33,7 @@ Structure of PageInfo
 |orderBy|String|order by|
 |totalCount|Long|total match record number|
 |hasNext|boolean|indicate whether there's next page|
-|dataSet|List&lt;T&&gt;|data list of current page|
+|dataSet|List&lt;T&gt;|data list of current page|
 <br>
 Below figure listed the global business codes, those business codes may appear in every result of API call. This document won't list those business codes in the following API chapters when introducing the APIs.
 
