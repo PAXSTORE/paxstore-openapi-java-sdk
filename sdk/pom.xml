@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>com.pax.market</groupId>
     <artifactId>paxstore-openapi-java-sdk</artifactId>
-	<version>6.1-SNAPSHOT</version>
+	<version>6.0-SNAPSHOT</version>
     <name>PAX Market :: Openapi Java SDK</name>
 
     <properties>
@@ -151,13 +151,9 @@
   </scm>
     
     <distributionManagement>
-        <repository>
-            <id>pax.nexus.internal</id>
-            <url>http://nexus.paxszapp.com/nexus/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>pax.nexus.snapshots</id>
-            <url>http://nexus.paxszapp.com/nexus/repository/maven-snapshots/</url>
-        </snapshotRepository>
+		<repository>
+		    <id>bintray</id>
+		    <url>https://api.bintray.com/maven/paxstore-support/paxstore/paxstore-openapi-java-sdk/;publish=1</url>
+	    </repository>
     </distributionManagement>
 </project>
