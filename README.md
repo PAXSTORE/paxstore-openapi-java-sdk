@@ -120,10 +120,10 @@ Update pom.xml add SDK dependency for your java project.
 
 ## Test Environment
 
-Log into Admin Center of demo marketplace using marketplace admin account. Enable the 3rd system access for current marketplace and get key and secret.
+Log into Admin Center of demo marketplace using marketplace admin account. Enable the 3rd system access for current marketplace and get key and secret.  
 
-URL of Admin Center of demo marketplace: https://demo.whatspos.com/admin/
-Base URL of API: https://api.paxstores.com:443/p-market-api
+URL of Admin Center of demo marketplace: https://demo.whatspos.com/admin/  
+Base URL of API: https://api.paxstores.com:443/p-market-api  
 
 
 ## License
