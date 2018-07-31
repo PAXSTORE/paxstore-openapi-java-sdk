@@ -29,7 +29,9 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 ```
 
 <br>
+
 **Input parameter(s) description**
+
 
 | Name| Type | Nullable|Description |
 |:--- | :---|:---|:---|
@@ -40,7 +42,9 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 |status|ResellerStatus|true|the reseller status<br/> the value can be ResellerStatus.Active, ResellerStatus.Inactive, ResellerStatus.Suspend|
 
 <br/>
+
 **Sample codes**
+
 
 ```
 ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
