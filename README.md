@@ -140,8 +140,8 @@ public class Sample {
 	private String SECRET = "YOUR SECRET";
 	
 	public Result<ResellerPageDTO> getResellers() {
-    	ResellerApi resellerApi = new  ResellerApi(BASEURL, KEY, SECRET);
-    	Result<ResellerPageDTO> resellerList = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Name, "reseller", ResellerStatus.Active);
+    	    ResellerApi resellerApi = new  ResellerApi(BASEURL, KEY, SECRET);
+    	    Result<ResellerPageDTO> resellerList = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Name, "reseller", ResellerStatus.Active);
     	return resellerList;
 	}
 }
