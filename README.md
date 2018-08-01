@@ -122,8 +122,18 @@ Update pom.xml add SDK dependency for your java project.
 
 Log into Admin Center of demo marketplace using marketplace admin account. Enable the 3rd system access for current marketplace and get key and secret.  
 
-URL of Admin Center of demo marketplace: https://demo.whatspos.com/admin/  
 Base URL of API: https://api.paxstores.com:443/p-market-api  
+
+## Sample Code  
+
+```
+String baseUrl = "https://api.paxstores.com:443/p-market-api";
+    	String key = "replace with your key";
+    	String secret = "replace with your secret";
+    	ResellerApi resellerApi = new  ResellerApi(baseUrl, key, secret);
+    	Result<ResellerPageDTO> resellerList = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Name, "reseller", ResellerStatus.Active);
+```
+
 
 
 ## License
