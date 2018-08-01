@@ -127,11 +127,24 @@ Base URL of API: https://api.paxstores.com:443/p-market-api
 ## Sample Code  
 
 ```
-String baseUrl = "https://api.paxstores.com:443/p-market-api";
-    	String key = "replace with your key";
-    	String secret = "replace with your secret";
-    	ResellerApi resellerApi = new  ResellerApi(baseUrl, key, secret);
+import com.pax.market.api.sdk.java.api.base.dto.Result;
+import com.pax.market.api.sdk.java.api.reseller.ResellerApi;
+import com.pax.market.api.sdk.java.api.reseller.ResellerApi.ResellerSearchOrderBy;
+import com.pax.market.api.sdk.java.api.reseller.ResellerApi.ResellerStatus;
+import com.pax.market.api.sdk.java.api.reseller.dto.ResellerPageDTO;
+
+public class Sample {
+	
+	private String BASEURL = "https://api.paxstores.com:443/p-market-api";
+	private String KEY = "YOUR KEY";
+	private String SECRET = "YOUR SECRET";
+	
+	public Result<ResellerPageDTO> getResellers() {
+    	ResellerApi resellerApi = new  ResellerApi(BASEURL, KEY, SECRET);
     	Result<ResellerPageDTO> resellerList = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Name, "reseller", ResellerStatus.Active);
+    	return resellerList;
+	}
+}
 ```
 
 
