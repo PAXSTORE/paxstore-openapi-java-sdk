@@ -66,33 +66,33 @@ Below are the step for enabling external system access and get access key and ac
 
 Log in to PAXSTORE admin console as Super Admin or Market Admin and click General Setting in left menu.
 
-![](/assets/sc-1.png)
+![](/docs/assets/sc-1.png)
 
 ### Step 2
 
 Click the left tab External System to show the external system configuration page like below screenshot.
 
-![](/assets/sc-2.png)
+![](/docs/assets/sc-2.png)
 
 From above screenshot we know the external system access is disabled by default. To enable it please click the enable/disable switch. And once user clicked the switch it will pop up a confirm dialog to let user confirm.
 
-![](/assets/sc-3.png)
+![](/docs/assets/sc-3.png)
 
 Click OK button to continue enabling the external system access. Click the CANCEL button to cancel current operation to keep external system access disabled.
 
 After click OK button the external system access is enabled and the access key is shown in the page. But the access secret is replaced by asterisks for security purpose.
 
-![](/assets/sc-4.png)
+![](/docs/assets/sc-4.png)
 
 ### Step 3
 
 Click the eye icon in external system configuration page to get the access secret.  It will show a dialog like below screenshot. 
 
-![](/assets/sc-5.png)
+![](/docs/assets/sc-5.png)
 
 Please click OK button. And it will show the access secret instead of asterisks.
 
-![](/assets/sc-6.png)
+![](/docs/assets/sc-6.png)
 
 For security purpose it only allow user to see the access secret one time. When user next time log in the access secret is replaced by asterisks again and no eye icon beside it. If user want to get the access secret again he/she must click the RESET button to get the new access key and access secret.  
 
@@ -169,13 +169,13 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 <br/>
 
-## [Reseller APIs](RESELLER_API.md)  
+## [Reseller APIs](docs/RESELLER_API.md)  
 
-## [Merchant APIs](MERCHANT_API.md)  
+## [Merchant APIs](docs/MERCHANT_API.md)  
 
-## [Terminal APIs](TERMINAL_API.md)
+## [Terminal APIs](docs/TERMINAL_API.md)
 
-## [Country Codes](COUNTRY_CODE.md)
+## [Country Codes](docs/COUNTRY_CODE.md)
 
 
 
