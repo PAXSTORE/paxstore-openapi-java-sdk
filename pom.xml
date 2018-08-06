@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ ********************************************************************************
+  ~ COPYRIGHT
+  ~               PAX TECHNOLOGY, Inc. PROPRIETARY INFORMATION
+  ~   This software is supplied under the terms of a license agreement or
+  ~   nondisclosure agreement with PAX  Technology, Inc. and may not be copied
+  ~   or disclosed except in accordance with the terms in that agreement.
+  ~
+  ~      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
+  ~ ********************************************************************************
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+	<groupId>com.pax.market</groupId>
+    <artifactId>paxstore-openapi-java-sdk</artifactId>
+	<version>6.1-SNAPSHOT</version>
+    <name>PAX Market :: Openapi Java SDK</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
+		<javadoc.opts>-Xdoclint:none</javadoc.opts>
+    </properties>
+
+    <dependencies>
+
+    
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+			<version>5.1.3.Final</version>
+        </dependency>
+	    <dependency>
+		    <groupId>org.glassfish.web</groupId>
+		    <artifactId>el-impl</artifactId>
+		    <version>2.2</version>
+		</dependency>
+		
+		 
+		<dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+			<version>2.3</version>
+
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.12</version>
+    
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+			<version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160810</version>
+        </dependency>
+		 
+    </dependencies>
+
+    <build>
+        <plugins>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+			<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.2</version>
+                    <configuration>
+                        <arguments>-DskipTests</arguments>
+                    </configuration>
+            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<aggregate>true</aggregate>
+					<charset>UTF-8</charset>
+					<docencoding>UTF-8</docencoding>
+					<additionalparam>${javadoc.opts}</additionalparam>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+        </plugins>
+    </build>
+	
+	<repositories>
+		<repository>
+			<id>pax</id>
+			<name>Pax Maven Repository</name>
+			<layout>default</layout>
+			<url>http://nexus.paxszapp.com/nexus/repository/maven-public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<!-- Define the plugin repositories -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>pax</id>
+			<name>Pax Maven Repository</name>
+			<layout>default</layout>
+			<url>http://nexus.paxszapp.com/nexus/repository/maven-public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<scm>
+        <developerConnection>scm:git:https://github.com/PAXSTORE/paxstore-openapi-java-sdk</developerConnection>
+      <tag>HEAD</tag>
+  </scm>
+    
+    <distributionManagement>
+		<repository>
+		    <id>bintray</id>
+		    <url>https://api.bintray.com/maven/paxstore-support/paxstore/paxstore-openapi-java-sdk/;publish=1</url>
+	    </repository>
+    </distributionManagement>
+</project>
