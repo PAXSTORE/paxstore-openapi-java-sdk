@@ -42,7 +42,7 @@ public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, Merchan
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, null, "2fecc", MerchantStatus.Active);
 ```
 
@@ -130,7 +130,7 @@ public Result<MerchantDTO>  getMerchant(Long merchantId)
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<MerchantDTO> result = merchantApi.getMerchant(72590L);
 ```
 
@@ -244,7 +244,7 @@ Structure of class MerchantCreateRequest
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 MerchantCreateRequest request = new MerchantCreateRequest();
 request.setName("KFC Suzhou");
 request.setResellerName("New York");
@@ -389,7 +389,7 @@ Structure of class MerchantUpdateRequest
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 MerchantUpdateRequest request = new MerchantUpdateRequest();
 request.setName("KFC Suzhou");
 request.setResellerName("New York");
@@ -527,7 +527,7 @@ public Result<String> activateMerchant(Long merchantId)
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = merchantApi.activateMerchant(72590L);
 ```
 
@@ -594,7 +594,7 @@ public Result<String> disableMerchant(Long merchantId)
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = merchantApi.disableMerchant(72594L);
 ```
 
@@ -662,7 +662,7 @@ public Result<String> deleteMerchant(Long merchantId)
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = merchantApi.deleteMerchant(72593L);
 ```
 
