@@ -47,7 +47,7 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 
 
 ```
-ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super", ResellerStatus.Suspend);
 ```    
 
@@ -137,7 +137,7 @@ public Result<ResellerDTO>  getReseller(Long resellerId)
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerDTO> result = resellerApi.getReseller(17850L);
 ```
 
@@ -252,7 +252,7 @@ Structure of class ResellerCreateRequest
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 ResellerCreateRequest request = new ResellerCreateRequest();
 request.setName("reseller_abc");
 request.setContact("Sam");
@@ -387,7 +387,7 @@ Structure of class ResellerUpdateRequest
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 ResellerUpdateRequest request = new ResellerUpdateRequest();
 request.setName("FVFFF");
 request.setContact("FFF");
@@ -515,7 +515,7 @@ public Result<String> activateReseller(Long resellerId)
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = resellerApi.activateReseller(51739L);
 ```
 
@@ -581,7 +581,7 @@ public Result<String> disableReseller(Long resellerId)
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = resellerApi.disableReseller(51739L);
 ```
 
@@ -649,7 +649,7 @@ public Result<String> deleteReseller(Long resellerId)
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = resellerApi.deleteReseller(51739L);
 ```
 
