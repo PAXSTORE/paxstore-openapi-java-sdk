@@ -5,8 +5,8 @@ All the reseller related APIs are encapsulated in the class com.pax.market.api.s
 **Constructors of ResellerAPI**
 
 ```
-public ResellerApi(String baseUrl, String appKey, String appSecret);
-public ResellerApi(String baseUrl, String appKey, String appSecret, Locale locale);
+public ResellerApi(String baseUrl, String apiKey, String apiSecret);
+public ResellerApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -14,8 +14,8 @@ public ResellerApi(String baseUrl, String appKey, String appSecret, Locale local
 |Name|Type|Description|
 |:--|:--|:--|
 |baseUrl|String|the base url of REST API|
-|appKey|String|the appkey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
-|appSecret|String|appSecret, get app secret from PAXSTORE admin console, refer to chapter Apply access rights|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 |locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
 <br>

@@ -56,18 +56,18 @@ public class TerminalApi extends BaseThirdPartySysApi{
 	protected static final String UPDATE_TERMINAL_URL = "/v1/3rdsys/terminals/{terminalId}";
 	
 
-	public TerminalApi(String baseUrl, String appKey, String appSecret) {
-		super(baseUrl, appKey, appSecret);
+	public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
+		super(baseUrl, apiKey, apiSecret);
 	}
 	
-	public TerminalApi(String baseUrl, String appKey, String appSecret, Locale locale) {
-		super(baseUrl, appKey, appSecret, locale);
+	public TerminalApi(String baseUrl, String apiKey, String apiSecret, Locale locale) {
+		super(baseUrl, apiKey, apiSecret, locale);
 	}
 	
 	
 	public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String serialNo) {
 		logger.debug("status="+status);
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		PageRequestDTO page = new PageRequestDTO();
 		page.setPageNo(pageNo);
 		page.setPageSize(pageSize);
@@ -96,7 +96,7 @@ public class TerminalApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<TerminalDTO>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(GET_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
 		TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
 		Result<TerminalDTO> result = new Result<TerminalDTO>(terminalResponse);
@@ -109,7 +109,7 @@ public class TerminalApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(ACTIVE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
 		request.setRequestMethod(RequestMethod.PUT);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
@@ -123,7 +123,7 @@ public class TerminalApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(DISABLE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
 		request.setRequestMethod(RequestMethod.PUT);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
@@ -137,7 +137,7 @@ public class TerminalApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(DELETE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
 		request.setRequestMethod(RequestMethod.DELETE);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
@@ -150,7 +150,7 @@ public class TerminalApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<TerminalDTO>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(CREATE_TERMINAL_URL);
 		request.setRequestMethod(RequestMethod.POST);
 		request.setRequestBody(new Gson().toJson(terminalCreateRequest, TerminalCreateRequest.class));
@@ -166,7 +166,7 @@ public class TerminalApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<TerminalDTO>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(UPDATE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
 		request.setRequestMethod(RequestMethod.PUT);
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);

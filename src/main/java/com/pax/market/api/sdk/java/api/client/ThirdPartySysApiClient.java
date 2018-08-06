@@ -37,13 +37,13 @@ public class ThirdPartySysApiClient {
      */
     protected String baseUrl;
     /**
-     * The App key.
+     * The Api key.
      */
-    protected String appKey;
+    protected String apiKey;
     /**
-     * The App secret.
+     * The Api secret.
      */
-    protected String appSecret;
+    protected String apiSecret;
     /**
      * The Sign method.
      */
@@ -66,16 +66,16 @@ public class ThirdPartySysApiClient {
      * @param appKey    the app key
      * @param appSecret the app secret
      */
-    public ThirdPartySysApiClient(String baseUrl, String appKey, String appSecret) {
-		this.appKey = appKey;
-		this.appSecret = appSecret;
+    public ThirdPartySysApiClient(String baseUrl, String apiKey, String apiSecret) {
+		this.apiKey = apiKey;
+		this.apiSecret = apiSecret;
 		this.baseUrl = baseUrl;
 		this.isThirdPartySys=true;
 	}
     
-    public ThirdPartySysApiClient(String baseUrl, String appKey, String appSecret, boolean isThirdPartySys) {
-		this.appKey = appKey;
-		this.appSecret = appSecret;
+    public ThirdPartySysApiClient(String baseUrl, String apiKey, String apiSecret, boolean isThirdPartySys) {
+		this.apiKey = apiKey;
+		this.apiSecret = apiSecret;
 		this.baseUrl = baseUrl;
 		this.isThirdPartySys = isThirdPartySys;
 	}
@@ -89,8 +89,8 @@ public class ThirdPartySysApiClient {
      * @param connectTimeout the connect timeout
      * @param readTimeout    the read timeout
      */
-    public ThirdPartySysApiClient(String baseUrl, String appKey, String appSecret, int connectTimeout, int readTimeout) {
-		this(baseUrl, appKey, appSecret);
+    public ThirdPartySysApiClient(String baseUrl, String apiKey, String apiSecret, int connectTimeout, int readTimeout) {
+		this(baseUrl, apiKey, apiSecret);
 		this.connectTimeout = connectTimeout;
 		this.readTimeout = readTimeout;
 		this.isThirdPartySys = true;
@@ -131,11 +131,11 @@ public class ThirdPartySysApiClient {
 	protected String _execute(SdkRequest request) throws IOException, GeneralSecurityException {
 		String response;
 
-		if(appKey != null) {
+		if(apiKey != null) {
 			if(this.isThirdPartySys) {
-				request.addRequestParam("sysKey", appKey);
+				request.addRequestParam("sysKey", apiKey);
 			}else {
-				request.addRequestParam(Constants.APP_KEY, appKey);
+				request.addRequestParam(Constants.APP_KEY, apiKey);
 			}
 			
 		}
@@ -146,8 +146,8 @@ public class ThirdPartySysApiClient {
 		request.addRequestParam(Constants.TIMESTAMP, Long.toString(timestamp));
 
 		String query = ThirdPartySysHttpUtils.buildQuery(request.getRequestParams(), Constants.CHARSET_UTF8);
-		if(appSecret != null) {
-			String signature = CryptoUtils.signRequest(query, null, appSecret, signMethod);
+		if(apiSecret != null) {
+			String signature = CryptoUtils.signRequest(query, null, apiSecret, signMethod);
 			request.addHeader(Constants.SIGNATURE, signature);
 		}
 		String requestUrl = ThirdPartySysHttpUtils.buildRequestUrl(baseUrl + request.getRequestMappingUrl(), query);

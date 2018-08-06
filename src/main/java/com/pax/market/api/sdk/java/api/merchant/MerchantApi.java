@@ -50,17 +50,17 @@ public class MerchantApi extends BaseThirdPartySysApi{
 	private static final String DISABLE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}/disable";
 	private static final String DELETE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}";
 
-	public MerchantApi(String baseUrl, String appKey, String appSecret) {
-		super(baseUrl, appKey, appSecret);
+	public MerchantApi(String baseUrl, String apiKey, String apiSecret) {
+		super(baseUrl, apiKey, apiSecret);
 	}
 	
-	public MerchantApi(String baseUrl, String appKey, String appSecret, Locale locale) {
-		super(baseUrl, appKey, appSecret, locale);
+	public MerchantApi(String baseUrl, String apiKey, String apiSecret, Locale locale) {
+		super(baseUrl, apiKey, apiSecret, locale);
 	}
 	
 	public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, MerchantSearchOrderBy orderBy, String name, MerchantStatus status) {
 		logger.debug("name="+name+"|status="+status);
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		PageRequestDTO page = new PageRequestDTO();
 		page.setPageNo(pageNo);
 		page.setPageSize(pageSize);
@@ -90,7 +90,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<MerchantDTO>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(GET_MERCHANT_URL.replace("{merchantId}", merchantId+""));
 		request.setRequestMethod(RequestMethod.GET);
         MerchantResponseDTO merchantResponseDTO = EnhancedJsonUtils.fromJson(client.execute(request), MerchantResponseDTO.class);
@@ -104,7 +104,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<MerchantDTO>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(CREATE_MERCHANT_URL);
 		request.setRequestMethod(RequestMethod.POST);
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
@@ -120,7 +120,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<MerchantDTO>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(UPDATE_MERCHANT_URL.replace("{merchantId}", merchantId+""));
 		request.setRequestMethod(RequestMethod.PUT);
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
@@ -136,7 +136,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(ACTIVATE_MERCHANT_URL.replace("{merchantId}", merchantId.toString()));
 		request.setRequestMethod(RequestMethod.PUT);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
@@ -150,7 +150,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(DISABLE_MERCHANT_URL.replace("{merchantId}", merchantId.toString()));
 		request.setRequestMethod(RequestMethod.PUT);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
@@ -164,7 +164,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(DELETE_MERCHANT_URL.replace("{merchantId}", merchantId.toString()));
 		request.setRequestMethod(RequestMethod.DELETE);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);

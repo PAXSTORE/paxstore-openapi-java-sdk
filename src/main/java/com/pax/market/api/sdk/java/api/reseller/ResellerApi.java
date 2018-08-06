@@ -50,17 +50,17 @@ public class ResellerApi extends BaseThirdPartySysApi{
 	private static final String DISABLE_RESELLER_URL = "/v1/3rdsys/resellers/{resellerId}/disable";
 	private static final String DELETE_RESELLER_URL = "/v1/3rdsys/resellers/{resellerId}";
 
-	public ResellerApi(String baseUrl, String appKey, String appSecret) {
-		super(baseUrl, appKey, appSecret);
+	public ResellerApi(String baseUrl, String apiKey, String apiSecret) {
+		super(baseUrl, apiKey, apiSecret);
 	}
 	
-	public ResellerApi(String baseUrl, String appKey, String appSecret, Locale locale) {
-		super(baseUrl, appKey, appSecret, locale);
+	public ResellerApi(String baseUrl, String apiKey, String apiSecret, Locale locale) {
+		super(baseUrl, apiKey, apiSecret, locale);
 	}
 	
 	public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, ResellerSearchOrderBy orderBy, String name, ResellerStatus status) {
 		logger.debug("name="+name+"|status="+status);
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		PageRequestDTO page = new PageRequestDTO();
 		page.setPageNo(pageNo);
 		page.setPageSize(pageSize);
@@ -87,7 +87,7 @@ public class ResellerApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<ResellerDTO>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(GET_RESELLER_URL.replace("{resellerId}", resellerId+""));
 		request.setRequestMethod(RequestMethod.GET);
         ResellerResponse resellerResponseDTO = EnhancedJsonUtils.fromJson(client.execute(request), ResellerResponse.class);
@@ -101,7 +101,7 @@ public class ResellerApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<ResellerDTO>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(CREATE_RESELLER_URL);
 		request.setRequestMethod(RequestMethod.POST);
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
@@ -117,7 +117,7 @@ public class ResellerApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<ResellerDTO>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(UPDATE_RESELLER_URL.replace("{resellerId}", resellerId+""));
 		request.setRequestMethod(RequestMethod.PUT);
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
@@ -133,7 +133,7 @@ public class ResellerApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(ACTIVATE_RESELLER_URL.replace("{resellerId}", resellerId.toString()));
 		request.setRequestMethod(RequestMethod.PUT);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
@@ -147,7 +147,7 @@ public class ResellerApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(DISABLE_RESELLER_URL.replace("{resellerId}", resellerId.toString()));
 		request.setRequestMethod(RequestMethod.PUT);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
@@ -161,7 +161,7 @@ public class ResellerApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
-		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getAppKey(), getAppSecret());
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(DELETE_RESELLER_URL.replace("{resellerId}", resellerId.toString()));
 		request.setRequestMethod(RequestMethod.DELETE);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);

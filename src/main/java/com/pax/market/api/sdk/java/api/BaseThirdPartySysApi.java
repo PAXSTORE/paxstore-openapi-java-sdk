@@ -44,26 +44,26 @@ public class BaseThirdPartySysApi{
      */
     private String baseUrl;
     /**
-     * The constant appKey.
+     * The constant apiKey.
      */
-    private String appKey;
+    private String apiKey;
     /**
-     * The constant appSecret.
+     * The constant apiSecret.
      */
-    private String appSecret;
+    private String apiSecret;
 
 
-    public BaseThirdPartySysApi(String baseUrl, String appKey, String appSecret) {
+    public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret) {
         this.baseUrl = baseUrl;
-        this.appKey = appKey;
-        this.appSecret = appSecret;
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
         factory = Validation.buildDefaultValidatorFactory();
     }
     
-    public BaseThirdPartySysApi(String baseUrl, String appKey, String appSecret, Locale locale) {
+    public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret, Locale locale) {
         this.baseUrl = baseUrl;
-        this.appKey = appKey;
-        this.appSecret = appSecret;
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
         if(locale!=null) {
         	Locale.setDefault(locale);
         }
@@ -74,15 +74,25 @@ public class BaseThirdPartySysApi{
         return baseUrl;
     }
 
-    public String getAppKey() {
-        return appKey;
-    }
-
-    public String getAppSecret() {
-        return appSecret;
-    }
     
-    protected SdkRequest createSdkRequest(String requestMappingUrl) {
+    
+    public String getApiKey() {
+		return apiKey;
+	}
+
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
+	}
+
+	public String getApiSecret() {
+		return apiSecret;
+	}
+
+	public void setApiSecret(String apiSecret) {
+		this.apiSecret = apiSecret;
+	}
+
+	protected SdkRequest createSdkRequest(String requestMappingUrl) {
     	SdkRequest request = new SdkRequest(requestMappingUrl);
     	request.addHeader("content-language", Locale.getDefault().toString());
     	return request;
