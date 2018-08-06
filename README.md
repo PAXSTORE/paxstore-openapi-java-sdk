@@ -122,7 +122,7 @@ Update pom.xml add SDK dependency for your java project.
 
 Log into Admin Center of demo marketplace using marketplace admin account. Enable the 3rd system access for current marketplace and get key and secret.  
 
-Base URL of API: https://api.paxstores.com:443/p-market-api  
+Base URL of API: https://api.whatspos.com:443/p-market-api  
 
 ## Sample Code  
 
@@ -135,7 +135,7 @@ import com.pax.market.api.sdk.java.api.reseller.dto.ResellerPageDTO;
 
 public class Sample {
 	
-	private String BASEURL = "https://api.paxstores.com:443/p-market-api";
+	private String BASEURL = "https://api.whatspos.com:443/p-market-api";
 	private String KEY = "YOUR KEY";
 	private String SECRET = "YOUR SECRET";
 	
