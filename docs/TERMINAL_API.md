@@ -44,7 +44,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225");
 ```
 
@@ -123,7 +123,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<TerminalDTO> result = terminalApi.getTerminal(907554L);
 ```
 
@@ -211,7 +211,7 @@ Structure of class TerminalCreateRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 TerminalCreateRequest createReq = new TerminalCreateRequest();
 createReq.setName("KFC-TML-001");
 createReq.setMerchantName("KFC");
@@ -335,7 +335,7 @@ Structure of class TerminalUpdateRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
 updateReq.setName("KFC-TML-001");
 updateReq.setModelName("A920");
@@ -451,7 +451,7 @@ public Result<String> activateTerminal(Long terminalId)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = terminalApi.activateTerminal(907560L);
 ```
 
@@ -519,7 +519,7 @@ public Result<String> disableTerminal(Long terminalId)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = terminalApi.disableTerminal(907560L);
 ```
 
@@ -583,7 +583,7 @@ public Result<String> deleteTerminal(Long terminalId)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = terminalApi.deleteTerminal(907560L);
 ```
 
