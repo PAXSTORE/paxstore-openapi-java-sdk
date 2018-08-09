@@ -290,7 +290,7 @@ The type of data in result is same as search terminal API.
 |1803|Terminal model is mandatory|&nbsp;|
 |2326|Terminal reseller is mandatory|&nbsp;|
 |1806|Terminal SN is too long|&nbsp;|
-|2312|Terminal Serial No. accept alphanumeric|&nbsp;|
+|2312|Terminal Serial No. accept alphanumeric|Alphanumeric and max length is 16|
 |1807|Terminal model is too long|&nbsp;|
 |1808|Terminal merchant is too long|&nbsp;|
 |1809|Terminal location is too long|&nbsp;|
@@ -412,7 +412,7 @@ The type of data in result is same as search terminal API.
 |1803|Terminal model is mandatory|&nbsp;|
 |2326|Terminal reseller is mandatory|&nbsp;|
 |1806|Terminal SN is too long|&nbsp;|
-|2312|Terminal Serial No. accept alphanumeric|&nbsp;|
+|2312|Terminal Serial No. accept alphanumeric|Alphanumeric and max length is 16|
 |1807|Terminal model is too long|&nbsp;|
 |1808|Terminal merchant is too long|&nbsp;|
 |1809|Terminal location is too long|&nbsp;|
