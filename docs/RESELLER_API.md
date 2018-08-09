@@ -350,7 +350,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1771|Reseller company is too long|&nbsp;|
 |1105|Email is invalid|&nbsp;|
 |1112|Phone No. is invalid|&nbsp;|
-|1624|The name cannot contain special characters|&nbsp;|
+|1624|The name cannot contain special characters|Name can contain the characters 0-9, a-z, A-Z, space, Chinese characters,(,),_,.|
 |3400|Country code is invalid|&nbsp;|
 
 ### Update a reseller
@@ -489,7 +489,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1770|Reseller email is too long|&nbsp;|
 |1105|Email is invalid|&nbsp;|
 |1112|Phone No. is invalid|&nbsp;|
-|1624|The name cannot contain special characters|&nbsp;|
+|1624|The name cannot contain special characters|Name can contain the characters 0-9, a-z, A-Z, space, Chinese characters,(,),_,.|
 |3400|Country code is invalid|&nbsp;|
 
 
