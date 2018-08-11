@@ -2,6 +2,7 @@ package com.pax.market.api.sdk.java.api.merchant.category;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,10 @@ public class MerchantCategoryApi extends BaseThirdPartySysApi{
 
 	public MerchantCategoryApi(String baseUrl, String apiKey, String apiSecret) {
 		super(baseUrl, apiKey, apiSecret);
+	}
+	
+	public MerchantCategoryApi(String baseUrl, String apiKey, String apiSecret, Locale locale) {
+		super(baseUrl, apiKey, apiSecret, locale);
 	}
 	
 	public Result<ArrayList<MerchantCategoryDTO>> getMerchantCategories(String name) {

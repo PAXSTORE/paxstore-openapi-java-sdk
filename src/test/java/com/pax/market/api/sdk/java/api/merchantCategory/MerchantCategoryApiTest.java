@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.merchant.category.MerchantCategoryApi;
@@ -11,6 +12,7 @@ import com.pax.market.api.sdk.java.api.merchant.category.dto.MerchantCategoryCre
 import com.pax.market.api.sdk.java.api.merchant.category.dto.MerchantCategoryDTO;
 import com.pax.market.api.sdk.java.api.merchant.category.dto.MerchantCategoryUpdateRequest;
 import com.pax.market.api.sdk.java.api.util.CryptoUtils;
+import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 
 public class MerchantCategoryApiTest {
 	
@@ -18,56 +20,55 @@ public class MerchantCategoryApiTest {
 	
 	
     public static void init(){
-    	merchantCategoryApi = new  MerchantCategoryApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+    	merchantCategoryApi = new  MerchantCategoryApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN", Locale.ENGLISH);
     }
 	
 	public static void testGetCategories() {
-		Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCategories("ab");
+		Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCategories("");
 		System.out.println(obj);
 	}
 	
 	public static void testCreateCategory() {
 		MerchantCategoryCreateRequest createRequest = new MerchantCategoryCreateRequest();
-		createRequest.setName("abcdef22");
-		createRequest.setRemarks("fefef");
-		Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(createRequest);
-		System.out.println(result);
+		createRequest.setName("Retail");
+		createRequest.setRemarks("Retail");
+		Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(null);
+		System.out.println(EnhancedJsonUtils.toJson(result));
+    	System.out.println("search result="+result);
+
 	}
 	
 	public static void testUpdateCategory() {
 		MerchantCategoryUpdateRequest updateRequest = new MerchantCategoryUpdateRequest();
-		updateRequest.setName("Fast Foods");
-		updateRequest.setRemarks("fefef");
-		Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(5L,updateRequest);
+		updateRequest.setName("Retail");
+		updateRequest.setRemarks("Fast Food remarks");
+		Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(2L,updateRequest);
 		System.out.println(result);
 	}
 	
 	public static void testDeleteCategory() {
-		Result<String> result = merchantCategoryApi.deleteMerchantCategory(1L);
+		Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 		System.out.println(result);
 	}
 	
 	public static void testBatchCreate() {
 		List<MerchantCategoryCreateRequest> batchCreateRequest = new ArrayList<MerchantCategoryCreateRequest>();
 		MerchantCategoryCreateRequest create1 = new MerchantCategoryCreateRequest();
-		create1.setName("d");
-		create1.setRemarks("fefef");
+		create1.setName("Retail");
+		create1.setRemarks("Retail remarks");
 		batchCreateRequest.add(create1);
 		
 		MerchantCategoryCreateRequest create2 = new MerchantCategoryCreateRequest();
-		create2.setName("cc");
+		create2.setName("Fast food");
 //		create2.setRemarks("ccd");
 		batchCreateRequest.add(create2);
 		
 		MerchantCategoryCreateRequest create3 = new MerchantCategoryCreateRequest();
-		create3.setName("cc");
-		create3.setRemarks("fefef");
+		create3.setName("Realty");
+		create3.setRemarks("Realty");
 		batchCreateRequest.add(create3);
 		
-		MerchantCategoryCreateRequest create4 = new MerchantCategoryCreateRequest();
-		create4.setName("abcdef226");
-		create4.setRemarks("fefef");
-		batchCreateRequest.add(create4);
+		
 		Result<String> result = merchantCategoryApi.batchCreateMerchantCategory(batchCreateRequest,false);
 		System.out.println(result);
 	}
@@ -77,11 +78,11 @@ public class MerchantCategoryApiTest {
 	
 	public static void main(String[] args) throws IOException, GeneralSecurityException {
 		init();
-//		testCreateCategory();
+		testCreateCategory();
 //		testGetCategories();
 //		testUpdateCategory();
 //		testDeleteCategory();
-		testBatchCreate();
+//		testBatchCreate();
 	
 	}
 }

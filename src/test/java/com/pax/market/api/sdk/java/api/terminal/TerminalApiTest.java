@@ -41,24 +41,24 @@ public class TerminalApiTest {
     }
 
     public static void testSearchTerminalList(){
-    	Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, TerminalStatus.Active, "sn0101012225");
+    	Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, TerminalStatus.Inactive, "sn");
 		System.out.println("search result: " + result);
 		System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
     public static void testGetTerminal(){
-    	Result<TerminalDTO> result = terminalApi.getTerminal(907554111L);
+    	Result<TerminalDTO> result = terminalApi.getTerminal(375977111L);
 		System.out.println("get result: " + result);
 		System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
     public static void testCreateTerminal() {
     	TerminalCreateRequest createReq = new TerminalCreateRequest();
-    	createReq.setName("KFC-TML-");
-    	createReq.setMerchantName("KFC");
+    	createReq.setName("KFC-TML-03");
+    	createReq.setMerchantName("KFC_Nanjing");
     	createReq.setResellerName("New York");
     	createReq.setLocation("USA");
-    	createReq.setSerialNo("sn0101012237");
+    	createReq.setSerialNo("sn0101012240");
     	createReq.setModelName("A920");
 
     	createReq.setStatus(TerminalStatus.Active);
@@ -72,14 +72,14 @@ public class TerminalApiTest {
     
     public static void testUpdateTerminal() {
     	TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
-    	updateReq.setName("KFC-TML-001");
+    	updateReq.setName("KFC-TML-JS");
     	updateReq.setModelName("A920");
     	updateReq.setLocation("CN");
-    	updateReq.setSerialNo("sn010101211226");
+    	updateReq.setSerialNo("AD0099");
     	updateReq.setResellerName("New York");
     	updateReq.setMerchantName("KFC");
     	
-    	Result<TerminalDTO> result = terminalApi.updateTerminal(907560L, updateReq);
+    	Result<TerminalDTO> result = terminalApi.updateTerminal(316995L, updateReq);
     	System.out.println("update result: " + result); 
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
@@ -111,12 +111,12 @@ public class TerminalApiTest {
     
     public static void main(String[] args){
         init();
-        testSearchTerminalList();
+//        testSearchTerminalList();
 //        testGetTerminal();
 //        testCreateTerminal();
 //        testDisableTerminal();
 //        testGetTerminal();
-//        testUpdateTerminal();
+        testUpdateTerminal();
 //        testActiveTerminal();
 //        testDisableTerminal();
 //        testDeleteTerminal();

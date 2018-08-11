@@ -48,7 +48,7 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     }
     
     public static void testSearchMerchant() {
-    	Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, MerchantSearchOrderBy.Contact, "2fecc", MerchantStatus.Active);
+    	Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, MerchantSearchOrderBy.Contact, "KFC_Nanjing", MerchantStatus.Inactive);
     	logger.info(result.toString());
     	System.out.println("search result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
@@ -58,7 +58,7 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     
     public static void testActivateMerchant() {
 //    	Result<String> result = merchantApi.activateMerchant(72594L);
-    	Result<String> result = merchantApi.activateMerchant(null);
+    	Result<String> result = merchantApi.activateMerchant(72513L);
     	System.out.println("activate result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
@@ -71,14 +71,16 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     
     public static void testCreateMerchant() {
     	MerchantCreateRequest request = new MerchantCreateRequest();
-    	request.setName("KFC_Suzhou");
+    	request.setName("KFC_Nanjing");
+    	request.setEmail("ta@pax.com");
     	request.setResellerName("New York");
-    	request.setCountry("CN");
     	request.setContact("sam");
-    	request.setEmail("sam@pax.com");
+    	request.setCountry("CN");
+    	
+    	request.setPostcode("5652");
     	request.setPhone("444888");
     	request.setAddress("Jiangsu suzhou city Xinghongjie 328#");
-    	request.setPostcode("5652");
+    	request.setDescription("Merchant KFC Nanjing");
     	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
     	attrs.put("456", "tan");
     	request.setEntityAttributeValues(attrs);
@@ -103,19 +105,25 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     public static void testUpdateMerchant() {
     	MerchantUpdateRequest request = new MerchantUpdateRequest();
 //    	request.setName("KFC Suzhou");
-    	request.setName("merchant_20180704_2fecc");
+    	request.setName("KFC_Nanjing");
+    	request.setEmail("jack@kfc.com.cn");
     	
     	request.setResellerName("New York");
-    	request.setCountry("CN");
+    	
+    	
     	request.setContact("Jack");
-    	request.setEmail("jack@kfc.com.cn");
-    	request.setPhone("xxxxx");
+    	request.setCountry("CN");
+    	
+    	request.setPhone("444866");
+    	request.setPostcode("5652");
     	String[] categoryNames = {"Fast Food"};
+    	request.setAddress("Jiangsu suzhou city Xinghongjie 328#");
+    	request.setDescription("Merchant KFC Nanjing");
     	request.setMerchantCategoryNames(Arrays.asList(categoryNames));
     	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
     	attrs.put("456", "tan2");
     	request.setEntityAttributeValues(attrs);
-    	Result<MerchantDTO> result = merchantApi.updateMerchant(72594L, request);
+    	Result<MerchantDTO> result = merchantApi.updateMerchant(72513L, request);
     	System.out.println("update result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
@@ -128,11 +136,11 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     
     public static void main(String[] args){
         init();
-//        testSearchMerchant();
+        testSearchMerchant();
 //        
-        testCreateMerchant();
+//        testCreateMerchant();
 //        testUpdateMerchant();
-//        testActivateMerchant();
+        testActivateMerchant();
 //        testDisableMerchant();
 //        testGetMerchant();
 //        testDelete();

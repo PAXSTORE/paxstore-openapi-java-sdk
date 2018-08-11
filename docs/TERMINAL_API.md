@@ -38,7 +38,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
 |orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
-|status|TerminalStatus|true|the reseller status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
+|status|TerminalStatus|true|the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
 |serialNo|String|true|search by serial number|
 
 **Sample codes**
@@ -433,7 +433,7 @@ The type of data in result is same as search terminal API.
 ### Activate a terminal
 
 Activate terminal API allows the thirdparty system to activate a terminal by terminal id.
-If activate successfully there's not response content from remote server.
+
 
 **API**
 
