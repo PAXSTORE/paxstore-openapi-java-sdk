@@ -52,18 +52,21 @@ public class ResellerApiTest {
     }
     
     public static void testGetReseller() {
-    	Result<ResellerDTO> result = resellerApi.getReseller(-17850111L);
+    	Result<ResellerDTO> result = resellerApi.getReseller(178501L);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     	System.out.println("get result="+result);
     }
     
     public static void testCreateReseller() {
     	ResellerCreateRequest request = new ResellerCreateRequest();
-    	request.setName("reseller_abc");
+    	request.setName("reseller_001");
     	request.setContact("Sam");
     	request.setCountry("CN");
-    	request.setEmail("sam@gmail.com");
+    	request.setEmail("sam2@gmail.com");
     	request.setPhone("87879696");
+    	request.setPostcode("850212");
+    	request.setCompany("Cam");
+    	request.setAddress("JiangSu Suzhou city xinghujie 203#");
     	request.setParentResellerName("New York");
     	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
     	attrs.put("111", "tan2");
@@ -78,22 +81,25 @@ public class ResellerApiTest {
     
     public static void testUpdateReseller() {
     	ResellerUpdateRequest request = new ResellerUpdateRequest();
-    	request.setName("FVFFF");
+    	request.setName("FVFFF2");
     	request.setContact("FFF");
     	request.setCountry("CN");
     	request.setEmail("FF@1234.COM");
     	request.setPhone("87879696");
+    	request.setPostcode("850212");
+    	request.setCompany("Cam");
+    	request.setAddress("JiangSu Suzhou city xinghujie 203#");
     	request.setParentResellerName("New York");
+    	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
+    	attrs.put("111", "tan2");
+    	request.setEntityAttributeValues(attrs);
+    	
 //    	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
 //    	attrs.put("111", "tan2");
 //    	request.setEntityAttributeValues(attrs);
     	
-    	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
-    	attrs.put("111", "tan2");
-//    	request.setEntityAttributeValues(attrs);
     	
-    	
-    	Result<ResellerDTO> result = resellerApi.updateReseller(17850L, request);
+    	Result<ResellerDTO> result = resellerApi.updateReseller(51745L, request);
     	System.out.println("update result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
@@ -118,11 +124,11 @@ public class ResellerApiTest {
     
     public static void main(String[] args){
         init();
-        testSearchReseller();
+//        testSearchReseller();
 //        
 //        testCreateReseller();
 //        testActivateReseller();
-//        testUpdateReseller();
+        testUpdateReseller();
 //        testGetReseller();
 //        testActivateReseller();
 //        testDisableReseller();

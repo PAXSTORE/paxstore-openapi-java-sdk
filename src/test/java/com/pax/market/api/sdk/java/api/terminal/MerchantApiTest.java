@@ -71,12 +71,14 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     
     public static void testCreateMerchant() {
     	MerchantCreateRequest request = new MerchantCreateRequest();
-    	request.setName("KFC Suzhou");
+    	request.setName("KFC_Suzhou");
     	request.setResellerName("New York");
     	request.setCountry("CN");
     	request.setContact("sam");
     	request.setEmail("sam@pax.com");
     	request.setPhone("444888");
+    	request.setAddress("Jiangsu suzhou city Xinghongjie 328#");
+    	request.setPostcode("5652");
     	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
     	attrs.put("456", "tan");
     	request.setEntityAttributeValues(attrs);
@@ -93,7 +95,7 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     }
     public static void testGetMerchant() {    	
 //    	Result<MerchantDTO> result = merchantApi.getMerchant(72590L);
-    	Result<MerchantDTO> result = merchantApi.getMerchant(72590222L);
+    	Result<MerchantDTO> result = merchantApi.getMerchant(725901L);
     	System.out.println("get result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
@@ -126,9 +128,9 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     
     public static void main(String[] args){
         init();
-        testSearchMerchant();
+//        testSearchMerchant();
 //        
-//        testCreateMerchant();
+        testCreateMerchant();
 //        testUpdateMerchant();
 //        testActivateMerchant();
 //        testDisableMerchant();

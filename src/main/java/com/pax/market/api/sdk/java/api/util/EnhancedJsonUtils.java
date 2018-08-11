@@ -64,6 +64,7 @@ public class EnhancedJsonUtils {
      * @return Javabean对象 t
      */
     public static <T> T fromJson(String sdkJsonStr, Class<T> clazz) {
+    	System.out.println(sdkJsonStr);
         return gson.fromJson(sdkJsonStr, clazz);
     }
 

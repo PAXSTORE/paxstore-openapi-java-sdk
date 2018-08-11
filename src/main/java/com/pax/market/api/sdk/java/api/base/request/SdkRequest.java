@@ -210,6 +210,8 @@ public class SdkRequest {
      * @param requestBody the request body
      */
     public void setRequestBody(String requestBody) {
+    	System.out.println("request body is");
+    	System.out.println(requestBody);
         this.requestBody = requestBody;
     }
 
