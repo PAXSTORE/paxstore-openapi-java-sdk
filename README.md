@@ -5,7 +5,7 @@
 
 ## Introduction
 
-PAXSTORE exposes reseller, merchant and terminal related APIs for thridparty system convenience. So that the authorized thirdparty system can do operations for reseller, merchant and terminal without logging into PAXSTORE's admin console. The exposed API is RESTful formatted. PAXSTORE provides the Java SDK to simplify the remote invoke.
+PAXSTORE exposes reseller, merchant and terminal related APIs for thirdparty system convenience. So that the authorized thirdparty system can do operations for reseller, merchant and terminal without logging into PAXSTORE's admin console. The exposed API is RESTful formatted. PAXSTORE provides the Java SDK to simplify the remote invoke.
 <br>
 <br>
 

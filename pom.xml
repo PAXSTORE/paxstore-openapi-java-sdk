@@ -120,35 +120,10 @@
         </plugins>
     </build>
 	
-	<repositories>
-		<repository>
-			<id>pax</id>
-			<name>Pax Maven Repository</name>
-			<layout>default</layout>
-			<url>http://nexus.paxszapp.com/nexus/repository/maven-public/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<!-- Define the plugin repositories -->
-	<pluginRepositories>
-		<pluginRepository>
-			<id>pax</id>
-			<name>Pax Maven Repository</name>
-			<layout>default</layout>
-			<url>http://nexus.paxszapp.com/nexus/repository/maven-public/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	
 	<scm>
         <developerConnection>scm:git:https://github.com/PAXSTORE/paxstore-openapi-java-sdk</developerConnection>
       <tag>HEAD</tag>
-  </scm>
+    </scm>
     
     <distributionManagement>
 		<repository>
