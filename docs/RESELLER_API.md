@@ -1,6 +1,6 @@
 ## Manage resellers
 
-All the reseller related APIs are encapsulated in the class com.pax.market.api.sdk.java.api.reseller.ResellerApi.
+All the reseller related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.reseller.ResellerApi*.
 
 **Constructors of ResellerAPI**
 

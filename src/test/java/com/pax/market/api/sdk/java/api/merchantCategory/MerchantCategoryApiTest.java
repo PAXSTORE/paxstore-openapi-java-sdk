@@ -30,9 +30,9 @@ public class MerchantCategoryApiTest {
 	
 	public static void testCreateCategory() {
 		MerchantCategoryCreateRequest createRequest = new MerchantCategoryCreateRequest();
-		createRequest.setName("Retail");
+		createRequest.setName("");
 		createRequest.setRemarks("Retail");
-		Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(null);
+		Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(createRequest);
 		System.out.println(EnhancedJsonUtils.toJson(result));
     	System.out.println("search result="+result);
 
@@ -40,37 +40,36 @@ public class MerchantCategoryApiTest {
 	
 	public static void testUpdateCategory() {
 		MerchantCategoryUpdateRequest updateRequest = new MerchantCategoryUpdateRequest();
-		updateRequest.setName("Retail");
-		updateRequest.setRemarks("Fast Food remarks");
+		updateRequest.setName("Retail3");
+		updateRequest.setRemarks("This is a retail category");
 		Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(2L,updateRequest);
-		System.out.println(result);
+		System.out.println(EnhancedJsonUtils.toJson(result));
 	}
 	
 	public static void testDeleteCategory() {
 		Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
-		System.out.println(result);
+		System.out.println(EnhancedJsonUtils.toJson(result));
 	}
 	
 	public static void testBatchCreate() {
 		List<MerchantCategoryCreateRequest> batchCreateRequest = new ArrayList<MerchantCategoryCreateRequest>();
 		MerchantCategoryCreateRequest create1 = new MerchantCategoryCreateRequest();
-		create1.setName("Retail");
+		create1.setName("Retail11");
 		create1.setRemarks("Retail remarks");
 		batchCreateRequest.add(create1);
 		
 		MerchantCategoryCreateRequest create2 = new MerchantCategoryCreateRequest();
-		create2.setName("Fast food");
-//		create2.setRemarks("ccd");
+		create2.setName("Fast food22");
+		create2.setRemarks("Retail remarks");
 		batchCreateRequest.add(create2);
 		
 		MerchantCategoryCreateRequest create3 = new MerchantCategoryCreateRequest();
-		create3.setName("Realty");
+		create3.setName("Realty33");
 		create3.setRemarks("Realty");
 		batchCreateRequest.add(create3);
 		
-		
 		Result<String> result = merchantCategoryApi.batchCreateMerchantCategory(batchCreateRequest,false);
-		System.out.println(result);
+		System.out.println(EnhancedJsonUtils.toJson(result));
 	}
 	
 	
@@ -78,11 +77,11 @@ public class MerchantCategoryApiTest {
 	
 	public static void main(String[] args) throws IOException, GeneralSecurityException {
 		init();
-		testCreateCategory();
+//		testCreateCategory();
 //		testGetCategories();
 //		testUpdateCategory();
 //		testDeleteCategory();
-//		testBatchCreate();
+		testBatchCreate();
 	
 	}
 }

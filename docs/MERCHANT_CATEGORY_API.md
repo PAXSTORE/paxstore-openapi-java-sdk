@@ -124,7 +124,7 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["name:may not be empty", "country:may not be empty", "email:may not be empty", "resellerName:may not be empty", "contact:may not be empty"]
+	"validationErrors": ["Parameter merchantCategoryCreateRequest cannot be null!"]
 }
 ```
 
@@ -132,8 +132,8 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(
 
 ```
 {
-	"businessCode": 1721,
-	"message": "Merchant name already exists"
+	"businessCode": 16001,
+	"message": "Merchant category name already exists"
 }
 ```
 
@@ -143,125 +143,66 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(
 {
 	"businessCode": 0,
 	"data": {
-		"entityAttributeValues": {
-			"tag": "suzh"
-		},
-		"merchantCategory": [{
-			"id": 1,
-			"name": "Fast Food"
-		}],
-		"id": 72594,
-		"name": "KFC Suzhou",
-		"reseller": {
-			"id": 4151,
-			"name": "New York"
-		},
-		"country": "CN",
-		"contact": "sam",
-		"email": "sam@pax.com",
-		"phone": "444888",
-		"status": "P"
+		"id": 4,
+		"name": "Retail",
+		"remarks": "Retail"
 	}
 }
 ```
 
-The type of data in result is same as the get reseller API.
+
 
 **Possible client validation errors**
 > <font color=red>Parameter merchantCategoryCreateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
-> <font color=red>country:may not be empty</font>  
-> <font color=red>email:may not be empty</font>  
-> <font color=red>resellerName:may not be empty</font>  
-> <font color=red>contact:may not be empty</font>  
-> <font color=red>name:length must be between 0 and 64</font>  
-> <font color=red>email:length must be between 0 and 255</font>  
-> <font color=red>resellerName:length must be between 0 and 64</font>  
-> <font color=red>contact:length must be between 0 and 64</font>  
-> <font color=red>country:length must be between 0 and 64</font>  
-> <font color=red>phone:length must be between 0 and 32</font>  
-> <font color=red>postcode:length must be between 0 and 16</font>  
-> <font color=red>address:length must be between 0 and 255</font>  
-> <font color=red>email:not a well-formed email address</font>  
-> <font color=red>description:length must be between 0 and 3000</font>  
+> <font color=red>name:length must be between 0 and 128</font>  
+> <font color=red>remarks:length must be between 0 and 255</font>  
+ 
 
-**Possible business codes**
+**Possible business codes**  
 
 |Business Code|Message|Description|
 |:--|:--|:--|
-|1721|Merchant name already exists|&nbsp;|
-|1759|Reseller doesn't exist|&nbsp;|
-|16000|Merchant category not found|&nbsp;|
-|1723|Merchant name is mandatory|&nbsp;|
-|1725|Merchant reseller is mandatory|&nbsp;|
-|1606|Country is mandatory|&nbsp;|
-|1726|Merchant contact is mandatory|&nbsp;|
-|1727|Merchant email is mandatory|&nbsp;|
-|1728|Merchant phone is mandatory|&nbsp;|
-|1729|Merchant name is too long|&nbsp;|
-|1731|Merchant reseller is too long|&nbsp;|
-|1618|Postcode is too long|&nbsp;|
-|1619|Address is too long|&nbsp;|
-|1732|Merchant contact is too long|&nbsp;|
-|1733|Merchant email is too long|&nbsp;|
-|1734|Merchant phone is too long|&nbsp;|
-|1736|Merchant description is too long|&nbsp;|
-|1105|Email is invalid|&nbsp;|
-|1112|Phone No. is invalid|&nbsp;|
-|3400|Country code is invalid|&nbsp;|
+|16001|Merchant category name already exists|&nbsp;|
+|16002|Merchant category name is mandatory|&nbsp;|
+|16003|Merchant category name is too long|&nbsp;|
+|16004|Merchant category remarks is too long|&nbsp;|
 
 
-### Update a merchant
+### Update a merchant category
 
-Update merchant API allows the thirdparty system update a exist merchant.
+Update merchant category API allows the thirdparty system update a exist merchant category by id.
 
 **API**
 
 ```
-public Result<MerchantDTO>  updateMerchant(Long merchantId, MerchantUpdateRequest merchantUpdateRequest)
+public Result<MerchantCategoryDTO> updateMerchantCategory(Long merchantCategoryId, MerchantCategoryUpdateRequest merchantCategoryUpdateRequest)
 ```
 
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
-|merchantId|Long|false|The id of merchant.|
-|merchantUpdateRequest|MerchantUpdateRequest|false|The update request object. The structure shows below.|
+|merchantCategoryId|Long|false|The id of merchant category.|
+|merchantCategoryUpdateRequest|MerchantCategoryUpdateRequest|false|The update request object. The structure shows below.|
 
-Structure of class MerchantUpdateRequest
+Structure of class MerchantCategoryUpdateRequest
 
 |Property Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
-|name|String|false|Merchant name, max length is 64.|
-|email|String|false|Email of merchant, max length is 255.|
-|resellerName|String|false|Reseller name of merchant, max length is 64. Make sure the reseller exist.|
-|contact|String|false|Contact of merchant, max length is 64.|
-|country|String|false|Country code of merchant, max length is 64. Please refer to country codes table.|
-|phone|String|true|Phone number of merchant, max length is 32.|
-|postcode|String|true|Postcode of merchant, max length is 16.|
-|address|String|true|Address of merchant, max length is 255.|
-|description|String|true|Description of merchant, max length is 3000.|
-|merchantCategoryNames|List&lt;String&gt;|true|Merchant categories. Make sure the categories are available.|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
+|name|String|false|Merchant category name, max length is 128.|
+|remarks|String|true|Remarks of merchant category, max length is 255.|
+
 
 
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-MerchantUpdateRequest request = new MerchantUpdateRequest();
-request.setName("KFC Suzhou");
-request.setResellerName("New York");
-request.setCountry("CN");
-request.setContact("Jack");
-request.setEmail("jack@kfc.com.cn");
-request.setPhone("86869999");
-String[] categoryNames = {"Fast Food"};
-request.setMerchantCategoryNames(Arrays.asList(categoryNames));
-LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
-attrs.put("tag", "suzh");
-request.setEntityAttributeValues(attrs);
-Result<MerchantDTO> result = merchantApi.updateMerchant(72594L, request);
+MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantCategoryUpdateRequest updateRequest = new MerchantCategoryUpdateRequest();
+updateRequest.setName("Retail");
+updateRequest.setRemarks("This is a retail category");
+Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(2L,updateRequest);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -269,7 +210,7 @@ Result<MerchantDTO> result = merchantApi.updateMerchant(72594L, request);
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["country:may not be empty"]
+	"validationErrors": ["Parameter merchantCategoryId cannot be null and cannot be lese than 1"]
 }
 ```
 
@@ -277,8 +218,8 @@ Result<MerchantDTO> result = merchantApi.updateMerchant(72594L, request);
 
 ```
 {
-	"businessCode": 1112,
-	"message": "Phone No. is invalid"
+	"businessCode": 16001,
+	"message": "Merchant category name already exists"
 }
 ```
 
@@ -288,106 +229,66 @@ Result<MerchantDTO> result = merchantApi.updateMerchant(72594L, request);
 {
 	"businessCode": 0,
 	"data": {
-		"entityAttributeValues": {
-			"tag": "suzh"
-		},
-		"merchantCategory": [{
-			"id": 1,
-			"name": "Fast Food"
-		}],
-		"id": 72594,
-		"name": "KFC Suzhou",
-		"reseller": {
-			"id": 4151,
-			"name": "New York"
-		},
-		"country": "CN",
-		"contact": "Jack",
-		"email": "jack@kfc.com.cn",
-		"phone": "86869999",
-		"status": "P"
+		"id": 2,
+		"name": "Retail",
+		"remarks": "This is a retail category"
 	}
 }
 ```
 
 
 
-The data type in result is same as get merchant API.
+
 
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantCreateRequest cannot be null!</font>  
+> <font color=red>Parameter merchantCategoryId cannot be null and cannot be lese than 1</font>  
+> <font color=red>Parameter merchantCategoryUpdateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
-> <font color=red>country:may not be empty</font>  
-> <font color=red>email:may not be empty</font>  
-> <font color=red>resellerName:may not be empty</font>  
-> <font color=red>contact:may not be empty</font>  
-> <font color=red>name:length must be between 0 and 64</font>  
-> <font color=red>email:length must be between 0 and 255</font>  
-> <font color=red>resellerName:length must be between 0 and 64</font>  
-> <font color=red>contact:length must be between 0 and 64</font>  
-> <font color=red>country:length must be between 0 and 64</font>  
-> <font color=red>phone:length must be between 0 and 32</font>  
-> <font color=red>postcode:length must be between 0 and 16</font>  
-> <font color=red>address:length must be between 0 and 255</font>  
-> <font color=red>email:not a well-formed email address</font>  
-> <font color=red>description:length must be between 0 and 3000</font>  
+> <font color=red>name:length must be between 0 and 128</font>  
+> <font color=red>remarks:length must be between 0 and 255</font> 
+
 
 
 **Possible business codes**
 
 |Business Code|Message|Description|
 |:--|:--|:--|
-|1720|Merchant doesn't exist|&nbsp;|
-|1721|Merchant name already exists|&nbsp;|
-|1759|Reseller doesn't exist|&nbsp;|
 |16000|Merchant category not found|&nbsp;|
-|1723|Merchant name is mandatory|&nbsp;|
-|1606|Country is mandatory|&nbsp;|
-|1726|Merchant contact is mandatory|&nbsp;|
-|1727|Merchant email is mandatory|&nbsp;|
-|1728|Merchant phone is mandatory|&nbsp;|
-|1725|Merchant reseller is mandatory|&nbsp;|
-|1729|Merchant name is too long|&nbsp;|
-|1618|Postcode is too long|&nbsp;|
-|1619|Address is too long|&nbsp;|
-|1732|Merchant contact is too long|&nbsp;|
-|1733|Merchant email is too long|&nbsp;|
-|1734|Merchant phone is too long|&nbsp;|
-|1736|Merchant description is too long|&nbsp;|
-|1105|Email is invalid|&nbsp;|
-|1112|Phone No. is invalid|&nbsp;|
-|3400|Country code is invalid|&nbsp;|
-|1927|The merchant is not inactive,reseller cannot be updated!|&nbsp;|
-|1759|Reseller doesn't exist|&nbsp;|
-|1773|The associated reseller is not activate|&nbsp;|
+|16001|Merchant category name already exists|&nbsp;|
+|16002|Merchant category name is mandatory|&nbsp;|
+|16003|Merchant category name is too long|&nbsp;|
+|16004|Merchant category remarks is too long|&nbsp;|
 
 
 
 
 
-### Activate a merchant
 
-Activate merchant API allows the thirdparty system activate a inactive merchant. 
-If activate successfully there's no response content from remote server.
 
-**API**
+### Delete a merchant category
+
+Delete merchant category API allows the thirdparty system delete a exist merchant category by id.
+
+
+**API**  
 
 ```
-public Result<String> activateMerchant(Long merchantId)
+public Result<String> deleteMerchantCategory(Long merchantCategoryId)
 ```
 
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
-|merchantId|Long|false|The merchant id.|
+|merchantCategoryId|Long|false|The merchant category id.|
+
 
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<String> result = merchantApi.activateMerchant(72590L);
+MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -395,7 +296,7 @@ Result<String> result = merchantApi.activateMerchant(72590L);
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["Parameter merchantId cannot be null and cannot be less than 1!"]
+	"validationErrors": ["Parameter merchantCategoryId cannot be null and cannot be lese than 1!"]
 }
 ```
 
@@ -403,143 +304,8 @@ Result<String> result = merchantApi.activateMerchant(72590L);
 
 ```
 {
-	"businessCode": 1892,
-	"message": "The merchant has already been activated!"
-}
-```
-
-
-**Successful sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 0
-}
-```
-
-
-**Possible client validation errors**
-> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
-
-
-**Possible business codes**
-
-|Business Code|Message|Description|
-|:--|:--|:--|
-|1720|Merchant doesn't exist|&nbsp;|
-|1759|Reseller doesn't exist|&nbsp;|
-|1773|The associated reseller is not activate|&nbsp;|
-|1892|The merchant has already been activated!|&nbsp;|
-
-
-### Disable a merchant
-
-Disable merchant API allows the thirdparty system disable a Active/Pendding merchant.
-If disable successfully there's not response content from remote server.
-
-**API**
-
-```
-public Result<String> disableMerchant(Long merchantId)
-```
-
-**Input parameter(s) description**
-
-|Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
-|merchantId|Long|false|The merchant id.|
-
-
-**Sample codes**
-
-```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<String> result = merchantApi.disableMerchant(72594L);
-```
-
-**Client side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": -1,
-	"validationErrors": ["Parameter merchantId cannot be null and cannot be less than 1!"]
-}
-```
-
-**Server side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 1887,
-	"message": "The merchant is not active,unable to disable!"
-}
-```
-
-**Successful sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 0
-}
-```
-
-
-
-**Possible client validation errors**
-
-> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
-
-
-**Possible business codes**
-
-|Business Code|Message|Description|
-|:--|:--|:--|
-|1720|Merchant doesn't exist|&nbsp;|
-|1887|The merchant is not active,unable to disable!|&nbsp;|
-|1797|The merchant has active terminals|&nbsp;|
-
-
-
-### Delete a merchant
-
-Delete merchant API allows the thirdparty system delete a exist merchant.
-If delete successfully there's no response content from remote server.
-
-**API**
-
-```
-public Result<String> deleteMerchant(Long merchantId)
-```
-
-**Input parameter(s) description**
-
-|Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
-|merchantId|Long|false|The merchant id.|
-
-
-**Sample codes**
-
-```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<String> result = merchantApi.deleteMerchant(72593L);
-```
-
-**Client side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": -1,
-	"validationErrors": ["Parameter merchantId cannot be null and cannot be less than 1!"]
-}
-```
-
-**Server side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 1720,
-	"message": "Merchant doesn't exist"
+	"businessCode": 16000,
+	"message": "Merchant category not found"
 }
 ```
 
@@ -553,22 +319,107 @@ Result<String> result = merchantApi.deleteMerchant(72593L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter merchantCategoryId cannot be null and cannot be lese than 1!</font>  
 
 
 **Possible business codes**
 
 |Business Code|Message|Description|
 |:--|:--|:--|
-|1720|Merchant doesn't exist|&nbsp;|
-|1876|The merchant is active,unable to delete!|&nbsp;|
-|1786|The merchant has been used by terminal|&nbsp;|
+|16000|Merchant category not found|&nbsp;|
 
 
 
 
 
+### Batch create a merchant categories
 
+
+
+**API**
+
+```
+public Result<String> batchCreateMerchantCategory(List<MerchantCategoryCreateRequest> merchantCategoryBatchCreateRequest, boolean skipExist)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable|Description|
+|:--|:--|:--|:--|
+|merchantCategoryBatchCreateRequest|List&lt;MerchantCategoryCreateRequest&gt;|false|List of merchant category to create|
+|skipExist|boolean|true|if the value is true, then the name of category in create list exist in system will skip when create, if the value is false then all the categories in create list won't created in system. The default value is false.|
+
+
+
+
+
+**Sample codes**
+
+```
+MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+List<MerchantCategoryCreateRequest> batchCreateRequest = new ArrayList<MerchantCategoryCreateRequest>();
+MerchantCategoryCreateRequest create1 = new MerchantCategoryCreateRequest();
+create1.setName("Retail");
+create1.setRemarks("Retail remarks");
+batchCreateRequest.add(create1);
+MerchantCategoryCreateRequest create2 = new MerchantCategoryCreateRequest();
+create2.setName("Fast food");
+batchCreateRequest.add(create2);
+MerchantCategoryCreateRequest create3 = new MerchantCategoryCreateRequest();
+create3.setName("Realty");
+create3.setRemarks("Realty");
+batchCreateRequest.add(create3);
+Result<String> result = merchantCategoryApi.batchCreateMerchantCategory(batchCreateRequest,false);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["All the category names in the list cannot be blank!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 16009,
+	"message": "Merchant name(s) Retail in create list already exists in system"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+
+
+**Possible client validation errors**
+> <font color=red>Parameter merchantCategoryBatchCreateRequest cannot be null and empty!</font>  
+> <font color=red>All the category names in the list cannot be blank!</font>  
+> <font color=red>Merchant category name '[NAME]' is too long!</font>  
+> <font color=red>Merchant category remarks '[REMARKS]' is too long!</font>  
+
+Note: [NAME] and [REMARKS] will be replaced by name and remarks of merchant category in batch create list.
+ 
+
+**Possible business codes**  
+
+|Business Code|Message|Description|
+|:--|:--|:--|
+|Business Code|Message|Description|
+|:--|:--|:--|
+|16005|Batch create merchant category list is empty|&nbsp;|
+|16006|All the names in batch create list cannot be empty|&nbsp;|
+|16007|Merchant category names {0} in create list is too long|Note: {0} in message will be replaced by category name(s)|
+|16008|Merchant category remarks {0} in create list is too longg|Note: {0} in message will be replaced by category remarks(s)|
+|16009|Merchant category name(s) {0} in create list already exists in system|Note: {0} in the message will be replaced by merchante category name in the create list which is already exist in system.|
 
 
 

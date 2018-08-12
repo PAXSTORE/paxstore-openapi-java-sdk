@@ -1,0 +1,108 @@
+## TerminalApk API
+
+All the terminalApk related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.terminalApk.TerminalApkApi*.
+
+**Constructors of TerminalApkApi**
+
+```
+public TerminalApkApi(String baseUrl, String apiKey, String apiSecret);
+public TerminalApkApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
+```
+
+**Constructor parameters description**
+
+|Name|Type|Description|
+|:--|:--|:--|
+|baseUrl|String|the base url of REST API|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
+|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
+
+### Create terminalApk
+
+Create terminalApk API allow the thirdparty system create a terminalApk.
+
+
+**API**
+
+```
+public Result<String> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable|Description|
+|:--|:--|:--|:--|
+|createTerminalApkRequest|CreateTerminalApkRequest|false|The create request object. The structure shows below.|
+
+Structure of class TerminalCreateRequest
+
+|Property Name|Type|Nullable|Description|
+|:--|:--|:--|:--|
+|tid|String|true|The tid of terminal|
+|serialNo|String|true|The serial number of terminal|
+|packageName|String|false|The package name which indicate the application you want to push to the terminal|
+|version|String|true|The version of application which you want to push, if it is blank API will push the latest version|
+|templateName|String|true|The template name of paramter, if it is blank API will combine all the templates which belongs to the application|
+|parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the the PID in template|
+
+
+
+**Sample codes**
+
+```
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
+createTerminalApkRequest.setTid("ABC09098989");
+createTerminalApkRequest.setPackageName("com.baidu.map");
+createTerminalApkRequest.setTemplateName("template_map");
+Map<String, String> parameters = new HashMap<String, String>();
+parameters.put("PID.locationCode", "cn_js_sz");
+parameters.put("PID.showtraffic", "true");
+createTerminalApkRequest.setParameters(parameters);
+ terminalApkApi.createTerminalApk(createTerminalApkRequest);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serialNo and tid in createTerminalApkRequest cannot be blank at same time!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "TerminalApk not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+
+
+**Possible validation errors**
+
+> <font color=red>Parameter createTerminalApkRequest cannot be null!</font>  
+> <font color=red>The property parameters of createTerminalApkRequest cannot be empty!</font>  
+> <font color=red>The property serialNo and tid in createTerminalApkRequest cannot be blank at same time!</font> 
+> <font color=red>packageName:may not be empty</font> 
+> <font color=red>parameters:may not be empty</font> 
+> 
+
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:--|:--|:--|
