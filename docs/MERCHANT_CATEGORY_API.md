@@ -411,10 +411,8 @@ Note: [NAME] and [REMARKS] will be replaced by name and remarks of merchant cate
 
 **Possible business codes**  
 
-|Business Code|Message|Description|
 |:--|:--|:--|
 |Business Code|Message|Description|
-|:--|:--|:--|
 |16005|Batch create merchant category list is empty|&nbsp;|
 |16006|All the names in batch create list cannot be empty|&nbsp;|
 |16007|Merchant category names {0} in create list is too long|Note: {0} in message will be replaced by category name(s)|
