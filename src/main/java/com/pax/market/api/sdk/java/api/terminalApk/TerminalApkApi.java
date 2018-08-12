@@ -41,7 +41,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	
 	private static final Logger logger = LoggerFactory.getLogger(TerminalApkApi.class);
 	
-	private static final String CREATE_TERMINAL_APK_URL = "v1/3rdsys/terminalApks";
+	private static final String CREATE_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks";
 
 	public TerminalApkApi(String baseUrl, String apiKey, String apiSecret) {
 		super(baseUrl, apiKey, apiSecret);

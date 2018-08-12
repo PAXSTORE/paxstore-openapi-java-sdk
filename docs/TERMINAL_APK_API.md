@@ -47,6 +47,7 @@ Structure of class TerminalCreateRequest
 |templateName|String|true|The template name of paramter, if it is blank API will combine all the templates which belongs to the application|
 |parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the the PID in template|
 
+Note: tid and serialNo cannot be empty at same time.
 
 
 **Sample codes**
@@ -106,3 +107,15 @@ createTerminalApkRequest.setParameters(parameters);
 
 |Business Code|Message|Description|
 |:--|:--|:--|
+|2028|Terminal not found||
+|2029|Apk not found||
+|2030|Parameter template not found||
+|13100|Invalid application parameter variables||
+|2026|Tid and serialNo cannot empty at same time||
+|2027|Package name cannot be empty||
+|2001|Terminal app not found||
+|2000|Terminal app status is invalid||
+|9306|App is not available||
+|2022|Same version of pending terminal app already exists||
+|2023|Same version of active terminal app already exists||
+

@@ -41,9 +41,9 @@ private static final Logger logger = LoggerFactory.getLogger(TerminalApiTest.cla
     
     public static void testCreateTerminalApk() {
     	CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
-    	createTerminalApkRequest.setTid("ABC09098989");
-    	createTerminalApkRequest.setPackageName("com.baidu.map");
-    	createTerminalApkRequest.setTemplateName("template_map");
+    	createTerminalApkRequest.setTid("3KJQMK6C");
+    	createTerminalApkRequest.setPackageName("com.baidu.patient");
+    	createTerminalApkRequest.setTemplateName("TransIT_Retail.zip");
     	Map<String, String> parameters = new HashMap<String, String>();
     	parameters.put("PID.locationCode", "cn_js_sz");
     	parameters.put("PID.showtraffic", "true");
@@ -51,5 +51,9 @@ private static final Logger logger = LoggerFactory.getLogger(TerminalApiTest.cla
     	terminalApkApi.createTerminalApk(createTerminalApkRequest);
     }
 
+    public static void main(String[] args) {
+    	TerminalApkApiTest.init();
+    	TerminalApkApiTest.testCreateTerminalApk();
+    }
 
 }

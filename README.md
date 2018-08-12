@@ -175,6 +175,10 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [Terminal APIs](docs/TERMINAL_API.md)
 
+## [Merchant Category APIs](docs/MERCHANT_CATEGORY_API.md)
+
+## [Terminal Apk APIs](docs/TERMINAL_APK_API.md)
+
 ## [Country Codes](docs/COUNTRY_CODE.md)
 
 
