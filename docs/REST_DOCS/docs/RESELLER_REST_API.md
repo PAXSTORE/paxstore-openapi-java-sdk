@@ -3,6 +3,7 @@
 
 
 ### Search resellers  
+
 Search reseller by page according to name and status.
 
 <table>
@@ -192,7 +193,9 @@ Note: As the businessCode for success response always 0, so the below table only
 |1759|Reseller doesn't exist|&nbsp;|
 
 <br>
+
 ### Create a reseller  
+
 
 <table>
 <tr>
@@ -325,6 +328,7 @@ Note: As the businessCode for success response always 0, so the below table only
 |3400|Country code is invalid|&nbsp;|
 
 <br>
+
 ### Update a reseller  
 
 <table>
@@ -465,6 +469,7 @@ Note: As the businessCode for success response always 0, so the below table only
 |3400|Country code is invalid|&nbsp;|
 
 <br>
+
 ### Activate a reseller  
 
 <table>
@@ -519,6 +524,7 @@ If activate reseller successfully there's no response content from remote server
 |1894|The reseller's parent is not active|&nbsp;|
 
 <br>
+
 ### Disable a reseller  
 
 <table>
@@ -578,6 +584,7 @@ If disable successfully there's no response content from remote server.
 |1781|The reseller has active sub-resellers|&nbsp;|
 
 <br>
+
 ### Delete a reseller  
 
 <table>
