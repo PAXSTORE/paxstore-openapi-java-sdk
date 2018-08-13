@@ -68,7 +68,7 @@ public class MerchantCategoryApiTest {
 		create3.setRemarks("Realty");
 		batchCreateRequest.add(create3);
 		
-		Result<String> result = merchantCategoryApi.batchCreateMerchantCategory(batchCreateRequest,false);
+		Result<ArrayList<MerchantCategoryDTO>> result = merchantCategoryApi.batchCreateMerchantCategory(batchCreateRequest,false);
 		System.out.println(EnhancedJsonUtils.toJson(result));
 	}
 	

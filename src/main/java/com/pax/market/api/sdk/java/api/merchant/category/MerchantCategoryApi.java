@@ -108,10 +108,10 @@ public class MerchantCategoryApi extends BaseThirdPartySysApi{
 		return result;
 	}
 	
-	public Result<String> batchCreateMerchantCategory(List<MerchantCategoryCreateRequest> merchantCategoryBatchCreateRequest, boolean skipExist){
+	public Result<ArrayList<MerchantCategoryDTO>> batchCreateMerchantCategory(List<MerchantCategoryCreateRequest> merchantCategoryBatchCreateRequest, boolean skipExist){
 		List<String> validationErrs = validateBatchCreate(merchantCategoryBatchCreateRequest);
 		if(validationErrs.size()>0) {
-			return new Result<String>(validationErrs);
+			return new Result<ArrayList<MerchantCategoryDTO>>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(BATCH_CREATE_CATEGORY_URL);
@@ -119,8 +119,8 @@ public class MerchantCategoryApi extends BaseThirdPartySysApi{
 		request.addRequestParam("skipExist", skipExist+"");
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
 		request.setRequestBody(new Gson().toJson(merchantCategoryBatchCreateRequest, List.class));
-		EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-		Result<String> result = new Result<String>(emptyResponse);
+		MerchantCategoryListResponseDTO categoryList = EnhancedJsonUtils.fromJson(client.execute(request), MerchantCategoryListResponseDTO.class);
+		Result<ArrayList<MerchantCategoryDTO>> result = new Result<ArrayList<MerchantCategoryDTO>>(categoryList);
 		return result;
 	}
 	
