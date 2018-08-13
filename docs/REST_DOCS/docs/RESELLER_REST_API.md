@@ -79,8 +79,9 @@ Search reseller by page according to name and status.
 }
 ```
 
-<br>
-### Get a reseller
+<br>  
+
+### Get a reseller  
 
 Get reseller by reseller id. 
 
@@ -324,7 +325,7 @@ Note: As the businessCode for success response always 0, so the below table only
 |3400|Country code is invalid|&nbsp;|
 
 <br>
-### Update a reseller
+### Update a reseller  
 
 <table>
 <tr>
@@ -464,7 +465,7 @@ Note: As the businessCode for success response always 0, so the below table only
 |3400|Country code is invalid|&nbsp;|
 
 <br>
-### Activate a reseller
+### Activate a reseller  
 
 <table>
 <tr>
@@ -518,7 +519,7 @@ If activate reseller successfully there's no response content from remote server
 |1894|The reseller's parent is not active|&nbsp;|
 
 <br>
-### Disable a reseller
+### Disable a reseller  
 
 <table>
 <tr>
