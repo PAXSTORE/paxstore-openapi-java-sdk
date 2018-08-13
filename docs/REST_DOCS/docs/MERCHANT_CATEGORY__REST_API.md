@@ -351,7 +351,26 @@ Note: As the businessCode for success response always 0, so the below table only
 }]
 ```
 
-If created successfully there's no response content.
+**Successful Response JSON Sample**  
+
+```
+{
+	"businessCode": 0,
+	"data": [{
+		"id": 11,
+		"name": "Retail11",
+		"remarks": "Retail remarks"
+	}, {
+		"id": 12,
+		"name": "Fast food22",
+		"remarks": "Retail remarks"
+	}, {
+		"id": 13,
+		"name": "Realty33",
+		"remarks": "Realty"
+	}]
+}
+```
 
 
 **Failed Response JSON Sample**
