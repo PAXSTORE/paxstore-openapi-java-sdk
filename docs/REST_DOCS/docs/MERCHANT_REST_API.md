@@ -6,6 +6,7 @@ The merchant APIs allow thirdparty system search resellers, get a reseller, crea
 
 
 ### Search merchants  
+
 The search merchants API allows thirdparty system to search merchants by page according to merchant name, status and resellerId.
 
 <table>
@@ -77,6 +78,7 @@ The search merchants API allows thirdparty system to search merchants by page ac
 ```
 
 <br>
+
 ### Get a merchant
 
 Get merchant by merchant id. 
@@ -192,6 +194,7 @@ Note: As the businessCode for success response always 0, so the below table only
 |1720|Merchant doesn't exist|&nbsp;|
 
 <br>
+
 ### Create a merchant  
 
 <table>
@@ -341,6 +344,7 @@ Note: As the businessCode for success response always 0, so the below table only
 ```
 
 <br>
+
 ### Update a merchant  
 
 
@@ -504,6 +508,7 @@ Note: As the businessCode for success response always 0, so the below table only
 
 
 <br>
+
 ### Activate a merchant
 
 <table>
@@ -567,6 +572,7 @@ If activate merchant successfully there's no response content from remote server
 |1892|The merchant has already been activated!|&nbsp;|
 
 <br>
+
 ### Disable a merchant
 
 <table>
@@ -622,6 +628,7 @@ If disable successfully there's no response content from remote server.
 |1797|The merchant has active terminals|&nbsp;|
 
 <br>
+
 ### Delete a merchant  
 
 <table>

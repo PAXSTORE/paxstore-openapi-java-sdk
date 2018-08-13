@@ -4,7 +4,9 @@ Terminal APIs allow thirdparty system search terminals, get a terminal, create a
 
 
 <br>
-### Search terminals
+
+### Search terminals  
+
 The search terminal API allow the thirdparty system search terminals by page according to serial number and status. 
 
 <table>
@@ -78,7 +80,8 @@ The search terminal API allow the thirdparty system search terminals by page acc
 ```
 
 <br>
-### Get a terminal
+
+### Get a terminal  
 
 Get terminal by id
 
@@ -177,7 +180,8 @@ Note: As the businessCode for success response always 0, so the below table only
 |1801|Terminal doesn't exist|&nbsp;|
 
 <br>
-### Create a terminal
+
+### Create a terminal  
 
 <table>
 <tr>
@@ -303,7 +307,8 @@ Note: As the businessCode for success response always 0, so the below table only
 |1773|The associated reseller is not activate|&nbsp;|
 
 <br>
-### Update a terminal
+
+### Update a terminal  
 
 <table>
 <tr>
@@ -432,6 +437,7 @@ Note: As the businessCode for success response always 0, so the below table only
 |1773|The associated reseller is not activate|&nbsp;|
 
 <br>
+
 ### Activate a terminal  
 
 Activate terminal API allows the thirdparty system to activate a terminal by terminal id.
@@ -501,7 +507,8 @@ If activate terminal successfully there's no response content from remote server
 |1713|The associated model is not activate|&nbsp;|
 
 <br>
-### Disable a terminal
+
+### Disable a terminal  
 
 <table>
 <tr>
@@ -563,7 +570,8 @@ If disable successfully there's no response content from remote server.
 |1888|The terminal is not active,unable to disable!|&nbsp;|
 
 <br>
-### Delete a terminal
+
+### Delete a terminal  
 
 <table>
 <tr>

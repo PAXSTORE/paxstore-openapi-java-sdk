@@ -179,6 +179,7 @@ Note: As the businessCode for success response always 0, so the below table only
 
 
 <br>
+
 ### Update merchant category  
 
 
@@ -380,6 +381,7 @@ If created successfully there's no response content.
 
 
 <br>
+
 ### Delete a merchant category 
 
 <table>
