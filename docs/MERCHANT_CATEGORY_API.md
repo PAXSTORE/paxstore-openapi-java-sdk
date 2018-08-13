@@ -47,7 +47,7 @@ Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCate
 
 
 
-**Successful sample result**
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -339,7 +339,7 @@ Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 **API**
 
 ```
-public Result<String> batchCreateMerchantCategory(List<MerchantCategoryCreateRequest> merchantCategoryBatchCreateRequest, boolean skipExist)
+public Result<ArrayList<MerchantCategoryDTO>> batchCreateMerchantCategory(List<MerchantCategoryCreateRequest> merchantCategoryBatchCreateRequest, boolean skipExist)
 ```
 
 **Input parameter(s) description**
@@ -369,7 +369,7 @@ MerchantCategoryCreateRequest create3 = new MerchantCategoryCreateRequest();
 create3.setName("Realty");
 create3.setRemarks("Realty");
 batchCreateRequest.add(create3);
-Result<String> result = merchantCategoryApi.batchCreateMerchantCategory(batchCreateRequest,false);
+Result<ArrayList<MerchantCategoryDTO>> result = merchantCategoryApi.batchCreateMerchantCategory(batchCreateRequest,false);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -390,11 +390,25 @@ Result<String> result = merchantCategoryApi.batchCreateMerchantCategory(batchCre
 }
 ```
 
+
 **Successful sample result(JSON formatted)**
 
 ```
 {
-	"businessCode": 0
+	"businessCode": 0,
+	"data": [{
+		"id": 1,
+		"name": "restaurant",
+		"remarks": "restaurant"
+	}, {
+		"id": 2,
+		"name": "Fast Foods",
+		"remarks": "Fast Food remarks"
+	}, {
+		"id": 3,
+		"name": "Retail",
+		"remarks": "Retail"
+	}]
 }
 ```
 
