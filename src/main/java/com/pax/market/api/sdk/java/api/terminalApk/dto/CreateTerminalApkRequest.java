@@ -28,7 +28,6 @@ public class CreateTerminalApkRequest implements Serializable{
 	
 	private String templateName;
 	
-	@NotNull
 	private Map<String, String> parameters;
 	
 	public String getTid() {

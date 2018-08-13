@@ -74,9 +74,6 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 			validationErrs.add(super.getMessage("parameter.createTerminalApkRequest.null"));
 		}else {
 			validate(createTerminalApkRequest);
-			if(createTerminalApkRequest.getParameters()!=null && createTerminalApkRequest.getParameters().isEmpty()) {
-				validationErrs.add(super.getMessage("parameter.createTerminalApkRequest.parameters.empty"));
-			}
 			if(StringUtils.isEmpty(createTerminalApkRequest.getSerialNo()) && StringUtils.isEmpty(createTerminalApkRequest.getTid())) {
 				validationErrs.add(super.getMessage("parameter.createTerminalApkRequest.sn.tid.empty"));
 			}
