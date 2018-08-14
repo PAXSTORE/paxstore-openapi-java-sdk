@@ -33,7 +33,7 @@ public class TerminalUpdateRequest implements Serializable{
 	@Length(max=64)
 	protected String name;
 
-	@Length(max=15, min=8)
+	@Length(max=16, min=8)
 	protected String tid;
     
 	@Length(max=32)
