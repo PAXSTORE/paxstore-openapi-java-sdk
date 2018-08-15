@@ -44,7 +44,7 @@ Structure of class TerminalCreateRequest
 |serialNo|String|true|The serial number of terminal|
 |packageName|String|false|The package name which indicate the application you want to push to the terminal|
 |version|String|true|The version of application which you want to push, if it is blank API will push the latest version|
-|templateName|String|true|The template name of paramter, if it is blank API will combine all the templates which belongs to the application|
+|templateName|String|true|The template name of paramter, if it is blank API will combine all the templates which belongs to the application. If user want to push more than one template the please use &#124; to concact the different template names like tempate1&#124;template2&#124;template3, the max size of template names is 10.|
 |parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the the PID in template|
 
 Note: tid and serialNo cannot be empty at same time.
@@ -100,7 +100,7 @@ createTerminalApkRequest.setParameters(parameters);
 > <font color=red>The property serialNo and tid in createTerminalApkRequest cannot be blank at same time!</font> 
 > <font color=red>packageName:may not be empty</font> 
 > <font color=red>parameters:may not be empty</font> 
-> 
+> <font color="red">The max size of template names is 10!</font>
 
 
 **Possible business codes**
@@ -108,8 +108,8 @@ createTerminalApkRequest.setParameters(parameters);
 |Business Code|Message|Description|
 |:--|:--|:--|
 |2028|Terminal not found|Please check the value of tid or serialNo|
-|2029|Apk not found||
-|2030|Parameter template not found||
+|2029|Apk not found|Cannot find apk by packagename and version|
+|2030|Parameter template not found|The given template name(s) not exist in system|
 |13100|Invalid application parameter variables||
 |2026|Tid and serialNo cannot empty at same time||
 |2027|Package name cannot be empty||
@@ -120,4 +120,5 @@ createTerminalApkRequest.setParameters(parameters);
 |2023|Same version of active terminal app already exists||
 |1905|Terminal task app parameter is invalid||
 |13100|Invalid application parameter variables||
+|1111|Selected parameter templates exceeded the max limit||
 

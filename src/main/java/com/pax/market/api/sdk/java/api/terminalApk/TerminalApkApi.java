@@ -42,6 +42,10 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	private static final Logger logger = LoggerFactory.getLogger(TerminalApkApi.class);
 	
 	private static final String CREATE_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks";
+	
+	private static final String TEMPLATE_NAME_DELIMITER = "|";
+	
+	private static final int MAX_TEMPLATE_SIZE = 10;
 
 	public TerminalApkApi(String baseUrl, String apiKey, String apiSecret) {
 		super(baseUrl, apiKey, apiSecret);
@@ -73,9 +77,14 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 		if(createTerminalApkRequest == null) {
 			validationErrs.add(super.getMessage("parameter.createTerminalApkRequest.null"));
 		}else {
-			validate(createTerminalApkRequest);
+			validationErrs.addAll(validate(createTerminalApkRequest));
 			if(StringUtils.isEmpty(createTerminalApkRequest.getSerialNo()) && StringUtils.isEmpty(createTerminalApkRequest.getTid())) {
 				validationErrs.add(super.getMessage("parameter.createTerminalApkRequest.sn.tid.empty"));
+			}
+			if(!StringUtils.isEmpty(createTerminalApkRequest.getTemplateName())) {
+				if(createTerminalApkRequest.getTemplateName().split(TEMPLATE_NAME_DELIMITER).length>MAX_TEMPLATE_SIZE) {
+					validationErrs.add(super.getMessage("parameter.createTerminalApkRequest.template.name.toolong"));
+				}
 			}
 		}
 		return validationErrs;

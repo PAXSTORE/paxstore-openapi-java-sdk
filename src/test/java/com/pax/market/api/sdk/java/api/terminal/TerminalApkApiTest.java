@@ -18,6 +18,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalApk.TerminalApkApi;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.CreateTerminalApkRequest;
 
@@ -36,19 +37,24 @@ private static final Logger logger = LoggerFactory.getLogger(TerminalApiTest.cla
 	static Long createdTerminalId = 0L;
 	
     public static void init(){
-    	terminalApkApi = new  TerminalApkApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+    	terminalApkApi = new  TerminalApkApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "PXCIGMB0HKBGKEW5EMFQF4ULJ55R2EORCC29FYAN");
+    	
     }
     
     public static void testCreateTerminalApk() {
     	CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
-    	createTerminalApkRequest.setTid("3KJQMK6C");
-    	createTerminalApkRequest.setPackageName("com.baidu.patient");
-    	createTerminalApkRequest.setTemplateName("TransIT_Retail.zip");
+//    	createTerminalApkRequest.setTid("6MB7J2QY");
+    	createTerminalApkRequest.setSerialNo("0820087293");
+    	
+    	createTerminalApkRequest.setPackageName("com.ting.mp3.android");
+//    	createTerminalApkRequest.setVersion("5.7.3.0");
+    	createTerminalApkRequest.setTemplateName("TransIT_Retail.zip|dfe|fefe|fef|fefe|fefe|fef|fefe|eee|feee|feee|fee|fee");
     	Map<String, String> parameters = new HashMap<String, String>();
     	parameters.put("PID.locationCode", "cn_js_sz");
     	parameters.put("PID.showtraffic", "true");
     	createTerminalApkRequest.setParameters(parameters);
-    	terminalApkApi.createTerminalApk(createTerminalApkRequest);
+    	Result<String> result = terminalApkApi.createTerminalApk(createTerminalApkRequest);
+    	System.out.println(result);
     }
 
     public static void main(String[] args) {

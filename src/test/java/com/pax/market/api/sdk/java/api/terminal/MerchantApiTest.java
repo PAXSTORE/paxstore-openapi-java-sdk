@@ -140,7 +140,7 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
 //        
 //        testCreateMerchant();
 //        testUpdateMerchant();
-        testActivateMerchant();
+//        testActivateMerchant();
 //        testDisableMerchant();
 //        testGetMerchant();
 //        testDelete();
