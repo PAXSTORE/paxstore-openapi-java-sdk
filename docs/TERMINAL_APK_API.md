@@ -107,7 +107,7 @@ createTerminalApkRequest.setParameters(parameters);
 
 |Business Code|Message|Description|
 |:--|:--|:--|
-|2028|Terminal not found||
+|2028|Terminal not found|Please check the value of tid or serialNo|
 |2029|Apk not found||
 |2030|Parameter template not found||
 |13100|Invalid application parameter variables||
@@ -118,4 +118,6 @@ createTerminalApkRequest.setParameters(parameters);
 |9306|App is not available||
 |2022|Same version of pending terminal app already exists||
 |2023|Same version of active terminal app already exists||
+|1905|Terminal task app parameter is invalid||
+|13100|Invalid application parameter variables||
 
