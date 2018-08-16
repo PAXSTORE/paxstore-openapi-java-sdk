@@ -138,6 +138,10 @@ Below are the possible businessCodes for all the APIs. These businessCodes won't
 |105|Client key is blocked||
 |103|Access token is invalid|Signature in http header is not correct|
 |102|Access token is missing|Signature is not in http header|
+|101|Invalid request method|The request method is not correct|
+|113|Request parameter is missing or invalid||
+|997|Malformed or illegal request|The JSON in request body is not a valid JSON|
+|998|Bad request||
 |999|Unknown error|Unknow error, please contact with support.|
 
 

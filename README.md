@@ -55,6 +55,10 @@ Below figure listed the global business codes, those business codes may appear i
 |105|Client key is blocked||
 |103|Access token is invalid||
 |102|Access token is missing|&nbsp;|
+|101|Invalid request method|The request method is not correct|
+|113|Request parameter is missing or invalid||
+|997|Malformed or illegal request|The JSON in request body is not a valid JSON|
+|998|Bad request||
 |999|Unknown error|Unknow error, please contact with support.|
 
 <br/>
