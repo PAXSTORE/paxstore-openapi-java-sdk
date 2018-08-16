@@ -26,6 +26,7 @@ public class CreateTerminalApkRequest implements Serializable{
 	
 	private String version;
 	
+	@NotBlank
 	private String templateName;
 	
 	private Map<String, String> parameters;
