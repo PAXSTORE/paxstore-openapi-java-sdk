@@ -30,11 +30,13 @@ Create terminalApk API allow the thirdparty system create a terminalApk.
 public Result<String> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest)
 ```
 
-**Input parameter(s) description**
+**Input parameter(s) description**  
+
 
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |createTerminalApkRequest|CreateTerminalApkRequest|false|The create request object. The structure shows below.|
+
 
 Structure of class TerminalCreateRequest
 
@@ -44,7 +46,7 @@ Structure of class TerminalCreateRequest
 |serialNo|String|true|The serial number of terminal|
 |packageName|String|false|The package name which indicate the application you want to push to the terminal|
 |version|String|true|The version of application which you want to push, if it is blank API will push the latest version|
-|templateName|String|true|The template name of paramter, if it is blank API will combine all the templates which belongs to the application. If user want to push more than one template the please use &#124; to concact the different template names like tempate1&#124;template2&#124;template3, the max size of template names is 10.|
+|templateName|String|true|The template name of paramter. If user want to push more than one template the please use &#124; to concact the different template names like tempate1&#124;template2&#124;template3, the max size of template names is 10.|
 |parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the the PID in template|
 
 Note: tid and serialNo cannot be empty at same time.
