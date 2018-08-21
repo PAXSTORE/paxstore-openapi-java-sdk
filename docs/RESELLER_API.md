@@ -380,7 +380,7 @@ Structure of class ResellerUpdateRequest
 |postcode|String|true|Post code, max length is 32. Sample value 510250.|
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
-|parentResellerName|String|true|Parent reseller name, if it is empty will set the root reseller of current marketplace as the parent reseller|
+|parentResellerName|String|true|Parent reseller name, if it is empty will set the root reseller of current marketplace as the parent reseller. If the status of the updated reseller is active or suspend the parent cannot be changed.|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|  
 
 
@@ -491,6 +491,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1112|Phone No. is invalid|&nbsp;|
 |1624|The name cannot contain special characters|Name can contain the characters 0-9, a-z, A-Z, space, Chinese characters,(,),_,.|
 |3400|Country code is invalid|&nbsp;|
+|1938|Reseller is active or suspend, parent cannot be updated!|&nbsp;|
 
 
 
