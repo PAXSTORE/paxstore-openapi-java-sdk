@@ -508,6 +508,72 @@ If activate terminal successfully there's no response content from remote server
 
 <br>
 
+
+### Activate a terminal(terminal id as query parameter instead of path parameter)
+
+Activate terminal API allows the thirdparty system to activate a terminal by terminal id.
+If activate successfully there's not response content from remote server.  
+
+
+<table>
+<tr>
+<td>Endpoint</td>
+<td>/v1/3rdsys/terminals/active</td>
+</tr>
+<tr>
+<td>Request Method</td>
+<td>PUT</td>
+</tr>
+<tr>
+<td>Path Parameter(s)</td>
+<td></td>
+</tr>
+<tr>
+<td>Query Parameter(s)</td>
+<td>terminalId, sysKey, timestamp</td>
+</tr>
+<tr>
+<td>Success Response Code</td>
+<td>204</td>
+</tr>
+</table>
+
+If activate terminal successfully there's no response content from remote server. 
+
+
+**Query Parameter(s) Description**  
+
+| Name| Type | Nullable|Description |
+|:--- | :---|:---|:---|
+|terminalId|Long|false|terminal id|
+|sysKey|String|false|the apiKey|
+|timestamp|String|false|currentTimeMillis|
+
+
+
+
+**Failed Response JSON Sample**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:--|:--|:--|
+|1800|Terminal not found|&nbsp;|
+|1893|The terminal has already been activated!|&nbsp;|
+|1802|Terminal SN is mandatory|&nbsp;|
+|1804|Terminal merchant is mandatory|&nbsp;|
+|1700|Model doesn't exist|&nbsp;|
+|1713|The associated model is not activate|&nbsp;|
+
+<br>
+
 ### Disable a terminal  
 
 <table>
