@@ -45,6 +45,44 @@ Search reseller by page according to name and status.
 |sysKey|String|false|the apiKey|
 |timestamp|String|false|currentTimeMillis|
 
+
+**Sample Code**  
+
+```
+public static void testSearchReseller() {
+	RestClient client = new RestClient("https://api.whatspos.cn/p-market-api/");
+	RestRequest request = new RestRequest("/v1/3rdsys/resellers", Method.GET);
+	request.AddParameter("sysKey", "ZJFXJAG7SJXPPESKVAPO");
+	request.AddParameter("pageNo","1");
+	request.AddParameter("limit","20");
+	request.AddParameter("orderBy","name");
+	request.AddParameter("name","reseller");
+	request.AddParameter("status","P");
+	String querystr = getQueryString(client, request);
+	String signature = generateSignature("AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9", querystr);
+	request.AddHeader("signature", signature);
+	IRestResponse response = client.Execute(request);
+	var responseContent = response.Content;
+	Console.WriteLine(responseContent);
+}
+
+public static string Hex(byte[] data) {
+	var sb = new StringBuilder();
+	foreach (var b in data)
+	sb.Append(b.ToString("x2"));
+	return sb.ToString();
+}
+
+public static String generateSignature(String secret, String strToSign) {
+	String signature = Hex(new HMACMD5(Encoding.UTF8.GetBytes(secret)).ComputeHash(
+	                           Encoding.UTF8.GetBytes(strToSign))).ToUpper();
+	return signature;
+}
+
+```
+
+
+
 **Success Response Sample**
 
 ```
@@ -126,6 +164,39 @@ Get reseller by reseller id.
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |resellerId|Long|false|the id of reseller|
+
+
+**Sample Code**  
+
+```
+public static void testGetResellerById() {
+	RestClient client = new RestClient("https://api.whatspos.cn/p-market-api/");
+	RestRequest requestGet = new RestRequest("/v1/3rdsys/resellers/{resellerId}", Method.GET);
+	requestGet.AddParameter("sysKey", "ZJFXJAG7SJXPPESKVAPO");
+	requestGet.AddUrlSegment("resellerId", "1000000211");
+	String querystr = getQueryString(client, requestGet);
+	String signature = generateSignature("AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9", querystr);
+	requestGet.AddHeader("signature", signature);
+	IRestResponse response = client.Execute(requestGet);
+	var responseContent = response.Content;
+	Console.WriteLine(responseContent);
+}
+
+public static string Hex(byte[] data) {
+	var sb = new StringBuilder();
+	foreach (var b in data)
+	sb.Append(b.ToString("x2"));
+	return sb.ToString();
+}
+
+public static String generateSignature(String secret, String strToSign) {
+	String signature = Hex(new HMACMD5(Encoding.UTF8.GetBytes(secret)).ComputeHash(
+	                           Encoding.UTF8.GetBytes(strToSign))).ToUpper();
+	return signature;
+}
+
+```
+
 
 **Success Response Sample**  
 
@@ -234,6 +305,50 @@ Note: As the businessCode for success response always 0, so the below table only
 |:--- | :---|:---|:---|
 |sysKey|String|false|the apiKey|
 |timestamp|String|false|currentTimeMillis|
+
+
+**Sample Code**  
+
+```
+public static void testCreateReseller() {
+	RestClient client = new RestClient("https://api.whatspos.cn/p-market-api/");
+	RestRequest request = new RestRequest("/v1/3rdsys/resellers",Method.POST);
+	request.AddParameter("sysKey", "ZJFXJAG7SJXPPESKVAPO", ParameterType.QueryString);
+	var reseller = new {
+		name = "reseller_003",
+		email = "sam2@gmail.com",
+		country = "CN",
+		contact = "sam",
+		phone = "89894545",
+		postcode = "8954",
+		address = "JiangSu Suzhou city xinghujie 203#",
+		company = "pax"
+	};
+	var resellerJson = request.JsonSerializer.Serialize(reseller);
+	request.AddParameter("application/json; charset=utf-8", resellerJson, ParameterType.RequestBody);
+	String querystr = getQueryString(client, request);
+	String signature = generateSignature("AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9", querystr);
+	request.AddHeader("signature", signature);
+	IRestResponse response = client.Execute(request);
+	var responseContent = response.Content;
+	Console.WriteLine(responseContent);
+}
+
+public static string Hex(byte[] data) {
+	var sb = new StringBuilder();
+	foreach (var b in data)
+	sb.Append(b.ToString("x2"));
+	return sb.ToString();
+}
+
+public static String generateSignature(String secret, String strToSign) {
+	String signature = Hex(new HMACMD5(Encoding.UTF8.GetBytes(secret)).ComputeHash(
+	                           Encoding.UTF8.GetBytes(strToSign))).ToUpper();
+	return signature;
+}
+
+```
+
 
 
 **Request Body Sample**  
@@ -379,6 +494,48 @@ Note: As the businessCode for success response always 0, so the below table only
 |resellerId|Long|false|Reseller's id.|
 
 
+```
+public static void testUpdateReseller() {
+	RestClient client = new RestClient("https://api.whatspos.cn/p-market-api/");
+	RestRequest request = new RestRequest("/v1/3rdsys/resellers/{resellerId}",Method.PUT);
+	request.AddParameter("sysKey", "ZJFXJAG7SJXPPESKVAPO", ParameterType.QueryString);
+	request.AddUrlSegment("resellerId","1000000225");
+	var reseller = new {
+		name = "reseller_002_ext",
+		email = "sam2@gmail.com",
+		country = "CN",
+		contact = "sam",
+		phone = "89894545",
+		postcode = "8954",
+		address = "JiangSu Suzhou city xinghujie 203#",
+		parentResellerName = "reseller_001",
+		company = "pax"
+	};
+	var resellerJson = request.JsonSerializer.Serialize(reseller);
+	request.AddParameter("application/json; charset=utf-8", resellerJson, ParameterType.RequestBody);
+	String querystr = getQueryString(client, request);
+	String signature = generateSignature("AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9", querystr);
+	request.AddHeader("signature", signature);
+	IRestResponse response = client.Execute(request);
+	var responseContent = response.Content;
+}
+
+public static string Hex(byte[] data) {
+	var sb = new StringBuilder();
+	foreach (var b in data)
+	sb.Append(b.ToString("x2"));
+	return sb.ToString();
+}
+
+public static String generateSignature(String secret, String strToSign) {
+	String signature = Hex(new HMACMD5(Encoding.UTF8.GetBytes(secret)).ComputeHash(
+	                           Encoding.UTF8.GetBytes(strToSign))).ToUpper();
+	return signature;
+}
+
+```
+
+
 **Request JSON Sample**  
 
 ```
@@ -514,6 +671,36 @@ If activate reseller successfully there's no response content from remote server
 |resellerId|Long|false|The reseller's id.|
 
 
+```
+public static void testActivateReseller() {
+	RestClient client = new RestClient("https://api.whatspos.cn/p-market-api/");
+	RestRequest request = new RestRequest("/v1/3rdsys/resellers/{resellerId}/active",Method.PUT);
+	request.AddParameter("sysKey", "ZJFXJAG7SJXPPESKVAPO", ParameterType.QueryString);
+	request.AddUrlSegment("resellerId","1000000225");
+	String querystr = getQueryString(client, request);
+	String signature = generateSignature("AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9", querystr);
+	request.AddHeader("signature", signature);
+	IRestResponse response = client.Execute(request);
+	Console.WriteLine(response.StatusCode==HttpStatusCode.NoContent?"Activate reseller success":"Activate reseller fail");
+	if(response.StatusCode!=HttpStatusCode.NoContent) {
+		Console.WriteLine(response.Content);
+	}
+}
+
+public static string Hex(byte[] data) {
+	var sb = new StringBuilder();
+	foreach (var b in data)
+	sb.Append(b.ToString("x2"));
+	return sb.ToString();
+}
+
+public static String generateSignature(String secret, String strToSign) {
+	String signature = Hex(new HMACMD5(Encoding.UTF8.GetBytes(secret)).ComputeHash(
+	                           Encoding.UTF8.GetBytes(strToSign))).ToUpper();
+	return signature;
+}
+
+```
 
 
 **Possible business codes**
@@ -573,6 +760,39 @@ If disable successfully there's no response content from remote server.
 
 
 
+```
+public static void testDisableReseller() {
+	RestClient client = new RestClient("https://api.whatspos.cn/p-market-api/");
+	RestRequest request = new RestRequest("/v1/3rdsys/resellers/{resellerId}/disable",Method.PUT);
+	request.AddParameter("sysKey", "ZJFXJAG7SJXPPESKVAPO", ParameterType.QueryString);
+	request.AddUrlSegment("resellerId","1000000225");
+	String querystr = getQueryString(client, request);
+	String signature = generateSignature("AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9", querystr);
+	request.AddHeader("signature", signature);
+	IRestResponse response = client.Execute(request);
+	Console.WriteLine(response.StatusCode==HttpStatusCode.NoContent?"Disable reseller success":"Disable reseller fail");
+	if(response.StatusCode!=HttpStatusCode.NoContent) {
+		Console.WriteLine(response.Content);
+	}
+}
+
+public static string Hex(byte[] data) {
+	var sb = new StringBuilder();
+	foreach (var b in data)
+	sb.Append(b.ToString("x2"));
+	return sb.ToString();
+}
+
+public static String generateSignature(String secret, String strToSign) {
+	String signature = Hex(new HMACMD5(Encoding.UTF8.GetBytes(secret)).ComputeHash(
+	                           Encoding.UTF8.GetBytes(strToSign))).ToUpper();
+	return signature;
+}
+
+```
+
+
+
 **Possible business codes**
 
 |BusinessCode|Message|Description|
@@ -626,6 +846,38 @@ If delete reseller successfully there's not response content from remote server.
 |Parameter Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |resellerId|Long|false|The reseller's id.|
+
+
+```
+public static void testDeleteReseller() {
+	RestClient client = new RestClient("https://api.whatspos.cn/p-market-api/");
+	RestRequest request = new RestRequest("/v1/3rdsys/resellers/{resellerId}",Method.DELETE);
+	request.AddParameter("sysKey", "ZJFXJAG7SJXPPESKVAPO", ParameterType.QueryString);
+	request.AddUrlSegment("resellerId","1000000218");
+	String querystr = getQueryString(client, request);
+	String signature = generateSignature("AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9", querystr);
+	request.AddHeader("signature", signature);
+	IRestResponse response = client.Execute(request);
+	Console.WriteLine(response.StatusCode==HttpStatusCode.NoContent?"Delete reseller success":"Delete reseller fail");
+	if(response.StatusCode!=HttpStatusCode.NoContent) {
+		Console.WriteLine(response.Content);
+	}
+}
+
+public static string Hex(byte[] data) {
+	var sb = new StringBuilder();
+	foreach (var b in data)
+	sb.Append(b.ToString("x2"));
+	return sb.ToString();
+}
+
+public static String generateSignature(String secret, String strToSign) {
+	String signature = Hex(new HMACMD5(Encoding.UTF8.GetBytes(secret)).ComputeHash(
+	                           Encoding.UTF8.GetBytes(strToSign))).ToUpper();
+	return signature;
+}
+
+```
 
 
 **Failed Response JSON Sample**
