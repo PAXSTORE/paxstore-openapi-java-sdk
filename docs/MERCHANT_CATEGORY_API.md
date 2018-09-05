@@ -42,7 +42,7 @@ public Result<ArrayList<MerchantCategoryDTO>> getMerchantCategories(String name)
 
 ```
 MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCategories("fast food");
+Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCategories("Fast Foods");
 ```
 
 
@@ -53,17 +53,9 @@ Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCate
 {
 	"businessCode": 0,
 	"data": [{
-		"id": 1,
-		"name": "restaurant",
-		"remarks": "restaurant"
-	}, {
 		"id": 2,
 		"name": "Fast Foods",
 		"remarks": "Fast Food remarks"
-	}, {
-		"id": 3,
-		"name": "Retail",
-		"remarks": "Retail"
 	}]
 }
 ```
