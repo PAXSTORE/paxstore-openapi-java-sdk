@@ -531,7 +531,7 @@ If activate reseller successfully there's no response content from remote server
 <table>
 <tr>
 <td>Endpoint</td>
-<td>/v1/3rdsys/resellers/{resellerId}/active</td>
+<td>/v1/3rdsys/resellers/{resellerId}/disable</td>
 </tr>
 <tr>
 <td>Request Method</td>
