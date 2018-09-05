@@ -40,7 +40,7 @@ public class ResellerApiTest {
 	static Long newResellerId = 0L;
 	
     public static void init(){
-    	resellerApi = new  ResellerApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+    	resellerApi = new  ResellerApi("https://api.whatspos.cn/p-market-api/", "ZJFXJAG7SJXPPESKVAPO", "AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9");
     }
     
     public static void testSearchReseller() {
@@ -67,10 +67,10 @@ public class ResellerApiTest {
     	request.setPostcode("850212");
     	request.setCompany("Cam");
     	request.setAddress("JiangSu Suzhou city xinghujie 203#");
-    	request.setParentResellerName("New York");
-    	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
-    	attrs.put("111", "tan2");
-    	request.setEntityAttributeValues(attrs);
+//    	request.setParentResellerName("New York");
+//    	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
+//    	attrs.put("111", "tan2");
+//    	request.setEntityAttributeValues(attrs);
     	Result<ResellerDTO> result = resellerApi.createReseller(request);
     	if(result.getBusinessCode() == 0) {
     		newResellerId = result.getData().getId();
@@ -126,9 +126,9 @@ public class ResellerApiTest {
         init();
 //        testSearchReseller();
 //        
-//        testCreateReseller();
+        testCreateReseller();
 //        testActivateReseller();
-        testUpdateReseller();
+//        testUpdateReseller();
 //        testGetReseller();
 //        testActivateReseller();
 //        testDisableReseller();

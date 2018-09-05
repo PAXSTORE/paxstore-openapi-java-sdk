@@ -65,7 +65,7 @@ public class TerminalApi extends BaseThirdPartySysApi{
 	}
 	
 	
-	public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String serialNo) {
+	public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID) {
 		logger.debug("status="+status);
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		PageRequestDTO page = new PageRequestDTO();
@@ -82,7 +82,7 @@ public class TerminalApi extends BaseThirdPartySysApi{
 		if(status!=null) {
 			request.addRequestParam("status", status.val);
 		}
-		request.addRequestParam("serialNo", serialNo);
+		request.addRequestParam("snNameTID", snNameTID);
         TerminalPageResponse terminalPageDTO = EnhancedJsonUtils.fromJson(client.execute(request), TerminalPageResponse.class);
         Result<TerminalDTO> result = new Result<TerminalDTO>(terminalPageDTO);
 

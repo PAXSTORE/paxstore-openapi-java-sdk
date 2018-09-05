@@ -37,11 +37,11 @@ public class TerminalApiTest {
 	static Long createdTerminalId = 0L;
 	
     public static void init(){
-    	terminalApi = new  TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+    	terminalApi = new  TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "PXCIGMB0HKBGKEW5EMFQF4ULJ55R2EORCC29FYAN");
     }
 
     public static void testSearchTerminalList(){
-    	Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, TerminalStatus.Inactive, "sn");
+    	Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, TerminalStatus.Inactive, "WXXFS");
 		System.out.println("search result: " + result);
 		System.out.println(EnhancedJsonUtils.toJson(result));
     }
@@ -111,12 +111,12 @@ public class TerminalApiTest {
     
     public static void main(String[] args){
         init();
-//        testSearchTerminalList();
+        testSearchTerminalList();
 //        testGetTerminal();
 //        testCreateTerminal();
 //        testDisableTerminal();
 //        testGetTerminal();
-        testUpdateTerminal();
+//        testUpdateTerminal();
 //        testActiveTerminal();
 //        testDisableTerminal();
 //        testDeleteTerminal();
