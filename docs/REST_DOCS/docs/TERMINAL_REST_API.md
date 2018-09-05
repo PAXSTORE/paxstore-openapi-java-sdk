@@ -43,7 +43,7 @@ The search terminal API allow the thirdparty system search terminals by page acc
 |pageNo|int|false|page number, value must >=1|
 |limit|int|false|the record number per page, range is 1 to 1000|
 |orderBy|String|true|result sort by field. the value can be one of name, contact and phone|
-|serialNo|String|true|search by serial number|
+|snNameTID|String|true|search by serial number, name or TID|
 |status|String|true|the terminalstatus<br/> the value can be A(Active), (P)Pendding, S(Suspend)|
 |sysKey|String|false|the apiKey|
 |timestamp|String|false|currentTimeMillis|
