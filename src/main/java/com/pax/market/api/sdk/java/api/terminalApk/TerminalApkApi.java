@@ -82,7 +82,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 				validationErrs.add(super.getMessage("parameter.createTerminalApkRequest.sn.tid.empty"));
 			}
 			if(!StringUtils.isEmpty(createTerminalApkRequest.getTemplateName())) {
-				if(createTerminalApkRequest.getTemplateName().split(TEMPLATE_NAME_DELIMITER).length>MAX_TEMPLATE_SIZE) {
+				if(createTerminalApkRequest.getTemplateName().split("\\"+TEMPLATE_NAME_DELIMITER).length>MAX_TEMPLATE_SIZE) {
 					validationErrs.add(super.getMessage("parameter.createTerminalApkRequest.template.name.toolong"));
 				}
 			}
