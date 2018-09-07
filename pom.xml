@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>com.pax.market</groupId>
     <artifactId>paxstore-openapi-java-sdk</artifactId>
-	<version>6.0.2-SNAPSHOT</version>
+	<version>6.0.2</version>
     <name>PAX Market :: Openapi Java SDK</name>
 
     <properties>
@@ -122,7 +122,7 @@
 	
 	<scm>
         <developerConnection>scm:git:git@github.com:PAXSTORE/paxstore-openapi-java-sdk.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>paxstore-openapi-java-sdk-6.0.2</tag>
     </scm>
     
     <distributionManagement>
