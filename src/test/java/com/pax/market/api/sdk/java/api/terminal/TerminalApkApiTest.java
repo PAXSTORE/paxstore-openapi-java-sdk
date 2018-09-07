@@ -48,7 +48,7 @@ private static final Logger logger = LoggerFactory.getLogger(TerminalApiTest.cla
     	
     	createTerminalApkRequest.setPackageName("FDRCNV-HC-Retail-S300");
 //    	createTerminalApkRequest.setVersion("5.7.3.0");
-    	createTerminalApkRequest.setTemplateName("config.zip");
+    	createTerminalApkRequest.setTemplateName("config.zip|abc.zip");
     	Map<String, String> parameters = new HashMap<String, String>();
     	parameters.put("sys.cap.emvParamCheckType", "abc");
     	

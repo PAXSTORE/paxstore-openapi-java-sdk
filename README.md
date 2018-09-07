@@ -47,6 +47,7 @@ Below figure listed the global business codes, those business codes may appear i
 |16105|Cannot connect to remote server!|The remote server is down or the constructor argument *baseUrl* is not correct.|
 |16104|Connection timeout!|Encounter SocketTimeoutException.|
 |16106|Request error!|Please check the error log or send the error log to support.|
+|16111|BaseUrl not correct!|The API BaseUrl may not correct|
 |16103|JSON error!||
 |129|Authentication failed||
 |104|Client key is missing or invalid||

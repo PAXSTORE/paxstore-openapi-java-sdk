@@ -37,11 +37,14 @@ public class TerminalApiTest {
 	static Long createdTerminalId = 0L;
 	
     public static void init(){
-    	terminalApi = new  TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "PXCIGMB0HKBGKEW5EMFQF4ULJ55R2EORCC29FYAN");
+//    	terminalApi = new  TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "PXCIGMB0HKBGKEW5EMFQF4ULJ55R2EORCC29FYAN");
+    	terminalApi = new  TerminalApi("https://api.paxstores.com/p-market-apis", "J6F2RVDFITV4UK2VZZHV", "QG3S1T2ENV7GESV73UET9I4P1L44YSWBXU8SRLZQ");
+    	
+
     }
 
     public static void testSearchTerminalList(){
-    	Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, TerminalStatus.Inactive, "WXXFS");
+    	Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, TerminalStatus.Inactive, "14494956");
 		System.out.println("search result: " + result);
 		System.out.println(EnhancedJsonUtils.toJson(result));
     }

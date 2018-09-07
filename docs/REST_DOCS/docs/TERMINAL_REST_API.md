@@ -24,7 +24,7 @@ The search terminal API allow the thirdparty system search terminals by page acc
 </tr>
 <tr>
 <td>Query Parameter(s)</td>
-<td>pageNo, limit, orderBy, status, serialNo, sysKey, timestamp</td>
+<td>pageNo, limit, orderBy, status, snNameTID, sysKey, timestamp</td>
 </tr>
 <tr>
 <td>Response Content Type</td>

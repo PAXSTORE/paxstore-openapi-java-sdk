@@ -44,7 +44,7 @@ public class ResellerApiTest {
     }
     
     public static void testSearchReseller() {
-    	Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Contact, null, ResellerStatus.Suspend);
+    	Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Contact, null, null);
     	logger.info(result.toString());
         
         System.out.println(EnhancedJsonUtils.toJson(result));
@@ -124,9 +124,9 @@ public class ResellerApiTest {
     
     public static void main(String[] args){
         init();
-//        testSearchReseller();
+        testSearchReseller();
 //        
-        testCreateReseller();
+//        testCreateReseller();
 //        testActivateReseller();
 //        testUpdateReseller();
 //        testGetReseller();
