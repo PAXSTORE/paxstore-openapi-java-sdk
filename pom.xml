@@ -121,7 +121,7 @@
     </build>
 	
 	<scm>
-        <developerConnection>scm:git:https://github.com/PAXSTORE/paxstore-openapi-java-sdk</developerConnection>
+        <developerConnection>scm:git:git@github.com:PAXSTORE/paxstore-openapi-java-sdk.git</developerConnection>
       <tag>HEAD</tag>
     </scm>
     
