@@ -157,6 +157,8 @@ public class Sample {
 }
 ```
 
+## [Changelog](docs/CHANGELOG.md)
+
 
 
 ## License
