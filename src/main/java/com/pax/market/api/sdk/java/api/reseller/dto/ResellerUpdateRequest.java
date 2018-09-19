@@ -47,6 +47,7 @@ public class ResellerUpdateRequest implements Serializable{
 	@Length(max=64)
 	private String contact;
 	
+	@NotBlank
 	@Length(max=32)
     private String phone;
 

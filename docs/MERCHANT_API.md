@@ -233,7 +233,7 @@ Structure of class MerchantCreateRequest
 |resellerName|String|false|Reseller name of merchant, max length is 64. Make sure the reseller exist.|
 |contact|String|false|Contact of merchant, max length is 64.|
 |country|String|false|Country code of merchant, max length is 64. Please refer to country codes table.|
-|phone|String|true|Phone number of merchant, max length is 32.|
+|phone|String|false|Phone number of merchant, max length is 32.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
@@ -320,6 +320,7 @@ The type of data in result is same as the get reseller API.
 > <font color=red>resellerName:length must be between 0 and 64</font>  
 > <font color=red>contact:length must be between 0 and 64</font>  
 > <font color=red>country:length must be between 0 and 64</font>  
+> <font color=red>phone:may not be empty</font>  
 > <font color=red>phone:length must be between 0 and 32</font>  
 > <font color=red>postcode:length must be between 0 and 16</font>  
 > <font color=red>address:length must be between 0 and 255</font>  
@@ -378,7 +379,7 @@ Structure of class MerchantUpdateRequest
 |resellerName|String|false|Reseller name of merchant, max length is 64. Make sure the reseller exist.|
 |contact|String|false|Contact of merchant, max length is 64.|
 |country|String|false|Country code of merchant, max length is 64. Please refer to country codes table.|
-|phone|String|true|Phone number of merchant, max length is 32.|
+|phone|String|false|Phone number of merchant, max length is 32.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
@@ -468,6 +469,7 @@ The data type in result is same as get merchant API.
 > <font color=red>resellerName:length must be between 0 and 64</font>  
 > <font color=red>contact:length must be between 0 and 64</font>  
 > <font color=red>country:length must be between 0 and 64</font>  
+> <font color=red>phone:may not be empty</font>  
 > <font color=red>phone:length must be between 0 and 32</font>  
 > <font color=red>postcode:length must be between 0 and 16</font>  
 > <font color=red>address:length must be between 0 and 255</font>  

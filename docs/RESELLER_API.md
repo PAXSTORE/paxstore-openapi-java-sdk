@@ -242,7 +242,7 @@ Structure of class ResellerCreateRequest
 |email|String|false|Email of reseller, max length is 255.|
 |country|String|false|Country code of reseller, max length is 64.|
 |contact|String|false|contact of reseller, max length is 64.|
-|phone|String|true|Phone number of reseller, max length is 32. Sample value 400-86554555.|
+|phone|String|false|Phone number of reseller, max length is 32. Sample value 400-86554555.|
 |postcode|String|true|Post code, max length is 32. Sample value 510250.|
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
@@ -321,6 +321,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 > <font color="red">email:length must be between 0 and 255</font><br/>
 > <font color="red">country:length must be between 0 and 64</font><br/>
 > <font color="red">contact:length must be between 0 and 64</font><br/>
+> <font color="red">phone:may not be empty</font><br/>
 > <font color="red">phone:length must be between 0 and 32</font><br/>
 > <font color="red">postcode:length must be between 0 and 16</font><br/>
 > <font color="red">address:length must be between 0 and 255</font><br/>
@@ -376,7 +377,7 @@ Structure of class ResellerUpdateRequest
 |email|String|false|Email of reseller, max length is 255.|
 |country|String|false|Country code of reseller, max length is 64.|
 |contact|String|false|contact of reseller, max length is 64.|
-|phone|String|true|Phone number of reseller, max length is 32. Sample value 400-86554555.|
+|phone|String|false|Phone number of reseller, max length is 32. Sample value 400-86554555.|
 |postcode|String|true|Post code, max length is 32. Sample value 510250.|
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
@@ -460,6 +461,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 > <font color="red">email:length must be between 0 and 255</font><br/>
 > <font color="red">country:length must be between 0 and 64</font><br/>
 > <font color="red">contact:length must be between 0 and 64</font><br/>
+> <font color="red">phone:may not be empty</font><br/>
 > <font color="red">phone:length must be between 0 and 32</font><br/>
 > <font color="red">postcode:length must be between 0 and 16</font><br/>
 > <font color="red">address:length must be between 0 and 255</font><br/>

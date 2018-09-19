@@ -52,6 +52,7 @@ public class MerchantUpdateRequest implements Serializable{
 	@Length(max=64)
     private String country;
 	
+    @NotBlank
     @Length(max=32)
 	private String phone;
 	
