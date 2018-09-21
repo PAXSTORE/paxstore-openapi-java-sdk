@@ -1,9 +1,9 @@
 ## Merchant APIs
 
-The merchant APIs allow thirdparty system search resellers, get a reseller, create/update a reseller, activate/disable a reseller and delete a exist reseller.
-All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.reseller.ResellerApi*.   
+The merchant APIs allow thirdparty system search merchants, get a merchant, create/update a merchant, activate/disable a merchant and delete a exist merchant.
+All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.merchant.MerchantApi*.   
 
-**Constructors of ResellerAPI**
+**Constructors of MerchantAPI**
 
 ```
 public MerchantApi(String baseUrl, String apiKey, String apiSecret);
@@ -36,7 +36,7 @@ public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, Merchan
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
 |orderBy|MerchantSearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of MerchantSearchOrderBy.Name, MerchantSearchOrderBy.Phone and MerchantSearchOrderBy.Contact.|
-|name|String|true|search by name|
+|name|String|true|search filter by merchant name|
 |status|MerchantStatus|true|the reseller status<br/> the value can be MerchantStatus.Active, MerchantStatus.Inactive, MerchantStatus.Suspend|
 
 **Sample codes**

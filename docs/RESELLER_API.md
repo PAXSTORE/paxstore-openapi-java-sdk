@@ -37,8 +37,8 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 |:--- | :---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
-|orderBy|ResellerSearchOrderBy|true|the sort order by field name, if it is null the search result will sort by id by default, and the value of thie parameter can be one of ResellerSearchOrderBy.Name, ResellerSearchOrderBy.Phone and ResellerSearchOrderBy.Contact|
-|name|String|true|search by name|
+|orderBy|ResellerSearchOrderBy|true|the field name of sort order by, if it is null the search result will sort by id by default, and the value of the parameter can be one of ResellerSearchOrderBy.Name, ResellerSearchOrderBy.Phone and ResellerSearchOrderBy.Contact|
+|name|String|true|search filter by reseller name|
 |status|ResellerStatus|true|the reseller status<br/> the value can be ResellerStatus.Active, ResellerStatus.Inactive, ResellerStatus.Suspend|
 
 <br/>
@@ -146,7 +146,7 @@ Result<ResellerDTO> result = resellerApi.getReseller(17850L);
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["email:not a well-formed email address", "contact:may not be empty", "country:may not be empty"]
+	"validationErrors": ["Parameter resellerId cannot be null and cannot be less than 1!"]
 }
 ```
 
