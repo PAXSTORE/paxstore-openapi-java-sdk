@@ -458,7 +458,8 @@ The data type in result is same as get merchant API.
 
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantCreateRequest cannot be null!</font>  
+> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font> 
+> <font color=red>Parameter merchantUpdateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
 > <font color=red>country:may not be empty</font>  
 > <font color=red>email:may not be empty</font>  
