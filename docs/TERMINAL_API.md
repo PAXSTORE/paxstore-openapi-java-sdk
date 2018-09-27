@@ -4,7 +4,7 @@ Terminal APIs allow thirdparty system search terminals, get a terminal, create a
 
 All the terminal APIs are in the class *com.pax.market.api.sdk.java.api.terminal.TerminalApi*.   
 
-**Constructors of TerminalAPI**
+**Constructors of TerminalApi**
 
 ```
 public TerminalApi(String baseUrl, String apiKey, String apiSecret);

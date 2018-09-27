@@ -45,7 +45,7 @@ Structure of class TerminalCreateRequest
 |tid|String|true|The tid of terminal|
 |serialNo|String|true|The serial number of terminal|
 |packageName|String|false|The package name which indicate the application you want to push to the terminal|
-|version|String|true|The version of application which you want to push, if it is blank API will push the latest version|
+|version|String|true|The version name of application which you want to push, if it is blank API will use the latest version|
 |templateName|String|true|The template name of paramter. If user want to push more than one template the please use &#124; to concact the different template names like tempate1&#124;template2&#124;template3, the max size of template names is 10.|
 |parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the the PID in template|
 
