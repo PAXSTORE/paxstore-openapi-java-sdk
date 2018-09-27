@@ -97,7 +97,7 @@ Structure of class MerchantCategoryCreateRequest
 |Property Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |name|String|false|Name of merchant category,max length is 128.|
-|remarks|String|false|true|Remarks of merchant category, max length is 255.|
+|remarks|String|true|Remarks of merchant category, max length is 255.|
 
 
 

@@ -101,7 +101,6 @@ createTerminalApkRequest.setParameters(parameters);
 > <font color=red>The property parameters of createTerminalApkRequest cannot be empty!</font>  
 > <font color=red>The property serialNo and tid in createTerminalApkRequest cannot be blank at same time!</font> 
 > <font color=red>packageName:may not be empty</font> 
-> <font color=red>templateName:may not be empty</font>  
 > <font color="red">The max size of template names is 10!</font>
 
 

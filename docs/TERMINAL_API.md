@@ -2,9 +2,9 @@
 
 Terminal APIs allow thirdparty system search terminals, get a terminal, create a terminal, update a terminal, activate a terminal, disable a terminal and delete a exist terminal.
 
-All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.reseller.ResellerApi*.   
+All the terminal APIs are in the class *com.pax.market.api.sdk.java.api.terminal.TerminalApi*.   
 
-**Constructors of ResellerAPI**
+**Constructors of TerminalAPI**
 
 ```
 public TerminalApi(String baseUrl, String apiKey, String apiSecret);
@@ -199,7 +199,7 @@ Structure of class TerminalCreateRequest
 |Property Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |name|String|false|The name of terminal, max length is 64.|
-|tid|String|true|The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 15.|
+|tid|String|true|The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16.|
 |serialNo|String|true|The serial number of terminal. If the status is active the serial number is mandatory.|
 |merchantName|String|true|The merchant of terminal belongs to. If the initial is active then merchantName is mandatory. The max length is 64. Make sure the merchant belongs to the given reseller|
 |resellerName|String|false|The reseller of terminal belongs to. Max length is 64.|
@@ -309,7 +309,7 @@ Update terminal API allows the thirdparty system update a exist terminal by term
 **API**
 
 ```
-public Result<TerminalDTO> updateTerminal(Long terminalId,TerminalUpdateRequest terminalUpdateRequest|)
+public Result<TerminalDTO> updateTerminal(Long terminalId,TerminalUpdateRequest terminalUpdateRequest)
 ```
 
 **Input parameter(s) description**
@@ -386,7 +386,8 @@ The type of data in result is same as search terminal API.
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalCreateRequest cannot be null!</font>  
+> <font color=red>Parameter terminalUpdateRequest cannot be null!</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
 > <font color=red>modelName:may not be empty</font>  
 > <font color=red>resellerName:may not be empty</font>  
 > <font color=red>name:may not be empty</font>  
