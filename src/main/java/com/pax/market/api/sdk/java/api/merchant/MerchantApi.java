@@ -32,6 +32,8 @@ import com.pax.market.api.sdk.java.api.merchant.dto.MerchantPageResponse;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantResponseDTO;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantUpdateRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.util.MessageBoudleUtil;
+import com.pax.market.api.sdk.java.api.util.StringUtils;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantPageDTO;
 
 /**
@@ -49,6 +51,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 	private static final String ACTIVATE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}/active";
 	private static final String DISABLE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}/disable";
 	private static final String DELETE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}";
+	private static final String REPLACE_MERCHANT_EMAIL_URL = "/v1/3rdsys/merchants/{merchantId}/replaceEmail";
 
 	public MerchantApi(String baseUrl, String apiKey, String apiSecret) {
 		super(baseUrl, apiKey, apiSecret);
@@ -171,6 +174,26 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		Result<String> result = new Result<String>(emptyResponse);
 		return result;
 	} 
+	
+	public Result<String> replaceMerchantEmail(Long merchantId, String email, boolean createUser){
+		logger.debug("merchantId="+merchantId);
+		List<String> validationErrs = validateId(merchantId, "parameter.merchantId.invalid");
+		if(!StringUtils.isValidEmailAddress(email)) {
+			validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.invalid", Locale.getDefault()));
+		}
+		if(email!=null && email.length()>255) {
+			validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.toolong", Locale.getDefault()));
+		}
+		if(validationErrs.size()>0) {
+			return new Result<String>(validationErrs);
+		}
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+		SdkRequest request = createSdkRequest(REPLACE_MERCHANT_EMAIL_URL.replace("{merchantId}", merchantId.toString()));
+		request.setRequestMethod(RequestMethod.POST);
+		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+		Result<String> result = new Result<String>(emptyResponse);
+		return result;
+	}
 	
 	public enum MerchantStatus {
 		Active("A"),

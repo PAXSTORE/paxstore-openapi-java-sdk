@@ -68,10 +68,21 @@ public class MerchantUpdateRequest implements Serializable{
     
     @Length(max=3000)
     private String description;
+    
+    private Boolean createUserFlag = Boolean.FALSE;
 
     private List<String> merchantCategoryNames;
 	
 	private LinkedHashMap<String, String> entityAttributeValues;
+
+	
+	public Boolean getCreateUserFlag() {
+		return createUserFlag;
+	}
+
+	public void setCreateUserFlag(Boolean createUserFlag) {
+		this.createUserFlag = createUserFlag;
+	}
 
 	public String getName() {
 		return name;

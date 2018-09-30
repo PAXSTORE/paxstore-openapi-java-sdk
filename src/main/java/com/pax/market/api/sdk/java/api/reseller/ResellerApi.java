@@ -33,6 +33,8 @@ import com.pax.market.api.sdk.java.api.reseller.dto.ResellerPageResponse;
 import com.pax.market.api.sdk.java.api.reseller.dto.ResellerResponse;
 import com.pax.market.api.sdk.java.api.reseller.dto.ResellerUpdateRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.util.MessageBoudleUtil;
+import com.pax.market.api.sdk.java.api.util.StringUtils;
 
 /**
  *
@@ -49,6 +51,7 @@ public class ResellerApi extends BaseThirdPartySysApi{
 	private static final String ACTIVATE_RESELLER_URL = "/v1/3rdsys/resellers/{resellerId}/active";
 	private static final String DISABLE_RESELLER_URL = "/v1/3rdsys/resellers/{resellerId}/disable";
 	private static final String DELETE_RESELLER_URL = "/v1/3rdsys/resellers/{resellerId}";
+	private static final String REPLACE_RESELLER_EMAIL_URL = "/v1/3rdsys/resellers/{resellerId}/replaceEmail";
 
 	public ResellerApi(String baseUrl, String apiKey, String apiSecret) {
 		super(baseUrl, apiKey, apiSecret);
@@ -168,6 +171,26 @@ public class ResellerApi extends BaseThirdPartySysApi{
 		Result<String> result = new Result<String>(emptyResponse);
 		return result;
 	} 
+	
+	public Result<String> replaceResellerEmail(Long resellerId, String email){
+		logger.debug("resellerId="+resellerId);
+		List<String> validationErrs = validateId(resellerId, "parameter.resellerId.invalid");
+		if(!StringUtils.isValidEmailAddress(email)) {
+			validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.invalid", Locale.getDefault()));
+		}
+		if(email!=null && email.length()>255) {
+			validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.toolong", Locale.getDefault()));
+		}
+		if(validationErrs.size()>0) {
+			return new Result<String>(validationErrs);
+		}
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+		SdkRequest request = createSdkRequest(REPLACE_RESELLER_EMAIL_URL.replace("{resellerId}", resellerId.toString()));
+		request.setRequestMethod(RequestMethod.POST);
+		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+		Result<String> result = new Result<String>(emptyResponse);
+		return result;
+	}
 	
 	public enum ResellerStatus {
 		Active("A"),
