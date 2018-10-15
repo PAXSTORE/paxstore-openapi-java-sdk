@@ -351,6 +351,7 @@ The type of data in result is same as the get reseller API.
 |1105|Email is invalid|&nbsp;|
 |1112|Phone No. is invalid|&nbsp;|
 |3400|Country code is invalid|&nbsp;|
+|1773|The associated reseller is not activate|&nbsp;|
 
 
 ### Update a merchant

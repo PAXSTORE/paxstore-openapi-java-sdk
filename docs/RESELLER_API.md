@@ -337,6 +337,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1778|Parent reseller not found|&nbsp;|
 |1779|Parent reseller is not active|&nbsp;|
 |1782|At most 10 level resellers are supported|&nbsp;|
+|1760|Reseller name already exists|&nbsp;|
 |1762|Reseller name is mandatory|&nbsp;|
 |1763|Reseller contact is mandatory|&nbsp;|
 |1764|Reseller phone is mandatory|&nbsp;|
