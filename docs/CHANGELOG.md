@@ -8,12 +8,14 @@
 * Separate replace reseller email from update merchant API, add additional replace reseller email API
 * Do not create user when create reseller but in activate reseller step. Won't affect code.
 
-### Bug fixed
+### Bug fixes
 
 ### Breaking changes
 
-* Add a new property createUserFlag in the MerchantCreateRequest and MerchantUpdateRequest to indicate whether to create user, the default value is false. The old version API will create user when create merchant step, if use udpate SDK to this version and does not do any code change it won't create user when create merchant.
+* Add a new property createUserFlag in the MerchantCreateRequest and MerchantUpdateRequest to indicate whether to create user, the default value is false. The old version API will create user when create merchant step, if use udpate SDK to this version and does not do any code change it won't create user when create merchant. If createUserFlag is true then when activate the merchant API will create user according to the email.
  
+* Remove the property *parentResellerName* from the class *ResellerUpdateRequest*, since version 6.1.0 the update reseller API cannot change the reseller's parent.
+
 
 ## 6.0.2  
 

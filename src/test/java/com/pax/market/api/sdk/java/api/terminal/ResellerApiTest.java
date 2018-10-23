@@ -40,7 +40,8 @@ public class ResellerApiTest {
 	static Long newResellerId = 0L;
 	
     public static void init(){
-    	resellerApi = new  ResellerApi("https://api.whatspos.cn/p-market-api/", "ZJFXJAG7SJXPPESKVAPO", "AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9");
+//    	resellerApi = new  ResellerApi("https://api.whatspos.cn/p-market-api/", "ZJFXJAG7SJXPPESKVAPO", "AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9");
+    	resellerApi = new  ResellerApi("http://localhost:8080/p-market-api/", "WZ5JT4WYOCCN0JQ7UZEV", "GBURG1CFPPPM9I7F1IDR8YWQ1H0ESUD31YEK2R78");
     }
     
     public static void testSearchReseller() {
@@ -52,7 +53,7 @@ public class ResellerApiTest {
     }
     
     public static void testGetReseller() {
-    	Result<ResellerDTO> result = resellerApi.getReseller(178501L);
+    	Result<ResellerDTO> result = resellerApi.getReseller(1000005210L);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     	System.out.println("get result="+result);
     }
@@ -67,7 +68,7 @@ public class ResellerApiTest {
     	request.setPostcode("850212");
     	request.setCompany("Cam");
     	request.setAddress("JiangSu Suzhou city xinghujie 203#");
-//    	request.setParentResellerName("New York");
+    	request.setParentResellerName("Jesse");
 //    	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
 //    	attrs.put("111", "tan2");
 //    	request.setEntityAttributeValues(attrs);
@@ -89,7 +90,7 @@ public class ResellerApiTest {
     	request.setPostcode("850212");
     	request.setCompany("Cam");
     	request.setAddress("JiangSu Suzhou city xinghujie 203#");
-    	request.setParentResellerName("New York");
+//    	request.setParentResellerName("New York");
     	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
     	attrs.put("111", "tan2");
     	request.setEntityAttributeValues(attrs);
@@ -99,32 +100,38 @@ public class ResellerApiTest {
 //    	request.setEntityAttributeValues(attrs);
     	
     	
-    	Result<ResellerDTO> result = resellerApi.updateReseller(51745L, request);
+    	Result<ResellerDTO> result = resellerApi.updateReseller(1000005210L, request);
     	System.out.println("update result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
     public static void testActivateReseller() {
-    	Result<String> result = resellerApi.activateReseller(51739L);
+    	Result<String> result = resellerApi.activateReseller(1000005211L);
     	System.out.println("activate result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
     public static void testDisableReseller() {
-    	Result<String> result = resellerApi.disableReseller(51739L);
+    	Result<String> result = resellerApi.disableReseller(1000005211L);
     	System.out.println("disable result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
     public static void testDeleteReseller() {
-    	Result<String> result = resellerApi.deleteReseller(51738111L);
+    	Result<String> result = resellerApi.deleteReseller(1000005212L);
     	System.out.println("Delete result="+result);
+    	System.out.println(EnhancedJsonUtils.toJson(result));
+    }
+    
+    public static void testReplaceEmail() {
+    	Result<String> result = resellerApi.replaceResellerEmail(1000005212L, "zhangsan@pax.com");
+    	System.out.println("Replace email result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
     public static void main(String[] args){
         init();
-        testSearchReseller();
+//        testSearchReseller();
 //        
 //        testCreateReseller();
 //        testActivateReseller();
@@ -132,7 +139,9 @@ public class ResellerApiTest {
 //        testGetReseller();
 //        testActivateReseller();
 //        testDisableReseller();
-//        testDeleteReseller();
+        testDeleteReseller();
+        
+//        testReplaceEmail();
         
     }
 }

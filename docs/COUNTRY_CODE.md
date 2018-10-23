@@ -45,4 +45,7 @@ Description
 <tr>
 <td>JP</td><td>Japan</td><td>日本</td><td>Japan</td><td>日本</td>
 </tr>
+<tr>
+<td>IND</td><td>India</td><td>印度</td><td>India</td><td>印度</td>
+</tr>
 </table>

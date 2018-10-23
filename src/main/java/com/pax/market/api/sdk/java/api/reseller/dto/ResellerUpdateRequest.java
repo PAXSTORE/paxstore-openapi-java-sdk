@@ -60,8 +60,7 @@ public class ResellerUpdateRequest implements Serializable{
 	@Length(max=255)
     private String company;
 	
-	@Length(max=64)
-	private String parentResellerName;
+	
 
 	private LinkedHashMap<String, String> entityAttributeValues;
 
@@ -137,19 +136,13 @@ public class ResellerUpdateRequest implements Serializable{
 		this.entityAttributeValues = entityAttributeValues;
 	}
 
-	public String getParentResellerName() {
-		return parentResellerName;
-	}
-
-	public void setParentResellerName(String parentResellerName) {
-		this.parentResellerName = parentResellerName;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "ResellerUpdateRequest [name=" + name + ", email=" + email + ", country=" + country + ", contact="
 				+ contact + ", phone=" + phone + ", postcode=" + postcode + ", address=" + address + ", company="
-				+ company + ", parentResellerName=" + parentResellerName + ", entityAttributeValues="
+				+ company + ", entityAttributeValues="
 				+ entityAttributeValues + "]";
 	}
 

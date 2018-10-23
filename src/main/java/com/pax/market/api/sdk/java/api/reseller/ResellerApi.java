@@ -11,8 +11,10 @@
  */
 package com.pax.market.api.sdk.java.api.reseller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -184,9 +186,15 @@ public class ResellerApi extends BaseThirdPartySysApi{
 		if(validationErrs.size()>0) {
 			return new Result<String>(validationErrs);
 		}
+//		ReplaceResellerEmailRequest replaceResellerEmailRequest = new ReplaceResellerEmailRequest();
+//		replaceResellerEmailRequest.setEmail(email);
+		Map<String, String> requestBodyMap = new HashMap<String, String>();
+		requestBodyMap.put("email", email);
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(REPLACE_RESELLER_EMAIL_URL.replace("{resellerId}", resellerId.toString()));
 		request.setRequestMethod(RequestMethod.POST);
+		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+		request.setRequestBody(new Gson().toJson(requestBodyMap, Map.class));
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
 		Result<String> result = new Result<String>(emptyResponse);
 		return result;

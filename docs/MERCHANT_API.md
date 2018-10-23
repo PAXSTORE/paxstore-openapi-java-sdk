@@ -237,6 +237,7 @@ Structure of class MerchantCreateRequest
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
+|createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant, the default value is false|
 |merchantCategoryNames|List&lt;String&gt;|true|Merchant categories. Make sure the categories are available.|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
 
@@ -384,6 +385,7 @@ Structure of class MerchantUpdateRequest
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
+|createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant|
 |merchantCategoryNames|List&lt;String&gt;|true|Merchant categories. Make sure the categories are available.|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
 
@@ -506,6 +508,8 @@ The data type in result is same as get merchant API.
 |1927|The merchant is not inactive,reseller cannot be updated!|&nbsp;|
 |1759|Reseller doesn't exist|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
+|1936|The merchant is not inactive,merchant email cannot be updated!|Only the pending merchant can update the email|
+
 
 
 
@@ -708,6 +712,80 @@ Result<String> result = merchantApi.deleteMerchant(72593L);
 |1720|Merchant doesn't exist|&nbsp;|
 |1876|The merchant is active,unable to delete!|&nbsp;|
 |1786|The merchant has been used by terminal|&nbsp;|
+
+
+
+### Replace merchant email
+
+This API is used to update the email of active merchant
+
+**API**
+
+```
+public Result<String> replaceMerchantEmail(Long merchantId, String email, boolean createUser)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable|Description|
+|:--|:--|:--|:--|
+|merchantId|Long|false|The merchant id|
+|email|String|false|The new email|
+|createUser|boolean|false|Indicate whether to create user when replace the email|
+
+
+**Sample codes**
+
+```
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = merchantApi.replaceMerchantEmail(72593L, "zhangsan@pax.com", true);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter merchantId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1720,
+	"message": "Merchant doesn't exist"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
+> <font color="red">Parameter email format invalid!</font>
+> <font color="red">Parameter email is too long, maxlength is 255!</font>  
+
+
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:--|:--|:--|
+|1720|Merchant doesn't exist|&nbsp;|
+|1934|The merchant is not active,unable to replace user!|This API can only update the email of active merchants|
+|1105|Email is invalid|The inputted email address is invalid|
+|1933|The user email not update.|The inputted email address is same as the original email|
+
+
+
 
 
 

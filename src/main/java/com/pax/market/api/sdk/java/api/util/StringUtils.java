@@ -13,7 +13,6 @@ package com.pax.market.api.sdk.java.api.util;
 
 
 import com.pax.market.api.sdk.java.api.constant.Constants;
-import com.pax.market.framework.common.utils.StringUtils;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;

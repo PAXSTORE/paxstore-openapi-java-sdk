@@ -11,6 +11,8 @@
  */
 package com.pax.market.api.sdk.java.api.reseller.dto;
 
+import org.hibernate.validator.constraints.Length;
+
 /**
  *
  * @author tanjie
@@ -19,5 +21,16 @@ package com.pax.market.api.sdk.java.api.reseller.dto;
 public class ResellerCreateRequest extends ResellerUpdateRequest{
 
 	private static final long serialVersionUID = -898044224050582642L;
+	
+	@Length(max=64)
+	private String parentResellerName;
+	
+	public String getParentResellerName() {
+		return parentResellerName;
+	}
+
+	public void setParentResellerName(String parentResellerName) {
+		this.parentResellerName = parentResellerName;
+	}
 
 }

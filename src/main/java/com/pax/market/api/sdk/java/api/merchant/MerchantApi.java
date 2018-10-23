@@ -11,8 +11,10 @@
  */
 package com.pax.market.api.sdk.java.api.merchant;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -190,6 +192,12 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(REPLACE_MERCHANT_EMAIL_URL.replace("{merchantId}", merchantId.toString()));
 		request.setRequestMethod(RequestMethod.POST);
+		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+		Map<String, Object> requestBodyMap = new HashMap<String, Object>();
+		requestBodyMap.put("email", email);
+		requestBodyMap.put("createUser", createUser);
+		request.setRequestBody(new Gson().toJson(requestBodyMap, Map.class));
+
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
 		Result<String> result = new Result<String>(emptyResponse);
 		return result;

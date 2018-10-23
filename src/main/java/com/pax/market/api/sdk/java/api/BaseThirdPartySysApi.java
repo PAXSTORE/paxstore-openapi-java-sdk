@@ -54,6 +54,9 @@ public class BaseThirdPartySysApi{
 
 
     public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret) {
+    	if(baseUrl.endsWith("/")) {
+    		baseUrl = baseUrl.substring(0, baseUrl.length()-1);
+    	}
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
@@ -61,6 +64,9 @@ public class BaseThirdPartySysApi{
     }
     
     public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret, Locale locale) {
+    	if(baseUrl.endsWith("/")) {
+    		baseUrl = baseUrl.substring(0, baseUrl.length()-1);
+    	}
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;

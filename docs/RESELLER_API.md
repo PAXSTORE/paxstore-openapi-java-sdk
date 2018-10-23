@@ -375,14 +375,13 @@ Structure of class ResellerUpdateRequest
 |Property Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |name|String|false|Name of reseller, max length is 64.|
-|email|String|false|Email of reseller, max length is 255.|
+|email|String|false|Email of reseller, max length is 255. Only the pending reseller can update the email. Of other reseller change email please call replaceResellerEmail API|
 |country|String|false|Country code of reseller, max length is 64.|
 |contact|String|false|contact of reseller, max length is 64.|
 |phone|String|false|Phone number of reseller, max length is 32. Sample value 400-86554555.|
 |postcode|String|true|Post code, max length is 32. Sample value 510250.|
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
-|parentResellerName|String|true|Parent reseller name, if it is empty will set the root reseller of current marketplace as the parent reseller. If the status of the updated reseller is active or suspend the parent cannot be changed.|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|  
 
 
@@ -467,7 +466,6 @@ Type of data is ResellerDTO, same as the API get reseller.
 > <font color="red">postcode:length must be between 0 and 16</font><br/>
 > <font color="red">address:length must be between 0 and 255</font><br/>
 > <font color="red">company:length must be between 0 and 255</font><br/>
-> <font color="red">parentResellerName:length must be between 0 and 64</font><br/>
 > <font color="red">email:not a well-formed email address</font>
 
 <br>
@@ -477,7 +475,6 @@ Type of data is ResellerDTO, same as the API get reseller.
 |Business Code|Message|Description|
 |:--|:--|:--|
 |1759|Reseller doesn't exist|&nbsp;|
-|1778|Parent reseller not found|&nbsp;|
 |1762|Reseller name is mandatory|&nbsp;|
 |1764|Reseller phone is mandatory|&nbsp;|
 |1606|Country is mandatory|&nbsp;|
@@ -494,7 +491,8 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1112|Phone No. is invalid|&nbsp;|
 |1624|The name cannot contain special characters|Name can contain the characters 0-9, a-z, A-Z, space, Chinese characters,(,),_,.|
 |3400|Country code is invalid|&nbsp;|
-|1938|Reseller is active or suspend, parent cannot be updated!|&nbsp;|
+|1925|The reseller is not inactive,reseller email cannot be updated!|The update reseller API can only update the email for the inactive reseller. To change the email for other resellers please use the replaceResellerEmail API|
+
 
 
 
@@ -699,3 +697,74 @@ Result<String> result = resellerApi.deleteReseller(51739L);
 |1785|The reseller has been used by terminal|&nbsp;|
 |1788|The reseller has been used by terminal group|&nbsp;|
 |1780|The reseller has sub-resellers|&nbsp;|
+
+
+
+### Replace reseller email
+
+**API**
+
+This API is used to update email of the active resellers
+
+```
+public Result<String> replaceResellerEmail(Long resellerId, String email)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable|Description|
+|:--|:--|:--|:--|
+|resellerId|Long|false|The reseller's id.|
+|email|String|false|The new email address.|
+
+**Sample codes**
+
+```
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = resellerApi.replaceResellerEmail(51739L, "zhangsan@pax.com");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter resellerId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1759,
+	"message": "Reseller doesn't exist"
+}
+```
+
+**Successful sample result**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+
+**Possible client validation errors**
+
+> <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font>
+> <font color="red">Parameter email format invalid!</font>
+> <font color="red">Parameter email is too long, maxlength is 255!</font>
+
+
+**Possible business codes**
+
+|BusinessCode|Message|Description|
+|:--|:--|:--|
+|1759|Reseller doesn't exist|The input reseller id not correct.|
+|131|Insufficient access right|This may caused by updating the root reseller's email|
+|1932|The reseller is not active,unable to replace user!|This API can only the active reseller's email|
+|1105|Email is invalid|Email address is not valid|
+|1933|The user email not update.|The inputted email address is same as the original email|
+
