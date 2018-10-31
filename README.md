@@ -74,13 +74,13 @@ Below are the step for enabling external system access and get access key and ac
 
 ### Step 1
 
-Log in to PAXSTORE admin console as Super Admin or Market Admin and click General Setting in left menu.
+Log in to PAXSTORE admin console as Super Admin or Market Admin and click **General Setting** in left menu.
 
-![](/docs/assets/sc-1.png)
+
 
 ### Step 2
 
-Click the left tab External System to show the external system configuration page like below screenshot.
+Click the left tab **External System** to show the external system configuration page like below screenshot.
 
 ![](/docs/assets/sc-2.png)
 
