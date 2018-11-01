@@ -83,6 +83,8 @@ public class TerminalApi extends BaseThirdPartySysApi{
 			request.addRequestParam("status", status.val);
 		}
 		request.addRequestParam("snNameTID", snNameTID);
+		request.addRequestParam("serialNo", snNameTID);
+		
         TerminalPageResponse terminalPageDTO = EnhancedJsonUtils.fromJson(client.execute(request), TerminalPageResponse.class);
         Result<TerminalDTO> result = new Result<TerminalDTO>(terminalPageDTO);
 

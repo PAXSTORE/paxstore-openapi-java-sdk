@@ -34,13 +34,11 @@ public class MerchantUpdateRequest implements Serializable{
 	@NotBlank
 	@Length(max=64)
 	private String name;
-	
-	@NotBlank
+
 	@Length(max=255)
 	@Email
 	private String email;
 	
-	@NotBlank
 	@Length(max=64)
     private String resellerName;
 	

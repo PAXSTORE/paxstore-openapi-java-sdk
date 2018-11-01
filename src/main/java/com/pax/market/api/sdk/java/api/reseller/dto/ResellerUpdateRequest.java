@@ -34,7 +34,6 @@ public class ResellerUpdateRequest implements Serializable{
 	@Length(max=64)
 	private String name;
 	
-	@NotBlank
 	@Length(max=255)
 	@Email
 	private String email;
@@ -59,6 +58,9 @@ public class ResellerUpdateRequest implements Serializable{
 
 	@Length(max=255)
     private String company;
+	
+	@Length(max=64)
+	private String parentResellerName;
 	
 	
 
@@ -137,6 +139,16 @@ public class ResellerUpdateRequest implements Serializable{
 	}
 
 	
+	
+
+	public String getParentResellerName() {
+		return parentResellerName;
+	}
+
+	@Deprecated
+	public void setParentResellerName(String parentResellerName) {
+		this.parentResellerName = parentResellerName;
+	}
 
 	@Override
 	public String toString() {

@@ -375,7 +375,7 @@ Structure of class ResellerUpdateRequest
 |Property Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |name|String|false|Name of reseller, max length is 64.|
-|email|String|false|Email of reseller, max length is 255. Only the pending reseller can update the email. Of other reseller change email please call replaceResellerEmail API|
+|email|String|true|Email of reseller, max length is 255. Only the pending reseller can update the email. Of other reseller change email please call replaceResellerEmail API. If email is empty API won't update the email.|
 |country|String|false|Country code of reseller, max length is 64.|
 |contact|String|false|contact of reseller, max length is 64.|
 |phone|String|false|Phone number of reseller, max length is 32. Sample value 400-86554555.|

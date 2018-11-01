@@ -11,7 +11,9 @@
  */
 package com.pax.market.api.sdk.java.api.reseller.dto;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -25,6 +27,11 @@ public class ResellerCreateRequest extends ResellerUpdateRequest{
 	@Length(max=64)
 	private String parentResellerName;
 	
+	@NotBlank
+	@Length(max=255)
+	@Email
+	private String email;
+	
 	public String getParentResellerName() {
 		return parentResellerName;
 	}
@@ -32,5 +39,15 @@ public class ResellerCreateRequest extends ResellerUpdateRequest{
 	public void setParentResellerName(String parentResellerName) {
 		this.parentResellerName = parentResellerName;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 
 }
