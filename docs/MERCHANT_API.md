@@ -377,8 +377,8 @@ Structure of class MerchantUpdateRequest
 |Property Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |name|String|false|Merchant name, max length is 64.|
-|email|String|false|Email of merchant, max length is 255.|
-|resellerName|String|false|Reseller name of merchant, max length is 64. Make sure the reseller exist.|
+|email|String|true|Email of merchant, max length is 255. If email is empty the API won't change the email.|
+|resellerName|String|true|Reseller name of merchant, max length is 64. Make sure the reseller exist. If resellerName is empty the API won't update the reseller of the merchant|
 |contact|String|false|Contact of merchant, max length is 64.|
 |country|String|false|Country code of merchant, max length is 64. Please refer to country codes table.|
 |phone|String|false|Phone number of merchant, max length is 32.|

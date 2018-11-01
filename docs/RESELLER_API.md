@@ -375,13 +375,14 @@ Structure of class ResellerUpdateRequest
 |Property Name|Type|Nullable|Description|
 |:--|:--|:--|:--|
 |name|String|false|Name of reseller, max length is 64.|
-|email|String|true|Email of reseller, max length is 255. Only the pending reseller can update the email. Of other reseller change email please call replaceResellerEmail API. If email is empty API won't update the email.|
+|email|String|true|Email of reseller, max length is 255. Only the pending reseller can update the email. For other reseller change email please call replaceResellerEmail API. If email is empty API won't update the email.|
 |country|String|false|Country code of reseller, max length is 64.|
 |contact|String|false|contact of reseller, max length is 64.|
 |phone|String|false|Phone number of reseller, max length is 32. Sample value 400-86554555.|
 |postcode|String|true|Post code, max length is 32. Sample value 510250.|
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
+|parentResellerName|String|true|Do not suggest set value for this property. If set value please keep the parentResellerName same as the original parentResellerName. Otherwise API will return a 1830 business code.|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|  
 
 
@@ -395,7 +396,6 @@ request.setContact("FFF");
 request.setCountry("CN");
 request.setEmail("FF@1234.COM");
 request.setPhone("87879696");
-request.setParentResellerName("New York");
 LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
 attrs.put("code", "XY");
 request.setEntityAttributeValues(attrs);
@@ -479,7 +479,6 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1764|Reseller phone is mandatory|&nbsp;|
 |1606|Country is mandatory|&nbsp;|
 |1763|Reseller contact is mandatory|&nbsp;|
-|1765|Reseller email is mandatory|&nbsp;|
 |1767|Reseller name is too long|&nbsp;|
 |1769|Reseller phone is too long|&nbsp;|
 |1768|Reseller contact is too long|&nbsp;|
@@ -492,6 +491,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1624|The name cannot contain special characters|Name can contain the characters 0-9, a-z, A-Z, space, Chinese characters,(,),_,.|
 |3400|Country code is invalid|&nbsp;|
 |1925|The reseller is not inactive,reseller email cannot be updated!|The update reseller API can only update the email for the inactive reseller. To change the email for other resellers please use the replaceResellerEmail API|
+|1830|Cannot update reseller's parent|
 
 
 
