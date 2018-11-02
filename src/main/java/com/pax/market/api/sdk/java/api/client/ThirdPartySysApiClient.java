@@ -118,6 +118,8 @@ public class ThirdPartySysApiClient {
      * @return the string
      */
     public String execute(SdkRequest request) {
+    	request.addHeader(Constants.REQ_HEADER_SDK_LANG, Constants.THIRD_PARTY_API_SDK_LANGUAGE);
+    	request.addHeader(Constants.REQ_HEADER_SDK_VERSION, Constants.THIRD_PARTY_API_SDK_VERSION);
 		try {
 			return _execute(request);
 		} catch (IOException e) {
