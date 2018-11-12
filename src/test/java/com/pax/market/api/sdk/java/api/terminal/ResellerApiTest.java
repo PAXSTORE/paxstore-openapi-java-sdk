@@ -41,7 +41,7 @@ public class ResellerApiTest {
 	
     public static void init(){
 //    	resellerApi = new  ResellerApi("https://api.whatspos.cn/p-market-api/", "ZJFXJAG7SJXPPESKVAPO", "AXN5ES2BFYYY8FRMSAPXKQ2ZMT22WYTQGCOGGFM9");
-    	resellerApi = new  ResellerApi("http://localhost:8080/p-market-api/", "WZ5JT4WYOCCN0JQ7UZEV", "GBURG1CFPPPM9I7F1IDR8YWQ1H0ESUD31YEK2R78");
+    	resellerApi = new  ResellerApi("http://localhost:8080/p-market-api/", "WZ5JT4WYOCCN0JQ7UZEV", "ALRBEIJDE9FDJHPWGCSGOTCM57HBDQFU0U2VGQPP");
     }
     
     public static void testSearchReseller() {
@@ -82,14 +82,15 @@ public class ResellerApiTest {
     
     public static void testUpdateReseller() {
     	ResellerUpdateRequest request = new ResellerUpdateRequest();
-    	request.setName("FVFFF2");
+    	request.setName("FVFFF22fef");
     	request.setContact("FFF");
     	request.setCountry("CN");
-    	request.setEmail("FF@1234.COM");
+//    	request.setEmail("FF@1234.COM");
     	request.setPhone("87879696");
     	request.setPostcode("850212");
     	request.setCompany("Cam");
     	request.setAddress("JiangSu Suzhou city xinghujie 203#");
+//    	request.setParentResellerName("Global");
 //    	request.setParentResellerName("New York");
     	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
     	attrs.put("111", "tan2");
@@ -100,7 +101,7 @@ public class ResellerApiTest {
 //    	request.setEntityAttributeValues(attrs);
     	
     	
-    	Result<ResellerDTO> result = resellerApi.updateReseller(1000005210L, request);
+    	Result<ResellerDTO> result = resellerApi.updateReseller(1000005221L, request);
     	System.out.println("update result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
@@ -135,11 +136,11 @@ public class ResellerApiTest {
 //        
 //        testCreateReseller();
 //        testActivateReseller();
-//        testUpdateReseller();
+        testUpdateReseller();
 //        testGetReseller();
 //        testActivateReseller();
 //        testDisableReseller();
-        testDeleteReseller();
+//        testDeleteReseller();
         
 //        testReplaceEmail();
         

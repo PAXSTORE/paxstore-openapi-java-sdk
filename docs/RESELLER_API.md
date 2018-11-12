@@ -407,7 +407,7 @@ Result<ResellerDTO> result = resellerApi.updateReseller(17850L, request);
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["email:may not be empty", "country:may not be empty", "contact:may not be empty", "name:may not be empty"]
+	"validationErrors": ["country:may not be empty", "contact:may not be empty", "name:may not be empty"]
 }
 ```
 
@@ -454,7 +454,6 @@ Type of data is ResellerDTO, same as the API get reseller.
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font><br/>
 > <font color="red">Parameter resellerUpdateRequest cannot be null!</font><br/>
 > <font color="red">contact:may not be empty</font><br/>
-> <font color="red">email:may not be empty</font><br/>
 > <font color="red">name:may not be empty</font><br/>
 > <font color="red">country:may not be empty</font><br/>
 > <font color="red">name:length must be between 0 and 64</font><br/>
@@ -466,9 +465,10 @@ Type of data is ResellerDTO, same as the API get reseller.
 > <font color="red">postcode:length must be between 0 and 16</font><br/>
 > <font color="red">address:length must be between 0 and 255</font><br/>
 > <font color="red">company:length must be between 0 and 255</font><br/>
-> <font color="red">email:not a well-formed email address</font>
+> <font color="red">email:not a well-formed email address</font><br>
+> <font color="red">parentResellerName:length must be between 0 and 64</font><br/>
 
-<br>
+
 
 **Possible business codes**
 
@@ -491,7 +491,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1624|The name cannot contain special characters|Name can contain the characters 0-9, a-z, A-Z, space, Chinese characters,(,),_,.|
 |3400|Country code is invalid|&nbsp;|
 |1925|The reseller is not inactive,reseller email cannot be updated!|The update reseller API can only update the email for the inactive reseller. To change the email for other resellers please use the replaceResellerEmail API|
-|1830|Cannot update reseller's parent|
+|1830|Cannot update reseller's parent|Cannot change the reseller's parent when updating a reseller|
 
 
 

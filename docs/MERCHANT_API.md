@@ -464,9 +464,7 @@ The data type in result is same as get merchant API.
 > <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font> 
 > <font color=red>Parameter merchantUpdateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
-> <font color=red>country:may not be empty</font>  
-> <font color=red>email:may not be empty</font>  
-> <font color=red>resellerName:may not be empty</font>  
+> <font color=red>country:may not be empty</font>   
 > <font color=red>contact:may not be empty</font>  
 > <font color=red>name:length must be between 0 and 64</font>  
 > <font color=red>email:length must be between 0 and 255</font>  
@@ -492,9 +490,7 @@ The data type in result is same as get merchant API.
 |1723|Merchant name is mandatory|&nbsp;|
 |1606|Country is mandatory|&nbsp;|
 |1726|Merchant contact is mandatory|&nbsp;|
-|1727|Merchant email is mandatory|&nbsp;|
 |1728|Merchant phone is mandatory|&nbsp;|
-|1725|Merchant reseller is mandatory|&nbsp;|
 |1729|Merchant name is too long|&nbsp;|
 |1618|Postcode is too long|&nbsp;|
 |1619|Address is too long|&nbsp;|
@@ -506,7 +502,6 @@ The data type in result is same as get merchant API.
 |1112|Phone No. is invalid|&nbsp;|
 |3400|Country code is invalid|&nbsp;|
 |1927|The merchant is not inactive,reseller cannot be updated!|&nbsp;|
-|1759|Reseller doesn't exist|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
 |1936|The merchant is not inactive,merchant email cannot be updated!|Only the pending merchant can update the email|
 

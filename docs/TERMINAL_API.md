@@ -300,6 +300,7 @@ The type of data in result is same as search terminal API.
 |2349|Terminal TID length is 8 to 15|&nbsp;|
 |1737|The associated merchant is not activate|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
+|2412|Your terminal SN not exist in asset|&nbsp;|
 
 
 ### Update a terminal
@@ -430,8 +431,10 @@ The type of data in result is same as search terminal API.
 |1737|The associated merchant is not activate|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
 |1740|Your terminal (SN:{0}) already exists|&nbsp;|
+|2412|Your terminal SN not exist in asset|&nbsp;|
 
-Note: The string {0} in the message of error code 1740 will be replaced by the SN in request.
+
+Note: The string {0} in the message of business code 1740 will be replaced by the SN in request.
 
 
 ### Activate a terminal
