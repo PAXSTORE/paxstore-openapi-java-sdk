@@ -1,20 +1,23 @@
 # Changelog
 
-## 6.1.0 (Not released)
+## 6.1 (Not released)
 
 ### Improvement
 
-* Separate replace merchant email from update merchant API, add additional replace merchant email API
-* Separate replace reseller email from update merchant API, add additional replace reseller email API
+* Separate replace merchant email from update merchant API, add additional replace merchant email API.
+* Separate replace reseller email from update merchant API, add additional replace reseller email API.
 * Do not create user when create reseller but in activate reseller step. Won't affect code.
+* *email* is not mandatory for updating merchant and reseller. If *email* is empty when call update merchant or reseller API the email won't be updated.
+* *resellerName* is not mandatory for updating merchant. If *resellerName* is empty when call update merchant API the merchant's reseller won't be updated.
+* *parentResellerName* is not mandatory for updating reseller and we suggest the developers pass null when updating reseller as the API does not support changing reseller's parent. To reserve this parameter is to make sure SDK is compatible with old version. 
 
 ### Bug fixes
 
 ### Breaking changes
 
-* Add a new property createUserFlag in the MerchantCreateRequest and MerchantUpdateRequest to indicate whether to create user, the default value is false. The old version API will create user when create merchant step, if use udpate SDK to this version and does not do any code change it won't create user when create merchant. If createUserFlag is true then when activate the merchant API will create user according to the email.
+* Add a new property *createUserFlag* in the MerchantCreateRequest and MerchantUpdateRequest to indicate whether to create user, the default value is false. The old version API will create user in create merchant step. The impact is if user udpated SDK to this version and does not do any code change, the API won't create user when creating merchant and activating merchant. If user still need create user for the created merchant he need to set *createuserFlag* to true when creating or updating a merchant.
  
-* Remove the property *parentResellerName* from the class *ResellerUpdateRequest*, since version 6.1.0 the update reseller API cannot change the reseller's parent.
+* The update reseller API cannot update the parent anymore. 
 
 
 ## 6.0.2  

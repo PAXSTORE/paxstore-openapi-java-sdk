@@ -1,6 +1,8 @@
 ## Manage resellers
 
-All the reseller related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.reseller.ResellerApi*.
+All the reseller related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.reseller.ResellerApi*.  
+
+User can customize the additional attributes for reseller. To add/delete/update reseller's additional entity attributes please using marketplace admin login and go to page via General Setting -> Entity Attribute Setting.
 
 **Constructors of ResellerAPI**
 
