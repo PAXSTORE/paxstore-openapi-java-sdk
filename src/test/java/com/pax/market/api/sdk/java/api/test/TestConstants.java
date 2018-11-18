@@ -17,7 +17,8 @@ package com.pax.market.api.sdk.java.api.test;
  * @date  2018/11/02 15:23:22
  */
 public interface TestConstants {
-	public static final String API_BASE_URL = "http://localhost:8080/p-market-api";
-	public static final String API_KEY = "WZ5JT4WYOCCN0JQ7UZEV";
-	public static final String API_SECRET = "ALRBEIJDE9FDJHPWGCSGOTCM57HBDQFU0U2VGQPP";
+
+	public static final String API_BASE_URL = "https://api.staging.whatspos.com/p-market-api";
+	public static final String API_KEY = "MCXF60RUVJPKWGBGATYO";
+	public static final String API_SECRET = "OF93E3I7A612QHAA55A56HNQ908QYL3MPUTZK6WU";
 }

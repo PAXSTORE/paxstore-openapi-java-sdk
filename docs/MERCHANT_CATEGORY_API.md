@@ -202,7 +202,7 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["Parameter merchantCategoryId cannot be null and cannot be lese than 1"]
+	"validationErrors": ["Parameter merchantCategoryId cannot be null and cannot be less than 1"]
 }
 ```
 
@@ -234,7 +234,7 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(
 
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantCategoryId cannot be null and cannot be lese than 1</font>  
+> <font color=red>Parameter merchantCategoryId cannot be null and cannot be less than 1</font>  
 > <font color=red>Parameter merchantCategoryUpdateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
 > <font color=red>name:length must be between 0 and 128</font>  
@@ -288,7 +288,7 @@ Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["Parameter merchantCategoryId cannot be null and cannot be lese than 1!"]
+	"validationErrors": ["Parameter merchantCategoryId cannot be null and cannot be less than 1!"]
 }
 ```
 
@@ -311,7 +311,7 @@ Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantCategoryId cannot be null and cannot be lese than 1!</font>  
+> <font color=red>Parameter merchantCategoryId cannot be null and cannot be less than 1!</font>  
 
 
 **Possible business codes**

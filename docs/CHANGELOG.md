@@ -1,6 +1,6 @@
 # Changelog
 
-## 6.1 (Not released)
+## 6.1 
 
 ### Improvement
 

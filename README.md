@@ -1,4 +1,4 @@
-# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=6.0.2) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/6.0.2/link)
+# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=6.1) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/6.1/link)
 
 
 <br/>
@@ -10,7 +10,7 @@ PAXSTORE exposes reseller, merchant and terminal related APIs for thirdparty sys
 
 If you are not using JAVA please refer to the API document for original RESTful API.   
 
-[RESTful API Document](docs/REST_DOCS/README.md)
+
 <br>
 <br>
 
