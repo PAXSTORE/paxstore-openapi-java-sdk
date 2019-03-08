@@ -1,57 +1,55 @@
 package com.pax.market.api.sdk.java.api.merchantCategory;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.merchant.category.MerchantCategoryApi;
 import com.pax.market.api.sdk.java.api.merchant.category.dto.MerchantCategoryCreateRequest;
 import com.pax.market.api.sdk.java.api.merchant.category.dto.MerchantCategoryDTO;
 import com.pax.market.api.sdk.java.api.merchant.category.dto.MerchantCategoryUpdateRequest;
-import com.pax.market.api.sdk.java.api.util.CryptoUtils;
-import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.test.TestConstants;
 
 public class MerchantCategoryApiTest {
 	
+	private static final Logger logger = LoggerFactory.getLogger(MerchantCategoryApiTest.class);
+	
 	static MerchantCategoryApi merchantCategoryApi;
 	
-	
     public static void init(){
-    	merchantCategoryApi = new  MerchantCategoryApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN", Locale.ENGLISH);
+    	merchantCategoryApi = new  MerchantCategoryApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET, Locale.ENGLISH);
     }
 	
-	public static void testGetCategories() {
+	public void testGetCategories() {
 		Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCategories("");
-		System.out.println(obj);
+		logger.debug("Result of get merchant categories: {}", obj.toString());
 	}
 	
-	public static void testCreateCategory() {
+	public void testCreateCategory() {
 		MerchantCategoryCreateRequest createRequest = new MerchantCategoryCreateRequest();
 		createRequest.setName("");
 		createRequest.setRemarks("Retail");
 		Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(createRequest);
-		System.out.println(EnhancedJsonUtils.toJson(result));
-    	System.out.println("search result="+result);
-
+		logger.debug("Result of create merchant category: {}", result.toString());
 	}
 	
-	public static void testUpdateCategory() {
+	public void testUpdateCategory() {
 		MerchantCategoryUpdateRequest updateRequest = new MerchantCategoryUpdateRequest();
 		updateRequest.setName("Retail3");
 		updateRequest.setRemarks("This is a retail category");
 		Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(2L,updateRequest);
-		System.out.println(EnhancedJsonUtils.toJson(result));
+		logger.debug("Result of update merchant category: {}", result.toString());
 	}
 	
-	public static void testDeleteCategory() {
+	public void testDeleteCategory() {
 		Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
-		System.out.println(EnhancedJsonUtils.toJson(result));
+		logger.debug("Result of delete merchant category: {}", result.toString());
 	}
 	
-	public static void testBatchCreate() {
+	public void testBatchCreate() {
 		List<MerchantCategoryCreateRequest> batchCreateRequest = new ArrayList<MerchantCategoryCreateRequest>();
 		MerchantCategoryCreateRequest create1 = new MerchantCategoryCreateRequest();
 		create1.setName("Retail11");
@@ -67,21 +65,8 @@ public class MerchantCategoryApiTest {
 		create3.setName("Realty33");
 		create3.setRemarks("Realty");
 		batchCreateRequest.add(create3);
-		
 		Result<ArrayList<MerchantCategoryDTO>> result = merchantCategoryApi.batchCreateMerchantCategory(batchCreateRequest,false);
-		System.out.println(EnhancedJsonUtils.toJson(result));
+		logger.debug("Result of batch create merchant categories: {}", result.toString());
 	}
 	
-	
-	
-	
-	public static void main(String[] args) throws IOException, GeneralSecurityException {
-		init();
-//		testCreateCategory();
-//		testGetCategories();
-//		testUpdateCategory();
-//		testDeleteCategory();
-		testBatchCreate();
-	
-	}
 }

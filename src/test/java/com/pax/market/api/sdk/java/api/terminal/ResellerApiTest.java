@@ -12,6 +12,8 @@
 package com.pax.market.api.sdk.java.api.terminal;
 
 import java.util.LinkedHashMap;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +33,10 @@ import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
  * @date 2018-07-03
  */
 public class ResellerApiTest {
+	
 	private static final Logger logger = LoggerFactory.getLogger(ResellerApiTest.class.getSimpleName());
 	
-	static ResellerApi resellerApi;
+	ResellerApi resellerApi;
 	
 	static Long newResellerId = 0L;
 	
@@ -44,17 +47,15 @@ public class ResellerApiTest {
     @Test
     public void testSearchReseller() {
     	Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Contact, null, null);
-    	logger.info(result.toString());
-        
-        System.out.println(EnhancedJsonUtils.toJson(result));
-    	System.out.println("search result="+result);
+    	logger.debug("Result of search reseller: {}",result.toString());
+	    Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test
     public void testGetReseller() {
     	Result<ResellerDTO> result = resellerApi.getReseller(1000005210L);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
-    	System.out.println("get result="+result);
+    	logger.debug("Result of get reseller: {}",result.toString());
+    	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test
@@ -77,8 +78,8 @@ public class ResellerApiTest {
     	if(result.getBusinessCode() == 0) {
     		newResellerId = result.getData().getId();
     	}
-    	System.out.println(EnhancedJsonUtils.toJson(result));
-    	System.out.println("create reseller result="+result);
+    	logger.debug("Result of create reseller: {}",result.toString());
+    	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test
@@ -104,36 +105,36 @@ public class ResellerApiTest {
     	
     	
     	Result<ResellerDTO> result = resellerApi.updateReseller(1000005221L, request);
-    	System.out.println("update result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of update reseller: {}",result.toString());
+    	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test
     public void testActivateReseller() {
     	Result<String> result = resellerApi.activateReseller(1000005211L);
-    	System.out.println("activate result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of activate reseller: {}",result.toString());
+    	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test
     public void testDisableReseller() {
     	Result<String> result = resellerApi.disableReseller(1000005211L);
-    	System.out.println("disable result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of disable reseller: {}",result.toString());
+    	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test
     public void testDeleteReseller() {
     	Result<String> result = resellerApi.deleteReseller(1000005212L);
-    	System.out.println("Delete result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of delete reseller: {}",result.toString());
+    	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test
     public void testReplaceEmail() {
     	Result<String> result = resellerApi.replaceResellerEmail(1000005212L, "zhangsan@pax.com");
-    	System.out.println("Replace email result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of replace reseller email: {}",result.toString());
+    	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
 }

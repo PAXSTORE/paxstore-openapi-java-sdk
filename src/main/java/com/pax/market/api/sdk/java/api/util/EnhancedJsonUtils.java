@@ -13,6 +13,9 @@ package com.pax.market.api.sdk.java.api.util;
 
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *
  * @author tanjie
@@ -27,6 +30,7 @@ import com.pax.market.api.sdk.java.api.constant.ResultCode;
  * The type Json utils.
  */
 public class EnhancedJsonUtils {
+	private static final Logger logger = LoggerFactory.getLogger(EnhancedJsonUtils.class);
     private static Gson gson = getGson();
 
     /**
@@ -64,7 +68,7 @@ public class EnhancedJsonUtils {
      * @return Javabean对象 t
      */
     public static <T> T fromJson(String sdkJsonStr, Class<T> clazz) {
-    	System.out.println(sdkJsonStr);
+    	logger.debug(sdkJsonStr);
         return gson.fromJson(sdkJsonStr, clazz);
     }
 

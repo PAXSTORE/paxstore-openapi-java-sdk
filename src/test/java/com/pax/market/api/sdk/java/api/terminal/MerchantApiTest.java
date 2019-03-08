@@ -36,9 +36,10 @@ import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
  * @date 2018-07-03
  */
 public class MerchantApiTest {
+	
 	private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.class.getSimpleName());
 	
-	private static MerchantApi merchantApi;
+	private MerchantApi merchantApi;
 	
 	static Long newMerchantId = 0L;
 	
@@ -50,9 +51,7 @@ public class MerchantApiTest {
     @Test
     public void testSearchMerchant() {
     	Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, MerchantSearchOrderBy.Contact, "", MerchantStatus.Active);
-    	logger.info(result.toString());
-    	System.out.println("search result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of search merchant: {}", result.toString()); 
     	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
@@ -77,7 +76,7 @@ public class MerchantApiTest {
     	
     	
     	Result<MerchantDTO> createResult = merchantApi.createMerchant(request);
-    	logger.info("Create Result="+createResult);
+    	logger.debug("Result of create merchant: {}", createResult);
     	Assert.assertTrue(createResult.getBusinessCode() == 0);
     	Long merchantId = createResult.getData().getId();
     	
@@ -99,9 +98,9 @@ public class MerchantApiTest {
     	attrs2.put("456", "tan2");
     	updateRequest.setEntityAttributeValues(attrs2);
     	Result<MerchantDTO> updateResult = merchantApi.updateMerchant(merchantId, updateRequest);
-    	logger.info("Update Merchant Result={0}", updateResult.toString());
+    	logger.debug("Result of update merchant result={0}", updateResult.toString());
     	
-    	
+    	Assert.assertTrue(updateResult.getBusinessCode() == 0);
     	
     	
     	
@@ -112,16 +111,15 @@ public class MerchantApiTest {
     @Test
     public void testActivateMerchant() {
     	Result<String> result = merchantApi.activateMerchant(1000056487L);
-    	System.out.println("activate result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of activate merchant: {}",result.toString());
     	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test
     public void testDisableMerchant() {
     	Result<String> result = merchantApi.disableMerchant(1000056487L);
-    	System.out.println("disable result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of disable merchant: {}",result.toString());
+    	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test
@@ -148,16 +146,14 @@ public class MerchantApiTest {
     	if(result.getBusinessCode() == 0) {
     		newMerchantId = result.getData().getId();
     	}
-    	System.out.println("create result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of create merchant: {}", result.toString());
     }
     
     @Test
     public void testGetMerchant() {    	
 //    	Result<MerchantDTO> result = merchantApi.getMerchant(72590L);
     	Result<MerchantDTO> result = merchantApi.getMerchant(725901L);
-    	System.out.println("get result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of get merchant: {}", result.toString());
     }
     
     @Test
@@ -185,24 +181,20 @@ public class MerchantApiTest {
     	attrs.put("456", "tan2");
     	request.setEntityAttributeValues(attrs);
     	Result<MerchantDTO> result = merchantApi.updateMerchant(1000056495L, request);
-    	System.out.println("update result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	
+    	logger.debug("Result of update merchant: {}", result.toString());
     }
     
     @Test
     public void testDelete() {
     	Result<String> result = merchantApi.deleteMerchant(1000056487L);
-    	System.out.println("delete result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of delete merchant: {}", result.toString());
     }
     
     @Test
     public void testReplaceEmail() {
-    	
-    	
     	Result<String> result = merchantApi.replaceMerchantEmail(1000056487L, "lisi@163.com", true);
-    	System.out.println("replace email result="+result);
-    	System.out.println(EnhancedJsonUtils.toJson(result));
+    	logger.debug("Result of replace merchant email: {}", result.toString());
     }
     
 }
