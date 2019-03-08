@@ -243,6 +243,7 @@ Structure of class MerchantCreateRequest
 |createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant, the default value is false|
 |merchantCategoryNames|List&lt;String&gt;|true|Merchant categories. Make sure the categories are available.|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
+|activateWhenCreate|Boolean|true|Whether to activate the merchant when create, default value is false|
 
 
 **Sample codes**

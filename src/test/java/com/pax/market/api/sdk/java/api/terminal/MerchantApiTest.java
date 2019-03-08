@@ -11,18 +11,13 @@
  */
 package com.pax.market.api.sdk.java.api.terminal;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
 
+import java.util.LinkedHashMap;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.merchant.MerchantApi;
 import com.pax.market.api.sdk.java.api.merchant.MerchantApi.MerchantSearchOrderBy;
@@ -41,7 +36,7 @@ import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
  * @date 2018-07-03
  */
 public class MerchantApiTest {
-private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.class.getSimpleName());
+	private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.class.getSimpleName());
 	
 	private static MerchantApi merchantApi;
 	
@@ -114,25 +109,27 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     }
     
     
-    
-    public static void testActivateMerchant() {
-//    	Result<String> result = merchantApi.activateMerchant(72594L);
+    @Test
+    public void testActivateMerchant() {
     	Result<String> result = merchantApi.activateMerchant(1000056487L);
     	System.out.println("activate result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
+    	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
-    public static void testDisableMerchant() {
+    @Test
+    public void testDisableMerchant() {
     	Result<String> result = merchantApi.disableMerchant(1000056487L);
     	System.out.println("disable result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
-    public static void testCreateMerchant() {
+    @Test
+    public void testCreateMerchant() {
     	MerchantCreateRequest request = new MerchantCreateRequest();
-    	request.setName("KFC_Nanjing");
+    	request.setName("KFC_Nanjing2");
     	request.setEmail("ta@pax.com");
-    	request.setResellerName("Jesse");
+    	request.setResellerName("reseller");
     	request.setContact("sam");
     	request.setCountry("CN");
     	
@@ -145,7 +142,7 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     	request.setEntityAttributeValues(attrs);
 //    	String[] categoryNames = {"Fast Food"};
 //    	request.setMerchantCategoryNames(Arrays.asList(categoryNames));
-    	
+    	request.setActivateWhenCreate(true);
     	
     	Result<MerchantDTO> result = merchantApi.createMerchant(request);
     	if(result.getBusinessCode() == 0) {
@@ -154,14 +151,17 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     	System.out.println("create result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
-    public static void testGetMerchant() {    	
+    
+    @Test
+    public void testGetMerchant() {    	
 //    	Result<MerchantDTO> result = merchantApi.getMerchant(72590L);
     	Result<MerchantDTO> result = merchantApi.getMerchant(725901L);
     	System.out.println("get result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
-    public static void testUpdateMerchant() {
+    @Test
+    public void testUpdateMerchant() {
     	MerchantUpdateRequest request = new MerchantUpdateRequest();
 //    	request.setName("KFC Suzhou");
     	request.setName("KFC_Nanjing");
@@ -189,13 +189,15 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
-    public static void testDelete() {
+    @Test
+    public void testDelete() {
     	Result<String> result = merchantApi.deleteMerchant(1000056487L);
     	System.out.println("delete result="+result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
-    public static void testReplaceEmail() {
+    @Test
+    public void testReplaceEmail() {
     	
     	
     	Result<String> result = merchantApi.replaceMerchantEmail(1000056487L, "lisi@163.com", true);
@@ -203,16 +205,4 @@ private static final Logger logger = LoggerFactory.getLogger(MerchantApiTest.cla
     	System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
-//    public static void main(String[] args){
-//        init();
-////        testSearchMerchant();
-////        
-////        testCreateMerchant();
-//        testUpdateMerchant();
-////        testActivateMerchant();
-////        testDisableMerchant();
-////        testGetMerchant();
-////        testDelete();
-////        testReplaceEmail();
-//    }
 }

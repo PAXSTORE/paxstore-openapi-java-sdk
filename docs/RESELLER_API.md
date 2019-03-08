@@ -250,6 +250,8 @@ Structure of class ResellerCreateRequest
 |company|String|true|Company of reseller, max length is 255.|
 |parentResellerName|String|true|Parent reseller name, if it is empty will set the root reseller of current marketplace as the parent reseller|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
+|activateWhenCreate|Boolean|true|Whether to activate the reseller when create, default value is false|
+
 
 **Sample codes**
 

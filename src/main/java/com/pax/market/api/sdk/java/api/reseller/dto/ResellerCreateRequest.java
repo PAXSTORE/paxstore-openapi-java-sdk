@@ -18,6 +18,9 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.google.gson.annotations.Expose;
+import com.pax.market.api.sdk.java.api.reseller.ResellerApi.ResellerStatus;
+
 /**
  *
  * @author tanjie
@@ -60,6 +63,10 @@ public class ResellerCreateRequest implements Serializable{
 
 	@Length(max=255)
     private String company;
+	
+	private Boolean activateWhenCreate = Boolean.FALSE;
+	
+	private String status;
 	
 	
 
@@ -149,7 +156,20 @@ public class ResellerCreateRequest implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+	public Boolean getActivateWhenCreate() {
+		return activateWhenCreate;
+	}
+
+	public void setActivateWhenCreate(Boolean activateWhenCreate) {
+		this.activateWhenCreate = activateWhenCreate;
+		if(activateWhenCreate) {
+			this.status=ResellerStatus.Active.val();
+		}
+	}
+
+	public String getStatus() {
+		return status;
+	}
 
 }

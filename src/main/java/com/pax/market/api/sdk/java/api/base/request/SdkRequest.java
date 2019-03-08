@@ -15,10 +15,15 @@ package com.pax.market.api.sdk.java.api.base.request;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Created by fanjun on 2016/11/10.
  */
 public class SdkRequest {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SdkRequest.class);
 
     /**
      * The Request method.
@@ -210,8 +215,7 @@ public class SdkRequest {
      * @param requestBody the request body
      */
     public void setRequestBody(String requestBody) {
-    	System.out.println("request body is");
-    	System.out.println(requestBody);
+    	logger.debug("Request body is {}", requestBody);
         this.requestBody = requestBody;
     }
 

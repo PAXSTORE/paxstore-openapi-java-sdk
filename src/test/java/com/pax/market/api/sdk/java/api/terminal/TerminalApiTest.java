@@ -12,8 +12,7 @@
 package com.pax.market.api.sdk.java.api.terminal;
 
 
-import java.util.Locale;
-
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
@@ -22,6 +21,7 @@ import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalCreateRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalUpdateRequest;
+import com.pax.market.api.sdk.java.api.test.TestConstants;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 
 /**
@@ -36,32 +36,32 @@ public class TerminalApiTest {
 	
 	static Long createdTerminalId = 0L;
 	
-    public static void init(){
-//    	terminalApi = new  TerminalApi("http://localhost:8080/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "PXCIGMB0HKBGKEW5EMFQF4ULJ55R2EORCC29FYAN");
-    	terminalApi = new  TerminalApi("https://api.paxstores.com/p-market-apis", "J6F2RVDFITV4UK2VZZHV", "QG3S1T2ENV7GESV73UET9I4P1L44YSWBXU8SRLZQ");
-    	
-
+    public void init(){
+    	terminalApi = new  TerminalApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
     }
 
-    public static void testSearchTerminalList(){
+    @Test
+    public void testSearchTerminalList(){
     	Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, TerminalStatus.Inactive, "14494956");
 		System.out.println("search result: " + result);
 		System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
-    public static void testGetTerminal(){
+    @Test
+    public void testGetTerminal(){
     	Result<TerminalDTO> result = terminalApi.getTerminal(375977111L);
 		System.out.println("get result: " + result);
 		System.out.println(EnhancedJsonUtils.toJson(result));
     }
     
-    public static void testCreateTerminal() {
+    @Test
+    public void testCreateTerminal() {
     	TerminalCreateRequest createReq = new TerminalCreateRequest();
     	createReq.setName("KFC-TML-03");
-    	createReq.setMerchantName("KFC_Nanjing");
-    	createReq.setResellerName("New York");
+    	createReq.setMerchantName("demo");
+    	createReq.setResellerName("tan");
     	createReq.setLocation("USA");
-    	createReq.setSerialNo("sn0101012240");
+    	createReq.setSerialNo("TJ000002");
     	createReq.setModelName("A920");
 
     	createReq.setStatus(TerminalStatus.Active);
@@ -71,9 +71,11 @@ public class TerminalApiTest {
     	}
     	System.out.println("create result: " + result); 
     	System.out.println(EnhancedJsonUtils.toJson(result));
+
     }
     
-    public static void testUpdateTerminal() {
+    @Test
+    public void testUpdateTerminal() {
     	TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
     	updateReq.setName("KFC-TML-JS");
     	updateReq.setModelName("A920");
@@ -88,41 +90,24 @@ public class TerminalApiTest {
     }
     
     
-    
-    public static void testActiveTerminal(){
+    @Test
+    public void testActiveTerminal(){
     	Result<String> result = terminalApi.activateTerminal(907560L);
     	System.out.println("active result: " + result);
     	System.out.println(EnhancedJsonUtils.toJson(result));
         
     }
     
-    public static void testDisableTerminal(){
+    @Test
+    public void testDisableTerminal(){
     	Result<String> result = terminalApi.disableTerminal(907560L);
     	System.out.println("disable result: " + result); 
     }
     
-    
-    
-    
-    
-    public static void testDeleteTerminal() {
+    @Test
+    public void testDeleteTerminal() {
     	Result<String> result = terminalApi.deleteTerminal(createdTerminalId);
     	System.out.println("delete result: " + result);
     }
     
-   
-    
-    public static void main(String[] args){
-        init();
-        testSearchTerminalList();
-//        testGetTerminal();
-//        testCreateTerminal();
-//        testDisableTerminal();
-//        testGetTerminal();
-//        testUpdateTerminal();
-//        testActiveTerminal();
-//        testDisableTerminal();
-//        testDeleteTerminal();
-        
-    }
 }

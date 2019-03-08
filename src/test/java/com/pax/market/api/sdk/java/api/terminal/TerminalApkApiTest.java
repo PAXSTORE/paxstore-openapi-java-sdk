@@ -15,12 +15,16 @@ package com.pax.market.api.sdk.java.api.terminal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalApk.TerminalApkApi;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.CreateTerminalApkRequest;
+import com.pax.market.api.sdk.java.api.test.TestConstants;
 
 /**
  * Description
@@ -30,36 +34,42 @@ import com.pax.market.api.sdk.java.api.terminalApk.dto.CreateTerminalApkRequest;
  */
 public class TerminalApkApiTest {
 	
-private static final Logger logger = LoggerFactory.getLogger(TerminalApiTest.class.getSimpleName());
+	private static final Logger logger = LoggerFactory.getLogger(TerminalApiTest.class.getSimpleName());
 	
 	static TerminalApkApi terminalApkApi;
 	
 	static Long createdTerminalId = 0L;
 	
-    public static void init(){
-    	terminalApkApi = new  TerminalApkApi("http://localhost:8080/p-market-api", "WZ5JT4WYOCCN0JQ7UZEV", "HMLAFOO4KRV3P4QSPFYBWFFHCRHRSMLX5ILSGDLP");
+    
+    @Before
+    public void init(){
+    	terminalApkApi = new  TerminalApkApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
     	
     }
     
-    public static void testCreateTerminalApk() {
+    @Test
+    public void testCreateTerminalApk() {
     	CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
-    	createTerminalApkRequest.setTid("FS1JQAAV");
-//    	createTerminalApkRequest.setSerialNo("0820087293");
+    	createTerminalApkRequest.setTid("0000002214479770");
+//    	createTerminalApkRequest.setTid("S9F0RA7V");
     	
-    	createTerminalApkRequest.setPackageName("FDRCNV-HC-Retail-S300");
+    	
+    	createTerminalApkRequest.setPackageName("com.pax.us.pay.std.vantiv");
+    	
+//    	createTerminalApkRequest.setPackageName("com.pax.android.lm");
+    	
 //    	createTerminalApkRequest.setVersion("5.7.3.0");
-    	createTerminalApkRequest.setTemplateName("config.zip|abc.zip");
+    	createTerminalApkRequest.setTemplateName("Restaurant.zip");
+//    	createTerminalApkRequest.setTemplateName("param02.xml");
     	Map<String, String> parameters = new HashMap<String, String>();
-    	parameters.put("sys.cap.emvParamCheckType", "abc");
+//    	parameters.put("sys.cap.emvParamCheckType", "abc");
     	
     	createTerminalApkRequest.setParameters(parameters);
     	Result<String> result = terminalApkApi.createTerminalApk(createTerminalApkRequest);
-    	System.out.println(result);
+    	Assert.assertTrue(result.getBusinessCode() == 0);
+    	logger.info(result.toString());
+    	
     }
 
-    public static void main(String[] args) {
-    	TerminalApkApiTest.init();
-    	TerminalApkApiTest.testCreateTerminalApk();
-    }
 
 }

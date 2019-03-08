@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.2
+
+### Improvement  
+
+* Support activate the reseller when create reseller, this improvement only works with PAXSTORE v6.2 and later.
+* Support activate the merchant when create merchant, this improvement only works with PAXSTORE v6.2 and later.
+
+### Bug fixes  
+
+### Breaking changes  
+NA
+
 ## 6.1 
 
 ### Improvement

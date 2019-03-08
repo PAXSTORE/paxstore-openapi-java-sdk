@@ -19,6 +19,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.pax.market.api.sdk.java.api.merchant.MerchantApi.MerchantStatus;
+
 /**
  *
  * @author tanjie
@@ -74,6 +76,10 @@ public class MerchantCreateRequest implements Serializable{
     private List<String> merchantCategoryNames;
 	
 	private LinkedHashMap<String, String> entityAttributeValues;
+	
+	private Boolean activateWhenCreate = Boolean.FALSE;
+	
+	private String status;
 
 	
 	public Boolean getCreateUserFlag() {
@@ -174,6 +180,19 @@ public class MerchantCreateRequest implements Serializable{
 		this.entityAttributeValues = entityAttributeValues;
 	}
 
+	public Boolean getActivateWhenCreate() {
+		return activateWhenCreate;
+	}
 
+	public void setActivateWhenCreate(Boolean activateWhenCreate) {
+		this.activateWhenCreate = activateWhenCreate;
+		if(activateWhenCreate) {
+			this.status = MerchantStatus.Active.val();
+		}
+	}
+
+	public String getStatus() {
+		return status;
+	}
 
 }
