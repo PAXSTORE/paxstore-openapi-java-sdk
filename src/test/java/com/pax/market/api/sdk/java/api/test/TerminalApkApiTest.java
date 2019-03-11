@@ -10,7 +10,7 @@
  * *******************************************************************************
  */
 
-package com.pax.market.api.sdk.java.api.terminal;
+package com.pax.market.api.sdk.java.api.test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalApk.TerminalApkApi;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.CreateTerminalApkRequest;
-import com.pax.market.api.sdk.java.api.test.TestConstants;
 
 /**
  * Description

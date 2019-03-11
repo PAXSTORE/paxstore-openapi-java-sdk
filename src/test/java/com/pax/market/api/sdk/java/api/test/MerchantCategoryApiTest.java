@@ -1,9 +1,12 @@
-package com.pax.market.api.sdk.java.api.merchantCategory;
+package com.pax.market.api.sdk.java.api.test;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import org.junit.Before;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
@@ -11,7 +14,6 @@ import com.pax.market.api.sdk.java.api.merchant.category.MerchantCategoryApi;
 import com.pax.market.api.sdk.java.api.merchant.category.dto.MerchantCategoryCreateRequest;
 import com.pax.market.api.sdk.java.api.merchant.category.dto.MerchantCategoryDTO;
 import com.pax.market.api.sdk.java.api.merchant.category.dto.MerchantCategoryUpdateRequest;
-import com.pax.market.api.sdk.java.api.test.TestConstants;
 
 public class MerchantCategoryApiTest {
 	
@@ -19,15 +21,18 @@ public class MerchantCategoryApiTest {
 	
 	static MerchantCategoryApi merchantCategoryApi;
 	
-    public static void init(){
+	@Before
+    public void init(){
     	merchantCategoryApi = new  MerchantCategoryApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET, Locale.ENGLISH);
     }
 	
+	@Test
 	public void testGetCategories() {
 		Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCategories("");
 		logger.debug("Result of get merchant categories: {}", obj.toString());
 	}
 	
+	@Test
 	public void testCreateCategory() {
 		MerchantCategoryCreateRequest createRequest = new MerchantCategoryCreateRequest();
 		createRequest.setName("");
@@ -36,6 +41,7 @@ public class MerchantCategoryApiTest {
 		logger.debug("Result of create merchant category: {}", result.toString());
 	}
 	
+	@Test
 	public void testUpdateCategory() {
 		MerchantCategoryUpdateRequest updateRequest = new MerchantCategoryUpdateRequest();
 		updateRequest.setName("Retail3");
@@ -44,11 +50,13 @@ public class MerchantCategoryApiTest {
 		logger.debug("Result of update merchant category: {}", result.toString());
 	}
 	
+	@Test
 	public void testDeleteCategory() {
 		Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 		logger.debug("Result of delete merchant category: {}", result.toString());
 	}
 	
+	@Test
 	public void testBatchCreate() {
 		List<MerchantCategoryCreateRequest> batchCreateRequest = new ArrayList<MerchantCategoryCreateRequest>();
 		MerchantCategoryCreateRequest create1 = new MerchantCategoryCreateRequest();

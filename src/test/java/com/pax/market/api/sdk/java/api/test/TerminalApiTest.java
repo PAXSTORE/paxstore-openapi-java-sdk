@@ -9,21 +9,22 @@
  *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
  * *******************************************************************************
  */
-package com.pax.market.api.sdk.java.api.terminal;
+package com.pax.market.api.sdk.java.api.test;
 
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
+import com.pax.market.api.sdk.java.api.terminal.TerminalApi;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalSearchOrderBy;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalCreateRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalUpdateRequest;
-import com.pax.market.api.sdk.java.api.test.TestConstants;
-import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+
 
 /**
  *
@@ -36,8 +37,7 @@ public class TerminalApiTest {
 	
 	TerminalApi terminalApi;
 	
-	static Long createdTerminalId = 0L;
-	
+	@Before
     public void init(){
     	terminalApi = new  TerminalApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
     }
@@ -49,69 +49,60 @@ public class TerminalApiTest {
     	Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
-    @Test
-    public void testGetTerminal(){
-    	Result<TerminalDTO> result = terminalApi.getTerminal(375977111L);
-    	logger.debug("Result of get terminal: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-    
+
     @Test
     public void testCreateTerminal() {
     	TerminalCreateRequest createReq = new TerminalCreateRequest();
     	createReq.setName("KFC-TML-03");
-    	createReq.setMerchantName("demo");
-    	createReq.setResellerName("tan");
+    	createReq.setMerchantName("merchant test");
+    	createReq.setResellerName("reseller test");
     	createReq.setLocation("USA");
     	createReq.setSerialNo("TJ000002");
     	createReq.setModelName("A920");
 
-    	createReq.setStatus(TerminalStatus.Active);
+
     	Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
-    	if(result.getBusinessCode() == 0) {
-    		createdTerminalId = result.getData().getId();
-    	}
     	logger.debug("Result of create terminal: {}",result.toString());
     	Assert.assertTrue(result.getBusinessCode() == 0);
-
-    }
-    
-    @Test
-    public void testUpdateTerminal() {
+    	
+    	Long terminalId = result.getData().getId();
+    	
+    	
+    	Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId);
+    	logger.debug("Result of get terminal: {}",getResult.toString());
+    	Assert.assertTrue(getResult.getBusinessCode() == 0);
+    	
+    	
+    	//test update
     	TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
     	updateReq.setName("KFC-TML-JS");
     	updateReq.setModelName("A920");
     	updateReq.setLocation("CN");
-    	updateReq.setSerialNo("AD0099");
-    	updateReq.setResellerName("New York");
-    	updateReq.setMerchantName("KFC");
+    	updateReq.setSerialNo("TJ000002");
+    	updateReq.setResellerName("reseller test");
+    	updateReq.setMerchantName("merchant test");
     	
-    	Result<TerminalDTO> result = terminalApi.updateTerminal(316995L, updateReq);
-    	logger.debug("Result of update terminal: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
+    	Result<TerminalDTO> updateResult = terminalApi.updateTerminal(terminalId, updateReq);
+    	logger.debug("Result of update terminal: {}",updateResult.toString());
+    	Assert.assertTrue(updateResult.getBusinessCode() == 0);
+    	
+    	//Test activate
+    	Result<String> activateResult = terminalApi.activateTerminal(terminalId);
+    	logger.debug("Result of activate terminal: {}",activateResult.toString());
+    	Assert.assertTrue(activateResult.getBusinessCode() == 0);
+    	
+    	//Test disable
+    	Result<String> disableResult = terminalApi.disableTerminal(terminalId);
+    	logger.debug("Result of disable terminal: {}",disableResult.toString());
+    	Assert.assertTrue(disableResult.getBusinessCode() == 0);
+    	
+    	//Test delete
+    	Result<String> deleteResult = terminalApi.deleteTerminal(terminalId);
+    	logger.debug("Result of delete terminal: {}",deleteResult.toString());
+    	Assert.assertTrue(deleteResult.getBusinessCode() == 0);
+
     }
     
-    
-    @Test
-    public void testActiveTerminal(){
-    	Result<String> result = terminalApi.activateTerminal(907560L);
-    	logger.debug("Result of activate terminal: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
-        
-    }
-    
-    @Test
-    public void testDisableTerminal(){
-    	Result<String> result = terminalApi.disableTerminal(907560L);
-    	logger.debug("Result of disable terminal: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-    
-    @Test
-    public void testDeleteTerminal() {
-    	Result<String> result = terminalApi.deleteTerminal(createdTerminalId);
-    	logger.debug("Result of delete terminal: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
-    }
+
     
 }

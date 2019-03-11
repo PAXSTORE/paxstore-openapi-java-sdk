@@ -9,7 +9,7 @@
  *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
  * *******************************************************************************
  */
-package com.pax.market.api.sdk.java.api.terminal;
+package com.pax.market.api.sdk.java.api.test;
 
 
 import java.util.LinkedHashMap;
@@ -26,8 +26,6 @@ import com.pax.market.api.sdk.java.api.merchant.dto.MerchantCreateRequest;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantDTO;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantPageDTO;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantUpdateRequest;
-import com.pax.market.api.sdk.java.api.test.TestConstants;
-import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 
 
 /**
@@ -59,9 +57,9 @@ public class MerchantApiTest {
     public void testCreateUpdateActiveDisableDeleteAllSuccess() {
     	//Create
     	MerchantCreateRequest request = new MerchantCreateRequest();
-    	request.setName("KFC_Nanjing");
+    	request.setName("merchant to delete");
     	request.setEmail("ta@pax.com");
-    	request.setResellerName("Jesse");
+    	request.setResellerName("reseller test");
     	request.setContact("sam");
     	request.setCountry("CN");
     	request.setPostcode("5652");
@@ -83,7 +81,7 @@ public class MerchantApiTest {
     	//update
     
     	MerchantUpdateRequest updateRequest = new MerchantUpdateRequest();
-    	updateRequest.setName("KFC_Nanjing");
+    	updateRequest.setName("merchant to delete2");
     	updateRequest.setContact("Jack");
     	updateRequest.setCountry("CN");
     	updateRequest.setPhone("444866");
@@ -103,98 +101,26 @@ public class MerchantApiTest {
     	Assert.assertTrue(updateResult.getBusinessCode() == 0);
     	
     	
+    	Result<String> activateResult = merchantApi.activateMerchant(merchantId);
+    	logger.debug("Result of activate merchant: {}",activateResult.toString());
+    	Assert.assertTrue(activateResult.getBusinessCode() == 0);
+    	
+    	Result<MerchantDTO> getResult = merchantApi.getMerchant(merchantId);
+    	logger.debug("Result of get merchant: {}", getResult.toString());
+    	
+    	Result<String> replaceEmailResult = merchantApi.replaceMerchantEmail(merchantId, "lisi@163.com", true);
+    	logger.debug("Result of replace merchant email: {}", replaceEmailResult.toString());
     	
     	
-    }
-    
-    
-    @Test
-    public void testActivateMerchant() {
-    	Result<String> result = merchantApi.activateMerchant(1000056487L);
-    	logger.debug("Result of activate merchant: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-    
-    @Test
-    public void testDisableMerchant() {
-    	Result<String> result = merchantApi.disableMerchant(1000056487L);
-    	logger.debug("Result of disable merchant: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-    
-    @Test
-    public void testCreateMerchant() {
-    	MerchantCreateRequest request = new MerchantCreateRequest();
-    	request.setName("KFC_Nanjing2");
-    	request.setEmail("ta@pax.com");
-    	request.setResellerName("reseller");
-    	request.setContact("sam");
-    	request.setCountry("CN");
-    	
-    	request.setPostcode("5652");
-    	request.setPhone("444888");
-    	request.setAddress("Jiangsu suzhou city Xinghongjie 328#");
-    	request.setDescription("Merchant KFC Nanjing");
-    	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
-    	attrs.put("456", "tan");
-    	request.setEntityAttributeValues(attrs);
-//    	String[] categoryNames = {"Fast Food"};
-//    	request.setMerchantCategoryNames(Arrays.asList(categoryNames));
-    	request.setActivateWhenCreate(true);
-    	
-    	Result<MerchantDTO> result = merchantApi.createMerchant(request);
-    	if(result.getBusinessCode() == 0) {
-    		newMerchantId = result.getData().getId();
-    	}
-    	logger.debug("Result of create merchant: {}", result.toString());
-    }
-    
-    @Test
-    public void testGetMerchant() {    	
-//    	Result<MerchantDTO> result = merchantApi.getMerchant(72590L);
-    	Result<MerchantDTO> result = merchantApi.getMerchant(725901L);
-    	logger.debug("Result of get merchant: {}", result.toString());
-    }
-    
-    @Test
-    public void testUpdateMerchant() {
-    	MerchantUpdateRequest request = new MerchantUpdateRequest();
-//    	request.setName("KFC Suzhou");
-    	request.setName("KFC_Nanjing");
-//    	request.setEmail("jack@kfc.com.cn");
-    	
-//    	request.setResellerName("Jesse");
+    	Result<String> disableResult = merchantApi.disableMerchant(merchantId);
+    	logger.debug("Result of disable merchant: {}",disableResult.toString());
+    	Assert.assertTrue(disableResult.getBusinessCode() == 0);
     	
     	
-    	request.setContact("Jack");
-    	request.setCountry("CN");
-    	
-    	request.setPhone("444866");
-    	request.setPostcode("5652");
-//    	String[] categoryNames = {"Fast Food"};
-    	request.setAddress("Jiangsu suzhou city Xinghongjie 328#");
-    	request.setDescription("Merchant KFC Nanjing");
-    	
-    	request.setCreateUserFlag(true);
-//    	request.setMerchantCategoryNames(Arrays.asList(categoryNames));
-    	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
-    	attrs.put("456", "tan2");
-    	request.setEntityAttributeValues(attrs);
-    	Result<MerchantDTO> result = merchantApi.updateMerchant(1000056495L, request);
-    	
-    	logger.debug("Result of update merchant: {}", result.toString());
-    }
-    
-    @Test
-    public void testDelete() {
-    	Result<String> result = merchantApi.deleteMerchant(1000056487L);
+    	Result<String> result = merchantApi.deleteMerchant(merchantId);
     	logger.debug("Result of delete merchant: {}", result.toString());
+    	
     }
     
-    @Test
-    public void testReplaceEmail() {
-    	Result<String> result = merchantApi.replaceMerchantEmail(1000056487L, "lisi@163.com", true);
-    	logger.debug("Result of replace merchant email: {}", result.toString());
-    }
-    
+
 }
