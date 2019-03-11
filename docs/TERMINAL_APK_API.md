@@ -46,7 +46,7 @@ Structure of class TerminalCreateRequest
 |serialNo|String|true|The serial number of terminal|
 |packageName|String|false|The package name which indicate the application you want to push to the terminal|
 |version|String|true|The version name of application which you want to push, if it is blank API will use the latest version|
-|templateName|String|true|The template name of paramter. If user want to push more than one template the please use &#124; to concact the different template names like tempate1&#124;template2&#124;template3, the max size of template names is 10.|
+|templateName|String|true|The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10.|
 |parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the the PID in template|
 
 Note: tid and serialNo cannot be empty at same time.
@@ -122,5 +122,5 @@ createTerminalApkRequest.setParameters(parameters);
 |1905|Terminal task app parameter is invalid||
 |13100|Invalid application parameter variables||
 |1111|Selected parameter templates exceeded the max limit||
-|2031|Templatename cannot be empty|&nbsp;|
+|2031|Template name cannot be empty|&nbsp;|
 
