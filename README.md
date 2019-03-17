@@ -1,4 +1,4 @@
-# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=6.1) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/6.1/link)
+# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=6.1) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/6.2/link)
 
 
 <br/>
