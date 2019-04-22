@@ -76,7 +76,7 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalSta
 			"merchantName": "KFC",
 			"modelName": "A920",
 			"resellerName": "New York",
-            "location": "USA"
+			"location": "USA"
 		}]
 	}
 }
