@@ -75,7 +75,8 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalSta
 			"status": "A",
 			"merchantName": "KFC",
 			"modelName": "A920",
-			"resellerName": "New York"
+			"resellerName": "New York",
+            "location": "USA"
 		}]
 	}
 }
@@ -95,6 +96,8 @@ Structure of class TerminalDTO
 |merchantName|String|The merchant of terminal belongs to.|
 |modelName|String|Model name of terminal.|
 |resellerName|String|The reseller of terminal belongs to.|
+|location|String|The location|
+
 
 **Possible validation errors**
 
@@ -158,7 +161,8 @@ Result<TerminalDTO> result = terminalApi.getTerminal(907554L);
 		"status": "S",
 		"merchantName": "haoxy",
 		"modelName": "A920",
-		"resellerName": "PAX"
+		"resellerName": "PAX",
+		"location": "USA"
 	}
 }
 ```
@@ -254,7 +258,8 @@ Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
 		"status": "A",
 		"merchantName": "KFC",
 		"modelName": "A920",
-		"resellerName": "New York"
+		"resellerName": "New York",
+		"location": "USA"
 	}
 }
 ```
@@ -378,7 +383,8 @@ Result<TerminalDTO> result = terminalApi.updateTerminal(907560L, updateReq);
 		"status": "S",
 		"merchantName": "KFC",
 		"modelName": "A920",
-		"resellerName": "New York"
+		"resellerName": "New York",
+		"location": "CN"
 	}
 }
 ```
