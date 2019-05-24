@@ -12,7 +12,7 @@ public TerminalApkApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 **Constructor parameters description**
 
 |Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
@@ -34,14 +34,14 @@ public Result<String> createTerminalApk(CreateTerminalApkRequest createTerminalA
 
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |createTerminalApkRequest|CreateTerminalApkRequest|false|The create request object. The structure shows below.|
 
 
 Structure of class TerminalCreateRequest
 
 |Property Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |tid|String|true|The tid of terminal|
 |serialNo|String|true|The serial number of terminal|
 |packageName|String|false|The package name which indicate the application you want to push to the terminal|
@@ -94,7 +94,6 @@ createTerminalApkRequest.setParameters(parameters);
 ```
 
 
-
 **Possible validation errors**
 
 > <font color=red>Parameter createTerminalApkRequest cannot be null!</font>  
@@ -107,7 +106,7 @@ createTerminalApkRequest.setParameters(parameters);
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |2028|Terminal not found|Please check the value of tid or serialNo|
 |2029|Apk not found|Cannot find apk by packagename and version|
 |2030|Parameter template not found|The given template name(s) not exist in system|
@@ -124,3 +123,172 @@ createTerminalApkRequest.setParameters(parameters);
 |1111|Selected parameter templates exceeded the max limit||
 |2031|Template name cannot be empty|&nbsp;|
 
+
+### Suspend terminalApk
+
+Suspend terminalApk API allow the thirdparty system suspend terminalApk.
+
+
+**API**
+
+```
+public Result<String> suspendTerminalApk(UpdateTerminalApkRequest suspendTerminalApkRequest)
+```
+
+**Input parameter(s) description**  
+
+
+|Parameter Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|suspendTerminalApkRequest|UpdateTerminalApkRequest|false|The suspend request object. The structure shows below.|
+
+
+Structure of class UpdateTerminalApkRequest
+
+|Property Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|tid|String|true|The tid of terminal|
+|serialNo|String|true|The serial number of terminal|
+|packageName|String|false|The package name which indicate the application you want to suspend the terminal push task|
+
+Note: tid and serialNo cannot be empty at same time.
+
+
+**Sample codes**
+
+```
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+UpdateTerminalApkRequest suspendTerminalApkRequest = new UpdateTerminalApkRequest();
+suspendTerminalApkRequest.setTid("ABC09098989");
+suspendTerminalApkRequest.setPackageName("com.baidu.map");
+terminalApkApi.suspendTerminalApk(suspendTerminalApkRequest);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serialNo and tid in suspendTerminalApkRequest cannot be blank at same time!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2038,
+	"message": "Unfinished terminal push app not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+
+**Possible validation errors**
+
+> <font color=red>Parameter suspendTerminalApkRequest cannot be null!</font>  
+> <font color=red>The property serialNo and tid in suspendTerminalApkRequest cannot be blank at same time!</font> 
+> <font color=red>packageName:may not be empty</font>
+
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|2028|Terminal not found|Please check the value of tid or serialNo|
+|2029|Apk not found|Cannot find apk by packagename and version|
+|2026|Tid and serialNo cannot empty at same time||
+|2027|Package name cannot be empty||
+|2038|Unfinished terminal push app not found||
+
+
+### Uninstall terminalApk
+
+Uninstall terminalApk API allow the thirdparty system uninstall app from terminal.
+
+
+**API**
+
+```
+public Result<String> uninstallTerminalApk(UpdateTerminalApkRequest uninstallTerminalApkRequest)
+```
+
+**Input parameter(s) description**  
+
+
+|Parameter Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|uninstallTerminalApkRequest|UpdateTerminalApkRequest|false|The suspend request object. The structure shows below.|
+
+
+Structure of class UpdateTerminalApkRequest
+
+|Property Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|tid|String|true|The tid of terminal|
+|serialNo|String|true|The serial number of terminal|
+|packageName|String|false|The package name which indicate the application you want to suspend the terminal push task|
+
+Note: tid and serialNo cannot be empty at same time.
+
+
+**Sample codes**
+
+```
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+UpdateTerminalApkRequest uninstallTerminalApkRequest = new UpdateTerminalApkRequest();
+uninstallTerminalApkRequest.setTid("ABC09098989");
+uninstallTerminalApkRequest.setPackageName("com.baidu.map");
+terminalApkApi.uninstallTerminalApk(uninstallTerminalApkRequest);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serialNo and tid in uninstallTerminalApkRequest cannot be blank at same time!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2037,
+	"message": "This app is not installed on the terminal"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+
+**Possible validation errors**
+
+> <font color=red>Parameter uninstallTerminalApkRequest cannot be null!</font>  
+> <font color=red>The property serialNo and tid in uninstallTerminalApkRequest cannot be blank at same time!</font> 
+> <font color=red>packageName:may not be empty</font>
+
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|2028|Terminal not found|Please check the value of tid or serialNo|
+|2029|Apk not found|Cannot find apk by packagename and version|
+|2026|Tid and serialNo cannot empty at same time||
+|2027|Package name cannot be empty||
+|2037|This app is not installed on the terminal||
