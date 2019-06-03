@@ -15,6 +15,7 @@ package com.pax.market.api.sdk.java.api.test;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkDTO;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.UpdateTerminalApkRequest;
 import org.junit.Assert;
 import org.junit.Before;
@@ -67,9 +68,13 @@ public class TerminalApkApiTest {
 //    	parameters.put("sys.cap.emvParamCheckType", "abc");
     	
     	createTerminalApkRequest.setParameters(parameters);
-    	Result<String> result = terminalApkApi.createTerminalApk(createTerminalApkRequest);
+    	Result<TerminalApkDTO> result = terminalApkApi.createTerminalApk(createTerminalApkRequest);
     	Assert.assertTrue(result.getBusinessCode() == 0);
     	logger.info(result.toString());
+
+    	//Test Get
+        Result<TerminalApkDTO> newTerminalApkDTO = terminalApkApi.getTerminalApk(result.getData().getId());
+        Assert.assertTrue(newTerminalApkDTO.getBusinessCode() == 0);
 
     	//Test Suspend
         UpdateTerminalApkRequest updateTerminalApkRequest = new UpdateTerminalApkRequest();

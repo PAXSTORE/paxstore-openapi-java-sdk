@@ -21,7 +21,7 @@ import com.pax.market.api.sdk.java.api.merchant.dto.SimpleResellerDTO;
  * @author tanjie
  * @date 2018-07-03
  */
-public class ResellerDTO extends  ResellerPageDTO{
+public class ResellerDTO extends ResellerPageDTO{
 
 		
 	/**
