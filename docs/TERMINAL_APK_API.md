@@ -64,7 +64,7 @@ Map<String, String> parameters = new HashMap<String, String>();
 parameters.put("PID.locationCode", "cn_js_sz");
 parameters.put("PID.showtraffic", "true");
 createTerminalApkRequest.setParameters(parameters);
- terminalApkApi.createTerminalApk(createTerminalApkRequest);
+terminalApkApi.createTerminalApk(createTerminalApkRequest);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -89,7 +89,10 @@ createTerminalApkRequest.setParameters(parameters);
 
 ```
 {
-	"businessCode": 0
+	"businessCode": 0,
+	"data": {
+    	"id": 51741,	
+    }
 }
 ```
 
@@ -110,6 +113,7 @@ createTerminalApkRequest.setParameters(parameters);
 |2028|Terminal not found|Please check the value of tid or serialNo|
 |2029|Apk not found|Cannot find apk by packagename and version|
 |2030|Parameter template not found|The given template name(s) not exist in system|
+|2039|Tid misMatch with serialNo|Please check the value of tid and serialNo|
 |13100|Invalid application parameter variables||
 |2026|Tid and serialNo cannot empty at same time||
 |2027|Package name cannot be empty||
@@ -122,6 +126,114 @@ createTerminalApkRequest.setParameters(parameters);
 |13100|Invalid application parameter variables||
 |1111|Selected parameter templates exceeded the max limit||
 |2031|Template name cannot be empty|&nbsp;|
+
+
+### Get terminalApk
+
+Get terminal apk by terminalApk id.
+
+
+**API**
+
+```
+public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|terminalApkId|Long|false|the id of terminalApk|
+
+**Sample codes**
+
+```
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalApkDTO> result = terminalApkApi.getTerminalApk(17850L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalApkId cannot be null and cannot be less than 1!"]
+}
+```
+
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2001,
+	"message": "Terminal app not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"id": 17850,
+		"apkPackageName": "com.pax.demo",
+		"terminalSN": "87879696",
+		"status": "A",
+		"actionStatus": 2,
+		"errorCode": ""
+	}
+}
+```
+
+<br>
+The type of data is TerminalApkDTO, and the structure shows below.
+
+|Name|Type|Description|
+|:---|:---|:---|
+|id|Long|the id of terminal apk|
+|apkPackageName|String|the packageName of apk|
+|terminalSN|String|the serialNo of terminal|
+|status|String|the status of terminal apk, value can be one of A(Active), P(Pendding), D(Delete), E(EXPIRED) and S(Suspend)|
+|actionStatus|String|the country code|
+|errorCode|String|the postcode of reseller|
+
+
+**Possible client validation errors**
+
+
+> <font color="red">Parameter terminalApkId cannot be null and cannot be less than 1!</font>
+
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|2001|Terminal app not found|&nbsp;|
+
+**Possible action status**
+
+|action status|status|Description|
+|:---|:---|:---|
+|0|None|The push task no start|
+|1|Pending|The push task staring|
+|2|Succeed|The push task is succeed|
+|3|Failed|The push task is failed|
+|4|Watting|The push task is watting, no need push|
+
+**Possible error codes**
+
+|Error Code|Description|
+|:---|:---|
+|1|Download error|
+|2|Install error|
+|3|App exist|
+|4|App version too low|
+|5|App param duplicate|
+|6|Apk not exist|
+|7|Apk version misMatch|
+|12|The push is disabled|
 
 
 ### Suspend terminalApk
@@ -207,6 +319,7 @@ terminalApkApi.suspendTerminalApk(suspendTerminalApkRequest);
 |2026|Tid and serialNo cannot empty at same time||
 |2027|Package name cannot be empty||
 |2038|Unfinished terminal push app not found||
+|2039|Tid misMatch with serialNo|Please check the value of tid and serialNo|
 
 
 ### Uninstall terminalApk
@@ -225,7 +338,7 @@ public Result<String> uninstallTerminalApk(UpdateTerminalApkRequest uninstallTer
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|uninstallTerminalApkRequest|UpdateTerminalApkRequest|false|The suspend request object. The structure shows below.|
+|uninstallTerminalApkRequest|UpdateTerminalApkRequest|false|The uninstall request object. The structure shows below.|
 
 
 Structure of class UpdateTerminalApkRequest
@@ -234,7 +347,7 @@ Structure of class UpdateTerminalApkRequest
 |:---|:---|:---|:---|
 |tid|String|true|The tid of terminal|
 |serialNo|String|true|The serial number of terminal|
-|packageName|String|false|The package name which indicate the application you want to suspend the terminal push task|
+|packageName|String|false|The package name which indicate the application you want to uninstall the terminal apk|
 
 Note: tid and serialNo cannot be empty at same time.
 
@@ -292,3 +405,4 @@ terminalApkApi.uninstallTerminalApk(uninstallTerminalApkRequest);
 |2026|Tid and serialNo cannot empty at same time||
 |2027|Package name cannot be empty||
 |2037|This app is not installed on the terminal||
+|2039|Tid misMatch with serialNo|Please check the value of tid and serialNo|

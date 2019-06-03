@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkDTO;
+import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkResponse;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.UpdateTerminalApkRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	private static final Logger logger = LoggerFactory.getLogger(TerminalApkApi.class);
 	
 	private static final String CREATE_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks";
+	private static final String GET_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/{terminalApkId}";
 	private static final String SUSPEND_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/suspend";
 	private static final String UNINSTALL_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/uninstall";
 
@@ -59,21 +62,35 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	}
 	
 	
-	public Result<String> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest){
+	public Result<TerminalApkDTO> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest){
 		List<String> validationErrs = validateCreateTerminalApk(createTerminalApkRequest);
 		
 		if(validationErrs.size()>0) {
-			return new Result<String>(validationErrs);
+			return new Result<TerminalApkDTO>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(CREATE_TERMINAL_APK_URL);
 		request.setRequestMethod(RequestMethod.POST);
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
 		request.setRequestBody(new Gson().toJson(createTerminalApkRequest, CreateTerminalApkRequest.class));
-		Response resp = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
-        Result<String> result = new Result<String>(resp);
+		TerminalApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalApkResponse.class);
+        Result<TerminalApkDTO> result = new Result<TerminalApkDTO>(resp);
         return result;
 	}
+
+	public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId){
+        logger.debug("terminalApkId="+terminalApkId);
+        List<String> validationErrs = validateId(terminalApkId, "parameter.terminalApkId.invalid");
+        if(validationErrs.size()>0) {
+            return new Result<TerminalApkDTO>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_APK_URL.replace("{terminalApkId}", terminalApkId+""));
+        request.setRequestMethod(RequestMethod.GET);
+        TerminalApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalApkResponse.class);
+        Result<TerminalApkDTO> result = new Result<TerminalApkDTO>(resp);
+        return result;
+    }
 
 	public Result<String> suspendTerminalApk(UpdateTerminalApkRequest suspendTerminalApkRequest){
         List<String> validationErrs = validateSuspendTerminalApk(suspendTerminalApkRequest);
