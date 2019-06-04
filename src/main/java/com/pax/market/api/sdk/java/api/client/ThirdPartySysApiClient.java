@@ -12,6 +12,8 @@
 package com.pax.market.api.sdk.java.api.client;
 
 
+import com.google.gson.JsonSyntaxException;
+import com.pax.market.api.sdk.java.api.base.dto.BaseDTO;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.constant.ResultCode;
@@ -160,6 +162,12 @@ public class ThirdPartySysApiClient {
 		} else {
 			response = ThirdPartySysHttpUtils.compressRequest(requestUrl, request.getRequestMethod().getValue(), connectTimeout, readTimeout, request.getRequestBody(), request.getHeaderMap(), request.getSaveFilePath());
 		}
+		try{
+			EnhancedJsonUtils.fromJson(response, BaseDTO.class);
+		} catch (JsonSyntaxException e){
+			return EnhancedJsonUtils.getSdkJson(999,response);
+		}
+
 		return response;
 	}
 
