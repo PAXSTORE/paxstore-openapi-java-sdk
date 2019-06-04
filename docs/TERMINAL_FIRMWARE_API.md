@@ -102,7 +102,7 @@ terminalFirmwareApi.createTerminalFirmware(createTerminalFirmwareRequest);
 |2033|Firmware name cannot be empty|&nbsp;|
 |2034|Firmware not found|Cannot find firmware by fmName|
 |2035|Firmware status not online|&nbsp;|
-|2036|Firmware model misMatch with terminal model|&nbsp;|
+|2036|Firmware model mismatch with terminal model|&nbsp;|
 |2026|Tid and serialNo cannot empty at same time|&nbsp;|
 |8112|Same version of pending terminal firmware already exists|&nbsp;|
 |8113|Same version of active terminal firmware already exists|&nbsp;|
