@@ -113,7 +113,7 @@ terminalApkApi.createTerminalApk(createTerminalApkRequest);
 |2028|Terminal not found|Please check the value of tid or serialNo|
 |2029|Apk not found|Cannot find apk by packagename and version|
 |2030|Parameter template not found|The given template name(s) not exist in system|
-|2039|Tid misMatch with serialNo|Please check the value of tid and serialNo|
+|2039|Tid mismatch with serialNo|Please check the value of tid and serialNo|
 |13100|Invalid application parameter variables||
 |2026|Tid and serialNo cannot empty at same time||
 |2027|Package name cannot be empty||
@@ -319,7 +319,7 @@ terminalApkApi.suspendTerminalApk(suspendTerminalApkRequest);
 |2026|Tid and serialNo cannot empty at same time||
 |2027|Package name cannot be empty||
 |2038|Unfinished terminal push app not found||
-|2039|Tid misMatch with serialNo|Please check the value of tid and serialNo|
+|2039|Tid mismatch with serialNo|Please check the value of tid and serialNo|
 
 
 ### Uninstall terminalApk
@@ -405,4 +405,4 @@ terminalApkApi.uninstallTerminalApk(uninstallTerminalApkRequest);
 |2026|Tid and serialNo cannot empty at same time||
 |2027|Package name cannot be empty||
 |2037|This app is not installed on the terminal||
-|2039|Tid misMatch with serialNo|Please check the value of tid and serialNo|
+|2039|Tid mismatch with serialNo|Please check the value of tid and serialNo|
