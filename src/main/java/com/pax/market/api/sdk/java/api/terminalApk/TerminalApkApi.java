@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkDTO;
+import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkResponse;
+import com.pax.market.api.sdk.java.api.terminalApk.dto.UpdateTerminalApkRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +45,10 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	private static final Logger logger = LoggerFactory.getLogger(TerminalApkApi.class);
 	
 	private static final String CREATE_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks";
-	
+	private static final String GET_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/{terminalApkId}";
+	private static final String SUSPEND_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/suspend";
+	private static final String UNINSTALL_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/uninstall";
+
 	private static final String TEMPLATE_NAME_DELIMITER = "|";
 	
 	private static final int MAX_TEMPLATE_SIZE = 10;
@@ -56,21 +62,67 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	}
 	
 	
-	public Result<String> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest){
+	public Result<TerminalApkDTO> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest){
 		List<String> validationErrs = validateCreateTerminalApk(createTerminalApkRequest);
 		
 		if(validationErrs.size()>0) {
-			return new Result<String>(validationErrs);
+			return new Result<TerminalApkDTO>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(CREATE_TERMINAL_APK_URL);
 		request.setRequestMethod(RequestMethod.POST);
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
 		request.setRequestBody(new Gson().toJson(createTerminalApkRequest, CreateTerminalApkRequest.class));
-		Response resp = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
-        Result<String> result = new Result<String>(resp);
+		TerminalApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalApkResponse.class);
+        Result<TerminalApkDTO> result = new Result<TerminalApkDTO>(resp);
         return result;
 	}
+
+	public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId){
+        logger.debug("terminalApkId="+terminalApkId);
+        List<String> validationErrs = validateId(terminalApkId, "parameter.terminalApkId.invalid");
+        if(validationErrs.size()>0) {
+            return new Result<TerminalApkDTO>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_APK_URL.replace("{terminalApkId}", terminalApkId+""));
+        request.setRequestMethod(RequestMethod.GET);
+        TerminalApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalApkResponse.class);
+        Result<TerminalApkDTO> result = new Result<TerminalApkDTO>(resp);
+        return result;
+    }
+
+	public Result<String> suspendTerminalApk(UpdateTerminalApkRequest suspendTerminalApkRequest){
+        List<String> validationErrs = validateSuspendTerminalApk(suspendTerminalApkRequest);
+
+        if(validationErrs.size()>0) {
+            return new Result<String>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SUSPEND_TERMINAL_APK_URL);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(suspendTerminalApkRequest, UpdateTerminalApkRequest.class));
+        Response resp = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
+        Result<String> result = new Result<String>(resp);
+        return result;
+    }
+
+    public Result<String> uninstallTerminalApk(UpdateTerminalApkRequest uninstallTerminalApkRequest){
+        List<String> validationErrs = validateUninstallTerminalApk(uninstallTerminalApkRequest);
+
+        if(validationErrs.size()>0) {
+            return new Result<String>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(UNINSTALL_TERMINAL_APK_URL);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(uninstallTerminalApkRequest, UpdateTerminalApkRequest.class));
+        Response resp = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
+        Result<String> result = new Result<String>(resp);
+        return result;
+    }
 	
 	private List<String> validateCreateTerminalApk(CreateTerminalApkRequest createTerminalApkRequest) {
 		List<String> validationErrs = new ArrayList<String>();
@@ -89,5 +141,31 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 		}
 		return validationErrs;
 	}
+
+	private List<String> validateSuspendTerminalApk(UpdateTerminalApkRequest suspendTerminalApkRequest) {
+        List<String> validationErrs = new ArrayList<String>();
+        if(suspendTerminalApkRequest == null) {
+            validationErrs.add(super.getMessage("parameter.suspendTerminalApkRequest.null"));
+        }else {
+            validationErrs.addAll(validate(suspendTerminalApkRequest));
+            if(StringUtils.isEmpty(suspendTerminalApkRequest.getSerialNo()) && StringUtils.isEmpty(suspendTerminalApkRequest.getTid())) {
+                validationErrs.add(super.getMessage("parameter.suspendTerminalApkRequest.sn.tid.empty"));
+            }
+        }
+        return validationErrs;
+    }
+
+    private List<String> validateUninstallTerminalApk(UpdateTerminalApkRequest uninstallTerminalApkRequest) {
+        List<String> validationErrs = new ArrayList<String>();
+        if(uninstallTerminalApkRequest == null) {
+            validationErrs.add(super.getMessage("parameter.uninstallTerminalApkRequest.null"));
+        }else {
+            validationErrs.addAll(validate(uninstallTerminalApkRequest));
+            if(StringUtils.isEmpty(uninstallTerminalApkRequest.getSerialNo()) && StringUtils.isEmpty(uninstallTerminalApkRequest.getTid())) {
+                validationErrs.add(super.getMessage("parameter.uninstallTerminalApkRequest.sn.tid.empty"));
+            }
+        }
+        return validationErrs;
+    }
 
 }

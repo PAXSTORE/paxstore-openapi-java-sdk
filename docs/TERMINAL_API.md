@@ -14,7 +14,7 @@ public TerminalApi(String baseUrl, String apiKey, String apiSecret, Locale local
 **Constructor parameters description**
 
 |Name|Type|Description|
-|:--|:--|:--|
+|:----|:----|:----|
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
@@ -34,7 +34,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 **Input parameter(s) description**
 
 | Name| Type | Nullable|Description |
-|:--- | :---|:---|:---|
+|:---- | :----|:----|:----|
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
 |orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
@@ -75,7 +75,8 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalSta
 			"status": "A",
 			"merchantName": "KFC",
 			"modelName": "A920",
-			"resellerName": "New York"
+			"resellerName": "New York",
+			"location": "USA"
 		}]
 	}
 }
@@ -86,7 +87,7 @@ The type in dataSet of result is TerminalDTO. The structure shows below.
 Structure of class TerminalDTO
 
 |Property Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |id|Long|Terminal's id.|
 |name|String|Terminal's name.|
 |tid|String|Terminal's tid.|
@@ -95,6 +96,8 @@ Structure of class TerminalDTO
 |merchantName|String|The merchant of terminal belongs to.|
 |modelName|String|Model name of terminal.|
 |resellerName|String|The reseller of terminal belongs to.|
+|location|String|The location|
+
 
 **Possible validation errors**
 
@@ -116,7 +119,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
 
 
@@ -158,7 +161,8 @@ Result<TerminalDTO> result = terminalApi.getTerminal(907554L);
 		"status": "S",
 		"merchantName": "haoxy",
 		"modelName": "A920",
-		"resellerName": "PAX"
+		"resellerName": "PAX",
+		"location": "USA"
 	}
 }
 ```
@@ -173,7 +177,7 @@ The type of data in result is TerminalDTO. Its structure already shows in search
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1801|Terminal doesn't exist|&nbsp;|
 
 
@@ -191,13 +195,13 @@ public Result<TerminalDTO> createTerminal(TerminalCreateRequest terminalCreateRe
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |terminalCreateRequest|TerminalCreateRequest|false|The create request object. The structure shows below.|
 
 Structure of class TerminalCreateRequest
 
 |Property Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |name|String|false|The name of terminal, max length is 64.|
 |tid|String|true|The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16.|
 |serialNo|String|true|The serial number of terminal. If the status is active the serial number is mandatory.|
@@ -254,7 +258,8 @@ Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
 		"status": "A",
 		"merchantName": "KFC",
 		"modelName": "A920",
-		"resellerName": "New York"
+		"resellerName": "New York",
+		"location": "USA"
 	}
 }
 ```
@@ -279,7 +284,7 @@ The type of data in result is same as search terminal API.
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1740|Your terminal (SN:xxxxxx) already exists|&nbsp;|
 |1759|Reseller doesn't exist|&nbsp;|
 |1720|Merchant doesn't exist|&nbsp;|
@@ -316,14 +321,14 @@ public Result<TerminalDTO> updateTerminal(Long terminalId,TerminalUpdateRequest 
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |terminalId|Long|false|Terminal's id.|
 |terminalUpdateRequest|TerminalUpdateRequest|false|Update terminal request object. The structure shows below.|
 
 Structure of class TerminalUpdateRequest
 
 |Property Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |name|String|false|The name of terminal, max length is 64.|
 |tid|String|true|The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 15.|
 |serialNo|String|true|The serial number of terminal. If the status is active the serial number is mandatory.|
@@ -378,7 +383,8 @@ Result<TerminalDTO> result = terminalApi.updateTerminal(907560L, updateReq);
 		"status": "S",
 		"merchantName": "KFC",
 		"modelName": "A920",
-		"resellerName": "New York"
+		"resellerName": "New York",
+		"location": "CN"
 	}
 }
 ```
@@ -403,7 +409,7 @@ The type of data in result is same as search terminal API.
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1759|Reseller doesn't exist|&nbsp;|
 |1720|Merchant doesn't exist|&nbsp;|
 |1937|Merchant is not belong to the given Reseller!|&nbsp;|
@@ -451,7 +457,7 @@ public Result<String> activateTerminal(Long terminalId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
 
 
@@ -495,7 +501,7 @@ Result<String> result = terminalApi.activateTerminal(907560L);
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1800|Terminal not found|&nbsp;|
 |1893|The terminal has already been activated!|&nbsp;|
 |1802|Terminal SN is mandatory|&nbsp;|
@@ -519,7 +525,7 @@ public Result<String> disableTerminal(Long terminalId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
 
 
@@ -563,7 +569,7 @@ Result<String> result = terminalApi.disableTerminal(907560L);
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1800|Terminal not found|&nbsp;|
 |1888|The terminal is not active,unable to disable!|&nbsp;|
 
@@ -583,7 +589,7 @@ public Result<String> deleteTerminal(Long terminalId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
 
 
@@ -627,7 +633,7 @@ Result<String> result = terminalApi.deleteTerminal(907560L);
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1800|Terminal not found|&nbsp;|
 |1877|The terminal is active,unable to delete!|&nbsp;|
 

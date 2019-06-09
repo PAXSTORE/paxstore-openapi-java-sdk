@@ -13,7 +13,6 @@ package com.pax.market.api.sdk.java.api.terminal.dto;
 
 import java.io.Serializable;
 
-import com.pax.market.api.sdk.java.api.base.dto.BaseDTO;
 
 
 /**
@@ -40,6 +39,8 @@ public class TerminalDTO implements Serializable{
     private String modelName;
     
     private String resellerName;
+    
+    private String location;
 
 	public Long getId() {
 		return id;
@@ -105,11 +106,19 @@ public class TerminalDTO implements Serializable{
 		this.resellerName = resellerName;
 	}
 
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String localtion) {
+		this.location = localtion;
+	}
+
 	@Override
 	public String toString() {
 		return "TerminalDTO [id=" + id + ", name=" + name + ", tid=" + tid + ", serialNo=" + serialNo + ", status="
 				+ status + ", merchantName=" + merchantName + ", modelName=" + modelName + ", resellerName="
-				+ resellerName + "]";
+				+ resellerName + ", location=" + location + "]";
 	}
 
 	

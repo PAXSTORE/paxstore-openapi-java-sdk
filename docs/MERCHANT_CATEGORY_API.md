@@ -15,7 +15,7 @@ public MerchantCategoryApi(String baseUrl, String apiKey, String apiSecret, Loca
 Constructor parameters description   
 
 |Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
@@ -64,7 +64,7 @@ The structure of the class MerchantCategoryDTO like below.
 
 
 |Property Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |id|Long|The id of merchant category.|
 |name|String|The name of merchant category.|
 |remarks|String|The remarks of merchant category.|
@@ -89,13 +89,13 @@ public Result<MerchantCategoryDTO> createMerchantCategory(MerchantCategoryCreate
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantCategoryCreateRequest|MerchantCategoryCreateRequest|false|The object of create request. The structure refer to below.|
 
 Structure of class MerchantCategoryCreateRequest
 
 |Property Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |name|String|false|Name of merchant category,max length is 128.|
 |remarks|String|true|Remarks of merchant category, max length is 255.|
 
@@ -154,7 +154,7 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(
 **Possible business codes**  
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |16001|Merchant category name already exists|&nbsp;|
 |16002|Merchant category name is mandatory|&nbsp;|
 |16003|Merchant category name is too long|&nbsp;|
@@ -174,14 +174,14 @@ public Result<MerchantCategoryDTO> updateMerchantCategory(Long merchantCategoryI
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantCategoryId|Long|false|The id of merchant category.|
 |merchantCategoryUpdateRequest|MerchantCategoryUpdateRequest|false|The update request object. The structure shows below.|
 
 Structure of class MerchantCategoryUpdateRequest
 
 |Property Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |name|String|false|Merchant category name, max length is 128.|
 |remarks|String|true|Remarks of merchant category, max length is 255.|
 
@@ -245,7 +245,7 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |16000|Merchant category not found|&nbsp;|
 |16001|Merchant category name already exists|&nbsp;|
 |16002|Merchant category name is mandatory|&nbsp;|
@@ -272,7 +272,7 @@ public Result<String> deleteMerchantCategory(Long merchantCategoryId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantCategoryId|Long|false|The merchant category id.|
 
 
@@ -317,7 +317,7 @@ Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |16000|Merchant category not found|&nbsp;|
 
 
@@ -337,7 +337,7 @@ public Result<ArrayList<MerchantCategoryDTO>> batchCreateMerchantCategory(List<M
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantCategoryBatchCreateRequest|List&lt;MerchantCategoryCreateRequest&gt;|false|List of merchant category to create|
 |skipExist|boolean|true|if the value is true, then the name of category in create list exist in system will skip when create, if the value is false then all the categories in create list won't created in system. The default value is false.|
 
@@ -418,7 +418,7 @@ Note: [NAME] and [REMARKS] will be replaced by name and remarks of merchant cate
 **Possible business codes**  
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |16005|Batch create merchant category list is empty|&nbsp;|
 |16006|All the names in batch create list cannot be empty|&nbsp;|
 |16007|Merchant category names {0} in create list is too long|Note: {0} in message will be replaced by category name(s)|

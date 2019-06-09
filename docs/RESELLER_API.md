@@ -14,7 +14,7 @@ public ResellerApi(String baseUrl, String apiKey, String apiSecret, Locale local
 **Constructor parameters description**
 
 |Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
@@ -101,7 +101,7 @@ Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super"
 The type in dataSet of is ResellerPageDTO. And the structure shows like below.
 
 |Property Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |id|Long|the id of reseller|
 |name|String|the name of reseller|
 |phone|String|the phone number of reseller|
@@ -133,7 +133,7 @@ public Result<ResellerDTO>  getReseller(Long resellerId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |resellerId|Long|false|the id of reseller|
 
 **Sample codes**
@@ -190,7 +190,7 @@ Result<ResellerDTO> result = resellerApi.getReseller(17850L);
 The type of data is ResellerDTO, and the structure shows below.
 
 |Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |id|Long|the id of reseller|
 |name|String|the name of reseller|
 |phone|String|the phone number of reseller|
@@ -204,7 +204,7 @@ The type of data is ResellerDTO, and the structure shows below.
 Structure of SimpleResellerDTO
 
 |Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |id|Long|the id of reseller|
 |name|String|the name of reseller|
 
@@ -219,7 +219,7 @@ Structure of SimpleResellerDTO
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1759|Reseller doesn't exist|&nbsp;|
 
 ### Create a reseller
@@ -233,13 +233,13 @@ public Result<ResellerDTO>  createReseller(ResellerCreateRequest resellerCreateR
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |resellerCreateRequest|ResellerCreateRequest|false|the create request object, the structure like below|
 
 Structure of class ResellerCreateRequest
 
 |Property Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |name|String|false|Name of reseller, max length is 64.|
 |email|String|false|Email of reseller, max length is 255.|
 |country|String|false|Country code of reseller, max length is 64.|
@@ -337,7 +337,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1778|Parent reseller not found|&nbsp;|
 |1779|Parent reseller is not active|&nbsp;|
 |1782|At most 10 level resellers are supported|&nbsp;|
@@ -370,14 +370,14 @@ public Result<ResellerDTO>  updateReseller(Long resellerId, ResellerUpdateReques
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |resellerId|Long|false|Reseller's id.|
 |resellerUpdateRequest|ResellerUpdateRequest|false|The update request object, the structure like below|
 
 Structure of class ResellerUpdateRequest
 
 |Property Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |name|String|false|Name of reseller, max length is 64.|
 |email|String|true|Email of reseller, max length is 255. Only the pending reseller can update the email. For other reseller change email please call replaceResellerEmail API. If email is empty API won't update the email.|
 |country|String|false|Country code of reseller, max length is 64.|
@@ -477,7 +477,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1759|Reseller doesn't exist|&nbsp;|
 |1762|Reseller name is mandatory|&nbsp;|
 |1764|Reseller phone is mandatory|&nbsp;|
@@ -515,7 +515,7 @@ public Result<String> activateReseller(Long resellerId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |resellerId|Long|false|The reseller's id.|
 
 **Sample codes**
@@ -561,7 +561,7 @@ Result<String> result = resellerApi.activateReseller(51739L);
 **Possible business codes**
 
 |BusinessCode|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1759|Reseller doesn't exist|The input reseller id not correct.|
 |1891|The reseller has already been activated!|&nbsp;|
 |1894|The reseller's parent is not active|&nbsp;|
@@ -581,7 +581,7 @@ public Result<String> disableReseller(Long resellerId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |resellerId|Long|false|The reseller's id.|
 
 **Sample codes**
@@ -628,7 +628,7 @@ Result<String> result = resellerApi.disableReseller(51739L);
 **Possible business codes**
 
 |BusinessCode|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1759|Reseller doesn't exist|The input reseller id not correct.|
 |1886|The reseller is not active,unable to disable!|&nbsp;|
 |1793|The reseller has active merchants|&nbsp;|
@@ -649,7 +649,7 @@ public Result<String> deleteReseller(Long resellerId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |resellerId|Long|false|The reseller's id.|
 
 **Sample codes**
@@ -693,7 +693,7 @@ Result<String> result = resellerApi.deleteReseller(51739L);
 **Possible business codes**
 
 |BusinessCode|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1759|Reseller doesn't exist|The input reseller id not correct.|
 |1875|The reseller is active,unable to delete!|&nbsp;|
 |1775|Not allowed to delete the reseller of current user|&nbsp;|
@@ -717,7 +717,7 @@ public Result<String> replaceResellerEmail(Long resellerId, String email)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |resellerId|Long|false|The reseller's id.|
 |email|String|false|The new email address.|
 
@@ -765,7 +765,7 @@ Result<String> result = resellerApi.replaceResellerEmail(51739L, "zhangsan@pax.c
 **Possible business codes**
 
 |BusinessCode|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1759|Reseller doesn't exist|The input reseller id not correct.|
 |131|Insufficient access right|This may caused by updating the root reseller's email|
 |1932|The reseller is not active,unable to replace user!|This API can only the active reseller's email|

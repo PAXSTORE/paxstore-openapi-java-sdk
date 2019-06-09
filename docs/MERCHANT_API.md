@@ -16,7 +16,7 @@ public MerchantApi(String baseUrl, String apiKey, String apiSecret, Locale local
 Constructor parameters description   
 
 |Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
@@ -35,7 +35,7 @@ public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, Merchan
 **Input parameter(s) description**
 
 | Name| Type | Nullable|Description |
-|:--- | :---|:---|:---|
+|:---- | :----|:----|:----|
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
 |orderBy|MerchantSearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of MerchantSearchOrderBy.Name, MerchantSearchOrderBy.Phone and MerchantSearchOrderBy.Contact.|
@@ -88,7 +88,7 @@ Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, null, "2fecc"
 The type in dataSet is MerchantPageDTO. And the structure like below.
 
 |Property Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |id|Long|The id of merchant.|
 |name|String|The name of merchant.|
 |reseller|SimpleResellerDTO|The reseller of the merchant belongs to.|
@@ -101,7 +101,7 @@ The type in dataSet is MerchantPageDTO. And the structure like below.
 The structure of class SimpleResellerDTO
 
 |Property Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |id|Long|The id of reseller.|
 |name|String|The name of reseller.|
 
@@ -127,7 +127,7 @@ public Result<MerchantDTO>  getMerchant(Long merchantId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantId|Long|false|The merchant id.|
 
 **Sample codes**
@@ -186,7 +186,7 @@ Result<MerchantDTO> result = merchantApi.getMerchant(72590L);
 The type of data in result is MerchantDTO, and the structure shows below.
 
 |Property Name|Type|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |id|Long|The id of merchant.|
 |name|String|The name of merchant.|
 |reseller|SimpleResellerDTO|The reseller of the merchant belongs to.|
@@ -207,7 +207,7 @@ The structure of SimpleResellerDTO already described in Search Merchants chapter
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1720|Merchant doesn't exist|&nbsp;|
 
 
@@ -224,13 +224,13 @@ public Result<MerchantDTO>  createMerchant(MerchantCreateRequest merchantCreateR
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantCreateRequest|MerchantCreateRequest|false|The object of create request. The structure refer to below.|
 
 Structure of class MerchantCreateRequest
 
 |Property Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |name|String|false|Merchant name, max length is 64.|
 |email|String|false|Email of merchant, max length is 255.|
 |resellerName|String|false|Reseller name of merchant, max length is 64. Make sure the reseller exist.|
@@ -335,7 +335,7 @@ The type of data in result is same as the get reseller API.
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1721|Merchant name already exists|&nbsp;|
 |1759|Reseller doesn't exist|&nbsp;|
 |16000|Merchant category not found|&nbsp;|
@@ -372,14 +372,14 @@ public Result<MerchantDTO>  updateMerchant(Long merchantId, MerchantUpdateReques
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantId|Long|false|The id of merchant.|
 |merchantUpdateRequest|MerchantUpdateRequest|false|The update request object. The structure shows below.|
 
 Structure of class MerchantUpdateRequest
 
 |Property Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |name|String|false|Merchant name, max length is 64.|
 |email|String|true|Email of merchant, max length is 255. If email is empty the API won't change the email.|
 |resellerName|String|true|Reseller name of merchant, max length is 64. Make sure the reseller exist. If resellerName is empty the API won't update the reseller of the merchant|
@@ -486,7 +486,7 @@ The data type in result is same as get merchant API.
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1720|Merchant doesn't exist|&nbsp;|
 |1721|Merchant name already exists|&nbsp;|
 |1759|Reseller doesn't exist|&nbsp;|
@@ -528,7 +528,7 @@ public Result<String> activateMerchant(Long merchantId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantId|Long|false|The merchant id.|
 
 **Sample codes**
@@ -573,7 +573,7 @@ Result<String> result = merchantApi.activateMerchant(72590L);
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1720|Merchant doesn't exist|&nbsp;|
 |1759|Reseller doesn't exist|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
@@ -594,7 +594,7 @@ public Result<String> disableMerchant(Long merchantId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantId|Long|false|The merchant id.|
 
 
@@ -641,7 +641,7 @@ Result<String> result = merchantApi.disableMerchant(72594L);
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1720|Merchant doesn't exist|&nbsp;|
 |1887|The merchant is not active,unable to disable!|&nbsp;|
 |1797|The merchant has active terminals|&nbsp;|
@@ -662,7 +662,7 @@ public Result<String> deleteMerchant(Long merchantId)
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantId|Long|false|The merchant id.|
 
 
@@ -707,7 +707,7 @@ Result<String> result = merchantApi.deleteMerchant(72593L);
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1720|Merchant doesn't exist|&nbsp;|
 |1876|The merchant is active,unable to delete!|&nbsp;|
 |1786|The merchant has been used by terminal|&nbsp;|
@@ -727,7 +727,7 @@ public Result<String> replaceMerchantEmail(Long merchantId, String email, boolea
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
-|:--|:--|:--|:--|
+|:---|:---|:---|:---|
 |merchantId|Long|false|The merchant id|
 |email|String|false|The new email|
 |createUser|boolean|false|Indicate whether to create user when replace the email|
@@ -777,7 +777,7 @@ Result<String> result = merchantApi.replaceMerchantEmail(72593L, "zhangsan@pax.c
 **Possible business codes**
 
 |Business Code|Message|Description|
-|:--|:--|:--|
+|:---|:---|:---|
 |1720|Merchant doesn't exist|&nbsp;|
 |1934|The merchant is not active,unable to replace user!|This API can only update the email of active merchants|
 |1105|Email is invalid|The inputted email address is invalid|
