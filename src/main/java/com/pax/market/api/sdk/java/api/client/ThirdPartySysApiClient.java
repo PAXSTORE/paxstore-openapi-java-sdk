@@ -13,6 +13,7 @@ package com.pax.market.api.sdk.java.api.client;
 
 
 import com.google.gson.JsonSyntaxException;
+import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
 import com.pax.market.api.sdk.java.api.base.dto.BaseDTO;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.constant.Constants;
@@ -53,7 +54,7 @@ public class ThirdPartySysApiClient {
     /**
      * The Connect timeout.
      */
-    protected int connectTimeout = 30000000; 			// 默认连接超时时间为30秒
+    protected int connectTimeout = 30000; 			// 默认连接超时时间为30秒
     /**
      * The Read timeout.
      */
@@ -73,6 +74,12 @@ public class ThirdPartySysApiClient {
 		this.apiSecret = apiSecret;
 		this.baseUrl = baseUrl;
 		this.isThirdPartySys=true;
+		if(BaseThirdPartySysApi.connectTimeout>0) {
+			this.connectTimeout = BaseThirdPartySysApi.connectTimeout;
+		}
+		if(BaseThirdPartySysApi.readTimeout>0) {
+			this.readTimeout = BaseThirdPartySysApi.readTimeout;
+		}
 	}
     
     public ThirdPartySysApiClient(String baseUrl, String apiKey, String apiSecret, boolean isThirdPartySys) {
