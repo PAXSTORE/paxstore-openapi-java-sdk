@@ -20,8 +20,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-
-import org.hibernate.validator.resourceloading.PlatformResourceBundleLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +49,9 @@ public class BaseThirdPartySysApi{
      * The constant apiSecret.
      */
     private String apiSecret;
+    
+    public static int connectTimeout = 0;
+    public static int readTimeout = 0;
 
 
     public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret) {
@@ -161,6 +162,14 @@ public class BaseThirdPartySysApi{
 			validationErrs.addAll(validate(updateReq));
 		}
 		return validationErrs;
+	}
+	
+	public void setAPIGlobalConnectTimeout(int timeout) {
+		this.connectTimeout = timeout;
+	}
+	
+	public void setAPIGlobalReadTimeout(int timeout) {
+		this.readTimeout = timeout;
 	}
 
 	
