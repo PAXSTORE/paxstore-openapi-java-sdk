@@ -15,6 +15,7 @@ package com.pax.market.api.sdk.java.api.util;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.constant.ResultCode;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -169,6 +170,11 @@ public abstract class ThirdPartySysHttpUtils {
 			} else {
 				urlConnection.setDoOutput(true);
 			}
+			
+			String rateLimit = "";
+			String rateLimitRemain = "";
+			String rateLimitReset = "";
+			
 			if ((null != userData) && (userData.length() > 0)) {
 				OutputStream outputStream = null;
 				try {
@@ -179,6 +185,12 @@ public abstract class ThirdPartySysHttpUtils {
 						String hexString = AlgHelper.bytes2HexString(compressData(userData.getBytes("UTF-8")));
 						outputStream.write(hexString.getBytes());
 					}
+					Map<String, List<String>> map = urlConnection.getHeaderFields();
+					rateLimit = map.get("X-RateLimit-Limit")==null?"":map.get("X-RateLimit-Limit").get(0);
+					rateLimitRemain = map.get("X-RateLimit-Remaining")==null?"":map.get("X-RateLimit-Remaining").get(0);
+					rateLimitReset = map.get("X-RateLimit-Reset")==null?"":map.get("X-RateLimit-Reset").get(0);
+		
+					
 				} finally {
 					if (outputStream != null) {
 						outputStream.close();
@@ -205,7 +217,7 @@ public abstract class ThirdPartySysHttpUtils {
 
 				return EnhancedJsonUtils.getSdkJson(ResultCode.SUCCESS, filePath);
 			}
-
+			String contentType = urlConnection.getContentType();
 			if (urlConnection.getResponseCode() == 200 || urlConnection.getResponseCode() == 201
 					|| urlConnection.getResponseCode() == 204) {
 				bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -221,8 +233,14 @@ public abstract class ThirdPartySysHttpUtils {
 			while ((str = bufferedReader.readLine()) != null) {
 				stringBuilder.append(str);
 			}
-
-			return stringBuilder.toString();
+			JSONObject json = new JSONObject(stringBuilder.toString());
+			
+			json.put("rateLimit", rateLimit);
+			json.put("rateLimitRemain", rateLimitRemain);
+			json.put("rateLimitReset", rateLimitReset);
+			
+//			return stringBuilder.toString();
+			return json.toString();
 			
 //			if(urlConnection.getResponseCode() == 200) {
 //				return stringBuilder.toString();
