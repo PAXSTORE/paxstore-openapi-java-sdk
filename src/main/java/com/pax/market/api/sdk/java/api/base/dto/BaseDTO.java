@@ -26,6 +26,10 @@ public class BaseDTO implements Serializable{
 	private int businessCode;
 	private String message;
 	
+	private String rateLimit;
+	private String rateLimitRemain;
+	private String rateLimitReset;
+	
 	public String getMessage() {
 		return message;
 	}
@@ -38,5 +42,25 @@ public class BaseDTO implements Serializable{
 	public void setBusinessCode(int businessCode) {
 		this.businessCode = businessCode;
 	}
+	public String getRateLimit() {
+		return rateLimit;
+	}
+	public void setRateLimit(String rateLimit) {
+		this.rateLimit = rateLimit;
+	}
+	public String getRateLimitRemain() {
+		return rateLimitRemain;
+	}
+	public void setRateLimitRemain(String rateLimitRemain) {
+		this.rateLimitRemain = rateLimitRemain;
+	}
+	public String getRateLimitReset() {
+		return rateLimitReset;
+	}
+	public void setRateLimitReset(String rateLimitReset) {
+		this.rateLimitReset = rateLimitReset;
+	}
+
+	
 	
 }
