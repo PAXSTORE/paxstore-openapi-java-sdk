@@ -232,7 +232,7 @@ The type of data is TerminalApkDTO, and the structure shows below.
 |4|App version too low|
 |5|App param duplicate|
 |6|Apk not exist|
-|7|Apk version misMatch|
+|7|Apk version mismatch|
 |12|The push is disabled|
 
 
