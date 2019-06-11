@@ -132,9 +132,15 @@ public abstract class ThirdPartySysHttpUtils {
 
 	private static String request(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, boolean compressData,
 								  Map<String, String> headerMap, String saveFilePath) {
-		HttpURLConnection urlConnection = null;
+		final HttpURLConnection urlConnection = null;
 		try {
 			urlConnection = getConnection(requestUrl, connectTimeout, readTimeout);
+//			RetryUtils.retry((requestUrl, connectTimeout, readTimeout)->getConnection(requestUrl, connectTimeout, readTimeout))
+
+			RetryUtils.retry(() -> {
+				return finalRequest(urlConnection, requestMethod, userData, compressData, headerMap, saveFilePath);
+			}, e -> isExceptionShouldRetry(e, message), retryTimes);
+
 			return finalRequest(urlConnection, requestMethod, userData, compressData, headerMap, saveFilePath);
 		} catch (IOException e) {
 			logger.error("IOException Occurred. Details: {}", e.toString());
@@ -147,7 +153,7 @@ public abstract class ThirdPartySysHttpUtils {
 	}
 
 	private static String finalRequest(HttpURLConnection urlConnection, String requestMethod, String userData, boolean compressData,
-									   Map<String, String> headerMap, String saveFilePath) {
+									   Map<String, String> headerMap, String saveFilePath) throws ConnectException{
 		StringBuilder stringBuilder = new StringBuilder();
 		BufferedReader bufferedReader = null;
 		FileOutputStream fileOutputStream = null;
@@ -241,9 +247,11 @@ public abstract class ThirdPartySysHttpUtils {
 			logger.error("SocketTimeoutException Occurred. Details: {}", localSocketTimeoutException.toString());
 			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_CONNECT_TIMEOUT);
 		} catch (ConnectException localConnectException) {
-			FileUtils.deleteFile(filePath);
-			logger.error("ConnectException Occurred. Details: {}", localConnectException.toString());
-			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
+//			FileUtils.deleteFile(filePath);
+//			logger.error("ConnectException Occurred. Details: {}", localConnectException.toString());
+//			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
+			throw localConnectException;
+
 		} catch (FileNotFoundException fileNotFoundException) {
 			FileUtils.deleteFile(filePath);
 			logger.error("FileNotFoundException Occurred. Details: {}", fileNotFoundException.toString());
