@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkDTO;
-import com.pax.market.api.sdk.java.api.terminalApk.dto.UpdateTerminalApkRequest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,10 +49,10 @@ public class TerminalApkApiTest {
     @Test
     public void testSearchTerminalApkList() {
         String terminalTid = "PZYL32EZH";
-        String testPackageName = "zz.dela.cmcc.traffic";
+        String testPackageName = "";
         Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,12,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
-                terminalTid, testPackageName, TerminalApkApi.PushStatus.Active);
-        logger.debug("Result of search terminalApk:{}", result.toString());
+                terminalTid, testPackageName, null);
+        //logger.debug("Result of search terminalApk:{}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
@@ -84,30 +83,5 @@ public class TerminalApkApiTest {
     	//Test Get
         Result<TerminalApkDTO> newTerminalApkDTO = terminalApkApi.getTerminalApk(result.getData().getId());
         Assert.assertTrue(newTerminalApkDTO.getBusinessCode() == 0);
-
-    	//Test Suspend
-        UpdateTerminalApkRequest updateTerminalApkRequest = new UpdateTerminalApkRequest();
-        updateTerminalApkRequest.setTid(terminalTid);
-        updateTerminalApkRequest.setPackageName(testPackageName);
-
-        Result<String> suspendResult = terminalApkApi.suspendTerminalApk(updateTerminalApkRequest);
-        Assert.assertTrue(suspendResult.getBusinessCode() == 0);
-        logger.info(suspendResult.toString());
-
-        //Test Uninstall
-        Result<String> uninstallResult = terminalApkApi.uninstallTerminalApk(updateTerminalApkRequest);
-        Assert.assertTrue(uninstallResult.getBusinessCode() == 0 || uninstallResult.getBusinessCode() == 2037);
-        logger.info(uninstallResult.toString());
-    }
-
-    @Test
-    public void testUninstallTerminalApk() {
-        UpdateTerminalApkRequest updateTerminalApkRequest = new UpdateTerminalApkRequest();
-        updateTerminalApkRequest.setTid("PUBDXO6SE");
-        updateTerminalApkRequest.setPackageName("zz.dela.cmcc.traffic");
-
-        Result<String> uninstallResult = terminalApkApi.uninstallTerminalApk(updateTerminalApkRequest);
-        Assert.assertTrue(uninstallResult.getBusinessCode() == 0);
-        logger.info(uninstallResult.toString());
     }
 }
