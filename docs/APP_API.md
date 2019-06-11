@@ -24,7 +24,7 @@ Constructor parameters description
 
 ### Search apps
 
-The search apps API allows thirdparty system to search apps by page.   
+The search apps API allows thirdparty system to search apps for page.   
 
 **API**
 

@@ -45,7 +45,16 @@ public class TerminalApkApiTest {
     @Before
     public void init(){
     	terminalApkApi = new TerminalApkApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
-    	
+    }
+
+    @Test
+    public void testSearchTerminalApkList() {
+        String terminalTid = "PZYL32EZH";
+        String testPackageName = "zz.dela.cmcc.traffic";
+        Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,12,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
+                terminalTid, testPackageName, TerminalApkApi.PushStatus.Active);
+        logger.debug("Result of search terminalApk:{}", result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
     }
     
     @Test

@@ -128,6 +128,86 @@ terminalApkApi.createTerminalApk(createTerminalApkRequest);
 |2031|Template name cannot be empty|&nbsp;|
 
 
+### Search terminalApks
+
+The search terminalApks API allows thirdparty system to search terminal push apks for page.   
+
+**API**
+
+```
+public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
+                                                    String terminalTid, String appPackageName, PushStatus status)
+```
+
+**Input parameter(s) description**
+
+| Name| Type | Nullable|Description |
+|:--- | :---|:---|:---|
+|pageNo|int|false|page number, value must >=1|
+|pageSize|int|false|the record number per page, range is 1 to 1000|
+|orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.CreatedDate_desc and SearchOrderBy.CreatedDate_asc.|
+|terminalTid|String|false|search filter by terminal tid|
+|appPackageName|String|true|search filter by app packageName|
+|status|PushStatus|true|the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend|
+
+**Sample codes**
+
+```
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,12,SearchOrderBy.CreatedDate_desc,
+                                terminalTid, testPackageName, PushStatus.Active);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageNo:must be greater than or equal to 1"]
+}
+```
+
+**Successful sample result**
+
+```
+{
+	"businessCode": 0,
+	"pageInfo": {
+		"pageNo": 1,
+		"limit": 12,
+		"totalCount": 1,
+		"hasNext": false,
+		"dataSet": [{
+			"id": 17850,
+            "apkPackageName": "com.pax.demo",
+            "apkVersionName": "7.5.0",
+            "apkVersionCode": "75",
+            "terminalSN": "87879696",
+            "status": "A",
+            "actionStatus": 2
+		}]
+	}
+}
+```
+
+The type in dataSet is TerminalApkDTO. And the structure like below.
+
+|Name|Type|Description|
+|:---|:---|:---|
+|id|Long|the id of terminal apk|
+|apkPackageName|String|the packageName of apk|
+|apkVersionName|String|the version name of apk|
+|apkVersionCode|Long|the version code of apk|
+|terminalSN|String|the serialNo of terminal|
+|status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
+|actionStatus|String|the country code|
+
+**Possible client validation errors**  
+
+> <font color=red>pageNo:must be greater than or equal to 1</font>   
+> <font color=red>pageSize:must be greater than or equal to 1</font>   
+> <font color=red>pageSize:must be less than or equal to 1000</font>  
+
 ### Get terminalApk
 
 Get terminal apk by terminalApk id.
@@ -179,6 +259,8 @@ Result<TerminalApkDTO> result = terminalApkApi.getTerminalApk(17850L);
 	"data": {
 		"id": 17850,
 		"apkPackageName": "com.pax.demo",
+		"apkVersionName": "7.5.0",
+		"apkVersionCode": "75",
 		"terminalSN": "87879696",
 		"status": "A",
 		"actionStatus": 2,
@@ -194,8 +276,10 @@ The type of data is TerminalApkDTO, and the structure shows below.
 |:---|:---|:---|
 |id|Long|the id of terminal apk|
 |apkPackageName|String|the packageName of apk|
+|apkVersionName|String|the version name of apk|
+|apkVersionCode|Long|the version code of apk|
 |terminalSN|String|the serialNo of terminal|
-|status|String|the status of terminal apk, value can be one of A(Active), P(Pendding), D(Delete), E(EXPIRED) and S(Suspend)|
+|status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
 |actionStatus|String|the country code|
 |errorCode|String|the postcode of reseller|
 
