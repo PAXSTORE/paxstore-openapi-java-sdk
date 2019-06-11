@@ -17,12 +17,12 @@ public class TerminalApkDTO implements Serializable {
     private String apkPackageName;
     private Long apkVersionCode;
     private String apkVersionName;
-    private Date activatedDate;
-    private Date effectiveTime;
+    private Long activatedDate;
+    private Long effectiveTime;
     private String status;
     private Long terminalId;
     private int actionStatus;
-    private Date actionTime;
+    private Long actionTime;
     private int errorCode;
 
     public Long getId() {
@@ -65,19 +65,19 @@ public class TerminalApkDTO implements Serializable {
         this.apkVersionName = apkVersionName;
     }
 
-    public Date getActivatedDate() {
+    public Long getActivatedDate() {
         return activatedDate;
     }
 
-    public void setActivatedDate(Date activatedDate) {
+    public void setActivatedDate(Long activatedDate) {
         this.activatedDate = activatedDate;
     }
 
-    public Date getEffectiveTime() {
+    public Long getEffectiveTime() {
         return effectiveTime;
     }
 
-    public void setEffectiveTime(Date effectiveTime) {
+    public void setEffectiveTime(Long effectiveTime) {
         this.effectiveTime = effectiveTime;
     }
 
@@ -105,11 +105,11 @@ public class TerminalApkDTO implements Serializable {
         this.actionStatus = actionStatus;
     }
 
-    public Date getActionTime() {
+    public Long getActionTime() {
         return actionTime;
     }
 
-    public void setActionTime(Date actionTime) {
+    public void setActionTime(Long actionTime) {
         this.actionTime = actionTime;
     }
 

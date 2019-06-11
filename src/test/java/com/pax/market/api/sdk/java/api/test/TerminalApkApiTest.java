@@ -59,7 +59,7 @@ public class TerminalApkApiTest {
     @Test
     public void testCreateUninstallSuspendTerminalApk() {
         String terminalTid = "PZYL32EZH";
-        String testPackageName = "zz.dela.cmcc.traffic";
+        String testPackageName = "com.ss.android.article.lite";
     	CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
     	createTerminalApkRequest.setTid(terminalTid);
 //    	createTerminalApkRequest.setTid("S9F0RA7V");
@@ -69,7 +69,7 @@ public class TerminalApkApiTest {
     	
 //    	createTerminalApkRequest.setPackageName("com.pax.android.lm");
     	
-    	createTerminalApkRequest.setVersion("3.4.7");
+    	createTerminalApkRequest.setVersion("6.4.3");
 //    	createTerminalApkRequest.setTemplateName("10个text字段 - 副本2.xml");
 //    	createTerminalApkRequest.setTemplateName("param02.xml");
     	Map<String, String> parameters = new HashMap<String, String>();
