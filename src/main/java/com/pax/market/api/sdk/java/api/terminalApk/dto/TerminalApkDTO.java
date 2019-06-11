@@ -13,6 +13,10 @@ public class TerminalApkDTO implements Serializable {
     private static final long serialVersionUID = 4826102239579200022L;
 
     private Long id;
+    private String terminalSN;
+    private String apkPackageName;
+    private Long apkVersionCode;
+    private String apkVersionName;
     private Date activatedDate;
     private Date effectiveTime;
     private String status;
@@ -27,6 +31,38 @@ public class TerminalApkDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTerminalSN() {
+        return terminalSN;
+    }
+
+    public void setTerminalSN(String terminalSN) {
+        this.terminalSN = terminalSN;
+    }
+
+    public String getApkPackageName() {
+        return apkPackageName;
+    }
+
+    public void setApkPackageName(String apkPackageName) {
+        this.apkPackageName = apkPackageName;
+    }
+
+    public Long getApkVersionCode() {
+        return apkVersionCode;
+    }
+
+    public void setApkVersionCode(Long apkVersionCode) {
+        this.apkVersionCode = apkVersionCode;
+    }
+
+    public String getApkVersionName() {
+        return apkVersionName;
+    }
+
+    public void setApkVersionName(String apkVersionName) {
+        this.apkVersionName = apkVersionName;
     }
 
     public Date getActivatedDate() {

@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkDTO;
-import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkResponse;
-import com.pax.market.api.sdk.java.api.terminalApk.dto.UpdateTerminalApkRequest;
+import com.pax.market.api.sdk.java.api.app.dto.AppPageDTO;
+import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
+import com.pax.market.api.sdk.java.api.terminalApk.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +30,6 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest.RequestMethod;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
-import com.pax.market.api.sdk.java.api.terminalApk.dto.CreateTerminalApkRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
 
@@ -44,6 +43,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	
 	private static final Logger logger = LoggerFactory.getLogger(TerminalApkApi.class);
 	
+	private static final String SEARCH_TERMINAL_APK_LIST_URL = "/v1/3rdsys/terminalApks";
 	private static final String CREATE_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks";
 	private static final String GET_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/{terminalApkId}";
 	private static final String SUSPEND_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/suspend";
@@ -60,7 +60,34 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	public TerminalApkApi(String baseUrl, String apiKey, String apiSecret, Locale locale) {
 		super(baseUrl, apiKey, apiSecret, locale);
 	}
-	
+
+	public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
+                                                    String terminalTid, String appPackageName, PushStatus status){
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        PageRequestDTO page = new PageRequestDTO();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        if(orderBy != null) {
+            page.setOrderBy(orderBy.val);
+        }
+
+        List<String> validationErrs = validate(page);
+        if(validationErrs.size()>0) {
+            return new Result<TerminalApkDTO>(validationErrs);
+        }
+
+        SdkRequest request = getPageRequest(SEARCH_TERMINAL_APK_LIST_URL, page);
+        request.addRequestParam("terminalTid", terminalTid);
+        request.addRequestParam("appPackageName", appPackageName);
+        if(status != null){
+            request.addRequestParam("status", status.val);
+        }
+
+        TerminalApkPageResponse pageResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalApkPageResponse.class);
+        Result<TerminalApkDTO> result = new Result<TerminalApkDTO>(pageResponse);
+
+        return result;
+    }
 	
 	public Result<TerminalApkDTO> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest){
 		List<String> validationErrs = validateCreateTerminalApk(createTerminalApkRequest);
@@ -168,4 +195,27 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         return validationErrs;
     }
 
+    public enum SearchOrderBy {
+        CreatedDate_desc("a.created_date DESC"),
+        CreatedDate_asc("a.created_date ASC");
+        private String val;
+        private SearchOrderBy(String orderBy) {
+            this.val = orderBy;
+        }
+        public String val(){
+            return this.val;
+        }
+    }
+
+    public enum PushStatus {
+        Active("A"),
+        Suspend("S");
+        private String val;
+        private PushStatus(String status) {
+            this.val = status;
+        }
+        public String val() {
+            return this.val;
+        }
+    }
 }
