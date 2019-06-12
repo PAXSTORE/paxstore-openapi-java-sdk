@@ -79,8 +79,9 @@ public abstract class ThirdPartySysHttpUtils {
      * @param headerMap      the header map
      * @return the string
      */
-    public static String request(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, Map<String, String> headerMap){
-		return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, false, headerMap, null);
+    public static String request(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, Map<String, String> headerMap, int retryTimes){
+//		return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, false, headerMap, null);
+		return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, headerMap, null, retryTimes);
 	}
 
     /**
@@ -94,8 +95,8 @@ public abstract class ThirdPartySysHttpUtils {
      * @param headerMap      the header map
      * @return the string
      */
-    public static String compressRequest(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, Map<String, String> headerMap){
-		return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, true, headerMap, null);
+    public static String compressRequest(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, Map<String, String> headerMap, int retryTimes){
+		return compressRequest(requestUrl, requestMethod, connectTimeout, readTimeout, userData, headerMap, null, retryTimes);
 	}
 
     /**
@@ -110,8 +111,17 @@ public abstract class ThirdPartySysHttpUtils {
      * @param saveFilePath   the save file path
      * @return the string
      */
-    public static String request(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, Map<String, String> headerMap, String saveFilePath){
-		return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, false, headerMap, saveFilePath);
+    public static String request(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, Map<String, String> headerMap, String saveFilePath, int retryTimes){
+//		return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, false, headerMap, saveFilePath);
+		try {
+			return RetryUtils.retry(() -> {
+				return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, false, headerMap, saveFilePath);
+			}, e -> isExceptionShouldRetry(e), retryTimes);
+		} catch (Exception e) {
+			FileUtils.deleteFile(saveFilePath);
+			logger.error("ConnectException Occurred. Details: {}", e.toString());
+			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
+		}
 	}
 
     /**
@@ -126,23 +136,42 @@ public abstract class ThirdPartySysHttpUtils {
      * @param saveFilePath   the save file path
      * @return the string
      */
-    public static String compressRequest(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, Map<String, String> headerMap, String saveFilePath){
-		return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, true, headerMap, saveFilePath);
+    public static String compressRequest(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, Map<String, String> headerMap, String saveFilePath, int retryTimes){
+		try {
+			return RetryUtils.retry(() -> {
+				return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, true, headerMap, saveFilePath);
+			}, e -> isExceptionShouldRetry(e), retryTimes);
+		} catch (Exception e) {
+			if(StringUtils.isNotBlank(saveFilePath)) {
+				FileUtils.deleteFile(saveFilePath);
+			}
+			logger.error("Occurred. Details: {}", e.toString());
+			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
+		}
+	}
+
+	private static boolean isExceptionShouldRetry(Throwable e) {
+    	if(e instanceof ConnectException){
+    		return true;
+		} else if(e instanceof SocketTimeoutException){
+    		return true;
+		}else{
+    		return false;
+		}
 	}
 
 	private static String request(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, boolean compressData,
-								  Map<String, String> headerMap, String saveFilePath) {
-		final HttpURLConnection urlConnection = null;
+								  Map<String, String> headerMap, String saveFilePath) throws ConnectException, SocketTimeoutException{
+		HttpURLConnection urlConnection = null;
 		try {
 			urlConnection = getConnection(requestUrl, connectTimeout, readTimeout);
-//			RetryUtils.retry((requestUrl, connectTimeout, readTimeout)->getConnection(requestUrl, connectTimeout, readTimeout))
-
-			RetryUtils.retry(() -> {
-				return finalRequest(urlConnection, requestMethod, userData, compressData, headerMap, saveFilePath);
-			}, e -> isExceptionShouldRetry(e, message), retryTimes);
-
 			return finalRequest(urlConnection, requestMethod, userData, compressData, headerMap, saveFilePath);
 		} catch (IOException e) {
+			if(e instanceof ConnectException){
+				throw (ConnectException)e;
+			}else if(e instanceof SocketTimeoutException){
+				throw (SocketTimeoutException)e;
+			}
 			logger.error("IOException Occurred. Details: {}", e.toString());
 		} finally {
 			if(urlConnection != null) {
@@ -153,7 +182,7 @@ public abstract class ThirdPartySysHttpUtils {
 	}
 
 	private static String finalRequest(HttpURLConnection urlConnection, String requestMethod, String userData, boolean compressData,
-									   Map<String, String> headerMap, String saveFilePath) throws ConnectException{
+									   Map<String, String> headerMap, String saveFilePath) throws ConnectException,SocketTimeoutException{
 		StringBuilder stringBuilder = new StringBuilder();
 		BufferedReader bufferedReader = null;
 		FileOutputStream fileOutputStream = null;
@@ -243,9 +272,14 @@ public abstract class ThirdPartySysHttpUtils {
 //				
 //			}
 		} catch (SocketTimeoutException localSocketTimeoutException) {
-			FileUtils.deleteFile(filePath);
-			logger.error("SocketTimeoutException Occurred. Details: {}", localSocketTimeoutException.toString());
-			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_CONNECT_TIMEOUT);
+			if(StringUtils.containsIgnoreCase(localSocketTimeoutException.toString(),"Read timed out")){
+				FileUtils.deleteFile(filePath);
+				logger.error("SocketTimeoutException Occurred. Details: {}", localSocketTimeoutException.toString());
+				return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_CONNECT_TIMEOUT);
+			}else{
+				throw localSocketTimeoutException;
+			}
+
 		} catch (ConnectException localConnectException) {
 //			FileUtils.deleteFile(filePath);
 //			logger.error("ConnectException Occurred. Details: {}", localConnectException.toString());
