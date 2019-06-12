@@ -119,8 +119,13 @@ public abstract class ThirdPartySysHttpUtils {
 			}, e -> isExceptionShouldRetry(e), retryTimes);
 		} catch (Exception e) {
 			FileUtils.deleteFile(saveFilePath);
-			logger.error("ConnectException Occurred. Details: {}", e.toString());
-			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
+			logger.error("Exception Occurred. Details: {}", e.toString());
+			if(e instanceof IOException) {
+				return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
+			}else{
+				return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_RQUEST_EXCEPTION);
+			}
+
 		}
 	}
 

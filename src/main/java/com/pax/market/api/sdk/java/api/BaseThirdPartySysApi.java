@@ -182,7 +182,7 @@ public class BaseThirdPartySysApi{
 	}
 
 	public void setRetryTimes(int retryTimes) {
-		if(retryTimes<0 || retryTimes>5) {
+		if(retryTimes <1 || retryTimes>5) {
 			throw new InvalidParamException("retryTimes cannot less than 0 and grate than 5");
 		}
 		BaseThirdPartySysApi.retryTimes = retryTimes;
