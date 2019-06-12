@@ -20,7 +20,6 @@ public class TerminalApkDTO implements Serializable {
     private Long activatedDate;
     private Long effectiveTime;
     private String status;
-    private Long terminalId;
     private int actionStatus;
     private Long actionTime;
     private int errorCode;
@@ -87,14 +86,6 @@ public class TerminalApkDTO implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Long getTerminalId() {
-        return terminalId;
-    }
-
-    public void setTerminalId(Long terminalId) {
-        this.terminalId = terminalId;
     }
 
     public int getActionStatus() {
