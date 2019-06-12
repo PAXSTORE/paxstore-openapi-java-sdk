@@ -125,7 +125,7 @@ public class Result<T extends Serializable> implements Serializable{
 	public String toString() {
 		return "Result [businessCode=" + businessCode + ", message=" + message + ", validationErrors="
 				+ validationErrors + ", data=" + data + ", rateLimit=" + rateLimit + ", rateLimitRemain="
-				+ rateLimitRemain + ", rateLimitReset=" + rateLimitReset + ", pageInfo=" + pageInfo + "]"+(rateLimitReset!=null?(new Date(Long.parseLong(rateLimitReset))).toString():"");
+				+ rateLimitRemain + ", rateLimitReset=" + rateLimitReset + ", pageInfo=" + pageInfo + "]"+(rateLimitReset!=null&&rateLimitReset.trim().length()>0?(new Date(Long.parseLong(rateLimitReset))).toString():"");
 	}
 
 
