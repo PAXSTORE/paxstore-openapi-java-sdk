@@ -72,6 +72,10 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         if(validationErrs.size()>0) {
             return new Result<TerminalApkDTO>(validationErrs);
         }
+        if(StringUtils.isEmpty(terminalTid)) {
+            validationErrs.add(super.getMessage("parameter.searchTerminalApk.terminalTid.empty"));
+            return new Result<TerminalApkDTO>(validationErrs);
+        }
 
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_APK_LIST_URL, page);
         request.addRequestParam("terminalTid", terminalTid);
