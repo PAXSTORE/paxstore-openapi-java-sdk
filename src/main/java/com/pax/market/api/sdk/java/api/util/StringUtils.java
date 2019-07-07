@@ -30,7 +30,7 @@ import java.util.Set;
 /**
  * 字符串工具类。
  */
-public abstract class StringUtils {
+public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	private static final String QUOT = "&quot;";
 	private static final String AMP = "&amp;";

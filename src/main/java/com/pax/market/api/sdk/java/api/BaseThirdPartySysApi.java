@@ -11,21 +11,21 @@
  */
 package com.pax.market.api.sdk.java.api;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
+import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
+import com.pax.market.api.sdk.java.api.exception.InvalidParamException;
+import com.pax.market.api.sdk.java.api.util.MessageBoudleUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
-import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
-import com.pax.market.api.sdk.java.api.util.MessageBoudleUtil;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 /**
  *
@@ -49,9 +49,12 @@ public class BaseThirdPartySysApi{
      * The constant apiSecret.
      */
     private String apiSecret;
-    
-    public static int connectTimeout = 0;
-    public static int readTimeout = 0;
+
+    public static int connectTimeout;
+    public static int readTimeout;
+    public static int retryTimes = 5;
+
+
 
 
     public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret) {
@@ -163,13 +166,26 @@ public class BaseThirdPartySysApi{
 		}
 		return validationErrs;
 	}
-	
-	public void setAPIGlobalConnectTimeout(int timeout) {
-		this.connectTimeout = timeout;
+
+	public void setSDKConnectTimeout(int connectTimeout) {
+		if(connectTimeout<0) {
+			throw new InvalidParamException("timeout can not be negative");
+		}
+		BaseThirdPartySysApi.connectTimeout = connectTimeout;
 	}
-	
-	public void setAPIGlobalReadTimeout(int timeout) {
-		this.readTimeout = timeout;
+
+	public void setSDKReadTimeout(int readTimeout) {
+		if(readTimeout<0) {
+			throw new InvalidParamException("timeout can not be negative");
+		}
+		BaseThirdPartySysApi.readTimeout = readTimeout;
+	}
+
+	public void setRetryTimes(int retryTimes) {
+		if(retryTimes <1 || retryTimes>5) {
+			throw new InvalidParamException("retryTimes cannot less than 0 and grate than 5");
+		}
+		BaseThirdPartySysApi.retryTimes = retryTimes;
 	}
 
 	
