@@ -12,26 +12,24 @@
 
 package com.pax.market.api.sdk.java.api.terminalApk;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import com.pax.market.api.sdk.java.api.app.dto.AppPageDTO;
-import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
-import com.pax.market.api.sdk.java.api.terminalApk.dto.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
+import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Response;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest.RequestMethod;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
+import com.pax.market.api.sdk.java.api.terminalApk.dto.*;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Description
@@ -123,8 +121,8 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         return result;
     }
 
-	public Result<String> suspendTerminalApk(UpdateTerminalApkRequest suspendTerminalApkRequest){
-        List<String> validationErrs = validateSuspendTerminalApk(suspendTerminalApkRequest);
+	public Result<String> disableApkPush(UpdateTerminalApkRequest disableTerminalApkRequest){
+        List<String> validationErrs = validateSuspendTerminalApk(disableTerminalApkRequest);
 
         if(validationErrs.size()>0) {
             return new Result<String>(validationErrs);
@@ -133,14 +131,14 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         SdkRequest request = createSdkRequest(SUSPEND_TERMINAL_APK_URL);
         request.setRequestMethod(RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(suspendTerminalApkRequest, UpdateTerminalApkRequest.class));
+        request.setRequestBody(new Gson().toJson(disableTerminalApkRequest, UpdateTerminalApkRequest.class));
         Response resp = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
         Result<String> result = new Result<String>(resp);
         return result;
     }
 
-    public Result<String> uninstallTerminalApk(UpdateTerminalApkRequest uninstallTerminalApkRequest){
-        List<String> validationErrs = validateUninstallTerminalApk(uninstallTerminalApkRequest);
+    public Result<String> uninstallApk(UpdateTerminalApkRequest uninstallApkRequest){
+        List<String> validationErrs = validateUninstallTerminalApk(uninstallApkRequest);
 
         if(validationErrs.size()>0) {
             return new Result<String>(validationErrs);
@@ -149,7 +147,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         SdkRequest request = createSdkRequest(UNINSTALL_TERMINAL_APK_URL);
         request.setRequestMethod(RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(uninstallTerminalApkRequest, UpdateTerminalApkRequest.class));
+        request.setRequestBody(new Gson().toJson(uninstallApkRequest, UpdateTerminalApkRequest.class));
         Response resp = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
         Result<String> result = new Result<String>(resp);
         return result;

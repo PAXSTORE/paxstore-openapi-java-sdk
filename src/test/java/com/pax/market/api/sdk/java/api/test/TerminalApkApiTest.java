@@ -12,9 +12,9 @@
 
 package com.pax.market.api.sdk.java.api.test;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.pax.market.api.sdk.java.api.base.dto.Result;
+import com.pax.market.api.sdk.java.api.terminalApk.TerminalApkApi;
+import com.pax.market.api.sdk.java.api.terminalApk.dto.CreateTerminalApkRequest;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkDTO;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.UpdateTerminalApkRequest;
 import org.junit.Assert;
@@ -23,9 +23,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.pax.market.api.sdk.java.api.base.dto.Result;
-import com.pax.market.api.sdk.java.api.terminalApk.TerminalApkApi;
-import com.pax.market.api.sdk.java.api.terminalApk.dto.CreateTerminalApkRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Description
@@ -90,12 +89,12 @@ public class TerminalApkApiTest {
         updateTerminalApkRequest.setTid(terminalTid);
         updateTerminalApkRequest.setPackageName(testPackageName);
 
-        Result<String> suspendResult = terminalApkApi.suspendTerminalApk(updateTerminalApkRequest);
+        Result<String> suspendResult = terminalApkApi.disableApkPush(updateTerminalApkRequest);
         Assert.assertTrue(suspendResult.getBusinessCode() == 0);
         logger.info(suspendResult.toString());
 
         //Test Uninstall
-        Result<String> uninstallResult = terminalApkApi.uninstallTerminalApk(updateTerminalApkRequest);
+        Result<String> uninstallResult = terminalApkApi.uninstallApk(updateTerminalApkRequest);
         Assert.assertTrue(uninstallResult.getBusinessCode() == 0 || uninstallResult.getBusinessCode() == 2037);
         logger.info(uninstallResult.toString());
     }
@@ -106,7 +105,7 @@ public class TerminalApkApiTest {
         updateTerminalApkRequest.setTid("PUBDXO6SE");
         updateTerminalApkRequest.setPackageName("zz.dela.cmcc.traffic");
 
-        Result<String> uninstallResult = terminalApkApi.uninstallTerminalApk(updateTerminalApkRequest);
+        Result<String> uninstallResult = terminalApkApi.uninstallApk(updateTerminalApkRequest);
         Assert.assertTrue(uninstallResult.getBusinessCode() == 0);
         logger.info(uninstallResult.toString());
     }

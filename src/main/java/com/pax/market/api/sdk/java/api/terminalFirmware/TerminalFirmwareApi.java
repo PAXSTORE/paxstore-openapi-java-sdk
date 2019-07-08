@@ -7,7 +7,7 @@ import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
-import com.pax.market.api.sdk.java.api.terminalFirmware.dto.CreateTerminalFirmwareRequest;
+import com.pax.market.api.sdk.java.api.terminalFirmware.dto.PushFirmware2TerminalRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
 
@@ -31,8 +31,8 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
         super(baseUrl, apiKey, apiSecret, locale);
     }
 
-    public Result<String> createTerminalFirmware(CreateTerminalFirmwareRequest createTerminalFirmwareRequest){
-        List<String> validationErrs = validateCreateTerminalFirmware(createTerminalFirmwareRequest);
+    public Result<String> pushFirmware2Terminal(PushFirmware2TerminalRequest pushFirmware2TerminalRequest){
+        List<String> validationErrs = validateCreateTerminalFirmware(pushFirmware2TerminalRequest);
 
         if(validationErrs.size()>0) {
             return new Result<String>(validationErrs);
@@ -41,13 +41,13 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(CREATE_TERMINAL_FIRMWARE_URL);
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(createTerminalFirmwareRequest, CreateTerminalFirmwareRequest.class));
+        request.setRequestBody(new Gson().toJson(pushFirmware2TerminalRequest, PushFirmware2TerminalRequest.class));
         Response response = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
         Result<String> result = new Result<String>(response);
         return result;
     }
 
-    private List<String> validateCreateTerminalFirmware(CreateTerminalFirmwareRequest createTerminalFirmwareRequest) {
+    private List<String> validateCreateTerminalFirmware(PushFirmware2TerminalRequest createTerminalFirmwareRequest) {
         List<String> validationErrs = new ArrayList<String>();
         if(createTerminalFirmwareRequest == null) {
             validationErrs.add(super.getMessage("parameter.createTerminalFirmwareRequest.null"));

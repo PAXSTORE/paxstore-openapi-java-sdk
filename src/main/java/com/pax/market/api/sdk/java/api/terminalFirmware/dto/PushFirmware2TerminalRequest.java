@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author liukai
  * @date 2019/5/23
  */
-public class CreateTerminalFirmwareRequest implements Serializable {
+public class PushFirmware2TerminalRequest implements Serializable {
 
 
     private static final long serialVersionUID = -7281022470088330469L;
