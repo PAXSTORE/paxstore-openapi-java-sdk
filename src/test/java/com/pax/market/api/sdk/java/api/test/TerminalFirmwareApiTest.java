@@ -2,7 +2,7 @@ package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalFirmware.TerminalFirmwareApi;
-import com.pax.market.api.sdk.java.api.terminalFirmware.dto.CreateTerminalFirmwareRequest;
+import com.pax.market.api.sdk.java.api.terminalFirmware.dto.PushFirmware2TerminalRequest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,11 +26,11 @@ public class TerminalFirmwareApiTest {
 
     @Test
     public void testCreateTerminalFirmware() {
-        CreateTerminalFirmwareRequest createTerminalFirmwareRequest = new CreateTerminalFirmwareRequest();
-        createTerminalFirmwareRequest.setTid("PUBDXO6SE");
-        createTerminalFirmwareRequest.setFmName("PayDroid_5.1.1_Aquarius_V02.3.05_20170831");
+        PushFirmware2TerminalRequest pushFirmware2TerminalRequest = new PushFirmware2TerminalRequest();
+        pushFirmware2TerminalRequest.setTid("PUBDXO6SE");
+        pushFirmware2TerminalRequest.setFmName("PayDroid_5.1.1_Aquarius_V02.3.05_20170831");
 
-        Result<String> result = terminalFirmwareApi.createTerminalFirmware(createTerminalFirmwareRequest);
+        Result<String> result = terminalFirmwareApi.pushFirmware2Terminal(pushFirmware2TerminalRequest);
         Assert.assertTrue(result.getBusinessCode() == 0);
         logger.info(result.toString());
     }
