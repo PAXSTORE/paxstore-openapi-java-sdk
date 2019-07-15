@@ -1,6 +1,6 @@
 ## TerminalFirmware API
 
-All the terminalFirmware related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.terminalFirmware.TerminalFirmwareApi*.
+All the push firmware to terminal related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.terminalFirmware.TerminalFirmwareApi*.
 
 **Constructors of TerminalFirmwareApi**
 
@@ -19,15 +19,15 @@ public TerminalFirmwareApi(String baseUrl, String apiKey, String apiSecret, Loca
 |locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
 
-### Create terminalFirmware
+### Push firmware
 
-Create terminalFirmware API allow the thirdparty system create a terminalFirmware.
+Push firmware API allow the thirdparty system push a firmware to terminal.
 
 
 **API**
 
 ```
-public Result<String> createTerminalFirmware(CreateTerminalFirmwareRequest createTerminalFirmwareRequest)
+public Result<String> pushFirmware2Terminal(PushFirmware2TerminalRequest pushFirmware2TerminalRequest)
 ```
 
 **Input parameter(s) description**  
@@ -35,10 +35,10 @@ public Result<String> createTerminalFirmware(CreateTerminalFirmwareRequest creat
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|createTerminalFirmwareRequest|CreateTerminalFirmwareRequest|false|The create request object. The structure shows below.|
+|pushFirmware2TerminalRequest|PushFirmware2TerminalRequest|false|The push firmware request object. The structure shows below.|
 
 
-Structure of class CreateTerminalFirmwareRequest
+Structure of class PushFirmware2TerminalRequest
 
 |Property Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
@@ -53,10 +53,10 @@ Note: tid and serialNo cannot be empty at same time.
 
 ```
 TerminalFirmwareApi terminalFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-CreateTerminalFirmwareRequest createTerminalFirmwareRequest = new CreateTerminalFirmwareRequest();
-createTerminalFirmwareRequest.setTid("ABC09098989");
-createTerminalFirmwareRequest.setFmName("A920_PayDroid_4.4.2_Capricorn_V01.1.10_20171226_OTA");
-terminalFirmwareApi.createTerminalFirmware(createTerminalFirmwareRequest);
+PushFirmware2TerminalRequest createTerminalFirmwareRequest = new PushFirmware2TerminalRequest();
+pushFirmware2TerminalRequest.setTid("ABC09098989");
+pushFirmware2TerminalRequest.setFmName("A920_PayDroid_4.4.2_Capricorn_V01.1.10_20171226_OTA");
+terminalFirmwareApi.pushFirmware2Terminal(pushFirmware2TerminalRequest);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
