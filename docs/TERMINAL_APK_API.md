@@ -1,6 +1,6 @@
 ## TerminalApk API
 
-All the terminalApk related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.terminalApk.TerminalApkApi*.
+All the push apk to terminal related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.terminalApk.TerminalApkApi*.
 
 **Constructors of TerminalApkApi**
 
@@ -19,9 +19,9 @@ public TerminalApkApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 |locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
 
-### Create terminalApk
+### Push apk
 
-Create terminalApk API allow the thirdparty system create a terminalApk.
+Push apk API allow the thirdparty system push a apk to terminal.
 
 
 **API**
@@ -128,10 +128,9 @@ terminalApkApi.createTerminalApk(createTerminalApkRequest);
 |2031|Template name cannot be empty|&nbsp;|
 
 
-### Search terminalApks
+### Search apk push history
 
-The search terminalApks API allows thirdparty system to search terminal push apks for page.   
-
+The search terminalApks API allows thirdparty system to search terminal push apks for page. The search apk push history API allows thirdparty system to search pushed apks to the specified terminal by page.
 **API**
 
 ```
@@ -208,9 +207,9 @@ The type in dataSet is TerminalApkDTO. And the structure like below.
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 1000</font>  
 
-### Get terminalApk
+### Get push apk history by id
 
-Get terminal apk by terminalApk id.
+Get terminal push apk history by id.
 
 
 **API**
@@ -320,15 +319,15 @@ The type of data is TerminalApkDTO, and the structure shows below.
 |12|The push is disabled|
 
 
-### Suspend terminalApk
+### Disable app push by serial number(TID) and package name
 
-Suspend terminalApk API allow the thirdparty system suspend terminalApk.
+This api allows the thirdparty system disable an exist push by specifing the serial number of terminal and the app package name. The function of this API is same as the above one.
 
 
 **API**
 
 ```
-public Result<String> suspendTerminalApk(UpdateTerminalApkRequest suspendTerminalApkRequest)
+public Result<String> disableApkPush(UpdateTerminalApkRequest disableTerminalApkRequest)
 ```
 
 **Input parameter(s) description**  
@@ -336,7 +335,7 @@ public Result<String> suspendTerminalApk(UpdateTerminalApkRequest suspendTermina
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|suspendTerminalApkRequest|UpdateTerminalApkRequest|false|The suspend request object. The structure shows below.|
+|disableTerminalApkRequest|UpdateTerminalApkRequest|false|The disable request object. The structure shows below.|
 
 
 Structure of class UpdateTerminalApkRequest
@@ -354,10 +353,10 @@ Note: tid and serialNo cannot be empty at same time.
 
 ```
 TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-UpdateTerminalApkRequest suspendTerminalApkRequest = new UpdateTerminalApkRequest();
-suspendTerminalApkRequest.setTid("ABC09098989");
-suspendTerminalApkRequest.setPackageName("com.baidu.map");
-terminalApkApi.suspendTerminalApk(suspendTerminalApkRequest);
+UpdateTerminalApkRequest disableTerminalApkRequest = new UpdateTerminalApkRequest();
+disableTerminalApkRequest.setTid("ABC09098989");
+disableTerminalApkRequest.setPackageName("com.baidu.map");
+terminalApkApi.disableApkPush(disableTerminalApkRequest);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -406,15 +405,15 @@ terminalApkApi.suspendTerminalApk(suspendTerminalApkRequest);
 |2039|Tid mismatch with serialNo|Please check the value of tid and serialNo|
 
 
-### Uninstall terminalApk
+### Uninstall app by serial number(TID) and package name
 
-Uninstall terminalApk API allow the thirdparty system uninstall app from terminal.
+This api allows the thirdparty system uninstall an app from a terminal by specifing the serial number and the package name of app. The function of this api is same as the above one
 
 
 **API**
 
 ```
-public Result<String> uninstallTerminalApk(UpdateTerminalApkRequest uninstallTerminalApkRequest)
+public Result<String> uninstallApk(UpdateTerminalApkRequest uninstallApkRequest)
 ```
 
 **Input parameter(s) description**  
@@ -422,7 +421,7 @@ public Result<String> uninstallTerminalApk(UpdateTerminalApkRequest uninstallTer
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|uninstallTerminalApkRequest|UpdateTerminalApkRequest|false|The uninstall request object. The structure shows below.|
+|uninstallApkRequest|UpdateTerminalApkRequest|false|The uninstall request object. The structure shows below.|
 
 
 Structure of class UpdateTerminalApkRequest
@@ -440,10 +439,10 @@ Note: tid and serialNo cannot be empty at same time.
 
 ```
 TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-UpdateTerminalApkRequest uninstallTerminalApkRequest = new UpdateTerminalApkRequest();
-uninstallTerminalApkRequest.setTid("ABC09098989");
-uninstallTerminalApkRequest.setPackageName("com.baidu.map");
-terminalApkApi.uninstallTerminalApk(uninstallTerminalApkRequest);
+UpdateTerminalApkRequest uninstallApkRequest = new UpdateTerminalApkRequest();
+uninstallApkRequest.setTid("ABC09098989");
+uninstallApkRequest.setPackageName("com.baidu.map");
+terminalApkApi.uninstallApk(uninstallApkRequest);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
