@@ -45,24 +45,29 @@ public class AppApi extends BaseThirdPartySysApi {
             return new Result<AppPageDTO>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_APP_URL, page);
-        request.addRequestParam("name", name);
-        if(apkStatus != null){
-            request.addRequestParam("apkStatus", apkStatus.val);
+//        request.addRequestParam("name", name);
+//        if(apkStatus != null){
+//            request.addRequestParam("apkStatus", apkStatus.val);
+//        }
+//        if(appStatus != null){
+//            request.addRequestParam("appStatus", appStatus.val);
+//        }
+//        if(baseType != null){
+//            request.addRequestParam("baseType", baseType.val);
+//        }
+//        if(chargeType != null){
+//            request.addRequestParam("chargeType", String.valueOf(chargeType.val));
+//        }
+//        if(osType != null){
+//            request.addRequestParam("osType", osType.val);
+//        }
+        if(specificReseller!=null) {
+            request.addRequestParam("specificReseller", String.valueOf(specificReseller));
         }
-        if(appStatus != null){
-            request.addRequestParam("appStatus", appStatus.val);
+        if(specificMerchantCategory != null){
+            request.addRequestParam("specificMerchantCategory", String.valueOf(specificMerchantCategory));
         }
-        if(baseType != null){
-            request.addRequestParam("baseType", baseType.val);
-        }
-        if(chargeType != null){
-            request.addRequestParam("chargeType", String.valueOf(chargeType.val));
-        }
-        if(osType != null){
-            request.addRequestParam("osType", osType.val);
-        }
-        request.addRequestParam("specificReseller", String.valueOf(specificReseller));
-        request.addRequestParam("specificMerchantCategory", String.valueOf(specificMerchantCategory));
+
 
 
         AppPageResponse appPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), AppPageResponse.class);
