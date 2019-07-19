@@ -1,5 +1,24 @@
 # Changelog
 
+## 6.3  
+
+### New features  
+
+* Add search app API
+* Add push firmware to terminal API
+* Add disable APK push API
+* Add uninstall APP API
+
+
+### Improvement
+
+* Support set connection timeout and read timeout time in API
+* Support retry when API encounter network issue
+* Add API request rate limit
+
+
+
+
 ## 6.2.1
 
 ### Improvement  
