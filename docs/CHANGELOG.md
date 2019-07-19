@@ -1,11 +1,5 @@
 # Changelog
 
-
-## 6.3.0-p1  
-
-### Bug fixes
-* Fix bug when do active/disable/delete terminal/merchant/reseller
-
 ## 6.3  
 
 ### New features  
@@ -18,31 +12,18 @@
 
 ### Improvement
 
+* Support set connection timeout and read timeout time in API
+* Support retry when API encounter network issue
 * Add API request rate limit
 
 
-### Bug fixes
-
-
-## 6.2.2  
-
-### New features
-
-* Add new API to let SDK support find push terminal APK list and find push terminal APK by id
-
-## 6.2.1-p1
-
-### New features
-
-* Support set connection timeout and read timeout time in API
-* Support retry when API encounter network issue
 
 
 ## 6.2.1
 
 ### Improvement  
 
-* Add location field to response for terminal related APIs
+Add location field to response for terminal related APIs
 
 
 
