@@ -258,6 +258,11 @@ public abstract class ThirdPartySysHttpUtils {
 				return EnhancedJsonUtils.getSdkJson(ResultCode.SUCCESS, filePath);
 			}
 			String contentType = urlConnection.getContentType();
+			Map<String, List<String>> map = urlConnection.getHeaderFields();
+			rateLimit = map.get("X-RateLimit-Limit")==null?"":map.get("X-RateLimit-Limit").get(0);
+			rateLimitRemain = map.get("X-RateLimit-Remaining")==null?"":map.get("X-RateLimit-Remaining").get(0);
+			rateLimitReset = map.get("X-RateLimit-Reset")==null?"":map.get("X-RateLimit-Reset").get(0);
+
 			if (urlConnection.getResponseCode() == 200 || urlConnection.getResponseCode() == 201
 					|| urlConnection.getResponseCode() == 204) {
 				bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
