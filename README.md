@@ -30,6 +30,10 @@ Below is the structure of class *com.pax.market.api.sdk.java.api.base.dto.Result
 |validationErrors|List|Client side validation errors.|
 |data|T(generic)|The actural DTO, the structure will be described in each APIs. And for pagination search the search result data will be in another property *pageInfo&lt;T&gt;*|
 |pageInfo|PageInfo&lt;T&gt;|The search result. If the operation is a search operation the data property is null. For the structure of PageInfo please refer to below|
+|rateLimit|string(int format)|The maximum number of requests you're permitted to make per 10 minutes.|
+|rateLimitRemain|string(int format)|The number of requests remaining in the current rate limit window.|
+|rateLimitReset|string(long format)|The time at which the current rate limit window resets in UTC epoch millisecond.|
+
 <br>
 Structure of PageInfo
 
@@ -61,12 +65,52 @@ Below figure listed the global business codes, those business codes may appear i
 |102|Access token is missing|&nbsp;|
 |101|Invalid request method|The request method is not correct|
 |113|Request parameter is missing or invalid||
+|429|Too many request|Request number exceed the maximum number in the current rate limit window|
 |997|Malformed or illegal request|The JSON in request body is not a valid JSON|
 |998|Bad request||
 |999|Unknown error|Unknow error, please contact with support.|
 
 <br/>
 <br/>
+
+
+## Request rate limit
+
+For API requests using apiKey and apiSecret, you can make up to 3000 requests per 10 minutes. Authenticated requests are associated with the apiKey and apiSecret. This means that all thirdparty systems using the same apiKey and apiSecret share the same quota of 3000 requests per 10 minutes.
+
+
+For unauthenticated requests, the rate limit allows for up to 20 requests per 30 minutes. Unauthenticated requests are associated with the originating IP address.
+
+The returned HTTP headers of any API request show your current rate limit status:
+
+|Header Name|Description|
+|:--|:--|
+|X-RateLimit-Limit|The maximum number of requests you're permitted to make per 10 minutes|
+|X-RateLimit-Remaining|The number of requests remaining in the current rate limit window|
+|X-RateLimit-Reset|The time at which the current rate limit window resets in UTC epoch millisecond|
+
+The above 3 response headers are encapsulated in class of *com.pax.market.api.sdk.java.api.base.dto.Result*. 
+
+If you exceed the rate limit, an error response code is 429:
+
+
+## Configure API connect timeout and read timeout
+
+The default value of connect timeout and read timeout is 30000(milliseconds). The connect/read timeout configuration is SDK level not API level.
+The default retry times is 5. And the max retry times is 5.
+
+
+Sample of configure connect timeout, read timeout and retry times
+
+```
+AppApi appApi = new AppApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+appApi.setSDKConnectTimeout(5000);
+appApi.setSDKReadTimeout(5000);
+appApi.setRetryTimes(3);
+
+```
+
+
 
 ## Apply access rights
 
