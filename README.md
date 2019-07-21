@@ -1,4 +1,4 @@
-# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=6.3) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/6.3/link)
+# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=6.3.0) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/6.3.0/link)
 
 
 <br/>
@@ -30,6 +30,9 @@ Below is the structure of class *com.pax.market.api.sdk.java.api.base.dto.Result
 |validationErrors|List|Client side validation errors.|
 |data|T(generic)|The actural DTO, the structure will be described in each APIs. And for pagination search the search result data will be in another property *pageInfo&lt;T&gt;*|
 |pageInfo|PageInfo&lt;T&gt;|The search result. If the operation is a search operation the data property is null. For the structure of PageInfo please refer to below|
+|rateLimit|string(int format)|The maximum number of requests you're permitted to make per 10 minutes.|
+|rateLimitRemain|string(int format)|The number of requests remaining in the current rate limit window.|
+|rateLimitReset|string(long format)|The time at which the current rate limit window resets in UTC epoch millisecond.|
 |rateLimit|string(int format)|The maximum number of requests you're permitted to make per 10 minutes.|
 |rateLimitRemain|string(int format)|The number of requests remaining in the current rate limit window.|
 |rateLimitReset|string(long format)|The time at which the current rate limit window resets in UTC epoch millisecond.|
@@ -168,7 +171,7 @@ Update pom.xml add SDK dependency for your java project.
 <dependency>
     <groupId>com.pax.market</groupId>
     <artifactId>paxstore-openapi-java-sdk</artifactId>
-    <version>6.0.2</version>
+    <version>6.3.0</version>
 </dependency>
 ```
 
@@ -236,6 +239,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 ## [Merchant Category APIs](docs/MERCHANT_CATEGORY_API.md)
 
 ## [Terminal Apk APIs](docs/TERMINAL_APK_API.md)
+
+## [Terminal Firmware APIs](docs/TERMINAL_FIRMWARE_API.md)
 
 ## [Country Codes](docs/COUNTRY_CODE.md)
 
