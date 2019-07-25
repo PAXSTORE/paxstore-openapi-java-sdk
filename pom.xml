@@ -139,8 +139,8 @@
 	
 	<scm>
         <developerConnection>scm:git:git@github.com:PAXSTORE/paxstore-openapi-java-sdk.git</developerConnection>
-      <tag>paxstore-openapi-java-sdk-6.2</tag>
-    </scm>
+      <tag>HEAD</tag>
+  </scm>
     
     <distributionManagement>
 		<repository>
