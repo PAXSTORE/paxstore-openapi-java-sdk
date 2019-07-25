@@ -59,15 +59,18 @@ public class ThirdPartySysApiClient {
      * The Read timeout.
      */
     protected int readTimeout = 30000; 				// 默认响应超时时间为30秒
+
+    protected int retryTimes = 3; //默认重试次数
     
     private boolean isThirdPartySys = false;
 
+
     /**
-     * Instantiates a new Default client.
+     * Instantiates a new Third party sys api client.
      *
      * @param baseUrl   the base url
-     * @param appKey    the app key
-     * @param appSecret the app secret
+     * @param apiKey    the api key
+     * @param apiSecret the api secret
      */
     public ThirdPartySysApiClient(String baseUrl, String apiKey, String apiSecret) {
 		this.apiKey = apiKey;
@@ -80,6 +83,9 @@ public class ThirdPartySysApiClient {
 		if(BaseThirdPartySysApi.readTimeout>0) {
 			this.readTimeout = BaseThirdPartySysApi.readTimeout;
 		}
+		if(BaseThirdPartySysApi.retryTimes>0) {
+		    this.retryTimes = BaseThirdPartySysApi.retryTimes;
+        }
 	}
     
     public ThirdPartySysApiClient(String baseUrl, String apiKey, String apiSecret, boolean isThirdPartySys) {
@@ -89,12 +95,13 @@ public class ThirdPartySysApiClient {
 		this.isThirdPartySys = isThirdPartySys;
 	}
 
+
     /**
-     * Instantiates a new Default client.
+     * Instantiates a new Third party sys api client.
      *
      * @param baseUrl        the base url
-     * @param appKey         the app key
-     * @param appSecret      the app secret
+     * @param apiKey         the api key
+     * @param apiSecret      the api secret
      * @param connectTimeout the connect timeout
      * @param readTimeout    the read timeout
      */
@@ -104,6 +111,21 @@ public class ThirdPartySysApiClient {
 		this.readTimeout = readTimeout;
 		this.isThirdPartySys = true;
 	}
+
+    /**
+     * Instantiates a new Third party sys api client.
+     *
+     * @param baseUrl        the base url
+     * @param apiKey         the api key
+     * @param apiSecret      the api secret
+     * @param connectTimeout the connect timeout
+     * @param readTimeout    the read timeout
+     * @param retryTimes     the retry times
+     */
+    public ThirdPartySysApiClient(String baseUrl, String apiKey, String apiSecret, int connectTimeout, int readTimeout, int retryTimes) {
+        this(baseUrl, apiKey, apiSecret, connectTimeout, readTimeout);
+        this.retryTimes = retryTimes;
+    }
 
     /**
      * Instantiates a new Default client.
@@ -165,9 +187,9 @@ public class ThirdPartySysApiClient {
 		logger.info(" --> {} {}", request.getRequestMethod().getValue(), requestUrl);
 
 		if(!request.isCompressData()){
-			response = ThirdPartySysHttpUtils.request(requestUrl, request.getRequestMethod().getValue(), connectTimeout, readTimeout, request.getRequestBody(), request.getHeaderMap(), request.getSaveFilePath());
+			response = ThirdPartySysHttpUtils.request(requestUrl, request.getRequestMethod().getValue(), connectTimeout, readTimeout, request.getRequestBody(), request.getHeaderMap(), retryTimes);
 		} else {
-			response = ThirdPartySysHttpUtils.compressRequest(requestUrl, request.getRequestMethod().getValue(), connectTimeout, readTimeout, request.getRequestBody(), request.getHeaderMap(), request.getSaveFilePath());
+			response = ThirdPartySysHttpUtils.compressRequest(requestUrl, request.getRequestMethod().getValue(), connectTimeout, readTimeout, request.getRequestBody(), request.getHeaderMap(), retryTimes);
 		}
 		try{
 			EnhancedJsonUtils.fromJson(response, BaseDTO.class);
@@ -195,5 +217,14 @@ public class ThirdPartySysApiClient {
     public void setReadTimeout(int readTimeout) {
 		this.readTimeout = readTimeout;
 	}
+
+    /**
+     * Sets retry times.
+     *
+     * @param retryTimes the retry times
+     */
+    public void setRetryTimes(int retryTimes) {
+        this.retryTimes = retryTimes;
+    }
 
 }

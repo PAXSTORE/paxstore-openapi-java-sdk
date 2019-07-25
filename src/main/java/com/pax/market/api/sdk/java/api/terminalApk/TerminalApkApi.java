@@ -66,7 +66,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
         if(orderBy != null) {
-            page.setOrderBy(orderBy.val);
+            page.setOrderBy(orderBy.val());
         }
 
         List<String> validationErrs = validate(page);
@@ -82,7 +82,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         request.addRequestParam("terminalTid", terminalTid);
         request.addRequestParam("appPackageName", appPackageName);
         if(status != null){
-            request.addRequestParam("status", status.val);
+            request.addRequestParam("status", status.val());
         }
 
         TerminalApkPageResponse pageResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalApkPageResponse.class);
@@ -195,29 +195,5 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
             }
         }
         return validationErrs;
-    }
-
-    public enum SearchOrderBy {
-        CreatedDate_desc("a.created_date DESC"),
-        CreatedDate_asc("a.created_date ASC");
-        private String val;
-        private SearchOrderBy(String orderBy) {
-            this.val = orderBy;
-        }
-        public String val(){
-            return this.val;
-        }
-    }
-
-    public enum PushStatus {
-        Active("A"),
-        Suspend("S");
-        private String val;
-        private PushStatus(String status) {
-            this.val = status;
-        }
-        public String val() {
-            return this.val;
-        }
     }
 }
