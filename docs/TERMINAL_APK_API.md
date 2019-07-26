@@ -21,7 +21,7 @@ public TerminalApkApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 
 ### Push apk
 
-Push apk API allow the thirdparty system push a apk to terminal.
+Push apk API allow the third party system push a apk to terminal.
 
 
 **API**
@@ -130,7 +130,7 @@ terminalApkApi.createTerminalApk(createTerminalApkRequest);
 
 ### Search apk push history
 
-The search terminalApks API allows thirdparty system to search terminal push apks for page. The search apk push history API allows thirdparty system to search pushed apks to the specified terminal by page.
+The search apk push history API allows third party system to search pushed apks to the specified terminal by page.
 **API**
 
 ```
@@ -199,7 +199,7 @@ The type in dataSet is TerminalApkDTO. And the structure like below.
 |apkVersionCode|Long|the version code of apk|
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
-|actionStatus|String|the country code|
+|actionStatus|String|the push status|
 
 **Possible client validation errors**  
 
@@ -321,7 +321,7 @@ The type of data is TerminalApkDTO, and the structure shows below.
 
 ### Disable app push by serial number(TID) and package name
 
-This api allows the thirdparty system disable an exist push by specifing the serial number of terminal and the app package name. The function of this API is same as the above one.
+This api allows the third party system disable an exist push by specifying the serial number of terminal and the app package name. The function of this API is same as the above one.
 
 
 **API**
@@ -364,7 +364,7 @@ terminalApkApi.disableApkPush(disableTerminalApkRequest);
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["The property serialNo and tid in suspendTerminalApkRequest cannot be blank at same time!"]
+	"validationErrors": ["The property serialNo and tid in disableTerminalApkRequest cannot be blank at same time!"]
 }
 ```
 
@@ -407,7 +407,7 @@ terminalApkApi.disableApkPush(disableTerminalApkRequest);
 
 ### Uninstall app by serial number(TID) and package name
 
-This api allows the thirdparty system uninstall an app from a terminal by specifing the serial number and the package name of app. The function of this api is same as the above one
+This api allows the third party system uninstall an app from a terminal by specifying the serial number and the package name of app. The function of this api is same as the above one
 
 
 **API**
