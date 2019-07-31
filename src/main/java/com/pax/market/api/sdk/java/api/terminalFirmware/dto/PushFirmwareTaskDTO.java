@@ -17,7 +17,6 @@ public class PushFirmwareTaskDTO implements Serializable {
     private Long effectiveTime;
     private String status;
     private int actionStatus;
-    private Long actionTime;
     private int errorCode;
 
     public Long getId() {
@@ -74,14 +73,6 @@ public class PushFirmwareTaskDTO implements Serializable {
 
     public void setActionStatus(int actionStatus) {
         this.actionStatus = actionStatus;
-    }
-
-    public Long getActionTime() {
-        return actionTime;
-    }
-
-    public void setActionTime(Long actionTime) {
-        this.actionTime = actionTime;
     }
 
     public int getErrorCode() {

@@ -81,10 +81,12 @@ terminalFirmwareApi.pushFirmware2Terminal(pushFirmware2TerminalRequest);
 
 ```
 {
-	"businessCode": 0
+	"businessCode": 0,
+	"data": {
+        "id": 51741,	
+    }
 }
 ```
-
 
 
 **Possible validation errors**
@@ -177,6 +179,7 @@ The type in dataSet is PushFirmwareTaskDTO. And the structure like below.
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of push firmware, value can be one of A(Active) and S(Suspend)|
 |actionStatus|String|the push status|
+|activatedDate|Date|the push firmware activated date|
 
 **Possible client validation errors**  
 
@@ -254,6 +257,7 @@ The type of data is PushFirmwareTaskDTO, and the structure shows below.
 |status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
 |actionStatus|String|the push status|
 |errorCode|String|the error code of push task|
+|activatedDate|Date|the push firmware activated date|
 
 
 **Possible client validation errors**
