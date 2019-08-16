@@ -62,7 +62,7 @@ public class ResellerApiTest {
     	request.setPostcode("850212");
     	request.setCompany("Cam");
     	request.setAddress("JiangSu Suzhou city xinghujie 203#");
-    	request.setParentResellerName("reseller test");
+    	request.setParentResellerName("Global");
     	request.setActivateWhenCreate(Boolean.FALSE);
     	Result<ResellerDTO> result = resellerApi.createReseller(request);
     	if(result.getBusinessCode() == 0) {
