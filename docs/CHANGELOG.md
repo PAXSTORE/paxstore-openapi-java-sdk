@@ -1,5 +1,11 @@
 # Changelog
 
+
+## 6.3.0-p1  
+
+### Bug fixes
+* Fix bug when do active/disable/delete terminal/merchant/reseller
+
 ## 6.3  
 
 ### New features  
