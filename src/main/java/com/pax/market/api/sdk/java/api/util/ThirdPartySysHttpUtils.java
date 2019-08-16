@@ -278,7 +278,8 @@ public abstract class ThirdPartySysHttpUtils {
 			while ((str = bufferedReader.readLine()) != null) {
 				stringBuilder.append(str);
 			}
-			JSONObject json = new JSONObject(stringBuilder.toString());
+			String resultStr = stringBuilder.toString();
+			JSONObject json = new JSONObject((StringUtils.isBlank(resultStr) || !StringUtils.startsWith(resultStr, "{"))?"{}":resultStr);
 			
 			json.put("rateLimit", rateLimit);
 			json.put("rateLimitRemain", rateLimitRemain);
