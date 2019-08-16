@@ -1,5 +1,11 @@
 # Changelog
 
+
+## 6.3.0-p1
+
+### Bug fixes
+* Fix bug of when activate/disable/delete terminal/reseller/merchant encounter 16106 error code
+
 ## 6.3  
 
 ### New features  
