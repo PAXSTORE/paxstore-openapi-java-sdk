@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.3.1  
+
+### New features  
+* Add get single push firmware history API
+* Add search push firmware history API
+* Add Suspend push firmware API
+
+
+### Breaking changes  
+* The return object type change for pushFirmware2Terminal API
+
+
 ## 6.3  
 
 ### New features  
