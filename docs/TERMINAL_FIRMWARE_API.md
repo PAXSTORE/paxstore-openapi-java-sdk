@@ -303,7 +303,7 @@ The type of data is PushFirmwareTaskDTO, and the structure shows below.
 
 ### Disable firmware push by serial number(TID) and firmware name
 
-This api allows the third Party system disable an exist push by specifying the serial number of terminal and the firmware name. The function of this API is same as the above one.
+This api allows the third Party system disable an exist push by specifying the serial number of terminal and the firmware name. 
 
 
 **API**
@@ -354,8 +354,8 @@ terminalFirmwareApi.disablePushFirmwareTask(disablePushFirmwareTask);
 
 ```
 {
-	"businessCode": 2038,
-	"message": "Unfinished terminal push app not found"
+	"businessCode": 2040,
+	"message": "Unfinished terminal push firmware not found"
 }
 ```
 
