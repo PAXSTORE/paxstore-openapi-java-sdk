@@ -167,27 +167,49 @@ public class BaseThirdPartySysApi{
 		return validationErrs;
 	}
 
-	public void setSDKConnectTimeout(int connectTimeout) {
-		if(connectTimeout<0) {
-			throw new InvalidParamException("timeout can not be negative");
-		}
-		BaseThirdPartySysApi.connectTimeout = connectTimeout;
-	}
+    public void setSDKConnectTimeout(int connectTimeout) {
+        if(connectTimeout<0) {
+            throw new InvalidParamException("timeout can not be negative");
+        }
+        BaseThirdPartySysApi.connectTimeout = connectTimeout;
+    }
 
-	public void setSDKReadTimeout(int readTimeout) {
-		if(readTimeout<0) {
-			throw new InvalidParamException("timeout can not be negative");
-		}
-		BaseThirdPartySysApi.readTimeout = readTimeout;
-	}
+    public void setSDKReadTimeout(int readTimeout) {
+        if(readTimeout<0) {
+            throw new InvalidParamException("timeout can not be negative");
+        }
+        BaseThirdPartySysApi.readTimeout = readTimeout;
+    }
 
-	public void setRetryTimes(int retryTimes) {
-		if(retryTimes <1 || retryTimes>5) {
-			throw new InvalidParamException("retryTimes cannot less than 0 and grate than 5");
-		}
-		BaseThirdPartySysApi.retryTimes = retryTimes;
-	}
+    public void setRetryTimes(int retryTimes) {
+        if(retryTimes <1 || retryTimes>5) {
+            throw new InvalidParamException("retryTimes cannot less than 0 and grate than 5");
+        }
+        BaseThirdPartySysApi.retryTimes = retryTimes;
+    }
 
-	
+    public enum SearchOrderBy {
+        CreatedDate_desc("a.created_date DESC"),
+        CreatedDate_asc("a.created_date ASC");
+        private String val;
+        private SearchOrderBy(String orderBy) {
+            this.val = orderBy;
+        }
+        public String val(){
+            return this.val;
+        }
+    }
+
+    public enum PushStatus {
+        Active("A"),
+        Suspend("S");
+        private String val;
+        private PushStatus(String status) {
+            this.val = status;
+        }
+        public String val() {
+            return this.val;
+        }
+    }
 
 }

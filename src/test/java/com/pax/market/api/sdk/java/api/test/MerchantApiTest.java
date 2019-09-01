@@ -12,12 +12,6 @@
 package com.pax.market.api.sdk.java.api.test;
 
 
-import java.util.LinkedHashMap;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.merchant.MerchantApi;
 import com.pax.market.api.sdk.java.api.merchant.MerchantApi.MerchantSearchOrderBy;
@@ -26,6 +20,13 @@ import com.pax.market.api.sdk.java.api.merchant.dto.MerchantCreateRequest;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantDTO;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantPageDTO;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantUpdateRequest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.LinkedHashMap;
 
 
 /**
@@ -59,7 +60,7 @@ public class MerchantApiTest {
     	MerchantCreateRequest request = new MerchantCreateRequest();
     	request.setName("merchant to delete");
     	request.setEmail("ta@pax.com");
-    	request.setResellerName("reseller test");
+    	request.setResellerName("Global");
     	request.setContact("sam");
     	request.setCountry("CN");
     	request.setPostcode("5652");

@@ -1,10 +1,16 @@
 # Changelog
 
+## 6.3.1  
 
-## 6.3.0-p1
+### New features  
+* Add get single push firmware history API
+* Add search push firmware history API
+* Add Suspend push firmware API
 
-### Bug fixes
-* Fix bug of when activate/disable/delete terminal/reseller/merchant encounter 16106 error code
+
+### Breaking changes  
+* The return object type change for pushFirmware2Terminal API
+
 
 ## 6.3  
 
@@ -18,31 +24,18 @@
 
 ### Improvement
 
+* Support set connection timeout and read timeout time in API
+* Support retry when API encounter network issue
 * Add API request rate limit
 
 
-### Bug fixes
-
-
-## 6.2.2  
-
-### New features
-
-* Add new API to let SDK support find push terminal APK list and find push terminal APK by id
-
-## 6.2.1-p1
-
-### New features
-
-* Support set connection timeout and read timeout time in API
-* Support retry when API encounter network issue
 
 
 ## 6.2.1
 
 ### Improvement  
 
-* Add location field to response for terminal related APIs
+Add location field to response for terminal related APIs
 
 
 
