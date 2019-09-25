@@ -242,6 +242,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [Terminal Firmware APIs](docs/TERMINAL_FIRMWARE_API.md)
 
+## [APP APIs](docs/APP_API.md)
+
 ## [Country Codes](docs/COUNTRY_CODE.md)
 
 
