@@ -48,6 +48,7 @@ Structure of class TerminalCreateRequest
 |version|String|true|The version name of application which you want to push, if it is blank API will use the latest version|
 |templateName|String|true|The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10.|
 |parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the the PID in template|
+|base64FileParameters|Map&lt;String, String&gt;|false|The file type parameter key and base64 value, the key the the PID in template|
 
 Note: tid and serialNo cannot be empty at same time.
 
@@ -63,6 +64,8 @@ createTerminalApkRequest.setTemplateName("template_map");
 Map<String, String> parameters = new HashMap<String, String>();
 parameters.put("PID.locationCode", "cn_js_sz");
 parameters.put("PID.showtraffic", "true");
+Map<String, String> base64FileParameters = new HashMap<String, String>();
+parameters.put("PID.cardBinFile", "data:image/jpeg;base64,/9j/4AAQSkZJR==");
 createTerminalApkRequest.setParameters(parameters);
 terminalApkApi.createTerminalApk(createTerminalApkRequest);
 ```

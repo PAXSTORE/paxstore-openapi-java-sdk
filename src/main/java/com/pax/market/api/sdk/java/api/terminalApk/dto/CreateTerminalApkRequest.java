@@ -29,7 +29,8 @@ public class CreateTerminalApkRequest implements Serializable{
 	private String templateName;
 	
 	private Map<String, String> parameters;
-	
+	private Map<String, String> base64FileParameters;
+
 	public String getTid() {
 		return tid;
 	}
@@ -66,7 +67,10 @@ public class CreateTerminalApkRequest implements Serializable{
 	public void setParameters(Map<String, String> parameters) {
 		this.parameters = parameters;
 	}
-	
-	
-
+    public Map<String, String> getBase64FileParameters() {
+        return base64FileParameters;
+    }
+    public void setBase64FileParameters(Map<String, String> base64FileParameters) {
+        this.base64FileParameters = base64FileParameters;
+    }
 }
