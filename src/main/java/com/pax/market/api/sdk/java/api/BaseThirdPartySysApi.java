@@ -143,6 +143,14 @@ public class BaseThirdPartySysApi{
 		}
 		return validationErrs;
 	}
+
+    protected static List<String> validateStr(String str, String errorMsgKey){
+        List<String> validationErrs = new ArrayList<String>();
+        if(str == null || str == "") {
+            validationErrs.add(getMessage(errorMsgKey));
+        }
+        return validationErrs;
+    }
     
     protected static <T> List<String> validateCreate(T createReq, String beanEmptyMsgKey){
     	List<String> validationErrs = new ArrayList<String>();
