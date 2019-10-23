@@ -55,7 +55,7 @@ Structure of class FileParameter
 |Property Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |pid|String|true|The PID in template|
-|fileName|String|true|The parameter of file type, file name|
+|fileName|String|true|The parameter of file type, file name containing suffix|
 |fileData|String|true|The parameter of file type, file base64 data|
 
 Note: tid and serialNo cannot be empty at same time.
