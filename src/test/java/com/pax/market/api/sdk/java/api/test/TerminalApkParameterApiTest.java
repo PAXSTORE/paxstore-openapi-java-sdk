@@ -33,7 +33,7 @@ import java.util.Map;
  * @Description
  * @Author: Shawn
  * @Date: 2019/10/31 10:58
- * @Version 1.0
+ * @Version 7.0
  */
 public class TerminalApkParameterApiTest {
 
@@ -60,7 +60,7 @@ public class TerminalApkParameterApiTest {
     public void  testCreateTerminalApkParameter() throws IOException {
         CreateApkParameterRequest createApkParameterRequest = new CreateApkParameterRequest();
         createApkParameterRequest.setParamTemplateName("1000084085_(3).xml|schema1.xml");
-        createApkParameterRequest.setName("testCreate3RD8");
+        createApkParameterRequest.setName("testCreate3RD10");
         createApkParameterRequest.setPackageName("com.ss.android.article.lite");
         createApkParameterRequest.setVersion("6.6.4");
      //   Map<String, String> parameters = new HashMap<String, String>();
