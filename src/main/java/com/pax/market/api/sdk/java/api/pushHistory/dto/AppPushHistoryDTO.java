@@ -9,15 +9,15 @@
  *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
  * *******************************************************************************
  */
-package com.pax.market.api.sdk.java.api.pushStatus.dto;
+package com.pax.market.api.sdk.java.api.pushHistory.dto;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * The type App push status.
+ * The type App push history.
  */
-public class AppPushStatusDTO implements Serializable {
+public class AppPushHistoryDTO implements Serializable {
     private static final long serialVersionUID = -7972757906620772968L;
 
     private Long terminalId;
@@ -289,7 +289,7 @@ public class AppPushStatusDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "AppPushStatusDTO{" +
+        return "AppPushHistoryDTO{" +
                 "terminalId=" + terminalId +
                 ", serialNo='" + serialNo + '\'' +
                 ", appName='" + appName + '\'' +
