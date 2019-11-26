@@ -60,23 +60,24 @@ public class TerminalApkParameterApiTest {
     public void  testCreateTerminalApkParameter() throws IOException {
         CreateApkParameterRequest createApkParameterRequest = new CreateApkParameterRequest();
         createApkParameterRequest.setParamTemplateName("1000084085_(3).xml|schema1.xml");
-        createApkParameterRequest.setName("testCreate3RD10");
+        createApkParameterRequest.setName("testCreate3RD-result-api-test-CREATEbY2");
         createApkParameterRequest.setPackageName("com.ss.android.article.lite");
         createApkParameterRequest.setVersion("6.6.4");
      //   Map<String, String> parameters = new HashMap<String, String>();
     //	parameters.put("sys.cap.emvParamCheckType", "abc");
      //   createApkParameterRequest.setParameters(parameters);
-        Result<ApkParameterDTO> result = terminalApkParameterApi.createApkParameter(createApkParameterRequest);
+        Result<String> result = terminalApkParameterApi.createApkParameter(createApkParameterRequest);
+        logger.debug("Result of  terminal apk parameter: {}",result.toString());
     }
 
     @Test
     public void  testUpdateTerminalApkParameter() throws IOException {
-       Long apkParameterId = 1141L;
+       Long apkParameterId = 1149L;
 
         UpdateApkParameterRequest updateApkParameterRequest = new UpdateApkParameterRequest();
         updateApkParameterRequest.setParamTemplateName("1000084085_(3).xml|schema1.xml");
         Map<String, String> parameters = new HashMap<String, String>();
-        parameters.put("wsplink_F1_wsplink_param_userName", "abc");
+        parameters.put("sys.param.acqInsCode", "abc");
         parameters.put("wsplink_F1_wsplink_param_password", "123");
         parameters.put("wsplink_F1_wsplink_param_TID", "abc");
         parameters.put("wsplink_F1_wsplink_param_posID", "abc");
@@ -84,12 +85,13 @@ public class TerminalApkParameterApiTest {
         parameters.put("wsplink_F1_wsplink_param_authURL0", "abc");
         parameters.put("wsplink_F1_wsplink_param_settingsPassword", "123");
         updateApkParameterRequest.setParameters(parameters);
-        Result<ApkParameterDTO> result = terminalApkParameterApi.updateApkParameter(apkParameterId,updateApkParameterRequest);
+        Result<String> result = terminalApkParameterApi.updateApkParameter(apkParameterId,updateApkParameterRequest);
+        logger.debug("Result of  terminal apk update parameter: {}",result.toString());
     }
 
     @Test
     public void testDeleteTerminalApkParameter() throws IOException {
-        Long apkParameterId = 1140L;
+        Long apkParameterId = 1150L;
         Result<String> deleteResult = terminalApkParameterApi.deleteApkParameter(apkParameterId);
         logger.debug("Result of delete terminal apk parameter: {}",deleteResult.toString());
         Assert.assertTrue(deleteResult.getBusinessCode() == 0);

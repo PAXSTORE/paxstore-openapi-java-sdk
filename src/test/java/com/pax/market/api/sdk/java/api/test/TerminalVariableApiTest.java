@@ -45,24 +45,23 @@ public class TerminalVariableApiTest {
 
     @Test
     public void testGetTerminalVariable(){
-        Result<ParameterVariableDTO> result = terminalVariableApi.getTerminalVariable("124465D345",null,"com.ss.android.article.lite","testUpdateVariable-key1",null);
+        Result<ParameterVariableDTO> result = terminalVariableApi.getTerminalVariable("124465D345",null,null,null,null);
         logger.debug("Result of  terminal variable: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
 
 
     @Test
-    public void  testCreateTerminalApkParameter() throws IOException {
+    public void  testCreateTerminalVariable() throws IOException {
         TerminalParameterVariableRequest createRequest = new TerminalParameterVariableRequest();
         ParameterVariable parameterVariable1 = new ParameterVariable();
-        parameterVariable1.setKey("testCreateVariable1Api3");
-        parameterVariable1.setValue("testApiCreate3");
-        parameterVariable1.setPackageName("com.ss.android.article.lite");
+        parameterVariable1.setKey("testUpdateVariable-key-WITHOUT-APPiD-BO");
+        parameterVariable1.setValue("testUpdateVariable-value1");
         parameterVariable1.setRemarks("今日头条app testCreateApi3");
         ParameterVariable parameterVariable2 = new ParameterVariable();
-        parameterVariable2.setKey("testCreateVariable1Api4");
+        parameterVariable2.setKey("testCreateVariable1Api4-BO");
         parameterVariable2.setValue("testApiCreate4");
-        parameterVariable2.setPackageName("com.ss.android.article.lite");
+        parameterVariable2.setPackageName("");
         parameterVariable2.setRemarks("今日头条app testCreateApi4");
         List<ParameterVariable> variableList = new ArrayList<>();
         variableList.add(parameterVariable1);
@@ -77,10 +76,10 @@ public class TerminalVariableApiTest {
 
     @Test
     public void  testUpdateTerminalVariable() throws IOException {
-        Long terminalVariableId = 1000001142L;
+        Long terminalVariableId = 1000001148L;
 
         ParameterVariable updateRequest = new ParameterVariable();
-        updateRequest.setKey("testUpdateVariable-key1");
+        updateRequest.setKey("testUpdateVariable-key2-appid-BO-UPDATE");
         updateRequest.setValue("testUpdateVariable-value1");
         updateRequest.setRemarks("updateRemarks1");
         updateRequest.setPackageName("com.ss.android.article.lite");
@@ -94,7 +93,7 @@ public class TerminalVariableApiTest {
 
     @Test
     public void  testDeleteTerminalVariable() throws IOException {
-        Long terminalVariableId = 1000001140L;
+        Long terminalVariableId = 1000001156L;
         Result<String> deleteResult = terminalVariableApi.deleteTerminalVariable(terminalVariableId);
         logger.debug("Result of delete terminal variable: {}",deleteResult.toString());
         Assert.assertTrue(deleteResult.getBusinessCode() == 0);

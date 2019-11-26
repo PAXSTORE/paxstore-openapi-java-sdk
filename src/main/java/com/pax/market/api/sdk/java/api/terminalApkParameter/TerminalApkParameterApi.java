@@ -70,27 +70,27 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
         return result;
     }
 
-    public Result<ApkParameterDTO> createApkParameter(CreateApkParameterRequest createApkParameterRequest){
+    public Result<String> createApkParameter(CreateApkParameterRequest createApkParameterRequest){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(CREATE_APK_PARAMETER_URL);
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(createApkParameterRequest, CreateApkParameterRequest.class));
-        ApkParameterResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), ApkParameterResponse.class);
-        Result<ApkParameterDTO> result = new Result<ApkParameterDTO>(resp);
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        Result<String> result = new Result<String>(emptyResponse);
         return result;
     }
 
 
-    public Result<ApkParameterDTO> updateApkParameter(Long apkParameterId,UpdateApkParameterRequest updateApkParameterRequest){
+    public Result<String> updateApkParameter(Long apkParameterId,UpdateApkParameterRequest updateApkParameterRequest){
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(UPDATE_APK_PARAMETER_URL.replace("{apkParameterId}",apkParameterId+""));
         request.setRequestMethod(SdkRequest.RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(updateApkParameterRequest, UpdateApkParameterRequest.class));
-        ApkParameterResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), ApkParameterResponse.class);
-        Result<ApkParameterDTO> result = new Result<ApkParameterDTO>(resp);
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        Result<String> result = new Result<String>(emptyResponse);
         return result;
     }
 
