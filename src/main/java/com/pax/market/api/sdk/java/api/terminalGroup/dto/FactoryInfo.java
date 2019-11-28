@@ -46,4 +46,25 @@ public class FactoryInfo implements Serializable {
     private Long createdDate;
     private Long updatedDate;
 
+    @Override
+    public String toString() {
+        return "FactoryInfo{" +
+                "id=" + id +
+                ", marketId=" + marketId +
+                ", name='" + name + '\'' +
+                ", contact='" + contact + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", address='" + address + '\'' +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", modelList=" + modelList +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                '}';
+    }
 }

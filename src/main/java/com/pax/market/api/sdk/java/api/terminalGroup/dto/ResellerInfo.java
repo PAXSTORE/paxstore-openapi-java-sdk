@@ -15,7 +15,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,4 +53,32 @@ public class ResellerInfo implements Serializable {
     private Integer terminalCount;
     private ResellerRkiInfo resellerRki;
 
+    @Override
+    public String toString() {
+        return "ResellerInfo{" +
+                "id=" + id +
+                ", marketId=" + marketId +
+                ", parentId=" + parentId +
+                ", parentIds='" + parentIds + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", address='" + address + '\'' +
+                ", company='" + company + '\'' +
+                ", contact='" + contact + '\'' +
+                ", email='" + email + '\'' +
+                ", userStatus='" + userStatus + '\'' +
+                ", status='" + status + '\'' +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                ", parent=" + parent +
+                ", children=" + children +
+                ", merchantList=" + merchantList +
+                ", terminalCount=" + terminalCount +
+                ", resellerRki=" + resellerRki +
+                '}';
+    }
 }

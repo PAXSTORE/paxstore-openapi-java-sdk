@@ -31,4 +31,13 @@ public class ResellerRkiInfo implements Serializable {
     private String token;
 
     private Boolean allowChildUse;
+
+    @Override
+    public String toString() {
+        return "ResellerRkiInfo{" +
+                "resellerId=" + resellerId +
+                ", token='" + token + '\'' +
+                ", allowChildUse=" + allowChildUse +
+                '}';
+    }
 }

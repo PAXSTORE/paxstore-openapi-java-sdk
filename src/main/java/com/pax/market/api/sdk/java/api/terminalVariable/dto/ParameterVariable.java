@@ -70,4 +70,15 @@ public class ParameterVariable implements Serializable {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
+
+    @Override
+    public String toString() {
+        return "ParameterVariable{" +
+                "packageName='" + packageName + '\'' +
+                ", version='" + version + '\'' +
+                ", key='" + key + '\'' +
+                ", value='" + value + '\'' +
+                ", remarks='" + remarks + '\'' +
+                '}';
+    }
 }

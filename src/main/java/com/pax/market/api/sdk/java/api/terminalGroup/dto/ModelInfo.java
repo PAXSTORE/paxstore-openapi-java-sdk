@@ -35,4 +35,18 @@ public class ModelInfo implements Serializable {
     private String androidType;
     private String status;         // status
     private String description;         // description
+
+    @Override
+    public String toString() {
+        return "ModelInfo{" +
+                "id=" + id +
+                ", factory=" + factory +
+                ", name='" + name + '\'' +
+                ", factoryModelName='" + factoryModelName + '\'' +
+                ", platform='" + platform + '\'' +
+                ", androidType='" + androidType + '\'' +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

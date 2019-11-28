@@ -33,4 +33,15 @@ public class MerchantCategoryInfo implements Serializable {
     private String remarks;
     private Date createdDate;
     private Date updatedDate;
+
+    @Override
+    public String toString() {
+        return "MerchantCategoryInfo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                '}';
+    }
 }

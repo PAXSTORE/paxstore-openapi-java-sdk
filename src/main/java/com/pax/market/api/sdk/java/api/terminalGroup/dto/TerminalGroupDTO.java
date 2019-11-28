@@ -44,4 +44,24 @@ public class TerminalGroupDTO implements Serializable {
     private Boolean containSubResellerTerminal;
     private List<MerchantInfo> merchants;
 
+
+    @Override
+    public String toString() {
+        return "TerminalGroupDTO{" +
+                "id=" + id +
+                ", reseller=" + reseller +
+                ", model=" + model +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", createdByResellerId=" + createdByResellerId +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                ", terminalCount=" + terminalCount +
+                ", dynamic=" + dynamic +
+                ", containSubResellerTerminal=" + containSubResellerTerminal +
+                ", merchants=" + merchants +
+                '}';
+    }
+
 }

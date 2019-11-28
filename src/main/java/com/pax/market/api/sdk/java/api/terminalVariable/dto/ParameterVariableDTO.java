@@ -116,4 +116,20 @@ public class ParameterVariableDTO implements Serializable {
     public void setUpdatedDate(Long updatedDate) {
         this.updatedDate = updatedDate;
     }
+
+    @Override
+    public String toString() {
+        return "ParameterVariableDTO{" +
+                "id=" + id +
+                ", appId=" + appId +
+                ", appPackageName='" + appPackageName + '\'' +
+                ", appName='" + appName + '\'' +
+                ", key='" + key + '\'' +
+                ", value='" + value + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", source='" + source + '\'' +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                '}';
+    }
 }

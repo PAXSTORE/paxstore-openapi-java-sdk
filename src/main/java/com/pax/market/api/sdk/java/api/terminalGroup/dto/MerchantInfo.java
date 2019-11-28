@@ -49,4 +49,30 @@ public class MerchantInfo implements Serializable {
     private Boolean createUserFlag; //是否在更新商户的时候创建用户
     private List<MerchantCategoryInfo> merchantCategoryList;        // 分类
     private Integer terminalCount;
+
+    @Override
+    public String toString() {
+        return "MerchantInfo{" +
+                "id=" + id +
+                ", identifier='" + identifier + '\'' +
+                ", name='" + name + '\'' +
+                ", reseller=" + reseller +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", address='" + address + '\'' +
+                ", contact='" + contact + '\'' +
+                ", email='" + email + '\'' +
+                ", userStatus='" + userStatus + '\'' +
+                ", phone='" + phone + '\'' +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                ", createUserFlag=" + createUserFlag +
+                ", merchantCategoryList=" + merchantCategoryList +
+                ", terminalCount=" + terminalCount +
+                '}';
+    }
 }
