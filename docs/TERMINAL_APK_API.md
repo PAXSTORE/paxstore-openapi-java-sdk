@@ -21,7 +21,7 @@ public TerminalApkApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 
 ### Push apk
 
-Push apk API allow the third party system push a apk to terminal.
+Push apk API allow the third party system push a apk to terminal. And max request data size is 5MB.
 
 
 **API**
