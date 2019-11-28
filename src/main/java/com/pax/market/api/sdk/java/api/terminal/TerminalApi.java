@@ -22,6 +22,7 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest.RequestMethod;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminal.dto.*;
+import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +49,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String CREATE_TERMINAL_URL = "/v1/3rdsys/terminals";
 
     protected static final String UPDATE_TERMINAL_URL = "/v1/3rdsys/terminals/{terminalId}";
+
+    protected static final String ADD_TERMINAL_TO_GROUP_URL = "/v1/3rdsys/terminals/groups";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -176,6 +179,21 @@ public class TerminalApi extends BaseThirdPartySysApi {
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         Result<TerminalDTO> result = new Result<TerminalDTO>(terminalResponse);
         return result;
+    }
+
+    public Result<String> batchAddTerminalToGroup(TerminalGroupRequest groupRequest){
+        List<String> validationErrs = validateCreate(groupRequest, "parameter.terminalCreateRequest.null");
+        if (validationErrs.size() > 0) {
+            return new Result<String>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(ADD_TERMINAL_TO_GROUP_URL);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(groupRequest, TerminalGroupRequest.class));
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<String>(emptyResponse);
+
     }
 
     public enum TerminalStatus {

@@ -12,6 +12,7 @@
 package com.pax.market.api.sdk.java.api.test;
 
 
+import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,9 @@ import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalCreateRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalUpdateRequest;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -101,8 +105,24 @@ public class TerminalApiTest {
     	logger.debug("Result of delete terminal: {}",deleteResult.toString());
     	Assert.assertTrue(deleteResult.getBusinessCode() == 0);
 
+
     }
     
+	@Test
+	public void testBatchAddTerminalToGroup(){
+		TerminalGroupRequest groupRequest = new TerminalGroupRequest();
+		Set<Long> terminalIds = new HashSet<>();
+		terminalIds.add(909744L);
+		terminalIds.add(909742L);
+		Set<Long> groupIds = new HashSet<>();
+		groupIds.add(16529L);
+		groupIds.add(16527L);
+ 		groupRequest.setTerminalIds(terminalIds);
+		groupRequest.setGroupIds(groupIds);
+	    Result<String> result = terminalApi.batchAddTerminalToGroup(groupRequest);
+		logger.debug("Result of search terminal: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
 
+	}
     
 }
