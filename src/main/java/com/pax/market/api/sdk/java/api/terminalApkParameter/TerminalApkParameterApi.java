@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
 
 import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
+import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
@@ -25,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -50,10 +52,28 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     }
 
 
-    public Result<ApkParameterDTO> getTerminalApkParameter(String templateName ,String packageName, String versionName){
-
+    public Result<ApkParameterDTO> getTerminalApkParameter(int pageNo, int pageSize , SearchOrderBy orderBy, String templateName , String packageName, String versionName){
+        logger.debug("packageName="+packageName+";versionName="+versionName);
+        List<String> validationErrsP = validateStr(packageName, "parameter.terminalApkParameterParam.invalid");
+        List<String> validationErrsV= validateStr(versionName, "parameter.terminalApkParameterParam.invalid");
+        if(validationErrsP.size()>0) {
+            return new Result<ApkParameterDTO>(validationErrsP);
+        }else if (validationErrsV.size()>0){
+            return new Result<ApkParameterDTO>(validationErrsV);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(GET_TERMINAL_APK_PARAMETER_URL);
+        PageRequestDTO page = new PageRequestDTO();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        if(orderBy!=null) {
+            page.setOrderBy(orderBy.val);
+        }
+        List<String> validationErrs = validate(page);
+        if(validationErrs.size()>0) {
+            return new Result<ApkParameterDTO>(validationErrs);
+        }
+
+        SdkRequest request = getPageRequest(GET_TERMINAL_APK_PARAMETER_URL, page);
         if(templateName!=null) {
             request.addRequestParam("templateName", templateName);
         }
@@ -71,6 +91,10 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> createApkParameter(CreateApkParameterRequest createApkParameterRequest){
+        List<String> validationErrs = validateCreate( createApkParameterRequest,"parameter.apkParameterCreateRequest.null");
+        if(validationErrs.size()>0) {
+            return new Result<String>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(CREATE_APK_PARAMETER_URL);
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
@@ -100,5 +124,17 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<String>(emptyResponse);
+    }
+
+    public enum SearchOrderBy {
+        ApkParameter_desc("a.created_date DESC"),
+        ApkParameter_asc("a.created_date ASC");
+        private String val;
+        private SearchOrderBy(String orderBy) {
+            this.val = orderBy;
+        }
+        public String val(){
+            return this.val;
+        }
     }
 }

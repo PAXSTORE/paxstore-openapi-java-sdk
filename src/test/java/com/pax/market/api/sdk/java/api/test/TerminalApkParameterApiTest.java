@@ -51,7 +51,7 @@ public class TerminalApkParameterApiTest {
 
     @Test
     public void testGetTerminalApkParameter(){
-        Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(null,"com.ss.android.article.lite","6.6.4");
+        Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,"testCreate3RD-result-api-test","com.ss.android.article.lite","6.6.4123");
         logger.debug("Result of  terminal Apk Parameter: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
@@ -60,14 +60,15 @@ public class TerminalApkParameterApiTest {
     public void  testCreateTerminalApkParameter() throws IOException {
         CreateApkParameterRequest createApkParameterRequest = new CreateApkParameterRequest();
         createApkParameterRequest.setParamTemplateName("1000084085_(3).xml|schema1.xml");
-        createApkParameterRequest.setName("testCreate3RD-result-api-test-CREATEbY2");
+        createApkParameterRequest.setName("testCreate3RD-result-api-test-CREATEbY-newest");
         createApkParameterRequest.setPackageName("com.ss.android.article.lite");
         createApkParameterRequest.setVersion("6.6.4");
-     //   Map<String, String> parameters = new HashMap<String, String>();
-    //	parameters.put("sys.cap.emvParamCheckType", "abc");
-     //   createApkParameterRequest.setParameters(parameters);
+        Map<String, String> parameters = new HashMap<String, String>();
+    	parameters.put("sys.cap.emvParamCheckType", "abc");
+        createApkParameterRequest.setParameters(parameters);
         Result<String> result = terminalApkParameterApi.createApkParameter(createApkParameterRequest);
         logger.debug("Result of  terminal apk parameter: {}",result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
     }
 
     @Test
@@ -87,6 +88,7 @@ public class TerminalApkParameterApiTest {
         updateApkParameterRequest.setParameters(parameters);
         Result<String> result = terminalApkParameterApi.updateApkParameter(apkParameterId,updateApkParameterRequest);
         logger.debug("Result of  terminal apk update parameter: {}",result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
     }
 
     @Test
