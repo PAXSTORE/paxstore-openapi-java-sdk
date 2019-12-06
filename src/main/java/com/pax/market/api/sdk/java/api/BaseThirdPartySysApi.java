@@ -175,6 +175,16 @@ public class BaseThirdPartySysApi{
 		return validationErrs;
 	}
 
+    protected static List<String> validateDelete( Object deleteReq, String beanEmptyMsgKey){
+        List<String> validationErrs = new ArrayList<String>();
+        if(deleteReq == null) {
+            validationErrs.add(getMessage(beanEmptyMsgKey));
+        }else {
+            validationErrs.addAll(validate(deleteReq));
+        }
+        return validationErrs;
+    }
+
     public void setSDKConnectTimeout(int connectTimeout) {
         if(connectTimeout<0) {
             throw new InvalidParamException("timeout can not be negative");

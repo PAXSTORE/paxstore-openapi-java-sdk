@@ -45,7 +45,7 @@ public class TerminalVariableApiTest {
 
     @Test
     public void testGetTerminalVariable(){
-        Result<ParameterVariableDTO> result = terminalVariableApi.getTerminalVariable("124465D345",null,null,null,null);
+        Result<ParameterVariableDTO> result = terminalVariableApi.getTerminalVariable(1,2,TerminalVariableApi.SearchOrderBy.Variable_asc,"124465D345",null,null,null,null);
         logger.debug("Result of  terminal variable: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }

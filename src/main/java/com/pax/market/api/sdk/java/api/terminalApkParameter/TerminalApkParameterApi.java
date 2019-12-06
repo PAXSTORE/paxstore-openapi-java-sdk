@@ -107,6 +107,10 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
 
 
     public Result<String> updateApkParameter(Long apkParameterId,UpdateApkParameterRequest updateApkParameterRequest){
+        List<String> validationErrs = validateUpdate( apkParameterId,updateApkParameterRequest,"parameter.terminalApkParameterId.invalid","parameter.apkParameterUpdateRequest.null");
+        if(validationErrs.size()>0) {
+            return new Result<String>(validationErrs);
+        }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(UPDATE_APK_PARAMETER_URL.replace("{apkParameterId}",apkParameterId+""));
@@ -119,6 +123,10 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> deleteApkParameter(Long apkParameterId){
+        List<String> validationErrs = validateId( apkParameterId,"parameter.terminalApkParameterId.invalid");
+        if(validationErrs.size()>0) {
+            return new Result<String>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(DELETE_APK_PARAMETER_URL.replace("{apkParameterId}",apkParameterId+""));
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);

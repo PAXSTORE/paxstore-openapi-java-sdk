@@ -27,7 +27,6 @@ public class ParameterVariableDTO implements Serializable {
     private static final long serialVersionUID = 5528612335998241207L;
 
     private Long id;
-    private Long appId;
     private String appPackageName;
     private String appName;
     private String key;
@@ -43,14 +42,6 @@ public class ParameterVariableDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Long appId) {
-        this.appId = appId;
     }
 
     public String getAppPackageName() {
@@ -121,7 +112,6 @@ public class ParameterVariableDTO implements Serializable {
     public String toString() {
         return "ParameterVariableDTO{" +
                 "id=" + id +
-                ", appId=" + appId +
                 ", appPackageName='" + appPackageName + '\'' +
                 ", appName='" + appName + '\'' +
                 ", key='" + key + '\'' +

@@ -14,13 +14,11 @@ package com.pax.market.api.sdk.java.api.terminalVariable;
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
 import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
+import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
-import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterDTO;
-import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterResponse;
-import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.UpdateApkParameterRequest;
 import com.pax.market.api.sdk.java.api.terminalVariable.dto.*;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import org.slf4j.Logger;
@@ -52,10 +50,15 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         super(baseUrl, apiKey, apiSecret, locale);
     }
 
-    public Result<ParameterVariableDTO> getTerminalVariable(String tid , String serialNo , String packageName, String key, String source){
-
+    public Result<ParameterVariableDTO> getTerminalVariable(int pageNo, int pageSize , SearchOrderBy orderBy,String tid , String serialNo , String packageName, String key, String source){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(GET_TERMINAL_VARIABLE_URL);
+        PageRequestDTO page = new PageRequestDTO();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        if(orderBy!=null) {
+            page.setOrderBy(orderBy.val);
+        }
+        SdkRequest request = getPageRequest(GET_TERMINAL_VARIABLE_URL,page);
 
         if(tid!=null) {
             request.addRequestParam("tid", tid);
@@ -82,6 +85,10 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
 
 
     public Result<String> createTerminalVariable(TerminalParameterVariableRequest createRequest){
+        List<String> validationErrs = validateCreate( createRequest,"parameter.terminalVariableRequest.null");
+        if(validationErrs.size()>0) {
+            return new Result<String>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(CREATE_TERMINAL_VARIABLE_URL);
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
@@ -114,6 +121,10 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
     }
 
     public Result<String> batchDeletionTerminalVariable(TerminalParameterVariableDeleteRequest batchDeletionRequest){
+        List<String> validationErrs = validateDelete( batchDeletionRequest,"parameter.terminalVariableDeleteRequest.null");
+        if(validationErrs.size()>0) {
+            return new Result<String>(validationErrs);
+        }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(BATCH_DELETION_TERMINAL_VARIABLE_URL);
@@ -135,4 +146,16 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<String>(emptyResponse);
     }
+    public enum SearchOrderBy {
+        Variable_desc("createdDate DESC"),
+        Variable_asc("createdDate ASC");
+        private String val;
+        private SearchOrderBy(String orderBy) {
+            this.val = orderBy;
+        }
+        public String val(){
+            return this.val;
+        }
+    }
+
 }
