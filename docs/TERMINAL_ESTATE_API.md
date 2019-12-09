@@ -44,8 +44,10 @@ public Result<String> verifyTerminalEstate(terminalSerialNo)
 
 ```
 TerminalEstateApi terminalEstateApi = new TerminalEstateApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<String> result = terminalEstateApi.verifyTerminalEstate(1350001853);
+Result<String> result = terminalEstateApi.verifyTerminalEstate("1350001853");
 ```
+
+If the property BusinessCode of result is 0, then means the terminal exist in terminal estate.
 
 **Client validation failed sample result(JSON formatted)**
 
