@@ -50,7 +50,7 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         super(baseUrl, apiKey, apiSecret, locale);
     }
 
-    public Result<ParameterVariableDTO> getTerminalVariable(int pageNo, int pageSize , SearchOrderBy orderBy,String tid , String serialNo , String packageName, String key, String source){
+    public Result<ParameterVariableDTO> getTerminalVariable(int pageNo, int pageSize , SearchOrderBy orderBy,String tid , String serialNo , String packageName, String key, VariableSource source){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -73,7 +73,7 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
             request.addRequestParam("key", key);
         }
         if(source!=null) {
-            request.addRequestParam("source", source);
+            request.addRequestParam("source", source.val());
         }
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
 
@@ -156,6 +156,24 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         public String val(){
             return this.val;
         }
+    }
+
+    public enum VariableSource {
+        TERMINAL("T"),
+        GROUP("G"),
+        MARKET("M"),
+        MERCHANT("C");
+
+        private String val;
+
+        private VariableSource(String orderBy) {
+            this.val = orderBy;
+        }
+
+        public String val() {
+            return this.val;
+        }
+
     }
 
 }

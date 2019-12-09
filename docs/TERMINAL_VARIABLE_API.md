@@ -25,7 +25,7 @@ The get terminal variable API allows third party system to get terminal variable
 **API**
 
 ```
-public Result<ParameterVariableDTO> getTerminalVariable(int pageNo, int pageSize , SearchOrderBy orderBy,String tid , String serialNo , String packageName, String key, String source)s
+public Result<ParameterVariableDTO> getTerminalVariable(int pageNo, int pageSize , SearchOrderBy orderBy,String tid , String serialNo , String packageName, String key, VariableSource source)
 ```
 
 **Input parameter(s) description**  
@@ -36,11 +36,11 @@ public Result<ParameterVariableDTO> getTerminalVariable(int pageNo, int pageSize
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.Variable_asc and SearchOrderBy.Variable_desc.|
-|tid|String|false|The tid of terminal|
-|serialNo|String|false|The serial number of terminal|
-|packageName|String|false|The package name of  needed to get the terminal variable|
-|key|String|false|The terminal variable key|
-|source|String|false|The  variable source|
+|tid|String|true|The tid of terminal, tid and serialNo cannot be empty at same time|
+|serialNo|String|true|The serial number of terminal|
+|packageName|String|true|The package name required to get the terminal variable|
+|key|String|true|The terminal variable key|
+|source|VariableSource|true|The variable source|
 
 **Sample codes**
 
