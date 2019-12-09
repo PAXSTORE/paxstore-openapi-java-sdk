@@ -31,7 +31,7 @@ import java.util.Map;
  * @Description
  * @Author: Shawn
  * @Date: 2019/11/29 15:29
- * @Version 1.0
+ * @Version 7.1
  */
 public class TerminalGroupApkApiTest {
     private static final Logger logger = LoggerFactory.getLogger(TerminalGroupApkApiTest.class.getSimpleName());

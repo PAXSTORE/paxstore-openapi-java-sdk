@@ -12,7 +12,6 @@
 package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
-import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterDTO;
 import com.pax.market.api.sdk.java.api.terminalGroup.TerminalGroupApi;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.CreateTerminalGroupRequest;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupDTO;
