@@ -239,10 +239,10 @@ Structure of class ParameterVariable
 | Property Name | Type                | Nullable | Description                                              |
 | :------------ | :------------------ | :------- | :------------------------------------------------------- |
 | packageName   | String              | false    | The name of param template                               |
-| version       | Map<String, String> | false    | The parameter key and value, the key the PID in template |
-| key           | String              | true     | Terminal variable key                                    |
+| version       | String              | true     |  |
+| key           | String              | false    | Terminal variable key                                    |
 | value         | String              | true     | Terminal variable value                                  |
-| remarks       | String              | false    | Comment                                                  |
+| remarks       | String              | true     | Comment                                                  |
 
 Note: parameterVariable cannot be empty
 
