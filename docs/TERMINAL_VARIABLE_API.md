@@ -145,8 +145,8 @@ Structure of class ParameterVariable
 | Property Name | Type   | Nullable | Description             |
 | :------------ | :----- | :------- | :---------------------- |
 | packageName   | String | false    | The app package name    |
-| version       | String | false    | The app  version        |
-| key           | String | true     | Terminal variable key   |
+| version       | String | true    | The app  version        |
+| key           | String | false     | Terminal variable key   |
 | value         | String | true     | Terminal variable value |
 | remarks       | String | false    | Comment                 |
 
