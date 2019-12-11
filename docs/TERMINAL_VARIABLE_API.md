@@ -317,7 +317,7 @@ public Result<String> deleteTerminalVariable(Long terminalVariableId)
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|terminalVariableId|Long|true|The  terminal variable id|
+|terminalVariableId|Long|false|The  terminal variable id|
 
 **Sample codes**
 
