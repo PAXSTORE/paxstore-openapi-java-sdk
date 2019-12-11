@@ -232,7 +232,7 @@ public Result<String> updateTerminalVariable(Long terminalVariableId, ParameterV
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |terminalVariableId|Long|true|the id of terminal variable|
-|parameterVariable|ParameterVariable|true|The parameterVariable request object. The structure shows below.|
+|updateRequest|ParameterVariable|true|The parameterVariable request object. The structure shows below.|
 
 Structure of class ParameterVariable
 
