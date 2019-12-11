@@ -372,7 +372,7 @@ public Result<String> batchDeletionTerminalVariable(TerminalParameterVariableDel
 
 | Parameter Name       | Type                                   | Nullable | Description                                                 |
 | :------------------- | :------------------------------------- | :------- | :---------------------------------------------------------- |
-| batchDeletionRequest | TerminalParameterVariableDeleteRequest | true     | The batchDeletionRequest object. The structure shows below. |
+| batchDeletionRequest | TerminalParameterVariableDeleteRequest | false     | The batchDeletionRequest object. The structure shows below. |
 
 Structure of class ParameterVariable
 
