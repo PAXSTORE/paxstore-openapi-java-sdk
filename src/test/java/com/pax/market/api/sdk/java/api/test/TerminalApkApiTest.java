@@ -120,4 +120,40 @@ public class TerminalApkApiTest {
         Assert.assertTrue(uninstallResult.getBusinessCode() == 0);
         logger.info(uninstallResult.toString());
     }
+
+    @Test
+    public void testCreate(){
+        String terminalTid = "SXDFPOM0";
+        String testPackageName = "com.baidu.tieba";
+        CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
+        createTerminalApkRequest.setTid(terminalTid);
+//    	createTerminalApkRequest.setTid("S9F0RA7V");
+        createTerminalApkRequest.setPushTemplateName("8799");
+
+
+        createTerminalApkRequest.setPackageName(testPackageName);
+
+//    	createTerminalApkRequest.setPackageName("com.pax.android.lm");
+
+        createTerminalApkRequest.setVersion("10.3.8.30");
+   // 	createTerminalApkRequest.setTemplateName("10个text字段 - 副本2.xml");
+    //	createTerminalApkRequest.setTemplateName("PassWord_Param02.xml");
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("sys_F1_sys_cap_test01", "abc");
+        parameters.put("sys_F1_sys_cap_test02", "123");
+        parameters.put("sys_F1_sys_cap_password", "123");
+
+        FileParameter fileParameter = new FileParameter();
+        fileParameter.setPid("PID.cardBinFile");
+        fileParameter.setFileName("cardBinFile.jpeg");
+        fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
+        List<FileParameter> base64FileParameters = new ArrayList<>();
+        base64FileParameters.add(fileParameter);
+        createTerminalApkRequest.setBase64FileParameters(null);
+
+        createTerminalApkRequest.setParameters(null);
+        Result<TerminalApkDTO> result = terminalApkApi.createTerminalApk(createTerminalApkRequest);
+        Assert.assertTrue(result.getBusinessCode() == 0);
+        logger.info(result.toString());
+    }
 }

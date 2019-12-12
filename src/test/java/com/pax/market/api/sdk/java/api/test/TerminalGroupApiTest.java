@@ -53,7 +53,7 @@ public class TerminalGroupApiTest {
     @Test
     public void testCreateTerminalGroup() {
         CreateTerminalGroupRequest createRequest = new CreateTerminalGroupRequest();
-        createRequest.setName("3RDAPITestCreateGroup");
+        createRequest.setName("3RDAPITestCreateGroup-test");
         createRequest.setModelId(1L);
         createRequest.setResellerId(51785L);
         createRequest.setDescription("TEST");
@@ -68,9 +68,9 @@ public class TerminalGroupApiTest {
     @Test
     public void testUpdateTerminalGroup() {
         //更新终端分组-当不是未激活状态时，只能修改name、desc，传其余值默认不修改，未激活,且分组下没有终端时均可修改
-        Long groupId = 16532L;
+        Long groupId = 16533L;
         UpdateTerminalGroupRequest updateRequest = new UpdateTerminalGroupRequest();
-        updateRequest.setName("3RDAPITestGroup-update-haveTerminal");
+        updateRequest.setName("3RDAPITestGroup-update-haveTerminal-test");
         updateRequest.setMerchantIds("");
         updateRequest.setModelId(2L);
         updateRequest.setResellerId(2L);
@@ -84,7 +84,7 @@ public class TerminalGroupApiTest {
     @Test
     public void testActiveGroup() {
 
-        Long groupId = 16530L;
+        Long groupId = 16536L;
         Result<String> result = terminalGroupApi.activeGroup(groupId);
         logger.debug("Result of update Terminal Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
@@ -92,7 +92,7 @@ public class TerminalGroupApiTest {
 
     @Test
     public void testDisableGroup() {
-        Long groupId = 16530L;
+        Long groupId = 16533L;
         Result<String> result = terminalGroupApi.disableGroup(groupId);
         logger.debug("Result of update Terminal Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
@@ -109,7 +109,7 @@ public class TerminalGroupApiTest {
 
     @Test
     public void testAddGroupInTerminal() {
-        Long groupId = 16532L;
+        Long groupId = 16533L;
         TerminalGroupRequest addInRequest = new TerminalGroupRequest();
         Set<Long> terminalIds = new HashSet<>();
         terminalIds.add(255976L);

@@ -38,7 +38,8 @@ import java.util.Locale;
 public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     private static final Logger logger = LoggerFactory.getLogger(TerminalApkParameterApi.class);
 
-    private static final String GET_TERMINAL_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters";
+    private static final String GET_TERMINAL_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters/{apkParameterId}";
+    private static final String SEARCH_TERMINAL_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters";
     private static final String CREATE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters";
     private static final String UPDATE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters/{apkParameterId}";
     private static final String DELETE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters/{apkParameterId}";
@@ -52,7 +53,7 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     }
 
 
-    public Result<ApkParameterDTO> getTerminalApkParameter(int pageNo, int pageSize , SearchOrderBy orderBy, String templateName , String packageName, String versionName){
+    public Result<ApkParameterDTO> searchTerminalApkParameter(int pageNo, int pageSize , SearchOrderBy orderBy, String templateName , String packageName, String versionName){
         logger.debug("packageName="+packageName+";versionName="+versionName);
         List<String> validationErrsP = validateStr(packageName, "parameter.terminalApkParameterParam.invalid");
         List<String> validationErrsV= validateStr(versionName, "parameter.terminalApkParameterParam.invalid");
@@ -73,7 +74,7 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
             return new Result<ApkParameterDTO>(validationErrs);
         }
 
-        SdkRequest request = getPageRequest(GET_TERMINAL_APK_PARAMETER_URL, page);
+        SdkRequest request = getPageRequest(SEARCH_TERMINAL_APK_PARAMETER_URL, page);
         if(templateName!=null) {
             request.addRequestParam("templateName", templateName);
         }
@@ -89,6 +90,24 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
         Result<ApkParameterDTO> result = new Result<ApkParameterDTO>(resp);
         return result;
     }
+
+    public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId){
+        logger.debug("apkParameterId="+apkParameterId);
+        List<String> validationErrs= validateId(apkParameterId, "parameter.terminalApkParameterId.invalid");
+        if(validationErrs.size()>0) {
+            return new Result<ApkParameterDTO>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_APK_PARAMETER_URL.replace("{apkParameterId}", apkParameterId.toString()));
+        request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        ApkParameterResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), ApkParameterResponse.class);
+        Result<ApkParameterDTO> result = new Result<ApkParameterDTO>(resp);
+        return result;
+    }
+
+
+
+
 
     public Result<String> createApkParameter(CreateApkParameterRequest createApkParameterRequest){
         List<String> validationErrs = validateCreate( createApkParameterRequest,"parameter.apkParameterCreateRequest.null");

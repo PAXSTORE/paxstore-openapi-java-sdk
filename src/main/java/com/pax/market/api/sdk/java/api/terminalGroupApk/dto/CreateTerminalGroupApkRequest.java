@@ -35,6 +35,8 @@ public class CreateTerminalGroupApkRequest implements Serializable {
 
     private Long groupId;
 
+    private String pushTemplateName;
+
     @NotBlank
     private String packageName;
 

@@ -51,8 +51,16 @@ public class TerminalApkParameterApiTest {
 
     @Test
     public void testGetTerminalApkParameter(){
-        Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,"testCreate3RD-result-api-test","com.ss.android.article.lite","6.6.4123");
-        logger.debug("Result of  terminal Apk Parameter: {}",result.toString());
+        Long apkParameterId = 1149L;
+        Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(apkParameterId);
+        logger.debug("Result of get terminal Apk Parameter: {}",result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
+
+    @Test
+    public void testSearchTerminalApkParameter(){
+        Result<ApkParameterDTO> result = terminalApkParameterApi.searchTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,"testCreate3RD-result-api-test","com.ss.android.article.lite","6.6.4123");
+        logger.debug("Result of search terminal Apk Parameter: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
 

@@ -1,12 +1,11 @@
 package com.pax.market.api.sdk.java.api.terminalApk.dto;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 
 
@@ -21,7 +20,7 @@ public class CreateTerminalApkRequest implements Serializable{
 	private String tid;
 	
 	private String serialNo;
-	
+
 	@NotBlank
 	private String packageName;
 	
@@ -31,6 +30,10 @@ public class CreateTerminalApkRequest implements Serializable{
 	
 	private Map<String, String> parameters;
 	private List<FileParameter> base64FileParameters;
+
+	private String pushTemplateName;
+
+
 
 	public String getTid() {
 		return tid;
@@ -76,4 +79,12 @@ public class CreateTerminalApkRequest implements Serializable{
     public void setBase64FileParameters(List<FileParameter> base64FileParameters) {
         this.base64FileParameters = base64FileParameters;
     }
+
+	public String getPushTemplateName() {
+		return pushTemplateName;
+	}
+
+	public void setPushTemplateName(String pushTemplateName) {
+		this.pushTemplateName = pushTemplateName;
+	}
 }

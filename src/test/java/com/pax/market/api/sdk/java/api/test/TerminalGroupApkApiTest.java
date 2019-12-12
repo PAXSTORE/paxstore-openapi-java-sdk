@@ -37,7 +37,7 @@ public class TerminalGroupApkApiTest {
     private static final Logger logger = LoggerFactory.getLogger(TerminalGroupApkApiTest.class.getSimpleName());
 
     static TerminalGroupApkApi terminalGroupApkApi;
-    static Long GroupApkId =1678L;
+    static Long GroupApkId =1728L;
     @Before
     public void init() {
         terminalGroupApkApi = new TerminalGroupApkApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
@@ -46,14 +46,15 @@ public class TerminalGroupApkApiTest {
     @Test
     public void testCreateTerminalGroupApk() {
         CreateTerminalGroupApkRequest createRequest = new CreateTerminalGroupApkRequest();
-        createRequest.setGroupId(16532L);
+        createRequest.setGroupId(16536L); //test Dy Group
+        createRequest.setPushTemplateName("8799");
         createRequest.setPackageName("com.baidu.tieba");
         createRequest.setTemplateName("PassWord_Param02.xml");
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("sys_F1_sys_cap_test01", "abc");
         parameters.put("sys_F1_sys_cap_test02", "123");
         parameters.put("sys_F1_sys_cap_password", "123");
-        createRequest.setParameters(parameters);
+        createRequest.setParameters(null);
 
         FileParameter fileParameter = new FileParameter();
         fileParameter.setPid("PID.cardBinFile");
