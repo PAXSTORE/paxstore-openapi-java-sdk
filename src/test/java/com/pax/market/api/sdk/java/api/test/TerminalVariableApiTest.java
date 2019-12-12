@@ -60,14 +60,14 @@ public class TerminalVariableApiTest {
         parameterVariable1.setRemarks("今日头条app testCreateApi3");
         ParameterVariable parameterVariable2 = new ParameterVariable();
         parameterVariable2.setKey("testCreateVariable1Api4-BO");
-        parameterVariable2.setValue("testApiCreate4");
+        parameterVariable2.setValue(null);
         parameterVariable2.setPackageName("");
         parameterVariable2.setRemarks("今日头条app testCreateApi4");
         List<ParameterVariable> variableList = new ArrayList<>();
-        variableList.add(parameterVariable1);
+      //  variableList.add(parameterVariable1);
         variableList.add(parameterVariable2);
         createRequest.setTid("124465D345");
-        createRequest.setVariableList(variableList);
+        createRequest.setVariableList(null);
         Result<String> createResult = terminalVariableApi.createTerminalVariable(createRequest);
         logger.debug("Result of create terminal variable: {}",createResult.toString());
         Assert.assertTrue(createResult.getBusinessCode() == 0);

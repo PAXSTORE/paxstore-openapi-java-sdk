@@ -26,7 +26,6 @@ public class ParameterVariable implements Serializable {
 
     private String packageName;
 
-    private String version;
     private String key;
     private String value;
     private String remarks;
@@ -37,14 +36,6 @@ public class ParameterVariable implements Serializable {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
     }
 
     public String getKey() {
@@ -75,7 +66,6 @@ public class ParameterVariable implements Serializable {
     public String toString() {
         return "ParameterVariable{" +
                 "packageName='" + packageName + '\'' +
-                ", version='" + version + '\'' +
                 ", key='" + key + '\'' +
                 ", value='" + value + '\'' +
                 ", remarks='" + remarks + '\'' +

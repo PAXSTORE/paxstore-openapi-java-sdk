@@ -130,23 +130,22 @@ public Result<String> createTerminalVariable(TerminalParameterVariableRequest cr
 
 | Parameter Name | Type                             | Nullable | Description                                         |
 | :------------- | :------------------------------- | :------- | :-------------------------------------------------- |
-| createRequest  | TerminalParameterVariableRequest | true     | the create request object, the structure like below |
+| createRequest  | TerminalParameterVariableRequest | false    | the create request object, the structure like below |
 
 Structure of class TerminalParameterVariableRequest
 
 | Property Name | Type | Nullable|Description |
 |:--- | :---|:---|:---|
-|tid|String|false|the tid of terminal|
-|serialNo|String|false|the serial number of terminal|
-|variableList|List<ParameterVariable>|true|List of parametervariables,the structure like below|
+|tid|String|true|the tid of terminal|
+|serialNo|String|true|the serial number of terminal|
+|variableList|List<ParameterVariable>|false|List of parametervariables,the structure like below|
 
 Structure of class ParameterVariable
 
 | Property Name | Type   | Nullable | Description             |
 | :------------ | :----- | :------- | :---------------------- |
-| packageName   | String | false    | The app package name    |
-| version       | String | true    | The app  version        |
-| key           | String | false     | Terminal variable key   |
+| packageName   | String | true | The app package name    |
+| key           | String | false | Terminal variable key   |
 | value         | String | true     | Terminal variable value |
 | remarks       | String | false    | Comment                 |
 
@@ -231,18 +230,17 @@ public Result<String> updateTerminalVariable(Long terminalVariableId, ParameterV
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|terminalVariableId|Long|true|the id of terminal variable|
-|updateRequest|ParameterVariable|true|The parameterVariable request object. The structure shows below.|
+|terminalVariableId|Long|false|the id of terminal variable|
+|updateRequest|ParameterVariable|false|The parameterVariable request object. The structure shows below.|
 
 Structure of class ParameterVariable
 
-| Property Name | Type                | Nullable | Description                                              |
-| :------------ | :------------------ | :------- | :------------------------------------------------------- |
-| packageName   | String              | false    | The name of param template                               |
-| version       | String              | true     |  |
-| key           | String              | false    | Terminal variable key                                    |
-| value         | String              | true     | Terminal variable value                                  |
-| remarks       | String              | true     | Comment                                                  |
+| Property Name | Type   | Nullable | Description                |
+| :------------ | :----- | :------- | :------------------------- |
+| packageName   | String | true     | The name of param template |
+| key           | String | false    | Terminal variable key      |
+| value         | String | true     | Terminal variable value    |
+| remarks       | String | true     | Comment                    |
 
 Note: parameterVariable cannot be empty
 
@@ -268,14 +266,9 @@ Result<String> updateResult = terminalVariableApi.updateTerminalVariable(termina
 }
 ```
 
-
 **Server side validation failed sample result(JSON formatted)**
 
 ```
-{
-	"businessCode": 113,
-	"message": "Your request is invalid, please try again or contact marketplace administrator"
-}
 {
 	"businessCode": 13000
 	"message"::"Variable not found"
@@ -398,15 +391,6 @@ Result<String> batchDeletionResult = terminalVariableApi.batchDeletionTerminalVa
 {
 	"businessCode": -1,
 	"validationErrors": ["Parameter terminalVariableDeleteRequest cannot be null!"]
-}
-```
-
-**Server side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 997,
-	"message": "Malformed or illegal request"
 }
 ```
 

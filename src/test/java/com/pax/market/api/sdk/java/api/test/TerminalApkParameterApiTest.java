@@ -13,6 +13,7 @@ package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 
+import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.TerminalApkParameterApi;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterDTO;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.CreateApkParameterRequest;
@@ -25,7 +26,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -59,7 +62,7 @@ public class TerminalApkParameterApiTest {
 
     @Test
     public void testSearchTerminalApkParameter(){
-        Result<ApkParameterDTO> result = terminalApkParameterApi.searchTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,"testCreate3RD-result-api-test","com.ss.android.article.lite","6.6.4123");
+        Result<ApkParameterDTO> result = terminalApkParameterApi.searchTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,null,"com.ss.android.article.lite","6.6.4");
         logger.debug("Result of search terminal Apk Parameter: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
@@ -67,13 +70,22 @@ public class TerminalApkParameterApiTest {
     @Test
     public void  testCreateTerminalApkParameter() throws IOException {
         CreateApkParameterRequest createApkParameterRequest = new CreateApkParameterRequest();
-        createApkParameterRequest.setParamTemplateName("1000084085_(3).xml|schema1.xml");
-        createApkParameterRequest.setName("testCreate3RD-result-api-test-CREATEbY-newest");
-        createApkParameterRequest.setPackageName("com.ss.android.article.lite");
-        createApkParameterRequest.setVersion("6.6.4");
+        createApkParameterRequest.setParamTemplateName("3243.xml");
+        createApkParameterRequest.setName("testCreate3RD-result-api-test-CREATEbY-newest-12334111");
+        createApkParameterRequest.setPackageName("com.baidu.tieba");
+        createApkParameterRequest.setVersion("10.3.8.30");
         Map<String, String> parameters = new HashMap<String, String>();
     	parameters.put("sys.cap.emvParamCheckType", "abc");
         createApkParameterRequest.setParameters(parameters);
+
+        FileParameter fileParameter = new FileParameter();
+        fileParameter.setPid("wsplink.param.img");
+        fileParameter.setFileName("cardBinFile.jpeg");
+        fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
+        List<FileParameter> base64FileParameters = new ArrayList<>();
+        base64FileParameters.add(fileParameter);
+        createApkParameterRequest.setBase64FileParameters(base64FileParameters);
+
         Result<String> result = terminalApkParameterApi.createApkParameter(createApkParameterRequest);
         logger.debug("Result of  terminal apk parameter: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);

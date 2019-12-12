@@ -19,14 +19,14 @@ public TerminalApkParameterApi(String baseUrl, String apiKey, String apiSecret, 
 |locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
 
-### get terminal apk parameter by templateName ,packageName,versionName
+### search terminal apk parameter by templateName ,packageName,versionName
 
-Get terminal  apk parameter history by templateName ,packageName  ,versionName.
+search terminal  apk parameter history by templateName ,packageName  ,versionName.
 
 **API**
 
 ```
- public Result<ApkParameterDTO> getTerminalApkParameter(String templateName ,String packageName, String versionName)
+ public Result<ApkParameterDTO> searchTerminalApkParameter(int pageNo, int pageSize , SearchOrderBy orderBy,String templateName ,String packageName, String versionName)
 ```
 
 **Input parameter(s) description**  
@@ -37,15 +37,15 @@ Get terminal  apk parameter history by templateName ,packageName  ,versionName.
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.ApkParameter_asc and SearchOrderBy.ApkParameter_desc.|
-|templateName|String|false|Apk parameter template name|
-|packageName|String|true|get by app packageName|
-|versionName|String|true|The version name of application|
+|templateName|String|true|Apk parameter template name|
+|packageName|String|false|get by app packageName|
+|versionName|String|fasle|The version name of application|
 
 **Sample codes**
 
 ```
 TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,"12312","com.ss.android.article.lite","6.6.4");
+Result<ApkParameterDTO> result = terminalApkParameterApi.searchTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,"12312","com.ss.android.article.lite","6.6.4");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -137,8 +137,77 @@ The structure of class ApkFileDTO
 
 
 
-### Create a Apk Parameter
+### Get a Apk Parameter
 
+**API**
+
+```
+public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type | Nullable | Description             |
+| :------------- | :--- | :------- | :---------------------- |
+| apkParameterId | Long | false    | the id of apk parameter |
+
+**Sample codes**
+
+```
+TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long apkParameterId = 1149L;
+Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(apkParameterId);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["terminal apk parameter Id cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 9001,
+	"message": "Push template not found"
+}
+```
+
+**Successful sample result**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"createdDate": 1574402850000,
+		"name": "testCreate3RD-result-api-test1",
+		"paramTemplateName": "1000084085_(3).xml|schema1.xml",
+		"id": 1149,
+		"updatedDate": 1575451257000,
+		"apk": {
+			"apkType": "P",
+			"apkFileType": "A",
+			"apkFile": {
+				"permissions": "USE_CREDENTIALS,READ_SYNC_SETTINGS,BROADCAST_BADGE,RECEIVE,WAKE_LOCK,SENSOR_ENABLE,CHANGE_BADGE,WRITE_EXTERNAL_STORAGE,CAMERA,MOUNT_UNMOUNT_FILESYSTEMS,UPDATE_BADGE,READ,SENSOR_INFO,READ_PHONE_STATE,GET_TASKS,RESTART_PACKAGES,MANAGE_ACCOUNTS,WRITE_SETTINGS,READ_LOGS,MIPUSH_RECEIVE,INSTALL_SHORTCUT,ACCESS_FINE_LOCATION,AUTHENTICATE_ACCOUNTS,WRITE,MESSAGE,ACCESS_NETWORK_STATE,CHANGE_WIFI_STATE,WRITE_SYNC_SETTINGS,READ_SETTINGS,READ_APP_BADGE,UNINSTALL_SHORTCUT,C2D_MESSAGE,PROVIDER_INSERT_BADGE,INTERNET,GET_ACCOUNTS,READ_EXTERNAL_STORAGE,SYSTEM_ALERT_WINDOW,RECEIVE_BOOT_COMPLETED,DISABLE_KEYGUARD,ACCESS_LOCATION_EXTRA_COMMANDS,RECIEVE_MCS_MESSAGE,CHANGE_CONFIGURATION,ACCESS_COARSE_LOCATION,UPDATE_SHORTCUT,READ_CONTACTS,ACCESS_MOCK_LOCATION,BLUETOOTH,CHANGE_NETWORK_STATE,VIBRATE,ACCESS_WIFI_STATE",
+				"paxPermission": ""
+			},
+			"osType": "A",
+			"versionName": "6.6.4",
+			"versionCode": 664,
+			"status": "O"
+		},
+		"apkAvailable": true
+	}
+}
+```
+
+The type in dataSet is ApkParameterDTO. And the Structure is like ApkParameterDTO returned by searchTerminalApkParameter Api.
+
+### Create a Apk Parameter
 
 **API**
 
@@ -156,24 +225,40 @@ Structure of class CreateApkParameterRequest
 
 | Property Name | Type | Nullable|Description |
 |:--- | :---|:---|:---|
-|packageName|String|true|The package name which indicate the application you want to push to the terminal|
-|version|String|true|The version name of application which you want to push|
-|name|String|true|The name of Apk Parameter|
+|packageName|String|false|The package name which indicate the application you want to push to the terminal|
+|version|String|false|The version name of application which you want to push|
+|name|String|false|The name of Apk Parameter|
 |paramTemplateName|String|false|The name of  Apk param template name|
-|parameters|Map<String, String>|false|The parameter key and value, the key the PID in template|
+|parameters|Map<String, String>|true|The parameter key and value, the key the PID in template|
+|base64FileParameters|List<FileParameter>|true|The parameter of file type|
+
+Structure of class FileParameter
+
+| Property Name | Type   | Nullable | Description                                             |
+| :------------ | :----- | :------- | :------------------------------------------------------ |
+| pid           | String | true     | The PID in template                                     |
+| fileName      | String | true     | The parameter of file type, file name containing suffix |
+| fileData      | String | true     | The parameter of file type, file base64 data            |
 
 **Sample codes**
 
 ```
 TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-CreateApkParameterRequest createApkParameterRequest = new CreateApkParameterRequest();
-createApkParameterRequest.setParamTemplateName("1000084085_(3).xml|schema1.xml");
-createApkParameterRequest.setName("testCreate3RD-result-api-test-CREATEbY-newest");
-createApkParameterRequest.setPackageName("com.ss.android.article.lite");
-createApkParameterRequest.setVersion("6.6.4");
+  CreateApkParameterRequest createApkParameterRequest = new CreateApkParameterRequest();
+createApkParameterRequest.setParamTemplateName("3243.xml");
+createApkParameterRequest.setName("testCreate3RD-result-api-test-CREATEbY-newest-12334111");
+createApkParameterRequest.setPackageName("com.baidu.tieba");
+createApkParameterRequest.setVersion("10.3.8.30");
 Map<String, String> parameters = new HashMap<String, String>();
 parameters.put("sys.cap.emvParamCheckType", "abc");
 createApkParameterRequest.setParameters(parameters);
+FileParameter fileParameter = new FileParameter();
+fileParameter.setPid("wsplink.param.img");
+fileParameter.setFileName("cardBinFile.jpeg");
+fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
+List<FileParameter> base64FileParameters = new ArrayList<>();
+base64FileParameters.add(fileParameter);
+createApkParameterRequest.setBase64FileParameters(base64FileParameters);
 Result<String> result = terminalApkParameterApi.createApkParameter(createApkParameterRequest);
 ```
 
@@ -214,6 +299,8 @@ Result<String> result = terminalApkParameterApi.createApkParameter(createApkPara
 >
 > <font color=red>paramTemplateName and parameters :may not be empty</font>
 
+
+
 ### Update terminal apk parameter by id
 
 Update terminal apk parameter by id.
@@ -229,15 +316,15 @@ public Result<String> updateApkParameter(Long apkParameterId,UpdateApkParameterR
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|apkParameterId|Long|true|the id of apk parameter|
-|updateApkParameterRequest|UpdateApkParameterRequest|true|The update request object. The structure shows below.|
+|apkParameterId|Long|false|the id of apk parameter|
+|updateApkParameterRequest|UpdateApkParameterRequest|false|The update request object. The structure shows below.|
 
 Structure of class UpdateApkParameterRequest
 
 | Property Name     | Type                | Nullable | Description                                              |
 | :---------------- | :------------------ | :------- | :------------------------------------------------------- |
-| paramTemplateName | String              | false    | The name of param template                               |
-| parameters        | Map<String, String> | false    | The parameter key and value, the key the PID in template |
+| paramTemplateName | String              | true     | The name of param template                               |
+| parameters        | Map<String, String> | true     | The parameter key and value, the key the PID in template |
 
 Note:UpdateApkParameterRequest cannot be empty or  paramTemplateName and  parameters cannot be empty at same time.
 
@@ -269,13 +356,12 @@ Result<String> result = terminalApkParameterApi.updateApkParameter(apkParameterI
 }
 ```
 
-
 **Server side validation failed sample result(JSON formatted)**
 
 ```
 {
-	"businessCode": 113,
-	"message": "Your request is invalid, please try again or contact marketplace administrator"
+	"businessCode": 9001,
+	"message": "Push template not found"
 }
 ```
 
@@ -294,8 +380,9 @@ s}
 
 |Business Code|Message|Description|
 |:---|:---|:---|
-|113|Malformed or illegal request|&nbsp;|
-|1272|Parameter template {0} not found||
+|113|Malformed or illegal request||
+|1272|Parameter template {0} not found|0 is the template name|
+|1759|Reseller doesn't exist||
 |9001|Push template not found||
 
 
@@ -315,7 +402,7 @@ public Result<String> deleteApkParameter(Long apkParameterId)
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|apkParameterId|Long|true|the  apk parameter's id|
+|apkParameterId|Long|false|the  apk parameter's id|
 
 
 **Sample codes**
@@ -338,8 +425,8 @@ terminalApkParameterApi.deleteApkParameter(apkParameterId);
 
 ```
 {
-	"businessCode": 113,
-	"message": "Your request is invalid, please try again or contact marketplace administrator"
+	"businessCode": 9001,
+	"message": "Push template not found"
 }
 ```
 
