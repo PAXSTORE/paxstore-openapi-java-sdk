@@ -28,7 +28,7 @@ The search terminal API allow the thirdparty system search terminals by page.
 **API**
 
 ```
-public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID)
+public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID，boolean includeGeoLocation, boolean includeInstalledApks, boolean includeInstalledFirmware)
 ```
 
 **Input parameter(s) description**
@@ -40,12 +40,18 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 |orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
 |status|TerminalStatus|true|the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
 |snNameTID|String|true|search by serial number,name and TID|
+|includeGeoLocation|boolean|true|search by geographic location,The default value is false|
+|includeInstalledApks|boolean|true|search by installed apks,The default value is false|
+|includeInstalledFirmware|boolean|true|search by installed firmware,The default value is false|
 
 **Sample codes**
 
+On the basis of retaining the original method, attributes are added.So there are two ways to request this API.
+
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225");
+Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225"); 
+Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225",false,false,false);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -104,7 +110,6 @@ Structure of class TerminalDTO
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 1000</font>  
-
 
 ### Get a terminal
 
