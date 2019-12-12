@@ -182,7 +182,7 @@ Result<String> result = terminalApkParameterApi.createApkParameter(createApkPara
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["Parameter apkParameterCreateRequest cannot be null!"]
+	"validationErrors": ["Parameter createApkParameterRequest cannot be null!"]
 }
 ```
 
