@@ -73,6 +73,11 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      * @return the result
      */
     public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, PushHistorySearchOrderBy orderBy, String packageName, String snNameTID, PushStatus appPushStatus, PushStatus parameterPushStatus) {
+        logger.debug("packageName="+packageName);
+        List<String> validationErrsP = validateStr(packageName, "parameter.packageName.null");
+        if(validationErrsP.size()>0){
+            return new Result<AppPushHistoryDTO>(validationErrsP);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);

@@ -32,7 +32,8 @@ public class PushHistoryApiTest {
 
     @Test
     public void testGetTerminalVariable(){
-        Result<AppPushHistoryDTO> result = pushHistoryApi.searchAppPushHistory(1, 10, PushHistoryApi.PushHistorySearchOrderBy.AppPushTime, "com.pax.posviewer", "", null, null);
+        Result<AppPushHistoryDTO> result = pushHistoryApi.searchAppPushHistory(1, 10, PushHistoryApi.PushHistorySearchOrderBy.AppPushTime,  "com.baidu.tieba", "", null, null);
+        logger.debug("Result of search App push History: {}",result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
     }
 }
