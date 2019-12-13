@@ -35,9 +35,9 @@ public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, 
 | pageNo              | int                      | false    | page number, value must >=1                                  |
 | pageSize            | int                      | false    | the record number per page, range is 1 to 1000               |
 | orderBy             | PushHistorySearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of PushHistorySearchOrderBy.AppPushTime and PushHistorySearchOrderBy.SerialNo. |
-| packageName         | String                   | false    | search filter by terminal tid                                |
-| snNameTID           | String                   | true     | search filter by app packageName                             |
-| appPushStatus       | PushStatus               | true     | the push status  the value can be PushStatus.Active, PushStatus.Suspend |
+| packageName         | String                   | false    | search filter by app packageName                             |
+| snNameTID           | String                   | true     | search filter by terminal tid                               |
+| appPushStatus       | PushStatus               | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | parameterPushStatus | PushStatus               | true     |                                                              |
 
 
@@ -95,4 +95,23 @@ Result<AppPushHistoryDTO> result = pushHistoryApi.searchAppPushHistory(1, 2, Pus
 	}
 }
 ```
+
+The type in dataSet of is AppPushHistoryDTO. And the structure shows like below.
+
+|Property Name|Type|Description|
+|:--|:--|:--|
+|TerminalId		|long	|the id of terminal|
+|SerialNo		|string	|the serial number of terminal|
+|AppName		|string	|the name of the app pushed|
+|VersionName	|string	|the version name of app|
+|PushStartTime	|long	|the start time of the push, it is millisecond|
+|AppPushTime	|long	|app push time|
+|AppPushStatus	|string	|the push result status, value can be Success and Fail|
+|AppPushError	|string	|the reason of app push fail|
+|ParameterPushTime|long	|parameter push time|
+|ParameterPushStatus|string|the parameter push result status, value can be Success and Fail|
+|ParameterPushError|string|the reason of parameter push failed|
+|ParameterValues|string	|parameter values|
+|ParameterVariables|string|parameter variables|
+|PushType		|string	|push type, value can be Terminal or Group|	
 
