@@ -242,6 +242,16 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [Terminal Firmware APIs](docs/TERMINAL_FIRMWARE_API.md)
 
+## [App APIs](docs/APP_API.md)
+
+## [Push Template APIs](docs/TERMINAL_APK_PARAMETER_API.md)
+
+## [Terminal Estate APIs](docs/TERMINAL_ESTATE_API.md)
+
+## [Terminal Variable APIs](docs/TERMINAL_VARIABLE_API.md)
+
+## [Push History APIs](docs/PUSH_HISTORY_API.md)
+
 ## [Country Codes](docs/COUNTRY_CODE.md)
 
 
