@@ -293,14 +293,14 @@ Result<String> result = terminalApkParameterApi.createApkParameter(createApkPara
 **Possible validation errors**
 
 > <font color=red>Parameter createApkParameterRequest cannot be null!</font>  
-> <font color=red>paramTemplateName:may not be empty</font> 
-> <font color=red>version:may not be empty</font> 
-> <font color=red>packageName:may not be empty</font>
-> <font color=red>name:may not be empty</font>
-> <font color=red>parameters and base64FileParameters cannot be null at same time!</font>
-> <font color=red>Exceed max counter (10) of file type parameters!</font>
-> <font color=red>Exceed max size (500kb) per file type parameters!</font>
-
+> <font color=red>paramTemplateName:may not be empty</font>  
+> <font color=red>version:may not be empty</font>  
+> <font color=red>packageName:may not be empty</font>  
+> <font color=red>name:may not be empty</font>  
+> <font color=red>parameters and base64FileParameters cannot be null at same time!</font>  
+> <font color=red>Exceed max counter (10) of file type parameters!</font>  
+> <font color=red>Exceed max size (500kb) per file type parameters!</font>  
+  
 
 
 ### Update terminal apk parameter by id
