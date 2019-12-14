@@ -1,6 +1,6 @@
 ## PushHistory API
 
-Push App to terminal related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.pushHistory.PushHistoryApi*.
+Push history API is used to search the push result. The related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.pushHistory.PushHistoryApi*.
 
 **Constructors of TerminalApkApi**
 
