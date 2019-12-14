@@ -1,9 +1,5 @@
 package com.pax.market.api.sdk.java.api.terminalFirmware.dto;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-import java.io.Serializable;
-
 /**
  * @author liukai
  * @date 2019/5/23
