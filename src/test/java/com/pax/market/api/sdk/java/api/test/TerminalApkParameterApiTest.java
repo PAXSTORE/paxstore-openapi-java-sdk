@@ -26,10 +26,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -49,7 +46,7 @@ public class TerminalApkParameterApiTest {
 
     @Before
     public void init(){
-        terminalApkParameterApi = new TerminalApkParameterApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+        terminalApkParameterApi = new TerminalApkParameterApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET, Locale.ENGLISH);
     }
 
     @Test
@@ -62,7 +59,13 @@ public class TerminalApkParameterApiTest {
 
     @Test
     public void testSearchTerminalApkParameter(){
-        Result<ApkParameterDTO> result = terminalApkParameterApi.searchTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,null,"com.ss.android.article.lite","6.6.4");
+//        Result<ApkParameterDTO> result = terminalApkParameterApi
+//                .searchTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,null,
+//                        "com.ss.android.article.lite","6.6.4");
+
+        Result<ApkParameterDTO> result = terminalApkParameterApi
+                .searchTerminalApkParameter(1,0, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,null,
+                        null,"6.6.4");
         logger.debug("Result of search terminal Apk Parameter: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }

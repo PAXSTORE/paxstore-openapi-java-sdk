@@ -13,18 +13,19 @@ package com.pax.market.api.sdk.java.api.terminalApkParameter;
 
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
-
 import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
+import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.*;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.util.FileUtils;
+import com.pax.market.api.sdk.java.api.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 import java.util.List;
 import java.util.Locale;
@@ -44,6 +45,9 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     private static final String UPDATE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters/{apkParameterId}";
     private static final String DELETE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters/{apkParameterId}";
 
+    private static final int MAX_FILE_TYPE_PARAMETER_COUNTER = 10;
+    private static final int MAX_FILE_TYPE_PARAMETER_SIZE = 500;
+
     public TerminalApkParameterApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
     }
@@ -54,15 +58,6 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
 
 
     public Result<ApkParameterDTO> searchTerminalApkParameter(int pageNo, int pageSize , SearchOrderBy orderBy, String templateName , String packageName, String versionName){
-        logger.debug("packageName="+packageName+";versionName="+versionName);
-        List<String> validationErrsP = validateStr(packageName, "parameter.terminalApkParameterParam.invalid");
-        List<String> validationErrsV= validateStr(versionName, "parameter.terminalApkParameterParam.invalid");
-        if(validationErrsP.size()>0) {
-            return new Result<ApkParameterDTO>(validationErrsP);
-        }else if (validationErrsV.size()>0){
-            return new Result<ApkParameterDTO>(validationErrsV);
-        }
-        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
@@ -70,10 +65,16 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
             page.setOrderBy(orderBy.val);
         }
         List<String> validationErrs = validate(page);
+        if(StringUtils.isEmpty(packageName)) {
+            validationErrs.add(getMessage("parameter.packageName.mandatory"));
+        }
+        if(StringUtils.isEmpty(versionName)) {
+            validationErrs.add(getMessage("parameter.versionName.mandatory"));
+        }
         if(validationErrs.size()>0) {
             return new Result<ApkParameterDTO>(validationErrs);
         }
-
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_APK_PARAMETER_URL, page);
         if(templateName!=null) {
             request.addRequestParam("templateName", templateName);
@@ -92,7 +93,6 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     }
 
     public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId){
-        logger.debug("apkParameterId="+apkParameterId);
         List<String> validationErrs= validateId(apkParameterId, "parameter.terminalApkParameterId.invalid");
         if(validationErrs.size()>0) {
             return new Result<ApkParameterDTO>(validationErrs);
@@ -111,6 +111,19 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
 
     public Result<String> createApkParameter(CreateApkParameterRequest createApkParameterRequest){
         List<String> validationErrs = validateCreate( createApkParameterRequest,"parameter.apkParameterCreateRequest.null");
+        if(createApkParameterRequest.getParameters() == null && createApkParameterRequest.getBase64FileParameters()==null) {
+            validationErrs.add(getMessage("parametersBase64FileParameters.not.null.atsame"));
+        }
+        if(createApkParameterRequest.getBase64FileParameters() != null && !createApkParameterRequest.getBase64FileParameters().isEmpty()) {
+            if(createApkParameterRequest.getBase64FileParameters().size()>MAX_FILE_TYPE_PARAMETER_COUNTER) {
+                validationErrs.add(getMessage("parametersBase64FileParameters.over.maxCounter"));
+            }
+            for(FileParameter fileParameter: createApkParameterRequest.getBase64FileParameters()) {
+                if(FileUtils.getBase64FileSizeKB(fileParameter.getFileData()) > MAX_FILE_TYPE_PARAMETER_SIZE) {
+                    validationErrs.add(getMessage("parametersBase64FileParameters.over.maxSize"));
+                }
+            }
+        }
         if(validationErrs.size()>0) {
             return new Result<String>(validationErrs);
         }
@@ -127,6 +140,16 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
 
     public Result<String> updateApkParameter(Long apkParameterId,UpdateApkParameterRequest updateApkParameterRequest){
         List<String> validationErrs = validateUpdate( apkParameterId,updateApkParameterRequest,"parameter.terminalApkParameterId.invalid","parameter.apkParameterUpdateRequest.null");
+        if(updateApkParameterRequest.getBase64FileParameters() != null && !updateApkParameterRequest.getBase64FileParameters().isEmpty()) {
+            if(updateApkParameterRequest.getBase64FileParameters().size()>MAX_FILE_TYPE_PARAMETER_COUNTER) {
+                validationErrs.add(getMessage("parametersBase64FileParameters.over.maxCounter"));
+            }
+            for(FileParameter fileParameter: updateApkParameterRequest.getBase64FileParameters()) {
+                if(FileUtils.getBase64FileSizeKB(fileParameter.getFileData()) > MAX_FILE_TYPE_PARAMETER_SIZE) {
+                    validationErrs.add(getMessage("parametersBase64FileParameters.over.maxSize"));
+                }
+            }
+        }
         if(validationErrs.size()>0) {
             return new Result<String>(validationErrs);
         }

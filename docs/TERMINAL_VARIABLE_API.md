@@ -1,6 +1,6 @@
 ## TerminalVariable API
 
-All terminal related Variable APIs are encapsulated in classes *com.pax.market.api.sdk.java.api.terminalVariable.TerminalVariableApi*.
+All terminal variable related APIs are encapsulated in classes *com.pax.market.api.sdk.java.api.terminalVariable.TerminalVariableApi*.
 
 **Constructors of TerminalApkParameter **
 
@@ -112,8 +112,7 @@ The type in dataSet is ParameterVariableDTO. And the structure like below.
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 1000</font>  
->
-> <font color=red>The parameter serialNo and tid  cannot be blank at same time!</font> 
+> <font color=red>Parameter tid and serialNo cannot be null at same time!</font> 
 
 
 
@@ -200,8 +199,9 @@ Result<String> createResult = terminalVariableApi.createTerminalVariable(createR
 **Possible validation errors**
 
 > <font color=red>variableList can not be empty</font> 
-> 
-><font color=red>The parameter serialNo and tid  cannot be blank at same time!</font> 
+> <font color=red>The parameter serialNo and tid  cannot be blank at same time!</font> 
+
+
 
 **Possible business codes**
 
@@ -310,7 +310,7 @@ public Result<String> deleteTerminalVariable(Long terminalVariableId)
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|terminalVariableId|Long|false|The  terminal variable id|
+|terminalVariableId|Long|false|The terminal variable id|
 
 **Sample codes**
 
@@ -333,8 +333,8 @@ Result<String> deleteResult = terminalVariableApi.deleteTerminalVariable(termina
 
 ```
 {
-	"businessCode": 113,
-	"message": "Your request is invalid, please try again or contact marketplace administrator"
+	"businessCode": 13000,
+	"message": "Variable not found"
 }
 ```
 
@@ -390,7 +390,7 @@ Result<String> batchDeletionResult = terminalVariableApi.batchDeletionTerminalVa
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["Parameter terminalVariableDeleteRequest cannot be null!"]
+	"validationErrors": ["Parameter batchDeletionRequest cannot be null!"]
 }
 ```
 
@@ -401,3 +401,10 @@ Result<String> batchDeletionResult = terminalVariableApi.batchDeletionTerminalVa
 	"businessCode": 0
 }
 ```
+
+
+**Possible validation errors**
+
+> <font color=red>Parameter batchDeletionRequest cannot be null!</font> 
+> <font color=red>variableIds cannot be empty!</font> 
+

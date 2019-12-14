@@ -21,6 +21,7 @@ import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminalVariable.dto.*;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,6 +56,10 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
+        List<String> validationErrs = validate(page);
+        if(StringUtils.isEmpty(tid) && StringUtils.isEmpty(serialNo)) {
+            validationErrs.add(getMessage("param.tid.serialNo.empty.atSameTime"));
+        }
         if(orderBy!=null) {
             page.setOrderBy(orderBy.val);
         }
@@ -86,6 +91,9 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
 
     public Result<String> createTerminalVariable(TerminalParameterVariableRequest createRequest){
         List<String> validationErrs = validateCreate( createRequest,"parameter.terminalVariableRequest.null");
+        if(StringUtils.isEmpty(createRequest.getTid()) && StringUtils.isEmpty(createRequest.getSerialNo())) {
+            validationErrs.add(getMessage("param.tid.serialNo.empty.atSameTime"));
+        }
         if(validationErrs.size()>0) {
             return new Result<String>(validationErrs);
         }
@@ -121,7 +129,12 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
     }
 
     public Result<String> batchDeletionTerminalVariable(TerminalParameterVariableDeleteRequest batchDeletionRequest){
-        List<String> validationErrs = validateDelete( batchDeletionRequest,"parameter.terminalVariableDeleteRequest.null");
+        List<String> validationErrs = validateDelete( batchDeletionRequest,"parameter.batchDeletionRequest.null");
+        if(batchDeletionRequest!=null) {
+            if(batchDeletionRequest.getVariableIds() == null || batchDeletionRequest.getVariableIds().isEmpty()) {
+                validationErrs.add(getMessage("variableIds.is.empty"));
+            }
+        }
         if(validationErrs.size()>0) {
             return new Result<String>(validationErrs);
         }
@@ -139,7 +152,7 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         List<String> validationErrs = validateId(terminalVariableId, "parameter.terminalVariableId.invalid");
         if(validationErrs.size()>0) {
             return new Result<String>(validationErrs);
-        }else return null;
+        }else return new Result<String>();
     }
 
     private Result<String>  emptyResult(ThirdPartySysApiClient client,SdkRequest request) {
