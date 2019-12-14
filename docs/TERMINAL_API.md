@@ -24,7 +24,7 @@ public TerminalApi(String baseUrl, String apiKey, String apiSecret, Locale local
 ### Search terminals
 
 The search terminal API allow the thirdparty system search terminals by page. 
-Note: This result of this API does not include the geolocation, firmware and installed application, if you need those 3 information in result please use another search terminals AP
+Note: This result of this API does not include the geolocation, firmware and installed application, if you need those 3 information in result please use another search terminals API
 
 **API**
 
