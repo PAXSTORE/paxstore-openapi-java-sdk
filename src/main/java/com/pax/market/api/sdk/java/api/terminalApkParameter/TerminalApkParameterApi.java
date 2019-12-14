@@ -121,6 +121,7 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
             for(FileParameter fileParameter: createApkParameterRequest.getBase64FileParameters()) {
                 if(FileUtils.getBase64FileSizeKB(fileParameter.getFileData()) > MAX_FILE_TYPE_PARAMETER_SIZE) {
                     validationErrs.add(getMessage("parametersBase64FileParameters.over.maxSize"));
+                    break;
                 }
             }
         }
@@ -147,6 +148,7 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
             for(FileParameter fileParameter: updateApkParameterRequest.getBase64FileParameters()) {
                 if(FileUtils.getBase64FileSizeKB(fileParameter.getFileData()) > MAX_FILE_TYPE_PARAMETER_SIZE) {
                     validationErrs.add(getMessage("parametersBase64FileParameters.over.maxSize"));
+                    break;
                 }
             }
         }
