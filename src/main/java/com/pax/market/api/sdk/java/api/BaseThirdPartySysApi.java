@@ -143,6 +143,14 @@ public class BaseThirdPartySysApi{
 		}
 		return validationErrs;
 	}
+
+    protected static List<String> validateStr(String str, String errorMsgKey){
+        List<String> validationErrs = new ArrayList<String>();
+        if(str == null || str == "") {
+            validationErrs.add(getMessage(errorMsgKey));
+        }
+        return validationErrs;
+    }
     
     protected static <T> List<String> validateCreate(T createReq, String beanEmptyMsgKey){
     	List<String> validationErrs = new ArrayList<String>();
@@ -166,6 +174,16 @@ public class BaseThirdPartySysApi{
 		}
 		return validationErrs;
 	}
+
+    protected static List<String> validateDelete( Object deleteReq, String beanEmptyMsgKey){
+        List<String> validationErrs = new ArrayList<String>();
+        if(deleteReq == null) {
+            validationErrs.add(getMessage(beanEmptyMsgKey));
+        }else {
+            validationErrs.addAll(validate(deleteReq));
+        }
+        return validationErrs;
+    }
 
     public void setSDKConnectTimeout(int connectTimeout) {
         if(connectTimeout<0) {

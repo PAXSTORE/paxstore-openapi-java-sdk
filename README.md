@@ -1,4 +1,4 @@
-# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=6.3.1) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/6.3.1/link)
+# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=7.0) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/7.0/link)
 
 
 <br/>
@@ -242,7 +242,15 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [Terminal Firmware APIs](docs/TERMINAL_FIRMWARE_API.md)
 
-## [APP APIs](docs/APP_API.md)
+## [App APIs](docs/APP_API.md)
+
+## [Push Template APIs](docs/TERMINAL_APK_PARAMETER_API.md)
+
+## [Terminal Estate APIs](docs/TERMINAL_ESTATE_API.md)
+
+## [Terminal Variable APIs](docs/TERMINAL_VARIABLE_API.md)
+
+## [Push History APIs](docs/PUSH_HISTORY_API.md)
 
 ## [Country Codes](docs/COUNTRY_CODE.md)
 

@@ -12,7 +12,7 @@
 package com.pax.market.api.sdk.java.api.terminal.dto;
 
 import java.io.Serializable;
-
+import java.util.List;
 
 
 /**
@@ -41,6 +41,12 @@ public class TerminalDTO implements Serializable{
     private String resellerName;
     
     private String location;
+
+	private TerminalLocationDTO geoLocation;
+
+	private TerminalInstalledFirmwareDTO installedFirmware;
+
+	private List<TerminalInstalledApkDTO> installedApks;
 
 	public Long getId() {
 		return id;
@@ -110,16 +116,49 @@ public class TerminalDTO implements Serializable{
 		return location;
 	}
 
-	public void setLocation(String localtion) {
-		this.location = localtion;
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public TerminalLocationDTO getGeoLocation() {
+		return geoLocation;
+	}
+
+	public void setGeoLocation(TerminalLocationDTO geoLocation) {
+		this.geoLocation = geoLocation;
+	}
+
+	public TerminalInstalledFirmwareDTO getInstalledFirmware() {
+		return installedFirmware;
+	}
+
+	public void setInstalledFirmware(TerminalInstalledFirmwareDTO installedFirmware) {
+		this.installedFirmware = installedFirmware;
+	}
+
+	public List<TerminalInstalledApkDTO> getInstalledApks() {
+		return installedApks;
+	}
+
+	public void setInstalledApks(List<TerminalInstalledApkDTO> installedApks) {
+		this.installedApks = installedApks;
 	}
 
 	@Override
 	public String toString() {
-		return "TerminalDTO [id=" + id + ", name=" + name + ", tid=" + tid + ", serialNo=" + serialNo + ", status="
-				+ status + ", merchantName=" + merchantName + ", modelName=" + modelName + ", resellerName="
-				+ resellerName + ", location=" + location + "]";
+		return "TerminalDTO{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", tid='" + tid + '\'' +
+				", serialNo='" + serialNo + '\'' +
+				", status='" + status + '\'' +
+				", merchantName='" + merchantName + '\'' +
+				", modelName='" + modelName + '\'' +
+				", resellerName='" + resellerName + '\'' +
+				", location='" + location + '\'' +
+				", geoLocation=" + geoLocation +
+				", installedFirmware=" + installedFirmware +
+				", installedApks=" + installedApks +
+				'}';
 	}
-
-	
 }

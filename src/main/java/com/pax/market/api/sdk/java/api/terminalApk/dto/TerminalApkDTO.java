@@ -1,7 +1,7 @@
 package com.pax.market.api.sdk.java.api.terminalApk.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 /**
  * @author liukai
@@ -110,5 +110,22 @@ public class TerminalApkDTO implements Serializable {
 
     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
+    }
+
+    @Override
+    public String toString() {
+        return "TerminalApkDTO{" +
+                "id=" + id +
+                ", terminalSN='" + terminalSN + '\'' +
+                ", apkPackageName='" + apkPackageName + '\'' +
+                ", apkVersionCode=" + apkVersionCode +
+                ", apkVersionName='" + apkVersionName + '\'' +
+                ", activatedDate=" + activatedDate +
+                ", effectiveTime=" + effectiveTime +
+                ", status='" + status + '\'' +
+                ", actionStatus=" + actionStatus +
+                ", actionTime=" + actionTime +
+                ", errorCode=" + errorCode +
+                '}';
     }
 }

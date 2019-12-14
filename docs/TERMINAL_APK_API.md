@@ -21,7 +21,7 @@ public TerminalApkApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 
 ### Push apk
 
-Push apk API allow the third party system push a apk to terminal.
+Push apk API allow the third party system push a apk to terminal. And max request data size is 5MB.
 
 
 **API**
@@ -47,7 +47,16 @@ Structure of class TerminalCreateRequest
 |packageName|String|false|The package name which indicate the application you want to push to the terminal|
 |version|String|true|The version name of application which you want to push, if it is blank API will use the latest version|
 |templateName|String|true|The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10.|
-|parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the the PID in template|
+|parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the PID in template|
+|base64FileParameters|List&lt;FileParameter&gt;|false|The parameter of file type|
+
+Structure of class FileParameter
+
+|Property Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|pid|String|true|The PID in template|
+|fileName|String|true|The parameter of file type, file name containing suffix|
+|fileData|String|true|The parameter of file type, file base64 data|
 
 Note: tid and serialNo cannot be empty at same time.
 
@@ -63,6 +72,13 @@ createTerminalApkRequest.setTemplateName("template_map");
 Map<String, String> parameters = new HashMap<String, String>();
 parameters.put("PID.locationCode", "cn_js_sz");
 parameters.put("PID.showtraffic", "true");
+FileParameter fileParameter = new FileParameter();
+fileParameter.setPid("PID.cardBinFile");
+fileParameter.setFileName("cardBinFile.jpeg");
+fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
+List<FileParameter> base64FileParameters = new ArrayList<>();
+base64FileParameters.add(fileParameter);
+createTerminalApkRequest.setBase64FileParameters(base64FileParameters);
 createTerminalApkRequest.setParameters(parameters);
 terminalApkApi.createTerminalApk(createTerminalApkRequest);
 ```
