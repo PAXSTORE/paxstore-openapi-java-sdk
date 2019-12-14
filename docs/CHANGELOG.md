@@ -7,6 +7,7 @@
 * Add terminal variable related APIs
 * Add search push history result API
 * Add API to verify terminal estate
+* Support file type parameter when push app and parameter to terminal
 
 ## 6.3.1  
 

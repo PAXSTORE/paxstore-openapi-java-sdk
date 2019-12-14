@@ -48,7 +48,7 @@ Structure of class TerminalCreateRequest
 |version|String|true|The version name of application which you want to push, if it is blank API will use the latest version|
 |templateName|String|true|The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10.|
 |parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the PID in template|
-|base64FileParameters|List&lt;FileParameter&gt;|false|The parameter of file type|
+|base64FileParameters|List&lt;FileParameter&gt;|false|The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb|
 
 Structure of class FileParameter
 
@@ -117,9 +117,11 @@ terminalApkApi.createTerminalApk(createTerminalApkRequest);
 
 > <font color=red>Parameter createTerminalApkRequest cannot be null!</font>  
 > <font color=red>The property parameters of createTerminalApkRequest cannot be empty!</font>  
-> <font color=red>The property serialNo and tid in createTerminalApkRequest cannot be blank at same time!</font> 
-> <font color=red>packageName:may not be empty</font> 
-> <font color="red">The max size of template names is 10!</font>
+> <font color=red>The property serialNo and tid in createTerminalApkRequest cannot be blank at same time!</font>  
+> <font color=red>packageName:may not be empty</font>  
+> <font color="red">The max size of template names is 10!</font>  
+> <font color=red>Exceed max counter (10) of file type parameters!</font>  
+> <font color=red>Exceed max size (500kb) per file type parameters!</font>
 
 
 **Possible business codes**
