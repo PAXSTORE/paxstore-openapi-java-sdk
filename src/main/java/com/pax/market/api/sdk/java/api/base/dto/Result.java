@@ -12,6 +12,7 @@
 package com.pax.market.api.sdk.java.api.base.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +32,10 @@ public class Result<T extends Serializable> implements Serializable{
 	private List<String> validationErrors;
 	private T data;
 	
+	private String rateLimit;
+	private String rateLimitRemain;
+	private String rateLimitReset;
+
 	private PageInfo<T> pageInfo;
 	
 	public Result() {
@@ -46,6 +51,9 @@ public class Result<T extends Serializable> implements Serializable{
 		this.businessCode = response.getBusinessCode();
 		this.message = response.getMessage();
 		this.data = response.getData();
+		this.rateLimit = response.getRateLimit();
+		this.rateLimitRemain = response.getRateLimitRemain();
+		this.rateLimitReset = response.getRateLimitReset();
 	}
 	
 	public Result(PageResponse<T> response) {
@@ -58,6 +66,11 @@ public class Result<T extends Serializable> implements Serializable{
 		pageInfo.setOrderBy(response.getOrderBy());
 		pageInfo.setPageNo(response.getPageNo());
 		pageInfo.setTotalCount(response.getTotalCount());
+
+		this.rateLimit = response.getRateLimit();
+		this.rateLimitRemain = response.getRateLimitRemain();
+		this.rateLimitReset = response.getRateLimitReset();
+
 		this.pageInfo = pageInfo;
 	}
 	
@@ -68,6 +81,9 @@ public class Result<T extends Serializable> implements Serializable{
 			this.businessCode = response.getBusinessCode();
 			this.message = response.getMessage();
 			this.data = null;
+			this.rateLimit = response.getRateLimit();
+			this.rateLimitRemain = response.getRateLimitRemain();
+			this.rateLimitReset = response.getRateLimitReset();
 		}
 		
 	}
@@ -108,10 +124,11 @@ public class Result<T extends Serializable> implements Serializable{
 	@Override
 	public String toString() {
 		return "Result [businessCode=" + businessCode + ", message=" + message + ", validationErrors="
-				+ validationErrors + ", data=" + data + ", pageInfo=" + pageInfo + "]";
+				+ validationErrors + ", data=" + data + ", rateLimit=" + rateLimit + ", rateLimitRemain="
+				+ rateLimitRemain + ", rateLimitReset=" + rateLimitReset + ", pageInfo=" + pageInfo + "]"+(rateLimitReset!=null&&rateLimitReset.trim().length()>0?(new Date(Long.parseLong(rateLimitReset))).toString():"");
 	}
-	
-	
+
+
 	
 
 }
