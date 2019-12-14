@@ -35,7 +35,7 @@ public class Result<T extends Serializable> implements Serializable{
 	private String rateLimit;
 	private String rateLimitRemain;
 	private String rateLimitReset;
-
+	
 	private PageInfo<T> pageInfo;
 	
 	public Result() {
@@ -66,11 +66,11 @@ public class Result<T extends Serializable> implements Serializable{
 		pageInfo.setOrderBy(response.getOrderBy());
 		pageInfo.setPageNo(response.getPageNo());
 		pageInfo.setTotalCount(response.getTotalCount());
-
+		
 		this.rateLimit = response.getRateLimit();
 		this.rateLimitRemain = response.getRateLimitRemain();
 		this.rateLimitReset = response.getRateLimitReset();
-
+		
 		this.pageInfo = pageInfo;
 	}
 	
