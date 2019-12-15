@@ -23,6 +23,7 @@ import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.*;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.util.FileUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,9 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	private static final String GET_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/{terminalApkId}";
 	private static final String SUSPEND_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/suspend";
 	private static final String UNINSTALL_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/uninstall";
+
+    private static final int MAX_FILE_TYPE_PARAMETER_COUNTER = 10;
+    private static final int MAX_FILE_TYPE_PARAMETER_SIZE = 500;
 
 	private static final String TEMPLATE_NAME_DELIMITER = "|";
 	
@@ -93,7 +97,17 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	
 	public Result<TerminalApkDTO> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest){
 		List<String> validationErrs = validateCreateTerminalApk(createTerminalApkRequest);
-		
+        if(createTerminalApkRequest.getBase64FileParameters() != null && !createTerminalApkRequest.getBase64FileParameters().isEmpty()) {
+            if(createTerminalApkRequest.getBase64FileParameters().size()>MAX_FILE_TYPE_PARAMETER_COUNTER) {
+                validationErrs.add(getMessage("parametersBase64FileParameters.over.maxCounter"));
+            }
+            for(FileParameter fileParameter: createTerminalApkRequest.getBase64FileParameters()) {
+                if(FileUtils.getBase64FileSizeKB(fileParameter.getFileData()) > MAX_FILE_TYPE_PARAMETER_SIZE) {
+                    validationErrs.add(getMessage("parametersBase64FileParameters.over.maxSize"));
+                    break;
+                }
+            }
+        }
 		if(validationErrs.size()>0) {
 			return new Result<TerminalApkDTO>(validationErrs);
 		}

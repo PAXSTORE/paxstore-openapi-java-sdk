@@ -53,7 +53,7 @@ Result<ApkParameterDTO> result = terminalApkParameterApi.searchTerminalApkParame
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["terminal apk parameter packageName and versionName cannot be null and cannot be less than 1!"]
+	"validationErrors": ["Parameter packageName is mandatory!", "Parameter versionName is mandatory!"]
 }
 ```
 
@@ -134,6 +134,8 @@ The structure of class ApkFileDTO
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>Parameter packageName is mandatory!</font>  
+> <font color=red>Parameter versionName is mandatory!</font>  
 
 
 
@@ -219,7 +221,7 @@ public Result<String> createApkParameter(CreateApkParameterRequest createApkPara
 
 | Parameter Name            | Type                      | Nullable | Description                                         |
 | :------------------------ | :------------------------ | :------- | :-------------------------------------------------- |
-| CreateApkParameterRequest | createApkParameterRequest | true     | the create request object, the structure like below |
+| CreateApkParameterRequest | createApkParameterRequest | false     | the create request object, the structure like below |
 
 Structure of class CreateApkParameterRequest
 
@@ -227,8 +229,8 @@ Structure of class CreateApkParameterRequest
 |:--- | :---|:---|:---|
 |packageName|String|false|The package name which indicate the application you want to push to the terminal|
 |version|String|false|The version name of application which you want to push|
-|name|String|false|The name of Apk Parameter|
-|paramTemplateName|String|false|The name of  Apk param template name|
+|name|String|false|The template name|
+|paramTemplateName|String|false|The template file name of paramter application|
 |parameters|Map<String, String>|true|The parameter key and value, the key the PID in template|
 |base64FileParameters|List<FileParameter>|true|The parameter of file type|
 
@@ -238,7 +240,7 @@ Structure of class FileParameter
 | :------------ | :----- | :------- | :------------------------------------------------------ |
 | pid           | String | true     | The PID in template                                     |
 | fileName      | String | true     | The parameter of file type, file name containing suffix |
-| fileData      | String | true     | The parameter of file type, file base64 data            |
+| fileData      | String | true     | The parameter of file type, file base64 data, max size of file is 500kb            |
 
 **Sample codes**
 
@@ -291,14 +293,14 @@ Result<String> result = terminalApkParameterApi.createApkParameter(createApkPara
 **Possible validation errors**
 
 > <font color=red>Parameter createApkParameterRequest cannot be null!</font>  
-> <font color=red>packageName:cannot be empty</font> 
->
-> <font color=red>version:cannot be empty</font> 
->
-> <font color=red>name : cannot be empty</font>
->
-> <font color=red>paramTemplateName and parameters :may not be empty</font>
-
+> <font color=red>paramTemplateName:may not be empty</font>  
+> <font color=red>version:may not be empty</font>  
+> <font color=red>packageName:may not be empty</font>  
+> <font color=red>name:may not be empty</font>  
+> <font color=red>parameters and base64FileParameters cannot be null at same time!</font>  
+> <font color=red>Exceed max counter (10) of file type parameters!</font>  
+> <font color=red>Exceed max size (500kb) per file type parameters!</font>  
+  
 
 
 ### Update terminal apk parameter by id
@@ -325,6 +327,7 @@ Structure of class UpdateApkParameterRequest
 | :---------------- | :------------------ | :------- | :------------------------------------------------------- |
 | paramTemplateName | String              | true     | The name of param template                               |
 | parameters        | Map<String, String> | true     | The parameter key and value, the key the PID in template |
+|base64FileParameters|List<FileParameter> |true      | The parameter of file type|
 
 Note:UpdateApkParameterRequest cannot be empty or  paramTemplateName and  parameters cannot be empty at same time.
 
@@ -352,7 +355,7 @@ Result<String> result = terminalApkParameterApi.updateApkParameter(apkParameterI
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["terminal apk parameter Id cannot be null and cannot be less than 1!,Parameter apkParameterUpdateRequest cannot be null!"]
+	"validationErrors": ["terminal apk parameter Id cannot be null and cannot be less than 1!","Parameter apkParameterUpdateRequest cannot be null!"]
 }
 ```
 
@@ -373,7 +376,13 @@ Result<String> result = terminalApkParameterApi.updateApkParameter(apkParameterI
 s}
 ```
 
+
+**Possible validation errors**
+
 > <font color="red">Parameter apkParameterId cannot be null and cannot be less than 1!</font>
+> <font color=red>Parameter apkParameterUpdateRequest cannot be null!</font>  
+> <font color=red>Exceed max counter (10) of file type parameters!</font>
+> <font color=red>Exceed max size (500kb) per file type parameters!</font>
 
 
 **Possible business codes**
@@ -381,7 +390,7 @@ s}
 |Business Code|Message|Description|
 |:---|:---|:---|
 |113|Malformed or illegal request||
-|1272|Parameter template {0} not found|0 is the template name|
+|1272|Parameter template {0} not found|{0} is the template name|
 |1759|Reseller doesn't exist||
 |9001|Push template not found||
 

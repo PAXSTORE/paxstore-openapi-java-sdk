@@ -1,4 +1,13 @@
-# Changelog
+# Changelog  
+
+## 7.0  
+### New features
+* Add new search terminal API to include geo location, firmware and installed app in search result
+* Add push template related APIs
+* Add terminal variable related APIs
+* Add search push history result API
+* Add API to verify terminal estate
+* Support file type parameter when push app and parameter to terminal
 
 ## 6.3.1  
 

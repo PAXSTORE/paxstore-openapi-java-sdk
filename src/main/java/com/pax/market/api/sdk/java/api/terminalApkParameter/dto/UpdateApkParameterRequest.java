@@ -12,8 +12,10 @@
 package com.pax.market.api.sdk.java.api.terminalApkParameter.dto;
 
 
+import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
+
 import java.io.Serializable;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +35,8 @@ public class UpdateApkParameterRequest  implements Serializable {
 
     private Map<String, String> parameters;
 
+    private List<FileParameter> base64FileParameters;
+
 
 
     public String getParamTemplateName() {
@@ -49,5 +53,13 @@ public class UpdateApkParameterRequest  implements Serializable {
 
     public void setParameters(Map<String, String> parameters) {
         this.parameters = parameters;
+    }
+
+    public List<FileParameter> getBase64FileParameters() {
+        return base64FileParameters;
+    }
+
+    public void setBase64FileParameters(List<FileParameter> base64FileParameters) {
+        this.base64FileParameters = base64FileParameters;
     }
 }
