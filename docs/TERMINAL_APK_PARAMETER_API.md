@@ -2,7 +2,7 @@
 
 All terminal related APK parameter APIs are encapsulated in classes *com.pax.market.api.sdk.java.api.terminalApkParameter.TerminalApkParameterApi*.
 
-**Constructors of TerminalApkParameter **
+**Constructors of TerminalApkParameter**
 
 ```
 public TerminalApkParameterApi(String baseUrl, String apiKey, String apiSecret);
@@ -379,10 +379,10 @@ s}
 
 **Possible validation errors**
 
-> <font color="red">Parameter apkParameterId cannot be null and cannot be less than 1!</font>
+> <font color="red">Parameter apkParameterId cannot be null and cannot be less than 1!</font>  
 > <font color=red>Parameter apkParameterUpdateRequest cannot be null!</font>  
-> <font color=red>Exceed max counter (10) of file type parameters!</font>
-> <font color=red>Exceed max size (500kb) per file type parameters!</font>
+> <font color=red>Exceed max counter (10) of file type parameters!</font>  
+> <font color=red>Exceed max size (500kb) per file type parameters!</font>  
 
 
 **Possible business codes**
