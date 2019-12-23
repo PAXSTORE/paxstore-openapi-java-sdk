@@ -63,12 +63,10 @@ public class MerchantApiTest {
     	request.setResellerName("Global");
     	request.setContact("sam");
     	request.setCountry("CN");
-    	request.setPostcode("5652");
     	request.setPhone("444888");
     	request.setAddress("Jiangsu suzhou city Xinghongjie 328#");
     	request.setDescription("Merchant KFC Nanjing");
     	LinkedHashMap<String,String> attrs = new LinkedHashMap<String,String>();
-    	attrs.put("456", "tan");
     	request.setEntityAttributeValues(attrs);
 //    	String[] categoryNames = {"Fast Food"};
 //    	request.setMerchantCategoryNames(Arrays.asList(categoryNames));
@@ -94,7 +92,7 @@ public class MerchantApiTest {
     	updateRequest.setCreateUserFlag(true);
 //    	updateRequest.setMerchantCategoryNames(Arrays.asList(categoryNames));
     	LinkedHashMap<String,String> attrs2 = new LinkedHashMap<String,String>();
-    	attrs2.put("456", "tan2");
+    	attrs2.put("test", "test02");
     	updateRequest.setEntityAttributeValues(attrs2);
     	Result<MerchantDTO> updateResult = merchantApi.updateMerchant(merchantId, updateRequest);
     	logger.debug("Result of update merchant result={0}", updateResult.toString());
