@@ -34,11 +34,12 @@ public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, 
 | :------------------ | :----------------------- | :------- | :----------------------------------------------------------- |
 | pageNo              | int                      | false    | page number, value must >=1                                  |
 | pageSize            | int                      | false    | the record number per page, range is 1 to 1000               |
-| orderBy             | PushHistorySearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of PushHistorySearchOrderBy.AppPushTime and PushHistorySearchOrderBy.SerialNo. |
 | packageName         | String                   | false    | search filter by app packageName                             |
 | snNameTID           | String                   | true     | search filter by terminal tid                               |
 | appPushStatus       | PushStatus               | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | parameterPushStatus | PushStatus               | true     |                                                              |
+| appPushTime         | Date                     | true     | search the push history after the push time                  |
+| parameterPushTime   | Date                     | true     |                                                              |
 
 
 
@@ -47,7 +48,7 @@ public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, 
 
 ```
 PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<AppPushHistoryDTO> result = pushHistoryApi.searchAppPushHistory(1, 2, PushHistoryApi.PushHistorySearchOrderBy.AppPushTime, "com.baidu.tieba", "", null, null);
+Result<AppPushHistoryDTO> result = pushHistoryApi.searchAppPushHistory(1, 2, "com.baidu.tieba", "", null, null, null, null);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
