@@ -2,7 +2,7 @@
 
 All terminal variable related APIs are encapsulated in classes *com.pax.market.api.sdk.java.api.terminalVariable.TerminalVariableApi*.
 
-**Constructors of TerminalApkParameter **
+**Constructors of TerminalApkParameter**
 
 ```
 public TerminalVariableApi(String baseUrl, String apiKey, String apiSecret);
@@ -405,6 +405,6 @@ Result<String> batchDeletionResult = terminalVariableApi.batchDeletionTerminalVa
 
 **Possible validation errors**
 
-> <font color=red>Parameter batchDeletionRequest cannot be null!</font> 
+> <font color=red>Parameter batchDeletionRequest cannot be null!</font>   
 > <font color=red>variableIds cannot be empty!</font> 
 
