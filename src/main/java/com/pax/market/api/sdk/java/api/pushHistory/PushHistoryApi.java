@@ -17,6 +17,7 @@ import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
+import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.pushHistory.dto.AppPushHistoryDTO;
 import com.pax.market.api.sdk.java.api.pushHistory.dto.AppPushHistoryPageResponse;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
@@ -97,10 +98,10 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
             request.addRequestParam("parameterPushStatus", String.valueOf(parameterPushStatus.val));
         }
         if (appPushTime != null) {
-            request.addRequestParam("appPushTime", StringUtils.formatDateTime(appPushTime));
+            request.addRequestParam("appPushTime", StringUtils.formatDateTime(appPushTime, Constants.TIMEZONE_DATE_TIME_FORMAT));
         }
         if (parameterPushTime != null) {
-            request.addRequestParam("parameterPushTime", StringUtils.formatDateTime(parameterPushTime));
+            request.addRequestParam("parameterPushTime", StringUtils.formatDateTime(parameterPushTime, Constants.TIMEZONE_DATE_TIME_FORMAT));
         }
         request.addRequestParam("packageName", packageName);
         request.addRequestParam("snNameTID", snNameTID);
@@ -145,10 +146,10 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
             request.addRequestParam("parameterPushStatus", String.valueOf(parameterPushStatus.val));
         }
         if (appPushTime != null) {
-            request.addRequestParam("appPushTime", StringUtils.formatDateTime(appPushTime));
+            request.addRequestParam("appPushTime", StringUtils.formatDateTime(appPushTime, Constants.TIMEZONE_DATE_TIME_FORMAT));
         }
         if (parameterPushTime != null) {
-            request.addRequestParam("parameterPushTime", StringUtils.formatDateTime(parameterPushTime));
+            request.addRequestParam("parameterPushTime", StringUtils.formatDateTime(parameterPushTime, Constants.TIMEZONE_DATE_TIME_FORMAT));
         }
         request.addRequestParam("packageName", packageName);
         request.addRequestParam("snNameTID", snNameTID);
