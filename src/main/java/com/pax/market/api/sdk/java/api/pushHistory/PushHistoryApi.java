@@ -146,10 +146,10 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
             request.addRequestParam("parameterPushStatus", String.valueOf(parameterPushStatus.val));
         }
         if (appPushTime != null) {
-            request.addRequestParam("appPushTime", StringUtils.formatDateTime(appPushTime));
+            request.addRequestParam("appPushTime", StringUtils.formatDateTime(appPushTime, Constants.TIMEZONE_DATE_TIME_FORMAT));
         }
         if (parameterPushTime != null) {
-            request.addRequestParam("parameterPushTime", StringUtils.formatDateTime(parameterPushTime));
+            request.addRequestParam("parameterPushTime", StringUtils.formatDateTime(parameterPushTime, Constants.TIMEZONE_DATE_TIME_FORMAT));
         }
         request.addRequestParam("packageName", packageName);
         request.addRequestParam("snNameTID", snNameTID);
