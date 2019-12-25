@@ -45,7 +45,7 @@ public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, in
 
 ```
 PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHistory(1, 10,  "com.pax.android.demoapp", null, PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
+Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHistory(1, 2,  "com.pax.android.demoapp", null, PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -61,37 +61,48 @@ Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHisto
 
 ```
 {
-	"businessCode": 0,
-	"pageInfo": {
-		"pageNo": 1,
-		"limit": 2,
-		"totalCount": 586,
-		"hasNext": true,
-		"dataSet": [{
-		"parameterPushStatus": "None",
-		"appPushStatus": "Failed",
-		"appName": "百度贴吧",
-		"appPushTime": 1575855301000,
-		"pushStartTime": 1575627420000,
-		"terminalId": 461706,
-		"versionName": "10.3.8.30",
-		"serialNo": "1150000070",
-		"pushType": "Group",
-		"appPushError": "任务已删除"
-	}, {
-		"parameterPushStatus": "None",
-		"appPushStatus": "Failed",
-		"appName": "百度贴吧",
-		"appPushTime": 1575855301000,
-		"pushStartTime": 1575627420000,
-		"terminalId": 461720,
-		"versionName": "10.3.8.30",
-		"serialNo": "1140000570",
-		"pushType": "Group",
-		"appPushError": "任务已删除"
-	}]
-	}
+  "businessCode": 0,
+  "rateLimit": "",
+  "pageNo": 1,
+  "limit": 2,
+  "hasNext": true,
+  "totalCount": 17,
+  "dataset": [
+    {
+      "parameterPushStatus": "Success",
+      "appPushStatus": "Success",
+      "appName": "PAXSTORE SDK Demo",
+      "appPushTime": 1575274370000,
+      "pushStartTime": 1575274320000,
+      "terminalId": 1013403755,
+      "versionName": "7.0.0-inner",
+      "parameterPushError": null,
+      "parameterPushTime": 1575274373000,
+      "serialNo": "HMP4C15A12000186",
+      "pushType": "Terminal",
+      "parameterVariables": "{\"#{test}\": \"44\"}",
+      "parameterValues": "{\"sys_F2_sys_param_termId\": \"#{test}\", \"sys_F2_sys_param_merCode\": \"000000000000001\", \"sys_F2_sys_param_merName\": \"Union Pay\", \"sys_F2_sys_param_acqInsCode\": \"00000000000\"}",
+      "appPushError": null
+    },
+    {
+      "parameterPushStatus": "Success",
+      "appPushStatus": "Success",
+      "appName": "PAXSTORE SDK Demo",
+      "appPushTime": 1575102052000,
+      "pushStartTime": 1575102000000,
+      "terminalId": 1013403370,
+      "versionName": "5.02.02",
+      "parameterPushError": null,
+      "parameterPushTime": 1575102054000,
+      "serialNo": "1170000652",
+      "pushType": "Terminal",
+      "parameterVariables": "{}",
+      "parameterValues": "{\"sys_F1_sys_cap_test01\": \"333\", \"sys_F1_sys_cap_test02\": \"111\"}",
+      "appPushError": null
+    }
+  ]
 }
+
 ```
 
 The type in dataSet of is ParameterPushHistoryDTO. And the structure shows like below.
