@@ -18,14 +18,14 @@ public PushHistoryApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 |locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
-### **SearchAppPushHistory**
+### **SearchParameterPushHistory**
 
-SearchAppPushHistory API allow the third party system  to find the push history of app
+SearchParameterPushHistory API allow the third party system  to find all the terminal push history of parameter application
 
 **API**
 
 ```
-public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, PushHistorySearchOrderBy orderBy, String packageName, String snNameTID, PushStatus appPushStatus, PushStatus parameterPushStatus)
+public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime)
 ```
 
 **Input parameter(s) description**  
@@ -35,12 +35,9 @@ public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, 
 | pageNo              | int                      | false    | page number, value must >=1                                  |
 | pageSize            | int                      | false    | the record number per page, range is 1 to 1000               |
 | packageName         | String                   | false    | search filter by app packageName                             |
-| snNameTID           | String                   | true     | search filter by terminal tid                               |
-| appPushStatus       | PushStatus               | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
-| parameterPushStatus | PushStatus               | true     |                                                              |
-| appPushTime         | Date                     | true     | search the push history after the push time                  |
-| parameterPushTime   | Date                     | true     |                                                              |
-
+| serialNo            | String                   | true     | only terminal with specified serialNo will search out                         |
+| pushStatus          | PushStatus               | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
+| pushTime            | Date                     | true     | search the push history after the push time                  |
 
 
 
@@ -48,7 +45,7 @@ public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, 
 
 ```
 PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<AppPushHistoryDTO> result = pushHistoryApi.searchAppPushHistory(1, 2, "com.baidu.tieba", "", null, null, null, null);
+Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHistory(1, 10,  "com.pax.android.demoapp", null, PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -97,7 +94,7 @@ Result<AppPushHistoryDTO> result = pushHistoryApi.searchAppPushHistory(1, 2, "co
 }
 ```
 
-The type in dataSet of is AppPushHistoryDTO. And the structure shows like below.
+The type in dataSet of is ParameterPushHistoryDTO. And the structure shows like below.
 
 |Property Name|Type|Description|
 |:--|:--|:--|
