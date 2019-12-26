@@ -18,14 +18,14 @@ public PushHistoryApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 |locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
-### **SearchAppPushHistory**
+### **SearchParameterPushHistory**
 
-SearchAppPushHistory API allow the third party system  to find the push history of app
+SearchParameterPushHistory API allow the third party system  to find all the terminal push history of parameter application
 
 **API**
 
 ```
-public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, PushHistorySearchOrderBy orderBy, String packageName, String snNameTID, PushStatus appPushStatus, PushStatus parameterPushStatus)
+public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime)
 ```
 
 **Input parameter(s) description**  
@@ -35,12 +35,9 @@ public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, 
 | pageNo              | int                      | false    | page number, value must >=1                                  |
 | pageSize            | int                      | false    | the record number per page, range is 1 to 1000               |
 | packageName         | String                   | false    | search filter by app packageName                             |
-| snNameTID           | String                   | true     | search filter by terminal tid                               |
-| appPushStatus       | PushStatus               | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
-| parameterPushStatus | PushStatus               | true     |                                                              |
-| appPushTime         | Date                     | true     | search the push history after the push time                  |
-| parameterPushTime   | Date                     | true     |                                                              |
-
+| serialNo            | String                   | true     | only terminal with specified serialNo will search out                         |
+| pushStatus          | PushStatus               | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
+| pushTime            | Date                     | true     | search the push history after the push time                  |
 
 
 
@@ -48,7 +45,7 @@ public Result<AppPushHistoryDTO> searchAppPushHistory(int pageNo, int pageSize, 
 
 ```
 PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<AppPushHistoryDTO> result = pushHistoryApi.searchAppPushHistory(1, 2, "com.baidu.tieba", "", null, null, null, null);
+Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHistory(1, 2,  "com.pax.android.demoapp", null, PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -64,40 +61,51 @@ Result<AppPushHistoryDTO> result = pushHistoryApi.searchAppPushHistory(1, 2, "co
 
 ```
 {
-	"businessCode": 0,
-	"pageInfo": {
-		"pageNo": 1,
-		"limit": 2,
-		"totalCount": 586,
-		"hasNext": true,
-		"dataSet": [{
-		"parameterPushStatus": "None",
-		"appPushStatus": "Failed",
-		"appName": "百度贴吧",
-		"appPushTime": 1575855301000,
-		"pushStartTime": 1575627420000,
-		"terminalId": 461706,
-		"versionName": "10.3.8.30",
-		"serialNo": "1150000070",
-		"pushType": "Group",
-		"appPushError": "任务已删除"
-	}, {
-		"parameterPushStatus": "None",
-		"appPushStatus": "Failed",
-		"appName": "百度贴吧",
-		"appPushTime": 1575855301000,
-		"pushStartTime": 1575627420000,
-		"terminalId": 461720,
-		"versionName": "10.3.8.30",
-		"serialNo": "1140000570",
-		"pushType": "Group",
-		"appPushError": "任务已删除"
-	}]
-	}
+  "businessCode": 0,
+  "rateLimit": "",
+  "pageNo": 1,
+  "limit": 2,
+  "hasNext": true,
+  "totalCount": 17,
+  "dataset": [
+    {
+      "parameterPushStatus": "Success",
+      "appPushStatus": "Success",
+      "appName": "PAXSTORE SDK Demo",
+      "appPushTime": 1575274370000,
+      "pushStartTime": 1575274320000,
+      "terminalId": 1013403755,
+      "versionName": "7.0.0-inner",
+      "parameterPushError": null,
+      "parameterPushTime": 1575274373000,
+      "serialNo": "HMP4C15A12000186",
+      "pushType": "Terminal",
+      "parameterVariables": "{\"#{test}\": \"44\"}",
+      "parameterValues": "{\"sys_F2_sys_param_termId\": \"#{test}\", \"sys_F2_sys_param_merCode\": \"000000000000001\", \"sys_F2_sys_param_merName\": \"Union Pay\", \"sys_F2_sys_param_acqInsCode\": \"00000000000\"}",
+      "appPushError": null
+    },
+    {
+      "parameterPushStatus": "Success",
+      "appPushStatus": "Success",
+      "appName": "PAXSTORE SDK Demo",
+      "appPushTime": 1575102052000,
+      "pushStartTime": 1575102000000,
+      "terminalId": 1013403370,
+      "versionName": "5.02.02",
+      "parameterPushError": null,
+      "parameterPushTime": 1575102054000,
+      "serialNo": "1170000652",
+      "pushType": "Terminal",
+      "parameterVariables": "{}",
+      "parameterValues": "{\"sys_F1_sys_cap_test01\": \"333\", \"sys_F1_sys_cap_test02\": \"111\"}",
+      "appPushError": null
+    }
+  ]
 }
+
 ```
 
-The type in dataSet of is AppPushHistoryDTO. And the structure shows like below.
+The type in dataSet of is ParameterPushHistoryDTO. And the structure shows like below.
 
 |Property Name|Type|Description|
 |:--|:--|:--|

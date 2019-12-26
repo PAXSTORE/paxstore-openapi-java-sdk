@@ -14,7 +14,7 @@ package com.pax.market.api.sdk.java.api.pushHistory.dto;
 
 import com.pax.market.api.sdk.java.api.base.dto.PageResponse;
 
-public class AppPushHistoryPageResponse extends PageResponse<AppPushHistoryDTO> {
+public class ParameterPushHistoryPageResponse extends PageResponse<ParameterPushHistoryDTO> {
 
     private static final long serialVersionUID = 7577160084128087177L;
 
