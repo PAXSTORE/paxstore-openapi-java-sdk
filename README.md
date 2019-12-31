@@ -1,4 +1,4 @@
-# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=7.0) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/7.0/link)
+# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=7.0.2) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/7.0.2/link)
 
 
 <br/>
@@ -171,7 +171,7 @@ Update pom.xml add SDK dependency for your java project.
 <dependency>
     <groupId>com.pax.market</groupId>
     <artifactId>paxstore-openapi-java-sdk</artifactId>
-    <version>6.3.0</version>
+    <version>7.0.0</version>
 </dependency>
 ```
 

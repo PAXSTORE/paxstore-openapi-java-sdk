@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * The type App push history.
  */
-public class AppPushHistoryDTO implements Serializable {
+public class ParameterPushHistoryDTO implements Serializable {
     private static final long serialVersionUID = -7972757906620772968L;
 
     private Long terminalId;

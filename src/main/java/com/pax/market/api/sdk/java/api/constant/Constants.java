@@ -39,6 +39,8 @@ public class Constants {
      */
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
+    public static final String TIMEZONE_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss Z";
+
     /**
      * UTF-8字符集
      */
@@ -104,7 +106,7 @@ public class Constants {
     public static final int DEFAULT_PAGE_SIZE = 10;
     
     public static final String THIRD_PARTY_API_SDK_LANGUAGE = "Java";
-    public static final String THIRD_PARTY_API_SDK_VERSION = "7.0.0";
+    public static final String THIRD_PARTY_API_SDK_VERSION = "7.0.2";
     public static final String REQ_HEADER_SDK_LANG = "SDK-Language";
     public static final String REQ_HEADER_SDK_VERSION = "SDK-Version";
 
