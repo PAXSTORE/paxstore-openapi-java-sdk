@@ -76,7 +76,6 @@ public class TerminalGroupApiTest {
 
     @Test
     public void testSearchTerminal(){
-        SearchTerminalRequest searchTerminalRequest =new SearchTerminalRequest();
         String status = "A";
         String modelId = "1";
         String resellerId="2";
