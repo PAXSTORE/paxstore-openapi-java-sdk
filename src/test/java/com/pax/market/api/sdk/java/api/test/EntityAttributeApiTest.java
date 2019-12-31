@@ -63,6 +63,10 @@ public class EntityAttributeApiTest {
         createRequest.setMaxLength(5);
         createRequest.setMinLength(1);
         createRequest.setRequired(false);
+    /*    createRequest.setSelector("{\n" +
+                "\t\"1\": \"1\",\n" +
+                "\t\"te1212121st\": \"test\"\n" +
+                "}");*/
         Result<EntityAttributeDTO> result = entityAttributeApi.createEntityAttribute(createRequest);
         logger.debug("Result of create entity attribute: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
@@ -77,6 +81,8 @@ public class EntityAttributeApiTest {
         updateRequest.setMaxLength(6);
         updateRequest.setMinLength(2);
         updateRequest.setRequired(false);
+        /*updateRequest.setSelector("{1:1}");
+        updateRequest.setRegex("");*/
         Result<EntityAttributeDTO> result = entityAttributeApi.updateEntityAttribute(attributeId,updateRequest);
         logger.debug("Result of update entity attribute: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);

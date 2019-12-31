@@ -9,7 +9,7 @@
  *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
  * ********************************************************************************
  */
-package com.pax.market.api.sdk.java.api.entityAttribute.dto;
+package com.pax.market.api.sdk.java.api.terminalGroup.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,20 +19,17 @@ import java.io.Serializable;
 /**
  * @Description
  * @Author: Shawn
- * @Date: 2019/11/19 9:43
+ * @Date: 2019/12/18 12:23
  * @Version 7.1
  */
+
 @Getter
 @Setter
-public class EntityAttributeUpdateRequest implements Serializable {
-    private static final long serialVersionUID = 4334504898768526684L;
-
-    private String inputType;
-    private Integer minLength;
-    private Integer maxLength;
-    private boolean required;
-    private String regex;
-    private String selector;
-    private String defaultLabel;
-
+public class SearchTerminalRequest implements Serializable {
+    private String status;
+    private Long modelId;
+    private Long resellerId;
+    private Long merchantId;
+    private String serialNo;
+    private Long excludeGroupId;
 }

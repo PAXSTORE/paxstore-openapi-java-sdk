@@ -13,11 +13,18 @@ package com.pax.market.api.sdk.java.api.terminalGroupApk;
 
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
+import com.pax.market.api.sdk.java.api.app.AppApi;
+import com.pax.market.api.sdk.java.api.app.dto.AppPageDTO;
+import com.pax.market.api.sdk.java.api.app.dto.AppPageResponse;
 import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
+import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
+import com.pax.market.api.sdk.java.api.terminalApkParameter.TerminalApkParameterApi;
+import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterDTO;
+import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterPageResponse;
 import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.CreateTerminalGroupApkRequest;
 import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.SimpleTerminalGroupApkDTO;
 import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.TerminalGroupApkResponse;
@@ -53,7 +60,7 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
     public Result<SimpleTerminalGroupApkDTO> getTerminalGroupApk(Long groupApkId){
         validateTerminalGroupApkId(groupApkId);
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(GET_TERMINAL_GROUP_APK_URL.replace("{groupApkId}", groupApkId.toString()+""));
+        SdkRequest request = createSdkRequest(GET_TERMINAL_GROUP_APK_URL.replace("{groupApkId}", groupApkId.toString() + ""));
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
         TerminalGroupApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupApkResponse.class);
         Result<SimpleTerminalGroupApkDTO> result = new Result<SimpleTerminalGroupApkDTO>(resp);
@@ -76,7 +83,7 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
     }
 
 
-    public Result<SimpleTerminalGroupApkDTO> suspendTerminalGroupApk(Long groupApkId){
+    public Result<SimpleTerminalGroupApkDTO> suspendTerminalGroupApk(Long groupApkId) {
         validateTerminalGroupApkId(groupApkId);
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(SUSPEND_TERMINAL_GROUP_APK_URL.replace("{groupApkId}", groupApkId.toString()));
@@ -87,23 +94,51 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
         return result;
     }
 
-    public Result<String> deleteTerminalGroupApk(Long groupApkId){
+    public Result<String> deleteTerminalGroupApk(Long groupApkId) {
         validateTerminalGroupApkId(groupApkId);
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(DELETE_TERMINAL_GROUP_APK_URL.replace("{groupApkId}", groupApkId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
-        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        return  new Result<String>(emptyResponse);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<String>(emptyResponse);
     }
 
 
-    private  Result<SimpleTerminalGroupApkDTO> validateTerminalGroupApkId(Long groupApkId) {
-        logger.debug("groupApkId="+groupApkId);
+    private Result<SimpleTerminalGroupApkDTO> validateTerminalGroupApkId(Long groupApkId) {
+        logger.debug("groupApkId=" + groupApkId);
         List<String> validationErrs = validateId(groupApkId, "parameter.terminalGroupApkId.invalid");
-        if(validationErrs.size()>0) {
+        if (validationErrs.size() > 0) {
             return new Result<SimpleTerminalGroupApkDTO>(validationErrs);
-        }else return null;
+        } else return null;
     }
 
+
+    public enum SearchOrderBy {
+        CreatedDate_desc("a.created_date DESC"),
+        CreatedDate_asc("a.created_date ASC");
+        private String val;
+        private SearchOrderBy(String orderBy) {
+            this.val = orderBy;
+        }
+        public String val(){
+            return this.val;
+        }
+    }
+
+    public enum AppSearchOrderBy {
+        AppName_desc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci DESC"),
+        AppName_asc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci ASC"),
+        Emial_desc("developer.email DESC"),
+        Emial_asc("developer.email ASC"),
+        UpdatedDate_desc("app.updated_date DESC"),
+        UpdatedDate_asc("app.updated_date ASC");
+        private String val;
+        private AppSearchOrderBy(String orderBy) {
+            this.val = orderBy;
+        }
+        public String val(){
+            return this.val;
+        }
+    }
 
 }

@@ -46,10 +46,11 @@ public class TerminalGroupApkApiTest {
     @Test
     public void testCreateTerminalGroupApk() {
         CreateTerminalGroupApkRequest createRequest = new CreateTerminalGroupApkRequest();
-        createRequest.setGroupId(16536L); //test Dy Group
-        createRequest.setPushTemplateName("8799");
-        createRequest.setPackageName("com.baidu.tieba");
-        createRequest.setTemplateName("PassWord_Param02.xml");
+        createRequest.setGroupId(16543L); //test Dy Group
+      //  createRequest.setPushTemplateName("8799");
+        createRequest.setPackageName(null);
+
+      //  createRequest.setTemplateName("PassWord_Param02.xml");
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("sys_F1_sys_cap_test01", "abc");
         parameters.put("sys_F1_sys_cap_test02", "123");

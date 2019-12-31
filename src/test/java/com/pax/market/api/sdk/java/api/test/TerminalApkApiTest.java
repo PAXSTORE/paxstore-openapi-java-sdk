@@ -128,14 +128,14 @@ public class TerminalApkApiTest {
         CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
         createTerminalApkRequest.setTid(terminalTid);
 //    	createTerminalApkRequest.setTid("S9F0RA7V");
-        createTerminalApkRequest.setPushTemplateName("8799");
+  //      createTerminalApkRequest.setPushTemplateName("8799");
 
 
         createTerminalApkRequest.setPackageName(testPackageName);
 
 //    	createTerminalApkRequest.setPackageName("com.pax.android.lm");
 
-        createTerminalApkRequest.setVersion("10.3.8.30");
+    //    createTerminalApkRequest.setVersion("10.3.8.30");
    // 	createTerminalApkRequest.setTemplateName("10个text字段 - 副本2.xml");
     //	createTerminalApkRequest.setTemplateName("PassWord_Param02.xml");
         Map<String, String> parameters = new HashMap<String, String>();
