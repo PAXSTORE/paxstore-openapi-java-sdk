@@ -1,5 +1,12 @@
 # Changelog  
 
+
+## 7.0.3  
+### Bug fixes  
+* Search app by app name not work  
+* Remove getTerminalApkParameter from TerminalApkParameterApi as it not supported  
+
+
 ## 7.0  
 ### New features
 * Add new search terminal API to include geo location, firmware and installed app in search result
