@@ -3,6 +3,7 @@ package com.pax.market.api.sdk.java.api.terminalApk.dto;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

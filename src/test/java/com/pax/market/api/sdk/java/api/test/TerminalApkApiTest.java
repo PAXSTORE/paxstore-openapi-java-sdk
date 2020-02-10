@@ -61,8 +61,8 @@ public class TerminalApkApiTest {
     
     @Test
     public void testCreateUninstallSuspendTerminalApk() {
-        String terminalTid = "PZYL32EZH";
-        String testPackageName = "zz.dela.cmcc.traffic";
+        String terminalTid = "3KJQMK6C";
+        String testPackageName = "com.cleanmaster.mguard_cn";
     	CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
     	createTerminalApkRequest.setTid(terminalTid);
 //    	createTerminalApkRequest.setTid("S9F0RA7V");
@@ -75,7 +75,7 @@ public class TerminalApkApiTest {
     	createTerminalApkRequest.setVersion("3.4.7");
 //    	createTerminalApkRequest.setTemplateName("10个text字段 - 副本2.xml");
 //    	createTerminalApkRequest.setTemplateName("param02.xml");
-    	Map<String, String> parameters = new HashMap<String, String>();
+//    	Map<String, String> parameters = new HashMap<String, String>();
 //    	parameters.put("sys.cap.emvParamCheckType", "abc");
 
         FileParameter fileParameter = new FileParameter();
@@ -86,7 +86,7 @@ public class TerminalApkApiTest {
         base64FileParameters.add(fileParameter);
         createTerminalApkRequest.setBase64FileParameters(base64FileParameters);
 
-    	createTerminalApkRequest.setParameters(parameters);
+    	//createTerminalApkRequest.setParameters(parameters);
     	Result<TerminalApkDTO> result = terminalApkApi.createTerminalApk(createTerminalApkRequest);
     	Assert.assertTrue(result.getBusinessCode() == 0);
     	logger.info(result.toString());

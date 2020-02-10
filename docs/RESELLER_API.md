@@ -498,10 +498,6 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1830|Cannot update reseller's parent|Cannot change the reseller's parent when updating a reseller|
 
 
-
-
-
-
 ### Activate a reseller
 
 **API**
@@ -772,3 +768,76 @@ Result<String> result = resellerApi.replaceResellerEmail(51739L, "zhangsan@pax.c
 |1105|Email is invalid|Email address is not valid|
 |1933|The user email not update.|The inputted email address is same as the original email|
 
+### Search reseller RKI key template list
+
+**API**
+
+```
+public Result<ResellerRkiKeyPageDTO> searchResellerRkiKeyList(Long resellerId, int pageNo, int pageSize, String rkiKey)
+```
+
+<br>
+
+**Input parameter(s) description**
+
+
+| Name| Type | Nullable|Description |
+|:--- | :---|:---|:---|
+|resellerId|Long|false|The reseller's id.|
+|pageNo|int|false|page number, value must >=1|
+|pageSize|int|false|the record number per page, range is 1 to 1000|
+|rkiKey|String|true|search filter by RKI key|
+<br/>
+
+**Sample codes**
+
+
+```
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<ResellerRkiKeyPageDTO> resultRkiKey = resellerApi.searchResellerRkiKeyList(51739L, 1, 10, null);
+```    
+
+
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageSize:must be greater than or equal to 1"]
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"pageInfo": {
+		"pageNo": 1,
+		"limit": 10,
+		"totalCount": 2,
+		"hasNext": false,
+		"dataSet": [{
+			"keyId": "TMK_TEST"
+		}, {
+			"keyId": "Test_new_versionT2"
+		}]
+	}
+}
+```
+
+<br>
+
+The type in dataSet of is ResellerRkiKeyPageDTO. And the structure shows like below.
+
+|Property Name|Type|Description|
+|:---|:---|:---|
+|keyId|String|the identifier of RKI key template|
+<br>
+
+**Possible client validation errors**
+
+> <font color="red">pageSize:must be greater than or equal to 1</font><br>
+> <font color="red">pageNo:must be greater than or equal to 1</font><br>
+> <font color="red">pageSize:must be less than or equal to 1000</font>
