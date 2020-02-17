@@ -256,6 +256,7 @@ The type of data is PushRkiTaskDTO, and the structure shows below.
 |actionStatus|String|the push status|
 |errorCode|String|the error code of push task|
 |activatedDate|Date|the push Rki activated date|
+|remarks|String|the push Rki result remarks|
 
 
 **Possible client validation errors**

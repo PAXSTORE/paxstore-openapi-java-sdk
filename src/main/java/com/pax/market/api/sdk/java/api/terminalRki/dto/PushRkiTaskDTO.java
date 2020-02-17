@@ -18,6 +18,7 @@ public class PushRkiTaskDTO implements Serializable {
     private String status;
     private int actionStatus;
     private int errorCode;
+    private String remarks;
 
     public Long getId() {
         return id;
@@ -81,5 +82,13 @@ public class PushRkiTaskDTO implements Serializable {
 
     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }
