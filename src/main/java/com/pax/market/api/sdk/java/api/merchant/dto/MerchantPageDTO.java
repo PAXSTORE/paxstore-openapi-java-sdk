@@ -30,7 +30,7 @@ public class MerchantPageDTO implements Serializable{
 	protected String name;        // name
 	protected SimpleResellerDTO reseller;        // reseller_id 父类
 	protected String country;        // country
-//	protected String province;        // province
+	protected String province;        // province
 //	protected String city;        // city
 	protected String postcode;        // postal_code
 	protected String address;        // address
@@ -66,12 +66,12 @@ public class MerchantPageDTO implements Serializable{
 	public void setCountry(String country) {
 		this.country = country;
 	}
-//	public String getProvince() {
-//		return province;
-//	}
-//	public void setProvince(String province) {
-//		this.province = province;
-//	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
 //	public String getCity() {
 //		return city;
 //	}

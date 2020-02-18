@@ -63,6 +63,7 @@ public class MerchantApiTest {
     	request.setResellerName("Global");
     	request.setContact("sam");
     	request.setCountry("CN");
+		request.setProvince("CN_JL");
     	request.setPhone("444888");
     	request.setAddress("Jiangsu suzhou city Xinghongjie 328#");
     	request.setDescription("Merchant KFC Nanjing");
@@ -83,6 +84,7 @@ public class MerchantApiTest {
     	updateRequest.setName("merchant to delete2");
     	updateRequest.setContact("Jack");
     	updateRequest.setCountry("CN");
+    	updateRequest.setProvince("CN_JL");
     	updateRequest.setPhone("444866");
     	updateRequest.setPostcode("5652");
 //    	String[] categoryNames = {"Fast Food"};
