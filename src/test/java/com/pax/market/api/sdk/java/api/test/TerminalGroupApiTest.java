@@ -148,7 +148,7 @@ public class TerminalGroupApiTest {
         terminalIds.add(908655L);
         terminalIds.add(908656L);
         addInRequest.setTerminalIds(terminalIds);
-        Result<String> result = terminalGroupApi.addGroupInTerminal(groupId, addInRequest);
+        Result<String> result = terminalGroupApi.addTerminalInGroup(groupId, addInRequest);
         logger.debug("Result of add in Terminal Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
@@ -162,7 +162,7 @@ public class TerminalGroupApiTest {
         terminalIds.add(461720L);
         terminalIds.add(461706L);
         removeRequest.setTerminalIds(terminalIds);
-        Result<String> result = terminalGroupApi.removeGroupOutTerminal(groupId, removeRequest);
+        Result<String> result = terminalGroupApi.removeTerminalOutGroup(groupId, removeRequest);
         logger.debug("Result of remove Terminal Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }

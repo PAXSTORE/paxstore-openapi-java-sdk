@@ -244,7 +244,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         return result;
     }
 
-    public Result<String> addGroupInTerminal(Long groupId, TerminalGroupRequest addInGroupRequest){
+    public Result<String> addTerminalInGroup(Long groupId, TerminalGroupRequest addInGroupRequest){
         validateGroupId(groupId);
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -255,7 +255,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         return emptyResult(client,request);
     }
 
-    public Result<String> removeGroupOutTerminal(Long groupId, TerminalGroupRequest removeGroupRequest){
+    public Result<String> removeTerminalOutGroup(Long groupId, TerminalGroupRequest removeGroupRequest){
         validateGroupId(groupId);
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
