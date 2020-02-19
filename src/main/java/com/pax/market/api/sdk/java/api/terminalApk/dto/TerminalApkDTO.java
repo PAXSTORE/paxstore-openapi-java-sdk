@@ -23,6 +23,7 @@ public class TerminalApkDTO implements Serializable {
     private int actionStatus;
     private Long actionTime;
     private int errorCode;
+    private TerminalApkParamDTO terminalApkParam;
 
     public Long getId() {
         return id;
@@ -112,6 +113,14 @@ public class TerminalApkDTO implements Serializable {
         this.errorCode = errorCode;
     }
 
+    public TerminalApkParamDTO getTerminalApkParam() {
+        return terminalApkParam;
+    }
+
+    public void setTerminalApkParam(TerminalApkParamDTO terminalApkParam) {
+        this.terminalApkParam = terminalApkParam;
+    }
+
     @Override
     public String toString() {
         return "TerminalApkDTO{" +
@@ -126,6 +135,7 @@ public class TerminalApkDTO implements Serializable {
                 ", actionStatus=" + actionStatus +
                 ", actionTime=" + actionTime +
                 ", errorCode=" + errorCode +
+                ", terminalApkParam=" + terminalApkParam +
                 '}';
     }
 }

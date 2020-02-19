@@ -144,7 +144,8 @@ The structure of class ApkFileDTO
 **API**
 
 ```
-public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId)
+public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId);
+public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId, List<String> pidList);
 ```
 
 **Input parameter(s) description**
@@ -152,6 +153,7 @@ public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId)
 | Parameter Name | Type | Nullable | Description             |
 | :------------- | :--- | :------- | :---------------------- |
 | apkParameterId | Long | false    | the id of apk parameter |
+|pidList|List|true|the pid of the configured parameters to return|
 
 **Sample codes**
 
@@ -159,6 +161,13 @@ public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId)
 TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Long apkParameterId = 1149L;
 Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(apkParameterId);
+
+List<String> pidList = new ArrayList<>();
+pidList.add("sys.cap.test01");
+pidList.add("sys.cap.test02");
+pidList.add("sys.cap.test03");
+Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(apkParameterId, pidList);
+
 ```
 
 **Client side validation failed sample result(JSON formatted)**
