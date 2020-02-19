@@ -93,6 +93,10 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     }
 
     public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId){
+        return getTerminalApkParameter(apkParameterId, null);
+    }
+
+    public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId, List<String> pidList){
         List<String> validationErrs= validateId(apkParameterId, "parameter.terminalApkParameterId.invalid");
         if(validationErrs.size()>0) {
             return new Result<ApkParameterDTO>(validationErrs);
@@ -100,14 +104,13 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_APK_PARAMETER_URL.replace("{apkParameterId}", apkParameterId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        if(pidList != null) {
+            request.addRequestParam("pidList", StringUtils.join(pidList, ","));
+        }
         ApkParameterResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), ApkParameterResponse.class);
         Result<ApkParameterDTO> result = new Result<ApkParameterDTO>(resp);
         return result;
     }
-
-
-
-
 
     public Result<String> createApkParameter(CreateApkParameterRequest createApkParameterRequest){
         List<String> validationErrs = validateCreate( createApkParameterRequest,"parameter.apkParameterCreateRequest.null");

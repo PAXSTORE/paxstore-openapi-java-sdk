@@ -29,6 +29,7 @@ import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.CreateTerminalGroupA
 import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.SimpleTerminalGroupApkDTO;
 import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.TerminalGroupApkResponse;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,10 +59,17 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
     private static final String DELETE_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks/{groupApkId}";
 
     public Result<SimpleTerminalGroupApkDTO> getTerminalGroupApk(Long groupApkId){
+        return getTerminalGroupApk(groupApkId, null);
+    }
+
+    public Result<SimpleTerminalGroupApkDTO> getTerminalGroupApk(Long groupApkId, List<String> pidList){
         validateTerminalGroupApkId(groupApkId);
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_GROUP_APK_URL.replace("{groupApkId}", groupApkId.toString() + ""));
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        if(pidList != null) {
+            request.addRequestParam("pidList", StringUtils.join(pidList, ","));
+        }
         TerminalGroupApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupApkResponse.class);
         Result<SimpleTerminalGroupApkDTO> result = new Result<SimpleTerminalGroupApkDTO>(resp);
         return result;
