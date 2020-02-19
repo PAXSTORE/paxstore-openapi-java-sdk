@@ -13,20 +13,15 @@ package com.pax.market.api.sdk.java.api.terminalGroupApk;
 
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
-import com.pax.market.api.sdk.java.api.app.AppApi;
-import com.pax.market.api.sdk.java.api.app.dto.AppPageDTO;
-import com.pax.market.api.sdk.java.api.app.dto.AppPageResponse;
 import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
-import com.pax.market.api.sdk.java.api.terminalApkParameter.TerminalApkParameterApi;
-import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterDTO;
-import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterPageResponse;
 import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.CreateTerminalGroupApkRequest;
 import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.SimpleTerminalGroupApkDTO;
+import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.TerminalGroupApkPageResponse;
 import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.TerminalGroupApkResponse;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
@@ -54,6 +49,7 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
     }
 
     private static final String GET_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks/{groupApkId}";
+    private static final String SEARCH_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks";
     private static final String CREATE_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks";
     private static final String SUSPEND_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks/{groupApkId}/suspend";
     private static final String DELETE_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks/{groupApkId}";
@@ -71,6 +67,39 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
             request.addRequestParam("pidList", StringUtils.join(pidList, ","));
         }
         TerminalGroupApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupApkResponse.class);
+        Result<SimpleTerminalGroupApkDTO> result = new Result<SimpleTerminalGroupApkDTO>(resp);
+        return result;
+    }
+
+    public Result<SimpleTerminalGroupApkDTO> searchTerminalGroupApk(int pageNo, int pageSize, SearchOrderBy orderBy , Long groupId, String pendingOnly, String historyOnly, String keyWords){
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        PageRequestDTO page = new PageRequestDTO();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        if (orderBy != null) {
+            page.setOrderBy(orderBy.val());
+        }
+        List<String> validationErrs = validate(page);
+        if (validationErrs.size() > 0) {
+            return new Result<SimpleTerminalGroupApkDTO>(validationErrs);
+        }
+
+        SdkRequest request = getPageRequest(SEARCH_TERMINAL_GROUP_APK_URL, page);
+        request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        if (groupId !=null){
+            request.addRequestParam("groupId", groupId.toString());
+        }
+        if(pendingOnly!=null) {
+            request.addRequestParam("pendingOnly", pendingOnly);
+        }
+        if(historyOnly!=null) {
+            request.addRequestParam("historyOnly", historyOnly);
+        }
+        if(keyWords!=null) {
+            request.addRequestParam("keyWords", keyWords);
+        }
+
+        TerminalGroupApkPageResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupApkPageResponse.class);
         Result<SimpleTerminalGroupApkDTO> result = new Result<SimpleTerminalGroupApkDTO>(resp);
         return result;
     }

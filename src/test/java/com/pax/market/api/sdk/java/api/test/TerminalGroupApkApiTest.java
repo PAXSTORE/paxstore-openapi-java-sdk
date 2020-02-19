@@ -70,6 +70,14 @@ public class TerminalGroupApkApiTest {
     }
 
     @Test
+    public void  testSearchTerminalGroupApk() {
+        Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.searchTerminalGroupApk(1,5, TerminalGroupApkApi.SearchOrderBy.CreatedDate_asc,16526L,"true",null,null);
+        logger.debug("Result of  terminal Group Apk list: {}", result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
+
+
+    @Test
     public void testGetTerminalGroupApk() {
         Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.getTerminalGroupApk(GroupApkId);
         logger.debug("Result of  terminal Group Apk: {}", result.toString());
