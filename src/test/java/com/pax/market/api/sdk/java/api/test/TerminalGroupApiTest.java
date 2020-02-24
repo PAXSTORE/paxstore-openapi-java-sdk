@@ -148,7 +148,7 @@ public class TerminalGroupApiTest {
         terminalIds.add(908655L);
         terminalIds.add(908656L);
         addInRequest.setTerminalIds(terminalIds);
-        Result<String> result = terminalGroupApi.addTerminalInGroup(groupId, addInRequest);
+        Result<String> result = terminalGroupApi.addTerminalToGroup(groupId, addInRequest);
         logger.debug("Result of add in Terminal Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }

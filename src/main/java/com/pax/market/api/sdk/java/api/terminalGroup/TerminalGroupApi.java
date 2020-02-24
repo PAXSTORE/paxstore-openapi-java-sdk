@@ -223,9 +223,13 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
             page.setOrderBy(orderBy.val());
         }
         List<String> validationErrs = validate(page);
+        if(groupId == null) {
+            validationErrs.add(getMessage("parameter.groupId.null"));
+        }
         if (validationErrs.size() > 0) {
             return new Result<TerminalDTO>(validationErrs);
         }
+
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_IN_GROUP_URL.replace("{groupId}", groupId.toString()), page);
 
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
@@ -244,7 +248,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         return result;
     }
 
-    public Result<String> addTerminalInGroup(Long groupId, TerminalGroupRequest addInGroupRequest){
+    public Result<String> addTerminalToGroup(Long groupId, TerminalGroupRequest addInGroupRequest){
         validateGroupId(groupId);
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());

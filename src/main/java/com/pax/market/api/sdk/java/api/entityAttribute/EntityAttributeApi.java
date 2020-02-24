@@ -127,7 +127,13 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
     }
 
     public Result<String>  updateEntityAttributeLabel(Long attributeId, EntityAttributeLabelUpdateRequest updateLabelRequest) {
-        validateAttributeId(attributeId);
+        List<String> validationErr = validateAttributeId(attributeId);
+        if(updateLabelRequest == null) {
+            validationErr.add(getMessage("parameter.updateLabelRequest.null"));
+        }
+        if(!validationErr.isEmpty()){
+            return new Result<>(validationErr);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(UPDATE_ENTITY_ATTRIBUTES_LABEL_URL.replace("{attributeId}", attributeId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.PUT);
@@ -139,7 +145,10 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
     }
 
     public Result<String> deleteEntityAttribute(Long attributeId){
-        validateAttributeId(attributeId);
+        List<String> validationErrs = validateAttributeId(attributeId);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(DELETE_ENTITY_ATTRIBUTES_URL.replace("{attributeId}", attributeId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
@@ -160,13 +169,10 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
         }
     }
 
-    private Result<String>  validateAttributeId(Long attributeId){
+    private List<String>  validateAttributeId(Long attributeId){
         logger.debug("attributeId="+attributeId);
         List<String> validationErrs = validateId(attributeId,"parameter.attributeId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
-        }
-        return null;
+        return validationErrs;
     }
 
 }
