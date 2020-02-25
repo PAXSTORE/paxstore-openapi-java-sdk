@@ -235,7 +235,6 @@ Result<PushRkiTaskDTO> result = terminalRkiApi.getPushRkiTask(17850L);
 	"businessCode": 0,
 	"data": {
 		"id": 17850,
-        "fmName": "PayDroid_5.1.1_Aquarius_V09.0.00_20190508",
         "terminalSN": "87879696",
         "status": "A",
         "actionStatus": 2,
