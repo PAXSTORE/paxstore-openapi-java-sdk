@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * @Description
@@ -248,25 +249,36 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         return result;
     }
 
-    public Result<String> addTerminalToGroup(Long groupId, TerminalGroupRequest addInGroupRequest){
+//    public Result<String> addTerminalToGroup(Long groupId, TerminalGroupRequest addInGroupRequest){
+//        validateGroupId(groupId);
+//
+//        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+//        SdkRequest request = createSdkRequest(ADD_TERMINAL_IN_GROUP_URL.replace("{groupId}", groupId.toString()));
+//        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+//        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+//        request.setRequestBody(new Gson().toJson(addInGroupRequest, TerminalGroupRequest.class));
+//        return emptyResult(client,request);
+//    }
+
+    public Result<String> addTerminalToGroup(Long groupId, Set<Long> terminalIds){
         validateGroupId(groupId);
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(ADD_TERMINAL_IN_GROUP_URL.replace("{groupId}", groupId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(addInGroupRequest, TerminalGroupRequest.class));
+        request.setRequestBody(new Gson().toJson(terminalIds, Set.class));
         return emptyResult(client,request);
     }
 
-    public Result<String> removeTerminalOutGroup(Long groupId, TerminalGroupRequest removeGroupRequest){
+    public Result<String> removeTerminalOutGroup(Long groupId, Set<Long> terminalIds){
         validateGroupId(groupId);
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(REMOVE_TERMINAL_OUT_GROUP_URL.replace("{groupId}", groupId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(removeGroupRequest, TerminalGroupRequest.class));
+        request.setRequestBody(new Gson().toJson(terminalIds, TerminalGroupRequest.class));
         return emptyResult(client,request);
     }
 

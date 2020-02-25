@@ -141,14 +141,12 @@ public class TerminalGroupApiTest {
 
     @Test
     public void testAddGroupInTerminal() {
-        Long groupId = 16533L;
-        TerminalGroupRequest addInRequest = new TerminalGroupRequest();
+        Long groupId = 1L;
         Set<Long> terminalIds = new HashSet<>();
         terminalIds.add(908654L);
         terminalIds.add(908655L);
         terminalIds.add(908656L);
-        addInRequest.setTerminalIds(terminalIds);
-        Result<String> result = terminalGroupApi.addTerminalToGroup(groupId, addInRequest);
+        Result<String> result = terminalGroupApi.addTerminalToGroup(groupId, terminalIds);
         logger.debug("Result of add in Terminal Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
@@ -156,13 +154,11 @@ public class TerminalGroupApiTest {
     @Test
     public void testRemoveGroupTerminal() {
         Long groupId = 16532L;
-        TerminalGroupRequest removeRequest = new TerminalGroupRequest();
         Set<Long> terminalIds = new HashSet<>();
         terminalIds.add(255976L);
         terminalIds.add(461720L);
         terminalIds.add(461706L);
-        removeRequest.setTerminalIds(terminalIds);
-        Result<String> result = terminalGroupApi.removeTerminalOutGroup(groupId, removeRequest);
+        Result<String> result = terminalGroupApi.removeTerminalOutGroup(groupId, terminalIds);
         logger.debug("Result of remove Terminal Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
