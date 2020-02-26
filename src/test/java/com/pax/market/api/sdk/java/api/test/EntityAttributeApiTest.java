@@ -55,9 +55,9 @@ public class EntityAttributeApiTest {
     @Test
     public void testCreateEntityAttribute(){
         EntityAttributeCreateRequest createRequest = new EntityAttributeCreateRequest();
-        createRequest.setEntityType("Reseller");
+        createRequest.setEntityType(EntityAttributeApi.EntityAttributeType.entityTypeReseller);
         createRequest.setDefaultLabel("testCreateApi-label");
-        createRequest.setInputType("TEXT");
+        createRequest.setInputType(EntityAttributeApi.EntityInputType.inputTypeText);
         createRequest.setKey("testCreateApi-key");
         createRequest.setMaxLength(5);
         createRequest.setMinLength(1);
@@ -76,7 +76,7 @@ public class EntityAttributeApiTest {
         Long attributeId = 1000000403L;
         EntityAttributeUpdateRequest updateRequest = new EntityAttributeUpdateRequest();
         updateRequest.setDefaultLabel("testCreateApi-label-update");
-        updateRequest.setInputType("TEXT");
+        updateRequest.setInputType(EntityAttributeApi.EntityInputType.inputTypeText);
         updateRequest.setMaxLength(6);
         updateRequest.setMinLength(2);
         updateRequest.setRequired(false);

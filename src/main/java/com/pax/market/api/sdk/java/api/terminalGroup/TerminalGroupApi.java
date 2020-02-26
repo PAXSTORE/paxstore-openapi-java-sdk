@@ -63,7 +63,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalGroupDTO> searchTerminalGroup(int pageNo, int pageSize,TerminalGroupSearchOrderBy orderBy ,
-                                                        String status, String modelIds, String resellerIds, String name, String includePushTasks, String isDynamic){
+                                                        TerminalGroupStatus status, String name,String resellerNames,String modelNames, Boolean isDynamic){
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
@@ -80,22 +80,19 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
 
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
         if (status !=null){
-            request.addRequestParam("status", status);
+            request.addRequestParam("status", status.val());
         }
-        if(modelIds!=null) {
-            request.addRequestParam("modelIds", modelIds);
+        if(modelNames!=null) {
+            request.addRequestParam("modelNames", modelNames);
         }
-        if(resellerIds!=null) {
-            request.addRequestParam("resellerIds", resellerIds);
+        if(resellerNames!=null) {
+            request.addRequestParam("resellerNames", resellerNames);
         }
         if(name!=null) {
             request.addRequestParam("name", name);
         }
-        if(includePushTasks!=null) {
-            request.addRequestParam("includePushTasks", includePushTasks);
-        }
         if(isDynamic!=null) {
-            request.addRequestParam("isDynamic", isDynamic);
+            request.addRequestParam("isDynamic", isDynamic.toString());
         }
         TerminalGroupPageResponse terminalGroupPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupPageResponse.class);
         Result<TerminalGroupDTO> result = new Result<TerminalGroupDTO>(terminalGroupPageResponse);
@@ -130,8 +127,8 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         return result;
     }
 
-    public  Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,String status,
-                                             String modelId, String resellerId, String merchantId, String serialNo, String excludeGroupId){
+    public  Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,TerminalStatus status,
+                                             String modelName, String resellerName, String merchantName, String serialNo, String excludeGroupId){
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
@@ -148,16 +145,16 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
 
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
         if (status !=null){
-            request.addRequestParam("status", status);
+            request.addRequestParam("status", status.val());
         }
-        if(modelId!=null) {
-            request.addRequestParam("modelId", modelId);
+        if(modelName!=null) {
+            request.addRequestParam("modelName", modelName);
         }
-        if(resellerId!=null) {
-            request.addRequestParam("resellerId", resellerId);
+        if(resellerName!=null) {
+            request.addRequestParam("resellerName", resellerName);
         }
-        if(merchantId!=null) {
-            request.addRequestParam("merchantId", merchantId);
+        if(merchantName!=null) {
+            request.addRequestParam("merchantName", merchantName);
         }
         if(serialNo!=null) {
             request.addRequestParam("serialNo", serialNo);
@@ -214,7 +211,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
 
 
     public  Result<TerminalDTO> searchTerminalsInGroup(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,
-                                                       Long groupId, String serialNo, String merchantIds, String merchantId){
+                                                       Long groupId, String serialNo, String merchantNames){
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
@@ -242,11 +239,8 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         if (serialNo !=null){
             request.addRequestParam("serialNo", serialNo);
         }
-        if(merchantIds!=null) {
-            request.addRequestParam("merchantIds", merchantIds);
-        }
-        if(merchantId!=null) {
-            request.addRequestParam("merchantId", merchantId);
+        if(merchantNames!=null) {
+            request.addRequestParam("merchantNames", merchantNames);
         }
 
         TerminalPageResponse terminalPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalPageResponse.class);
@@ -314,14 +308,38 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         CreatedDate_asc("createdDate ASC");
 
         private String val;
-
         private TerminalGroupSearchOrderBy(String orderBy) {
             this.val = orderBy;
         }
-
         public String val() {
             return this.val;
         }
+    }
 
+    public enum TerminalGroupStatus {
+        PENDING("P"),
+        ACTIVE("A"),
+        SUSPEND("S");
+        private String val;
+        private TerminalGroupStatus(String status) {
+            this.val = status;
+        }
+        public String val() {
+            return this.val;
+        }
+    }
+
+    public enum TerminalStatus {
+        PENDING("P"),
+        ACTIVE("A"),
+        SUSPEND("S"),
+        DELETED("D");
+        private String val;
+        private TerminalStatus(String status) {
+            this.val = status;
+        }
+        public String val() {
+            return this.val;
+        }
     }
 }

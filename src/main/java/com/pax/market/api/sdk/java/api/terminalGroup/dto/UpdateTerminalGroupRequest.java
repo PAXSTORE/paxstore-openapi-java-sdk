@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Description
@@ -29,7 +30,7 @@ public class UpdateTerminalGroupRequest implements Serializable {
     private static final long serialVersionUID = 3649618122658375454L;
     private String name;
     private String description;
-    private Long modelId;
-    private Long resellerId;
-    private String merchantIds;
+    private String modelName;
+    private String resellerName;
+    private List<String> merchantNameList;
 }

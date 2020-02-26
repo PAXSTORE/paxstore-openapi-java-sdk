@@ -71,7 +71,7 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
         return result;
     }
 
-    public Result<SimpleTerminalGroupApkDTO> searchTerminalGroupApk(int pageNo, int pageSize, SearchOrderBy orderBy , Long groupId, String pendingOnly, String historyOnly, String keyWords){
+    public Result<SimpleTerminalGroupApkDTO> searchTerminalGroupApk(int pageNo, int pageSize, SearchOrderBy orderBy , Long groupId, Boolean pendingOnly, Boolean historyOnly, String keyWords){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -90,10 +90,10 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
             request.addRequestParam("groupId", groupId.toString());
         }
         if(pendingOnly!=null) {
-            request.addRequestParam("pendingOnly", pendingOnly);
+            request.addRequestParam("pendingOnly", pendingOnly.toString());
         }
         if(historyOnly!=null) {
-            request.addRequestParam("historyOnly", historyOnly);
+            request.addRequestParam("historyOnly", historyOnly.toString());
         }
         if(keyWords!=null) {
             request.addRequestParam("keyWords", keyWords);

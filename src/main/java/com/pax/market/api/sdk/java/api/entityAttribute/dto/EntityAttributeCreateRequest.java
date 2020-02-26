@@ -11,6 +11,7 @@
  */
 package com.pax.market.api.sdk.java.api.entityAttribute.dto;
 
+import com.pax.market.api.sdk.java.api.entityAttribute.EntityAttributeApi;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,8 +29,8 @@ import java.io.Serializable;
 public class EntityAttributeCreateRequest implements Serializable {
     private static final long serialVersionUID = -2639872173785717404L;
 
-    private String entityType;
-    private String inputType;
+    private EntityAttributeApi.EntityAttributeType entityType;
+    private EntityAttributeApi.EntityInputType inputType;
     private Integer minLength;
     private Integer maxLength;
     private boolean required;
