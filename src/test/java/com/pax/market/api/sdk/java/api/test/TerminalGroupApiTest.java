@@ -134,7 +134,7 @@ public class TerminalGroupApiTest {
     @Test
     public void testSearchTerminalsInGroup(){
         Long groupId = 16539L;
-        Result<TerminalDTO> result = terminalGroupApi.searchTerminalsInGroup(1,5, TerminalApi.TerminalSearchOrderBy.Name,groupId,null,"72638","");
+        Result<TerminalDTO> result = terminalGroupApi.searchTerminalsInGroup(1,5, TerminalApi.TerminalSearchOrderBy.SerialNo,groupId,null,null,"");
         logger.debug("Result of search Terminals in Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }

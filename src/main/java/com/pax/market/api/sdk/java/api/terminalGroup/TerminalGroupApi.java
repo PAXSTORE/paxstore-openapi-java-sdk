@@ -221,7 +221,12 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
         if (orderBy != null) {
-            page.setOrderBy(orderBy.val());
+            if(orderBy == TerminalApi.TerminalSearchOrderBy.SerialNo) {
+                page.setOrderBy("a.serial_no ASC, a.id ASC");
+            }else{
+                page.setOrderBy(orderBy.val());
+            }
+
         }
         List<String> validationErrs = validate(page);
         if(groupId == null) {
