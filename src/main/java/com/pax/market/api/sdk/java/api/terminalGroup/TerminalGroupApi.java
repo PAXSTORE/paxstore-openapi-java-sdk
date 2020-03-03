@@ -102,7 +102,10 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalGroupDTO> getTerminalGroup(Long groupId){
-        validateTerminalGroupId(groupId);
+        List<String> validationErrs = validateGroupId(groupId);
+        if(!validationErrs.isEmpty()) {
+            return new Result<TerminalGroupDTO>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_GROUP_URL.replace("{groupId}", groupId.toString()+""));
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
@@ -186,23 +189,32 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> activeGroup(Long groupId){
-        validateGroupId(groupId);
+        List<String> validationErrs = validateGroupId(groupId);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(ACTIVE_TERMINAL_GROUP_URL.replace("{groupId}", groupId.toString()));
-        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+        request.setRequestMethod(SdkRequest.RequestMethod.PUT);
         return emptyResult(client,request);
     }
 
     public Result<String> disableGroup(Long groupId){
-        validateGroupId(groupId);
+        List<String> validationErrs = validateGroupId(groupId);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(DISABLE_TERMINAL_GROUP_URL.replace("{groupId}", groupId.toString()));
-        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+        request.setRequestMethod(SdkRequest.RequestMethod.PUT);
         return emptyResult(client,request);
     }
 
     public Result<String> deleteGroup(Long groupId){
-        validateGroupId(groupId);
+        List<String> validationErrs = validateGroupId(groupId);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(DELETE_TERMINAL_GROUP_URL.replace("{groupId}", groupId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
@@ -260,8 +272,10 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
 //    }
 
     public Result<String> addTerminalToGroup(Long groupId, Set<Long> terminalIds){
-        validateGroupId(groupId);
-
+        List<String> validationErrs = validateGroupId(groupId);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(ADD_TERMINAL_IN_GROUP_URL.replace("{groupId}", groupId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
@@ -271,7 +285,10 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> removeTerminalOutGroup(Long groupId, Set<Long> terminalIds){
-        validateGroupId(groupId);
+        List<String> validationErrs = validateGroupId(groupId);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(REMOVE_TERMINAL_OUT_GROUP_URL.replace("{groupId}", groupId.toString()));
@@ -281,20 +298,11 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         return emptyResult(client,request);
     }
 
-    private Result<TerminalGroupDTO>  validateTerminalGroupId(Long groupId){
-        logger.debug("groupId="+groupId);
-        List<String> validationErrs = validateId(groupId, "parameter.terminalGroupId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<TerminalGroupDTO>(validationErrs);
-        }else return null;
-    }
 
-    private Result<String>  validateGroupId(Long groupId){
+    private List<String>  validateGroupId(Long groupId){
         logger.debug("groupId="+groupId);
         List<String> validationErrs = validateId(groupId, "parameter.terminalGroupId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
-        }else return null;
+        return validationErrs;
     }
 
     private Result<String>  emptyResult(ThirdPartySysApiClient client,SdkRequest request) {
