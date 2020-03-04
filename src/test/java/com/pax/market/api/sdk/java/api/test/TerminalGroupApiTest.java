@@ -45,7 +45,7 @@ public class TerminalGroupApiTest {
 
     @Test
     public void testSearchTerminalGroup(){
-        Result<TerminalGroupDTO> result = terminalGroupApi.searchTerminalGroup(1,5, TerminalGroupApi.TerminalGroupSearchOrderBy.CreatedDate_asc, TerminalGroupApi.TerminalGroupStatus.ACTIVE,null,"Shawn-test-8992","A920,wqe&#44qwe",true);
+        Result<TerminalGroupDTO> result = terminalGroupApi.searchTerminalGroup(1,5, TerminalGroupApi.TerminalGroupSearchOrderBy.CreatedDate_asc, TerminalGroupApi.TerminalGroupStatus.Active,null,"Shawn-test-8992","A920,wqe&#44qwe",true);
         logger.debug("Result of search terminal Group list: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
@@ -82,12 +82,11 @@ public class TerminalGroupApiTest {
     public void testSearchTerminal(){
 
         String modelName = "A920";
-        String resellerName="GLOBAL";
-        String merchantName = "12343543";
-        String serialNo = null;
+        String resellerName="Shawn-test-8992";
+        String serialNo = "123124";
         String excludeGroupId = "16541";
 
-        Result<TerminalDTO> result = terminalGroupApi.searchTerminal(1,20, TerminalApi.TerminalSearchOrderBy.Name, TerminalGroupApi.TerminalStatus.ACTIVE,modelName,resellerName,null,null,excludeGroupId);
+        Result<TerminalDTO> result = terminalGroupApi.searchTerminal(1,5, TerminalApi.TerminalSearchOrderBy.Name, TerminalGroupApi.TerminalStatus.Active,modelName,resellerName,null,excludeGroupId);
         logger.debug("Result of search Terminal : {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }

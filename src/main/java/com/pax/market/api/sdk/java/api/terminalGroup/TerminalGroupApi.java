@@ -131,7 +131,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     }
 
     public  Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,TerminalStatus status,
-                                             String modelName, String resellerName, String merchantName, String serialNo, String excludeGroupId){
+                                             String modelName, String resellerName, String serialNo, String excludeGroupId){
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
@@ -155,9 +155,6 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         }
         if(resellerName!=null) {
             request.addRequestParam("resellerName", resellerName);
-        }
-        if(merchantName!=null) {
-            request.addRequestParam("merchantName", merchantName);
         }
         if(serialNo!=null) {
             request.addRequestParam("serialNo", serialNo);
@@ -325,9 +322,9 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     }
 
     public enum TerminalGroupStatus {
-        PENDING("P"),
-        ACTIVE("A"),
-        SUSPEND("S");
+        Pending("P"),
+        Active("A"),
+        Suspend("S");
         private String val;
         private TerminalGroupStatus(String status) {
             this.val = status;
@@ -338,10 +335,10 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     }
 
     public enum TerminalStatus {
-        PENDING("P"),
-        ACTIVE("A"),
-        SUSPEND("S"),
-        DELETED("D");
+        Pending("P"),
+        Active("A"),
+        Suspend("S"),
+        Delete("D");
         private String val;
         private TerminalStatus(String status) {
             this.val = status;
