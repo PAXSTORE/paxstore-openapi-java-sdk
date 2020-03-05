@@ -254,7 +254,7 @@ public Result<SimpleTerminalGroupApkDTO> createAndActiveGroupApk(CreateTerminalG
 |:---|:---|:---|:---|
 |createRequest|CreateTerminalGroupApkRequest|false||
 
-Structure of class ParameterVariable.
+Structure of class CreateTerminalGroupApkRequest.
 
 | Property Name        | Type                | Nullable | Description                                                  |
 | :------------------- | :------------------ | :------- | :----------------------------------------------------------- |
