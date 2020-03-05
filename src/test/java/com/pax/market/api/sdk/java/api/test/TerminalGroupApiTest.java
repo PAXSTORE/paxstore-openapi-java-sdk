@@ -86,7 +86,7 @@ public class TerminalGroupApiTest {
         String serialNo = "123124";
         String excludeGroupId = "16541";
 
-        Result<TerminalDTO> result = terminalGroupApi.searchTerminal(1,5, TerminalApi.TerminalSearchOrderBy.Name, TerminalGroupApi.TerminalStatus.Active,modelName,resellerName,null,excludeGroupId);
+        Result<SimpleTerminalDTO> result = terminalGroupApi.searchTerminal(1,5, TerminalApi.TerminalSearchOrderBy.Name, TerminalGroupApi.TerminalStatus.Active,modelName,resellerName,null,excludeGroupId);
         logger.debug("Result of search Terminal : {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
@@ -95,9 +95,9 @@ public class TerminalGroupApiTest {
     public void testUpdateTerminalGroup() {
         //更新终端分组-当不是未激活状态时，只能修改name、desc，传其余值默认不修改，未激活,且分组下没有终端时均可修改
         //更新 name，modelId，resellerId 若没有传则使用原来的默认不变,在后端做了校验3rds可不传，若传值则确保未修改
-        Long groupId = 16528L;
+        Long groupId = 16576L;
         UpdateTerminalGroupRequest updateRequest = new UpdateTerminalGroupRequest();
-      //  updateRequest.setName("3RDAPITestGroup-update-haveTerminal-test-221");
+        updateRequest.setName("3rdsUpdateTerminalGroupName");
         List<String> merchantNamesList = new ArrayList<>();
         merchantNamesList.add("testDelete6");
         merchantNamesList.add("12348");
@@ -106,7 +106,7 @@ public class TerminalGroupApiTest {
         updateRequest.setResellerName("Shawn-test-8992");
         updateRequest.setDescription("test-3rd-api-update-UPDATE");
 
-        Result<TerminalGroupDTO> result = terminalGroupApi.updateTerminalGroup(groupId, updateRequest);
+        Result<TerminalGroupDTO> result = terminalGroupApi.updateTerminalGroup(groupId, null);
         logger.debug("Result of update Terminal Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
@@ -115,7 +115,7 @@ public class TerminalGroupApiTest {
     public void testActiveGroup() {
 
         Long groupId = 16549L;
-        Result<String> result = terminalGroupApi.activeGroup(groupId);
+        Result<String> result = terminalGroupApi.activeGroup(null);
         logger.debug("Result of update Terminal Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
@@ -140,7 +140,7 @@ public class TerminalGroupApiTest {
     @Test
     public void testSearchTerminalsInGroup(){
         Long groupId = 16541L;
-        Result<TerminalDTO> result = terminalGroupApi.searchTerminalsInGroup(1,5, TerminalApi.TerminalSearchOrderBy.SerialNo,groupId,null,"12343543,123445489");
+        Result<SimpleTerminalDTO> result = terminalGroupApi.searchTerminalsInGroup(1,5, TerminalApi.TerminalSearchOrderBy.SerialNo,groupId,null,"12343543,123445489");
         logger.debug("Result of search Terminals in Group: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }

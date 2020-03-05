@@ -130,7 +130,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         return result;
     }
 
-    public  Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,TerminalStatus status,
+    public  Result<SimpleTerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,TerminalStatus status,
                                              String modelName, String resellerName, String serialNo, String excludeGroupId){
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -142,7 +142,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         }
         List<String> validationErrs = validate(page);
         if (validationErrs.size() > 0) {
-            return new Result<TerminalDTO>(validationErrs);
+            return new Result<SimpleTerminalDTO>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_URL, page);
 
@@ -162,8 +162,8 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         if(excludeGroupId!=null) {
             request.addRequestParam("excludeGroupId", excludeGroupId);
         }
-        TerminalPageResponse terminalPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalPageResponse.class);
-        Result<TerminalDTO> result = new Result<TerminalDTO>(terminalPageResponse);
+        SimpleTerminalPageResponse terminalPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), SimpleTerminalPageResponse.class);
+        Result<SimpleTerminalDTO> result = new Result<SimpleTerminalDTO>(terminalPageResponse);
         return result;
     }
 
@@ -219,7 +219,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     }
 
 
-    public  Result<TerminalDTO> searchTerminalsInGroup(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,
+    public  Result<SimpleTerminalDTO> searchTerminalsInGroup(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,
                                                        Long groupId, String serialNo, String merchantNames){
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -239,7 +239,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
             validationErrs.add(getMessage("parameter.groupId.null"));
         }
         if (validationErrs.size() > 0) {
-            return new Result<TerminalDTO>(validationErrs);
+            return new Result<SimpleTerminalDTO>(validationErrs);
         }
 
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_IN_GROUP_URL.replace("{groupId}", groupId.toString()), page);
@@ -252,8 +252,8 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
             request.addRequestParam("merchantNames", merchantNames);
         }
 
-        TerminalPageResponse terminalPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalPageResponse.class);
-        Result<TerminalDTO> result = new Result<TerminalDTO>(terminalPageResponse);
+        SimpleTerminalPageResponse terminalPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), SimpleTerminalPageResponse.class);
+        Result<SimpleTerminalDTO> result = new Result<SimpleTerminalDTO>(terminalPageResponse);
         return result;
     }
 
