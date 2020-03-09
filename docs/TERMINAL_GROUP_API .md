@@ -373,7 +373,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.
 | pageNo         | int                               | false    | page number, value must >=1                                  |
 | pageSize       | int                               | false    | the record number per page, range is 1 to 1000               |
 | orderBy        | TerminalApi.TerminalSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalApi.TerminalSearchOrderBy.Name and TerminalApi.TerminalSearchOrderBy.Tid and TerminalApi.TerminalSearchOrderBy.SerialNo. |
-| status         | TerminalStatus                    | true     | Only active or pending is allowed when creating, and other default values are pending. The value of this parameter can be one of  TerminalApi.TerminalStatus.Active and TerminalApi.TerminalStatus.Inactive and TerminalApi.TerminalStatus.Suspend |
+| status         | TerminalStatus                    | true     | Only active or pending or suspend is allowed when creating, and other default values are pending. The value of this parameter can be one of  TerminalApi.TerminalStatus.Active and TerminalApi.TerminalStatus.Inactive and TerminalApi.TerminalStatus.Suspend |
 | modelName      | String                            | true     | the model name                                               |
 | resellerName   | String                            | true     | the reseller name                                            |
 | serialNo       | String                            | true     | the serial number of terminal                                |
