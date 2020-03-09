@@ -20,10 +20,9 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi;
-import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
-import com.pax.market.api.sdk.java.api.terminal.dto.TerminalPageResponse;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.*;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -130,8 +129,8 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         return result;
     }
 
-    public  Result<SimpleTerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,TerminalStatus status,
-                                             String modelName, String resellerName, String serialNo, String excludeGroupId){
+    public  Result<SimpleTerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy, TerminalStatus status,
+                                                     String modelName, String resellerName, String serialNo, String excludeGroupId){
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
@@ -257,16 +256,6 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         return result;
     }
 
-//    public Result<String> addTerminalToGroup(Long groupId, TerminalGroupRequest addInGroupRequest){
-//        validateGroupId(groupId);
-//
-//        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-//        SdkRequest request = createSdkRequest(ADD_TERMINAL_IN_GROUP_URL.replace("{groupId}", groupId.toString()));
-//        request.setRequestMethod(SdkRequest.RequestMethod.POST);
-//        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-//        request.setRequestBody(new Gson().toJson(addInGroupRequest, TerminalGroupRequest.class));
-//        return emptyResult(client,request);
-//    }
 
     public Result<String> addTerminalToGroup(Long groupId, Set<Long> terminalIds){
         List<String> validationErrs = validateGroupId(groupId);
@@ -334,17 +323,4 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         }
     }
 
-    public enum TerminalStatus {
-        Pending("P"),
-        Active("A"),
-        Suspend("S"),
-        Delete("D");
-        private String val;
-        private TerminalStatus(String status) {
-            this.val = status;
-        }
-        public String val() {
-            return this.val;
-        }
-    }
 }
