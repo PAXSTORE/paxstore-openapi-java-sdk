@@ -86,7 +86,7 @@ public class TerminalGroupApiTest {
         String serialNo = "123124";
         String excludeGroupId = "16541";
 
-        Result<SimpleTerminalDTO> result = terminalGroupApi.searchTerminal(1,5, TerminalApi.TerminalSearchOrderBy.Name, TerminalGroupApi.TerminalStatus.Active,modelName,resellerName,null,excludeGroupId);
+        Result<SimpleTerminalDTO> result = terminalGroupApi.searchTerminal(1,5, TerminalApi.TerminalSearchOrderBy.Name, TerminalApi.TerminalStatus.Active, modelName,resellerName,null,excludeGroupId);
         logger.debug("Result of search Terminal : {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
