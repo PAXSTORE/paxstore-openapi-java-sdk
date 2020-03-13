@@ -237,14 +237,14 @@ Structure of class CreateTerminalGroupRequest
 
 | Property Name              | Type         | Nullable | Description                                                  |
 | :------------------------- | :----------- | :------- | :----------------------------------------------------------- |
-| name                       | String       | false    | the tid of terminal                                          |
-| modelName                  | String       | false    | the serial number of terminal                                |
-| resellerName               | String       | false    | List of parametervariables,the structure like below          |
+| name                       | String       | false    | the name of group                                          |
+| modelName                  | String       | false    | the model name, only the same model termina can be add to this group                                |
+| resellerName               | String       | false    | reseller name, only the terminals in this reseller can be add to this group|
 | description                | String       | true     |                                                              |
-| status                     | String       | true     | the status of terminal group,the values are ‘P’,'A','S'. The value of this parameter can be one of TerminalGroupApi.TerminalGroupStatus.Pending.val(),    TerminalGroupApi.TerminalGroupStatus.Active.val(), TerminalGroupApi.TerminalGroupStatus.Suspend.val() |
-| dynamic                    | Boolean      | true     | the default value is false                                   |
-| containSubResellerTerminal | Boolean      | true     | the default value is false                                   |
-| merchantNameList           | List<String> | true     |                                                              |
+| status                     | String       | true     | the status of terminal group,the values can be 'P' and 'A', if the value is null will create group with default status P(Pending)|
+| dynamic                    | Boolean      | true     | Indicate whether the group is dynamic group or general group, the default value is false (general group)                                   |
+| containSubResellerTerminal | Boolean      | true     | Indicate whether to conatin sub reseller's termnal for dynamic group, this property is for dynamic group, if the value is null will use the default value false                                   |
+| merchantNameList           | List<String> | true     | merchant names, only terminals belong to those merchant can be add to group, this property is for dynamic group                                                            |
 
 **Sample codes**
 
@@ -373,11 +373,11 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.
 | pageNo         | int                               | false    | page number, value must >=1                                  |
 | pageSize       | int                               | false    | the record number per page, range is 1 to 1000               |
 | orderBy        | TerminalApi.TerminalSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalApi.TerminalSearchOrderBy.Name and TerminalApi.TerminalSearchOrderBy.Tid and TerminalApi.TerminalSearchOrderBy.SerialNo. |
-| status         | TerminalStatus                    | true     | Only active or pending or suspend is allowed when creating, and other default values are pending. The value of this parameter can be one of  TerminalApi.TerminalStatus.Active and TerminalApi.TerminalStatus.Inactive and TerminalApi.TerminalStatus.Suspend |
+| status         | TerminalStatus                    | true     | Terminal status. The value can be one of  TerminalApi.TerminalStatus.Active and TerminalApi.TerminalStatus.Inactive and TerminalApi.TerminalStatus.Suspend |
 | modelName      | String                            | true     | the model name                                               |
 | resellerName   | String                            | true     | the reseller name                                            |
 | serialNo       | String                            | true     | the serial number of terminal                                |
-| excludeGroupId | String                            | true     | id of the excluded group, dynamic group not support excludeGroupId |
+| excludeGroupId | String                            | true     | group id which the terminals in this group will be excluded from search result. This search parameter does not support dynamic group |
 
 **Sample codes**
 
@@ -423,7 +423,7 @@ Result<TerminalDTO> result = terminalGroupApi.searchTerminal(1,5, TerminalApi.Te
 			"tid": "12312SSASAQSAQWS",
 			"serialNo": "12312SSASAQSAQWS",
 			"status": "A",
-			"merchantName": "23423胜多负少123"
+			"merchantName": "merchant a"
 		}, {
 			"modelName": "A920",
 			"resellerName": "test-8992",
@@ -433,7 +433,7 @@ Result<TerminalDTO> result = terminalGroupApi.searchTerminal(1,5, TerminalApi.Te
 			"tid": "DONP3PIU",
 			"serialNo": "1223131",
 			"status": "A",
-			"merchantName": "shawn-01"
+			"merchantName": "merchant b"
 		}]
 	}
 }
@@ -485,10 +485,10 @@ Structure of class UpdateTerminalGroupRequest
 
 |Property Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|name|String|true|the name of terminal group|
+|name|String|true|the name of terminal group, if the value is null API won't update the origial value of this property|
 |description|String|true|the description of terminal group|
-|modelName|String|true| the name of model                 |
-|resellerName|String|true|the name of reseller|
+|modelName|String|true| the name of model, if the value is null API won't update the origial value of this property|
+|resellerName|String|true|the name of reseller, if the value is null API won't update the origial value of this property|
 |merchantNameList|List<String>|true|the name of merchants|
 
 Note: name, description, modelName, resellerName, and merchantNameList cannot be empty at same time. When it is not inactive, only name and description can be modified.
@@ -771,7 +771,7 @@ public  Result<SimpleTerminalDTO> searchTerminalsInGroup(int pageNo, int pageSiz
 | pageNo         | int                               | false    | page number, value must >=1                                  |
 | pageSize       | int                               | false    | the record number per page, range is 1 to 1000               |
 | orderBy        | TerminalApi.TerminalSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalApi.TerminalSearchOrderBy.Name and TerminalApi.TerminalSearchOrderBy.Tid and TerminalApi.TerminalSearchOrderBy.SerialNo. |
-| groupId        | Long                              | true     | the id of terminal group                                     |
+| groupId        | Long                              | false     | the id of terminal group                                     |
 | serialNo       | String                            | true     | the serial number of terminal                                |
 | merchantNames  | String                            | true     | the name of merchants                                        |
 
