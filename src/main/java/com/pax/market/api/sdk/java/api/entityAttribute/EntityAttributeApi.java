@@ -170,8 +170,8 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
     }
 
     public enum EntityAttributeType {
-        entityTypeMerchant("Merchant"),
-        entityTypeReseller("Reseller");
+        Merchant("Merchant"),
+        Reseller("Reseller");
         private String val;
         private EntityAttributeType(String entityType) {
             this.val = entityType;
@@ -182,8 +182,8 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
     }
 
     public enum EntityInputType {
-        inputTypeText("TEXT"),
-        inputTypeSelector("SELECTOR");
+        Text("TEXT"),
+        Selector("SELECTOR");
         private String val;
         private EntityInputType(String inputType) {
             this.val = inputType;

@@ -244,8 +244,8 @@ Structure of class EntityAttributeCreateRequest.
 
 | Property Name | Type                | Nullable | Description                                                  |
 | :------------ | :------------------ | :------- | :----------------------------------------------------------- |
-| entityType    | EntityAttributeType | false    | The value of this parameter can be one of EntityAttributeApi.EntityAttributeType.entityTypeMerchant and EntityAttributeApi.EntityAttributeType.entityTypeReseller. |
-| inputType     | EntityInputType     | false    | The value of this parameter can be one of EntityAttributeApi.EntityInputType.inputTypeText and EntityAttributeApi.EntityInputType.inputTypeSelector. |
+| entityType    | EntityAttributeType | false    | The value of this parameter can be one of EntityAttributeApi.EntityAttributeType.Merchant and EntityAttributeApi.EntityAttributeType.Reseller. |
+| inputType     | EntityInputType     | false    | The value of this parameter can be one of EntityAttributeApi.EntityInputType.Text and EntityAttributeApi.EntityInputType.Selector. |
 | minLength     | Integer             | true     |                                                              |
 | maxLength     | Integer             | true     |                                                              |
 | required      | boolean             | false    |                                                              |
@@ -258,9 +258,9 @@ Structure of class EntityAttributeCreateRequest.
 
 ```
 EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-EntityAttributeCreateRequest createRequest = new EntityAttributeCreateRequest();       createRequest.setEntityType(EntityAttributeApi.EntityAttributeType.entityTypeReseller);
+EntityAttributeCreateRequest createRequest = new EntityAttributeCreateRequest();       createRequest.setEntityType(EntityAttributeApi.EntityAttributeType.Reseller);
 createRequest.setDefaultLabel("testCreateApi-label-1");
-createRequest.setInputType(EntityAttributeApi.EntityInputType.inputTypeText);
+createRequest.setInputType(EntityAttributeApi.EntityInputType.Text);
 createRequest.setKey("testCreateApi-key-01");
 createRequest.setMaxLength(5);
 createRequest.setMinLength(1);
@@ -374,7 +374,7 @@ Structure of class EntityAttributeUpdateRequest.
 
 | Property Name | Type            | Nullable | Description                                                  |
 | :------------ | :-------------- | :------- | :----------------------------------------------------------- |
-| inputType     | EntityInputType | false    | The value of this parameter can be one of EntityAttributeApi.EntityInputType.inputTypeText and EntityAttributeApi.EntityInputType.inputTypeSelector. |
+| inputType     | EntityInputType | false    | The value of this parameter can be one of EntityAttributeApi.EntityInputType.Text and EntityAttributeApi.EntityInputType.Selector. |
 | minLength     | Integer         | true     |                                                              |
 | maxLength     | Integer         | true     |                                                              |
 | required      | boolean         | false    |                                                              |
@@ -388,7 +388,7 @@ Structure of class EntityAttributeUpdateRequest.
 EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 EntityAttributeUpdateRequest updateRequest = new EntityAttributeUpdateRequest();
 updateRequest.setDefaultLabel("testCreateApi-label-update");
-updateRequest.setInputType(EntityAttributeApi.EntityInputType.inputTypeText);
+updateRequest.setInputType(EntityAttributeApi.EntityInputType.Text);
 updateRequest.setMaxLength(6);
 updateRequest.setMinLength(2);
 updateRequest.setRequired(false);
