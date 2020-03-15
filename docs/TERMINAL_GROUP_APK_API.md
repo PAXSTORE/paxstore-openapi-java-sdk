@@ -197,7 +197,7 @@ The type in dataSet is SimpleTerminalGroupApkDTO. And the structure like below.
 |effectiveTime|String|                                        |
 |expiredTime|String||
 |updatedDate|String||
-|actionStatus|int|the country code|
+|actionStatus|int|action status|
 |status|String|the push status|
 |pendingCount|int||
 |successCount|int||
@@ -278,24 +278,24 @@ Structure of class FileParameter
 
 ```
 TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-     CreateTerminalGroupApkRequest createRequest = new CreateTerminalGroupApkRequest();
-        createRequest.setGroupId(16543L); 
-        createRequest.setPushTemplateName("testCreate3RD-result-api-test-CREATEbY-newest-12334111");
-        createRequest.setPackageName("com.baidu.tieba");
-        createRequest.setTemplateName("123 (3).xml");
-      //  Map<String, String> parameters = new HashMap<String, String>();
-      //  parameters.put("sys_F1_sys_cap_test01", "abc");
-      //  parameters.put("sys_F1_sys_cap_test02", "123");
-      //  parameters.put("sys_F1_sys_cap_password", "123");
-        createRequest.setParameters(null);
-       //  FileParameter fileParameter = new FileParameter();
-       //  fileParameter.setPid("PID.cardBinFile");
-       //  fileParameter.setFileName("cardBinFile.jpeg");
-       // fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
-       // List<FileParameter> base64FileParameters = new ArrayList<>();
-       // base64FileParameters.add(fileParameter);
-        createRequest.setBase64FileParameters(null);
-        Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.createAndActiveGroupApk(createRequest);
+CreateTerminalGroupApkRequest createRequest = new CreateTerminalGroupApkRequest();
+createRequest.setGroupId(16543L); 
+createRequest.setPushTemplateName("testCreate3RD-result-api-test-CREATEbY-newest-12334111");
+createRequest.setPackageName("com.baidu.tieba");
+createRequest.setTemplateName("123 (3).xml");
+//  Map<String, String> parameters = new HashMap<String, String>();
+//  parameters.put("sys_F1_sys_cap_test01", "abc");
+//  parameters.put("sys_F1_sys_cap_test02", "123");
+//  parameters.put("sys_F1_sys_cap_password", "123");
+createRequest.setParameters(null);
+//  FileParameter fileParameter = new FileParameter();
+//  fileParameter.setPid("PID.cardBinFile");
+//  fileParameter.setFileName("cardBinFile.jpeg");
+// fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
+// List<FileParameter> base64FileParameters = new ArrayList<>();
+// base64FileParameters.add(fileParameter);
+createRequest.setBase64FileParameters(null);
+Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.createAndActiveGroupApk(createRequest);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -473,7 +473,7 @@ public Result<String> deleteTerminalGroupApk(Long groupApkId)
 
 ```
 TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.suspendTerminalGroupApk(1743L);
+Result<String> result = terminalGroupApkApi.deleteTerminalGroupApk(1743L);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
