@@ -13,7 +13,6 @@ package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi;
-import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
 import com.pax.market.api.sdk.java.api.terminalGroup.TerminalGroupApi;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.*;
 import org.junit.Assert;

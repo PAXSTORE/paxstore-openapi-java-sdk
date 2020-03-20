@@ -12,6 +12,7 @@
 package com.pax.market.api.sdk.java.api.test;
 
 
+import com.pax.market.api.sdk.java.api.terminal.dto.TerminalRemoteConfigRequest;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import org.junit.Assert;
 import org.junit.Before;
@@ -128,6 +129,17 @@ public class TerminalApiTest {
 		groupRequest.setGroupIds(groupIds);
 	    Result<String> result = terminalApi.batchAddTerminalToGroup(groupRequest);
 		logger.debug("Result of search terminal: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+
+	}
+
+	@Test
+	public void testUpdateTerminalRemoteConfig(){
+		Long terminalId = 909753L;
+		TerminalRemoteConfigRequest terminalRemoteConfigRequest = new TerminalRemoteConfigRequest();
+		terminalRemoteConfigRequest.setAllowRemoteChange(true);
+	    Result<String> result = terminalApi.updateTerminalRemoteConfig(terminalId,terminalRemoteConfigRequest);
+		logger.debug("Result of update Terminal Remote Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 
 	}
