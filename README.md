@@ -252,7 +252,9 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [Push History APIs](docs/PUSH_HISTORY_API.md)
 
-## [Terminal Group APIs](docs/TERMINAL_GROUP_API.md)
+## [Terminal Group APIs](docs/TERMINAL_GROUP_API.md)  
+
+## [Terminal Group Push APIs](docs/TERMINAL_GROUP_APK_API.md)
 
 ## [Entity Attribute APIs](docs/ENTITY_ATTRIBUTE_API.md)
 
