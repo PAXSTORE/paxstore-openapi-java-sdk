@@ -58,15 +58,16 @@ public class MerchantCreateRequest implements Serializable{
     @Length(max=32)
 	private String phone;
 
-	@NotBlank
+
 	@Length(max=64)
 	private String province;
 	
     @Length(max=16)
 	private String postcode;
-	
-//    private String city;
-//    
+
+	@Length(max=255)
+    private String city;
+
     @Length(max=255)
     private String address;
     
@@ -156,6 +157,13 @@ public class MerchantCreateRequest implements Serializable{
 		this.postcode = postcode;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 	public String getAddress() {
 		return address;

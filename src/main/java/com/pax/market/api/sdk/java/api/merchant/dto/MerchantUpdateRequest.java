@@ -54,15 +54,15 @@ public class MerchantUpdateRequest implements Serializable{
     @Length(max=32)
 	private String phone;
 
-	@NotBlank
 	@Length(max=64)
 	private String province;
 	
     @Length(max=16)
 	private String postcode;
-	
-//    private String city;
-//    
+
+	@Length(max=255)
+    private String city;
+
     @Length(max=255)
     private String address;
     
@@ -140,6 +140,14 @@ public class MerchantUpdateRequest implements Serializable{
 		this.province = province;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	public String getPostcode() {
 		return postcode;
 	}
@@ -183,12 +191,21 @@ public class MerchantUpdateRequest implements Serializable{
 
 	@Override
 	public String toString() {
-		return "MerchantUpdateRequest [name=" + name + ", email=" + email + ", resellerName=" + resellerName
-				+ ", contact=" + contact + ", country=" + country + ", phone=" + phone + ", postcode=" + postcode
-				+ ", address=" + address + ", description=" + description + ", merchantCategoryNames="
-				+ merchantCategoryNames + ", entityAttributeValues=" + entityAttributeValues + "]";
+		return "MerchantUpdateRequest{" +
+				"name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", resellerName='" + resellerName + '\'' +
+				", contact='" + contact + '\'' +
+				", country='" + country + '\'' +
+				", phone='" + phone + '\'' +
+				", province='" + province + '\'' +
+				", postcode='" + postcode + '\'' +
+				", city='" + city + '\'' +
+				", address='" + address + '\'' +
+				", description='" + description + '\'' +
+				", createUserFlag=" + createUserFlag +
+				", merchantCategoryNames=" + merchantCategoryNames +
+				", entityAttributeValues=" + entityAttributeValues +
+				'}';
 	}
-
-	
-	
 }
