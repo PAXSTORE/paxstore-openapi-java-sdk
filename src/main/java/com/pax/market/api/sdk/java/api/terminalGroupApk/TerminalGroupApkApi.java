@@ -181,20 +181,20 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
         }
     }
 
-    public enum AppSearchOrderBy {
-        AppName_desc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci DESC"),
-        AppName_asc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci ASC"),
-        Emial_desc("developer.email DESC"),
-        Emial_asc("developer.email ASC"),
-        UpdatedDate_desc("app.updated_date DESC"),
-        UpdatedDate_asc("app.updated_date ASC");
-        private String val;
-        private AppSearchOrderBy(String orderBy) {
-            this.val = orderBy;
-        }
-        public String val(){
-            return this.val;
-        }
-    }
+//    public enum AppSearchOrderBy {
+//        AppName_desc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci DESC"),
+//        AppName_asc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci ASC"),
+//        Emial_desc("developer.email DESC"),
+//        Emial_asc("developer.email ASC"),
+//        UpdatedDate_desc("app.updated_date DESC"),
+//        UpdatedDate_asc("app.updated_date ASC");
+//        private String val;
+//        private AppSearchOrderBy(String orderBy) {
+//            this.val = orderBy;
+//        }
+//        public String val(){
+//            return this.val;
+//        }
+//    }
 
 }

@@ -2,7 +2,7 @@
 
 All the push terminal group apk to terminal related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.terminalGroupApk.TerminalGroupApk*.
 
-**Constructors of TerminalGroupApk**
+**Constructors of TerminalGroupApkApi**
 
 ```
 public TerminalGroupApkApi(String baseUrl, String apiKey, String apiSecret);
@@ -125,9 +125,9 @@ public Result<SimpleTerminalGroupApkDTO> searchTerminalGroupApk(int pageNo, int 
 |pageSize|int|false|the record number per page, range is 1 to 1000|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalGroupApkApi.SearchOrderBy.CreatedDate_desc and TerminalGroupApkApi.SearchOrderBy.CreatedDate_asc.|
 |groupId|Long|false|the id of the group|
-|pendingOnly|Boolean|true||
-|historyOnly|Boolean|true|                                                              |
-|keyWords|String|true|search filter by keywords|
+|pendingOnly|Boolean|true|Indicate whether to search the pending push task only|
+|historyOnly|Boolean|true|Indicate whether to search history push task only                                                              |
+|keyWords|String|true|Key words， it will match APP's package name, APK's name, APK's short description and APK's description|
 
 **Sample codes**
 
