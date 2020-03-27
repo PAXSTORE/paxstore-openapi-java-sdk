@@ -13,35 +13,35 @@ package com.pax.market.api.sdk.java.api.terminalGroup.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @Description
  * @Author: Shawn
- * @Date: 2019/11/26 9:51
- * @Version 1.0
+ * @Date: 2020/3/5
  */
 @Getter
 @Setter
-public class MerchantCategoryInfo implements Serializable {
-
-    private static final long serialVersionUID = -5851843819972585429L;
+@ToString
+public class SimpleTerminalDTO implements Serializable {
+    private static final long serialVersionUID = 1614462888971498901L;
     private Long id;
-    private String name;
-    private String remarks;
-    private Date createdDate;
-    private Date updatedDate;
 
-    @Override
-    public String toString() {
-        return "MerchantCategoryInfo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", remarks='" + remarks + '\'' +
-                ", createdDate=" + createdDate +
-                ", updatedDate=" + updatedDate +
-                '}';
-    }
+    private String name;
+
+    private String tid;
+
+    private String serialNo;
+
+    private String status;
+
+    private String merchantName;
+
+    private String modelName;
+
+    private String resellerName;
+
+    private String location;
 }

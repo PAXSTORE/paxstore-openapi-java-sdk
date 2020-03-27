@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import com.pax.market.api.sdk.java.api.reseller.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,12 +29,6 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest.RequestMethod;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerCreateRequest;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerDTO;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerPageDTO;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerPageResponse;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerResponse;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerUpdateRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.MessageBoudleUtil;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
@@ -54,6 +49,7 @@ public class ResellerApi extends BaseThirdPartySysApi{
 	private static final String DISABLE_RESELLER_URL = "/v1/3rdsys/resellers/{resellerId}/disable";
 	private static final String DELETE_RESELLER_URL = "/v1/3rdsys/resellers/{resellerId}";
 	private static final String REPLACE_RESELLER_EMAIL_URL = "/v1/3rdsys/resellers/{resellerId}/replaceEmail";
+	private static final String SEARCH_RESELLER_RKI_KET_TEMPLATE_LIST_URL = "/v1/3rdsys/resellers/{resellerId}/rki/template";
 
 	public ResellerApi(String baseUrl, String apiKey, String apiSecret) {
 		super(baseUrl, apiKey, apiSecret);
@@ -199,6 +195,23 @@ public class ResellerApi extends BaseThirdPartySysApi{
 		Result<String> result = new Result<String>(emptyResponse);
 		return result;
 	}
+
+    public Result<ResellerRkiKeyPageDTO> searchResellerRkiKeyList(Long resellerId, int pageNo, int pageSize, String rkiKey) {
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        PageRequestDTO page = new PageRequestDTO();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+
+        List<String> validationErrs = validate(page);
+        if(validationErrs.size()>0) {
+            return new Result<ResellerRkiKeyPageDTO>(validationErrs);
+        }
+        SdkRequest request = getPageRequest(SEARCH_RESELLER_RKI_KET_TEMPLATE_LIST_URL.replace("{resellerId}", resellerId.toString()), page);
+        request.addRequestParam("key", rkiKey);
+        ResellerRkiKeyPageResponse pageResponse = EnhancedJsonUtils.fromJson(client.execute(request), ResellerRkiKeyPageResponse.class);
+        Result<ResellerRkiKeyPageDTO> result = new Result<ResellerRkiKeyPageDTO>(pageResponse);
+        return result;
+    }
 	
 	public enum ResellerStatus {
 		Active("A"),

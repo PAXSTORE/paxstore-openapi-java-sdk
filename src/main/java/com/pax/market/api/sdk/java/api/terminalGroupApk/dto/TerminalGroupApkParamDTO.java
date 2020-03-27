@@ -15,50 +15,27 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
-
-/**
- * @Description
- * @Author: Shawn
- * @Date: 2019/11/29 11:06
- * @Version 7.1
- */
+import java.util.Map;
 
 @Getter
 @Setter
-public class SimpleTerminalGroupApkDTO implements Serializable {
+public class TerminalGroupApkParamDTO implements Serializable {
 
     private static final long serialVersionUID = -2819937434488271303L;
-    private Long id;
-    private String apkPackageName;
-    private Long apkVersionCode;
-    private String apkVersionName;
-    private Long effectiveTime;
-    private Long expiredTime;
-    private Long updatedDate;
-    private int actionStatus;
-    private String status;
+    private String paramTemplateName;
+    private Map<String, String> configuredParameters;
     private int pendingCount;
     private int successCount;
     private int failedCount;
-    private TerminalGroupApkParamDTO groupApkParam;
 
     @Override
     public String toString() {
-        return "SimpleTerminalGroupApkDTO{" +
-                "id=" + id +
-                ", apkPackageName='" + apkPackageName + '\'' +
-                ", apkVersionCode=" + apkVersionCode +
-                ", apkVersionName='" + apkVersionName + '\'' +
-                ", effectiveTime=" + effectiveTime +
-                ", expiredTime=" + expiredTime +
-                ", updatedDate=" + updatedDate +
-                ", actionStatus=" + actionStatus +
-                ", status='" + status + '\'' +
+        return "TerminalGroupApkParamDTO{" +
+                "paramTemplateName='" + paramTemplateName + '\'' +
+                ", configuredParameters=" + configuredParameters +
                 ", pendingCount=" + pendingCount +
                 ", successCount=" + successCount +
                 ", failedCount=" + failedCount +
-                ", groupApkParam=" + groupApkParam +
                 '}';
     }
 }

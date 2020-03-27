@@ -13,15 +13,14 @@ package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.entityAttribute.EntityAttributeApi;
-import com.pax.market.api.sdk.java.api.entityAttribute.dto.*;
+import com.pax.market.api.sdk.java.api.entityAttribute.dto.EntityAttributeCreateRequest;
+import com.pax.market.api.sdk.java.api.entityAttribute.dto.EntityAttributeDTO;
+import com.pax.market.api.sdk.java.api.entityAttribute.dto.EntityAttributeUpdateRequest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Description
@@ -56,13 +55,17 @@ public class EntityAttributeApiTest {
     @Test
     public void testCreateEntityAttribute(){
         EntityAttributeCreateRequest createRequest = new EntityAttributeCreateRequest();
-        createRequest.setEntityType("Reseller");
+        createRequest.setEntityType(EntityAttributeApi.EntityAttributeType.Reseller);
         createRequest.setDefaultLabel("testCreateApi-label");
-        createRequest.setInputType("TEXT");
+        createRequest.setInputType(EntityAttributeApi.EntityInputType.Text);
         createRequest.setKey("testCreateApi-key");
         createRequest.setMaxLength(5);
         createRequest.setMinLength(1);
         createRequest.setRequired(false);
+    /*    createRequest.setSelector("{\n" +
+                "\t\"1\": \"1\",\n" +
+                "\t\"te1212121st\": \"test\"\n" +
+                "}");*/
         Result<EntityAttributeDTO> result = entityAttributeApi.createEntityAttribute(createRequest);
         logger.debug("Result of create entity attribute: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
@@ -73,10 +76,12 @@ public class EntityAttributeApiTest {
         Long attributeId = 1000000403L;
         EntityAttributeUpdateRequest updateRequest = new EntityAttributeUpdateRequest();
         updateRequest.setDefaultLabel("testCreateApi-label-update");
-        updateRequest.setInputType("TEXT");
+        updateRequest.setInputType(EntityAttributeApi.EntityInputType.Text);
         updateRequest.setMaxLength(6);
         updateRequest.setMinLength(2);
         updateRequest.setRequired(false);
+        /*updateRequest.setSelector("{1:1}");
+        updateRequest.setRegex("");*/
         Result<EntityAttributeDTO> result = entityAttributeApi.updateEntityAttribute(attributeId,updateRequest);
         logger.debug("Result of update entity attribute: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
@@ -84,28 +89,28 @@ public class EntityAttributeApiTest {
 
     @Test
     public void testUpdateEntityAttributeLabel(){
-        Long attributeId = 1000000403L;
-        EntityAttributeLabelInfo labelInfoJp = new EntityAttributeLabelInfo();
-        EntityAttributeLabelInfo labelInfoEn = new EntityAttributeLabelInfo();
-        EntityAttributeLabelInfo labelInfoZh = new EntityAttributeLabelInfo();
-        labelInfoJp.setEntityAttributeId(attributeId);
-        labelInfoJp.setLabel("テストラベル-jp");
-        labelInfoJp.setLocale("jp");
-        labelInfoEn.setEntityAttributeId(attributeId);
-        labelInfoEn.setLabel("testCreateApi-label-en");
-        labelInfoEn.setLocale("en");
-        labelInfoZh.setEntityAttributeId(attributeId);
-        labelInfoZh.setLabel("测试updateAPI-zh");
-        labelInfoZh.setLocale("zh_CN");
-        List<EntityAttributeLabelInfo> entityAttributeLabelList = new ArrayList<>();
-        entityAttributeLabelList.add(labelInfoJp);
-        entityAttributeLabelList.add(labelInfoEn);
-        entityAttributeLabelList.add(labelInfoZh);
-        EntityAttributeLabelUpdateRequest updateRequest = new EntityAttributeLabelUpdateRequest();
-        updateRequest.setEntityAttributeLabelList(entityAttributeLabelList);
-        Result<String> result = entityAttributeApi.updateEntityAttributeLabel(attributeId,updateRequest);
-        logger.debug("Result of update entity attribute label: {}",result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+//        Long attributeId = 1000000403L;
+//        EntityAttributeLabelInfo labelInfoJp = new EntityAttributeLabelInfo();
+//        EntityAttributeLabelInfo labelInfoEn = new EntityAttributeLabelInfo();
+//        EntityAttributeLabelInfo labelInfoZh = new EntityAttributeLabelInfo();
+//        labelInfoJp.setEntityAttributeId(attributeId);
+//        labelInfoJp.setLabel("テストラベル-jp");
+//        labelInfoJp.setLocale("jp");
+//        labelInfoEn.setEntityAttributeId(attributeId);
+//        labelInfoEn.setLabel("testCreateApi-label-en");
+//        labelInfoEn.setLocale("en");
+//        labelInfoZh.setEntityAttributeId(attributeId);
+//        labelInfoZh.setLabel("测试updateAPI-zh");
+//        labelInfoZh.setLocale("zh_CN");
+//        List<EntityAttributeLabelInfo> entityAttributeLabelList = new ArrayList<>();
+//        entityAttributeLabelList.add(labelInfoJp);
+//        entityAttributeLabelList.add(labelInfoEn);
+//        entityAttributeLabelList.add(labelInfoZh);
+//        EntityAttributeLabelUpdateRequest updateRequest = new EntityAttributeLabelUpdateRequest();
+//        updateRequest.setEntityAttributeLabelList(entityAttributeLabelList);
+        Result<String> result = entityAttributeApi.updateEntityAttributeLabel(null,null);
+//        logger.debug("Result of update entity attribute label: {}",result.toString());
+//        Assert.assertTrue(result.getBusinessCode() == 0);
     }
 
     @Test

@@ -46,10 +46,11 @@ public class TerminalGroupApkApiTest {
     @Test
     public void testCreateTerminalGroupApk() {
         CreateTerminalGroupApkRequest createRequest = new CreateTerminalGroupApkRequest();
-        createRequest.setGroupId(16536L); //test Dy Group
-        createRequest.setPushTemplateName("8799");
-        createRequest.setPackageName("com.baidu.tieba");
-        createRequest.setTemplateName("PassWord_Param02.xml");
+        createRequest.setGroupId(16543L); //test Dy Group
+      //  createRequest.setPushTemplateName("8799");
+        createRequest.setPackageName(null);
+
+      //  createRequest.setTemplateName("PassWord_Param02.xml");
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("sys_F1_sys_cap_test01", "abc");
         parameters.put("sys_F1_sys_cap_test02", "123");
@@ -67,6 +68,14 @@ public class TerminalGroupApkApiTest {
         logger.debug("Result of create terminal Group Apk: {}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
+
+    @Test
+    public void  testSearchTerminalGroupApk() {
+        Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.searchTerminalGroupApk(1,5, TerminalGroupApkApi.SearchOrderBy.CreatedDate_asc,16526L,true,null,null);
+        logger.debug("Result of  terminal Group Apk list: {}", result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
+
 
     @Test
     public void testGetTerminalGroupApk() {

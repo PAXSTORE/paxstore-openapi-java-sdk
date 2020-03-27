@@ -15,7 +15,7 @@ import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotBlank;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class CreateTerminalGroupApkRequest implements Serializable {
 
     private static final long serialVersionUID = -5645272376227693380L;
 
-
+    @NotNull
     private Long groupId;
 
     private String pushTemplateName;

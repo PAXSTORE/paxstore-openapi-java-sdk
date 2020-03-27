@@ -31,8 +31,8 @@ public class TerminalGroupDTO implements Serializable {
 
     private static final long serialVersionUID = -2375133176041768065L;
     private Long id;
-    private ResellerInfo reseller;
-    private ModelInfo model;
+    private String resellerName;
+    private String modelName;
     private String name;
     private String status;
     private String description;
@@ -42,15 +42,15 @@ public class TerminalGroupDTO implements Serializable {
     private int terminalCount;
     private Boolean dynamic;
     private Boolean containSubResellerTerminal;
-    private List<MerchantInfo> merchants;
+    private List<String> merchantNames;
 
 
     @Override
     public String toString() {
         return "TerminalGroupDTO{" +
                 "id=" + id +
-                ", reseller=" + reseller +
-                ", model=" + model +
+                ", resellerName='" + resellerName + '\'' +
+                ", modelName='" + modelName + '\'' +
                 ", name='" + name + '\'' +
                 ", status='" + status + '\'' +
                 ", description='" + description + '\'' +
@@ -60,8 +60,7 @@ public class TerminalGroupDTO implements Serializable {
                 ", terminalCount=" + terminalCount +
                 ", dynamic=" + dynamic +
                 ", containSubResellerTerminal=" + containSubResellerTerminal +
-                ", merchants=" + merchants +
+                ", merchantNames=" + merchantNames +
                 '}';
     }
-
 }

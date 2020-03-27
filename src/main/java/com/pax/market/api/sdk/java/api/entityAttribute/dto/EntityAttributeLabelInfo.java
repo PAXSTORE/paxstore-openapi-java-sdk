@@ -20,7 +20,7 @@ import java.io.Serializable;
 public class EntityAttributeLabelInfo implements Serializable {
 
     private static final long serialVersionUID = -1L;
-    private Long entityAttributeId;
+   // private Long entityAttributeId;
     private String locale;
     private String label;
 
@@ -29,18 +29,18 @@ public class EntityAttributeLabelInfo implements Serializable {
      *
      * @return the attribute id
      */
-    public Long getEntityAttributeId() {
+  /*  public Long getEntityAttributeId() {
         return entityAttributeId;
-    }
+    }*/
 
     /**
      * Sets attribute id.
      *
      * @param entityAttributeId the attribute id
      */
-    public void setEntityAttributeId(Long entityAttributeId) {
+  /*  public void setEntityAttributeId(Long entityAttributeId) {
         this.entityAttributeId = entityAttributeId;
-    }
+    }*/
 
 
     /**
@@ -85,8 +85,7 @@ public class EntityAttributeLabelInfo implements Serializable {
     @Override
     public String toString() {
         return "EntityAttributeLabelInfo {" +
-                "entityAttributeId=" + entityAttributeId +
-                ", locale='" + locale + '\'' +
+                "locale='" + locale + '\'' +
                 ", label='" + label + '\'' +
                 '}';
     }

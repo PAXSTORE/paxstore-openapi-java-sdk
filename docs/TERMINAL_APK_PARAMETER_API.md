@@ -141,6 +141,81 @@ The structure of class ApkFileDTO
 
 
 
+```
+public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId);
+public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId, List<String> pidList);
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type | Nullable | Description             |
+| :------------- | :--- | :------- | :---------------------- |
+| apkParameterId | Long | false    | the id of apk parameter |
+|pidList|List|true|the pid of the configured parameters to return|
+
+**Sample codes**
+
+```
+TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long apkParameterId = 1149L;
+Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(apkParameterId);
+
+List<String> pidList = new ArrayList<>();
+pidList.add("sys.cap.test01");
+pidList.add("sys.cap.test02");
+pidList.add("sys.cap.test03");
+Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(apkParameterId, pidList);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["terminal apk parameter Id cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 9001,
+	"message": "Push template not found"
+}
+```
+
+**Successful sample result**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"createdDate": 1574402850000,
+		"name": "testCreate3RD-result-api-test1",
+		"paramTemplateName": "1000084085_(3).xml|schema1.xml",
+		"id": 1149,
+		"updatedDate": 1575451257000,
+		"apk": {
+			"apkType": "P",
+			"apkFileType": "A",
+			"apkFile": {
+				"permissions": "USE_CREDENTIALS,READ_SYNC_SETTINGS,BROADCAST_BADGE,RECEIVE,WAKE_LOCK,SENSOR_ENABLE,CHANGE_BADGE,WRITE_EXTERNAL_STORAGE,CAMERA,MOUNT_UNMOUNT_FILESYSTEMS,UPDATE_BADGE,READ,SENSOR_INFO,READ_PHONE_STATE,GET_TASKS,RESTART_PACKAGES,MANAGE_ACCOUNTS,WRITE_SETTINGS,READ_LOGS,MIPUSH_RECEIVE,INSTALL_SHORTCUT,ACCESS_FINE_LOCATION,AUTHENTICATE_ACCOUNTS,WRITE,MESSAGE,ACCESS_NETWORK_STATE,CHANGE_WIFI_STATE,WRITE_SYNC_SETTINGS,READ_SETTINGS,READ_APP_BADGE,UNINSTALL_SHORTCUT,C2D_MESSAGE,PROVIDER_INSERT_BADGE,INTERNET,GET_ACCOUNTS,READ_EXTERNAL_STORAGE,SYSTEM_ALERT_WINDOW,RECEIVE_BOOT_COMPLETED,DISABLE_KEYGUARD,ACCESS_LOCATION_EXTRA_COMMANDS,RECIEVE_MCS_MESSAGE,CHANGE_CONFIGURATION,ACCESS_COARSE_LOCATION,UPDATE_SHORTCUT,READ_CONTACTS,ACCESS_MOCK_LOCATION,BLUETOOTH,CHANGE_NETWORK_STATE,VIBRATE,ACCESS_WIFI_STATE",
+				"paxPermission": ""
+			},
+			"osType": "A",
+			"versionName": "6.6.4",
+			"versionCode": 664,
+			"status": "O"
+		},
+		"apkAvailable": true
+	}
+}
+```
+
+The type in dataSet is ApkParameterDTO. And the Structure is like ApkParameterDTO returned by searchTerminalApkParameter Api.
+
 ### Create a Apk Parameter
 
 **API**

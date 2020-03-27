@@ -28,6 +28,7 @@ import com.pax.market.api.sdk.java.api.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -122,6 +123,10 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	}
 
 	public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId){
+        return getTerminalApk(terminalApkId, null);
+    }
+
+    public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId, List<String> pidList){
         logger.debug("terminalApkId="+terminalApkId);
         List<String> validationErrs = validateId(terminalApkId, "parameter.terminalApkId.invalid");
         if(validationErrs.size()>0) {
@@ -130,6 +135,9 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_APK_URL.replace("{terminalApkId}", terminalApkId+""));
         request.setRequestMethod(RequestMethod.GET);
+        if(pidList != null) {
+            request.addRequestParam("pidList", StringUtils.join(pidList, ","));
+        }
         TerminalApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalApkResponse.class);
         Result<TerminalApkDTO> result = new Result<TerminalApkDTO>(resp);
         return result;

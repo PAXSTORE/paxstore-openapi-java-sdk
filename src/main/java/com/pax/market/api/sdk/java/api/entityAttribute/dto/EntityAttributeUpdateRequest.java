@@ -11,6 +11,10 @@
  */
 package com.pax.market.api.sdk.java.api.entityAttribute.dto;
 
+import com.pax.market.api.sdk.java.api.entityAttribute.EntityAttributeApi;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 /**
@@ -19,10 +23,12 @@ import java.io.Serializable;
  * @Date: 2019/11/19 9:43
  * @Version 7.1
  */
+@Getter
+@Setter
 public class EntityAttributeUpdateRequest implements Serializable {
     private static final long serialVersionUID = 4334504898768526684L;
 
-    private String inputType;
+    private EntityAttributeApi.EntityInputType inputType;
     private Integer minLength;
     private Integer maxLength;
     private boolean required;
@@ -30,59 +36,4 @@ public class EntityAttributeUpdateRequest implements Serializable {
     private String selector;
     private String defaultLabel;
 
-    public String getInputType() {
-        return inputType;
-    }
-
-    public void setInputType(String inputType) {
-        this.inputType = inputType;
-    }
-
-    public Integer getMinLength() {
-        return minLength;
-    }
-
-    public void setMinLength(Integer minLength) {
-        this.minLength = minLength;
-    }
-
-    public Integer getMaxLength() {
-        return maxLength;
-    }
-
-    public void setMaxLength(Integer maxLength) {
-        this.maxLength = maxLength;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public String getRegex() {
-        return regex;
-    }
-
-    public void setRegex(String regex) {
-        this.regex = regex;
-    }
-
-    public String getSelector() {
-        return selector;
-    }
-
-    public void setSelector(String selector) {
-        this.selector = selector;
-    }
-
-    public String getDefaultLabel() {
-        return defaultLabel;
-    }
-
-    public void setDefaultLabel(String defaultLabel) {
-        this.defaultLabel = defaultLabel;
-    }
 }

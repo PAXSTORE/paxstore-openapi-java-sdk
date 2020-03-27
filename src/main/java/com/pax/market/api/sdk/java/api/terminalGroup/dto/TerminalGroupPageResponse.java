@@ -11,26 +11,14 @@
  */
 package com.pax.market.api.sdk.java.api.terminalGroup.dto;
 
-
-import lombok.Getter;
-import lombok.Setter;
-
-import java.io.Serializable;
-import java.util.List;
+import com.pax.market.api.sdk.java.api.base.dto.PageResponse;
 
 /**
  * @Description
  * @Author: Shawn
- * @Date: 2019/11/25 17:12
+ * @Date: 2019/12/18 15:07
  * @Version 7.1
  */
-@Getter
-@Setter
-public class UpdateTerminalGroupRequest implements Serializable {
-    private static final long serialVersionUID = 3649618122658375454L;
-    private String name;
-    private String description;
-    private String modelName;
-    private String resellerName;
-    private List<String> merchantNameList;
+public class TerminalGroupPageResponse extends PageResponse<TerminalGroupDTO> {
+    private static final long serialVersionUID = -2339434671794257562L;
 }

@@ -12,6 +12,7 @@
 package com.pax.market.api.sdk.java.api.test;
 
 
+import com.pax.market.api.sdk.java.api.reseller.dto.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,10 +21,6 @@ import org.slf4j.LoggerFactory;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.reseller.ResellerApi;
 import com.pax.market.api.sdk.java.api.reseller.ResellerApi.ResellerSearchOrderBy;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerCreateRequest;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerDTO;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerPageDTO;
-import com.pax.market.api.sdk.java.api.reseller.dto.ResellerUpdateRequest;
 
 /**
  *
@@ -112,7 +109,17 @@ public class ResellerApiTest {
     	Result<String> deleteResult = resellerApi.deleteReseller(resellerId);
     	logger.debug("Result of delete reseller: {}",deleteResult.toString());
     	Assert.assertTrue(deleteResult.getBusinessCode() == 0);
+
+
     	
+    }
+
+    @Test
+    public void testSearchResellerRkiKey(){
+        //Test fetch reseller Rki Key
+        Result<ResellerRkiKeyPageDTO> resultRkiKey = resellerApi.searchResellerRkiKeyList(1L,1, 10, null);
+        logger.debug("Result of search reseller rki key list: {}",resultRkiKey.toString());
+        Assert.assertTrue(resultRkiKey.getBusinessCode() == 0);
     }
     
     

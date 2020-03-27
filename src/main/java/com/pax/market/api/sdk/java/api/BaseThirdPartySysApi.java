@@ -15,6 +15,7 @@ import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.exception.InvalidParamException;
 import com.pax.market.api.sdk.java.api.util.MessageBoudleUtil;
+import com.pax.market.api.sdk.java.api.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,7 +117,9 @@ public class BaseThirdPartySysApi{
 		SdkRequest request = createSdkRequest(requestUrl);
 		request.addRequestParam("limit", page.getPageSize()+"");
 		request.addRequestParam("pageNo", page.getPageNo()+"");
-		request.addRequestParam("orderBy", page.getOrderBy());
+		if(StringUtils.isNotEmpty(page.getOrderBy())){
+            request.addRequestParam("orderBy", page.getOrderBy());
+        }
 		return request;
 	}
 	

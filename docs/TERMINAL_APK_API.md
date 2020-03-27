@@ -233,7 +233,8 @@ Get terminal push apk history by id.
 **API**
 
 ```
-public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId)
+public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId);
+public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId, List<String> pidList);
 ```
 
 **Input parameter(s) description**
@@ -241,12 +242,19 @@ public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId)
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |terminalApkId|Long|false|the id of terminalApk|
+|pidList|List|true|the pid of the configured parameters to return|
 
 **Sample codes**
 
 ```
 TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<TerminalApkDTO> result = terminalApkApi.getTerminalApk(17850L);
+
+List<String> pidList = new ArrayList<>();
+pidList.add("sys.cap.test01");
+pidList.add("sys.cap.test02");
+pidList.add("sys.cap.test03");
+Result<TerminalApkDTO> result = terminalApkApi.getTerminalApk(17850L, pidList);
 ```
 
 **Client side validation failed sample result(JSON formatted)**

@@ -1,4 +1,4 @@
-# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=7.0.3) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/7.0.3/link)
+# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=7.1.0) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/7.1.0/link)
 
 
 <br/>
@@ -199,8 +199,8 @@ public class Sample {
 	private String SECRET = "YOUR SECRET";
 	
 	public Result<ResellerPageDTO> getResellers() {
-    	    ResellerApi resellerApi = new  ResellerApi(BASEURL, KEY, SECRET);
-    	    Result<ResellerPageDTO> resellerList = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Name, "reseller", ResellerStatus.Active);
+    	ResellerApi resellerApi = new  ResellerApi(BASEURL, KEY, SECRET);
+    	Result<ResellerPageDTO> resellerList = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Name, "reseller", ResellerStatus.Active);
     	return resellerList;
 	}
 }
@@ -251,6 +251,12 @@ See the [Apache 2.0 license](LICENSE) file for details.
 ## [Terminal Variable APIs](docs/TERMINAL_VARIABLE_API.md)
 
 ## [Push History APIs](docs/PUSH_HISTORY_API.md)
+
+## [Terminal Group APIs](docs/TERMINAL_GROUP_API.md)
+
+## [Entity Attribute APIs](docs/ENTITY_ATTRIBUTE_API.md)
+
+## [Terminal RKI APIs](docs/TERMINAL_RKI_API.md)
 
 ## [Country Codes](docs/COUNTRY_CODE.md)
 

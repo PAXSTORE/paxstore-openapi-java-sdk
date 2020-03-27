@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Description
@@ -30,11 +31,11 @@ public class CreateTerminalGroupRequest implements Serializable {
     private static final long serialVersionUID = 6285480267415151043L;
 
     private String name;
-    private Long modelId;
-    private Long resellerId;
+    private String modelName;
+    private String resellerName;
     private String description;
     private String status;
     private Boolean dynamic = false;
     private Boolean containSubResellerTerminal = false;
-    private String merchantIds;
+    private List<String> merchantNameList;
 }

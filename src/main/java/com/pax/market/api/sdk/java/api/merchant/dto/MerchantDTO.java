@@ -47,10 +47,8 @@ public class MerchantDTO extends MerchantPageDTO{
 	@Override
 	public String toString() {
 		return "MerchantDTO [entityAttributeValues=" + entityAttributeValues + ", merchantCategory=" + merchantCategory
-				+ ", id=" + id + ", name=" + name + ", reseller=" + reseller + ", country=" + country + ", postcode="
+				+ ", id=" + id + ", name=" + name + ", reseller=" + reseller + ", country=" + country + ",province="+province+ ",city="+city+", postcode="
 				+ postcode + ", address=" + address + ", contact=" + contact + ", email=" + email + ", phone=" + phone
 				+ ", status=" + status + ", description=" + description + "]";
 	}
-
-	
 }

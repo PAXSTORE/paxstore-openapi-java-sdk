@@ -9,35 +9,25 @@
  *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
  * ********************************************************************************
  */
-package com.pax.market.api.sdk.java.api.terminalGroup.dto;
+package com.pax.market.api.sdk.java.api.terminal.dto;
 
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 
 /**
  * @Description
  * @Author: Shawn
- * @Date: 2019/11/26 9:54
- * @Version 1.0
+ * @Date: 2020/3/19
  */
-@Getter
-@Setter
-public class ResellerRkiInfo implements Serializable {
+public class TerminalRemoteConfigRequest implements Serializable {
+    private static final long serialVersionUID = -4927756870104996001L;
+    private boolean allowRemoteChange;
 
-    private static final long serialVersionUID = 770682520693193685L;
-    private Long resellerId;
-    private String token;
+    public boolean isAllowRemoteChange() {
+        return allowRemoteChange;
+    }
 
-    private Boolean allowChildUse;
-
-    @Override
-    public String toString() {
-        return "ResellerRkiInfo{" +
-                "resellerId=" + resellerId +
-                ", token='" + token + '\'' +
-                ", allowChildUse=" + allowChildUse +
-                '}';
+    public void setAllowRemoteChange(boolean allowRemoteChange) {
+        this.allowRemoteChange = allowRemoteChange;
     }
 }

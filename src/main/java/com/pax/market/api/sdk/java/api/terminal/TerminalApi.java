@@ -52,6 +52,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String ADD_TERMINAL_TO_GROUP_URL = "/v1/3rdsys/terminals/groups";
 
+    protected static final String UPDATE_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/remote/config";
+
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -195,6 +197,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return  new Result<String>(emptyResponse);
 
     }
+
 
     public enum TerminalStatus {
         Active("A"),
