@@ -23,10 +23,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -36,7 +33,6 @@ import java.util.Set;
 public class BaseThirdPartySysApi{
 	
 	private final Logger logger = LoggerFactory.getLogger(BaseThirdPartySysApi.class);
-	
 
     /**
      * The constant baseUrl.
@@ -55,9 +51,6 @@ public class BaseThirdPartySysApi{
     public static int readTimeout;
     public static int retryTimes = 5;
 
-
-
-
     public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret) {
     	if(baseUrl.endsWith("/")) {
     		baseUrl = baseUrl.substring(0, baseUrl.length()-1);
@@ -65,6 +58,18 @@ public class BaseThirdPartySysApi{
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
+        setDefaultTZ(null);
+        factory = Validation.buildDefaultValidatorFactory();
+    }
+
+    public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret, TimeZone timeZone) {
+        if(baseUrl.endsWith("/")) {
+            baseUrl = baseUrl.substring(0, baseUrl.length()-1);
+        }
+        this.baseUrl = baseUrl;
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
+        setDefaultTZ(timeZone);
         factory = Validation.buildDefaultValidatorFactory();
     }
     
@@ -75,18 +80,41 @@ public class BaseThirdPartySysApi{
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
-        if(locale!=null) {
-        	Locale.setDefault(locale);
-        }
+        setDefaultLocal(locale);
+        setDefaultTZ(null);
         factory = Validation.buildDefaultValidatorFactory();
+    }
+
+    public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret, Locale locale, TimeZone timeZone) {
+        if(baseUrl.endsWith("/")) {
+            baseUrl = baseUrl.substring(0, baseUrl.length()-1);
+        }
+        this.baseUrl = baseUrl;
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
+        setDefaultLocal(locale);
+        setDefaultTZ(timeZone);
+        factory = Validation.buildDefaultValidatorFactory();
+    }
+
+    private void setDefaultLocal(Locale locale){
+        if(locale!=null) {
+            Locale.setDefault(locale);
+        }
+    }
+
+    private void setDefaultTZ(TimeZone timeZone){
+        if(timeZone != null){
+            TimeZone.setDefault(timeZone);
+        } else {
+            TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        }
     }
 
     public String getBaseUrl() {
         return baseUrl;
     }
 
-    
-    
     public String getApiKey() {
 		return apiKey;
 	}
@@ -106,10 +134,10 @@ public class BaseThirdPartySysApi{
 	protected SdkRequest createSdkRequest(String requestMappingUrl) {
     	SdkRequest request = new SdkRequest(requestMappingUrl);
     	request.addHeader("content-language", Locale.getDefault().toString());
+    	request.addHeader("Time-Zone", TimeZone.getDefault().getID());
     	return request;
     }
 
-	
 	protected SdkRequest getPageRequest(String requestUrl, PageRequestDTO page) {
 		logger.debug("pageSize="+page.getPageSize());
 		logger.debug("pageNo"+page.getPageNo());

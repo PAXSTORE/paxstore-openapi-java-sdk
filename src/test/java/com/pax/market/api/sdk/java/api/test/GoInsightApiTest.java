@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.TimeZone;
+
 /**
  * @author liukai
  * @date 2020/3/23
@@ -19,15 +21,27 @@ public class GoInsightApiTest {
 
     private GoInsightApi goInsightApi;
 
+    private static final TimeZone tz = TimeZone.getTimeZone("Etc/GMT-1");
+    private static final GoInsightApi.TimestampRangeType rangeType = GoInsightApi.TimestampRangeType.T1D;
+    private static final String queryCode = "hd77smoq";
+
     @Before
     public void init() {
-        goInsightApi = new GoInsightApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+        goInsightApi = new GoInsightApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET, tz);
     }
 
     @Test
     public void testSearchData() {
-        Result<DataQueryResultDTO> result = goInsightApi.findDataFromInsight("hd77smoq",2,10);
+        Result<DataQueryResultDTO> result = goInsightApi.findDataFromInsight(queryCode, rangeType,1,10);
         logger.debug("Result of search data from insight: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
+
+    /*public static void main(String[] args) {
+        String[] ids = TimeZone.getAvailableIDs();
+        for (int i = 0; i<ids.length; i++) {
+            int offset = TimeZone.getTimeZone(ids[i]).getRawOffset();
+            System.out.println(i+" "+ids[i]+" "+offset / 1000 + "\t");
+        }
+    }*/
 }

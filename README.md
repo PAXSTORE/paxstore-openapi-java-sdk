@@ -260,6 +260,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [Terminal RKI APIs](docs/TERMINAL_RKI_API.md)
 
+## [GoInsight APIs](docs/GOINSIGHT_API.md)
+
 ## [Country Codes](docs/COUNTRY_CODE.md)
 
 
