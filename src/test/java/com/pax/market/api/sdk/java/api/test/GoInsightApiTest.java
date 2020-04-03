@@ -31,17 +31,31 @@ public class GoInsightApiTest {
     }
 
     @Test
+    public void testSearchDataOnlyQueryCode() {
+        Result<DataQueryResultDTO> result = goInsightApi.findDataFromInsight(queryCode);
+        logger.debug("Result of search data from insight: {}",result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
+
+    @Test
+    public void testSearchDataNoPage() {
+        Result<DataQueryResultDTO> result = goInsightApi.findDataFromInsight(queryCode, rangeType);
+        logger.debug("Result of search data from insight: {}",result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
+
+    @Test
     public void testSearchData() {
         Result<DataQueryResultDTO> result = goInsightApi.findDataFromInsight(queryCode, rangeType,1,10);
         logger.debug("Result of search data from insight: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         String[] ids = TimeZone.getAvailableIDs();
         for (int i = 0; i<ids.length; i++) {
             int offset = TimeZone.getTimeZone(ids[i]).getRawOffset();
             System.out.println(i+" "+ids[i]+" "+offset / 1000 + "\t");
         }
-    }*/
+    }
 }

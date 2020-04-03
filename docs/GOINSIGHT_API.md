@@ -9,6 +9,7 @@ All the GoInsight related APIs are in the class *com.pax.market.api.sdk.java.api
 ```
 public GoInsightApi(String baseUrl, String apiKey, String apiSecret);
 public GoInsightApi(String baseUrl, String apiKey, String apiSecret, Locale locale)
+public GoInsightApi(String baseUrl, String apiKey, String apiSecret, TimeZone timeZone)
 ```
 
 **Constructor parameters description**
@@ -19,7 +20,39 @@ public GoInsightApi(String baseUrl, String apiKey, String apiSecret, Locale loca
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin/reseller console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin/reseller console, refer to chapter Apply access rights|
 |locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+|timeZone|TimeZone|the timeZone, the default timeZone is TimeZone.getTimeZone("UTC"), the biz data in return object depend on timeZone|
 
+Part of the timeZone available ids
+| ID | Time Zone Offset(s) |
+|:---- |:----|
+|UTC|0|
+|Etc/GMT+12|-43200|
+|Etc/GMT+11|-39600|
+|Etc/GMT+10|-36000|
+|Etc/GMT+9|-32400|
+|Etc/GMT+8|-28800|
+|Etc/GMT+7|-25200|
+|Etc/GMT+6|-21600|
+|Etc/GMT+5|-18000|
+|Etc/GMT+4|-14400|
+|Etc/GMT+3|-10800|
+|Etc/GMT+2|-7200|
+|Etc/GMT+1|-3600|
+|Etc/GMT|0|
+|Etc/GMT-1|3600|
+|Etc/GMT-2|7200|
+|Etc/GMT-3|10800|
+|Etc/GMT-4|14400|
+|Etc/GMT-5|18000|
+|Etc/GMT-6|21600|
+|Etc/GMT-7|25200|
+|Etc/GMT-8|28800|
+|Etc/GMT-9|32400|
+|Etc/GMT-10|36000|
+|Etc/GMT-11|39600|
+|Etc/GMT-12|43200|
+|Etc/GMT-13|46800|
+|Etc/GMT-14|50400|
 
 ### Search APP BizData
 
@@ -30,21 +63,46 @@ Note: This result of this API depends on the API query settings in GoInsight. Pa
 
 ```
 public Result<DataQueryResultDTO> findDataFromInsight(String queryCode)
+public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType)
 public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, Integer pageNo, Integer pageSize)
+public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize)
 ```
 
 **Input parameter(s) description**
 
 | Name| Type | Nullable|Description |
 |:---- | :----|:----|:----|
-|queryCode|String|false|search by serial number,name and TID|
+|queryCode|String|false|search by GoInsight api query code|
+|rangeType|TimestampRangeType|true|you can choose the range of data results for search|
 |pageNo|int|true|page number, value must >=1|
 |pageSize|int|true|the record number per page, range in 10, 25, 50, 100|
+
+Value of enum TimestampRangeType
+
+| Value | Description |
+|:---- |:----|
+|P1D|Yesterday|
+|P1W|Last Week|
+|P1M|Last Month|
+|P1Y|Last Year|
+|R1D|Recent Day|
+|R1W|Recent Week|
+|R1M|Recent Month|
+|R1Y|Recent Year|
+|T1D|Today|
+|T1W|This Week|
+|T1M|This Month|
+|T1Y|This Year|
+
+Note: The page param will be ignore when your query result set type is not table chart.
 
 **Sample codes**
 
 ```
-GoInsightApi goInsightApi = new GoInsightApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String[] ids = TimeZone.getAvailableIDs();
+//TimeZone tz1 = TimeZone.getTimeZone(ids[2]);
+TimeZone tz = TimeZone.getTimeZone("Etc/GMT-1");
+GoInsightApi goInsightApi = new GoInsightApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN", tz);
 Result<DataQueryResultDTO> resultData = goInsightApi.findDataFromInsight("ahh3y62t");
 ```
 
@@ -176,9 +234,10 @@ Structure of class Row
 |colName|String|The dataset filed name in GoInsight|
 |value|Object|The dataset filed's value|
 
-**Possible validation errors**
+**Possible client validation errors**
  
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>Parameter queryCode cannot be null</font>  
+> <font color=red>Parameter queryCode length must is 8</font>  
 
 **Possible business codes**
 
@@ -189,3 +248,6 @@ Structure of class Row
 |36002|Query failed, please try again|&nbsp;|
 |36003|The query is timeout, please try again|&nbsp;|
 |36004|Insufficient permissions|&nbsp;|
+|36005|Invalid pageNo|&nbsp;|
+|36006|Invalid pageSize|&nbsp;|
+|36008|Query failed, please contact administrator|&nbsp;

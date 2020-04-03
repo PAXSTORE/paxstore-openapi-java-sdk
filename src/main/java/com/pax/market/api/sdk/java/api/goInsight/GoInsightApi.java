@@ -39,22 +39,24 @@ public class GoInsightApi extends BaseThirdPartySysApi {
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode){
-        return findDataFromInsight(queryCode, null,0, 0);
+        return findDataFromInsight(queryCode, null,null, null);
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType){
-        return findDataFromInsight(queryCode, rangeType,0, 0);
+        return findDataFromInsight(queryCode, rangeType,null, null);
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize){
-        logger.debug("queryCode=" + queryCode);
         List<String> validationErrs = validateStr(queryCode, "parameter.queryCode.invalid");
+        if (queryCode != null && queryCode.length() != 8){
+            validationErrs.add(getMessage("parameter.queryCode.length.invalid"));
+        }
         if (validationErrs.size() > 0) {
             return new Result<DataQueryResultDTO>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(SEARCH_GO_INSIGHT_DATA_URL.replace("{queryCode}", queryCode));
-        if(pageNo > 0 && pageSize > 0){
+        if(pageNo != null && pageNo > 0 && pageSize != null && pageSize > 0){
             request.addRequestParam("pageSize", pageSize+"");
             request.addRequestParam("pageNo", pageNo+"");
         }
