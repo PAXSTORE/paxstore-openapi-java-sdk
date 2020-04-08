@@ -57,7 +57,7 @@ Part of the timeZone available ids
 ### Search APP BizData
 
 The search app bizData API allow the third party system search data.<br/>
-Note: This result of this API depends on the API query settings in GoInsight. Paging needs to be set when the query result set type is a table.
+Note: This result of this API depends on the API query settings in GoInsight. Paging needs to be set when the query result set type is a details data.
 
 **API**
 
@@ -74,8 +74,10 @@ public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, Timestam
 |:---- | :----|:----|:----|
 |queryCode|String|false|search by GoInsight api query code|
 |rangeType|TimestampRangeType|true|you can choose the range of data results for search|
-|pageNo|int|true|page number, value must >=1|
-|pageSize|int|true|the record number per page, range in 10, 25, 50, 100|
+|pageNo|int|true|page number, value must >= 1|
+|pageSize|int|false|the record number per page, range is 1 to 100 for details data query, range is 1 to 1000 for statistics data query|
+
+Note: The pageNo param will be ignore when your query result set type is statistics chart.
 
 Value of enum TimestampRangeType
 
@@ -94,7 +96,6 @@ Value of enum TimestampRangeType
 |T1M|This Month|
 |T1Y|This Year|
 
-Note: The page param will be ignore when your query result set type is not table chart.
 
 **Sample codes**
 
@@ -237,7 +238,8 @@ Structure of class Row
 **Possible client validation errors**
  
 > <font color=red>Parameter queryCode cannot be null</font>  
-> <font color=red>Parameter queryCode length must is 8</font>  
+> <font color=red>Parameter queryCode length must is 8</font>
+> <font color=red>Parameter pageSize must be range is 1 to 1000</font>
 
 **Possible business codes**
 

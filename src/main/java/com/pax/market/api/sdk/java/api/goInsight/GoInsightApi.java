@@ -21,6 +21,7 @@ import java.util.TimeZone;
 public class GoInsightApi extends BaseThirdPartySysApi {
     private static final Logger logger = LoggerFactory.getLogger(GoInsightApi.class.getSimpleName());
     private final String SEARCH_GO_INSIGHT_DATA_URL = "/v1/3rdsys/goInsight/data/querying/{queryCode}";
+    private final int QUERY_CODE_LENGTH = 8;
 
     public GoInsightApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -48,8 +49,11 @@ public class GoInsightApi extends BaseThirdPartySysApi {
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize){
         List<String> validationErrs = validateStr(queryCode, "parameter.queryCode.invalid");
-        if (queryCode != null && queryCode.length() != 8){
+        if (queryCode != null && queryCode.length() != QUERY_CODE_LENGTH){
             validationErrs.add(getMessage("parameter.queryCode.length.invalid"));
+        }
+        if (pageSize != null && (pageSize <=0 || pageSize > 1000)){
+            validationErrs.add(getMessage("parameter.pageSize.length.invalid"));
         }
         if (validationErrs.size() > 0) {
             return new Result<DataQueryResultDTO>(validationErrs);
