@@ -75,7 +75,7 @@ public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, Timestam
 |queryCode|String|false|search by GoInsight api query code|
 |rangeType|TimestampRangeType|true|you can choose the range of data results for search|
 |pageNo|int|true|page number, value must >= 1|
-|pageSize|int|false|the record number per page, range is 1 to 100 for details data query, range is 1 to 1000 for statistics data query|
+|pageSize|int|true|the record number per page, range is 1 to 100 for details data query, range is 1 to 1000 for statistics data query|
 
 Note: The pageNo param will be ignore when your query result set type is statistics chart.
 
@@ -233,7 +233,7 @@ Structure of class Row
 |Property Name|Type|Description|
 |:---|:---|:---|
 |colName|String|The dataset filed name in GoInsight|
-|value|Object|The dataset filed's value|
+|value|String|The dataset filed's value|
 
 **Possible client validation errors**
  

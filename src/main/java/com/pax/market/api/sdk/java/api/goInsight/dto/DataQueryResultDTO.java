@@ -26,7 +26,7 @@ public class DataQueryResultDTO implements Serializable {
     @ToString
     public static class Row {
         String colName;
-        Object value;
+        String value;
     }
 
     @Getter
