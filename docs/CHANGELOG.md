@@ -1,7 +1,15 @@
 # Changelog  
 
+
+## 7.1.1  
+### New features(To support these new features Paxstore must upgrade to version 7.1.1)  
+* Add GoInsight related APIs
+  1. Find app business data by query code  ```findDataFromInsight(String queryCode)```  
+  2. Find app business data by query code and date range  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType)```  
+  3. Find app business data by query code, date range and page  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize)```
+
 ## 7.1.0  
-### New features(To support these new feature Paxstore must upgrade to version 7.1)  
+### New features(To support these new features Paxstore must upgrade to version 7.1)  
 * Add entity attribute APIs (EntityAttributeApi)  
   1. Get entity attribute by id  ```getEntityAttribute(Long attributeId)```  
   2. Search entity attribute  ```searchEntityAttributes(int pageNo, int pageSize, SearchOrderBy orderBy, String key , EntityAttributeType entityType)```  
