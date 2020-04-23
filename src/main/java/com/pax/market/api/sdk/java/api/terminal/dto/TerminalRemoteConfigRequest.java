@@ -21,13 +21,13 @@ import java.io.Serializable;
  */
 public class TerminalRemoteConfigRequest implements Serializable {
     private static final long serialVersionUID = -4927756870104996001L;
-    private boolean allowRemoteChange;
+    private Boolean allowRemoteChange;
 
-    public boolean isAllowRemoteChange() {
+    public Boolean getAllowRemoteChange() {
         return allowRemoteChange;
     }
 
-    public void setAllowRemoteChange(boolean allowRemoteChange) {
+    public void setAllowRemoteChange(Boolean allowRemoteChange) {
         this.allowRemoteChange = allowRemoteChange;
     }
 }
