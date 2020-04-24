@@ -53,6 +53,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String ADD_TERMINAL_TO_GROUP_URL = "/v1/3rdsys/terminals/groups";
 
     protected static final String UPDATE_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/remote/config";
+    protected static final String GET_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/remote/config";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -211,6 +212,21 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.setRequestBody(new Gson().toJson(remoteConfigRequest, TerminalRemoteConfigRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<String>(emptyResponse);
+    }
+
+
+    public Result<TerminalRemoteConfigDTO> getTerminalRemoteConfig(Long terminalId){
+        logger.debug("terminalId=" + terminalId);
+        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
+        if (validationErrs.size() > 0) {
+            return new Result<TerminalRemoteConfigDTO>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_REMOTE_CONFIG_URL.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        TerminalRemoteConfigReponse terminalRemoteConfigReponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalRemoteConfigReponse.class);
+        return  new Result<TerminalRemoteConfigDTO>(terminalRemoteConfigReponse);
     }
 
     public enum TerminalStatus {

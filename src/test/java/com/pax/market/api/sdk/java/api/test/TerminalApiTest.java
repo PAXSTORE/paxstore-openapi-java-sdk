@@ -12,7 +12,7 @@
 package com.pax.market.api.sdk.java.api.test;
 
 
-import com.pax.market.api.sdk.java.api.terminal.dto.TerminalRemoteConfigRequest;
+import com.pax.market.api.sdk.java.api.terminal.dto.*;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,9 +23,6 @@ import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalSearchOrderBy;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
-import com.pax.market.api.sdk.java.api.terminal.dto.TerminalCreateRequest;
-import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
-import com.pax.market.api.sdk.java.api.terminal.dto.TerminalUpdateRequest;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -135,11 +132,20 @@ public class TerminalApiTest {
 
 	@Test
 	public void testUpdateTerminalRemoteConfig(){
-		Long terminalId = 909753L;
+		Long terminalId = 909744L;
 		TerminalRemoteConfigRequest terminalRemoteConfigRequest = new TerminalRemoteConfigRequest();
 		terminalRemoteConfigRequest.setAllowRemoteChange(true);
 	    Result<String> result = terminalApi.updateTerminalRemoteConfig(terminalId,terminalRemoteConfigRequest);
 		logger.debug("Result of update Terminal Remote Config: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+
+	}
+
+	@Test
+	public void testGetTerminalRemoteConfig(){
+		Long terminalId = 90974L;
+	    Result<TerminalRemoteConfigDTO> result = terminalApi.getTerminalRemoteConfig(terminalId);
+		logger.debug("Result of get Terminal Remote Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 
 	}
