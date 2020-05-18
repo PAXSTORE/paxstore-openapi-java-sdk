@@ -16,8 +16,10 @@ import com.pax.market.api.sdk.java.api.base.dto.Response;
 /**
  * @Description
  * @Author: Shawn
- * @Date: 2020/4/24
+ * @Date: 2020/5/18
  */
-public class TerminalRemoteConfigReponse  extends Response<TerminalRemoteConfigDTO> {
-    private static final long serialVersionUID = 6840737337614078561L;
+public class TerminalPedResponse extends Response<TerminalPedDTO> {
+
+    private static final long serialVersionUID = -3783910732741586694L;
+
 }

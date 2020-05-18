@@ -149,5 +149,14 @@ public class TerminalApiTest {
 		Assert.assertTrue(result.getBusinessCode() == 0);
 
 	}
-    
+
+
+    @Test
+	public void testGetTerminalPedStatus(){
+		Long terminalId = 909755L;
+	    Result<TerminalPedDTO> result = terminalApi.getTerminalPedStatus(terminalId);
+		logger.debug("Result of get Terminal ped: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+	}
+
 }
