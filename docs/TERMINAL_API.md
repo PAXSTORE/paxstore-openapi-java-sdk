@@ -707,6 +707,79 @@ Result<String> result = terminalApi.disableTerminal(907560L);
 |1888|The terminal is not active,unable to disable!|&nbsp;|
 
 
+### Move a terminal  
+
+The move terminal API allows the thirdparty system move a terminal to another reseller and merchant by terminal id.
+If move successfully there's not response content from remote server.
+
+**API**
+
+```
+public Result<String> moveTerminal(Long terminalId, String resellerName, String merchantName)
+```
+
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|terminalId|Long|false|The terminal id.|
+|resellerName|String|false|The target reseller name to move.|
+|merchantName|String|false|The target merchant name to move.|
+
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminalApi.moveTerminal(907560L, "targetReseller", "targetMerchant");
+```
+
+**Client validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2402,
+	"message": "The terminal is not active or disabled!"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>resellerName:may not be empty</font>  
+> <font color=red>merchantName:may not be empty</font>  
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|1800|Terminal not found|&nbsp;|
+|2402|The terminal is not active or disabled, unable to move!|&nbsp;|
+|1759|Reseller doesn't exist|&nbsp;|
+|1720|Merchant doesn't exist|&nbsp;|
+|1937|Merchant is not belong to the given Reseller!|&nbsp;|
+|1737|The associated merchant is not activate|&nbsp;|
+|1773|The associated reseller is not activate|&nbsp;|
+
+
 ### Delete a terminal  
 
 Delete terminal API allows the thirdparty system delete a exist terminal by terminal id.

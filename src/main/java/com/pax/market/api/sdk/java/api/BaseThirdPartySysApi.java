@@ -149,7 +149,7 @@ public class BaseThirdPartySysApi{
 
     protected static List<String> validateStr(String str, String errorMsgKey){
         List<String> validationErrs = new ArrayList<String>();
-        if(str == null || str == "") {
+        if(str == null || str.equals("")) {
             validationErrs.add(getMessage(errorMsgKey));
         }
         return validationErrs;
