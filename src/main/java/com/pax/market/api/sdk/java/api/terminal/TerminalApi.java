@@ -44,6 +44,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String DISABLE_TERMINAL_URL = "/v1/3rdsys/terminals/{terminalId}/disable";
 
+    protected static final String MOVE_TERMINAL_URL = "/v1/3rdsys/terminals/{terminalId}/move";
+
     protected static final String DELETE_TERMINAL_URL = "/v1/3rdsys/terminals/{terminalId}";
 
     protected static final String CREATE_TERMINAL_URL = "/v1/3rdsys/terminals";
@@ -137,6 +139,30 @@ public class TerminalApi extends BaseThirdPartySysApi {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(DISABLE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.PUT);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        Result<String> result = new Result<String>(emptyResponse);
+        return result;
+    }
+
+    public Result<String> moveTerminal(Long terminalId, String resellerName, String merchantName) {
+        logger.debug("terminalId=" + terminalId);
+        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
+        if (validationErrs.size() > 0) {
+            return new Result<String>(validationErrs);
+        }
+        validationErrs = validateStr(resellerName, "parameter.resellerName.invalid");
+        if (validationErrs.size() > 0) {
+            return new Result<String>(validationErrs);
+        }
+        validationErrs = validateStr(merchantName, "parameter.merchantName.invalid");
+        if (validationErrs.size() > 0) {
+            return new Result<String>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(MOVE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addRequestParam("resellerName", resellerName);
+        request.addRequestParam("merchantName", merchantName);
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         Result<String> result = new Result<String>(emptyResponse);
         return result;

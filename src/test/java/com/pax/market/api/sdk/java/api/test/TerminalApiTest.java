@@ -159,4 +159,11 @@ public class TerminalApiTest {
 		Assert.assertTrue(result.getBusinessCode() == 0);
 	}
 
+	@Test
+	public void testMoveTerminal() {
+		Long terminalId = 1018664801L;
+		Result<String> result = terminalApi.moveTerminal(terminalId, "PAX", "6666");
+		logger.debug("Result of move Terminal {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+	}
 }
