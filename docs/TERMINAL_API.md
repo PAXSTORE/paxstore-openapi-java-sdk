@@ -661,7 +661,6 @@ public Result<String> disableTerminal(Long terminalId)
 |:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
 
-
 **Sample codes**
 
 ```
@@ -846,5 +845,278 @@ Result<String> result = terminalApi.deleteTerminal(907560L);
 
 
 
+### Batch add terminal to group  
 
+Batch add terminal to group API allows the thirdparty system to add terminals to one or more groups.
+
+**API**
+
+```
+public Result<String> batchAddTerminalToGroup(TerminalGroupRequest groupRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type                 | Nullable | Description                                                  |
+| :------------- | :------------------- | :------- | :----------------------------------------------------------- |
+| groupRequest   | TerminalGroupRequest | false    | add terminals to group request object. The structure shows below. |
+
+Structure of class TerminalGroupRequest
+
+| Property Name | Type      | Nullable | Description      |
+| :------------ | :-------- | :------- | :--------------- |
+| terminalIds   | Set<Long> | false    | terminal id list |
+| groupIds      | Set<Long> | false    | group id list    |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupRequest groupRequest = new TerminalGroupRequest();
+Set<Long> terminalIds = new HashSet<>();
+terminalIds.add(909744L);
+terminalIds.add(909742L);
+Set<Long> groupIds = new HashSet<>();
+groupIds.add(16529L);
+groupIds.add(16527L);
+groupRequest.setTerminalIds(terminalIds);
+groupRequest.setGroupIds(groupIds);
+Result<String> result = terminalApi.batchAddTerminalToGroup(groupRequest);
+```
+
+**Client validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalGroupRequest cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2150,
+	"message": "Terminal group not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalGroupRequest cannot be null !</font>  
+
+**Possible business codes**
+
+| Business Code | Message                                                      | Description |
+| :------------ | :----------------------------------------------------------- | :---------- |
+| 1800          | Terminal not found                                           |             |
+| 1810          | Terminal is not active                                       |             |
+| 2150          | Terminal group not found                                     |             |
+| 2163          | Terminal reseller mismatched                                 |             |
+| 2164          | Terminal model mismatched                                    |             |
+| 2167          | Terminal group exceeded the max terminal count limit, please create new terminal group to put the terminal |             |
+
+### Update terminal remote config
+
+Update whether the terminal allows remote switch configuration.
+
+**API**
+
+```
+public Result<String> updateTerminalRemoteConfig(Long terminalId, TerminalRemoteConfigRequest remoteConfigRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name      | Type                        | Nullable | Description                                                  |
+| :------------------ | :-------------------------- | :------- | :----------------------------------------------------------- |
+| terminalId          | Long                        | false    | Terminal's id.                                               |
+| remoteConfigRequest | TerminalRemoteConfigRequest | false    | Update terminal remote config request object. The structure shows below. |
+
+Structure of class TerminalRemoteConfigRequest
+
+| Property Name     | Type    | Nullable | Description |
+| :---------------- | :------ | :------- | :---------- |
+| allowRemoteChange | boolean | false    |             |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long terminalId = 909744L;
+TerminalRemoteConfigRequest terminalRemoteConfigRequest = new 	TerminalRemoteConfigRequest();
+terminalRemoteConfigRequest.setAllowRemoteChange(true);
+Result<String> result = terminalApi.updateTerminalRemoteConfig(terminalId,terminalRemoteConfigRequest);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1 !</font>  
+
+**Possible business codes**
+
+| Business Code | Message                                                      | Description |
+| :------------ | :----------------------------------------------------------- | :---------- |
+| 1800          | Terminal not found                                           |             |
+| 1838          | It is not allowed to change the terminal level "Terminal Replacement" status. please make sure reseller level terminal replacement settings are enabled. |             |
+
+### Get terminal remote config
+
+get terminal replacement status.
+
+**API**
+
+```
+public Result<TerminalRemoteConfigDTO> getTerminalRemoteConfig(Long terminalId)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type | Nullable | Description    |
+| :------------- | :--- | :------- | :------------- |
+| terminalId     | Long | false    | Terminal's id. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalRemoteConfigDTO> result = terminalApi.getTerminalRemoteConfig(909744L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"allowRemoteChange": true
+	}
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1 !</font>  
+
+**Possible business codes**
+
+| Business Code | Message                | Description |
+| :------------ | :--------------------- | :---------- |
+| 1800          | Terminal not found     |             |
+| 1801          | Terminal doesn't exist |             |
+
+### Get terminal ped status
+
+get terminal ped status by terminal id.
+
+**API**
+
+```
+public Result<TerminalPedDTO> getTerminalPedStatus(Long terminalId)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type | Nullable | Description    |
+| :------------- | :--- | :------- | :------------- |
+| terminalId     | Long | false    | Terminal's id. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalPedDTO> result = terminalApi.getTerminalPedStatus(909755L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"info": "[{\"SK/TPK\": [{\"kcv\": \"B03273DC0000000000\", \"slot\": \"2\"}]}, {\"TDES DUKPT\": [{\"ksi\": \"FFFF539SD99336FCA00001\", \"slot\": \"1\"}, {\"ksi\": \"FFFF98765D400CB600001\", \"slot\": \"3\"}, {\"ksi\": \"FFFF9876D5400CB200001\", \"slot\": \"4\"}, {\"ksi\": \"FFFF98765D43347000001\", \"slot\": \"5\"}, {\"ksi\": \"FFFF987654C92DA200001\", \"slot\": \"11\"}]}]"
+	}
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1 !</font>  
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
 

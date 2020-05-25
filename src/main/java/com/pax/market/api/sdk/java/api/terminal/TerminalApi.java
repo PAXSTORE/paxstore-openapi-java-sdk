@@ -209,7 +209,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> batchAddTerminalToGroup(TerminalGroupRequest groupRequest){
-        List<String> validationErrs = validateCreate(groupRequest, "parameter.terminalCreateRequest.null");
+        List<String> validationErrs = validateCreate(groupRequest, "parameter.terminalGroupRequest.null");
         if (validationErrs.size() > 0) {
             return new Result<String>(validationErrs);
         }
