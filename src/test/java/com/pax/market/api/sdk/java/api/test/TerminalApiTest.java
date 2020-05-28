@@ -23,6 +23,15 @@ import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalSearchOrderBy;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
+import com.pax.market.api.sdk.java.api.terminal.dto.TerminalCreateRequest;
+import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
+import com.pax.market.api.sdk.java.api.terminal.dto.TerminalUpdateRequest;
+import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -166,4 +175,5 @@ public class TerminalApiTest {
 		logger.debug("Result of move Terminal {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 	}
+
 }

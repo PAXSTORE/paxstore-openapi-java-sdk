@@ -1,7 +1,15 @@
 # Changelog  
 
+
+## 7.1.1  
+### New features(To support these new features Paxstore must upgrade to version 7.1.1)  
+* Add GoInsight related APIs
+  1. Find app business data by query code  ```findDataFromInsight(String queryCode)```  
+  2. Find app business data by query code and date range  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType)```  
+  3. Find app business data by query code, date range and page  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize)```
+
 ## 7.1.0  
-### New features(To support these new feature Paxstore must upgrade to version 7.1)  
+### New features(To support these new features Paxstore must upgrade to version 7.1)  
 * Add entity attribute APIs (EntityAttributeApi)  
   1. Get entity attribute by id  ```getEntityAttribute(Long attributeId)```  
   2. Search entity attribute  ```searchEntityAttributes(int pageNo, int pageSize, SearchOrderBy orderBy, String key , EntityAttributeType entityType)```  
@@ -48,10 +56,35 @@
 ## 7.0  
 ### New features
 * Add new search terminal API to include geo location, firmware and installed app in search result
-* Add push template related APIs
-* Add terminal variable related APIs
-* Add search push history result API
-* Add API to verify terminal estate
+
+* Add push template related APIs (TerminalApkParameterApi)
+
+  Get push template(s)
+
+  Create a push template
+
+  Update a exist push template by id
+
+  Delete a exist push template by id
+
+* Add terminal variable related APIs (TerminalVariableApi)
+
+  Get terminal variable by tid , serialNo , packageName, key, source
+
+  Create a terminal variable
+
+  Update terminal variable by id
+
+  Delete terminal variable by terminal variable id
+
+  Batch  delete terminalvariable 
+
+* Add search push history result API (PushHistoryApi)
+
+  SearchAppPushHistory
+
+* Add API to verify terminal estate (TerminalEstateApi)
+
 * Support file type parameter when push app and parameter to terminal
 
 ## 6.3.1  
@@ -121,7 +154,7 @@ NA
 ### Breaking changes
 
 * Add a new property *createUserFlag* in the MerchantCreateRequest and MerchantUpdateRequest to indicate whether to create user, the default value is false. The old version API will create user in create merchant step. The impact is if user udpated SDK to this version and does not do any code change, the API won't create user when creating merchant and activating merchant. If user still need create user for the created merchant he need to set *createuserFlag* to true when creating or updating a merchant.
- 
+
 * The update reseller API cannot update the parent anymore. 
 
 

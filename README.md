@@ -1,4 +1,4 @@
-# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=7.1.0) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/7.1.0/link)
+# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=7.1.1) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/7.1.1/link)
 
 
 <br/>
@@ -171,7 +171,7 @@ Update pom.xml add SDK dependency for your java project.
 <dependency>
     <groupId>com.pax.market</groupId>
     <artifactId>paxstore-openapi-java-sdk</artifactId>
-    <version>7.0.0</version>
+    <version>7.1.1</version>
 </dependency>
 ```
 
@@ -252,11 +252,15 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [Push History APIs](docs/PUSH_HISTORY_API.md)
 
-## [Terminal Group APIs](docs/TERMINAL_GROUP_API.md)
+## [Terminal Group APIs](docs/TERMINAL_GROUP_API.md)  
+
+## [Terminal Group Push APIs](docs/TERMINAL_GROUP_APK_API.md)
 
 ## [Entity Attribute APIs](docs/ENTITY_ATTRIBUTE_API.md)
 
 ## [Terminal RKI APIs](docs/TERMINAL_RKI_API.md)
+
+## [GoInsight APIs](docs/GOINSIGHT_API.md)
 
 ## [Country Codes](docs/COUNTRY_CODE.md)
 

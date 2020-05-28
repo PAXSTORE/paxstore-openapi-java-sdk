@@ -13,8 +13,6 @@ package com.pax.market.api.sdk.java.api.merchant.dto;
 
 import java.io.Serializable;
 
-import java.util.List;
-
 /**
  *
  * @author tanjie
@@ -31,7 +29,6 @@ public class MerchantPageDTO implements Serializable{
 	protected SimpleResellerDTO reseller;        // reseller_id 父类
 	protected String country;        // country
 	protected String province;        // province
-	protected String city;        // city
 	protected String postcode;        // postal_code
 	protected String address;        // address
 	protected String contact;        // contact
@@ -71,12 +68,6 @@ public class MerchantPageDTO implements Serializable{
 	}
 	public void setProvince(String province) {
 		this.province = province;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
 	}
 	public String getPostcode() {
 		return postcode;
@@ -124,7 +115,7 @@ public class MerchantPageDTO implements Serializable{
 	@Override
 	public String toString() {
 		return "MerchantPageDTO [id=" + id + ", name=" + name + ", reseller=" + reseller + ", country=" + country
-				+ ", province=" + province +", postcode=" + postcode+", city=" + city + ", address=" + address + ", contact=" + contact + ", email=" + email
+				+ ", province=" + province +", postcode=" + postcode+ ", address=" + address + ", contact=" + contact + ", email=" + email
 				+ ", phone=" + phone + ", status=" + status + ", description=" + description + "]";
 	}
 }

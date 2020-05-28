@@ -82,4 +82,18 @@ public class PushFirmwareTaskDTO implements Serializable {
     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
     }
+
+    @Override
+    public String toString() {
+        return "PushFirmwareTaskDTO{" +
+                "id=" + id +
+                ", terminalSN='" + terminalSN + '\'' +
+                ", fmName='" + fmName + '\'' +
+                ", activatedDate=" + activatedDate +
+                ", effectiveTime=" + effectiveTime +
+                ", status='" + status + '\'' +
+                ", actionStatus=" + actionStatus +
+                ", errorCode=" + errorCode +
+                '}';
+    }
 }
