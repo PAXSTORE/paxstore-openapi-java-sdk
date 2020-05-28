@@ -35,5 +35,6 @@ public class DataQueryResultDTO implements Serializable {
     public static class Column {
         String colName;
         String displayName;
+        String type;
     }
 }

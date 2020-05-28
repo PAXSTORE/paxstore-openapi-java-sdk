@@ -125,28 +125,36 @@ Result<DataQueryResultDTO> resultData = goInsightApi.findDataFromInsight("ahh3y6
         "worksheetName": "Merchant transaction amount trend (This Year)",
 		"columns": [{
 			"colName": "acquirer_type",
-			"displayName": "Acquirer Type"
+			"displayName": "Acquirer Type",
+            "type": "Dimension"
 		}, {
 			"colName": "currency",
-			"displayName": "Currency"
+			"displayName": "Currency",
+            "type": "Dimension"
 		}, {
 			"colName": "purchase_id",
-			"displayName": "Purchase ID"
+			"displayName": "Purchase ID",
+            "type": "Dimension"
 		}, {
 			"colName": "amount",
-			"displayName": "Amount"
+			"displayName": "Amount",
+            "type": "Measure"
 		}, {
 			"colName": "tax",
-			"displayName": "Tax"
+			"displayName": "Tax",
+            "type": "Measure"
 		}, {
 			"colName": "_sys_marketid",
-			"displayName": "Marketplace"
+			"displayName": "Marketplace",
+            "type": "Dimension"
 		}, {
 			"colName": "_sys_merchantid",
-			"displayName": "Merchant"
+			"displayName": "Merchant",
+            "type": "Dimension"
 		}, {
 			"colName": "_sys_terminalid",
-			"displayName": "Terminal"
+			"displayName": "Terminal",
+            "type": "Dimension"
 		}],
 		"rows": [
 			[{
@@ -227,6 +235,7 @@ Structure of class Column
 |:---|:---|:---|
 |colName|String|The dataset filed name in GoInsight|
 |displayName|String|The dataset filed's display name|
+|type|String|Data analysis type of dataset field. Value can be one of Dimension, Measure and Image|
 
 Structure of class Row  
 
