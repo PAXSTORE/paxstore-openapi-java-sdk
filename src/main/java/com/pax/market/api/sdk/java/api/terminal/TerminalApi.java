@@ -223,7 +223,20 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     }
 
-
+    public Result<String> updateTerminalRemoteConfig(Long terminalId, TerminalRemoteConfigRequest remoteConfigRequest){
+        logger.debug("terminalId=" + terminalId);
+        List<String> validationErrs = validateUpdate(terminalId, remoteConfigRequest, "parameter.terminalId.invalid", "parameter.terminalRemoteConfigRequest.null");
+        if (validationErrs.size() > 0) {
+            return new Result<String>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(UPDATE_TERMINAL_REMOTE_CONFIG_URL.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(remoteConfigRequest, TerminalRemoteConfigRequest.class));
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<String>(emptyResponse);
+    }
 
     public Result<TerminalRemoteConfigDTO> getTerminalRemoteConfig(Long terminalId){
         logger.debug("terminalId=" + terminalId);
