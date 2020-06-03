@@ -17,17 +17,19 @@ import java.io.Serializable;
 /**
  * @Description
  * @Author: Shawn
- * @Date: 2020/3/19
+ * @Date: 2020/4/24
  */
-public class TerminalRemoteConfigRequest implements Serializable {
-    private static final long serialVersionUID = -4927756870104996001L;
-    private Boolean allowRemoteChange;
 
-    public Boolean getAllowRemoteChange() {
-        return allowRemoteChange;
+public class TerminalConfigDTO implements Serializable {
+
+    private static final long serialVersionUID = 6509938259306387562L;
+    private Boolean allowReplacement;
+
+    public Boolean getAllowReplacement() {
+        return allowReplacement;
     }
 
-    public void setAllowRemoteChange(Boolean allowRemoteChange) {
-        this.allowRemoteChange = allowRemoteChange;
+    public void setAllowReplacement(Boolean allowReplacement) {
+        this.allowReplacement = allowReplacement;
     }
 }

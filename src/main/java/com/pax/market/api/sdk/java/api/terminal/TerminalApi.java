@@ -54,11 +54,11 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String ADD_TERMINAL_TO_GROUP_URL = "/v1/3rdsys/terminals/groups";
 
-    protected static final String UPDATE_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/remote/config";
+    protected static final String UPDATE_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/config";
 
-    protected static final String GET_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/remote/config";
+    protected static final String GET_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/config";
 
-    protected static final String GET_TERMINAL_PED_STATUS_URL = "/v1/3rdsys/terminals/{terminalId}/ped/status";
+    protected static final String GET_TERMINAL_PED_STATUS_URL = "/v1/3rdsys/terminals/{terminalId}/ped";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -223,36 +223,36 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     }
 
-    public Result<String> updateTerminalRemoteConfig(Long terminalId, TerminalRemoteConfigRequest remoteConfigRequest){
+    public Result<String> updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest){
         logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateUpdate(terminalId, remoteConfigRequest, "parameter.terminalId.invalid", "parameter.terminalRemoteConfigRequest.null");
+        List<String> validationErrs = validateUpdate(terminalId, terminalConfigUpdateRequest, "parameter.terminalId.invalid", "parameter.terminalRemoteConfigRequest.null");
         if (validationErrs.size() > 0) {
             return new Result<String>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(UPDATE_TERMINAL_REMOTE_CONFIG_URL.replace("{terminalId}", terminalId.toString()));
-        request.setRequestMethod(RequestMethod.POST);
+        request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(remoteConfigRequest, TerminalRemoteConfigRequest.class));
+        request.setRequestBody(new Gson().toJson(terminalConfigUpdateRequest, TerminalConfigUpdateRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<String>(emptyResponse);
     }
 
-    public Result<TerminalRemoteConfigDTO> getTerminalRemoteConfig(Long terminalId){
+    public Result<TerminalConfigDTO> getTerminalConfig(Long terminalId){
         logger.debug("terminalId=" + terminalId);
         List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
         if (validationErrs.size() > 0) {
-            return new Result<TerminalRemoteConfigDTO>(validationErrs);
+            return new Result<TerminalConfigDTO>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_REMOTE_CONFIG_URL.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.GET);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        TerminalRemoteConfigResponse terminalRemoteConfigResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalRemoteConfigResponse.class);
-        return  new Result<TerminalRemoteConfigDTO>(terminalRemoteConfigResponse);
+        TerminalConfigResponse terminalConfigResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalConfigResponse.class);
+        return new Result<TerminalConfigDTO>(terminalConfigResponse);
     }
 
-    public Result<TerminalPedDTO> getTerminalPedStatus(Long terminalId){
+    public Result<TerminalPedDTO> getTerminalPed(Long terminalId){
         logger.debug("terminalId=" + terminalId);
         List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
         if (validationErrs.size() > 0) {

@@ -11,13 +11,23 @@
  */
 package com.pax.market.api.sdk.java.api.terminal.dto;
 
-import com.pax.market.api.sdk.java.api.base.dto.Response;
+
+import java.io.Serializable;
 
 /**
  * @Description
  * @Author: Shawn
- * @Date: 2020/4/24
+ * @Date: 2020/3/19
  */
-public class TerminalRemoteConfigResponse extends Response<TerminalRemoteConfigDTO> {
-    private static final long serialVersionUID = 6840737337614078561L;
+public class TerminalConfigUpdateRequest implements Serializable {
+    private static final long serialVersionUID = -4927756870104996001L;
+    private Boolean allowReplacement;
+
+    public Boolean getAllowReplacement() {
+        return allowReplacement;
+    }
+
+    public void setAllowReplacement(Boolean allowReplacement) {
+        this.allowReplacement = allowReplacement;
+    }
 }

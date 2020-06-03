@@ -29,6 +29,7 @@ public class MerchantPageDTO implements Serializable{
 	protected SimpleResellerDTO reseller;        // reseller_id 父类
 	protected String country;        // country
 	protected String province;        // province
+	protected String city;
 	protected String postcode;        // postal_code
 	protected String address;        // address
 	protected String contact;        // contact
@@ -112,10 +113,30 @@ public class MerchantPageDTO implements Serializable{
 		this.description = description;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	@Override
 	public String toString() {
-		return "MerchantPageDTO [id=" + id + ", name=" + name + ", reseller=" + reseller + ", country=" + country
-				+ ", province=" + province +", postcode=" + postcode+ ", address=" + address + ", contact=" + contact + ", email=" + email
-				+ ", phone=" + phone + ", status=" + status + ", description=" + description + "]";
+		return "MerchantPageDTO{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", reseller=" + reseller +
+				", country='" + country + '\'' +
+				", province='" + province + '\'' +
+				", city='" + city + '\'' +
+				", postcode='" + postcode + '\'' +
+				", address='" + address + '\'' +
+				", contact='" + contact + '\'' +
+				", email='" + email + '\'' +
+				", phone='" + phone + '\'' +
+				", status='" + status + '\'' +
+				", description='" + description + '\'' +
+				'}';
 	}
 }

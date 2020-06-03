@@ -60,6 +60,9 @@ public class MerchantCreateRequest implements Serializable{
 
 	@Length(max=64)
 	private String province;
+
+	@Length(max=255)
+	private String city;
 	
     @Length(max=16)
 	private String postcode;
@@ -183,6 +186,14 @@ public class MerchantCreateRequest implements Serializable{
 
 	public void setEntityAttributeValues(LinkedHashMap<String, String> entityAttributeValues) {
 		this.entityAttributeValues = entityAttributeValues;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public Boolean getActivateWhenCreate() {

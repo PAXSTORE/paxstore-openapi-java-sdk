@@ -140,30 +140,30 @@ public class TerminalApiTest {
 	}
 
 	@Test
-	public void testUpdateTerminalRemoteConfig(){
+	public void testUpdateTerminalConfig(){
 		Long terminalId = 909744L;
-		TerminalRemoteConfigRequest terminalRemoteConfigRequest = new TerminalRemoteConfigRequest();
-		terminalRemoteConfigRequest.setAllowRemoteChange(true);
-	    Result<String> result = terminalApi.updateTerminalRemoteConfig(terminalId,terminalRemoteConfigRequest);
-		logger.debug("Result of update Terminal Remote Config: {}",result.toString());
+		TerminalConfigUpdateRequest terminalConfigUpdateRequest = new TerminalConfigUpdateRequest();
+		terminalConfigUpdateRequest.setAllowReplacement(true);
+	    Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
+		logger.debug("Result of update Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 
 	}
 
 	@Test
-	public void testGetTerminalRemoteConfig(){
+	public void testGetTerminalConfig(){
 		Long terminalId = 90974L;
-	    Result<TerminalRemoteConfigDTO> result = terminalApi.getTerminalRemoteConfig(terminalId);
-		logger.debug("Result of get Terminal Remote Config: {}",result.toString());
+	    Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(terminalId);
+		logger.debug("Result of get Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 
 	}
 
 
     @Test
-	public void testGetTerminalPedStatus(){
+	public void testGetTerminalPed(){
 		Long terminalId = 909755L;
-	    Result<TerminalPedDTO> result = terminalApi.getTerminalPedStatus(terminalId);
+	    Result<TerminalPedDTO> result = terminalApi.getTerminalPed(terminalId);
 		logger.debug("Result of get Terminal ped: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 	}

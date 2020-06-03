@@ -925,37 +925,37 @@ Result<String> result = terminalApi.batchAddTerminalToGroup(groupRequest);
 | 2164          | Terminal model mismatched                                    |             |
 | 2167          | Terminal group exceeded the max terminal count limit, please create new terminal group to put the terminal |             |
 
-### Update terminal remote config
+### Update terminal configuration
 
-Update whether the terminal allows remote switch configuration.
+Update terminal configuration like whether allow terminal replacement by API or input serial number on terminal.
 
 **API**
 
 ```
-public Result<String> updateTerminalRemoteConfig(Long terminalId, TerminalRemoteConfigRequest remoteConfigRequest)
+public Result<String> updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest)
 ```
 
 **Input parameter(s) description**
 
-| Parameter Name      | Type                        | Nullable | Description                                                  |
-| :------------------ | :-------------------------- | :------- | :----------------------------------------------------------- |
-| terminalId          | Long                        | false    | Terminal's id.                                               |
-| remoteConfigRequest | TerminalRemoteConfigRequest | false    | Update terminal remote config request object. The structure shows below. |
+| Parameter Name              | Type                        | Nullable | Description                                                  |
+| :-------------------------- | :-------------------------- | :------- | :----------------------------------------------------------- |
+| terminalId                  | Long                        | false    | Terminal's id.                                               |
+| terminalConfigUpdateRequest | TerminalConfigUpdateRequest | false    | Update terminal config request object. The structure shows below. |
 
 Structure of class TerminalRemoteConfigRequest
 
-| Property Name     | Type    | Nullable | Description |
-| :---------------- | :------ | :------- | :---------- |
-| allowRemoteChange | boolean | false    |             |
+| Property Name    | Type    | Nullable | Description                                                  |
+| :--------------- | :------ | :------- | :----------------------------------------------------------- |
+| allowReplacement | Boolean | false    | Whether allow terminal replacement by API or input serial number on termial |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Long terminalId = 909744L;
-TerminalRemoteConfigRequest terminalRemoteConfigRequest = new 	TerminalRemoteConfigRequest();
-terminalRemoteConfigRequest.setAllowRemoteChange(true);
-Result<String> result = terminalApi.updateTerminalRemoteConfig(terminalId,terminalRemoteConfigRequest);
+TerminalConfigUpdateRequest terminalConfigUpdateRequest = new TerminalConfigUpdateRequest();
+terminalConfigUpdateRequest.setAllowReplacement(true);
+Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -995,14 +995,14 @@ Result<String> result = terminalApi.updateTerminalRemoteConfig(terminalId,termin
 | 1800          | Terminal not found                                           |             |
 | 1838          | It is not allowed to change the terminal level "Terminal Replacement" status. please make sure reseller level terminal replacement settings are enabled. |             |
 
-### Get terminal remote config
+### Get terminal configuration
 
-get terminal replacement status.
+Get terminal configuration.
 
 **API**
 
 ```
-public Result<TerminalRemoteConfigDTO> getTerminalRemoteConfig(Long terminalId)
+public Result<TerminalConfigDTO> getTerminalConfig(Long terminalId)
 ```
 
 **Input parameter(s) description**
@@ -1015,7 +1015,7 @@ public Result<TerminalRemoteConfigDTO> getTerminalRemoteConfig(Long terminalId)
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalRemoteConfigDTO> result = terminalApi.getTerminalRemoteConfig(909744L);
+Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(909744L);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -1042,7 +1042,7 @@ Result<TerminalRemoteConfigDTO> result = terminalApi.getTerminalRemoteConfig(909
 {
 	"businessCode": 0,
 	"data": {
-		"allowRemoteChange": true
+		"allowReplacement": true
 	}
 }
 ```
@@ -1058,14 +1058,14 @@ Result<TerminalRemoteConfigDTO> result = terminalApi.getTerminalRemoteConfig(909
 | 1800          | Terminal not found     |             |
 | 1801          | Terminal doesn't exist |             |
 
-### Get terminal ped status
+### Get terminal PED information
 
-get terminal ped status by terminal id.
+Get terminal PED information by terminal id.
 
 **API**
 
 ```
-public Result<TerminalPedDTO> getTerminalPedStatus(Long terminalId)
+public Result<TerminalPedDTO> getTerminalPed(Long terminalId)
 ```
 
 **Input parameter(s) description**
@@ -1078,7 +1078,7 @@ public Result<TerminalPedDTO> getTerminalPedStatus(Long terminalId)
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalPedDTO> result = terminalApi.getTerminalPedStatus(909755L);
+Result<TerminalPedDTO> result = terminalApi.getTerminalPed(909755L);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
