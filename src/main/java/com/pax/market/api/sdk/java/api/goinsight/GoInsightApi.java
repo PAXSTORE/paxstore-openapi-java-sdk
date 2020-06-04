@@ -1,11 +1,11 @@
-package com.pax.market.api.sdk.java.api.goInsight;
+package com.pax.market.api.sdk.java.api.goinsight;
 
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
-import com.pax.market.api.sdk.java.api.goInsight.dto.DataQueryResponse;
-import com.pax.market.api.sdk.java.api.goInsight.dto.DataQueryResultDTO;
+import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResponse;
+import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResultDTO;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,51 +81,51 @@ public class GoInsightApi extends BaseThirdPartySysApi {
         /**
          * pass 1 day.
          */
-        P1D("p1d"),
+        YESTERDAY("p1d"),
         /**
          * pass 1 week.
          */
-        P1W("p1w"),
+        LAST_WEEK("p1w"),
         /**
          * pass 1 month.
          */
-        P1M("p1m"),
+        LAST_MONTH("p1m"),
         /**
          * pass 1 year.
          */
-        P1Y("p1y"),
+        LAST_YEAR("p1y"),
         /**
          * recent 1 day.
          */
-        R1D("r1d"),
+        RECENT_DAY("r1d"),
         /**
          * recent 1 week.
          */
-        R1W("r1w"),
+        RECENT_WEEK("r1w"),
         /**
          * recent 1 month.
          */
-        R1M("r1m"),
+        RECENT_MONTH("r1m"),
         /**
          * recent 1 year.
          */
-        R1Y("r1y"),
+        RECENT_YEAR("r1y"),
         /**
          * this day.
          */
-        T1D("t1d"),
+        TODAY("t1d"),
         /**
          * this week.
          */
-        T1W("t1w"),
+        THIS_WEEK("t1w"),
         /**
          * this month.
          */
-        T1M("t1m"),
+        THIS_MONTH("t1m"),
         /**
          * this year.
          */
-        T1Y("t1y");
+        THIS_YEAR("t1y");
 
         TimestampRangeType(String val) {
             this.val = val;

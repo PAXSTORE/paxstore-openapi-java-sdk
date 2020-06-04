@@ -1,8 +1,8 @@
 package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
-import com.pax.market.api.sdk.java.api.goInsight.GoInsightApi;
-import com.pax.market.api.sdk.java.api.goInsight.dto.DataQueryResultDTO;
+import com.pax.market.api.sdk.java.api.goinsight.GoInsightApi;
+import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResultDTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class GoInsightApiTest {
     private GoInsightApi goInsightApi;
 
     private static final TimeZone tz = TimeZone.getTimeZone("Etc/GMT-1");
-    private static final GoInsightApi.TimestampRangeType rangeType = GoInsightApi.TimestampRangeType.T1D;
+    private static final GoInsightApi.TimestampRangeType rangeType = GoInsightApi.TimestampRangeType.TODAY;
     private static final String queryCode = "hd77smoq";
 
     @Before

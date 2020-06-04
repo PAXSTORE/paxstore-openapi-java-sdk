@@ -83,18 +83,18 @@ Value of enum TimestampRangeType
 
 | Value | Description |
 |:---- |:----|
-|P1D|Yesterday|
-|P1W|Last Week|
-|P1M|Last Month|
-|P1Y|Last Year|
-|R1D|Recent Day|
-|R1W|Recent Week|
-|R1M|Recent Month|
-|R1Y|Recent Year|
-|T1D|Today|
-|T1W|This Week|
-|T1M|This Month|
-|T1Y|This Year|
+|YESTERDAY|Yesterday|
+|LAST_WEEK|Last Week|
+|LAST_MONTH|Last Month|
+|LAST_YEAR|Last Year|
+|RECENT_DAY|Recent Day|
+|RECENT_WEEK|Recent Week|
+|RECENT_MONTH|Recent Month|
+|RECENT_YEAR|Recent Year|
+|TODAY|Today|
+|THIS_WEEK|This Week|
+|THIS_MONTH|This Month|
+|THIS_YEAR|This Year|
 
 
 **Sample codes**

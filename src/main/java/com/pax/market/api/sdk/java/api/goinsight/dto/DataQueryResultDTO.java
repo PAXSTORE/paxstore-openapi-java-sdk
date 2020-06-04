@@ -1,4 +1,4 @@
-package com.pax.market.api.sdk.java.api.goInsight.dto;
+package com.pax.market.api.sdk.java.api.goinsight.dto;
 
 import lombok.*;
 
