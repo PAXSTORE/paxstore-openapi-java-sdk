@@ -6,11 +6,11 @@ All the GoInsight related APIs are in the class *com.pax.market.api.sdk.java.api
 
 **Constructors of GoInsightApi**
 
-```
+```  
 public GoInsightApi(String baseUrl, String apiKey, String apiSecret);
-public GoInsightApi(String baseUrl, String apiKey, String apiSecret, Locale locale)
+
 public GoInsightApi(String baseUrl, String apiKey, String apiSecret, TimeZone timeZone)
-```
+```  
 
 **Constructor parameters description**
 
@@ -217,13 +217,13 @@ Result<DataQueryResultDTO> resultData = goInsightApi.findDataFromInsight("ahh3y6
 
 The type in dataSet of result is DataQueryResultDTO. The structure shows below.
 
-Structure of class TerminalDTO
+Structure of class DataQueryResultDTO
 
 |Property Name|Type|Description|
 |:---|:---|:---|
 |worksheetName|String|The result set worksheet name.|
-|columns|List<Column>|The result set column.|
-|rows|List<List<Row>>|The result set.|
+|columns|List\<Column\>|The result set column.|
+|rows|List\<List\<Row\>\>|The result set.|
 |hasNext|Boolean|Is there any data.|
 |offset|int|Rows offset if exit page info.|
 |limit|int|Rows page size if exit page info.|

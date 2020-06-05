@@ -6,7 +6,6 @@ All terminal variable related APIs are encapsulated in classes *com.pax.market.a
 
 ```
 public TerminalVariableApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalVariableApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -16,7 +15,6 @@ public TerminalVariableApi(String baseUrl, String apiKey, String apiSecret, Loca
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
 ### Get terminal variable by tid , serialNo , packageName, key, source
 
@@ -137,7 +135,7 @@ Structure of class TerminalParameterVariableRequest
 |:--- | :---|:---|:---|
 |tid|String|true|the tid of terminal|
 |serialNo|String|true|the serial number of terminal|
-|variableList|List<ParameterVariable>|false|List of parametervariables,the structure like below|
+|variableList|List\<ParameterVariable\>|false|List of parametervariables,the structure like below|
 
 Structure of class ParameterVariable
 
@@ -371,7 +369,7 @@ Structure of class ParameterVariable
 
 | Property Name | Type       | Nullable | Description                     |
 | :------------ | :--------- | :------- | :------------------------------ |
-| variableIds   | List<Long> | false    | The ids of terminal variable id |
+| variableIds   | List\<Long\> | false    | The ids of terminal variable id |
 
 **Sample codes**
 

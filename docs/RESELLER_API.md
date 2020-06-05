@@ -8,7 +8,6 @@ User can customize the additional attributes for reseller. To add/delete/update 
 
 ```
 public ResellerApi(String baseUrl, String apiKey, String apiSecret);
-public ResellerApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -18,7 +17,7 @@ public ResellerApi(String baseUrl, String apiKey, String apiSecret, Locale local
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 <br>
 
@@ -199,7 +198,7 @@ The type of data is ResellerDTO, and the structure shows below.
 |email|String|the email of reseller|
 |status|String|the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)|
 |parent|SimpleResellerDTO|reseller's parent|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|dynamic attributes|
+|entityAttributeValues|LinkedHashMap\<String, String\>|dynamic attributes|
 <br>
 Structure of SimpleResellerDTO
 
@@ -249,7 +248,7 @@ Structure of class ResellerCreateRequest
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
 |parentResellerName|String|true|Parent reseller name, if it is empty will set the root reseller of current marketplace as the parent reseller|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
+|entityAttributeValues|LinkedHashMap\<String, String\>|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
 |activateWhenCreate|Boolean|true|Whether to activate the reseller when create, default value is false|
 
 
@@ -387,7 +386,7 @@ Structure of class ResellerUpdateRequest
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
 |parentResellerName|String|true|Do not suggest set value for this property. If set value please keep the parentResellerName same as the original parentResellerName. Otherwise API will return a 1830 business code.|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|  
+|entityAttributeValues|LinkedHashMap\<String, String\>|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|  
 
 
 **Sample codes**

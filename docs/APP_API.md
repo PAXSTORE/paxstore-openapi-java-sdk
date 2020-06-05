@@ -10,7 +10,6 @@ User can customize the additional attributes for app. To featch app's additional
 
 ```
 public AppApi(String baseUrl, String apiKey, String apiSecret);
-public AppApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 Constructor parameters description   
@@ -20,7 +19,7 @@ Constructor parameters description
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 ### Search apps
 
@@ -128,7 +127,7 @@ The type in dataSet is AppPageDTO. And the structure like below.
 |specificReseller|Boolean|whether make app specific reseller.|
 |downloads|Long|downloads of app.|
 |developer|SimpleDeveloperDTO|The developer of the app belongs to.|
-|apkList|List<ApkDTO>|App version list.|
+|apkList|List\<ApkDTO\>|App version list.|
 
 The structure of class ApkDTO
 

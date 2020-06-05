@@ -10,7 +10,6 @@ User can customize the additional attributes for merchant. To add/delete/update 
 
 ```
 public MerchantApi(String baseUrl, String apiKey, String apiSecret);
-public MerchantApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 Constructor parameters description   
@@ -20,7 +19,7 @@ Constructor parameters description
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 ### Search merchants
 
@@ -196,7 +195,7 @@ The type of data in result is MerchantDTO, and the structure shows below.
 |phone|String|Phone number of merchant.|
 |status|String|Status of merchant. Value can be one of A(Active), P(Pendding) and S(Suspend)|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|Dynamic attributes of merchant.|
-|merchantCategory|List&lt;MerchantCategoryDTO&gt;|Categories of merchant belongs to.|
+|merchantCategory|List\<MerchantCategoryDTO\>|Categories of merchant belongs to.|
 
 The structure of SimpleResellerDTO already described in Search Merchants chapter.
 
@@ -241,8 +240,8 @@ Structure of class MerchantCreateRequest
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
 |createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant, the default value is false|
-|merchantCategoryNames|List&lt;String&gt;|true|Merchant categories. Make sure the categories are available.|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
+|merchantCategoryNames|List\<String\>|true|Merchant categories. Make sure the categories are available.|
+|entityAttributeValues|LinkedHashMap\<String, String\>|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
 |activateWhenCreate|Boolean|true|Whether to activate the merchant when create, default value is false|
 
 
@@ -390,8 +389,8 @@ Structure of class MerchantUpdateRequest
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
 |createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant|
-|merchantCategoryNames|List&lt;String&gt;|true|Merchant categories. Make sure the categories are available.|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
+|merchantCategoryNames|List\<String\>|true|Merchant categories. Make sure the categories are available.|
+|entityAttributeValues|LinkedHashMap\<String, String\>|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
 
 
 **Sample codes**

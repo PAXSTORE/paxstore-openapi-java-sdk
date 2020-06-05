@@ -8,7 +8,6 @@ All the terminal APIs are in the class *com.pax.market.api.sdk.java.api.terminal
 
 ```
 public TerminalApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalApi(String baseUrl, String apiKey, String apiSecret, Locale locale)
 ```
 
 **Constructor parameters description**
@@ -18,7 +17,7 @@ public TerminalApi(String baseUrl, String apiKey, String apiSecret, Locale local
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 
 ### Search terminals
@@ -100,7 +99,7 @@ Structure of class TerminalDTO
 |location|String|The location|
 |geoLocation|TerminalLocationDTO| The geo location of the terminal|
 |installedFirmware|TerminalInstalledFirmwareDTO| The installed firmware of the terminal|
-|installedApks|List<TerminalInstalledApkDTO>| The installed applications of the terminal|
+|installedApks|List\<TerminalInstalledApkDTO\>| The installed applications of the terminal|
 
 Structure of class TerminalLocationDTO
 
@@ -865,8 +864,8 @@ Structure of class TerminalGroupRequest
 
 | Property Name | Type      | Nullable | Description      |
 | :------------ | :-------- | :------- | :--------------- |
-| terminalIds   | Set<Long> | false    | terminal id list |
-| groupIds      | Set<Long> | false    | group id list    |
+| terminalIds   | Set\<Long\> | false    | terminal id list |
+| groupIds      | Set\<Long\> | false    | group id list    |
 
 **Sample codes**
 

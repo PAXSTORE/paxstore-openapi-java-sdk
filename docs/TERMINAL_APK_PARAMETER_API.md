@@ -6,7 +6,6 @@ All terminal related APK parameter APIs are encapsulated in classes *com.pax.mar
 
 ```
 public TerminalApkParameterApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalApkParameterApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -16,7 +15,7 @@ public TerminalApkParameterApi(String baseUrl, String apiKey, String apiSecret, 
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 
 ### search terminal apk parameter by templateName ,packageName,versionName
@@ -238,8 +237,8 @@ Structure of class CreateApkParameterRequest
 |version|String|false|The version name of application which you want to push|
 |name|String|false|The template name|
 |paramTemplateName|String|false|The template file name of paramter application|
-|parameters|Map<String, String>|true|The parameter key and value, the key the PID in template|
-|base64FileParameters|List<FileParameter>|true|The parameter of file type|
+|parameters|Map\<String, String\>|true|The parameter key and value, the key the PID in template|
+|base64FileParameters|List\<FileParameter\>|true|The parameter of file type|
 
 Structure of class FileParameter
 
@@ -333,8 +332,8 @@ Structure of class UpdateApkParameterRequest
 | Property Name     | Type                | Nullable | Description                                              |
 | :---------------- | :------------------ | :------- | :------------------------------------------------------- |
 | paramTemplateName | String              | true     | The name of param template                               |
-| parameters        | Map<String, String> | true     | The parameter key and value, the key the PID in template |
-|base64FileParameters|List<FileParameter> |true      | The parameter of file type|
+| parameters        | Map\<String, String\> | true     | The parameter key and value, the key the PID in template |
+|base64FileParameters|List\<FileParameter\> |true      | The parameter of file type|
 
 Note:UpdateApkParameterRequest cannot be empty or  paramTemplateName and  parameters cannot be empty at same time.
 

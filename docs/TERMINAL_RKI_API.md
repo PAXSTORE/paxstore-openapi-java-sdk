@@ -6,7 +6,6 @@ All the push RKI to terminal related APIs are encapsulated in the class *com.pax
 
 ```
 public TerminalRkiApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalRkiApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -16,7 +15,7 @@ public TerminalRkiApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 | baseUrl | String | the base url of REST API |
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 
 ### Push Rki

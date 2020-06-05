@@ -6,7 +6,6 @@ All the push terminal group apk to terminal related APIs are encapsulated in the
 
 ```
 public TerminalGroupApkApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalGroupApkApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -16,7 +15,7 @@ public TerminalGroupApkApi(String baseUrl, String apiKey, String apiSecret, Loca
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 
 ### Get terminal group apk
@@ -37,7 +36,7 @@ Get terminal group apk by groupApkId and pidList
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |groupApkId|Long|false|the id of terminalGroupApk|
-|pidList|List<String>|true|the pid of the configured parameters to return|
+|pidList|List\<String\>|true|the pid of the configured parameters to return|
 
 **Sample codes**
 
@@ -209,7 +208,7 @@ The type in data is TerminalGroupApkParamDTO. And the structure like below.
 | Name                 | Type               | Description                       |
 | :------------------- | :----------------- | :-------------------------------- |
 | paramTemplateName    | String             |                                   |
-| configuredParameters | Map<String,String> | Configuration parameters in param |
+| configuredParameters | Map\<String,String\> | Configuration parameters in param |
 | pendingCount         | int                |                                   |
 | successCount         | int                |                                   |
 | failedCount          | int                |                                   |
@@ -263,8 +262,8 @@ Structure of class CreateTerminalGroupApkRequest.
 | packageName          | String              | false    | the package name of push apk                                 |
 | version              | String              | true     | The package name which indicate the application you want to push |
 | templateName         | String              | true     | The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10. |
-| parameters           | Map<String, String> | true     | The parameter key and value, the key the PID in template     |
-| base64FileParameters | List<FileParameter> | true     | The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb |
+| parameters           | Map\<String, String\> | true     | The parameter key and value, the key the PID in template     |
+| base64FileParameters | List\<FileParameter\> | true     | The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb |
 
 Structure of class FileParameter
 

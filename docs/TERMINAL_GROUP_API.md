@@ -6,7 +6,6 @@ All APIs related to terminal grouping operations are encapsulated in this class 
 
 ```
 public TerminalGroupApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalGroupApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -16,7 +15,7 @@ public TerminalGroupApi(String baseUrl, String apiKey, String apiSecret, Locale 
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 
 ### Search terminal group
@@ -114,7 +113,7 @@ The type in dataSet is TerminalGroupDTO. And the structure like below.
 | terminalCount              | int          | Number of terminals in the terminal group                    |
 | dynamic                    | Boolean      | Dynamic group or general group                               |
 | containSubResellerTerminal | Boolean      | Include sub resellers or not                                 |
-| merchantNames              | List<String> | the merchant names                                           |
+| merchantNames              | List\<String\> | the merchant names                                           |
 
 **Possible validation errors**
 
@@ -207,7 +206,7 @@ The type in data is TerminalGroupDTO. And the structure like below.
 | terminalCount              | int          | Number of terminals in the terminal group                    |
 | dynamic                    | Boolean      | Dynamic group or general group                               |
 | containSubResellerTerminal | Boolean      | Include sub resellers or not                                 |
-| merchantNames              | List<String> | the merchant names                                           |
+| merchantNames              | List\<String\> | the merchant names                                           |
 
 **Possible client validation errors**  
 
@@ -244,7 +243,7 @@ Structure of class CreateTerminalGroupRequest
 | status                     | String       | true     | the status of terminal group,the values can be 'P' and 'A', if the value is null will create group with default status P(Pending)|
 | dynamic                    | Boolean      | true     | Indicate whether the group is dynamic group or general group, the default value is false (general group)                                   |
 | containSubResellerTerminal | Boolean      | true     | Indicate whether to conatin sub reseller's termnal for dynamic group, this property is for dynamic group, if the value is null will use the default value false                                   |
-| merchantNameList           | List<String> | true     | merchant names, only terminals belong to those merchant can be add to group, this property is for dynamic group                                                            |
+| merchantNameList           | List\<String\> | true     | merchant names, only terminals belong to those merchant can be add to group, this property is for dynamic group                                                            |
 
 **Sample codes**
 
@@ -324,7 +323,7 @@ The type in data is TerminalGroupDTO. And the structure like below.
 | terminalCount              | int          | Number of terminals in the terminal group                    |
 | dynamic                    | Boolean      | Dynamic group or general group                               |
 | containSubResellerTerminal | Boolean      | Include sub resellers or not                                 |
-| merchantNames              | List<String> | the merchant names                                           |
+| merchantNames              | List\<String\> | the merchant names                                           |
 
 **Possible client validation errors**
 
@@ -489,7 +488,7 @@ Structure of class UpdateTerminalGroupRequest
 |description|String|true|the description of terminal group|
 |modelName|String|true| the name of model, if the value is null API won't update the origial value of this property|
 |resellerName|String|true|the name of reseller, if the value is null API won't update the origial value of this property|
-|merchantNameList|List<String>|true|the name of merchants|
+|merchantNameList|List\<String\>|true|the name of merchants|
 
 Note: name, description, modelName, resellerName, and merchantNameList cannot be empty at same time. When it is not inactive, only name and description can be modified.
 
@@ -876,7 +875,7 @@ This api allows the third party system add terminal to group.
 | Parameter Name | Type      | Nullable | Description                                    |
 | :------------- | :-------- | :------- | :--------------------------------------------- |
 | groupId        | Long      | false    | The id of terminal group                       |
-| terminalIds    | Set<Long> | false    | terminal ids to be added to the terminal group |
+| terminalIds    | Set\<Long\> | false    | terminal ids to be added to the terminal group |
 
 **Sample codes**
 
@@ -944,7 +943,7 @@ public Result<String> removeTerminalOutGroup(Long groupId, Set<Long> terminalIds
 | Parameter Name | Type      | Nullable | Description                                    |
 | :------------- | :-------- | :------- | :--------------------------------------------- |
 | groupId        | Long      | false    | The id of terminal group                       |
-| terminalIds    | Set<Long> | false    | terminal ids to be added to the terminal group |
+| terminalIds    | Set\<Long\> | false    | terminal ids to be added to the terminal group |
 
 **Sample codes**
 

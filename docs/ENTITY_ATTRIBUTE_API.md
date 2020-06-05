@@ -6,7 +6,6 @@ All the entity attribute related APIs are encapsulated in the class *com.pax.mar
 
 ```
 public EntityAttributeApi(String baseUrl, String apiKey, String apiSecret);
-public EntityAttributeApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -16,7 +15,6 @@ public EntityAttributeApi(String baseUrl, String apiKey, String apiSecret, Local
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
 
 
@@ -108,7 +106,7 @@ The type in dataSet is EntityAttributeDTO. And the structure like below.
 | key                      | String                         |                                                    |
 | index                    | int                            |                                                    |
 | defaultLabel             | String                         |                                                    |
-| entityAttributeLabelList | List<EntityAttributeLabelInfo> | the EntityAttributeLabelInfo structure like below. |
+| entityAttributeLabelList | List\<EntityAttributeLabelInfo\> | the EntityAttributeLabelInfo structure like below. |
 
 The type in data is EntityAttributeLabelInfo. And the structure like below.
 
