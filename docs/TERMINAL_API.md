@@ -912,7 +912,7 @@ Result<String> result = terminalApi.batchAddTerminalToGroup(groupRequest);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalGroupRequest cannot be null !</font>  
+> <font color=red>Parameter terminalGroupRequest cannot be null!</font>  
 
 **Possible business codes**
 
@@ -986,7 +986,7 @@ Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConf
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1 !</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
 
 **Possible business codes**
 
@@ -1049,7 +1049,7 @@ Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(909744L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1 !</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
 
 **Possible business codes**
 
