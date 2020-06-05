@@ -19,7 +19,6 @@ public GoInsightApi(String baseUrl, String apiKey, String apiSecret, TimeZone ti
 |baseUrl|String|the base url of REST API|
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin/reseller console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin/reseller console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 |timeZone|TimeZone|the timeZone, the default timeZone is TimeZone.getTimeZone("UTC"), the biz data in return object depend on timeZone|
 
 Part of the timeZone available ids
