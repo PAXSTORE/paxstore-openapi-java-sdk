@@ -20,8 +20,8 @@ import java.util.TimeZone;
  */
 public class GoInsightApi extends BaseThirdPartySysApi {
     private static final Logger logger = LoggerFactory.getLogger(GoInsightApi.class.getSimpleName());
-    private final String SEARCH_GO_INSIGHT_DATA_URL = "/v1/3rdsys/goInsight/data/querying/{queryCode}";
-    private final int QUERY_CODE_LENGTH = 8;
+    private final static String SEARCH_GO_INSIGHT_DATA_URL = "/v1/3rdsys/goInsight/data/querying/{queryCode}";
+    private final static int QUERY_CODE_LENGTH = 8;
 
     public GoInsightApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);

@@ -51,6 +51,8 @@ public class BaseThirdPartySysApi{
     public static int readTimeout;
     public static int retryTimes = 5;
 
+    private TimeZone apiTimeZone = null;
+
     public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret) {
     	if(baseUrl.endsWith("/")) {
     		baseUrl = baseUrl.substring(0, baseUrl.length()-1);
@@ -72,7 +74,8 @@ public class BaseThirdPartySysApi{
         setDefaultTZ(timeZone);
         factory = Validation.buildDefaultValidatorFactory();
     }
-    
+
+    @Deprecated
     public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret, Locale locale) {
     	if(baseUrl.endsWith("/")) {
     		baseUrl = baseUrl.substring(0, baseUrl.length()-1);
@@ -85,6 +88,7 @@ public class BaseThirdPartySysApi{
         factory = Validation.buildDefaultValidatorFactory();
     }
 
+    @Deprecated
     public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret, Locale locale, TimeZone timeZone) {
         if(baseUrl.endsWith("/")) {
             baseUrl = baseUrl.substring(0, baseUrl.length()-1);
@@ -98,16 +102,16 @@ public class BaseThirdPartySysApi{
     }
 
     private void setDefaultLocal(Locale locale){
-        if(locale!=null) {
-            Locale.setDefault(locale);
-        }
+//        if(locale!=null) {
+//            Locale.setDefault(locale);
+//        }
     }
 
     private void setDefaultTZ(TimeZone timeZone){
         if(timeZone != null){
-            TimeZone.setDefault(timeZone);
+            apiTimeZone = timeZone;
         } else {
-            TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+            apiTimeZone = TimeZone.getTimeZone("UTC");
         }
     }
 
@@ -134,9 +138,10 @@ public class BaseThirdPartySysApi{
 	protected SdkRequest createSdkRequest(String requestMappingUrl) {
     	SdkRequest request = new SdkRequest(requestMappingUrl);
     	request.addHeader("content-language", Locale.getDefault().toString());
-    	request.addHeader("Time-Zone", TimeZone.getDefault().getID());
+    	request.addHeader("Time-Zone", apiTimeZone.getID());
     	return request;
     }
+
 
 	protected SdkRequest getPageRequest(String requestUrl, PageRequestDTO page) {
 		logger.debug("pageSize="+page.getPageSize());
