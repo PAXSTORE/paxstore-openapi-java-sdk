@@ -7,8 +7,6 @@ import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResponse;
 import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResultDTO;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Locale;
@@ -19,8 +17,7 @@ import java.util.TimeZone;
  * @date 2020/3/23
  */
 public class GoInsightApi extends BaseThirdPartySysApi {
-    private static final Logger logger = LoggerFactory.getLogger(GoInsightApi.class.getSimpleName());
-    private final static String SEARCH_GO_INSIGHT_DATA_URL = "/v1/3rdsys/goInsight/data/querying/{queryCode}";
+    private final static String SEARCH_GO_INSIGHT_DATA_URL = "/v1/3rdsys/goInsight/data/app-biz";
     private final static int QUERY_CODE_LENGTH = 8;
 
     public GoInsightApi(String baseUrl, String apiKey, String apiSecret) {
@@ -60,6 +57,7 @@ public class GoInsightApi extends BaseThirdPartySysApi {
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(SEARCH_GO_INSIGHT_DATA_URL.replace("{queryCode}", queryCode));
+        request.addRequestParam("queryCode", queryCode);
         if(pageNo != null && pageNo > 0 && pageSize != null && pageSize > 0){
             request.addRequestParam("pageSize", pageSize+"");
             request.addRequestParam("pageNo", pageNo+"");

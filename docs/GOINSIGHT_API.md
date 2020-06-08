@@ -86,7 +86,7 @@ Value of enum TimestampRangeType
 |LAST_WEEK|Last Week|
 |LAST_MONTH|Last Month|
 |LAST_YEAR|Last Year|
-|RECENT_DAY|Recent Day|
+|RECENT_DAY|Recent Day: Past 24h|
 |RECENT_WEEK|Recent Week|
 |RECENT_MONTH|Recent Month|
 |RECENT_YEAR|Recent Year|
