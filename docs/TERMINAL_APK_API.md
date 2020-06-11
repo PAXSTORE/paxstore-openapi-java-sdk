@@ -215,7 +215,7 @@ The type in dataSet is TerminalApkDTO. And the structure like below.
 |apkVersionCode|Long|the version code of apk|
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
-|actionStatus|String|the push status|
+|actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
 
 **Possible client validation errors**  
 
@@ -303,8 +303,8 @@ The type of data is TerminalApkDTO, and the structure shows below.
 |apkVersionCode|Long|the version code of apk|
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
-|actionStatus|String|the country code|
-|errorCode|String|the postcode of reseller|
+|actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
+|errorCode|String|the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes)|
 
 
 **Possible client validation errors**
@@ -312,35 +312,11 @@ The type of data is TerminalApkDTO, and the structure shows below.
 
 > <font color="red">Parameter terminalApkId cannot be null and cannot be less than 1!</font>
 
-
 **Possible business codes**
 
 |Business Code|Message|Description|
 |:---|:---|:---|
 |2001|Terminal app not found|&nbsp;|
-
-**Possible action status**
-
-|action status|status|Description|
-|:---|:---|:---|
-|0|None|The push task no start|
-|1|Pending|The push task staring|
-|2|Succeed|The push task is succeed|
-|3|Failed|The push task is failed|
-|4|Watting|The push task is watting, no need push|
-
-**Possible error codes**
-
-|Error Code|Description|
-|:---|:---|
-|1|Download error|
-|2|Install error|
-|3|App exist|
-|4|App version too low|
-|5|App param duplicate|
-|6|Apk not exist|
-|7|Apk version mismatch|
-|12|The push is disabled|
 
 
 ### Disable app push by serial number(TID) and package name

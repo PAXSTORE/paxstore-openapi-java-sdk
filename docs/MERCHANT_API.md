@@ -91,7 +91,7 @@ The type in dataSet is MerchantPageDTO. And the structure like below.
 |id|Long|The id of merchant.|
 |name|String|The name of merchant.|
 |reseller|SimpleResellerDTO|The reseller of the merchant belongs to.|
-|country|String|Country code of merchant.|
+|country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |contact|String|Contact of merchant.|
 |email|String|Email of merchant.|
 |phone|String|Phone number of merchant.|
@@ -189,7 +189,7 @@ The type of data in result is MerchantDTO, and the structure shows below.
 |id|Long|The id of merchant.|
 |name|String|The name of merchant.|
 |reseller|SimpleResellerDTO|The reseller of the merchant belongs to.|
-|country|String|Country code of merchant.|
+|country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |contact|String|Contact of merchant.|
 |email|String|Email of merchant.|
 |phone|String|Phone number of merchant.|
@@ -234,7 +234,7 @@ Structure of class MerchantCreateRequest
 |email|String|false|Email of merchant, max length is 255.|
 |resellerName|String|false|Reseller name of merchant, max length is 64. Make sure the reseller exist.|
 |contact|String|false|Contact of merchant, max length is 64.|
-|country|String|false|Country code of merchant, max length is 64. Please refer to country codes table.|
+|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |phone|String|false|Phone number of merchant, max length is 32.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
@@ -383,7 +383,7 @@ Structure of class MerchantUpdateRequest
 |email|String|true|Email of merchant, max length is 255. If email is empty the API won't change the email.|
 |resellerName|String|true|Reseller name of merchant, max length is 64. Make sure the reseller exist. If resellerName is empty the API won't update the reseller of the merchant|
 |contact|String|false|Contact of merchant, max length is 64.|
-|country|String|false|Country code of merchant, max length is 64. Please refer to country codes table.|
+|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |phone|String|false|Phone number of merchant, max length is 32.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|

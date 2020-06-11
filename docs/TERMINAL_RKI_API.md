@@ -175,7 +175,7 @@ The type in dataSet is PushRkiTaskDTO. And the structure like below.
 |rkiKey|String|the key of RKI|
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of push Rki, value can be one of A(Active) and S(Suspend)|
-|actionStatus|String|the push status|
+|actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
 |activatedDate|Date|the push Rki activated date|
 
 **Possible client validation errors**  
@@ -251,8 +251,8 @@ The type of data is PushRkiTaskDTO, and the structure shows below.
 |rkiKey|String|the key of RKI|
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
-|actionStatus|String|the push status|
-|errorCode|String|the error code of push task|
+|actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
+|errorCode|String|the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes)|
 |activatedDate|Date|the push Rki activated date|
 |remarks|String|the push Rki result remarks|
 

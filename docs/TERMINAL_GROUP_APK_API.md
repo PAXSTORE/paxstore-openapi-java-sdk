@@ -196,7 +196,7 @@ The type in dataSet is SimpleTerminalGroupApkDTO. And the structure like below.
 |effectiveTime|String|                                        |
 |expiredTime|String||
 |updatedDate|String||
-|actionStatus|int|action status|
+|actionStatus|int|the action status, value can be 0 and 1, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
 |status|String|the push status|
 |pendingCount|int||
 |successCount|int||
@@ -213,15 +213,7 @@ The type in data is TerminalGroupApkParamDTO. And the structure like below.
 | successCount         | int                |                                   |
 | failedCount          | int                |                                   |
 
-**Possible action status**
 
-| action status | status  | Description                            |
-| :------------ | :------ | :------------------------------------- |
-| 0             | None    | The push task no start                 |
-| 1             | Pending | The push task staring                  |
-| 2             | Succeed | The push task is succeed               |
-| 3             | Failed  | The push task is failed                |
-| 4             | Watting | The push task is watting, no need push |
 
 **Possible client validation errors**  
 
