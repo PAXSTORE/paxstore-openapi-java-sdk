@@ -1,3 +1,4 @@
+### [7.1.0](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/paxstore-openapi-java-sdk-7.1.0) 
 ### [7.0.3](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/paxstore-openapi-java-sdk-7.0.3) 
 ### [7.0.2](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/paxstore-openapi-java-sdk-7.0.2) 
 ### [6.3.1](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/paxstore-openapi-java-sdk-6.3.1)  

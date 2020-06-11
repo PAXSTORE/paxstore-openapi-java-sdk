@@ -11,14 +11,10 @@
  */
 package com.pax.market.api.sdk.java.api.terminalGroupApk.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.Map;
 
-@Getter
-@Setter
+
 public class TerminalGroupApkParamDTO implements Serializable {
 
     private static final long serialVersionUID = -2819937434488271303L;
@@ -27,6 +23,46 @@ public class TerminalGroupApkParamDTO implements Serializable {
     private int pendingCount;
     private int successCount;
     private int failedCount;
+
+    public String getParamTemplateName() {
+        return paramTemplateName;
+    }
+
+    public void setParamTemplateName(String paramTemplateName) {
+        this.paramTemplateName = paramTemplateName;
+    }
+
+    public Map<String, String> getConfiguredParameters() {
+        return configuredParameters;
+    }
+
+    public void setConfiguredParameters(Map<String, String> configuredParameters) {
+        this.configuredParameters = configuredParameters;
+    }
+
+    public int getPendingCount() {
+        return pendingCount;
+    }
+
+    public void setPendingCount(int pendingCount) {
+        this.pendingCount = pendingCount;
+    }
+
+    public int getSuccessCount() {
+        return successCount;
+    }
+
+    public void setSuccessCount(int successCount) {
+        this.successCount = successCount;
+    }
+
+    public int getFailedCount() {
+        return failedCount;
+    }
+
+    public void setFailedCount(int failedCount) {
+        this.failedCount = failedCount;
+    }
 
     @Override
     public String toString() {

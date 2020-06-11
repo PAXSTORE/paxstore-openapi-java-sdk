@@ -6,7 +6,6 @@ All the push terminal group apk to terminal related APIs are encapsulated in the
 
 ```
 public TerminalGroupApkApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalGroupApkApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -14,9 +13,9 @@ public TerminalGroupApkApi(String baseUrl, String apiKey, String apiSecret, Loca
 |Name|Type|Description|
 |:---|:---|:---|
 |baseUrl|String|the base url of REST API|
-|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 
 ### Get terminal group apk
@@ -37,7 +36,7 @@ Get terminal group apk by groupApkId and pidList
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |groupApkId|Long|false|the id of terminalGroupApk|
-|pidList|List<String>|true|the pid of the configured parameters to return|
+|pidList|List\<String\>|true|the pid of the configured parameters to return|
 
 **Sample codes**
 
@@ -197,7 +196,7 @@ The type in dataSet is SimpleTerminalGroupApkDTO. And the structure like below.
 |effectiveTime|String|                                        |
 |expiredTime|String||
 |updatedDate|String||
-|actionStatus|int|action status|
+|actionStatus|int|the action status, value can be 0 and 1, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
 |status|String|the push status|
 |pendingCount|int||
 |successCount|int||
@@ -209,20 +208,12 @@ The type in data is TerminalGroupApkParamDTO. And the structure like below.
 | Name                 | Type               | Description                       |
 | :------------------- | :----------------- | :-------------------------------- |
 | paramTemplateName    | String             |                                   |
-| configuredParameters | Map<String,String> | Configuration parameters in param |
+| configuredParameters | Map\<String,String\> | Configuration parameters in param |
 | pendingCount         | int                |                                   |
 | successCount         | int                |                                   |
 | failedCount          | int                |                                   |
 
-**Possible action status**
 
-| action status | status  | Description                            |
-| :------------ | :------ | :------------------------------------- |
-| 0             | None    | The push task no start                 |
-| 1             | Pending | The push task staring                  |
-| 2             | Succeed | The push task is succeed               |
-| 3             | Failed  | The push task is failed                |
-| 4             | Watting | The push task is watting, no need push |
 
 **Possible client validation errors**  
 
@@ -263,8 +254,8 @@ Structure of class CreateTerminalGroupApkRequest.
 | packageName          | String              | false    | the package name of push apk                                 |
 | version              | String              | true     | The package name which indicate the application you want to push |
 | templateName         | String              | true     | The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10. |
-| parameters           | Map<String, String> | true     | The parameter key and value, the key the PID in template     |
-| base64FileParameters | List<FileParameter> | true     | The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb |
+| parameters           | Map\<String, String\> | true     | The parameter key and value, the key the PID in template     |
+| base64FileParameters | List\<FileParameter\> | true     | The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb |
 
 Structure of class FileParameter
 

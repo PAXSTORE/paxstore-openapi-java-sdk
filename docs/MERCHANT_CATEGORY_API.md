@@ -9,7 +9,6 @@ All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.merchant
 
 ```
 public MerchantCategoryApi(String baseUrl, String apiKey, String apiSecret);  
-public MerchantCategoryApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 Constructor parameters description   
@@ -17,9 +16,9 @@ Constructor parameters description
 |Name|Type|Description|
 |:---|:---|:---|
 |baseUrl|String|the base url of REST API|
-|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 ### Get merchant categories
 
@@ -68,10 +67,6 @@ The structure of the class MerchantCategoryDTO like below.
 |id|Long|The id of merchant category.|
 |name|String|The name of merchant category.|
 |remarks|String|The remarks of merchant category.|
-
-
-
-
 
 
 
@@ -255,9 +250,6 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(
 
 
 
-
-
-
 ### Delete a merchant category
 
 Delete merchant category API allows the thirdparty system delete a exist merchant category by id.
@@ -338,7 +330,7 @@ public Result<ArrayList<MerchantCategoryDTO>> batchCreateMerchantCategory(List<M
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
-|merchantCategoryBatchCreateRequest|List&lt;MerchantCategoryCreateRequest&gt;|false|List of merchant category to create|
+|merchantCategoryBatchCreateRequest|List\<MerchantCategoryCreateRequest\>|false|List of merchant category to create|
 |skipExist|boolean|true|if the value is true, then the name of category in create list exist in system will skip when create, if the value is false then all the categories in create list won't created in system. The default value is false.|
 
 

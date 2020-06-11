@@ -11,23 +11,15 @@
  */
 package com.pax.market.api.sdk.java.api.terminal.dto;
 
-
-import java.io.Serializable;
+import com.pax.market.api.sdk.java.api.base.dto.Response;
 
 /**
  * @Description
  * @Author: Shawn
- * @Date: 2020/3/19
+ * @Date: 2020/5/18
  */
-public class TerminalRemoteConfigRequest implements Serializable {
-    private static final long serialVersionUID = -4927756870104996001L;
-    private boolean allowRemoteChange;
+public class TerminalPedResponse extends Response<TerminalPedDTO> {
 
-    public boolean isAllowRemoteChange() {
-        return allowRemoteChange;
-    }
+    private static final long serialVersionUID = -3783910732741586694L;
 
-    public void setAllowRemoteChange(boolean allowRemoteChange) {
-        this.allowRemoteChange = allowRemoteChange;
-    }
 }

@@ -54,7 +54,11 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String ADD_TERMINAL_TO_GROUP_URL = "/v1/3rdsys/terminals/groups";
 
-    protected static final String UPDATE_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/remote/config";
+    protected static final String UPDATE_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/config";
+
+    protected static final String GET_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/config";
+
+    protected static final String GET_TERMINAL_PED_STATUS_URL = "/v1/3rdsys/terminals/{terminalId}/ped";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -93,9 +97,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 		request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
 
         TerminalPageResponse terminalPageDTO = EnhancedJsonUtils.fromJson(client.execute(request), TerminalPageResponse.class);
-        Result<TerminalDTO> result = new Result<TerminalDTO>(terminalPageDTO);
 
-        return result;
+        return new Result<TerminalDTO>(terminalPageDTO);
     }
 
 
@@ -108,8 +111,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
-        Result<TerminalDTO> result = new Result<TerminalDTO>(terminalResponse);
-        return result;
+        return new Result<TerminalDTO>(terminalResponse);
     }
 
     public Result<String> activateTerminal(Long terminalId) {
@@ -122,8 +124,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(ACTIVE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.PUT);
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<String>(emptyResponse);
     }
 
     public Result<String> disableTerminal(Long terminalId) {
@@ -136,8 +137,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(DISABLE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.PUT);
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<String>(emptyResponse);
     }
 
     public Result<String> moveTerminal(Long terminalId, String resellerName, String merchantName) {
@@ -157,11 +157,13 @@ public class TerminalApi extends BaseThirdPartySysApi {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(MOVE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.PUT);
-        request.addRequestParam("resellerName", resellerName);
-        request.addRequestParam("merchantName", merchantName);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        TerminalMoveRequest terminalMoveRequest = new TerminalMoveRequest();
+        terminalMoveRequest.setResellerName(resellerName);
+        terminalMoveRequest.setMerchantName(merchantName);
+        request.setRequestBody(new Gson().toJson(terminalMoveRequest, TerminalMoveRequest.class));
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<String>(emptyResponse);
     }
 
     public Result<String> deleteTerminal(Long terminalId) {
@@ -174,8 +176,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(DELETE_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.DELETE);
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<String>(emptyResponse);
     }
 
     public Result<TerminalDTO> createTerminal(TerminalCreateRequest terminalCreateRequest) {
@@ -189,8 +190,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.setRequestBody(new Gson().toJson(terminalCreateRequest, TerminalCreateRequest.class));
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
-        Result<TerminalDTO> result = new Result<TerminalDTO>(terminalResponse);
-        return result;
+        return new Result<TerminalDTO>(terminalResponse);
     }
 
     public Result<TerminalDTO> updateTerminal(Long terminalId, TerminalUpdateRequest terminalUpdateRequest) {
@@ -205,12 +205,11 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(terminalUpdateRequest, TerminalUpdateRequest.class));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
-        Result<TerminalDTO> result = new Result<TerminalDTO>(terminalResponse);
-        return result;
+        return new Result<TerminalDTO>(terminalResponse);
     }
 
     public Result<String> batchAddTerminalToGroup(TerminalGroupRequest groupRequest){
-        List<String> validationErrs = validateCreate(groupRequest, "parameter.terminalCreateRequest.null");
+        List<String> validationErrs = validateCreate(groupRequest, "parameter.terminalGroupRequest.null");
         if (validationErrs.size() > 0) {
             return new Result<String>(validationErrs);
         }
@@ -224,19 +223,47 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     }
 
-    public Result<String> updateTerminalRemoteConfig(Long terminalId, TerminalRemoteConfigRequest remoteConfigRequest){
+    public Result<String> updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest){
         logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateUpdate(terminalId, remoteConfigRequest, "parameter.terminalId.invalid", "parameter.terminalRemoteConfigRequest.null");
+        List<String> validationErrs = validateUpdate(terminalId, terminalConfigUpdateRequest, "parameter.terminalId.invalid", "parameter.terminalRemoteConfigRequest.null");
         if (validationErrs.size() > 0) {
             return new Result<String>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(UPDATE_TERMINAL_REMOTE_CONFIG_URL.replace("{terminalId}", terminalId.toString()));
-        request.setRequestMethod(RequestMethod.POST);
+        request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(remoteConfigRequest, TerminalRemoteConfigRequest.class));
+        request.setRequestBody(new Gson().toJson(terminalConfigUpdateRequest, TerminalConfigUpdateRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<String>(emptyResponse);
+    }
+
+    public Result<TerminalConfigDTO> getTerminalConfig(Long terminalId){
+        logger.debug("terminalId=" + terminalId);
+        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
+        if (validationErrs.size() > 0) {
+            return new Result<TerminalConfigDTO>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_REMOTE_CONFIG_URL.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        TerminalConfigResponse terminalConfigResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalConfigResponse.class);
+        return new Result<TerminalConfigDTO>(terminalConfigResponse);
+    }
+
+    public Result<TerminalPedDTO> getTerminalPed(Long terminalId){
+        logger.debug("terminalId=" + terminalId);
+        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
+        if (validationErrs.size() > 0) {
+            return new Result<TerminalPedDTO>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_PED_STATUS_URL.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        TerminalPedResponse terminalPedResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalPedResponse.class);
+        return  new Result<TerminalPedDTO>(terminalPedResponse);
     }
 
     public enum TerminalStatus {

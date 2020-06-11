@@ -8,7 +8,6 @@ All the terminal estate APIs are in the class *com.pax.market.api.sdk.java.api.t
 
 ```
 public TerminalEstateApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalEstateApi(String baseUrl, String apiKey, String apiSecret, Locale locale)
 ```
 
 **Constructor parameters description**
@@ -16,9 +15,9 @@ public TerminalEstateApi(String baseUrl, String apiKey, String apiSecret, Locale
 |Name|Type|Description|
 |:----|:----|:----|
 |baseUrl|String|the base url of REST API|
-|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 
 ### Verify Terminal Estate  

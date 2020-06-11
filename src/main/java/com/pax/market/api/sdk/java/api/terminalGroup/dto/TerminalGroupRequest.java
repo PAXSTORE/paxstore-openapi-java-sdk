@@ -11,9 +11,6 @@
  */
 package com.pax.market.api.sdk.java.api.terminalGroup.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.Set;
 
@@ -24,12 +21,26 @@ import java.util.Set;
  * @Version 7.1
  */
 
-@Getter
-@Setter
 public class TerminalGroupRequest implements Serializable {
     private static final long serialVersionUID = -6479044740436049647L;
 
     private Set<Long> terminalIds;
 
     private Set<Long> groupIds;
+
+    public Set<Long> getTerminalIds() {
+        return terminalIds;
+    }
+
+    public void setTerminalIds(Set<Long> terminalIds) {
+        this.terminalIds = terminalIds;
+    }
+
+    public Set<Long> getGroupIds() {
+        return groupIds;
+    }
+
+    public void setGroupIds(Set<Long> groupIds) {
+        this.groupIds = groupIds;
+    }
 }

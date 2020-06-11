@@ -8,7 +8,6 @@ User can customize the additional attributes for reseller. To add/delete/update 
 
 ```
 public ResellerApi(String baseUrl, String apiKey, String apiSecret);
-public ResellerApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -16,9 +15,9 @@ public ResellerApi(String baseUrl, String apiKey, String apiSecret, Locale local
 |Name|Type|Description|
 |:---|:---|:---|
 |baseUrl|String|the base url of REST API|
-|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 <br>
 
@@ -51,7 +50,7 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 ```
 ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super", ResellerStatus.Suspend);
-```    
+```
 
 
 
@@ -105,7 +104,7 @@ The type in dataSet of is ResellerPageDTO. And the structure shows like below.
 |id|Long|the id of reseller|
 |name|String|the name of reseller|
 |phone|String|the phone number of reseller|
-|country|String|the country code|
+|country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |postcode|String|the postcode of reseller|
 |email|String|the email of reseller|
 |status|String|the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)|
@@ -194,12 +193,12 @@ The type of data is ResellerDTO, and the structure shows below.
 |id|Long|the id of reseller|
 |name|String|the name of reseller|
 |phone|String|the phone number of reseller|
-|country|String|the country code|
+|country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |postcode|String|the postcode of reseller|
 |email|String|the email of reseller|
 |status|String|the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)|
 |parent|SimpleResellerDTO|reseller's parent|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|dynamic attributes|
+|entityAttributeValues|LinkedHashMap\<String, String\>|dynamic attributes|
 <br>
 Structure of SimpleResellerDTO
 
@@ -242,14 +241,14 @@ Structure of class ResellerCreateRequest
 |:---|:---|:---|:---|
 |name|String|false|Name of reseller, max length is 64.|
 |email|String|false|Email of reseller, max length is 255.|
-|country|String|false|Country code of reseller, max length is 64.|
+|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |contact|String|false|contact of reseller, max length is 64.|
 |phone|String|false|Phone number of reseller, max length is 32. Sample value 400-86554555.|
 |postcode|String|true|Post code, max length is 32. Sample value 510250.|
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
 |parentResellerName|String|true|Parent reseller name, if it is empty will set the root reseller of current marketplace as the parent reseller|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
+|entityAttributeValues|LinkedHashMap\<String, String\>|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
 |activateWhenCreate|Boolean|true|Whether to activate the reseller when create, default value is false|
 
 
@@ -380,14 +379,14 @@ Structure of class ResellerUpdateRequest
 |:---|:---|:---|:---|
 |name|String|false|Name of reseller, max length is 64.|
 |email|String|true|Email of reseller, max length is 255. Only the pending reseller can update the email. For other reseller change email please call replaceResellerEmail API. If email is empty API won't update the email.|
-|country|String|false|Country code of reseller, max length is 64.|
+|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |contact|String|false|contact of reseller, max length is 64.|
 |phone|String|false|Phone number of reseller, max length is 32. Sample value 400-86554555.|
 |postcode|String|true|Post code, max length is 32. Sample value 510250.|
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
 |parentResellerName|String|true|Do not suggest set value for this property. If set value please keep the parentResellerName same as the original parentResellerName. Otherwise API will return a 1830 business code.|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|  
+|entityAttributeValues|LinkedHashMap\<String, String\>|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
 
 
 **Sample codes**
@@ -795,7 +794,7 @@ public Result<ResellerRkiKeyPageDTO> searchResellerRkiKeyList(Long resellerId, i
 ```
 ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerRkiKeyPageDTO> resultRkiKey = resellerApi.searchResellerRkiKeyList(51739L, 1, 10, null);
-```    
+```
 
 
 

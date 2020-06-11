@@ -11,11 +11,7 @@
  */
 package com.pax.market.api.sdk.java.api.terminalGroupApk.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @Description
@@ -24,8 +20,6 @@ import java.util.Date;
  * @Version 7.1
  */
 
-@Getter
-@Setter
 public class SimpleTerminalGroupApkDTO implements Serializable {
 
     private static final long serialVersionUID = -2819937434488271303L;
@@ -42,6 +36,110 @@ public class SimpleTerminalGroupApkDTO implements Serializable {
     private int successCount;
     private int failedCount;
     private TerminalGroupApkParamDTO groupApkParam;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getApkPackageName() {
+        return apkPackageName;
+    }
+
+    public void setApkPackageName(String apkPackageName) {
+        this.apkPackageName = apkPackageName;
+    }
+
+    public Long getApkVersionCode() {
+        return apkVersionCode;
+    }
+
+    public void setApkVersionCode(Long apkVersionCode) {
+        this.apkVersionCode = apkVersionCode;
+    }
+
+    public String getApkVersionName() {
+        return apkVersionName;
+    }
+
+    public void setApkVersionName(String apkVersionName) {
+        this.apkVersionName = apkVersionName;
+    }
+
+    public Long getEffectiveTime() {
+        return effectiveTime;
+    }
+
+    public void setEffectiveTime(Long effectiveTime) {
+        this.effectiveTime = effectiveTime;
+    }
+
+    public Long getExpiredTime() {
+        return expiredTime;
+    }
+
+    public void setExpiredTime(Long expiredTime) {
+        this.expiredTime = expiredTime;
+    }
+
+    public Long getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Long updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public int getActionStatus() {
+        return actionStatus;
+    }
+
+    public void setActionStatus(int actionStatus) {
+        this.actionStatus = actionStatus;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getPendingCount() {
+        return pendingCount;
+    }
+
+    public void setPendingCount(int pendingCount) {
+        this.pendingCount = pendingCount;
+    }
+
+    public int getSuccessCount() {
+        return successCount;
+    }
+
+    public void setSuccessCount(int successCount) {
+        this.successCount = successCount;
+    }
+
+    public int getFailedCount() {
+        return failedCount;
+    }
+
+    public void setFailedCount(int failedCount) {
+        this.failedCount = failedCount;
+    }
+
+    public TerminalGroupApkParamDTO getGroupApkParam() {
+        return groupApkParam;
+    }
+
+    public void setGroupApkParam(TerminalGroupApkParamDTO groupApkParam) {
+        this.groupApkParam = groupApkParam;
+    }
 
     @Override
     public String toString() {

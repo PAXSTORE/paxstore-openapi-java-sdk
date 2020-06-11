@@ -6,7 +6,6 @@ All the push apk to terminal related APIs are encapsulated in the class *com.pax
 
 ```
 public TerminalApkApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalApkApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -14,9 +13,8 @@ public TerminalApkApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 |Name|Type|Description|
 |:---|:---|:---|
 |baseUrl|String|the base url of REST API|
-|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
 
 ### Push apk
@@ -47,8 +45,9 @@ Structure of class TerminalCreateRequest
 |packageName|String|false|The package name which indicate the application you want to push to the terminal|
 |version|String|true|The version name of application which you want to push, if it is blank API will use the latest version|
 |templateName|String|true|The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10.|
-|parameters|Map&lt;String, String&gt;|false|The parameter key and value, the key the PID in template|
-|base64FileParameters|List&lt;FileParameter&gt;|false|The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb|
+|parameters|Map\<String, String\>|false|The parameter key and value, the key the PID in template|
+|base64FileParameters|List\<FileParameter\>|false|The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb|
+|pushTemplateName|String|true|The push template name|
 
 Structure of class FileParameter
 
@@ -217,7 +216,7 @@ The type in dataSet is TerminalApkDTO. And the structure like below.
 |apkVersionCode|Long|the version code of apk|
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
-|actionStatus|String|the push status|
+|actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
 
 **Possible client validation errors**  
 
@@ -305,8 +304,8 @@ The type of data is TerminalApkDTO, and the structure shows below.
 |apkVersionCode|Long|the version code of apk|
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
-|actionStatus|String|the country code|
-|errorCode|String|the postcode of reseller|
+|actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
+|errorCode|String|the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes)|
 
 
 **Possible client validation errors**
@@ -314,35 +313,11 @@ The type of data is TerminalApkDTO, and the structure shows below.
 
 > <font color="red">Parameter terminalApkId cannot be null and cannot be less than 1!</font>
 
-
 **Possible business codes**
 
 |Business Code|Message|Description|
 |:---|:---|:---|
 |2001|Terminal app not found|&nbsp;|
-
-**Possible action status**
-
-|action status|status|Description|
-|:---|:---|:---|
-|0|None|The push task no start|
-|1|Pending|The push task staring|
-|2|Succeed|The push task is succeed|
-|3|Failed|The push task is failed|
-|4|Watting|The push task is watting, no need push|
-
-**Possible error codes**
-
-|Error Code|Description|
-|:---|:---|
-|1|Download error|
-|2|Install error|
-|3|App exist|
-|4|App version too low|
-|5|App param duplicate|
-|6|Apk not exist|
-|7|Apk version mismatch|
-|12|The push is disabled|
 
 
 ### Disable app push by serial number(TID) and package name

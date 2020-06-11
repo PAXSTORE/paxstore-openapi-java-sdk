@@ -11,15 +11,14 @@
  */
 package com.pax.market.api.sdk.java.api.merchant.dto;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.List;
-
+import com.pax.market.api.sdk.java.api.merchant.MerchantApi.MerchantStatus;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.pax.market.api.sdk.java.api.merchant.MerchantApi.MerchantStatus;
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  *
@@ -61,12 +60,12 @@ public class MerchantCreateRequest implements Serializable{
 
 	@Length(max=64)
 	private String province;
+
+	@Length(max=255)
+	private String city;
 	
     @Length(max=16)
 	private String postcode;
-
-	@Length(max=255)
-    private String city;
 
     @Length(max=255)
     private String address;
@@ -157,14 +156,6 @@ public class MerchantCreateRequest implements Serializable{
 		this.postcode = postcode;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -195,6 +186,14 @@ public class MerchantCreateRequest implements Serializable{
 
 	public void setEntityAttributeValues(LinkedHashMap<String, String> entityAttributeValues) {
 		this.entityAttributeValues = entityAttributeValues;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public Boolean getActivateWhenCreate() {

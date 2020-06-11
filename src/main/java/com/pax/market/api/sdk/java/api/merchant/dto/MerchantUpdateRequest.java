@@ -11,13 +11,13 @@
  */
 package com.pax.market.api.sdk.java.api.merchant.dto;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 
 /**
@@ -27,7 +27,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class MerchantUpdateRequest implements Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -8474134725528888476L;
 
@@ -38,44 +38,44 @@ public class MerchantUpdateRequest implements Serializable{
 	@Length(max=255)
 	@Email
 	private String email;
-	
+
 	@Length(max=64)
-    private String resellerName;
-	
-    @NotBlank
+	private String resellerName;
+
+	@NotBlank
 	@Length(max=64)
 	private String contact;
 
-    @NotBlank
+	@NotBlank
 	@Length(max=64)
-    private String country;
-	
-    @NotBlank
-    @Length(max=32)
+	private String country;
+
+	@NotBlank
+	@Length(max=32)
 	private String phone;
 
 	@Length(max=64)
 	private String province;
-	
-    @Length(max=16)
+
+	@Length(max=16)
 	private String postcode;
 
 	@Length(max=255)
-    private String city;
+	private String city;
 
-    @Length(max=255)
-    private String address;
-    
-    @Length(max=3000)
-    private String description;
-    
-    private Boolean createUserFlag = Boolean.FALSE;
+	@Length(max=255)
+	private String address;
 
-    private List<String> merchantCategoryNames;
-	
+	@Length(max=3000)
+	private String description;
+
+	private Boolean createUserFlag = Boolean.FALSE;
+
+	private List<String> merchantCategoryNames;
+
 	private LinkedHashMap<String, String> entityAttributeValues;
 
-	
+
 	public Boolean getCreateUserFlag() {
 		return createUserFlag;
 	}
@@ -140,14 +140,6 @@ public class MerchantUpdateRequest implements Serializable{
 		this.province = province;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	public String getPostcode() {
 		return postcode;
 	}
@@ -187,6 +179,14 @@ public class MerchantUpdateRequest implements Serializable{
 
 	public void setEntityAttributeValues(LinkedHashMap<String, String> entityAttributeValues) {
 		this.entityAttributeValues = entityAttributeValues;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	@Override

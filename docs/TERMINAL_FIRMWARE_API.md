@@ -6,7 +6,6 @@ All the push firmware to terminal related APIs are encapsulated in the class *co
 
 ```
 public TerminalFirmwareApi(String baseUrl, String apiKey, String apiSecret);
-public TerminalFirmwareApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -16,7 +15,6 @@ public TerminalFirmwareApi(String baseUrl, String apiKey, String apiSecret, Loca
 | baseUrl | String | the base url of REST API |
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
 
 
 ### Push firmware
@@ -178,7 +176,7 @@ The type in dataSet is PushFirmwareTaskDTO. And the structure like below.
 |fmName|String|the name of firmware|
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of push firmware, value can be one of A(Active) and S(Suspend)|
-|actionStatus|String|the push status|
+|actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
 |activatedDate|Date|the push firmware activated date|
 
 **Possible client validation errors**  
@@ -255,8 +253,8 @@ The type of data is PushFirmwareTaskDTO, and the structure shows below.
 |fmName|String|the name of firmware|
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
-|actionStatus|String|the push status|
-|errorCode|String|the error code of push task|
+|actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
+|errorCode|String|the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes)|
 |activatedDate|Date|the push firmware activated date|
 
 
@@ -272,33 +270,7 @@ The type of data is PushFirmwareTaskDTO, and the structure shows below.
 |:---|:---|:---|
 |8101|Terminal firmware not found|&nbsp;|
 
-**Possible action status**
 
-|action status|status|Description|
-|:---|:---|:---|
-|0|None|The push task no start|
-|1|Pending|The push task staring|
-|2|Succeed|The push task is succeed|
-|3|Failed|The push task is failed|
-|4|Watting|The push task is watting, no need push|
-
-**Possible error codes**
-
-|Error Code|Description|
-|:---|:---|
-|1|Download error|
-|2|Install error|
-|12|The push is disabled|
-|13|The firmware is duplicate|
-|14|The firmware status invalid|
-|15|The firmware model pn mismatch with terminal|
-|16|The firmware version mismatch|
-|17|The firmware model mismatch with terminal|
-|18|The terminal no right to download this firmware|
-|19|The firmware already installed|
-|20|The firmware file version too low|
-|22|The firmware file deleted by user|
-|25|The firmware resource mismatch|
 
 
 ### Disable firmware push by serial number(TID) and firmware name

@@ -49,13 +49,6 @@ public class TerminalApkParameterApiTest {
         terminalApkParameterApi = new TerminalApkParameterApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET, Locale.ENGLISH);
     }
 
-    @Test
-    public void testGetTerminalApkParameter(){
-        Long apkParameterId = 1149L;
-        Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(apkParameterId);
-        logger.debug("Result of get terminal Apk Parameter: {}",result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
-    }
 
     @Test
     public void testSearchTerminalApkParameter(){

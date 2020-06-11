@@ -11,9 +11,6 @@
  */
 package com.pax.market.api.sdk.java.api.entityAttribute.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -24,8 +21,7 @@ import java.util.List;
  * @Version 7.1
  */
 
-@Getter
-@Setter
+
 public class EntityAttributeDTO implements Serializable {
 
     private static final long serialVersionUID = 8784795559463211636L;
@@ -41,6 +37,102 @@ public class EntityAttributeDTO implements Serializable {
     private int index;
     private String defaultLabel;
     private List<EntityAttributeLabelInfo> entityAttributeLabelList;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEntityType() {
+        return entityType;
+    }
+
+    public void setEntityType(String entityType) {
+        this.entityType = entityType;
+    }
+
+    public String getInputType() {
+        return inputType;
+    }
+
+    public void setInputType(String inputType) {
+        this.inputType = inputType;
+    }
+
+    public Integer getMinLength() {
+        return minLength;
+    }
+
+    public void setMinLength(Integer minLength) {
+        this.minLength = minLength;
+    }
+
+    public Integer getMaxLength() {
+        return maxLength;
+    }
+
+    public void setMaxLength(Integer maxLength) {
+        this.maxLength = maxLength;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
+    }
+
+    public String getRegex() {
+        return regex;
+    }
+
+    public void setRegex(String regex) {
+        this.regex = regex;
+    }
+
+    public String getSelector() {
+        return selector;
+    }
+
+    public void setSelector(String selector) {
+        this.selector = selector;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public String getDefaultLabel() {
+        return defaultLabel;
+    }
+
+    public void setDefaultLabel(String defaultLabel) {
+        this.defaultLabel = defaultLabel;
+    }
+
+    public List<EntityAttributeLabelInfo> getEntityAttributeLabelList() {
+        return entityAttributeLabelList;
+    }
+
+    public void setEntityAttributeLabelList(List<EntityAttributeLabelInfo> entityAttributeLabelList) {
+        this.entityAttributeLabelList = entityAttributeLabelList;
+    }
 
     @Override
     public String toString() {

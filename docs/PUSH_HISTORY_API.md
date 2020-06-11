@@ -6,7 +6,6 @@ Push history API is used to search the push result. The related APIs are encapsu
 
 ```
 public PushHistoryApi(String baseUrl, String apiKey, String apiSecret);
-public PushHistoryApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 **Constructor parameters description**
@@ -14,9 +13,9 @@ public PushHistoryApi(String baseUrl, String apiKey, String apiSecret, Locale lo
 |Name|Type|Description|
 |:---|:---|:---|
 |baseUrl|String|the base url of REST API|
-|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 ### **SearchParameterPushHistory**
 

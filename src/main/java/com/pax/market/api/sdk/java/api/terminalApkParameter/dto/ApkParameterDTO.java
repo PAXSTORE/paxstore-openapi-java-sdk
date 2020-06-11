@@ -14,8 +14,6 @@ package com.pax.market.api.sdk.java.api.terminalApkParameter.dto;
 
 
 import com.pax.market.api.sdk.java.api.app.dto.ApkDTO;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -27,8 +25,6 @@ import java.io.Serializable;
  * @Date: 2019/10/29 16:27
  * @Version 1.0
  */
-@Getter
-@Setter
 public class ApkParameterDTO implements Serializable {
 
 
@@ -40,6 +36,62 @@ public class ApkParameterDTO implements Serializable {
     private Long createdDate;
     private Long updatedDate;
     private Boolean apkAvailable;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public ApkDTO getApk() {
+        return apk;
+    }
+
+    public void setApk(ApkDTO apk) {
+        this.apk = apk;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getParamTemplateName() {
+        return paramTemplateName;
+    }
+
+    public void setParamTemplateName(String paramTemplateName) {
+        this.paramTemplateName = paramTemplateName;
+    }
+
+    public Long getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Long createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Long getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Long updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public Boolean getApkAvailable() {
+        return apkAvailable;
+    }
+
+    public void setApkAvailable(Boolean apkAvailable) {
+        this.apkAvailable = apkAvailable;
+    }
 
     @Override
     public String toString() {

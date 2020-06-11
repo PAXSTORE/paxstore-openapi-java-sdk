@@ -10,7 +10,6 @@ User can customize the additional attributes for merchant. To add/delete/update 
 
 ```
 public MerchantApi(String baseUrl, String apiKey, String apiSecret);
-public MerchantApi(String baseUrl, String apiKey, String apiSecret, Locale locale);
 ```
 
 Constructor parameters description   
@@ -18,9 +17,9 @@ Constructor parameters description
 |Name|Type|Description|
 |:---|:---|:---|
 |baseUrl|String|the base url of REST API|
-|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
-|locale|Locale|the locale, the default locale is Locale.ENGLISH, the language of message and errors in return object depend on locale|
+
 
 ### Search merchants
 
@@ -92,7 +91,7 @@ The type in dataSet is MerchantPageDTO. And the structure like below.
 |id|Long|The id of merchant.|
 |name|String|The name of merchant.|
 |reseller|SimpleResellerDTO|The reseller of the merchant belongs to.|
-|country|String|Country code of merchant.|
+|country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |contact|String|Contact of merchant.|
 |email|String|Email of merchant.|
 |phone|String|Phone number of merchant.|
@@ -190,13 +189,13 @@ The type of data in result is MerchantDTO, and the structure shows below.
 |id|Long|The id of merchant.|
 |name|String|The name of merchant.|
 |reseller|SimpleResellerDTO|The reseller of the merchant belongs to.|
-|country|String|Country code of merchant.|
+|country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |contact|String|Contact of merchant.|
 |email|String|Email of merchant.|
 |phone|String|Phone number of merchant.|
 |status|String|Status of merchant. Value can be one of A(Active), P(Pendding) and S(Suspend)|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|Dynamic attributes of merchant.|
-|merchantCategory|List&lt;MerchantCategoryDTO&gt;|Categories of merchant belongs to.|
+|merchantCategory|List\<MerchantCategoryDTO\>|Categories of merchant belongs to.|
 
 The structure of SimpleResellerDTO already described in Search Merchants chapter.
 
@@ -235,14 +234,14 @@ Structure of class MerchantCreateRequest
 |email|String|false|Email of merchant, max length is 255.|
 |resellerName|String|false|Reseller name of merchant, max length is 64. Make sure the reseller exist.|
 |contact|String|false|Contact of merchant, max length is 64.|
-|country|String|false|Country code of merchant, max length is 64. Please refer to country codes table.|
+|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |phone|String|false|Phone number of merchant, max length is 32.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
 |createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant, the default value is false|
-|merchantCategoryNames|List&lt;String&gt;|true|Merchant categories. Make sure the categories are available.|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
+|merchantCategoryNames|List\<String\>|true|Merchant categories. Make sure the categories are available.|
+|entityAttributeValues|LinkedHashMap\<String, String\>|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
 |activateWhenCreate|Boolean|true|Whether to activate the merchant when create, default value is false|
 
 
@@ -384,14 +383,14 @@ Structure of class MerchantUpdateRequest
 |email|String|true|Email of merchant, max length is 255. If email is empty the API won't change the email.|
 |resellerName|String|true|Reseller name of merchant, max length is 64. Make sure the reseller exist. If resellerName is empty the API won't update the reseller of the merchant|
 |contact|String|false|Contact of merchant, max length is 64.|
-|country|String|false|Country code of merchant, max length is 64. Please refer to country codes table.|
+|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |phone|String|false|Phone number of merchant, max length is 32.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
 |createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant|
-|merchantCategoryNames|List&lt;String&gt;|true|Merchant categories. Make sure the categories are available.|
-|entityAttributeValues|LinkedHashMap&lt;String, String&gt;|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
+|merchantCategoryNames|List\<String\>|true|Merchant categories. Make sure the categories are available.|
+|entityAttributeValues|LinkedHashMap\<String, String\>|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
 
 
 **Sample codes**
