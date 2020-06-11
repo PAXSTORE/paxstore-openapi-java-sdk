@@ -47,6 +47,7 @@ Structure of class TerminalCreateRequest
 |templateName|String|true|The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10.|
 |parameters|Map\<String, String\>|false|The parameter key and value, the key the PID in template|
 |base64FileParameters|List\<FileParameter\>|false|The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb|
+|pushTemplateName|String|true|The push template name|
 
 Structure of class FileParameter
 
