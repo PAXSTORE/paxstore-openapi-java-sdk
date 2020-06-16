@@ -12,13 +12,12 @@
 package com.pax.market.api.sdk.java.api.util;
 
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.constant.ResultCode;
-
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.net.ssl.*;
 import java.io.*;
 import java.net.*;
@@ -41,8 +40,9 @@ public abstract class ThirdPartySysHttpUtils {
 	private static final int BUFFER_SIZE = 4096;
 	private static final String DEFAULT_CHARSET = Constants.CHARSET_UTF8;
 	private static Locale locale = Locale.CHINA;
+	private static JsonParser jsonParser = new JsonParser();
 
-    /**
+	/**
      * Sets local.
      *
      * @param locale the locale
@@ -257,7 +257,6 @@ public abstract class ThirdPartySysHttpUtils {
 
 				return EnhancedJsonUtils.getSdkJson(ResultCode.SUCCESS, filePath);
 			}
-			String contentType = urlConnection.getContentType();
 			Map<String, List<String>> map = urlConnection.getHeaderFields();
 			rateLimit = map.get("X-RateLimit-Limit")==null?"":map.get("X-RateLimit-Limit").get(0);
 			rateLimitRemain = map.get("X-RateLimit-Remaining")==null?"":map.get("X-RateLimit-Remaining").get(0);
@@ -284,27 +283,11 @@ public abstract class ThirdPartySysHttpUtils {
 			}else if(!StringUtils.startsWith(resultStr, "{")){
 				resultStr=String.format("{%s}", resultStr);
 			}
-			JSONObject json = new JSONObject(resultStr);
-			
-			json.put("rateLimit", rateLimit);
-			json.put("rateLimitRemain", rateLimitRemain);
-			json.put("rateLimitReset", rateLimitReset);
-			
-//			return stringBuilder.toString();
+			JsonObject json = jsonParser.parse(resultStr).getAsJsonObject();
+			json.addProperty("rateLimit", rateLimit);
+			json.addProperty("rateLimitRemain", rateLimitRemain);
+			json.addProperty("rateLimitReset", rateLimitReset);
 			return json.toString();
-			
-//			if(urlConnection.getResponseCode() == 200) {
-//				return stringBuilder.toString();
-//			} else {
-//				if((urlConnection.getResponseCode() == 201 && requestMethod.equals(RequestMethod.POST.getValue()))
-//					|| (urlConnection.getResponseCode() == 204 && requestMethod.equals(RequestMethod.PUT.getValue()))) {
-//					//nothing todo
-//					return stringBuilder.toString();
-//				}else {
-//					return JsonUtils.getSdkJson(urlConnection.getResponseCode(), stringBuilder.toString());
-//				}
-//				
-//			}
 		} catch (SocketTimeoutException localSocketTimeoutException) {
 			if(StringUtils.containsIgnoreCase(localSocketTimeoutException.toString(),"Read timed out")){
 				FileUtils.deleteFile(filePath);
@@ -315,9 +298,6 @@ public abstract class ThirdPartySysHttpUtils {
 			}
 
 		} catch (ConnectException localConnectException) {
-//			FileUtils.deleteFile(filePath);
-//			logger.error("ConnectException Occurred. Details: {}", localConnectException.toString());
-//			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
 			throw localConnectException;
 
 		} catch (FileNotFoundException fileNotFoundException) {
