@@ -12,9 +12,9 @@
   4. Update terminal configuration(allow replacement)  ```updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest)```
 
 ### Dependency change
-* Remove lombok dependency
-
+* Remove lombok dependency  
 * Update guava from 20.0 to 28.2  
+* Update hibernate-validator to 5.3.5.Final
 
   
 
