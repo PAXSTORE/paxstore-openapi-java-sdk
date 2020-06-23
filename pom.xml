@@ -23,7 +23,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
 		<javadoc.opts>-Xdoclint:none</javadoc.opts>
-        <lombok.version>1.18.2</lombok.version>
     </properties>
 
     <dependencies>
