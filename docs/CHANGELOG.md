@@ -11,7 +11,12 @@
   3. Get terminal configuration(allow replacement)  ```getTerminalConfig(Long terminalId)```  
   4. Update terminal configuration(allow replacement)  ```updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest)```
 
+### Dependency change
+* Remove lombok dependency
 
+* Update guava from 20.0 to 28.2  
+
+  
 
 ## 7.1.1  
 
