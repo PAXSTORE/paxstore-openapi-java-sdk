@@ -63,7 +63,7 @@ Below figure listed the global business codes, those business codes may appear i
 |104|Client key is missing or invalid||
 |108|Marketplace is not available||
 |109|Marketplace is not active||
-|105|Client key is blocked||
+|105|External System Integration not enable||
 |103|Access token is invalid||
 |102|Access token is missing|&nbsp;|
 |101|Invalid request method|The request method is not correct|
