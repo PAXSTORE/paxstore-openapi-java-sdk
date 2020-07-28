@@ -40,4 +40,13 @@ public class AppApiTest  {
         logger.debug("Result of search app:{}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
+
+    @Test
+    public void testSearchAppWithSubscribedApp() {
+        Result<AppPageDTO> result = appApi.searchApp(1,1, AppSearchOrderBy.UpdatedDate_desc,
+                "", AppOsType.Android, AppChargeType.Free, AppBaseType.Normal, AppStatus.Active,
+                ApkStatus.Online, false, null,true);
+        logger.debug("Result of search app:{}", result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
 }

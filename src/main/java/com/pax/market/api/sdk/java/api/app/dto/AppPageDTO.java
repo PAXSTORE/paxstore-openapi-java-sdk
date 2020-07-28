@@ -35,7 +35,6 @@ public class AppPageDTO implements Serializable {
     private Integer chargeType;
     private BigDecimal price;
     private Long downloads;             // 下载次数
-    private SimpleDeveloperDTO developer;
     private List<ApkDTO> apkList;
 
     public Long getId() {
@@ -110,14 +109,6 @@ public class AppPageDTO implements Serializable {
         this.downloads = downloads;
     }
 
-    public SimpleDeveloperDTO getDeveloper() {
-        return developer;
-    }
-
-    public void setDeveloper(SimpleDeveloperDTO developer) {
-        this.developer = developer;
-    }
-
     public List<ApkDTO> getApkList() {
         return apkList;
     }
@@ -138,7 +129,6 @@ public class AppPageDTO implements Serializable {
                 ", chargeType=" + chargeType +
                 ", price=" + price +
                 ", downloads=" + downloads +
-                ", developer=" + developer +
                 ", apkList=" + apkList +
                 '}';
     }
