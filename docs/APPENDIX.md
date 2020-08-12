@@ -66,6 +66,7 @@ Description
 
 |Error Code|Description|
 |:--|:--|
+|0|Default Value|
 |1|Download Failed|
 |2|Install Failed|
 |3|App Exist|
