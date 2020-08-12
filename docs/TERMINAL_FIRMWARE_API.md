@@ -162,7 +162,7 @@ Result<PushFirmwareTaskDTO> result = terminalFirmwareApi.searchPushFirmwareTasks
             "terminalSN": "87879696",
             "status": "A",
             "actionStatus": 2,
-            "errorCode": ""
+            "errorCode": 0
 		}]
 	}
 }
@@ -239,7 +239,7 @@ Result<PushFirmwareTaskDTO> result = terminalFirmwareApi.getPushFirmwareTask(178
         "terminalSN": "87879696",
         "status": "A",
         "actionStatus": 2,
-        "errorCode": ""
+        "errorCode": 0
 	}
 }
 ```
@@ -254,7 +254,7 @@ The type of data is PushFirmwareTaskDTO, and the structure shows below.
 |terminalSN|String|the serialNo of terminal|
 |status|String|the status of terminal apk, value can be one of A(Active) and S(Suspend)|
 |actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
-|errorCode|String|the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes)|
+|errorCode|int|the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes)|
 |activatedDate|Date|the push firmware activated date|
 
 
