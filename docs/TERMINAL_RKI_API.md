@@ -240,7 +240,7 @@ Result<PushRkiTaskDTO> result = terminalRkiApi.getPushRkiTask(17850L);
         "terminalSN": "87879696",
         "status": "A",
         "actionStatus": 2,
-        "errorCode": ""
+        "errorCode": 0
 	}
 }
 ```
