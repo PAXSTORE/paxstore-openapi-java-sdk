@@ -24,6 +24,7 @@ public class GoInsightApi extends BaseThirdPartySysApi {
         super(baseUrl, apiKey, apiSecret);
     }
 
+    @Deprecated
     public GoInsightApi(String baseUrl, String apiKey, String apiSecret, Locale locale) {
         super(baseUrl, apiKey, apiSecret, locale);
     }
@@ -76,54 +77,37 @@ public class GoInsightApi extends BaseThirdPartySysApi {
      */
     public enum TimestampRangeType {
 
-        /**
-         * pass 1 day.
-         */
+        LAST_HOUR("p1h"),
         YESTERDAY("p1d"),
-        /**
-         * pass 1 week.
-         */
         LAST_WEEK("p1w"),
-        /**
-         * pass 1 month.
-         */
         LAST_MONTH("p1m"),
-        /**
-         * pass 1 year.
-         */
+        LAST_QUARTER("p1q"),
         LAST_YEAR("p1y"),
-        /**
-         * recent 1 day.
-         */
+        LAST_YEAR_BY_QUARTER("p1ybq"),
+
+        RECENT_5_MIN("r5min"),
+        RECENT_30_MIN("r30min"),
+        RECENT_HOUR("r1h"),
+        RECENT_3_HOUR("r3h"),
         RECENT_DAY("r1d"),
-        /**
-         * recent 1 week.
-         */
+        RECENT_2_DAY("r2d"),
+        RECENT_5_DAY("r5d"),
         RECENT_WEEK("r1w"),
-        /**
-         * recent 1 month.
-         */
         RECENT_MONTH("r1m"),
-        /**
-         * recent 1 year.
-         */
+        RECENT_3_MONTH("r3m"),
+        RECENT_3_MONTH_BY_WEEK("r3mbw"),
+        RECENT_6_MONTH("r6m"),
         RECENT_YEAR("r1y"),
-        /**
-         * this day.
-         */
+        RECENT_YEAR_BY_QUARTER("r1ybq"),
+
+        THIS_HOUR("t1h"),
         TODAY("t1d"),
-        /**
-         * this week.
-         */
         THIS_WEEK("t1w"),
-        /**
-         * this month.
-         */
         THIS_MONTH("t1m"),
-        /**
-         * this year.
-         */
-        THIS_YEAR("t1y");
+        THIS_QUARTER("t1q"),
+        THIS_QUARTER_BY_WEEK("t1qbw"),
+        THIS_YEAR("t1y"),
+        THIS_YEAR_BY_QUARTER("t1ybq");
 
         TimestampRangeType(String val) {
             this.val = val;
