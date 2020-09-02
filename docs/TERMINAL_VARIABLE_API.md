@@ -32,7 +32,7 @@ public Result<ParameterVariableDTO> getTerminalVariable(int pageNo, int pageSize
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.Variable_asc and SearchOrderBy.Variable_desc.|
 |tid|String|true|The tid of terminal, tid and serialNo cannot be empty at same time|
 |serialNo|String|true|The serial number of terminal|
@@ -109,7 +109,7 @@ The type in dataSet is ParameterVariableDTO. And the structure like below.
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 > <font color=red>Parameter tid and serialNo cannot be null at same time!</font> 
 
 

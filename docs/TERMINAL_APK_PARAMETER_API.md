@@ -34,7 +34,7 @@ search terminal  apk parameter history by templateName ,packageName  ,versionNam
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.ApkParameter_asc and SearchOrderBy.ApkParameter_desc.|
 |templateName|String|true|Apk parameter template name|
 |packageName|String|false|get by app packageName|
@@ -132,7 +132,7 @@ The structure of class ApkFileDTO
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 > <font color=red>Parameter packageName is mandatory!</font>  
 > <font color=red>Parameter versionName is mandatory!</font>  
 
@@ -306,7 +306,7 @@ Result<String> result = terminalApkParameterApi.createApkParameter(createApkPara
 > <font color=red>parameters and base64FileParameters cannot be null at same time!</font>  
 > <font color=red>Exceed max counter (10) of file type parameters!</font>  
 > <font color=red>Exceed max size (500kb) per file type parameters!</font>  
-  
+
 
 
 ### Update terminal apk parameter by id

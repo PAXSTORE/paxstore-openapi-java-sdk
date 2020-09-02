@@ -39,7 +39,7 @@ public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy 
 | Name| Type | Nullable|Description |
 |:--- | :---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|AppSearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of AppSearchOrderBy.AppName_desc, AppSearchOrderBy.AppName_asc, AppSearchOrderBy.Emial_desc, AppSearchOrderBy.Emial_asc, AppSearchOrderBy.UpdatedDate_desc and AppSearchOrderBy.UpdatedDate_asc.|
 |name|String|true|search filter by app name(parsed from apk file）, package name or the developer's name|
 |appStatus|AppStatus|true|the app status<br/> the value can be AppStatus.Active, AppStatus.Suspend|
@@ -145,7 +145,7 @@ The structure of class ApkFileDTO
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 
 
 

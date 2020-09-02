@@ -10,7 +10,7 @@ All the GoInsight related APIs are in the class *com.pax.market.api.sdk.java.api
 public GoInsightApi(String baseUrl, String apiKey, String apiSecret);
 
 public GoInsightApi(String baseUrl, String apiKey, String apiSecret, TimeZone timeZone)
-```  
+```
 
 **Constructor parameters description**
 
@@ -74,7 +74,7 @@ public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, Timestam
 |queryCode|String|false|search by GoInsight api query code|
 |rangeType|TimestampRangeType|true|you can choose the range of data results for search|
 |pageNo|int|true|page number, value must >= 1|
-|pageSize|int|true|the record number per page, range is 1 to 100 for details data query, range is 1 to 1000 for statistics data query|
+|pageSize|int|true|the record number per page, range is 1 to 100 for details data query, range is 1 to 100 for statistics data query|
 
 Note: The pageNo param will be ignore when your query result set type is statistics chart.
 
@@ -259,10 +259,10 @@ Structure of class Row
 |value|String|The dataset filed's value|
 
 **Possible client validation errors**
- 
+
 > <font color=red>Parameter queryCode cannot be null</font>  
 > <font color=red>Parameter queryCode length must is 8</font>
-> <font color=red>Parameter pageSize must be range is 1 to 1000</font>
+> <font color=red>Parameter pageSize must be range is 1 to 100</font>
 
 **Possible business codes**
 

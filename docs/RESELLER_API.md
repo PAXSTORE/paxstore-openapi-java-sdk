@@ -37,7 +37,7 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 | Name| Type | Nullable|Description |
 |:--- | :---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|ResellerSearchOrderBy|true|the field name of sort order by, if it is null the search result will sort by id by default, and the value of the parameter can be one of ResellerSearchOrderBy.Name, ResellerSearchOrderBy.Phone and ResellerSearchOrderBy.Contact|
 |name|String|true|search filter by reseller name|
 |status|ResellerStatus|true|the reseller status<br/> the value can be ResellerStatus.Active, ResellerStatus.Inactive, ResellerStatus.Suspend|
@@ -114,7 +114,7 @@ The type in dataSet of is ResellerPageDTO. And the structure shows like below.
 
 > <font color="red">pageSize:must be greater than or equal to 1</font><br>
 > <font color="red">pageNo:must be greater than or equal to 1</font><br>
-> <font color="red">pageSize:must be less than or equal to 1000</font>
+> <font color="red">pageSize:must be less than or equal to 100</font>
 
 
 

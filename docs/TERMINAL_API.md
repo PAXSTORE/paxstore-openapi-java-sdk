@@ -36,7 +36,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 | Name| Type | Nullable|Description |
 |:---- | :----|:----|:----|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
 |status|TerminalStatus|true|the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
 |snNameTID|String|true|search by serial number,name and TID|
@@ -133,7 +133,7 @@ Structure of class TerminalInstalledApkDTO
 
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 
 ### Search terminals include geo location, installed app and firmware  
 This API is similar to the search terminals API, it has additional 3 parameters, the details please refer to the Input parameter(s) description
@@ -148,7 +148,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 | Name| Type | Nullable|Description |
 |:---- | :----|:----|:----|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
 |status|TerminalStatus|true|the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
 |snNameTID|String|true|search by serial number,name and TID|
@@ -234,7 +234,7 @@ The type in dataSet of result is TerminalDTO.
 
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 
 
 
@@ -1137,7 +1137,7 @@ public Result<String> moveTerminal(Long terminalId, String resellerName, String 
 | :------------- | :--- | :------- | :------------- |
 | terminalId     | Long | false    | Terminal's id. |
 | resellerName| String | false | The target reseller name the terminal move to|
-| merchantName| String | false | The target merchant name the terminal move to|  
+| merchantName| String | false | The target merchant name the terminal move to|
 
 
 
