@@ -51,7 +51,7 @@ public class GoInsightApi extends BaseThirdPartySysApi {
             validationErrs.add(getMessage("parameter.queryCode.length.invalid"));
         }
         if (pageSize != null && (pageSize <=0 || pageSize > 1000)){
-            validationErrs.add(getMessage("parameter.pageSize.length.invalid"));
+            validationErrs.add(getMessage("insight.pageSize.length.invalid"));
         }
         if (validationErrs.size() > 0) {
             return new Result<DataQueryResultDTO>(validationErrs);

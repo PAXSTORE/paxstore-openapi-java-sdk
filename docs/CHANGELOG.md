@@ -6,7 +6,8 @@
 * Change the SDK default connection timeout and read timeout value from 30 seconds to 5 seconds. 
 
 ### Breaking changes
-* Max records per page is reduced from 1000 to 100. If pass a value greate than 100 SDK validation will fail.
+* Max records per page is reduced from 1000 to 100 (except GoInsightApi). If pass a value greate than 100 SDK validation will fail.
+* Developer inforamtion is removed from search result of AppApi
 
 
 ## 7.2.0  
