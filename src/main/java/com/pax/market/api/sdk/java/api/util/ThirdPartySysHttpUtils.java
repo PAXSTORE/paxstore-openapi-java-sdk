@@ -261,7 +261,8 @@ public abstract class ThirdPartySysHttpUtils {
 			rateLimit = map.get("X-RateLimit-Limit")==null?"":map.get("X-RateLimit-Limit").get(0);
 			rateLimitRemain = map.get("X-RateLimit-Remaining")==null?"":map.get("X-RateLimit-Remaining").get(0);
 			rateLimitReset = map.get("X-RateLimit-Reset")==null?"":map.get("X-RateLimit-Reset").get(0);
-
+			List<String> contentTypeHeaders = map.get("Content-Type");
+			String contentType = contentTypeHeaders!=null && contentTypeHeaders.size()>0?contentTypeHeaders.get(0):"";
 			if (urlConnection.getResponseCode() == 200 || urlConnection.getResponseCode() == 201
 					|| urlConnection.getResponseCode() == 204) {
 				bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -278,6 +279,9 @@ public abstract class ThirdPartySysHttpUtils {
 				stringBuilder.append(str);
 			}
 			String resultStr = stringBuilder.toString();
+			if(!StringUtils.containsIgnoreCase(contentType, "json")) {
+				logger.warn(resultStr);
+			}
 			if(StringUtils.isBlank(resultStr)) {
 				resultStr= "{}";
 			}else if(!StringUtils.startsWith(resultStr, "{")){
