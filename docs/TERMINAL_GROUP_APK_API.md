@@ -121,7 +121,7 @@ public Result<SimpleTerminalGroupApkDTO> searchTerminalGroupApk(int pageNo, int 
 | Name| Type | Nullable|Description |
 |:--- | :---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalGroupApkApi.SearchOrderBy.CreatedDate_desc and TerminalGroupApkApi.SearchOrderBy.CreatedDate_asc.|
 |groupId|Long|false|the id of the group|
 |pendingOnly|Boolean|true|Indicate whether to search the pending push task only|
@@ -219,7 +219,7 @@ The type in data is TerminalGroupApkParamDTO. And the structure like below.
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 
 **Possible business codes**
 

@@ -10,7 +10,7 @@ All the GoInsight related APIs are in the class *com.pax.market.api.sdk.java.api
 public GoInsightApi(String baseUrl, String apiKey, String apiSecret);
 
 public GoInsightApi(String baseUrl, String apiKey, String apiSecret, TimeZone timeZone)
-```  
+```
 
 **Constructor parameters description**
 
@@ -82,19 +82,34 @@ Value of enum TimestampRangeType
 
 | Value | Description |
 |:---- |:----|
+|LAST_HOUR|Last Hour|
 |YESTERDAY|Yesterday|
 |LAST_WEEK|Last Week|
 |LAST_MONTH|Last Month|
+|LAST_QUARTER|Last Quarter|
 |LAST_YEAR|Last Year|
+|LAST_YEAR_BY_QUARTER|Last Year (by quarter)|
+|RECENT_5_MIN|Recent 5 Minute: Past 5m|
+|RECENT_30_MIN|Recent 30 Minute: Past 30m|
+|RECENT_HOUR|Recent Hour: Past 1h|
+|RECENT_3_HOUR|Recent 3 Hour: Past 3h|
 |RECENT_DAY|Recent Day: Past 24h|
+|RECENT_2_DAY|Recent 2 Day: Past 48h|
+|RECENT_5_DAY|Recent 5 Day: Past 120h|
 |RECENT_WEEK|Recent Week|
 |RECENT_MONTH|Recent Month|
+|RECENT_3_MONTH|Recent 3 Month|
+|RECENT_6_MONTH|Recent 6 Month|
 |RECENT_YEAR|Recent Year|
+|RECENT_YEAR_BY_QUARTER|Recent Year (by quarter)|
+|THIS_HOUR|This Hour|
 |TODAY|Today|
 |THIS_WEEK|This Week|
 |THIS_MONTH|This Month|
+|THIS_QUARTER|This Quarter|
+|THIS_QUARTER_BY_WEEK|This Quarter (by week)|
 |THIS_YEAR|This Year|
-
+|THIS_YEAR_BY_QUARTER|This Year (by quarter)|
 
 **Sample codes**
 
@@ -244,7 +259,7 @@ Structure of class Row
 |value|String|The dataset filed's value|
 
 **Possible client validation errors**
- 
+
 > <font color=red>Parameter queryCode cannot be null</font>  
 > <font color=red>Parameter queryCode length must is 8</font>
 > <font color=red>Parameter pageSize must be range is 1 to 1000</font>

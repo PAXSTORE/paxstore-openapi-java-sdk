@@ -29,14 +29,14 @@ public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, in
 
 **Input parameter(s) description**  
 
-| Name                | Type                     | Nullable | Description                                                  |
-| :------------------ | :----------------------- | :------- | :----------------------------------------------------------- |
-| pageNo              | int                      | false    | page number, value must >=1                                  |
-| pageSize            | int                      | false    | the record number per page, range is 1 to 1000               |
-| packageName         | String                   | false    | search filter by app packageName                             |
-| serialNo            | String                   | true     | only terminal with specified serialNo will search out                         |
-| pushStatus          | PushStatus               | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
-| pushTime            | Date                     | true     | search the push history after the push time                  |
+| Name        | Type       | Nullable | Description                                                  |
+| :---------- | :--------- | :------- | :----------------------------------------------------------- |
+| pageNo      | int        | false    | page number, value must >=1                                  |
+| pageSize    | int        | false    | the record number per page, range is 1 to 100                |
+| packageName | String     | false    | search filter by app packageName                             |
+| serialNo    | String     | true     | only terminal with specified serialNo will search out        |
+| pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
+| pushTime    | Date       | true     | search the push history after the push time                  |
 
 
 
@@ -121,5 +121,5 @@ The type in dataSet of is ParameterPushHistoryDTO. And the structure shows like 
 |ParameterPushError|string|the reason of parameter push failed|
 |ParameterValues|string	|parameter values|
 |ParameterVariables|string|parameter variables|
-|PushType		|string	|push type, value can be Terminal or Group|	
+|PushType		|string	|push type, value can be Terminal or Group|
 

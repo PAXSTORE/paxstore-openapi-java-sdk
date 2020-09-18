@@ -28,7 +28,7 @@ public class PageRequestDTO{
     private int pageNo = 1;
 	
 	@Min(1)
-	@Max(1000)
+	@Max(100)
     private int pageSize = Constants.DEFAULT_PAGE_SIZE;
     private String orderBy;
 

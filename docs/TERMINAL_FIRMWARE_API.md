@@ -123,7 +123,7 @@ public Result<PushFirmwareTaskDTO> searchPushFirmwareTasks(int pageNo, int pageS
 | Name| Type | Nullable|Description |
 |:--- | :---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.CreatedDate_desc and SearchOrderBy.CreatedDate_asc.|
 |terminalTid|String|false|search filter by terminal tid|
 |fmName|String|true|search filter by firmware name|
@@ -183,7 +183,7 @@ The type in dataSet is PushFirmwareTaskDTO. And the structure like below.
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 
 ### Get push firmware history by id
 

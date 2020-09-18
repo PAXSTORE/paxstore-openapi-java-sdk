@@ -34,7 +34,7 @@ public Result<TerminalGroupDTO> searchTerminalGroup(int pageNo, int pageSize, Te
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|TerminalGroupSearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalGroupSearchOrderBy.CreatedDate_desc and TerminalGroupSearchOrderBy.CreatedDate_asc and TerminalGroupSearchOrderBy.Name.|
 |status|TerminalGroupStatus|true|The value of status can be one of  TerminalGroupStatus.PENDING and TerminalGroupStatus.ACTIVE and TerminalGroupStatus.SUSPEND.|
 |name|String|true|The name of group|
@@ -119,7 +119,7 @@ The type in dataSet is TerminalGroupDTO. And the structure like below.
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 
 **Possible business codes**
 
@@ -370,7 +370,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.
 | Parameter Name | Type                              | Nullable | Description                                                  |
 | :------------- | :-------------------------------- | :------- | :----------------------------------------------------------- |
 | pageNo         | int                               | false    | page number, value must >=1                                  |
-| pageSize       | int                               | false    | the record number per page, range is 1 to 1000               |
+| pageSize       | int                               | false    | the record number per page, range is 1 to 100                |
 | orderBy        | TerminalApi.TerminalSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalApi.TerminalSearchOrderBy.Name and TerminalApi.TerminalSearchOrderBy.Tid and TerminalApi.TerminalSearchOrderBy.SerialNo. |
 | status         | TerminalStatus                    | true     | Terminal status. The value can be one of  TerminalApi.TerminalStatus.Active and TerminalApi.TerminalStatus.Inactive and TerminalApi.TerminalStatus.Suspend |
 | modelName      | String                            | true     | the model name                                               |
@@ -456,7 +456,7 @@ The type in dataSet is SimpleTerminalDTO. And the structure like below.
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 
 
 
@@ -768,7 +768,7 @@ public  Result<SimpleTerminalDTO> searchTerminalsInGroup(int pageNo, int pageSiz
 | Parameter Name | Type                              | Nullable | Description                                                  |
 | :------------- | :-------------------------------- | :------- | :----------------------------------------------------------- |
 | pageNo         | int                               | false    | page number, value must >=1                                  |
-| pageSize       | int                               | false    | the record number per page, range is 1 to 1000               |
+| pageSize       | int                               | false    | the record number per page, range is 1 to 100               |
 | orderBy        | TerminalApi.TerminalSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalApi.TerminalSearchOrderBy.Name and TerminalApi.TerminalSearchOrderBy.Tid and TerminalApi.TerminalSearchOrderBy.SerialNo. |
 | groupId        | Long                              | false     | the id of terminal group                                     |
 | serialNo       | String                            | true     | the serial number of terminal                                |
@@ -849,7 +849,7 @@ The type in dataSet is SimpleTerminalDTO. And the structure like below.
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 1000</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>  
 
 **Possible business codes**
 

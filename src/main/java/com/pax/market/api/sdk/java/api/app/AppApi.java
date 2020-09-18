@@ -31,7 +31,7 @@ public class AppApi extends BaseThirdPartySysApi {
     public Result<AppPageDTO> searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
                                              String name, AppOsType osType, AppChargeType chargeType,
                                              AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
-                                             Boolean specificReseller, Boolean specificMerchantCategory){
+                                             Boolean specificReseller, Boolean specificMerchantCategory,Boolean includeSubscribedApp){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -68,12 +68,21 @@ public class AppApi extends BaseThirdPartySysApi {
             request.addRequestParam("specificMerchantCategory", String.valueOf(specificMerchantCategory));
         }
 
-
+        if(includeSubscribedApp != null){
+            request.addRequestParam("includeSubscribedApp", String.valueOf(includeSubscribedApp));
+        }
 
         AppPageResponse appPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), AppPageResponse.class);
         Result<AppPageDTO> result = new Result<AppPageDTO>(appPageResponse);
 
         return result;
+    }
+
+    public Result<AppPageDTO> searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
+                                        String name, AppOsType osType, AppChargeType chargeType,
+                                        AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
+                                        Boolean specificReseller, Boolean specificMerchantCategory) {
+        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, false);
     }
 
     public enum ApkStatus {
@@ -141,8 +150,6 @@ public class AppApi extends BaseThirdPartySysApi {
     public enum AppSearchOrderBy {
         AppName_desc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci DESC"),
         AppName_asc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci ASC"),
-        Emial_desc("developer.email DESC"),
-        Emial_asc("developer.email ASC"),
         UpdatedDate_desc("app.updated_date DESC"),
         UpdatedDate_asc("app.updated_date ASC");
         private String val;
