@@ -179,7 +179,7 @@ public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy 
 | chargeType               | AppChargeType    | true     | the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging |
 | specificReseller         | Boolean          | true     | specific reseller<br/> make app private to some reseller, the value can be true or false |
 | specificMerchantCategory | Boolean          | true     | sperific merchant category<br/> make app only visible by specific merchants in store client, the value can be true or false |
-| includeSubscribedApp     | Boolean          | true     | when sub market, whether to include the subscribed app, value can be one of true and false |
+| includeSubscribedApp     | Boolean          | true     | whether to include the subscribed applications from global market |
 
 **Sample codes**
 
