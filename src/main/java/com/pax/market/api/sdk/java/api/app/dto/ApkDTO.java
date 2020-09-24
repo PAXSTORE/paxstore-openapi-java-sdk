@@ -23,13 +23,23 @@ public class ApkDTO implements Serializable {
 
     private static final long serialVersionUID = 758239688663238628L;
 
+    private String name;
     private String status;        // 状态
     private Long versionCode;
+    private Long fileSize;
     private String versionName;
     private String apkType;       // 应用类型（参数、非参数)
     private String apkFileType;   // A,P,B
     private ApkFileDTO apkFile;
     private String osType;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getStatus() {
         return status;
@@ -45,6 +55,14 @@ public class ApkDTO implements Serializable {
 
     public void setVersionCode(Long versionCode) {
         this.versionCode = versionCode;
+    }
+
+    public Long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(Long fileSize) {
+        this.fileSize = fileSize;
     }
 
     public String getVersionName() {
@@ -90,8 +108,10 @@ public class ApkDTO implements Serializable {
     @Override
     public String toString() {
         return "ApkDTO{" +
-                "status='" + status + '\'' +
+                "name='" + name + '\'' +
+                ", status='" + status + '\'' +
                 ", versionCode=" + versionCode +
+                ", fileSize='" + fileSize + '\'' +
                 ", versionName='" + versionName + '\'' +
                 ", apkType='" + apkType + '\'' +
                 ", apkFileType='" + apkFileType + '\'' +
