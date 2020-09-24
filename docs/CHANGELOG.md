@@ -1,5 +1,10 @@
 # Changelog  
 
+## 7.3.1  
+
+### Improvement
+* Add name and fileSize properties to ApkDTO in search application result
+
 ## 7.3  
 
 ### Improvement

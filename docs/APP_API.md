@@ -90,6 +90,8 @@ Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate
             "downloads":4,
             "apkList":[
                  {
+                    "name":"sample",
+                    "fileSize":2545215,
                     "status":"O",
                     "versionCode":1,
                     "versionName":null,
@@ -125,6 +127,8 @@ The structure of class ApkDTO
 
 |Property Name|Type|Description|
 |:---|:---|:---|
+|name|String|Apk name|
+|fileSize|Long|Apk file size（byte）|
 |status|String|Status of apk. Value can be one of P(Pending), O(Online), R(Rejected) and U(Offline)|
 |versionCode|Long|version code of apk.|
 |versionName|String|version name of apk.|
