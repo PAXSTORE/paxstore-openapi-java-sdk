@@ -106,7 +106,7 @@ public class Constants {
     public static final int DEFAULT_PAGE_SIZE = 10;
     
     public static final String THIRD_PARTY_API_SDK_LANGUAGE = "Java";
-    public static final String THIRD_PARTY_API_SDK_VERSION = "7.3.0";
+    public static final String THIRD_PARTY_API_SDK_VERSION = "7.3.1";
     public static final String REQ_HEADER_SDK_LANG = "SDK-Language";
     public static final String REQ_HEADER_SDK_VERSION = "SDK-Version";
 
