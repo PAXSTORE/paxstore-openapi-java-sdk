@@ -60,6 +60,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String GET_TERMINAL_PED_STATUS_URL = "/v1/3rdsys/terminals/{terminalId}/ped";
 
+    protected static final String PUSH_TERMINAL_ACTION_URL = "/v1/3rdsys/terminals/{terminalId}/operation";
+
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -266,6 +268,21 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return  new Result<TerminalPedDTO>(terminalPedResponse);
     }
 
+    public Result<String> pushTerminalAction(Long terminalId,TerminalDetailUpdateRequest terminalDetailUpdateRequest){
+        logger.debug("terminalId=" + terminalId);
+        List<String> validationErrs = validateUpdate(terminalId, terminalDetailUpdateRequest, "parameter.terminalId.invalid", "parameter.terminalDetailUpdateRequest.null");
+        if (validationErrs.size() > 0) {
+            return new Result<String>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_ACTION_URL.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(terminalDetailUpdateRequest, TerminalDetailUpdateRequest.class));
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<String>(emptyResponse);
+    }
+
     public enum TerminalStatus {
         Active("A"),
         Inactive("P"),
@@ -296,6 +313,33 @@ public class TerminalApi extends BaseThirdPartySysApi {
             return this.val;
         }
 
+    }
+
+    public enum TerminalDetailKey {
+        RESTART_TM("RESTART_TM"),
+        LOCK_TM("LOCK_TM");
+
+        private String val;
+        private TerminalDetailKey(String type) {
+            this.val = type;
+        }
+        public String val(){
+            return this.val;
+        }
+    }
+
+    public enum TerminalDetailValue {
+        RESTART_TM("1"),
+        LOCK_TM_LOCK("lock"),
+        LOCK_TM_UNLOCK("unlock");
+
+        private String val;
+        private TerminalDetailValue(String value) {
+            this.val = value;
+        }
+        public String val(){
+            return this.val;
+        }
     }
 
 }

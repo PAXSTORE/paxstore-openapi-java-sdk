@@ -175,4 +175,23 @@ public class TerminalApiTest {
 		logger.debug("Result of move Terminal {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 	}
+
+	@Test
+	public void testPushTerminalAction() {
+		Long terminalId = 909822L;
+		TerminalDetailUpdateRequest request = new TerminalDetailUpdateRequest();
+		request.setKey(TerminalApi.TerminalDetailKey.LOCK_TM);
+		//锁定
+		request.setValue(TerminalApi.TerminalDetailValue.LOCK_TM_LOCK);
+		//解锁
+	//	request.setValue(TerminalApi.TerminalDetailValue.LOCK_TM_UNLOCK);
+
+		//重启
+	//	request.setKey(TerminalApi.TerminalDetailKey.RESTART_TM);
+	//	request.setValue(TerminalApi.TerminalDetailValue.RESTART_TM);
+
+		Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
+		logger.debug("Result of push terminal action {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+	}
 }
