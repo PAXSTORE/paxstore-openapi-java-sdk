@@ -180,18 +180,18 @@ public class TerminalApiTest {
 	public void testPushTerminalAction() {
 		Long terminalId = 909822L;
 		TerminalDetailUpdateRequest request = new TerminalDetailUpdateRequest();
-		request.setKey(TerminalApi.TerminalDetailKey.LOCK_TM);
+		request.setKey(TerminalApi.TerminalDetailKey.Lock_tm);
 		//锁定
-		request.setValue(TerminalApi.TerminalDetailValue.LOCK_TM_LOCK);
+		request.setValue(TerminalApi.TerminalDetailValue.Lock_tm_lock);
 		//解锁
-	//	request.setValue(TerminalApi.TerminalDetailValue.LOCK_TM_UNLOCK);
+	//	request.setValue(TerminalApi.TerminalDetailValue.Lock_tm_unlock);
 
 		//重启
-	//	request.setKey(TerminalApi.TerminalDetailKey.RESTART_TM);
-	//	request.setValue(TerminalApi.TerminalDetailValue.RESTART_TM);
+	//	request.setKey(TerminalApi.TerminalDetailKey.Restart_tm);
+	//	request.setValue(TerminalApi.TerminalDetailValue.Restart_tm);
 
 		Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
 		logger.debug("Result of push terminal action {}",result.toString());
-		Assert.assertTrue(result.getBusinessCode() == 0);
+		Assert.assertEquals(0, result.getBusinessCode());
 	}
 }

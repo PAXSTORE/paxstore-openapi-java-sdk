@@ -316,8 +316,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public enum TerminalDetailKey {
-        RESTART_TM("RESTART_TM"),
-        LOCK_TM("LOCK_TM");
+        Restart_tm("RESTART_TM"),
+        Lock_tm("LOCK_TM");
 
         private String val;
         private TerminalDetailKey(String type) {
@@ -329,9 +329,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public enum TerminalDetailValue {
-        RESTART_TM("1"),
-        LOCK_TM_LOCK("lock"),
-        LOCK_TM_UNLOCK("unlock");
+        Restart_tm("1"),
+        Lock_tm_lock("lock"),
+        Lock_tm_unlock("unlock");
 
         private String val;
         private TerminalDetailValue(String value) {

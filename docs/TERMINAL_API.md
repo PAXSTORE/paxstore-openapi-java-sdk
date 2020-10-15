@@ -1190,3 +1190,85 @@ Result<String> result = terminalApi.moveTerminal(terminalId, "PAX", "6666");
 | 1937          | Merchant is not belong to the given Reseller! |             |
 
 
+
+
+
+### Push Terminal Action
+
+Execute lock, unlock and restart terminal operation
+
+**API**
+
+```
+public Result<String> pushTerminalAction(Long terminalId,TerminalDetailUpdateRequest terminalDetailUpdateRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name              | Type                        | Nullable | Description                     |
+| :-------------------------- | :-------------------------- | :------- | :------------------------------ |
+| terminalId                  | Long                        | false    | Terminal's id.                  |
+| terminalDetailUpdateRequest | TerminalDetailUpdateRequest | false    | Push terminal operation details |
+
+Structure of class TerminalDetailUpdateRequest
+
+| Property Name | Type                | Nullable | Description                                                  |
+| :------------ | :------------------ | :------- | :----------------------------------------------------------- |
+| key           | TerminalDetailKey   | false    | The value of this parameter can be one of TerminalApi.TerminalDetailKey.Lock_tm and TerminalApi.TerminalDetailKey.Restart_tm. |
+| value         | TerminalDetailValue | false    | The value of this parameter can be one of TerminalApi.TerminalDetailValue.Lock_tm_lock, TerminalApi.TerminalDetailValue.Lock_tm_unlock and TerminalApi.TerminalDetailValue.Restart_tm. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalDetailUpdateRequest request = new TerminalDetailUpdateRequest();
+request.setKey(TerminalApi.TerminalDetailKey.Lock_tm);
+//lock 
+request.setValue(TerminalApi.TerminalDetailValue.Lock_tm_lock);
+Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1801,
+	"message": "Terminal doesn't exist"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter terminalDetailUpdateRequest cannot be null!</font> 
+
+**Possible business codes**
+
+| Business Code | Message                                  | Description |
+| :------------ | :--------------------------------------- | :---------- |
+| 135           | Request parameter is missing or invalid  |             |
+| 997           | Malformed or illegal request             |             |
+| 1801          | Terminal doesn't exist                   |             |
+| 1896          | The terminal is offline                  |             |
+| 15094         | Terminal is locked                       |             |
+| 15095         | Terminal has been unlocked               |             |
+| 15096         | The terminal is being locked or unlocked |             |
+| 15099         | Terminal restart in progress             |             |
+
