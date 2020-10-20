@@ -1215,7 +1215,7 @@ Structure of class TerminalDetailUpdateRequest
 | Property Name | Type                | Nullable | Description                                                  |
 | :------------ | :------------------ | :------- | :----------------------------------------------------------- |
 | key           | TerminalDetailKey   | false    | The value of this parameter can be one of TerminalApi.TerminalDetailKey.Lock_tm and TerminalApi.TerminalDetailKey.Restart_tm. |
-| value         | TerminalDetailValue | false    | The value of this parameter can be one of TerminalApi.TerminalDetailValue.Lock_tm_lock, TerminalApi.TerminalDetailValue.Lock_tm_unlock and TerminalApi.TerminalDetailValue.Restart_tm. |
+| value         | TerminalDetailValue | false    | The value of this parameter can be one of TerminalApi.TerminalDetailValue.Lock, TerminalApi.TerminalDetailValue.Unlock and TerminalApi.TerminalDetailValue.Restart. |
 
 **Sample codes**
 
@@ -1224,7 +1224,7 @@ TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api
 TerminalDetailUpdateRequest request = new TerminalDetailUpdateRequest();
 request.setKey(TerminalApi.TerminalDetailKey.Lock_tm);
 //lock 
-request.setValue(TerminalApi.TerminalDetailValue.Lock_tm_lock);
+request.setValue(TerminalApi.TerminalDetailValue.Lock);
 Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
 ```
 

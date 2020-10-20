@@ -182,13 +182,13 @@ public class TerminalApiTest {
 		TerminalDetailUpdateRequest request = new TerminalDetailUpdateRequest();
 		request.setKey(TerminalApi.TerminalDetailKey.Lock_tm);
 		//锁定
-		request.setValue(TerminalApi.TerminalDetailValue.Lock_tm_lock);
+		request.setValue(TerminalApi.TerminalDetailValue.Lock);
 		//解锁
-	//	request.setValue(TerminalApi.TerminalDetailValue.Lock_tm_unlock);
+	//	request.setValue(TerminalApi.TerminalDetailValue.UnLock);
 
 		//重启
 	//	request.setKey(TerminalApi.TerminalDetailKey.Restart_tm);
-	//	request.setValue(TerminalApi.TerminalDetailValue.Restart_tm);
+	//	request.setValue(TerminalApi.TerminalDetailValue.Restart);
 
 		Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
 		logger.debug("Result of push terminal action {}",result.toString());
