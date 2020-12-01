@@ -111,4 +111,20 @@ public class TerminalDetailDTO implements Serializable {
     public void setCellid(String cellid) {
         this.cellid = cellid;
     }
+
+    @Override
+    public String toString() {
+        return "TerminalDetailDTO{" +
+                "pn='" + pn + '\'' +
+                ", osVersion='" + osVersion + '\'' +
+                ", imei='" + imei + '\'' +
+                ", screenResolution='" + screenResolution + '\'' +
+                ", language='" + language + '\'' +
+                ", ip='" + ip + '\'' +
+                ", timeZone='" + timeZone + '\'' +
+                ", macAddress='" + macAddress + '\'' +
+                ", iccid='" + iccid + '\'' +
+                ", cellid='" + cellid + '\'' +
+                '}';
+    }
 }

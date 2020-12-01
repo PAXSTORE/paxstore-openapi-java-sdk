@@ -67,4 +67,15 @@ public class TerminalAccessoryDTO implements Serializable {
     public void setHistory(List<TerminalDeviceDTO> history) {
         this.history = history;
     }
+
+    @Override
+    public String toString() {
+        return "TerminalAccessoryDTO{" +
+                "relatedTerminalName='" + relatedTerminalName + '\'' +
+                ", basic=" + basic +
+                ", hardware=" + hardware +
+                ", installApps=" + installApps +
+                ", history=" + history +
+                '}';
+    }
 }
