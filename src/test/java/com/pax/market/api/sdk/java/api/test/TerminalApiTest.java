@@ -26,12 +26,6 @@ import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalCreateRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalUpdateRequest;
-import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -179,16 +173,14 @@ public class TerminalApiTest {
 	@Test
 	public void testPushTerminalAction() {
 		Long terminalId = 909822L;
-		TerminalDetailUpdateRequest request = new TerminalDetailUpdateRequest();
-		request.setKey(TerminalApi.TerminalDetailKey.Lock_tm);
+		TerminalPushCmdRequest request = new TerminalPushCmdRequest();
 		//锁定
-		request.setValue(TerminalApi.TerminalDetailValue.Lock);
+		//request.setKey(TerminalApi.TerminalPushCmd.Lock);
 		//解锁
-	//	request.setValue(TerminalApi.TerminalDetailValue.UnLock);
+		request.setKey(TerminalApi.TerminalPushCmd.Unlock);
 
 		//重启
-	//	request.setKey(TerminalApi.TerminalDetailKey.Restart_tm);
-	//	request.setValue(TerminalApi.TerminalDetailValue.Restart);
+		//request.setKey(TerminalApi.TerminalPushCmd.Restart);
 
 		Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
 		logger.debug("Result of push terminal action {}",result.toString());

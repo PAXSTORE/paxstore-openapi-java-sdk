@@ -268,9 +268,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return  new Result<TerminalPedDTO>(terminalPedResponse);
     }
 
-    public Result<String> pushTerminalAction(Long terminalId,TerminalDetailUpdateRequest terminalDetailUpdateRequest){
+    public Result<String> pushTerminalAction(Long terminalId, TerminalPushCmdRequest terminalPushCmdRequest){
         logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateUpdate(terminalId, terminalDetailUpdateRequest, "parameter.terminalId.invalid", "parameter.terminalDetailUpdateRequest.null");
+        List<String> validationErrs = validateUpdate(terminalId, terminalPushCmdRequest, "parameter.terminalId.invalid", "parameter.terminalPushCmdRequest.null");
         if (validationErrs.size() > 0) {
             return new Result<String>(validationErrs);
         }
@@ -278,7 +278,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(PUSH_TERMINAL_ACTION_URL.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(terminalDetailUpdateRequest, TerminalDetailUpdateRequest.class));
+        request.setRequestBody(new Gson().toJson(terminalPushCmdRequest, TerminalPushCmdRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<String>(emptyResponse);
     }
@@ -315,31 +315,18 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     }
 
-    public enum TerminalDetailKey {
-        Restart_tm("RESTART_TM"),
-        Lock_tm("LOCK_TM");
+    public enum TerminalPushCmd {
+        Restart("restart"),
+        Lock("lock"),
+        Unlock("unlock");
+
 
         private String val;
-        private TerminalDetailKey(String type) {
+        private TerminalPushCmd(String type) {
             this.val = type;
         }
         public String val(){
             return this.val;
         }
     }
-
-    public enum TerminalDetailValue {
-        Restart("1"),
-        Lock("lock"),
-        Unlock("unlock");
-
-        private String val;
-        private TerminalDetailValue(String value) {
-            this.val = value;
-        }
-        public String val(){
-            return this.val;
-        }
-    }
-
 }

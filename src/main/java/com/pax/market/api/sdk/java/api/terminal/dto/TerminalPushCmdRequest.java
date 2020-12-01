@@ -22,28 +22,16 @@ import java.io.Serializable;
  * @author shifan
  * @date 2020/10/13
  */
-public class TerminalDetailUpdateRequest implements Serializable{
+public class TerminalPushCmdRequest implements Serializable{
     private static final long serialVersionUID = -8197381426657587862L;
 
-    private TerminalApi.TerminalDetailKey key;
+    private TerminalApi.TerminalPushCmd key;
 
-    private TerminalApi.TerminalDetailValue value;
-
-
-    public TerminalApi.TerminalDetailKey getKey() {
+    public TerminalApi.TerminalPushCmd getKey() {
         return key;
     }
 
-    public void setKey(TerminalApi.TerminalDetailKey key) {
+    public void setKey(TerminalApi.TerminalPushCmd key) {
         this.key = key;
     }
-
-    public TerminalApi.TerminalDetailValue getValue() {
-        return value;
-    }
-
-    public void setValue(TerminalApi.TerminalDetailValue value) {
-        this.value = value;
-    }
-
 }
