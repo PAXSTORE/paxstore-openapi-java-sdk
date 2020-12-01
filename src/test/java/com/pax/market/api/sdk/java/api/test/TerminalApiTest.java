@@ -121,6 +121,15 @@ public class TerminalApiTest {
 
 
     }
+
+    @Test
+    public void testGetTerminalIncludeAccessoryInfo() {
+    	Long terminalId = 908627L;
+    	Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId,true);
+    	logger.debug("Result of get terminal: {}",getResult.toString());
+    	Assert.assertTrue(getResult.getBusinessCode() == 0);
+
+    }
     
 	@Test
 	public void testBatchAddTerminalToGroup(){
