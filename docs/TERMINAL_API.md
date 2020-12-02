@@ -96,10 +96,14 @@ Structure of class TerminalDTO
 |merchantName|String|The merchant of terminal belongs to.|
 |modelName|String|Model name of terminal.|
 |resellerName|String|The reseller of terminal belongs to.|
+|createdDate|Date|The create time|
+|lastActiveTime|Date|The activation time|
 |location|String|The location|
 |geoLocation|TerminalLocationDTO| The geo location of the terminal|
 |installedFirmware|TerminalInstalledFirmwareDTO| The installed firmware of the terminal|
 |installedApks|List\<TerminalInstalledApkDTO\>| The installed applications of the terminal|
+|terminalDetail|TerminalDetailDTO| The terminal detail info |
+|terminalAccessory|TerminalAccessoryDTO| The terminal accessory info |
 
 Structure of class TerminalLocationDTO
 
@@ -122,12 +126,54 @@ Structure of class TerminalInstalledApkDTO
 |:---|:---|:---|
 |appName|String|Application name|
 |packageName|String|Package name of application|
-
 |versionName|String|Version name of application|
 |versionCode|Long|Version code of application|
 |packageName|String|Package name of application|
 |installTime|Date|Installed time of application|
 
+Structure of class TerminalDetailDTO
+
+| Property Name    | Type   | Description                  |
+| :--------------- | :----- | :--------------------------- |
+| pn               | String | Terminal's pn                |
+| osVersion        | String | Terminal's android version   |
+| imei             | String | Terminal's IMEI              |
+| screenResolution | String | Terminal's screen resolution |
+| language         | String | Terminal's language          |
+| ip               | String | Terminal's network ip        |
+| timeZone         | String | Terminal's time zone         |
+| macAddress       | String | Terminal's mac address       |
+| iccid            | String | Terminal's Iccid             |
+| cellid           | String | Terminal's Cellid            |
+
+Structure of class TerminalAccessoryDTO
+
+| Property Name       | Type                     | Description                                         |
+| :------------------ | :----------------------- | :-------------------------------------------------- |
+| relatedTerminalName | String                   | The accessory information terminal name             |
+| basic               | TerminalDeviceSimpleDTO  | The basic information of the accessory device       |
+| hardware            | TerminalDeviceSimpleDTO  | The hardware information of the accessory device    |
+| installApps         | TerminalDeviceSimpleDTO  | The installApps information of the accessory device |
+| history             | TerminalDeviceHistoryDTO | The history information of the accessory device     |
+
+Structure of class TerminalDeviceSimpleDTO
+
+| Property Name | Type   | Description                       |
+| :------------ | :----- | :-------------------------------- |
+| name          | String | The accessory information name    |
+| content       | String | The accessory information content |
+
+Structure of class TerminalDeviceHistoryDTO
+
+| Property Name | Type   | Description                                                  |
+| :------------ | :----- | :----------------------------------------------------------- |
+| name          | String | The accessory information name                               |
+| status        | String | The status of the related historical push of the accessory device |
+| installTime   | Date   | The accessory information install time                       |
+| fileSize      | Long   | The size of the file pushed by the accessory device          |
+| fileType      | String | The type of the file pushed by the accessory device          |
+| source        | String | The file source                                              |
+| remarks       | String | The remarks information                                      |
 
 **Possible validation errors**
 
@@ -245,7 +291,8 @@ The get terminal API allows the thirdparty system get a terminal by terminal id.
 **API**
 
 ```
-public Result<TerminalDTO> getTerminal(Long terminalId)
+public Result<TerminalDTO> getTerminal(Long terminalId);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfo);
 ```
 
 **Input parameter(s) description**
@@ -259,7 +306,10 @@ public Result<TerminalDTO> getTerminal(Long terminalId)
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalDTO> result = terminalApi.getTerminal(907554L);
+//simple info
+Result<TerminalDTO> result = terminalApi.getTerminal(908627L);
+//includeDetailInfo, whether to return Detail Info 
+Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -286,18 +336,148 @@ Result<TerminalDTO> result = terminalApi.getTerminal(907554L);
 {
 	"businessCode": 0,
 	"data": {
-		"id": 907554,
-		"name": "testcreateterminal_023",
-		"tid": "FNI9W6IX",
-		"serialNo": "sn0101012",
-		"status": "S",
-		"merchantName": "haoxy",
-		"modelName": "A920",
-		"resellerName": "PAX",
-		"location": "USA"
+		"id": 908627,
+		"name": "test8000999",
+		"tid": "BTG7KFTY",
+		"serialNo": "TEST8000999",
+		"status": "A",
+		"merchantName": "pax",
+		"modelName": "A930",
+		"resellerName": "Jesse",
+		"location": "",
+		"createdDate": 1552536099000,
+		"lastActiveTime": 1552536095000
 	}
 }
 ```
+
+```HTML
+{
+	"businessCode": 0,
+	"data": {
+		"id": 908627,
+		"name": "test8000999",
+		"tid": "BTG7KFTY",
+		"serialNo": "TEST8000999",
+		"status": "A",
+		"merchantName": "pax",
+		"modelName": "A930",
+		"resellerName": "Jesse",
+		"location": "",
+		"createdDate": 1552536099000,
+		"lastActiveTime": 1552536095000,
+		"terminalDetail": {
+			"pn": "A920-3AW-RD5-21EU",
+			"screenResolution": "720px * 1280px",
+			"language": "English",
+			"ip": "192.168.5.213",
+			"timeZone": "GMT +08:00",
+			"macAddress": "A4:D4:B2:4C:14:FE"
+		},
+		"terminalAccessory": {
+			"basic": [{
+				"name": "SN",
+				"content": "1140073435"
+			}, {
+				"name": "MACH",
+				"content": "Q20"
+			}, {
+				"name": "OS",
+				"content": "Prolin2.7.66"
+			}],
+			"hardware": [{
+				"name": "PCD",
+				"content": "Y"
+			}, {
+				"name": "MSR",
+				"content": "Y"
+			}, {
+				"name": "SCI",
+				"content": "Y"
+			}, {
+				"name": "BOARDID",
+				"content": "Q20_M06_P00"
+			}, {
+				"name": "BLUETOOTH"
+			}, {
+				"name": "ETHERNET"
+			}, {
+				"name": "WIFI"
+			}, {
+				"name": "WIRELESS"
+			}, {
+				"name": "MODEM"
+			}, {
+				"name": "PRINTER"
+			}, {
+				"name": "BARCODE"
+			}, {
+				"name": "FLASH",
+				"content": "128MB"
+			}, {
+				"name": "FREEFLASH",
+				"content": "58.41M"
+			}, {
+				"name": "RAM",
+				"content": "246.50MB"
+			}, {
+				"name": "SECURITY LEVEL",
+				"content": "1"
+			}, {
+				"name": "SECURITY MODE",
+				"content": "2"
+			}, {
+				"name": "TOUCHSCREEN",
+				"content": "Y"
+			}, {
+				"name": "CIPHER_CHIP"
+			}],
+			"installApps": [{
+				"name": "browser",
+				"content": "2.00.10"
+			}],
+			"history": [{
+				"name": "MAINAPP/config.xml",
+				"status": "Success",
+				"installTime": 1588053636000,
+				"fileSize": 102,
+				"fileType": "Private file",
+				"source": "Remote Upgrade"
+			}, {
+				"name": "MAINAPP/sys_param.p",
+				"status": "Success",
+				"installTime": 1588053633000,
+				"fileSize": 135,
+				"fileType": "Private file",
+				"source": "Remote Upgrade"
+			}, {
+				"name": "MAINAPP/sys_cap.p",
+				"status": "Success",
+				"installTime": 1588053630000,
+				"fileSize": 234,
+				"fileType": "Private file",
+				"source": "Remote Upgrade"
+			}, {
+				"name": "browser.aip",
+				"status": "Success",
+				"installTime": 1588053240000,
+				"fileSize": 2165940,
+				"fileType": "Application",
+				"source": "Local Upgrade"
+			}, {
+				"name": "prolin-pelican-2.7.66.8833R_SIG.zip",
+				"status": "Success",
+				"installTime": 1588041153000,
+				"fileSize": 17890812,
+				"fileType": "Firmware",
+				"source": "Local Upgrade"
+			}]
+		}
+	}
+}
+```
+
+
 
 The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
 

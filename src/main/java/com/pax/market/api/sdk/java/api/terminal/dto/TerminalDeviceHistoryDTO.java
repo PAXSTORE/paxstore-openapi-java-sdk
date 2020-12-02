@@ -20,28 +20,16 @@ import java.util.Date;
  * @author shifan
  * @date 2020/12/1
  */
-public class TerminalDeviceDTO implements Serializable {
+public class TerminalDeviceHistoryDTO implements Serializable {
 
     private static final long serialVersionUID = 194315398237043077L;
-    private String type;
     private String name;
-    private String version;
     private String status;
-    private Date syncTime;
-
     private Date installTime;
     private Long fileSize;
     private String fileType;
     private String source;
     private String remarks;
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getName() {
         return name;
@@ -51,13 +39,6 @@ public class TerminalDeviceDTO implements Serializable {
         this.name = name;
     }
 
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
 
     public String getStatus() {
         return status;
@@ -67,13 +48,6 @@ public class TerminalDeviceDTO implements Serializable {
         this.status = status;
     }
 
-    public Date getSyncTime() {
-        return syncTime;
-    }
-
-    public void setSyncTime(Date syncTime) {
-        this.syncTime = syncTime;
-    }
 
     public Date getInstallTime() {
         return installTime;

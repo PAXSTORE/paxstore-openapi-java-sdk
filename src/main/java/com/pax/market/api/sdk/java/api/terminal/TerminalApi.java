@@ -108,7 +108,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
        return getTerminal(terminalId,false);
     }
 
-    public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeAccessoryInfo) {
+    public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfo) {
         logger.debug("terminalId=" + terminalId);
         List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
         if (validationErrs.size() > 0) {
@@ -116,7 +116,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
-        request.addRequestParam("includeAccessoryInfo", String.valueOf(includeAccessoryInfo));
+        request.addRequestParam("includeDetailInfo", String.valueOf(includeDetailInfo));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<TerminalDTO>(terminalResponse);
     }

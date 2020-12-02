@@ -23,10 +23,10 @@ public class TerminalAccessoryDTO implements Serializable {
     private static final long serialVersionUID = 8439973186104896362L;
 
     private String relatedTerminalName;
-    private List<TerminalDeviceDTO> basic;
-    private List<TerminalDeviceDTO> hardware;
-    private List<TerminalDeviceDTO> installApps;
-    private List<TerminalDeviceDTO> history;
+    private List<TerminalDeviceSimpleDTO> basic;
+    private List<TerminalDeviceSimpleDTO> hardware;
+    private List<TerminalDeviceSimpleDTO> installApps;
+    private List<TerminalDeviceHistoryDTO> history;
 
     public String getRelatedTerminalName() {
         return relatedTerminalName;
@@ -36,35 +36,35 @@ public class TerminalAccessoryDTO implements Serializable {
         this.relatedTerminalName = relatedTerminalName;
     }
 
-    public List<TerminalDeviceDTO> getBasic() {
+    public List<TerminalDeviceSimpleDTO> getBasic() {
         return basic;
     }
 
-    public void setBasic(List<TerminalDeviceDTO> basic) {
+    public void setBasic(List<TerminalDeviceSimpleDTO> basic) {
         this.basic = basic;
     }
 
-    public List<TerminalDeviceDTO> getHardware() {
+    public List<TerminalDeviceSimpleDTO> getHardware() {
         return hardware;
     }
 
-    public void setHardware(List<TerminalDeviceDTO> hardware) {
+    public void setHardware(List<TerminalDeviceSimpleDTO> hardware) {
         this.hardware = hardware;
     }
 
-    public List<TerminalDeviceDTO> getInstallApps() {
+    public List<TerminalDeviceSimpleDTO> getInstallApps() {
         return installApps;
     }
 
-    public void setInstallApps(List<TerminalDeviceDTO> installApps) {
+    public void setInstallApps(List<TerminalDeviceSimpleDTO> installApps) {
         this.installApps = installApps;
     }
 
-    public List<TerminalDeviceDTO> getHistory() {
+    public List<TerminalDeviceHistoryDTO> getHistory() {
         return history;
     }
 
-    public void setHistory(List<TerminalDeviceDTO> history) {
+    public void setHistory(List<TerminalDeviceHistoryDTO> history) {
         this.history = history;
     }
 
