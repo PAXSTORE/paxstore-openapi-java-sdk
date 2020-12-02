@@ -23,10 +23,10 @@ public class TerminalAccessoryDTO implements Serializable {
     private static final long serialVersionUID = 8439973186104896362L;
 
     private String relatedTerminalName;
-    List<TerminalDeviceDTO> basic;
-    List<TerminalDeviceDTO> hardware;
-    List<TerminalDeviceDTO> installApps;
-    List<TerminalDeviceDTO> history;
+    private List<TerminalDeviceDTO> basic;
+    private List<TerminalDeviceDTO> hardware;
+    private List<TerminalDeviceDTO> installApps;
+    private List<TerminalDeviceDTO> history;
 
     public String getRelatedTerminalName() {
         return relatedTerminalName;
