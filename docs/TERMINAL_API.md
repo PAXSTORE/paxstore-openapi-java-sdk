@@ -1193,14 +1193,14 @@ Result<String> result = terminalApi.moveTerminal(terminalId, "PAX", "6666");
 
 
 
-### Push Terminal Action
+### Push Command to Terminal
 
-Execute lock, unlock and restart terminal operation
+Push lock, unlock and restart command to terminal
 
 **API**
 
 ```
-public Result<String> pushTerminalAction(Long terminalId,TerminalPushCmdRequest terminalPushCmdRequest)
+public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command)
 ```
 
 **Input parameter(s) description**
@@ -1208,22 +1208,13 @@ public Result<String> pushTerminalAction(Long terminalId,TerminalPushCmdRequest 
 | Parameter Name              | Type                        | Nullable | Description                     |
 | :-------------------------- | :-------------------------- | :------- | :------------------------------ |
 | terminalId                  | Long                        | false    | Terminal's id.                  |
-| terminalPushCmdRequest | TerminalPushCmdRequest | false    | Push terminal operation details |
-
-Structure of class TerminalPushCmdRequest
-
-| Property Name | Type            | Nullable | Description                                                  |
-| :------------ | :-------------- | :------- | :----------------------------------------------------------- |
-| key           | TerminalPushCmd | false    | The value of this parameter can be one of TerminalApi.TerminalPushCmd.Lock and TerminalApi.TerminalPushCmd.Unlock and TerminalApi.TerminalPushCmd.Restart |
+| command | TerminalPushCmd | false    | Value can be TerminalPushCmd.Lock, TerminalPushCmd.Unlock and TerminalPushCmd.Restart |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-TerminalPushCmdRequest request = new TerminalPushCmdRequest();
-//lock 
-request.setKey(TerminalApi.TerminalPushCmd.Lock);
-Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
+Result<String> result = terminalApi.pushTerminalAction(terminalId, TerminalPushCmd.Lock);
 ```
 
 **Client side validation failed sample result(JSON formatted)**

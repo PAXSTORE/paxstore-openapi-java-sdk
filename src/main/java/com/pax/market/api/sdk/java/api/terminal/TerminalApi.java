@@ -268,9 +268,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return  new Result<TerminalPedDTO>(terminalPedResponse);
     }
 
-    public Result<String> pushTerminalAction(Long terminalId, TerminalPushCmdRequest terminalPushCmdRequest){
+    public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command){
         logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateUpdate(terminalId, terminalPushCmdRequest, "parameter.terminalId.invalid", "parameter.terminalPushCmdRequest.null");
+        List<String> validationErrs = validateUpdate(terminalId, command, "parameter.terminalId.invalid", "parameter.terminalPushCmdRequest.null");
         if (validationErrs.size() > 0) {
             return new Result<String>(validationErrs);
         }
@@ -278,7 +278,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(PUSH_TERMINAL_ACTION_URL.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(terminalPushCmdRequest, TerminalPushCmdRequest.class));
+        request.addRequestParam("command", command.val());
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<String>(emptyResponse);
     }
@@ -316,9 +316,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public enum TerminalPushCmd {
-        Restart("restart"),
-        Lock("lock"),
-        Unlock("unlock");
+        Restart("Restart"),
+        Lock("Lock"),
+        Unlock("Unlock");
 
 
         private String val;

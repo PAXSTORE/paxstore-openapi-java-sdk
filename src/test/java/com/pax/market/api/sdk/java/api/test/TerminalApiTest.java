@@ -172,17 +172,8 @@ public class TerminalApiTest {
 
 	@Test
 	public void testPushTerminalAction() {
-		Long terminalId = 909822L;
-		TerminalPushCmdRequest request = new TerminalPushCmdRequest();
-		//锁定
-		//request.setKey(TerminalApi.TerminalPushCmd.Lock);
-		//解锁
-		request.setKey(TerminalApi.TerminalPushCmd.Unlock);
-
-		//重启
-		//request.setKey(TerminalApi.TerminalPushCmd.Restart);
-
-		Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
+		Long terminalId = 515006L;
+		Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalApi.TerminalPushCmd.Unlock);
 		logger.debug("Result of push terminal action {}",result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
 	}
