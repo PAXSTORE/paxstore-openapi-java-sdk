@@ -1373,14 +1373,14 @@ Result<String> result = terminalApi.moveTerminal(terminalId, "PAX", "6666");
 
 
 
-### Push Terminal Action
+### Push Command to Terminal
 
-Execute lock, unlock and restart terminal operation
+Push lock, unlock and restart command to terminal
 
 **API**
 
 ```
-public Result<String> pushTerminalAction(Long terminalId,TerminalDetailUpdateRequest terminalDetailUpdateRequest)
+public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command)
 ```
 
 **Input parameter(s) description**
@@ -1388,24 +1388,13 @@ public Result<String> pushTerminalAction(Long terminalId,TerminalDetailUpdateReq
 | Parameter Name              | Type                        | Nullable | Description                     |
 | :-------------------------- | :-------------------------- | :------- | :------------------------------ |
 | terminalId                  | Long                        | false    | Terminal's id.                  |
-| terminalDetailUpdateRequest | TerminalDetailUpdateRequest | false    | Push terminal operation details |
-
-Structure of class TerminalDetailUpdateRequest
-
-| Property Name | Type                | Nullable | Description                                                  |
-| :------------ | :------------------ | :------- | :----------------------------------------------------------- |
-| key           | TerminalDetailKey   | false    | The value of this parameter can be one of TerminalApi.TerminalDetailKey.Lock_tm and TerminalApi.TerminalDetailKey.Restart_tm. |
-| value         | TerminalDetailValue | false    | The value of this parameter can be one of TerminalApi.TerminalDetailValue.Lock, TerminalApi.TerminalDetailValue.Unlock and TerminalApi.TerminalDetailValue.Restart. |
+| command | TerminalPushCmd | false    | Value can be TerminalPushCmd.Lock, TerminalPushCmd.Unlock and TerminalPushCmd.Restart |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-TerminalDetailUpdateRequest request = new TerminalDetailUpdateRequest();
-request.setKey(TerminalApi.TerminalDetailKey.Lock_tm);
-//lock 
-request.setValue(TerminalApi.TerminalDetailValue.Lock);
-Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
+Result<String> result = terminalApi.pushTerminalAction(terminalId, TerminalPushCmd.Lock);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -1437,7 +1426,7 @@ Result<String> result = terminalApi.pushTerminalAction(terminalId, request);
 **Possible client validation errors**
 
 > <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
-> <font color=red>Parameter terminalDetailUpdateRequest cannot be null!</font> 
+> <font color=red>Parameter terminalPushCmdRequest cannot be null!</font> 
 
 **Possible business codes**
 
