@@ -46,7 +46,6 @@ public class TerminalUpdateRequest implements Serializable{
 	@Length(max=64)
 	protected String resellerName;
     
-	@NotBlank
     @Length(max=64)
     protected String modelName;
 
