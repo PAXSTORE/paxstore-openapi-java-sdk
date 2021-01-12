@@ -72,10 +72,10 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID) {
-        return searchTerminal(pageNo, pageSize, orderBy, status, snNameTID, false, false, false);
+        return searchTerminal(pageNo, pageSize, orderBy, status, snNameTID, false, false, false, false);
     }
 
-    public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID, boolean includeGeoLocation, boolean includeInstalledApks, boolean includeInstalledFirmware) {
+    public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID, boolean includeGeoLocation, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeDetailInfo) {
         logger.debug("status=" + status);
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
@@ -97,6 +97,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
 		request.addRequestParam("includeGeoLocation", String.valueOf(includeGeoLocation));
 		request.addRequestParam("includeInstalledFirmware", String.valueOf(includeInstalledFirmware));
 		request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
+		request.addRequestParam("includeDetailInfo", String.valueOf(includeDetailInfo));
 
         TerminalPageResponse terminalPageDTO = EnhancedJsonUtils.fromJson(client.execute(request), TerminalPageResponse.class);
 
