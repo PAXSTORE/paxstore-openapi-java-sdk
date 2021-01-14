@@ -1214,7 +1214,7 @@ public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<String> result = terminalApi.pushTerminalAction(terminalId, TerminalPushCmd.Lock);
+Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCmd.Lock);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -1246,7 +1246,7 @@ Result<String> result = terminalApi.pushTerminalAction(terminalId, TerminalPushC
 **Possible client validation errors**
 
 > <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
-> <font color=red>Parameter terminalPushCmdRequest cannot be null!</font> 
+> <font color=red>Parameter command cannot be null!</font> 
 
 **Possible business codes**
 
