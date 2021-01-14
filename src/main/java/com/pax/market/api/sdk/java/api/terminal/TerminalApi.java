@@ -60,6 +60,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String GET_TERMINAL_PED_STATUS_URL = "/v1/3rdsys/terminals/{terminalId}/ped";
 
+    protected static final String PUSH_TERMINAL_ACTION_URL = "/v1/3rdsys/terminals/{terminalId}/operation";
+
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -266,6 +268,21 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return  new Result<TerminalPedDTO>(terminalPedResponse);
     }
 
+    public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command){
+        logger.debug("terminalId=" + terminalId);
+        List<String> validationErrs = validateUpdate(terminalId, command, "parameter.terminalId.invalid", "parameter.terminalPushCmdRequest.null");
+        if (validationErrs.size() > 0) {
+            return new Result<String>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_ACTION_URL.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("command", command.val());
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<String>(emptyResponse);
+    }
+
     public enum TerminalStatus {
         Active("A"),
         Inactive("P"),
@@ -298,4 +315,18 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     }
 
+    public enum TerminalPushCmd {
+        Restart("Restart"),
+        Lock("Lock"),
+        Unlock("Unlock");
+
+
+        private String val;
+        private TerminalPushCmd(String type) {
+            this.val = type;
+        }
+        public String val(){
+            return this.val;
+        }
+    }
 }
