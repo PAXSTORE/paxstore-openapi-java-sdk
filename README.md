@@ -171,7 +171,7 @@ Update pom.xml add SDK dependency for your java project.
 <dependency>
     <groupId>com.pax.market</groupId>
     <artifactId>paxstore-openapi-java-sdk</artifactId>
-    <version>7.3.1</version>
+    <version>7.4.0</version>
 </dependency>
 ```
 
