@@ -1,4 +1,7 @@
 # Changelog  
+## 7.4.0  
+### New Feature  
+* Terminal API supports push command(lock, unlock, restart) to terminal   
 
 ## 7.3.1  
 
