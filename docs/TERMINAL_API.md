@@ -201,13 +201,12 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 |includeGeoLocation|boolean|true|whether to include geo location information in search result|
 |includeInstalledApks|boolean|true|whether to include install applications in search result|
 |includeInstalledFirmware|boolean|true|whether to include the firmware version of the terminal in search result|
-|includeDetailInfo|boolean|true|whether to return detail Info and accessory Info|
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225", true, true, true, true);
+Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225", true, true, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -266,113 +265,7 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalSta
 				"installTime": 1563639280000,
 				"versionName": "V3.02.00_20190129",
 				"versionCode": 11
-			}],
-			"terminalDetail": {
-				"pn": "A920-3AW-RD5-21EU",
-				"screenResolution": "720px * 1280px",
-				"language": "English",
-				"ip": "192.168.6.253",
-				"timeZone": "GMT +08:00",
-				"macAddress": "A4:D4:B2:9C:10:FF"
-			},
-			"terminalAccessory": {
-				"basic": [{
-					"name": "SN",
-					"content": "1140073435"
-				}, {
-					"name": "MACH",
-					"content": "Q20"
-				}, {
-					"name": "OS",
-					"content": "Prolin2.7.66"
-				}],
-				"hardware": [{
-					"name": "PCD",
-					"content": "Y"
-				}, {
-					"name": "MSR",
-					"content": "Y"
-				}, {
-					"name": "SCI",
-					"content": "Y"
-				}, {
-					"name": "BOARDID",
-					"content": "Q20_M06_P00"
-				}, {
-					"name": "BLUETOOTH"
-				}, {
-					"name": "ETHERNET"
-				}, {
-					"name": "WIFI"
-				}, {
-					"name": "WIRELESS"
-				}, {
-					"name": "MODEM"
-				}, {
-					"name": "PRINTER"
-				}, {
-					"name": "BARCODE"
-				}, {
-					"name": "FLASH",
-					"content": "128MB"
-				}, {
-					"name": "FREEFLASH",
-					"content": "58.41M"
-				}, {
-					"name": "RAM",
-					"content": "246.50MB"
-				}, {
-					"name": "SECURITY LEVEL",
-					"content": "1"
-				}, {
-					"name": "SECURITY MODE",
-					"content": "2"
-				}, {
-					"name": "TOUCHSCREEN",
-					"content": "Y"
-				}, {
-					"name": "CIPHER_CHIP"
-				}],
-				"installApps": [{
-					"name": "browser",
-					"content": "2.00.10"
-				}],
-				"history": [{
-					"name": "MAINAPP/config.xml",
-					"status": "Success",
-					"installTime": 1588053636000,
-					"fileSize": 102,
-					"fileType": "Private file",
-					"source": "Remote Upgrade"
-				}, {
-					"name": "MAINAPP/sys_param.p",
-					"status": "Success",
-					"installTime": 1588053633000,
-					"fileSize": 135,
-					"fileType": "Private file",
-					"source": "Remote Upgrade"
-				}, {
-					"name": "MAINAPP/sys_cap.p",
-					"status": "Success",
-					"installTime": 1588053630000,
-					"fileSize": 234,
-					"fileType": "Private file",
-					"source": "Remote Upgrade"
-				}, {
-					"name": "browser.aip",
-					"status": "Success",
-					"installTime": 1588053240000,
-					"fileSize": 2165940,
-					"fileType": "Application",
-					"source": "Local Upgrade"
-				}, {
-					"name": "prolin-pelican-2.7.66.8833R_SIG.zip",
-					"status": "Success",
-					"installTime": 1588041153000,
-					"fileSize": 17890812,
-					"fileType": "Firmware",
-					"source": "Local Upgrade"
-				}]
+			}]
 			}
 		}]
 	}

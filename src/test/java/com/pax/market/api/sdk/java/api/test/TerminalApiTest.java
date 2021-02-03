@@ -56,7 +56,7 @@ public class TerminalApiTest {
 
 	@Test
 	public void testSearchTerminalListInluceGeoFirmAppDetail(){
-		Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, null, "BTG7KFTY", true, true, true, true);
+		Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, null, "BTG7KFTY", true, true, true);
 		logger.debug("Result of search terminal: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 	}
