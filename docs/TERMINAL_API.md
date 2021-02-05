@@ -168,6 +168,7 @@ Structure of class TerminalDeviceHistoryDTO
 | Property Name | Type   | Description                                                  |
 | :------------ | :----- | :----------------------------------------------------------- |
 | name          | String | The accessory information name                               |
+| version       | String | The accessory information version                            |
 | status        | String | The status of the related historical push of the accessory device |
 | installTime   | Date   | The accessory information install time                       |
 | fileSize      | Long   | The size of the file pushed by the accessory device          |
@@ -466,6 +467,7 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 				"source": "Local Upgrade"
 			}, {
 				"name": "prolin-pelican-2.7.66.8833R_SIG.zip",
+				"version": "2.00.10",
 				"status": "Success",
 				"installTime": 1588041153000,
 				"fileSize": 17890812,

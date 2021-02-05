@@ -24,6 +24,7 @@ public class TerminalDeviceHistoryDTO implements Serializable {
 
     private static final long serialVersionUID = 194315398237043077L;
     private String name;
+    private String version;
     private String status;
     private Date installTime;
     private Long fileSize;
@@ -39,6 +40,13 @@ public class TerminalDeviceHistoryDTO implements Serializable {
         this.name = name;
     }
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
     public String getStatus() {
         return status;
