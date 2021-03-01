@@ -31,7 +31,7 @@ Description
 <td>IRN</td><td>Iran</td><td>伊朗</td><td>Iran</td><td>伊朗</td>
 </tr>
 <tr>
-<td>BRA</td><td>Brasil</td><td>巴西</td><td>Brasil</td><td>巴西</td>
+<td>BRA</td><td>Brazil</td><td>巴西</td><td>Brazil</td><td>巴西</td>
 </tr>
 <tr>
 <td>GBR</td><td>United Kingdom</td><td>英国</td><td>United Kingdom</td><td>英国</td>
