@@ -39,7 +39,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 |pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
 |status|TerminalStatus|true|the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
-|snNameTID|String|true|search by serial number,name and TID|
+|snNameTID|String|true|search by serial number,name and TID(exactly match)|
 
 **Sample codes**
 
