@@ -121,6 +121,18 @@ public class Result<T extends Serializable> implements Serializable{
 		this.pageInfo = pageInfo;
 	}
 
+	public String getRateLimit() {
+		return rateLimit;
+	}
+
+	public String getRateLimitRemain() {
+		return rateLimitRemain;
+	}
+
+	public String getRateLimitReset() {
+		return rateLimitReset;
+	}
+
 	@Override
 	public String toString() {
 		return "Result [businessCode=" + businessCode + ", message=" + message + ", validationErrors="
