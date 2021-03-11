@@ -47,8 +47,8 @@ public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy 
 |osType|AppOsType|true|the app osType<br/> the value can be AppOsType.Android, AppOsType.Traditional|
 |baseType|AppBaseType|true|the app baseType<br/> the value can be AppBaseType.Normal, AppBaseType.Parameter|
 |chargeType|AppChargeType|true|the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging|
-|specificReseller|Boolean|true|specific reseller<br/> make app private to some reseller, the value can be true or false|
-|specificMerchantCategory|Boolean|true|sperific merchant category<br/> make app only visible by specific merchants in store client, the value can be true or false|
+|specificReseller|Boolean|true|specific reseller<br/> value can be one of true(yes) and false(no)|
+|specificMerchantCategory|Boolean|true|specific merchant category<br/> value can be one of true(yes) and false(no)|
 
 **Sample codes**
 
