@@ -1,7 +1,16 @@
 # Changelog  
+
+## 8.0  
+### New Feature  
+* Terminal API supports get details when get single terminal
+
+### Improvement  
+* Provide the get method for the properties rateLimit, rateLimitRemain and rateLimitReset in the class Result
+
 ## 7.4.0  
 ### New Feature  
-* Terminal API supports push command(lock, unlock, restart) to terminal   
+* Terminal API supports push command(lock, unlock, restart) to terminal  
+
 
 ## 7.3.1  
 
@@ -11,10 +20,10 @@
 ## 7.3  
 
 ### Improvement
-* Change the SDK default connection timeout and read timeout value from 30 seconds to 5 seconds. 
+* Change the SDK default connection timeout and read timeout value from 30 seconds to 5 seconds 
 
 ### Breaking changes
-* Max records per page is reduced from 1000 to 100 (except GoInsightApi). If pass a value greate than 100 SDK validation will fail.
+* Max records per page is reduced from 1000 to 100 (except GoInsightApi). If pass a value greate than 100 SDK validation will fail
 * Developer inforamtion is removed from search result of AppApi
 
 
