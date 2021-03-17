@@ -99,18 +99,18 @@ Structure of class TerminalDTO
 |createdDate|Date|The create time|
 |lastActiveTime|Date|The activation time|
 |location|String|The location|
-|geoLocation|TerminalLocationDTO| The geo location of the terminal|
+|geoLocation|TerminalLocationDTO| The geography location of the terminal|
 |installedFirmware|TerminalInstalledFirmwareDTO| The installed firmware of the terminal|
 |installedApks|List\<TerminalInstalledApkDTO\>| The installed applications of the terminal|
-|terminalDetail|TerminalDetailDTO| The terminal detail info |
-|terminalAccessory|TerminalAccessoryDTO| The terminal accessory info |
+|terminalDetail|TerminalDetailDTO| The terminal detail information |
+|terminalAccessory|TerminalAccessoryDTO| The terminal accessory information |
 
 Structure of class TerminalLocationDTO
 
 |Property Name|Type|Description|
 |:---|:---|:---|
-|lat|Double|The latitude of geo location|
-|lng|Double|The longitude of geo location|
+|lat|Double|The latitude of geography location|
+|lng|Double|The longitude of geography location|
 
 Structure of class TerminalInstalledFirmwareDTO  
 
@@ -142,8 +142,8 @@ Structure of class TerminalDetailDTO
 | language         | String | Terminal's language          |
 | ip               | String | Terminal's network ip        |
 | timeZone         | String | Terminal's time zone         |
-| macAddress       | String | Terminal's mac address       |
-| iccid            | String | Terminal's Iccid             |
+| macAddress       | String | Terminal's MAC address       |
+| iccid            | String | Terminal's ICCID             |
 | cellid           | String | Terminal's Cellid            |
 
 Structure of class TerminalAccessoryDTO
