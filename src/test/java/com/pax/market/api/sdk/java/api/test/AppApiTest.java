@@ -49,4 +49,15 @@ public class AppApiTest  {
         logger.debug("Result of search app:{}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
+
+
+    @Test
+    public void testSearchAppWithResellerName() {
+        String resellerName = "reseller";
+        Result<AppPageDTO> result = appApi.searchApp(1,20, AppSearchOrderBy.UpdatedDate_desc,
+                "", null, null, null, AppStatus.Active,
+                ApkStatus.Online, false, null,false, resellerName);
+        logger.debug("Result of search app:{}", result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
 }

@@ -28,10 +28,11 @@ The search apps API allows thirdparty system to search apps for page.
 **API**
 
 ```
+public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy, String name, AppOsType osType, AppChargeType chargeType,AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,Boolean specificReseller,Boolean specificMerchantCategory, Boolean includeSubscribedApp, String resellerName);
 public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
-                                    String name, AppOsType osType, AppChargeType chargeType,
-                                    AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
-                                    Boolean specificReseller, Boolean specificMerchantCategory)
+String name, AppOsType osType, AppChargeType chargeType, AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,Boolean specificReseller,Boolean specificMerchantCategory, Boolean includeSubscribedApp);
+public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
+String name, AppOsType osType, AppChargeType chargeType, AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,Boolean specificReseller,Boolean pecificMerchantCategory);
 ```
 
 **Input parameter(s) description**
@@ -49,14 +50,14 @@ public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy 
 |chargeType|AppChargeType|true|the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging|
 |specificReseller|Boolean|true|specific reseller<br/> value can be one of true(yes) and false(no)|
 |specificMerchantCategory|Boolean|true|specific merchant category<br/> value can be one of true(yes) and false(no)|
+|includeSubscribedApp|Boolean|true|include the subscribed app, value can be one of true(yes) and false(no)|
+|resellerName|String|true|search filter by reseller name, search out the app to which the reseller belongs|
 
 **Sample codes**
 
 ```
 AppApi AppApi = new  AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate_desc,
-                                                 "", AppOsType.Android, AppChargeType.Free, AppBaseType.Normal, 
-                                                 AppStatus.Active, ApkStatus.Online, false, false);
+Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate_desc,"", AppOsType.Android, AppChargeType.Free, AppBaseType.Normal, AppStatus.Active, ApkStatus.Online, false, false, null);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
