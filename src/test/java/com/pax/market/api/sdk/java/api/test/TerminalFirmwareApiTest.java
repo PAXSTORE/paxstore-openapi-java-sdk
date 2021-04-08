@@ -60,4 +60,14 @@ public class TerminalFirmwareApiTest {
         logger.debug("Result of search terminalFm:{}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
+
+    @Test
+    public void testSearchTerminalFirmwareListBySerialNoAndTID() {
+        String terminalTid = "GAPXQNMQ";
+        String terminalSN = "GAPXQNMQSN";
+        Result<PushFirmwareTaskDTO> result = terminalFirmwareApi.searchPushFirmwareTasks(1,12,TerminalFirmwareApi.SearchOrderBy.CreatedDate_desc,
+                terminalTid, "", TerminalFirmwareApi.PushStatus.Active,terminalSN);
+        logger.debug("Result of search terminalFm:{}", result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
 }
