@@ -33,6 +33,7 @@ public class CreateTerminalApkRequest implements Serializable{
 	private List<FileParameter> base64FileParameters;
 
 	private String pushTemplateName;
+	private Boolean inheritPushHistory;
 
 
 
@@ -87,5 +88,13 @@ public class CreateTerminalApkRequest implements Serializable{
 
 	public void setPushTemplateName(String pushTemplateName) {
 		this.pushTemplateName = pushTemplateName;
+	}
+
+	public Boolean getInheritPushHistory() {
+		return inheritPushHistory;
+	}
+
+	public void setInheritPushHistory(Boolean inheritPushHistory) {
+		this.inheritPushHistory = inheritPushHistory;
 	}
 }
