@@ -26,6 +26,7 @@ public class ParameterVariable implements Serializable {
 
     private String packageName;
 
+    private String type;
     private String key;
     private String value;
     private String remarks;
@@ -36,6 +37,14 @@ public class ParameterVariable implements Serializable {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getKey() {
@@ -66,6 +75,7 @@ public class ParameterVariable implements Serializable {
     public String toString() {
         return "ParameterVariable{" +
                 "packageName='" + packageName + '\'' +
+                ", type='" + type + '\'' +
                 ", key='" + key + '\'' +
                 ", value='" + value + '\'' +
                 ", remarks='" + remarks + '\'' +
