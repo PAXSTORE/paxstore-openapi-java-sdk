@@ -29,6 +29,7 @@ public class ParameterVariableDTO implements Serializable {
     private Long id;
     private String appPackageName;
     private String appName;
+    private String type;
     private String key;
     private String value;
     private String remarks;
@@ -58,6 +59,14 @@ public class ParameterVariableDTO implements Serializable {
 
     public void setAppName(String appName) {
         this.appName = appName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getKey() {
@@ -114,6 +123,7 @@ public class ParameterVariableDTO implements Serializable {
                 "id=" + id +
                 ", appPackageName='" + appPackageName + '\'' +
                 ", appName='" + appName + '\'' +
+                ", type='" + type + '\'' +
                 ", key='" + key + '\'' +
                 ", value='" + value + '\'' +
                 ", remarks='" + remarks + '\'' +
