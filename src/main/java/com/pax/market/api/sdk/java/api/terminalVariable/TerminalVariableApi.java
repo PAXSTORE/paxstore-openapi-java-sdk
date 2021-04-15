@@ -20,11 +20,15 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminalVariable.dto.*;
+import com.pax.market.api.sdk.java.api.util.CryptoUtils;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.Locale;
 
@@ -87,7 +91,14 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         return result;
     }
 
-
+    private void encryptPasswordVariable(ParameterVariable parameterVariable) {
+        if (StringUtils.equals("P", parameterVariable.getType()) && StringUtils.isNotEmpty(parameterVariable.getValue())) {
+            try {
+                parameterVariable.setValue(CryptoUtils.byte2hex(CryptoUtils.aesEncrypt(parameterVariable.getValue().getBytes(StandardCharsets.UTF_8), CryptoUtils.encryptMD5(getApiSecret()))));
+            } catch (Exception ignore) {
+            }
+        }
+    }
 
     public Result<String> createTerminalVariable(TerminalParameterVariableRequest createRequest){
         List<String> validationErrs = validateCreate( createRequest,"parameter.terminalVariableRequest.null");
@@ -96,6 +107,9 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         }
         if(validationErrs.size()>0) {
             return new Result<String>(validationErrs);
+        }
+        for (ParameterVariable parameterVariable : createRequest.getVariableList()) {
+            encryptPasswordVariable(parameterVariable);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(CREATE_TERMINAL_VARIABLE_URL);
@@ -109,6 +123,7 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
 
     public Result<String> updateTerminalVariable(Long terminalVariableId, ParameterVariable updateRequest){
         validateTerminalVariableId(terminalVariableId);
+        encryptPasswordVariable(updateRequest);
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(UPDATE_TERMINAL_VARIABLE_URL.replace("{terminalVariableId}",terminalVariableId+""));
