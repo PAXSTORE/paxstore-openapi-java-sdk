@@ -55,8 +55,8 @@ public class TerminalApiTest {
     }
 
 	@Test
-	public void testSearchTerminalListInluceGeoFirmApp(){
-		Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, null, "1170054731", true, true, true);
+	public void testSearchTerminalListInluceGeoFirmAppDetail(){
+		Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, null, "BTG7KFTY", true, true, true);
 		logger.debug("Result of search terminal: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 	}
@@ -113,6 +113,15 @@ public class TerminalApiTest {
     	logger.debug("Result of delete terminal: {}",deleteResult.toString());
     	Assert.assertTrue(deleteResult.getBusinessCode() == 0);
 
+
+    }
+
+    @Test
+    public void testGetTerminalIncludeAccessoryInfo() {
+    	Long terminalId = 908627L;
+    	Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId,true);
+    	logger.debug("Result of get terminal: {}",getResult.toString());
+    	Assert.assertTrue(getResult.getBusinessCode() == 0);
 
     }
     

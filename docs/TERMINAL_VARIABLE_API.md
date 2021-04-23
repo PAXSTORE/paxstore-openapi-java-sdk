@@ -75,6 +75,7 @@ Result<ParameterVariableDTO> result = terminalVariableApi.getTerminalVariable(1,
 			"updatedDate": 1519609650000,
 			"value": "www",
 			"key": "MARKET_DOMAIN",
+			"type": "T",
 			"remarks": "This variable is used in all apps of the market terminals"
 		}, {
 			"createdDate": 1519609650000,
@@ -85,6 +86,7 @@ Result<ParameterVariableDTO> result = terminalVariableApi.getTerminalVariable(1,
 			"updatedDate": 1519803201000,
 			"value": "Global",
 			"key": "MARKET_NAME",
+			"type": "P",
 			"remarks": "This variable is only used in the specified app of the market terminals"
 		}]
 	}
@@ -98,6 +100,7 @@ The type in dataSet is ParameterVariableDTO. And the structure like below.
 | id             | Long   | The id of terminal variable |
 | appPackageName | String | The app package name        |
 | appName        | String | The app name                |
+| type           | String | Terminal variable type, T(text) or P(password) |
 | key            | String | Terminal variable key       |
 | value          | String | Terminal variable value     |
 | remarks        | String | Comment                     |
@@ -141,8 +144,9 @@ Structure of class ParameterVariable
 
 | Property Name | Type   | Nullable | Description             |
 | :------------ | :----- | :------- | :---------------------- |
-| packageName   | String | true | The app package name    |
-| key           | String | false | Terminal variable key   |
+| packageName   | String | true     | The app package name    |
+| type          | String | true     | Terminal variable type, T(text) or P(password) |
+| key           | String | false    | Terminal variable key   |
 | value         | String | true     | Terminal variable value |
 | remarks       | String | false    | Comment                 |
 
@@ -152,10 +156,12 @@ Structure of class ParameterVariable
 TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 TerminalParameterVariableRequest createRequest = new TerminalParameterVariableRequest();
 ParameterVariable parameterVariable1 = new ParameterVariable();
+parameterVariable1.setType("T");
 parameterVariable1.setKey("testUpdateVariable-key-WITHOUT-APPiD-BO-testAdDvALIDATE");
 parameterVariable1.setValue("testUpdateVariable-value1");
 parameterVariable1.setRemarks("今日头条app testCreateApi3");
 ParameterVariable parameterVariable2 = new ParameterVariable();
+parameterVariable2.setType("P");
 parameterVariable2.setKey("testCreateVariable1Api4-BO");
 parameterVariable2.setValue("testApiCreate4");
 parameterVariable2.setPackageName("");
@@ -236,6 +242,7 @@ Structure of class ParameterVariable
 | Property Name | Type   | Nullable | Description                |
 | :------------ | :----- | :------- | :------------------------- |
 | packageName   | String | true     | The name of param template |
+| type          | String | true     | Terminal variable type, T(text) or P(password) |
 | key           | String | false    | Terminal variable key      |
 | value         | String | true     | Terminal variable value    |
 | remarks       | String | true     | Comment                    |
@@ -248,6 +255,7 @@ Note: parameterVariable cannot be empty
 TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Long terminalVariableId = 1000001148L;
 ParameterVariable updateRequest = new ParameterVariable();
+updateRequest.setType("T");
 updateRequest.setKey("testUpdateVariable-key2-BO-UPDATE");
 updateRequest.setValue("testUpdateVariable-value1");
 updateRequest.setRemarks("updateRemarks1");

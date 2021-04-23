@@ -12,6 +12,7 @@
 package com.pax.market.api.sdk.java.api.terminal.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 
@@ -39,7 +40,11 @@ public class TerminalDTO implements Serializable{
     private String modelName;
     
     private String resellerName;
-    
+
+	private Date createdDate;
+
+	private Date lastActiveTime;
+
     private String location;
 
 	private TerminalLocationDTO geoLocation;
@@ -47,6 +52,10 @@ public class TerminalDTO implements Serializable{
 	private TerminalInstalledFirmwareDTO installedFirmware;
 
 	private List<TerminalInstalledApkDTO> installedApks;
+
+	private TerminalDetailDTO terminalDetail;
+
+	private TerminalAccessoryDTO terminalAccessory;
 
 	public Long getId() {
 		return id;
@@ -112,6 +121,22 @@ public class TerminalDTO implements Serializable{
 		this.resellerName = resellerName;
 	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getLastActiveTime() {
+		return lastActiveTime;
+	}
+
+	public void setLastActiveTime(Date lastActiveTime) {
+		this.lastActiveTime = lastActiveTime;
+	}
+
 	public String getLocation() {
 		return location;
 	}
@@ -144,6 +169,22 @@ public class TerminalDTO implements Serializable{
 		this.installedApks = installedApks;
 	}
 
+	public TerminalDetailDTO getTerminalDetail() {
+		return terminalDetail;
+	}
+
+	public void setTerminalDetail(TerminalDetailDTO terminalDetail) {
+		this.terminalDetail = terminalDetail;
+	}
+
+	public TerminalAccessoryDTO getTerminalAccessory() {
+		return terminalAccessory;
+	}
+
+	public void setTerminalAccessory(TerminalAccessoryDTO terminalAccessory) {
+		this.terminalAccessory = terminalAccessory;
+	}
+
 	@Override
 	public String toString() {
 		return "TerminalDTO{" +
@@ -155,10 +196,14 @@ public class TerminalDTO implements Serializable{
 				", merchantName='" + merchantName + '\'' +
 				", modelName='" + modelName + '\'' +
 				", resellerName='" + resellerName + '\'' +
+				", createdDate=" + createdDate +
+				", lastActiveTime=" + lastActiveTime +
 				", location='" + location + '\'' +
 				", geoLocation=" + geoLocation +
 				", installedFirmware=" + installedFirmware +
 				", installedApks=" + installedApks +
+				", terminalDetail=" + terminalDetail +
+				", terminalAccessory=" + terminalAccessory +
 				'}';
 	}
 }

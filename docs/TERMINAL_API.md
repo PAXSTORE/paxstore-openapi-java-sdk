@@ -39,7 +39,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 |pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
 |status|TerminalStatus|true|the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
-|snNameTID|String|true|search by serial number,name and TID|
+|snNameTID|String|true|search by serial number,name and TID(exactly match)|
 
 **Sample codes**
 
@@ -96,17 +96,21 @@ Structure of class TerminalDTO
 |merchantName|String|The merchant of terminal belongs to.|
 |modelName|String|Model name of terminal.|
 |resellerName|String|The reseller of terminal belongs to.|
+|createdDate|Date|The create time|
+|lastActiveTime|Date|The activation time|
 |location|String|The location|
-|geoLocation|TerminalLocationDTO| The geo location of the terminal|
+|geoLocation|TerminalLocationDTO| The geography location of the terminal|
 |installedFirmware|TerminalInstalledFirmwareDTO| The installed firmware of the terminal|
 |installedApks|List\<TerminalInstalledApkDTO\>| The installed applications of the terminal|
+|terminalDetail|TerminalDetailDTO| The terminal detail information |
+|terminalAccessory|TerminalAccessoryDTO| The terminal accessory information |
 
 Structure of class TerminalLocationDTO
 
 |Property Name|Type|Description|
 |:---|:---|:---|
-|lat|Double|The latitude of geo location|
-|lng|Double|The longitude of geo location|
+|lat|Double|The latitude of geography location|
+|lng|Double|The longitude of geography location|
 
 Structure of class TerminalInstalledFirmwareDTO  
 
@@ -122,12 +126,55 @@ Structure of class TerminalInstalledApkDTO
 |:---|:---|:---|
 |appName|String|Application name|
 |packageName|String|Package name of application|
-
 |versionName|String|Version name of application|
 |versionCode|Long|Version code of application|
 |packageName|String|Package name of application|
 |installTime|Date|Installed time of application|
 
+Structure of class TerminalDetailDTO
+
+| Property Name    | Type   | Description                  |
+| :--------------- | :----- | :--------------------------- |
+| pn               | String | Terminal's pn                |
+| osVersion        | String | Terminal's android version   |
+| imei             | String | Terminal's IMEI              |
+| screenResolution | String | Terminal's screen resolution |
+| language         | String | Terminal's language          |
+| ip               | String | Terminal's network ip        |
+| timeZone         | String | Terminal's time zone         |
+| macAddress       | String | Terminal's MAC address       |
+| iccid            | String | Terminal's ICCID             |
+| cellid           | String | Terminal's Cellid            |
+
+Structure of class TerminalAccessoryDTO
+
+| Property Name       | Type                     | Description                                         |
+| :------------------ | :----------------------- | :-------------------------------------------------- |
+| relatedTerminalName | String                   | The accessory information terminal name             |
+| basic               | TerminalDeviceSimpleDTO  | The basic information of the accessory device       |
+| hardware            | TerminalDeviceSimpleDTO  | The hardware information of the accessory device    |
+| installApps         | TerminalDeviceSimpleDTO  | The installApps information of the accessory device |
+| history             | TerminalDeviceHistoryDTO | The history information of the accessory device     |
+
+Structure of class TerminalDeviceSimpleDTO
+
+| Property Name | Type   | Description                       |
+| :------------ | :----- | :-------------------------------- |
+| name          | String | The accessory information name    |
+| content       | String | The accessory information content |
+
+Structure of class TerminalDeviceHistoryDTO
+
+| Property Name | Type   | Description                                                  |
+| :------------ | :----- | :----------------------------------------------------------- |
+| name          | String | The accessory information name                               |
+| version       | String | The accessory information version                            |
+| status        | String | The status of the related historical push of the accessory device |
+| installTime   | Date   | The accessory information install time                       |
+| fileSize      | Long   | The size of the file pushed by the accessory device          |
+| fileType      | String | The type of the file pushed by the accessory device          |
+| source        | String | The file source                                              |
+| remarks       | String | The remarks information                                      |
 
 **Possible validation errors**
 
@@ -155,7 +202,6 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 |includeGeoLocation|boolean|true|whether to include geo location information in search result|
 |includeInstalledApks|boolean|true|whether to include install applications in search result|
 |includeInstalledFirmware|boolean|true|whether to include the firmware version of the terminal in search result|
-
 
 **Sample codes**
 
@@ -197,9 +243,10 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalSta
 				"lng": 120.77595,
 				"lat": 31.308021
 			},
-			"installedFirmware": {"firmwareName": "A930_PayDroid_7.1.1_Virgo_customer_res_pax_20180925",
+			"installedFirmware": {
+				"firmwareName": "A930_PayDroid_7.1.1_Virgo_customer_res_pax_20180925",
 				"installTime": null
-			
+
 			},
 			"installedApks": [{
 				"appName": "WSPLink",
@@ -219,8 +266,8 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalSta
 				"installTime": 1563639280000,
 				"versionName": "V3.02.00_20190129",
 				"versionCode": 11
+			}]
 			}
-			]
 		}]
 	}
 }
@@ -245,7 +292,8 @@ The get terminal API allows the thirdparty system get a terminal by terminal id.
 **API**
 
 ```
-public Result<TerminalDTO> getTerminal(Long terminalId)
+public Result<TerminalDTO> getTerminal(Long terminalId);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfo);
 ```
 
 **Input parameter(s) description**
@@ -259,7 +307,10 @@ public Result<TerminalDTO> getTerminal(Long terminalId)
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalDTO> result = terminalApi.getTerminal(907554L);
+//simple info
+Result<TerminalDTO> result = terminalApi.getTerminal(908627L);
+//includeDetailInfo, whether to return Detail Info 
+Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -286,18 +337,149 @@ Result<TerminalDTO> result = terminalApi.getTerminal(907554L);
 {
 	"businessCode": 0,
 	"data": {
-		"id": 907554,
-		"name": "testcreateterminal_023",
-		"tid": "FNI9W6IX",
-		"serialNo": "sn0101012",
-		"status": "S",
-		"merchantName": "haoxy",
-		"modelName": "A920",
-		"resellerName": "PAX",
-		"location": "USA"
+		"id": 908627,
+		"name": "test8000999",
+		"tid": "BTG7KFTY",
+		"serialNo": "TEST8000999",
+		"status": "A",
+		"merchantName": "pax",
+		"modelName": "A930",
+		"resellerName": "Jesse",
+		"location": "",
+		"createdDate": 1552536099000,
+		"lastActiveTime": 1552536095000
 	}
 }
 ```
+
+```HTML
+{
+	"businessCode": 0,
+	"data": {
+		"id": 908627,
+		"name": "test8000999",
+		"tid": "BTG7KFTY",
+		"serialNo": "TEST8000999",
+		"status": "A",
+		"merchantName": "pax",
+		"modelName": "A930",
+		"resellerName": "Jesse",
+		"location": "",
+		"createdDate": 1552536099000,
+		"lastActiveTime": 1552536095000,
+		"terminalDetail": {
+			"pn": "A920-3AW-RD5-21EU",
+			"screenResolution": "720px * 1280px",
+			"language": "English",
+			"ip": "192.168.5.213",
+			"timeZone": "GMT +08:00",
+			"macAddress": "A4:D4:B2:4C:14:FE"
+		},
+		"terminalAccessory": {
+			"basic": [{
+				"name": "SN",
+				"content": "1140073435"
+			}, {
+				"name": "MACH",
+				"content": "Q20"
+			}, {
+				"name": "OS",
+				"content": "Prolin2.7.66"
+			}],
+			"hardware": [{
+				"name": "PCD",
+				"content": "Y"
+			}, {
+				"name": "MSR",
+				"content": "Y"
+			}, {
+				"name": "SCI",
+				"content": "Y"
+			}, {
+				"name": "BOARDID",
+				"content": "Q20_M06_P00"
+			}, {
+				"name": "BLUETOOTH"
+			}, {
+				"name": "ETHERNET"
+			}, {
+				"name": "WIFI"
+			}, {
+				"name": "WIRELESS"
+			}, {
+				"name": "MODEM"
+			}, {
+				"name": "PRINTER"
+			}, {
+				"name": "BARCODE"
+			}, {
+				"name": "FLASH",
+				"content": "128MB"
+			}, {
+				"name": "FREEFLASH",
+				"content": "58.41M"
+			}, {
+				"name": "RAM",
+				"content": "246.50MB"
+			}, {
+				"name": "SECURITY LEVEL",
+				"content": "1"
+			}, {
+				"name": "SECURITY MODE",
+				"content": "2"
+			}, {
+				"name": "TOUCHSCREEN",
+				"content": "Y"
+			}, {
+				"name": "CIPHER_CHIP"
+			}],
+			"installApps": [{
+				"name": "browser",
+				"content": "2.00.10"
+			}],
+			"history": [{
+				"name": "MAINAPP/config.xml",
+				"status": "Success",
+				"installTime": 1588053636000,
+				"fileSize": 102,
+				"fileType": "Private file",
+				"source": "Remote Upgrade"
+			}, {
+				"name": "MAINAPP/sys_param.p",
+				"status": "Success",
+				"installTime": 1588053633000,
+				"fileSize": 135,
+				"fileType": "Private file",
+				"source": "Remote Upgrade"
+			}, {
+				"name": "MAINAPP/sys_cap.p",
+				"status": "Success",
+				"installTime": 1588053630000,
+				"fileSize": 234,
+				"fileType": "Private file",
+				"source": "Remote Upgrade"
+			}, {
+				"name": "browser.aip",
+				"status": "Success",
+				"installTime": 1588053240000,
+				"fileSize": 2165940,
+				"fileType": "Application",
+				"source": "Local Upgrade"
+			}, {
+				"name": "prolin-pelican-2.7.66.8833R_SIG.zip",
+				"version": "2.00.10",
+				"status": "Success",
+				"installTime": 1588041153000,
+				"fileSize": 17890812,
+				"fileType": "Firmware",
+				"source": "Local Upgrade"
+			}]
+		}
+	}
+}
+```
+
+
 
 The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
 

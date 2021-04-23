@@ -101,7 +101,6 @@ The type in dataSet is EntityAttributeDTO. And the structure like below.
 | minLength                | Integer                        |                                                    |
 | maxLength                | Integer                        |                                                    |
 | required                 | boolean                        |                                                    |
-| regex                    | String                         | check whether it is legal or not.                  |
 | selector                 | String                         |                                                    |
 | key                      | String                         |                                                    |
 | index                    | int                            |                                                    |
@@ -247,7 +246,6 @@ Structure of class EntityAttributeCreateRequest.
 | minLength     | Integer             | true     |                                                              |
 | maxLength     | Integer             | true     |                                                              |
 | required      | boolean             | false    |                                                              |
-| regex         | String              | true     | verify entity attribute value                                |
 | selector      | String              | true     | the value of json format                                     |
 | key           | String              | false    | the key of the attribute value                               |
 | defaultLabel  | String              | false    |                                                              |
@@ -376,7 +374,6 @@ Structure of class EntityAttributeUpdateRequest.
 | minLength     | Integer         | true     |                                                              |
 | maxLength     | Integer         | true     |                                                              |
 | required      | boolean         | false    |                                                              |
-| regex         | String          | true     | verify entity attribute value                                |
 | selector      | String          | true     | the value of json format                                     |
 | defaultLabel  | String          | false    |                                                              |
 

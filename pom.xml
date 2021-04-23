@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>com.pax.market</groupId>
     <artifactId>paxstore-openapi-java-sdk</artifactId>
-	<version>7.4.1-SNAPSHOT</version>
+	<version>8.1-SNAPSHOT</version>
     <name>PAX Market :: Openapi Java SDK</name>
 
     <properties>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-			<version>5.3.6.Final</version>
+			<version>5.3.5.Final</version>
         </dependency>
 	    <dependency>
 		    <groupId>org.glassfish.web</groupId>
@@ -72,7 +72,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>28.2-jre</version>
+            <version>29.0-jre</version>
         </dependency>
     </dependencies>
 

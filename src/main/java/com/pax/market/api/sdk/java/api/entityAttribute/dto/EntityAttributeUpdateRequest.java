@@ -64,10 +64,12 @@ public class EntityAttributeUpdateRequest implements Serializable {
         this.required = required;
     }
 
+    @Deprecated
     public String getRegex() {
         return regex;
     }
 
+    @Deprecated
     public void setRegex(String regex) {
         this.regex = regex;
     }
