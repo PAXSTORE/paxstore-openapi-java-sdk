@@ -541,14 +541,6 @@ createReq.setStatus(TerminalStatus.Active);
 Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
 ```
 
-**Client side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": -1,
-	"validationErrors": ["modelName:may not be empty", "name:may not be empty"]
-}
-```
 
 **Server side validation failed sample result(JSON formatted)**
 
