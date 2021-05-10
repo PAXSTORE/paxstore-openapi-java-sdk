@@ -521,7 +521,7 @@ Structure of class TerminalCreateRequest
 |serialNo|String|true|The serial number of terminal. If the status is active the serial number is mandatory.|
 |merchantName|String|true|The merchant of terminal belongs to. If the initial is active then merchantName is mandatory. The max length is 64. Make sure the merchant belongs to the given reseller|
 |resellerName|String|false|The reseller of terminal belongs to. Max length is 64.|
-|modelName|String|false|The model name of terminal. Max length is 64.|
+|modelName|String|true|The model name of terminal. Max length is 64.|
 |location|String|true|The location of terminal, max length is 32.|
 |status|String|true|Status of terminal, valus can be one of A(Active) and P(Pendding). If status is null the initial status is P(Pendding) when creating.|
 
@@ -541,14 +541,6 @@ createReq.setStatus(TerminalStatus.Active);
 Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
 ```
 
-**Client side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": -1,
-	"validationErrors": ["modelName:may not be empty", "name:may not be empty"]
-}
-```
 
 **Server side validation failed sample result(JSON formatted)**
 
