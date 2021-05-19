@@ -78,7 +78,8 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      * @return the result
      */
     public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
-        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "false", "false");
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<ParameterPushHistoryDTO>>(){}.getType();
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "false", "false", responseType);
     }
 
     /**
@@ -93,7 +94,8 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      * @return the result
      */
     public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
-        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "false", "true");
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<ParameterPushHistoryDTO>>(){}.getType();
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "false", "true", responseType);
     }
 
     /**
@@ -108,7 +110,8 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      * @return the result
      */
     public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
-        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "true", "false");
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<OptimizedParameterPushHistoryDTO>>(){}.getType();
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "true", "false", responseType);
     }
 
     /**
@@ -123,10 +126,11 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      * @return the result
      */
     public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
-        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "true", "true");
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<OptimizedParameterPushHistoryDTO>>(){}.getType();
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "true", "true", responseType);
     }
 
-    private <T extends Serializable> Result<T> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime, String onlyLastPushHistory, String optimizeParameters) {
+    private <T extends Serializable> Result<T> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime, String onlyLastPushHistory, String optimizeParameters, Type responseType) {
         List<String> validationErrsP = validateStr(packageName, "parameter.packageName.null");
         if(validationErrsP.size()>0){
             return new Result<>(validationErrsP);
@@ -151,8 +155,7 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
         request.addRequestParam("onlyLastPushHistory", onlyLastPushHistory);
         request.addRequestParam("optimizeParameters", optimizeParameters);
 
-        Type type = new TypeToken<ParameterPushHistoryPageResponse<T>>(){}.getType();
-        ParameterPushHistoryPageResponse<T> parameterPushHistoryPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), type);
+        ParameterPushHistoryPageResponse<T> parameterPushHistoryPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), responseType);
         return new Result<>(parameterPushHistoryPageResponse);
     }
 
