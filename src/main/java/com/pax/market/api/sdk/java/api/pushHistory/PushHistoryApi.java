@@ -12,12 +12,14 @@
 package com.pax.market.api.sdk.java.api.pushHistory;
 
 
+import com.google.gson.reflect.TypeToken;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
+import com.pax.market.api.sdk.java.api.pushHistory.dto.OptimizedParameterPushHistoryDTO;
 import com.pax.market.api.sdk.java.api.pushHistory.dto.ParameterPushHistoryDTO;
 import com.pax.market.api.sdk.java.api.pushHistory.dto.ParameterPushHistoryPageResponse;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
@@ -25,6 +27,8 @@ import com.pax.market.api.sdk.java.api.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -62,21 +66,70 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
         super(baseUrl, apiKey, apiSecret, locale);
     }
 
-
     /**
      * Search parameter push history result.
      *
      * @param pageNo      the page no
      * @param pageSize    the page size
      * @param packageName the package name
+     * @param serialNo    the serial no
      * @param pushStatus  the push status
      * @param pushTime    the push time
      * @return the result
      */
     public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "false", "false");
+    }
+
+    /**
+     * Search optimized parameter push history result.
+     *
+     * @param pageNo      the page no
+     * @param pageSize    the page size
+     * @param packageName the package name
+     * @param serialNo    the serial no
+     * @param pushStatus  the push status
+     * @param pushTime    the push time
+     * @return the result
+     */
+    public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "false", "true");
+    }
+
+    /**
+     * Search latest parameter push history result.
+     *
+     * @param pageNo      the page no
+     * @param pageSize    the page size
+     * @param packageName the package name
+     * @param serialNo    the serial no
+     * @param pushStatus  the push status
+     * @param pushTime    the push time
+     * @return the result
+     */
+    public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "true", "false");
+    }
+
+    /**
+     * Search latest optimized parameter push history result.
+     *
+     * @param pageNo      the page no
+     * @param pageSize    the page size
+     * @param packageName the package name
+     * @param serialNo    the serial no
+     * @param pushStatus  the push status
+     * @param pushTime    the push time
+     * @return the result
+     */
+    public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "true", "true");
+    }
+
+    private <T extends Serializable> Result<T> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime, String onlyLastPushHistory, String optimizeParameters) {
         List<String> validationErrsP = validateStr(packageName, "parameter.packageName.null");
         if(validationErrsP.size()>0){
-            return new Result<ParameterPushHistoryDTO>(validationErrsP);
+            return new Result<>(validationErrsP);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
@@ -84,7 +137,7 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
         page.setPageSize(pageSize);
         List<String> validationErrs = validate(page);
         if (validationErrs.size() > 0) {
-            return new Result<ParameterPushHistoryDTO>(validationErrs);
+            return new Result<>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_APP_PUSH_HISTORY_URL, page);
         if (pushStatus != null) {
@@ -95,10 +148,12 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
         }
         request.addRequestParam("packageName", packageName);
         request.addRequestParam("serialNo", serialNo);
+        request.addRequestParam("onlyLastPushHistory", onlyLastPushHistory);
+        request.addRequestParam("optimizeParameters", optimizeParameters);
 
-        ParameterPushHistoryPageResponse parameterPushHistoryPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), ParameterPushHistoryPageResponse.class);
-
-        return new Result<ParameterPushHistoryDTO>(parameterPushHistoryPageResponse);
+        Type type = new TypeToken<ParameterPushHistoryPageResponse<T>>(){}.getType();
+        ParameterPushHistoryPageResponse<T> parameterPushHistoryPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), type);
+        return new Result<>(parameterPushHistoryPageResponse);
     }
 
     /**
