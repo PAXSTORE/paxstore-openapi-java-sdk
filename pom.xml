@@ -14,10 +14,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-	<groupId>com.pax.market</groupId>
-    <artifactId>paxstore-openapi-java-sdk</artifactId>
-	<version>8.1-SNAPSHOT</version>
-    <name>PAX Market :: Openapi Java SDK</name>
+	<groupId>com.whatspos.sdk</groupId>
+    <artifactId>3rdsys-openapi</artifactId>
+	<version>8.1.0-SNAPSHOT</version>
+    <name>OpenAPI Java SDK</name>
+    <description>OpenAPI Java SDK</description>
+    <url>https://github.com/PAXSTORE/paxstore-openapi-java-sdk</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,13 +27,36 @@
 		<javadoc.opts>-Xdoclint:none</javadoc.opts>
     </properties>
 
-    <dependencies>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
-    
+    <developers>
+        <developer>
+            <name>jay</name>
+            <email>tanjie@paxsz.com.com</email>
+            <organization>pax</organization>
+        </developer>
+        <developer>
+            <name>Max</name>
+            <email>wangzh@paxsz.com</email>
+            <organization>pax</organization>
+        </developer>
+        <developer>
+            <name>ShiFan</name>
+            <email>shifan@paxsz.com</email>
+            <organization>pax</organization>
+        </developer>
+    </developers>
+
+    <dependencies>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-			<version>5.3.5.Final</version>
+			<version>5.3.6.Final</version>
         </dependency>
 	    <dependency>
 		    <groupId>org.glassfish.web</groupId>
@@ -56,13 +81,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>4.13.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <version>2.7</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -87,12 +112,25 @@
                 </configuration>
             </plugin>
 			<plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.2</version>
-                    <configuration>
-                        <arguments>-DskipTests</arguments>
-                    </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <arguments>-DskipTests</arguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -122,18 +160,40 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <keyname>PAXSTORE-SUPPORT</keyname>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-	
-	<scm>
-        <developerConnection>scm:git:git@github.com:PAXSTORE/paxstore-openapi-java-sdk.git</developerConnection>
-      <tag>paxstore-openapi-java-sdk-7.2.0</tag>
-  </scm>
-    
+
+    <scm>
+        <connection>scm:git:https://github.com/PAXSTORE/paxstore-openapi-java-sdk.git</connection>
+        <developerConnection>scm:git:https://github.com/PAXSTORE/paxstore-openapi-java-sdk.git</developerConnection>
+        <url>scm:git:https://github.com/PAXSTORE/paxstore-openapi-java-sdk.git</url>
+    </scm>
+
     <distributionManagement>
-		<repository>
-		    <id>bintray</id>
-		    <url>https://api.bintray.com/maven/paxstore-support/paxstore/paxstore-openapi-java-sdk/;publish=1</url>
-	    </repository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 </project>
