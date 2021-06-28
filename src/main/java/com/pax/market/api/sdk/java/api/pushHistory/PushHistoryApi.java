@@ -94,7 +94,7 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      * @return the result
      */
     public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
-        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<ParameterPushHistoryDTO>>(){}.getType();
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<OptimizedParameterPushHistoryDTO>>(){}.getType();
         return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "false", "true", responseType);
     }
 
@@ -110,7 +110,7 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      * @return the result
      */
     public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
-        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<OptimizedParameterPushHistoryDTO>>(){}.getType();
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<ParameterPushHistoryDTO>>(){}.getType();
         return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "true", "false", responseType);
     }
 
