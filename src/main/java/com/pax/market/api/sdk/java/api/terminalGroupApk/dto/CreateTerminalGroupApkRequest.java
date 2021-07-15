@@ -43,6 +43,8 @@ public class CreateTerminalGroupApkRequest implements Serializable {
 
     private Map<String, String> parameters;
     private List<FileParameter> base64FileParameters;
+    private Boolean inheritPushHistory;
+
 
     public Long getGroupId() {
         return groupId;
@@ -98,5 +100,13 @@ public class CreateTerminalGroupApkRequest implements Serializable {
 
     public void setBase64FileParameters(List<FileParameter> base64FileParameters) {
         this.base64FileParameters = base64FileParameters;
+    }
+
+    public Boolean getInheritPushHistory() {
+        return inheritPushHistory;
+    }
+
+    public void setInheritPushHistory(Boolean inheritPushHistory) {
+        this.inheritPushHistory = inheritPushHistory;
     }
 }
