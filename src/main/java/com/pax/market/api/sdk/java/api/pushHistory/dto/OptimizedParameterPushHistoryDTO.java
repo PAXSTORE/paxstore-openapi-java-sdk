@@ -29,6 +29,7 @@ public class OptimizedParameterPushHistoryDTO implements Serializable {
     private Date appPushTime;
     private String appPushStatus;
     private String appPushError;
+    private String parameterTemplateName;
     private Date parameterPushTime;
     private String parameterPushStatus;
     private String parameterPushError;
@@ -180,6 +181,24 @@ public class OptimizedParameterPushHistoryDTO implements Serializable {
     }
 
     /**
+     * Gets parameter template name.
+     *
+     * @return the parameter template name
+     */
+    public String getParameterTemplateName() {
+        return parameterTemplateName;
+    }
+
+    /**
+     * Sets parameter template name.
+     *
+     * @param parameterTemplateName the parameter template name
+     */
+    public void setParameterTemplateName(String parameterTemplateName) {
+        this.parameterTemplateName = parameterTemplateName;
+    }
+
+    /**
      * Gets parameter push time.
      *
      * @return the parameter push time
@@ -280,6 +299,7 @@ public class OptimizedParameterPushHistoryDTO implements Serializable {
                 ", appPushTime=" + appPushTime +
                 ", appPushStatus='" + appPushStatus + '\'' +
                 ", appPushError='" + appPushError + '\'' +
+                ", parameterTemplateName='" + parameterTemplateName + '\'' +
                 ", parameterPushTime=" + parameterPushTime +
                 ", parameterPushStatus='" + parameterPushStatus + '\'' +
                 ", parameterPushError='" + parameterPushError + '\'' +
