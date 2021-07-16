@@ -48,6 +48,7 @@ Structure of class TerminalCreateRequest
 |parameters|Map\<String, String\>|false|The parameter key and value, the key the PID in template|
 |base64FileParameters|List\<FileParameter\>|false|The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb|
 |pushTemplateName|String|true|The push template name|
+|inheritPushHistory|Boolean|true|Whether to inherit the latest success push history parameters, inherited parameter values have lower priority than passed-in parameter values|
 
 Structure of class FileParameter
 

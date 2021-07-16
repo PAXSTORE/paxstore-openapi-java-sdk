@@ -60,6 +60,19 @@ public class EnhancedJsonUtils {
     }
 
     /**
+     * From json t.
+     *
+     * @param <T>        the type parameter
+     * @param sdkJsonStr the sdk json str
+     * @param typeOfT    the type of t
+     * @return the t
+     */
+    public static <T> T fromJson(String sdkJsonStr, Type typeOfT) {
+        logger.debug(sdkJsonStr);
+        return gson.fromJson(sdkJsonStr, typeOfT);
+    }
+
+    /**
      * Gets sdk json.
      *
      * @param resultCode the result code
@@ -126,9 +139,18 @@ public class EnhancedJsonUtils {
 
     private static class DateTypeAdapter implements JsonDeserializer<Date> {
         private DateFormat format;
+
+        /**
+         * Instantiates a new Date type adapter.
+         */
         DateTypeAdapter() {
         }
 
+        /**
+         * Instantiates a new Date type adapter.
+         *
+         * @param format the format
+         */
         public DateTypeAdapter(DateFormat format) {
             this.format = format;
         }

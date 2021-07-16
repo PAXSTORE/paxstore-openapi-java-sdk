@@ -188,7 +188,6 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
 
     public enum VariableSource {
         TERMINAL("T"),
-        GROUP("G"),
         MARKET("M"),
         MERCHANT("C");
 

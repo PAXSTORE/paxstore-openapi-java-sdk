@@ -55,7 +55,7 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
     }
 
     public Result<PushFirmwareTaskDTO> searchPushFirmwareTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
-                                                               String terminalTid, String fmName, PushStatus status){
+                                                               String terminalTid, String fmName, PushStatus status, String serialNo){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -64,17 +64,9 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
             page.setOrderBy(orderBy.val());
         }
 
-        List<String> validationErrs = validate(page);
-        if(validationErrs.size()>0) {
-            return new Result<PushFirmwareTaskDTO>(validationErrs);
-        }
-        if(StringUtils.isEmpty(terminalTid)) {
-            validationErrs.add(super.getMessage("parameter.searchPushFirmwareTasks.terminalTid.empty"));
-            return new Result<PushFirmwareTaskDTO>(validationErrs);
-        }
-
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_FIRMWARE_LIST_URL, page);
         request.addRequestParam("terminalTid", terminalTid);
+        request.addRequestParam("serialNo", serialNo);
         request.addRequestParam("fmName", fmName);
         if(status != null){
             request.addRequestParam("status", status.val());
@@ -84,6 +76,18 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
         Result<PushFirmwareTaskDTO> result = new Result<PushFirmwareTaskDTO>(pageResponse);
 
         return result;
+    }
+
+    public Result<PushFirmwareTaskDTO> searchPushFirmwareTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
+                                                               String terminalTid, String fmName, PushStatus status){
+
+        logger.debug("terminalTid="+terminalTid);
+        List<String> validationErrs = validateStr(terminalTid, "parameter.searchPushFirmwareTasks.terminalTid.empty");
+        if(validationErrs.size()>0) {
+            return new Result<PushFirmwareTaskDTO>(validationErrs);
+        }
+
+        return searchPushFirmwareTasks(pageNo, pageSize, orderBy, terminalTid, fmName, status,null);
     }
 
     public Result<PushFirmwareTaskDTO> getPushFirmwareTask(Long pushFirmwareTaskId){

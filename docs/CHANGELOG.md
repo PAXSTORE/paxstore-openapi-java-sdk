@@ -1,5 +1,22 @@
 # Changelog  
 
+## 8.1  
+Please note all the changes is based on PAXStore version 8.1.0.
+
+### New Feature   
+* PushHistoryApi supports search latest parameter push history
+* PushHistoryApi supports search optimized parameter push history
+* PushHistoryApi supports search latest optimized parameter push history
+
+### Improvement  
+* Add new search app API to support search apps filter by reseller
+* Add new search push firmware task API to support search by tasks filter by serial number
+* TerminalApkApi supports push a parameter app inherite parameters from the lastest success push history
+* EntityAttributeApi does not support regular expression anymore
+
+### Breaking Changes
+* GROUP is removed from enum VariableSource, if you are using it when search terminal variables you need to change codes 
+
 ## 8.0  
 ### New Feature  
 * Terminal API supports get details when get single terminal

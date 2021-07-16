@@ -93,7 +93,6 @@ terminalFirmwareApi.pushFirmware2Terminal(pushFirmware2TerminalRequest);
 > <font color=red>The property serialNo and tid in createTerminalFirmwareRequest cannot be blank at same time!</font> 
 > <font color=red>fmName:may not be empty</font> 
 
-
 **Possible business codes**
 
 |Business Code|Message|Description|
@@ -114,8 +113,9 @@ The search firmware push history API allows third party system to search pushed 
 **API**
 
 ```
-public Result<PushFirmwareTaskDTO> searchPushFirmwareTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
-                                                                      String terminalTid, String fmName, PushStatus status)
+public Result<PushFirmwareTaskDTO> searchPushFirmwareTasks(int pageNo, int pageSize, SearchOrderBy orderBy,String terminalTid, String fmName, PushStatus status)
+public Result<PushFirmwareTaskDTO> searchPushFirmwareTasks(int pageNo, int pageSize, SearchOrderBy orderBy,String terminalTid, String fmName, PushStatus status, 
+String serialNo)
 ```
 
 **Input parameter(s) description**
@@ -125,9 +125,10 @@ public Result<PushFirmwareTaskDTO> searchPushFirmwareTasks(int pageNo, int pageS
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.CreatedDate_desc and SearchOrderBy.CreatedDate_asc.|
-|terminalTid|String|false|search filter by terminal tid|
+|terminalTid|String|true|search filter by terminal tid, <br/>when the parameter serialNo has a value, it can be null, otherwise, it cannot be empty|
 |fmName|String|true|search filter by firmware name|
 |status|PushStatus|true|the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend|
+|serialNo|String|true|search filter by terminal serial no|
 
 **Sample codes**
 
@@ -184,6 +185,13 @@ The type in dataSet is PushFirmwareTaskDTO. And the structure like below.
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 100</font>  
+
+**Possible business codes**
+
+| Business Code | Message                    | Description                               |
+| :------------ | :------------------------- | :---------------------------------------- |
+| 2028          | Terminal not found         | Please check the value of tid or serialNo |
+| 2039          | Tid mismatch with serialNo |                                           |
 
 ### Get push firmware history by id
 

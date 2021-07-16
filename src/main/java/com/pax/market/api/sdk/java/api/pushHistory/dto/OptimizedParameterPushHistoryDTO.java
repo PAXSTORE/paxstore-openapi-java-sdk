@@ -13,11 +13,12 @@ package com.pax.market.api.sdk.java.api.pushHistory.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * The type App push history.
  */
-public class ParameterPushHistoryDTO implements Serializable {
+public class OptimizedParameterPushHistoryDTO implements Serializable {
     private static final long serialVersionUID = -7972757906620772968L;
 
     private Long terminalId;
@@ -32,8 +33,7 @@ public class ParameterPushHistoryDTO implements Serializable {
     private Date parameterPushTime;
     private String parameterPushStatus;
     private String parameterPushError;
-    private String parameterValues;
-    private String parameterVariables;
+    private Map<String, String> parameters;
     private String pushType;
 
     /**
@@ -253,39 +253,21 @@ public class ParameterPushHistoryDTO implements Serializable {
     }
 
     /**
-     * Gets parameter values.
+     * Gets parameters.
      *
-     * @return the parameter values
+     * @return the parameters
      */
-    public String getParameterValues() {
-        return parameterValues;
+    public Map<String, String> getParameters() {
+        return parameters;
     }
 
     /**
-     * Sets parameter values.
+     * Sets parameters.
      *
-     * @param parameterValues the parameter values
+     * @param parameters the parameters
      */
-    public void setParameterValues(String parameterValues) {
-        this.parameterValues = parameterValues;
-    }
-
-    /**
-     * Gets parameter variables.
-     *
-     * @return the parameter variables
-     */
-    public String getParameterVariables() {
-        return parameterVariables;
-    }
-
-    /**
-     * Sets parameter variables.
-     *
-     * @param parameterVariables the parameter variables
-     */
-    public void setParameterVariables(String parameterVariables) {
-        this.parameterVariables = parameterVariables;
+    public void setParameters(Map<String, String> parameters) {
+        this.parameters = parameters;
     }
 
     /**
@@ -308,7 +290,7 @@ public class ParameterPushHistoryDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ParameterPushHistoryDTO{" +
+        return "OptimizedParameterPushHistoryDTO{" +
                 "terminalId=" + terminalId +
                 ", serialNo='" + serialNo + '\'' +
                 ", appName='" + appName + '\'' +
@@ -321,8 +303,7 @@ public class ParameterPushHistoryDTO implements Serializable {
                 ", parameterPushTime=" + parameterPushTime +
                 ", parameterPushStatus='" + parameterPushStatus + '\'' +
                 ", parameterPushError='" + parameterPushError + '\'' +
-                ", parameterValues='" + parameterValues + '\'' +
-                ", parameterVariables='" + parameterVariables + '\'' +
+                ", parameters=" + parameters +
                 ", pushType='" + pushType + '\'' +
                 '}';
     }
