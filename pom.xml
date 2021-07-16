@@ -174,7 +174,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <keyname>PAXSTORE-SUPPORT</keyname>
+                    <keyname>Derek</keyname>
                 </configuration>
             </plugin>
         </plugins>
