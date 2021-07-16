@@ -1,6 +1,6 @@
 # Changelog  
 
-## 8.1  
+## 8.1.0  
 Please note all the changes is based on PAXStore version 8.1.0.
 
 ### New Feature   

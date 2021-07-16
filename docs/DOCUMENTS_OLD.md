@@ -1,3 +1,4 @@
+### [8.0](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/paxstore-openapi-java-sdk-8.0)  
 ### [7.4.0](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/paxstore-openapi-java-sdk-7.4.0)  
 ### [7.3](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/paxstore-openapi-java-sdk-7.3) 
 ### [7.2.0](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/paxstore-openapi-java-sdk-7.2.0) 

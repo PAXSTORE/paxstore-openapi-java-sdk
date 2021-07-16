@@ -156,14 +156,13 @@ Please keep the access key and access secret safely. Once the access key or acce
 
 ## Intergrate with SDK
 
-Update maven's settings.xml add a new repository https://dl.bintray.com/paxstore-support/paxstore/  
 Update pom.xml add SDK dependency for your java project.
 
 ```
 <dependency>
-    <groupId>com.pax.market</groupId>
-    <artifactId>paxstore-openapi-java-sdk</artifactId>
-    <version>7.3.1</version>
+    <groupId>com.whatspos.sdk</groupId>
+    <artifactId>3rdsys-openapi</artifactId>
+    <version>8.1.0</version>
 </dependency>
 ```
 
