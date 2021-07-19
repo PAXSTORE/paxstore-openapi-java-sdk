@@ -1,4 +1,4 @@
-# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=8.0) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/8.0/link)
+# PAXSTORE Open API Java SDK [ ![Download](https://api.bintray.com/packages/paxstore-support/paxstore/paxstore-openapi-java-sdk/images/download.svg?version=7.4.0) ](https://bintray.com/paxstore-support/paxstore/paxstore-openapi-java-sdk/7.4.0/link)
 
 
 <br/>
@@ -11,11 +11,6 @@ PAXSTORE exposes reseller, merchant and terminal related APIs for thirdparty sys
 
 
 ## [Documents for Old Versions](docs/DOCUMENTS_OLD.md)
-
-## Important Changes
-
-As from May 1st 2021 Bintray repository serivces is no longer available we migrated SDK publish to JitPack. And currently only SDKs which version after 7.4.0(include 7.4.0) are available in JitPack. And JitPack is using tag name as the version name so the dependency inforamtion is different from before. Please change the version in dependency. For example change version 7.4.0 to paxstore-openapi-java-sdk-7.4.0. Please refer to the below Integrate with SDK to add the JitPack repository in your local Maven settings.xml.
-
 
 
 <br>
@@ -160,14 +155,14 @@ Please keep the access key and access secret safely. Once the access key or acce
 
 ## Intergrate with SDK
 
-Update maven's settings.xml add a new repository https://jitpack.io  
+Update maven's settings.xml add a new repository https://dl.bintray.com/paxstore-support/paxstore/  
 Update pom.xml add SDK dependency for your java project.
 
 ```
 <dependency>
-    <groupId>com.github.PAXSTORE</groupId>
+    <groupId>com.pax.market</groupId>
     <artifactId>paxstore-openapi-java-sdk</artifactId>
-    <version>paxstore-openapi-java-sdk-8.0</version>
+    <version>7.3.1</version>
 </dependency>
 ```
 
