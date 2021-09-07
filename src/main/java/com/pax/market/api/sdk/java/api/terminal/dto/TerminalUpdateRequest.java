@@ -49,9 +49,11 @@ public class TerminalUpdateRequest implements Serializable{
     @Length(max=64)
     protected String modelName;
 
-    @Length(max=32)
-    protected String location;
-    
+	@Length(max=64)
+	protected String location;
+
+	@Length(max=500)
+	protected String remark;
 
 	public String getName() {
 		return name;
@@ -95,6 +97,14 @@ public class TerminalUpdateRequest implements Serializable{
 		this.location = location;
 	}
 
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public String getModelName() {
 		return modelName;
 	}
@@ -117,7 +127,7 @@ public class TerminalUpdateRequest implements Serializable{
 	public String toString() {
 		return "TerminalUpdateRequest [name=" + name + ", tid=" + tid + ", serialNo=" + serialNo + ", merchantName="
 				+ merchantName + ", resellerName=" + resellerName + ", modelName=" + modelName + ", location="
-				+ location + "]";
+				+ location + ", remark=" + remark +"]";
 	}
 
 	

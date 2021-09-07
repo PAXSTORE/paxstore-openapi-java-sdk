@@ -76,7 +76,8 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalSta
 			"merchantName": "KFC",
 			"modelName": "A920",
 			"resellerName": "New York",
-			"location": "USA"
+			"location": "USA",
+			"remark":""
 		}]
 	}
 }
@@ -99,6 +100,7 @@ Structure of class TerminalDTO
 |createdDate|Date|The create time|
 |lastActiveTime|Date|The activation time|
 |location|String|The location|
+|remark|String|The remark|
 |geoLocation|TerminalLocationDTO| The geography location of the terminal|
 |installedFirmware|TerminalInstalledFirmwareDTO| The installed firmware of the terminal|
 |installedApks|List\<TerminalInstalledApkDTO\>| The installed applications of the terminal|
@@ -239,6 +241,7 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalSta
 			"modelName": "A920",
 			"resellerName": "New York",
 			"location": "USA",
+			"remark":"",
 			"geoLocation": {
 				"lng": 120.77595,
 				"lat": 31.308021
@@ -346,6 +349,7 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"modelName": "A930",
 		"resellerName": "Jesse",
 		"location": "",
+		"remark":"",
 		"createdDate": 1552536099000,
 		"lastActiveTime": 1552536095000
 	}
@@ -365,6 +369,7 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"modelName": "A930",
 		"resellerName": "Jesse",
 		"location": "",
+		"remark":"",
 		"createdDate": 1552536099000,
 		"lastActiveTime": 1552536095000,
 		"terminalDetail": {
@@ -522,7 +527,8 @@ Structure of class TerminalCreateRequest
 |merchantName|String|true|The merchant of terminal belongs to. If the initial is active then merchantName is mandatory. The max length is 64. Make sure the merchant belongs to the given reseller|
 |resellerName|String|false|The reseller of terminal belongs to. Max length is 64.|
 |modelName|String|true|The model name of terminal. Max length is 64.|
-|location|String|true|The location of terminal, max length is 32.|
+|location|String|true|The location of terminal, max length is 64.|
+|remark|String|true|The remark of terminal, max length is 500.|
 |status|String|true|Status of terminal, valus can be one of A(Active) and P(Pendding). If status is null the initial status is P(Pendding) when creating.|
 
 
@@ -535,6 +541,7 @@ createReq.setName("KFC-TML-001");
 createReq.setMerchantName("KFC");
 createReq.setResellerName("New York");
 createReq.setLocation("USA");
+createReq.setRemark("Terminal Remark");
 createReq.setSerialNo("sn0101012236");
 createReq.setModelName("A920");
 createReq.setStatus(TerminalStatus.Active);
@@ -565,7 +572,8 @@ Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
 		"merchantName": "KFC",
 		"modelName": "A920",
 		"resellerName": "New York",
-		"location": "USA"
+		"location": "USA",
+		"remark": "Terminal Remark"
 	}
 }
 ```
@@ -641,7 +649,8 @@ Structure of class TerminalUpdateRequest
 |merchantName|String|true|The merchant of terminal belongs to. If the initial is active then merchantName is mandatory. The max length is 64. Make sure the merchant belongs to the given reseller|
 |resellerName|String|false|The reseller of terminal belongs to. Max length is 64.|
 |modelName|String|false|The model name of terminal. Max length is 64.|
-|location|String|true|The location of terminal, max length is 32.|
+|location|String|true|The location of terminal, max length is 64.|
+|remark|String|true|The remark of terminal, max length is 500.|
 
 
 **Sample codes**
@@ -652,6 +661,7 @@ TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
 updateReq.setName("KFC-TML-001");
 updateReq.setModelName("A920");
 updateReq.setLocation("CN");
+updateReq.setRemark("Terminal Remark");
 updateReq.setSerialNo("sn010101211226");
 updateReq.setResellerName("New York");
 updateReq.setMerchantName("KFC");
@@ -690,7 +700,8 @@ Result<TerminalDTO> result = terminalApi.updateTerminal(907560L, updateReq);
 		"merchantName": "KFC",
 		"modelName": "A920",
 		"resellerName": "New York",
-		"location": "CN"
+		"location": "CN",
+		"remark":"Termianl Remark"
 	}
 }
 ```
