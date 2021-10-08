@@ -54,7 +54,7 @@ public class TerminalGroupRkiApi extends BaseThirdPartySysApi {
     private static final String CREATE_TERMINAL_GROUP_RKI_URL = "/v1/3rdsys/terminalGroupRki";
     private static final String SUSPEND_TERMINAL_GROUP_RKI_URL = "/v1/3rdsys/terminalGroupRki/{groupRkiId}/suspend";
 
-    public Result<TerminalGroupRkiDTO> searchGroupPushRkiTask(int pageNo, int pageSize, BaseThirdPartySysApi.SearchOrderBy orderBy , Long groupId, Boolean pendingOnly, Boolean historyOnly, String keyWords){
+    public Result<TerminalGroupRkiDTO> searchGroupPushRkiTask(int pageNo, int pageSize, SearchOrderBy orderBy , Long groupId, Boolean pendingOnly, Boolean historyOnly, String keyWords){
         logger.debug("groupId="+groupId);
         List<String> validationErrId = validateId(groupId, "parameter.terminalGroupId.invalid");
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
