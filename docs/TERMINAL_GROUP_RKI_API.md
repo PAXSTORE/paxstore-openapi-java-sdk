@@ -322,8 +322,6 @@ The type of data is TerminalGroupRkiDTO, and Refer to search group push rki task
 |18006|Invalid RKI push task status||
 
 
-### 
-
 
 ### Disable Rki push by group push rki task id
 
