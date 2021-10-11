@@ -1,5 +1,14 @@
 # Changelog  
 
+
+## 8.2.0  
+### New Feature
+* Terminal added new property 'Remark'  
+
+### Improvement  
+* The max length of Location property in terminal increased to 64  
+
+
 ## 8.1.0  
 Please note all the changes is based on PAXStore version 8.1.0.
 
