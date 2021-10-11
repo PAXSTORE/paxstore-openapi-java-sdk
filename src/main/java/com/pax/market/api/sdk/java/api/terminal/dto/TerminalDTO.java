@@ -47,6 +47,8 @@ public class TerminalDTO implements Serializable{
 
     private String location;
 
+	private String remark;
+
 	private TerminalLocationDTO geoLocation;
 
 	private TerminalInstalledFirmwareDTO installedFirmware;
@@ -151,6 +153,14 @@ public class TerminalDTO implements Serializable{
 
 	public void setGeoLocation(TerminalLocationDTO geoLocation) {
 		this.geoLocation = geoLocation;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public TerminalInstalledFirmwareDTO getInstalledFirmware() {
