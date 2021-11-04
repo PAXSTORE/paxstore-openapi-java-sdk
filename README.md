@@ -153,9 +153,10 @@ Please keep the access key and access secret safely. Once the access key or acce
 <br>
 <br>
 
-## Intergrate with SDK
+## Integrate with SDK  
 
-Update pom.xml add SDK dependency for your java project.
+The minimal JDK version is 1.8.   
+To integrate with this SDK please add below dependency by updating the pom.xml file in your maven project.
 
 ```
 <dependency>
