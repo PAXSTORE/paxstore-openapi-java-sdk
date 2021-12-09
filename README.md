@@ -249,6 +249,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [Entity Attribute APIs](docs/ENTITY_ATTRIBUTE_API.md)
 
+## [Terminal Group RKI APIs](docs/TERMINAL_GROUP_RKI_API.md)
+
 ## [Terminal RKI APIs](docs/TERMINAL_RKI_API.md)
 
 ## [GoInsight APIs](docs/GOINSIGHT_API.md)
