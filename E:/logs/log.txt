@@ -1,0 +1,11 @@
+2021/12/13 16:51:05,000 DEBUG logging:19 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2021/12/13 16:51:05,002  INFO Version:30 - HV000001: Hibernate Validator 5.3.6.Final
+2021/12/13 16:51:05,016 DEBUG DefaultTraversableResolver:70 - Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+2021/12/13 16:51:05,018 DEBUG ValidationXmlParser:99 - Trying to load META-INF/validation.xml for XML based Validator configuration.
+2021/12/13 16:51:05,020 DEBUG ResourceLoaderHelper:54 - Trying to load META-INF/validation.xml via TCCL
+2021/12/13 16:51:05,020 DEBUG ResourceLoaderHelper:60 - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+2021/12/13 16:51:05,021 DEBUG ValidationXmlParser:106 - No META-INF/validation.xml found. Using annotation based configuration only.
+2021/12/13 16:51:05,053 DEBUG TerminalVariableApi:57 - attributeId=1000000218
+2021/12/13 16:51:05,204  INFO ThirdPartySysApiClient:170 -  --> GET https://api.whatspos.com/p-market-api/v1/3rdsys/attributes/1000000218?sysKey=0TAJEJK00R8YYK3HY0LI&timestamp=1639385465055
+2021/12/13 16:51:06,512 DEBUG EnhancedJsonUtils:58 - {"businessCode":104,"message":"Client key is missing or invalid","rateLimit":"20","rateLimitRemain":"18","rateLimitReset":"1639387266307"}
+2021/12/13 16:51:06,517 DEBUG EntityAttributeApiTest:44 - Result of  Entity Attributes: Result [businessCode=104, message=Client key is missing or invalid, validationErrors=null, data=null, rateLimit=20, rateLimitRemain=18, rateLimitReset=1639387266307, pageInfo=null]Mon Dec 13 17:21:06 CST 2021
