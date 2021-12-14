@@ -4,6 +4,10 @@
 <br/>
 <br/>
 
+## Security Announcement  
+This Open API SDK depends on log4j-1.2.7. It won't affected by the vulnerability CVE-2021-44228. The SDK is using slf4j as the log facade and the log4j as the log implementation. Developers can using other log implementation to replace the log4j.
+
+
 ## Introduction
 
 PAXSTORE exposes reseller, merchant and terminal related APIs for thirdparty system convenience. So that the authorized thirdparty system can do operations for reseller, merchant and terminal without logging into PAXSTORE's admin console. The exposed API is RESTful formatted. PAXSTORE provides the Java SDK to simplify the remote invoke.  
