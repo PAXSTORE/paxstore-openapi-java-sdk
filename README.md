@@ -5,7 +5,14 @@
 <br/>
 
 ## Security Announcement  
-This Open API SDK depends on log4j-1.2.7. It won't affected by the vulnerability CVE-2021-44228. The SDK is using slf4j as the log facade and the log4j as the log implementation. Developers can using other log implementation to replace the log4j.
+This Open API SDK depends on log4j-1.2.7. It won't affected by the vulnerability CVE-2021-44228. But a similar vulnerability(CVE-2021-4104) is found in log4j 1.2.x. If the developer is not using JMSAppender it won't affected. Also developer can remove JMSAppender using command(zip -q -d log4j-1.2.17.jar org/apache/log4j/net/JMSAppender.class). Below is the description about CVE-2021-44228.  
+
+```
+JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when the attacker has write access to the Log4j configuration. The attacker can provide TopicBindingName and TopicConnectionFactoryBindingName configurations causing JMSAppender to perform JNDI requests that result in remote code execution in a similar fashion to CVE-2021-44228. Note this issue only affects Log4j 1.2 when specifically configured to use JMSAppender, which is not the default. Apache Log4j 1.2 reached end of life in August 2015. Users should upgrade to Log4j 2 as it addresses numerous other issues from the previous versions.
+```
+
+The SDK is using slf4j as the log facade and the log4j as the log implementation. Developers can using other log implementation to replace the log4j.
+From next version we will remove the log4j dependency from this SDK.
 
 
 ## Introduction
