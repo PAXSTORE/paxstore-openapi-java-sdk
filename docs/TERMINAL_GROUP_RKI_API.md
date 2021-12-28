@@ -102,21 +102,21 @@ Result<TerminalGroupRkiDTO> result = terminalGroupRkiApi.searchGroupPushRkiTask(
 
 The type in dataSet is TerminalGroupRkiDTO. And the structure like below.
 
-| Name          | Type    | Description                                                  |
-| :------------ | :------ | :----------------------------------------------------------- |
-| id            | Long    | the id of group push Rki record                              |
-| rkiKey        | String  | the key of RKI                                               |
-| status        | String  | the status of push Rki, value can be one of A(Active) and S(Suspend) |
-| actionStatus  | String  | the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status) |
-| activatedDate | Date    | the push Rki activated date                                  |
-| effectiveTime | Date    | the push Rki effective date                                  |
-| remarks       | String  | the push Rki result remarks                                  |
-| errorCode     | int     | the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes) |
-| pendingCount  | int     |                                                              |
-| successCount  | int     |                                                              |
-| failedCount   | int     |                                                              |
-| completed     | Boolean | push complete                                                |
-| pushLimit     | int     | the push limit count                                         |
+| Name          | Type      | Description                                                  |
+| :------------ | :-------- | :----------------------------------------------------------- |
+| id            | Long      | the id of group push Rki record                              |
+| rkiKey        | String    | the key of RKI                                               |
+| status        | String    | the status of push Rki, value can be one of A(Active) and S(Suspend) |
+| actionStatus  | String    | the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status) |
+| activatedDate | Timestamp | the push Rki activated date                                  |
+| effectiveTime | Timestamp | the push Rki effective date                                  |
+| remarks       | String    | the push Rki result remarks                                  |
+| errorCode     | int       | the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes) |
+| pendingCount  | int       |                                                              |
+| successCount  | int       |                                                              |
+| failedCount   | int       |                                                              |
+| completed     | Boolean   | push complete                                                |
+| pushLimit     | int       | the push limit count                                         |
 
 **Possible client validation errors**  
 
