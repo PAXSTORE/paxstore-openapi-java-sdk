@@ -12,7 +12,7 @@ JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when
 ```
 
 The SDK is using slf4j as the log facade and the log4j as the log implementation. Developers can using other log implementation to replace the log4j.
-From next version we will remove the log4j dependency from this SDK.
+From version 8.3.0 we removed log4j dependecy from this SDK, developer need to choose the log implementation by self.
 
 
 ## Introduction
