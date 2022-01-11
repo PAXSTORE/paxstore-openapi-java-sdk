@@ -64,7 +64,11 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
     }
 
     public Result<SimpleTerminalGroupApkDTO> getTerminalGroupApk(Long groupApkId, List<String> pidList){
-        validateTerminalGroupApkId(groupApkId);
+        logger.debug("groupApkId=" + groupApkId);
+        List<String> validationErrs = validateId(groupApkId, "parameter.terminalGroupApkId.invalid");
+        if (validationErrs.size() > 0) {
+            return new Result<SimpleTerminalGroupApkDTO>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_GROUP_APK_URL.replace("{groupApkId}", groupApkId.toString() + ""));
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
@@ -140,7 +144,11 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
 
 
     public Result<SimpleTerminalGroupApkDTO> suspendTerminalGroupApk(Long groupApkId) {
-        validateTerminalGroupApkId(groupApkId);
+        logger.debug("groupApkId=" + groupApkId);
+        List<String> validationErrs = validateId(groupApkId, "parameter.terminalGroupApkId.invalid");
+        if (validationErrs.size() > 0) {
+            return new Result<SimpleTerminalGroupApkDTO>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(SUSPEND_TERMINAL_GROUP_APK_URL.replace("{groupApkId}", groupApkId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
@@ -151,21 +159,16 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> deleteTerminalGroupApk(Long groupApkId) {
-        validateTerminalGroupApkId(groupApkId);
+        logger.debug("groupApkId=" + groupApkId);
+        List<String> validationErrs = validateId(groupApkId, "parameter.terminalGroupApkId.invalid");
+        if (validationErrs.size() > 0) {
+            return new Result<String>(validationErrs);
+        }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(DELETE_TERMINAL_GROUP_APK_URL.replace("{groupApkId}", groupApkId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<String>(emptyResponse);
-    }
-
-
-    private Result<SimpleTerminalGroupApkDTO> validateTerminalGroupApkId(Long groupApkId) {
-        logger.debug("groupApkId=" + groupApkId);
-        List<String> validationErrs = validateId(groupApkId, "parameter.terminalGroupApkId.invalid");
-        if (validationErrs.size() > 0) {
-            return new Result<SimpleTerminalGroupApkDTO>(validationErrs);
-        } else return null;
     }
 
 

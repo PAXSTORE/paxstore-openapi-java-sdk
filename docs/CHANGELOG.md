@@ -1,6 +1,13 @@
 # Changelog  
 
 
+## 8.3.0  
+### New Feature  
+* Add group RKI related APIs
+
+### Improvement  
+* Remove log4j dependency, developers need to choose the log implementations by self
+
 ## 8.2.0  
 ### New Feature
 * Terminal added new property 'Remark'  

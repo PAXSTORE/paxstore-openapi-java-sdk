@@ -279,7 +279,7 @@ public abstract class ThirdPartySysHttpUtils {
 				stringBuilder.append(str);
 			}
 			String resultStr = stringBuilder.toString();
-			if(!StringUtils.containsIgnoreCase(contentType, "json")) {
+			if(!StringUtils.containsIgnoreCase(contentType, "json") && StringUtils.isNotBlank(resultStr)) {
 				logger.warn(resultStr);
 			}
 			if(StringUtils.isBlank(resultStr)) {
