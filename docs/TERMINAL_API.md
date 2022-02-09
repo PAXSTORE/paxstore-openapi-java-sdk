@@ -553,8 +553,8 @@ Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
 
 ```
 {
-	"businessCode": 1740,
-	"message": "Your terminal (SN:sn0101012237) already exists"
+	"businessCode": 2321,
+	"message": "Terminal Serial No.sn0101012237 already exists"
 }
 ```
 
@@ -599,7 +599,6 @@ The type of data in result is same as search terminal API.
 
 |Business Code|Message|Description|
 |:---|:---|:---|
-|1740|Your terminal (SN:xxxxxx) already exists|&nbsp;|
 |1759|Reseller doesn't exist|&nbsp;|
 |1720|Merchant doesn't exist|&nbsp;|
 |1937|Merchant is not belong to the given Reseller!|&nbsp;|
@@ -616,10 +615,12 @@ The type of data in result is same as search terminal API.
 |1804|Terminal merchant is mandatory|&nbsp;|
 |1802|Terminal SN is mandatory|&nbsp;|
 |1828|TID already used|&nbsp;|
+|2321|Terminal Serial No.{0} already exists||
 |2349|Terminal TID length is 8 to 15|&nbsp;|
 |1737|The associated merchant is not activate|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
+|2350|Terminal Serial No.{0} already exists in other marketplace sandbox||
 
 
 ### Update a terminal
@@ -727,37 +728,40 @@ The type of data in result is same as search terminal API.
 
 |Business Code|Message|Description|
 |:---|:---|:---|
+|1700|Model doesn't exist||
+|1713|The associated model is not activate||
+|1720|Merchant doesn't exist||
+|1737|The associated merchant is not activate||
 |1759|Reseller doesn't exist|&nbsp;|
-|1720|Merchant doesn't exist|&nbsp;|
-|1937|Merchant is not belong to the given Reseller!|&nbsp;|
-|1700|Model doesn't exist|&nbsp;|
+|1773|The associated reseller is not activate||
 |1800|Terminal not found|&nbsp;|
-|1817|Terminal name is mandatory|&nbsp;|
-|1818|Terminal name is too long|&nbsp;|
-|1803|Terminal model is mandatory|&nbsp;|
+|1802|Terminal SN is mandatory||
+|1803|Terminal model is mandatory||
+|1804|Terminal merchant is mandatory||
+|1806|Terminal SN is too long||
+|1807|Terminal model is too long||
+|1808|Terminal merchant is too long||
+|1809|Terminal location is too long||
+|1811|The terminal has already been activated,unable to update reseller.||
+|1813|Push task has already been added, unable to update model.||
+|1814|Push task has already been added,unable to update reseller.||
+|1817|Terminal name is mandatory||
+|1818|Terminal name is too long||
+|1828|TID already used||
+|1859|Model {0} is not available, please contact administrator||
+|1898|TID cannot be updated when terminal is active||
+|1912|Terminal is disabled, TID cannot be updated!||
+|1928|The terminal is active,terminal SN cannot be updated!||
+|1929|The terminal is not inactive,model cannot be updated!||
+|1937|Merchant is not belong to the given Reseller!|&nbsp;|
+|2312|Terminal Serial No. accept alphanumeric|&nbsp;Alphanumeric and max length is 16|
+|2321|Terminal Serial No.{0} already exists|&nbsp;|
 |2326|Terminal reseller is mandatory|&nbsp;|
-|1806|Terminal SN is too long|&nbsp;|
-|2312|Terminal Serial No. accept alphanumeric|Alphanumeric and max length is 16|
-|1807|Terminal model is too long|&nbsp;|
-|1808|Terminal merchant is too long|&nbsp;|
-|1809|Terminal location is too long|&nbsp;|
-|2401|Terminal TID is invalid|&nbsp;|
-|1929|The terminal is not inactive,model cannot be updated!|&nbsp;|
-|1811|The terminal has already been activated,unable to update reseller.|&nbsp;|
-|1928|The terminal is active,terminal SN cannot be updated!|&nbsp;|
-|1804|Terminal merchant is mandatory|&nbsp;|
-|1737|The associated merchant is not activate|&nbsp;|
-|1813|Push task has already been added, unable to update model.|&nbsp;|
-|1814|Push task has already been added,unable to update reseller.|&nbsp;|
-|1828|TID already used|&nbsp;|
 |2349|Terminal TID length is 8 to 15|&nbsp;|
-|1737|The associated merchant is not activate|&nbsp;|
-|1773|The associated reseller is not activate|&nbsp;|
-|1740|Your terminal (SN:{0}) already exists|&nbsp;|
+|2350|Terminal Serial No.{0} already exists in other marketplace sandbox|&nbsp;|
+|2401|Terminal TID is invalid|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
 
-
-Note: The string {0} in the message of business code 1740 will be replaced by the SN in request.
 
 
 ### Activate a terminal
