@@ -57,7 +57,7 @@ public class TerminalDTO implements Serializable{
 
 	private TerminalDetailDTO terminalDetail;
 
-	private TerminalAccessoryDTO terminalAccessory;
+	private List<TerminalAccessoryDTO> terminalAccessoryList;
 
 	public Long getId() {
 		return id;
@@ -187,12 +187,12 @@ public class TerminalDTO implements Serializable{
 		this.terminalDetail = terminalDetail;
 	}
 
-	public TerminalAccessoryDTO getTerminalAccessory() {
-		return terminalAccessory;
+	public List<TerminalAccessoryDTO> getTerminalAccessoryList() {
+		return terminalAccessoryList;
 	}
 
-	public void setTerminalAccessory(TerminalAccessoryDTO terminalAccessory) {
-		this.terminalAccessory = terminalAccessory;
+	public void setTerminalAccessoryList(List<TerminalAccessoryDTO> terminalAccessoryList) {
+		this.terminalAccessoryList = terminalAccessoryList;
 	}
 
 	@Override
@@ -213,7 +213,7 @@ public class TerminalDTO implements Serializable{
 				", installedFirmware=" + installedFirmware +
 				", installedApks=" + installedApks +
 				", terminalDetail=" + terminalDetail +
-				", terminalAccessory=" + terminalAccessory +
+				", terminalAccessoryList=" + terminalAccessoryList +
 				'}';
 	}
 }
