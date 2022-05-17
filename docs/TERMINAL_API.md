@@ -105,7 +105,7 @@ Structure of class TerminalDTO
 |installedFirmware|TerminalInstalledFirmwareDTO| The installed firmware of the terminal|
 |installedApks|List\<TerminalInstalledApkDTO\>| The installed applications of the terminal|
 |terminalDetail|TerminalDetailDTO| The terminal detail information |
-|terminalAccessory|TerminalAccessoryDTO| The terminal accessory information |
+|terminalAccessoryList|List\<TerminalAccessoryDTO\>| The terminal accessory information list |
 
 Structure of class TerminalLocationDTO
 
@@ -296,7 +296,7 @@ The get terminal API allows the thirdparty system get a terminal by terminal id.
 
 ```
 public Result<TerminalDTO> getTerminal(Long terminalId);
-public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfo);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList);
 ```
 
 **Input parameter(s) description**
@@ -312,7 +312,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 //simple info
 Result<TerminalDTO> result = terminalApi.getTerminal(908627L);
-//includeDetailInfo, whether to return Detail Info 
+//includeDetailInfoList, whether to return Detail Info and Accessory List 
 Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 ```
 
@@ -380,7 +380,7 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 			"timeZone": "GMT +08:00",
 			"macAddress": "A4:D4:B2:4C:14:FE"
 		},
-		"terminalAccessory": {
+		"terminalAccessory": [{
 			"basic": [{
 				"name": "SN",
 				"content": "1140073435"
@@ -479,7 +479,99 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 				"fileType": "Firmware",
 				"source": "Local Upgrade"
 			}]
-		}
+		},{
+            "basic": [{
+                "name": "SN",
+                "content": "1140073438"
+            }, {
+                "name": "Q20",
+                "content": "Q20"
+            }, {
+                "name": "OS",
+                "content": "Prolin2.7.2"
+            }],
+            "hardware": [{
+                "name": "PCD",
+                "content": "Y"
+            }, {
+                "name": "MSR",
+                "content": "Y"
+            }, {
+                "name": "SCI",
+                "content": "Y"
+            }, {
+                "name": "BOARDID",
+                "content": "Q20_M06_P01"
+            }, {
+                "name": "BLUETOOTH"
+            }, {
+                "name": "ETHERNET"
+            }, {
+                "name": "WIFI"
+            }, {
+                "name": "WIRELESS"
+            }, {
+                "name": "MODEM"
+            }, {
+                "name": "PRINTER"
+            }, {
+                "name": "BARCODE"
+            }, {
+                "name": "FLASH",
+                "content": "256MB"
+            }, {
+                "name": "FREEFLASH",
+                "content": "88.52M"
+            }, {
+                "name": "RAM",
+                "content": "325.50MB"
+            }, {
+                "name": "SECURITY LEVEL",
+                "content": "1"
+            }, {
+                "name": "SECURITY MODE",
+                "content": "2"
+            }, {
+                "name": "TOUCHSCREEN",
+                "content": "Y"
+            }, {
+                "name": "CIPHER_CHIP"
+            }],
+            "installApps": [{
+                "name": "NeptuneLite",
+                "content": "2.01.01"
+            }],
+            "history": [{
+                "name": "MAINAPP/sys_param.p",
+                "status": "Success",
+                "installTime": 1651113398000,
+                "fileSize": 135,
+                "fileType": "Private file",
+                "source": "Remote Upgrade"
+            }, {
+                "name": "MAINAPP/sys_cap.p",
+                "status": "Success",
+                "installTime": 16511133980000,
+                "fileSize": 234,
+                "fileType": "Private file",
+                "source": "Remote Upgrade"
+            }, {
+                "name": "browser.aip",
+                "status": "Success",
+                "installTime": 16511133980000,
+                "fileSize": 2165940,
+                "fileType": "Application",
+                "source": "Local Upgrade"
+            }, {
+                "name": "prolin-pelican-2.7.66.8833R_SIG.zip",
+                "version": "2.00.10",
+                "status": "Success",
+                "installTime": 1651113948000,
+                "fileSize": 17890812,
+                "fileType": "Firmware",
+                "source": "Local Upgrade"
+            }]
+        }]
 	}
 }
 ```
