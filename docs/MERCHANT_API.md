@@ -231,11 +231,11 @@ Structure of class MerchantCreateRequest
 |Property Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |name|String|false|Merchant name, max length is 64.|
-|email|String|false|Email of merchant, max length is 255.|
+|email|String|true|Email of merchant, max length is 255.|
 |resellerName|String|false|Reseller name of merchant, max length is 64. Make sure the reseller exist.|
-|contact|String|false|Contact of merchant, max length is 64.|
-|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
-|phone|String|false|Phone number of merchant, max length is 32.|
+|contact|String|true|Contact of merchant, max length is 64.|
+|country|String|true|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
+|phone|String|true|Phone number of merchant, max length is 32.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
@@ -315,16 +315,12 @@ The type of data in result is same as the get reseller API.
 **Possible client validation errors**
 > <font color=red>Parameter merchantCreateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
-> <font color=red>country:may not be empty</font>  
-> <font color=red>email:may not be empty</font>  
 > <font color=red>resellerName:may not be empty</font>  
-> <font color=red>contact:may not be empty</font>  
 > <font color=red>name:length must be between 0 and 64</font>  
 > <font color=red>email:length must be between 0 and 255</font>  
 > <font color=red>resellerName:length must be between 0 and 64</font>  
 > <font color=red>contact:length must be between 0 and 64</font>  
 > <font color=red>country:length must be between 0 and 64</font>  
-> <font color=red>phone:may not be empty</font>  
 > <font color=red>phone:length must be between 0 and 32</font>  
 > <font color=red>postcode:length must be between 0 and 16</font>  
 > <font color=red>address:length must be between 0 and 255</font>  
@@ -340,10 +336,6 @@ The type of data in result is same as the get reseller API.
 |16000|Merchant category not found|&nbsp;|
 |1723|Merchant name is mandatory|&nbsp;|
 |1725|Merchant reseller is mandatory|&nbsp;|
-|1606|Country is mandatory|&nbsp;|
-|1726|Merchant contact is mandatory|&nbsp;|
-|1727|Merchant email is mandatory|&nbsp;|
-|1728|Merchant phone is mandatory|&nbsp;|
 |1729|Merchant name is too long|&nbsp;|
 |1731|Merchant reseller is too long|&nbsp;|
 |1618|Postcode is too long|&nbsp;|
@@ -382,9 +374,9 @@ Structure of class MerchantUpdateRequest
 |name|String|false|Merchant name, max length is 64.|
 |email|String|true|Email of merchant, max length is 255. If email is empty the API won't change the email.|
 |resellerName|String|true|Reseller name of merchant, max length is 64. Make sure the reseller exist. If resellerName is empty the API won't update the reseller of the merchant|
-|contact|String|false|Contact of merchant, max length is 64.|
-|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
-|phone|String|false|Phone number of merchant, max length is 32.|
+|contact|String|true|Contact of merchant, max length is 64.|
+|country|String|true|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
+|phone|String|true|Phone number of merchant, max length is 32.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
@@ -467,14 +459,11 @@ The data type in result is same as get merchant API.
 > <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font> 
 > <font color=red>Parameter merchantUpdateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
-> <font color=red>country:may not be empty</font>   
-> <font color=red>contact:may not be empty</font>  
 > <font color=red>name:length must be between 0 and 64</font>  
 > <font color=red>email:length must be between 0 and 255</font>  
 > <font color=red>resellerName:length must be between 0 and 64</font>  
 > <font color=red>contact:length must be between 0 and 64</font>  
 > <font color=red>country:length must be between 0 and 64</font>  
-> <font color=red>phone:may not be empty</font>  
 > <font color=red>phone:length must be between 0 and 32</font>  
 > <font color=red>postcode:length must be between 0 and 16</font>  
 > <font color=red>address:length must be between 0 and 255</font>  
@@ -491,9 +480,6 @@ The data type in result is same as get merchant API.
 |1759|Reseller doesn't exist|&nbsp;|
 |16000|Merchant category not found|&nbsp;|
 |1723|Merchant name is mandatory|&nbsp;|
-|1606|Country is mandatory|&nbsp;|
-|1726|Merchant contact is mandatory|&nbsp;|
-|1728|Merchant phone is mandatory|&nbsp;|
 |1729|Merchant name is too long|&nbsp;|
 |1618|Postcode is too long|&nbsp;|
 |1619|Address is too long|&nbsp;|
@@ -728,7 +714,7 @@ public Result<String> replaceMerchantEmail(Long merchantId, String email, boolea
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |merchantId|Long|false|The merchant id|
-|email|String|false|The new email|
+|email|String|true|The new email|
 |createUser|boolean|false|Indicate whether to create user when replace the email|
 
 
