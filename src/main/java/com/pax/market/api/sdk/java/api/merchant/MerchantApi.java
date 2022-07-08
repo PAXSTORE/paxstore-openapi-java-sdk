@@ -180,10 +180,10 @@ public class MerchantApi extends BaseThirdPartySysApi{
 	public Result<String> replaceMerchantEmail(Long merchantId, String email, boolean createUser){
 		logger.debug("merchantId="+merchantId);
 		List<String> validationErrs = validateId(merchantId, "parameter.merchantId.invalid");
-		if(!StringUtils.isValidEmailAddress(email)) {
+		if(StringUtils.isNotBlank(email) && !StringUtils.isValidEmailAddress(email)) {
 			validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.invalid", Locale.getDefault()));
 		}
-		if(email!=null && email.length()>255) {
+		if(StringUtils.length(email) > 255) {
 			validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.toolong", Locale.getDefault()));
 		}
 		if(validationErrs.size()>0) {

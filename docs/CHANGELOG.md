@@ -1,5 +1,15 @@
 # Changelog  
 
+## 8.5.0  
+### Improvement  
+* Updated get terminal details API to support return accessory list  
+* Updated create merchant API, fields email, contact, country and phone are not mandatory anymore.
+
+### Breaking 
+* The API TerminalAPI.getTerminal(Long terminalId, boolean includeDetailInfoList) is not compatible with or old API, 
+the structure of the return result is not same as before. It will cause compile fail if developer do not change codes after upgrading SDK to 8.5.
+Please refer to the API document. 
+
 
 ## 8.3.0  
 ### New Feature  
@@ -55,14 +65,14 @@ Please note all the changes is based on PAXStore version 8.1.0.
 ### Improvement
 * Change the SDK default connection timeout and read timeout value from 30 seconds to 5 seconds 
 
-### Breaking changes
+### Breaking Changes
 * Max records per page is reduced from 1000 to 100 (except GoInsightApi). If pass a value greate than 100 SDK validation will fail
 * Developer inforamtion is removed from search result of AppApi
 
 
 ## 7.2.0  
 
-### New features(To support these new features server side application must upgrade to version 7.2.0)  
+### New Features(To support these new features server side application must upgrade to version 7.2.0)  
 
 * Merchant supports new properties 'city' and 'province'
 * Add new terminal related APIs in TerminalApi
@@ -71,7 +81,7 @@ Please note all the changes is based on PAXStore version 8.1.0.
   3. Get terminal configuration(allow replacement)  ```getTerminalConfig(Long terminalId)```  
   4. Update terminal configuration(allow replacement)  ```updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest)```
 
-### Dependency change
+### Dependency Change
 * Remove lombok dependency  
 * Update guava from 20.0 to 28.2  
 * Update hibernate-validator to 5.3.5.Final
@@ -80,14 +90,14 @@ Please note all the changes is based on PAXStore version 8.1.0.
 
 ## 7.1.1  
 
-### New features(To support these new features Paxstore must upgrade to version 7.1.1)  
+### New Features(To support these new features Paxstore must upgrade to version 7.1.1)  
 * Add GoInsight related APIs
   1. Find app business data by query code  ```findDataFromInsight(String queryCode)```  
   2. Find app business data by query code and date range  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType)```  
   3. Find app business data by query code, date range and page  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize)```
 
 ## 7.1.0  
-### New features(To support these new features Paxstore must upgrade to version 7.1)  
+### New Features(To support these new features Paxstore must upgrade to version 7.1)  
 * Add entity attribute APIs (EntityAttributeApi)  
   1. Get entity attribute by id  ```getEntityAttribute(Long attributeId)```  
   2. Search entity attribute  ```searchEntityAttributes(int pageNo, int pageSize, SearchOrderBy orderBy, String key , EntityAttributeType entityType)```  
@@ -132,7 +142,7 @@ Please note all the changes is based on PAXStore version 8.1.0.
 
 
 ## 7.0  
-### New features
+### New Features
 * Add new search terminal API to include geo location, firmware and installed app in search result
 
 * Add push template related APIs (TerminalApkParameterApi)
@@ -167,19 +177,19 @@ Please note all the changes is based on PAXStore version 8.1.0.
 
 ## 6.3.1  
 
-### New features  
+### New Features  
 * Add get single push firmware history API
 * Add search push firmware history API
 * Add Suspend push firmware API
 
 
-### Breaking changes  
+### Breaking Changes  
 * The return object type change for pushFirmware2Terminal API
 
 
 ## 6.3  
 
-### New features  
+### New Features  
 
 * Add search app API
 * Add push firmware to terminal API
@@ -211,9 +221,9 @@ Add location field to response for terminal related APIs
 * Support activate the reseller when create reseller, this improvement only works with PAXSTORE v6.2 and later.
 * Support activate the merchant when create merchant, this improvement only works with PAXSTORE v6.2 and later.
 
-### Bug fixes  
+### Bug Fixes  
 
-### Breaking changes  
+### Breaking Changes  
 NA
 
 ## 6.1 
@@ -227,9 +237,9 @@ NA
 * *resellerName* is not mandatory for updating merchant. If *resellerName* is empty when call update merchant API the merchant's reseller won't be updated.
 * *parentResellerName* is not mandatory for updating reseller and we suggest the developers pass null when updating reseller as the API does not support changing reseller's parent. To reserve this parameter is to make sure SDK is compatible with old version. 
 
-### Bug fixes
+### Bug Fixes
 
-### Breaking changes
+### Breaking Changes
 
 * Add a new property *createUserFlag* in the MerchantCreateRequest and MerchantUpdateRequest to indicate whether to create user, the default value is false. The old version API will create user in create merchant step. The impact is if user udpated SDK to this version and does not do any code change, the API won't create user when creating merchant and activating merchant. If user still need create user for the created merchant he need to set *createuserFlag* to true when creating or updating a merchant.
 
@@ -238,14 +248,14 @@ NA
 
 ## 6.0.2  
 
-### New features  
+### New Features  
 
 * Add merchant category releated APIs
 * Add terminal apk API
 
-### Bug fixes  
+### Bug Fixes  
 
 
-### Breaking changes  
+### Breaking Changes  
 NA
 

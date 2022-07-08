@@ -105,7 +105,7 @@ Structure of class TerminalDTO
 |installedFirmware|TerminalInstalledFirmwareDTO| The installed firmware of the terminal|
 |installedApks|List\<TerminalInstalledApkDTO\>| The installed applications of the terminal|
 |terminalDetail|TerminalDetailDTO| The terminal detail information |
-|terminalAccessory|TerminalAccessoryDTO| The terminal accessory information |
+|terminalAccessoryList|List\<TerminalAccessoryDTO\>| The terminal accessory information list |
 
 Structure of class TerminalLocationDTO
 
@@ -296,7 +296,7 @@ The get terminal API allows the thirdparty system get a terminal by terminal id.
 
 ```
 public Result<TerminalDTO> getTerminal(Long terminalId);
-public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfo);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList);
 ```
 
 **Input parameter(s) description**
@@ -312,7 +312,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 //simple info
 Result<TerminalDTO> result = terminalApi.getTerminal(908627L);
-//includeDetailInfo, whether to return Detail Info 
+//includeDetailInfoList, whether to return Detail Info and Accessory List 
 Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 ```
 
@@ -380,7 +380,7 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 			"timeZone": "GMT +08:00",
 			"macAddress": "A4:D4:B2:4C:14:FE"
 		},
-		"terminalAccessory": {
+		"terminalAccessory": [{
 			"basic": [{
 				"name": "SN",
 				"content": "1140073435"
@@ -479,7 +479,99 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 				"fileType": "Firmware",
 				"source": "Local Upgrade"
 			}]
-		}
+		},{
+            "basic": [{
+                "name": "SN",
+                "content": "1140073438"
+            }, {
+                "name": "Q20",
+                "content": "Q20"
+            }, {
+                "name": "OS",
+                "content": "Prolin2.7.2"
+            }],
+            "hardware": [{
+                "name": "PCD",
+                "content": "Y"
+            }, {
+                "name": "MSR",
+                "content": "Y"
+            }, {
+                "name": "SCI",
+                "content": "Y"
+            }, {
+                "name": "BOARDID",
+                "content": "Q20_M06_P01"
+            }, {
+                "name": "BLUETOOTH"
+            }, {
+                "name": "ETHERNET"
+            }, {
+                "name": "WIFI"
+            }, {
+                "name": "WIRELESS"
+            }, {
+                "name": "MODEM"
+            }, {
+                "name": "PRINTER"
+            }, {
+                "name": "BARCODE"
+            }, {
+                "name": "FLASH",
+                "content": "256MB"
+            }, {
+                "name": "FREEFLASH",
+                "content": "88.52M"
+            }, {
+                "name": "RAM",
+                "content": "325.50MB"
+            }, {
+                "name": "SECURITY LEVEL",
+                "content": "1"
+            }, {
+                "name": "SECURITY MODE",
+                "content": "2"
+            }, {
+                "name": "TOUCHSCREEN",
+                "content": "Y"
+            }, {
+                "name": "CIPHER_CHIP"
+            }],
+            "installApps": [{
+                "name": "NeptuneLite",
+                "content": "2.01.01"
+            }],
+            "history": [{
+                "name": "MAINAPP/sys_param.p",
+                "status": "Success",
+                "installTime": 1651113398000,
+                "fileSize": 135,
+                "fileType": "Private file",
+                "source": "Remote Upgrade"
+            }, {
+                "name": "MAINAPP/sys_cap.p",
+                "status": "Success",
+                "installTime": 16511133980000,
+                "fileSize": 234,
+                "fileType": "Private file",
+                "source": "Remote Upgrade"
+            }, {
+                "name": "browser.aip",
+                "status": "Success",
+                "installTime": 16511133980000,
+                "fileSize": 2165940,
+                "fileType": "Application",
+                "source": "Local Upgrade"
+            }, {
+                "name": "prolin-pelican-2.7.66.8833R_SIG.zip",
+                "version": "2.00.10",
+                "status": "Success",
+                "installTime": 1651113948000,
+                "fileSize": 17890812,
+                "fileType": "Firmware",
+                "source": "Local Upgrade"
+            }]
+        }]
 	}
 }
 ```
@@ -553,8 +645,8 @@ Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
 
 ```
 {
-	"businessCode": 1740,
-	"message": "Your terminal (SN:sn0101012237) already exists"
+	"businessCode": 2321,
+	"message": "Terminal Serial No.sn0101012237 already exists"
 }
 ```
 
@@ -599,7 +691,6 @@ The type of data in result is same as search terminal API.
 
 |Business Code|Message|Description|
 |:---|:---|:---|
-|1740|Your terminal (SN:xxxxxx) already exists|&nbsp;|
 |1759|Reseller doesn't exist|&nbsp;|
 |1720|Merchant doesn't exist|&nbsp;|
 |1937|Merchant is not belong to the given Reseller!|&nbsp;|
@@ -616,10 +707,12 @@ The type of data in result is same as search terminal API.
 |1804|Terminal merchant is mandatory|&nbsp;|
 |1802|Terminal SN is mandatory|&nbsp;|
 |1828|TID already used|&nbsp;|
+|2321|Terminal Serial No.{0} already exists||
 |2349|Terminal TID length is 8 to 15|&nbsp;|
 |1737|The associated merchant is not activate|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
+|2350|Terminal Serial No.{0} already exists in other marketplace sandbox||
 
 
 ### Update a terminal
@@ -727,37 +820,40 @@ The type of data in result is same as search terminal API.
 
 |Business Code|Message|Description|
 |:---|:---|:---|
+|1700|Model doesn't exist||
+|1713|The associated model is not activate||
+|1720|Merchant doesn't exist||
+|1737|The associated merchant is not activate||
 |1759|Reseller doesn't exist|&nbsp;|
-|1720|Merchant doesn't exist|&nbsp;|
-|1937|Merchant is not belong to the given Reseller!|&nbsp;|
-|1700|Model doesn't exist|&nbsp;|
+|1773|The associated reseller is not activate||
 |1800|Terminal not found|&nbsp;|
-|1817|Terminal name is mandatory|&nbsp;|
-|1818|Terminal name is too long|&nbsp;|
-|1803|Terminal model is mandatory|&nbsp;|
+|1802|Terminal SN is mandatory||
+|1803|Terminal model is mandatory||
+|1804|Terminal merchant is mandatory||
+|1806|Terminal SN is too long||
+|1807|Terminal model is too long||
+|1808|Terminal merchant is too long||
+|1809|Terminal location is too long||
+|1811|The terminal has already been activated,unable to update reseller.||
+|1813|Push task has already been added, unable to update model.||
+|1814|Push task has already been added,unable to update reseller.||
+|1817|Terminal name is mandatory||
+|1818|Terminal name is too long||
+|1828|TID already used||
+|1859|Model {0} is not available, please contact administrator||
+|1898|TID cannot be updated when terminal is active||
+|1912|Terminal is disabled, TID cannot be updated!||
+|1928|The terminal is active,terminal SN cannot be updated!||
+|1929|The terminal is not inactive,model cannot be updated!||
+|1937|Merchant is not belong to the given Reseller!|&nbsp;|
+|2312|Terminal Serial No. accept alphanumeric|&nbsp;Alphanumeric and max length is 16|
+|2321|Terminal Serial No.{0} already exists|&nbsp;|
 |2326|Terminal reseller is mandatory|&nbsp;|
-|1806|Terminal SN is too long|&nbsp;|
-|2312|Terminal Serial No. accept alphanumeric|Alphanumeric and max length is 16|
-|1807|Terminal model is too long|&nbsp;|
-|1808|Terminal merchant is too long|&nbsp;|
-|1809|Terminal location is too long|&nbsp;|
-|2401|Terminal TID is invalid|&nbsp;|
-|1929|The terminal is not inactive,model cannot be updated!|&nbsp;|
-|1811|The terminal has already been activated,unable to update reseller.|&nbsp;|
-|1928|The terminal is active,terminal SN cannot be updated!|&nbsp;|
-|1804|Terminal merchant is mandatory|&nbsp;|
-|1737|The associated merchant is not activate|&nbsp;|
-|1813|Push task has already been added, unable to update model.|&nbsp;|
-|1814|Push task has already been added,unable to update reseller.|&nbsp;|
-|1828|TID already used|&nbsp;|
 |2349|Terminal TID length is 8 to 15|&nbsp;|
-|1737|The associated merchant is not activate|&nbsp;|
-|1773|The associated reseller is not activate|&nbsp;|
-|1740|Your terminal (SN:{0}) already exists|&nbsp;|
+|2350|Terminal Serial No.{0} already exists in other marketplace sandbox|&nbsp;|
+|2401|Terminal TID is invalid|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
 
-
-Note: The string {0} in the message of business code 1740 will be replaced by the SN in request.
 
 
 ### Activate a terminal
