@@ -1,8 +1,14 @@
 # Changelog  
 
+## 8.5.1  
+### Bug Fix  
+* Make fields contact, country and phone are not mandatory in update merchant API.
+Please upgrade SDK to 8.5.1 if developer is using version 8.5.0.
+
+
 ## 8.5.0  
 ### Improvement  
-* Updated get terminal details API to support return accessory list  
+* Updated get terminal details API to support return accessory list.  
 * Updated create merchant API, fields email, contact, country and phone are not mandatory anymore.
 
 ### Breaking 
