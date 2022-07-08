@@ -12,7 +12,7 @@ Please upgrade SDK to 8.5.1 if developer is using version 8.5.0.
 * Updated create merchant API, fields email, contact, country and phone are not mandatory anymore.
 
 ### Breaking 
-* The API TerminalAPI.getTerminal(Long terminalId, boolean includeDetailInfoList) is not compatible with or old API, 
+* The API TerminalAPI.getTerminal(Long terminalId, boolean includeDetailInfoList) is not compatible with the old API, 
 the structure of the return result is not same as before. It will cause compile fail if developer do not change codes after upgrading SDK to 8.5.
 Please refer to the API document. 
 
