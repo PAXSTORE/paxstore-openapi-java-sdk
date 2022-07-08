@@ -42,15 +42,12 @@ public class MerchantUpdateRequest implements Serializable{
 	@Length(max=64)
 	private String resellerName;
 
-	@NotBlank
 	@Length(max=64)
 	private String contact;
 
-	@NotBlank
 	@Length(max=64)
 	private String country;
 
-	@NotBlank
 	@Length(max=32)
 	private String phone;
 
