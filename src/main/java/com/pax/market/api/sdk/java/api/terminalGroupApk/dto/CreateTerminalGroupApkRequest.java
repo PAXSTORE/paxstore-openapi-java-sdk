@@ -16,14 +16,15 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @Description
- * @Author: Shawn
- * @Date: 2019/11/29 16:09
- * @Version 1.0
+ * Create Terminal Group Apk Request
+ *
+ * @author shifan
+ * {@code @Date:} 2019/11/29 16:09
  */
 public class CreateTerminalGroupApkRequest implements Serializable {
 
@@ -44,7 +45,10 @@ public class CreateTerminalGroupApkRequest implements Serializable {
     private Map<String, String> parameters;
     private List<FileParameter> base64FileParameters;
     private Boolean inheritPushHistory;
-
+    private boolean forceUpdate;
+    private boolean wifiOnly;
+    private Date effectiveTime;
+    private Date expiredTime;
 
     public Long getGroupId() {
         return groupId;
@@ -109,4 +113,6 @@ public class CreateTerminalGroupApkRequest implements Serializable {
     public void setInheritPushHistory(Boolean inheritPushHistory) {
         this.inheritPushHistory = inheritPushHistory;
     }
+
+
 }

@@ -75,6 +75,7 @@ Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHisto
       "pushStartTime": 1575274320000,
       "terminalId": 1013403755,
       "versionName": "7.0.0-inner",
+      "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575274373000,
       "serialNo": "HMP4C15A12000186",
@@ -91,6 +92,7 @@ Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHisto
       "pushStartTime": 1575102000000,
       "terminalId": 1013403370,
       "versionName": "5.02.02",
+      "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575102054000,
       "serialNo": "1170000652",
@@ -116,6 +118,7 @@ The type in dataSet of is ParameterPushHistoryDTO. And the structure shows like 
 |AppPushTime	|long	|app push time|
 |AppPushStatus	|string	|the push result status, value can be Success and Fail|
 |AppPushError	|string	|the reason of app push fail|
+|ParameterTemplateName	|string	|the pushed parameter template name|
 |ParameterPushTime|long	|parameter push time|
 |ParameterPushStatus|string|the parameter push result status, value can be Success and Fail|
 |ParameterPushError|string|the reason of parameter push failed|
@@ -182,6 +185,7 @@ Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchLatestParameterPus
       "pushStartTime": 1575274320000,
       "terminalId": 1013403755,
       "versionName": "7.0.0-inner",
+      "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575274373000,
       "serialNo": "HMP4C15A12000186",
@@ -198,6 +202,7 @@ Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchLatestParameterPus
       "pushStartTime": 1575102000000,
       "terminalId": 1013403370,
       "versionName": "5.02.02",
+      "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575102054000,
       "serialNo": "1170000652",
@@ -223,6 +228,7 @@ The type in dataSet of is ParameterPushHistoryDTO. And the structure shows like 
 |AppPushTime	|long	|app push time|
 |AppPushStatus	|string	|the push result status, value can be Success and Fail|
 |AppPushError	|string	|the reason of app push fail|
+|ParameterTemplateName	|string	|the pushed parameter template name|
 |ParameterPushTime|long	|parameter push time|
 |ParameterPushStatus|string|the parameter push result status, value can be Success and Fail|
 |ParameterPushError|string|the reason of parameter push failed|
@@ -289,6 +295,7 @@ Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchOptimized
       "pushStartTime": 1575274320000,
       "terminalId": 1013403755,
       "versionName": "7.0.0-inner",
+      "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575274373000,
       "serialNo": "HMP4C15A12000186",
@@ -304,6 +311,7 @@ Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchOptimized
       "pushStartTime": 1575102000000,
       "terminalId": 1013403370,
       "versionName": "5.02.02",
+      "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575102054000,
       "serialNo": "1170000652",
@@ -328,6 +336,7 @@ The type in dataSet of is OptimizedParameterPushHistoryDTO. And the structure sh
 |AppPushTime	|long	|app push time|
 |AppPushStatus	|string	|the push result status, value can be Success and Fail|
 |AppPushError	|string	|the reason of app push fail|
+|ParameterTemplateName	|string	|the pushed parameter template name|
 |ParameterPushTime|long	|parameter push time|
 |ParameterPushStatus|string|the parameter push result status, value can be Success and Fail|
 |ParameterPushError|string|the reason of parameter push failed|
@@ -392,6 +401,7 @@ Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchLatestOpt
       "pushStartTime": 1575274320000,
       "terminalId": 1013403755,
       "versionName": "7.0.0-inner",
+      "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575274373000,
       "serialNo": "HMP4C15A12000186",
@@ -407,6 +417,7 @@ Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchLatestOpt
       "pushStartTime": 1575102000000,
       "terminalId": 1013403370,
       "versionName": "5.02.02",
+      "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575102054000,
       "serialNo": "1170000652",
@@ -431,6 +442,7 @@ The type in dataSet of is OptimizedParameterPushHistoryDTO. And the structure sh
 |AppPushTime	|long	|app push time|
 |AppPushStatus	|string	|the push result status, value can be Success and Fail|
 |AppPushError	|string	|the reason of app push fail|
+|ParameterTemplateName	|string	|the pushed parameter template name|
 |ParameterPushTime|long	|parameter push time|
 |ParameterPushStatus|string|the parameter push result status, value can be Success and Fail|
 |ParameterPushError|string|the reason of parameter push failed|
