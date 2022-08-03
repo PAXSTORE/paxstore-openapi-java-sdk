@@ -75,7 +75,15 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return searchTerminal(pageNo, pageSize, orderBy, status, snNameTID, false, false, false);
     }
 
+    public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, String resellerName, String merchantName, TerminalStatus status, String snNameTID) {
+        return searchTerminal(pageNo, pageSize, orderBy, resellerName, merchantName, status, snNameTID, false, false, false);
+    }
+
     public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID, boolean includeGeoLocation, boolean includeInstalledApks, boolean includeInstalledFirmware) {
+        return searchTerminal(pageNo, pageSize, orderBy, null, null, status, snNameTID, includeGeoLocation, includeInstalledApks, includeInstalledFirmware);
+    }
+
+    public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, String resellerName, String merchantName, TerminalStatus status, String snNameTID, boolean includeGeoLocation, boolean includeInstalledApks, boolean includeInstalledFirmware) {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -88,6 +96,12 @@ public class TerminalApi extends BaseThirdPartySysApi {
             return new Result<>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_URL, page);
+        if (resellerName != null) {
+            request.addRequestParam("resellerName", resellerName);
+        }
+        if (merchantName != null) {
+            request.addRequestParam("merchantName", merchantName);
+        }
         if (status != null) {
             request.addRequestParam("status", status.val);
         }
