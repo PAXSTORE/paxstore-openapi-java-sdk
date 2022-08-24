@@ -18,7 +18,10 @@ public class TerminalApkDTO implements Serializable {
     private Long apkVersionCode;
     private String apkVersionName;
     private Long activatedDate;
+    private Boolean forceUpdate;
+    private Boolean wifiOnly;
     private Long effectiveTime;
+    private Long expiredTime;
     private String status;
     private int actionStatus;
     private Long actionTime;
@@ -73,12 +76,36 @@ public class TerminalApkDTO implements Serializable {
         this.activatedDate = activatedDate;
     }
 
+    public Boolean getForceUpdate() {
+        return forceUpdate;
+    }
+
+    public void setForceUpdate(Boolean forceUpdate) {
+        this.forceUpdate = forceUpdate;
+    }
+
+    public Boolean getWifiOnly() {
+        return wifiOnly;
+    }
+
+    public void setWifiOnly(Boolean wifiOnly) {
+        this.wifiOnly = wifiOnly;
+    }
+
     public Long getEffectiveTime() {
         return effectiveTime;
     }
 
     public void setEffectiveTime(Long effectiveTime) {
         this.effectiveTime = effectiveTime;
+    }
+
+    public Long getExpiredTime() {
+        return expiredTime;
+    }
+
+    public void setExpiredTime(Long expiredTime) {
+        this.expiredTime = expiredTime;
     }
 
     public String getStatus() {
@@ -130,7 +157,10 @@ public class TerminalApkDTO implements Serializable {
                 ", apkVersionCode=" + apkVersionCode +
                 ", apkVersionName='" + apkVersionName + '\'' +
                 ", activatedDate=" + activatedDate +
+                ", forceUpdate=" + forceUpdate +
+                ", wifiOnly=" + wifiOnly +
                 ", effectiveTime=" + effectiveTime +
+                ", expiredTime=" + expiredTime +
                 ", status='" + status + '\'' +
                 ", actionStatus=" + actionStatus +
                 ", actionTime=" + actionTime +

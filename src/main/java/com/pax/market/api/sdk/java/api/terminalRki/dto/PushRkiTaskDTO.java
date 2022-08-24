@@ -15,6 +15,7 @@ public class PushRkiTaskDTO implements Serializable {
     private String rkiKey;
     private Long activatedDate;
     private Long effectiveTime;
+    private Long expiredTime;
     private String status;
     private int actionStatus;
     private int errorCode;
@@ -60,6 +61,14 @@ public class PushRkiTaskDTO implements Serializable {
         this.effectiveTime = effectiveTime;
     }
 
+    public Long getExpiredTime() {
+        return expiredTime;
+    }
+
+    public void setExpiredTime(Long expiredTime) {
+        this.expiredTime = expiredTime;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -90,5 +99,21 @@ public class PushRkiTaskDTO implements Serializable {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    @Override
+    public String toString() {
+        return "PushRkiTaskDTO{" +
+                "id=" + id +
+                ", terminalSN='" + terminalSN + '\'' +
+                ", rkiKey='" + rkiKey + '\'' +
+                ", activatedDate=" + activatedDate +
+                ", effectiveTime=" + effectiveTime +
+                ", expiredTime=" + expiredTime +
+                ", status='" + status + '\'' +
+                ", actionStatus=" + actionStatus +
+                ", errorCode=" + errorCode +
+                ", remarks='" + remarks + '\'' +
+                '}';
     }
 }

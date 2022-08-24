@@ -27,6 +27,8 @@ public class SimpleTerminalGroupApkDTO implements Serializable {
     private String apkPackageName;
     private Long apkVersionCode;
     private String apkVersionName;
+    private Boolean forceUpdate;
+    private Boolean wifiOnly;
     private Long effectiveTime;
     private Long expiredTime;
     private Long updatedDate;
@@ -67,6 +69,22 @@ public class SimpleTerminalGroupApkDTO implements Serializable {
 
     public void setApkVersionName(String apkVersionName) {
         this.apkVersionName = apkVersionName;
+    }
+
+    public Boolean getForceUpdate() {
+        return forceUpdate;
+    }
+
+    public void setForceUpdate(Boolean forceUpdate) {
+        this.forceUpdate = forceUpdate;
+    }
+
+    public Boolean getWifiOnly() {
+        return wifiOnly;
+    }
+
+    public void setWifiOnly(Boolean wifiOnly) {
+        this.wifiOnly = wifiOnly;
     }
 
     public Long getEffectiveTime() {
@@ -148,6 +166,8 @@ public class SimpleTerminalGroupApkDTO implements Serializable {
                 ", apkPackageName='" + apkPackageName + '\'' +
                 ", apkVersionCode=" + apkVersionCode +
                 ", apkVersionName='" + apkVersionName + '\'' +
+                ", forceUpdate=" + forceUpdate +
+                ", wifiOnly=" + wifiOnly +
                 ", effectiveTime=" + effectiveTime +
                 ", expiredTime=" + expiredTime +
                 ", updatedDate=" + updatedDate +
