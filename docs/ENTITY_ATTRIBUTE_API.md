@@ -1,6 +1,7 @@
 ## EntityAttributeAPI
 
-All the entity attribute related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.entityAttribute.EntityAttributeApi*.
+All the entity attribute related APIs are encapsulated in the class *
+com.pax.market.api.sdk.java.api.entityAttribute.EntityAttributeApi*.
 
 **Constructors of EntityAttribute**
 
@@ -16,13 +17,9 @@ public EntityAttributeApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
-
-
 ### Get entity attribute
 
 Get entity attribute by attributeId .
-
 
 **API**
 
@@ -30,8 +27,7 @@ Get entity attribute by attributeId .
 public Result<EntityAttributeDTO> getEntityAttribute(Long attributeId)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
@@ -124,8 +120,6 @@ The type in data is EntityAttributeLabelInfo. And the structure like below.
 | :------------ | :------------------------- | :---------- |
 | 11000         | Entity attribute not found |             |
 
-
-
 ### Search entity attributes
 
 The search entity attributes API allows third party system to search entity attribute to the current market by page.
@@ -207,11 +201,11 @@ Result<EntityAttributeDTO> result = entityAttributeApi.searchEntityAttributes(1,
 
 The type of data is EntityAttributeDTO,EntityAttributeLabelInfo, and Refer to get entity attribute Api for structure .
 
-**Possible client validation errors**  
+**Possible client validation errors**
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
 **Possible business codes**
 
@@ -219,11 +213,9 @@ The type of data is EntityAttributeDTO,EntityAttributeLabelInfo, and Refer to ge
 | :------------ | :------------------ | :---------- |
 | 11002         | Invalid entity type |             |
 
-
-
 ### Create entity attribute
 
-This api allows the third party system create entity attribute  by EntityAttributeCreateRequest.
+This api allows the third party system create entity attribute by EntityAttributeCreateRequest.
 
 **API**
 
@@ -276,7 +268,6 @@ Result<EntityAttributeDTO> result = entityAttributeApi.createEntityAttribute(cre
 	"validationErrors": ["Entity attributeCreateRequest cannot be null!"]
 }
 ```
-
 
 **Server side validation failed sample result(JSON formatted)**
 
@@ -345,12 +336,9 @@ The type of data is EntityAttributeDTO,EntityAttributeLabelInfo, and Refer to ge
 | 11013 |Invalid regular expression||
 | 11005 |Entity attribute label is mandatory||
 
-
-
-
 ### Update entity attribute
 
-This api allows the third party system update entity attribute by  attributeId and EntityAttributeUpdateRequest.
+This api allows the third party system update entity attribute by attributeId and EntityAttributeUpdateRequest.
 
 **API**
 
@@ -358,8 +346,7 @@ This api allows the third party system update entity attribute by  attributeId a
 public Result<EntityAttributeDTO>  updateEntityAttribute(Long attributeId, EntityAttributeUpdateRequest updateRequest)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
@@ -416,7 +403,6 @@ Result<EntityAttributeDTO> result = entityAttributeApi.updateEntityAttribute(100
 }
 ```
 
-
 **Possible business codes**
 
 |Business Code|Message|Description|
@@ -438,12 +424,9 @@ Result<EntityAttributeDTO> result = entityAttributeApi.updateEntityAttribute(100
 | 11012         |Entity attribute key is already exist||
 | 11013         |Invalid regular expression||
 
-
-
 ### Update entity attribute label
 
-This api allows the third party system  update entity attribute label.
-
+This api allows the third party system update entity attribute label.
 
 **API**
 
@@ -451,8 +434,7 @@ This api allows the third party system  update entity attribute label.
 public Result<String>  updateEntityAttributeLabel(Long attributeId, EntityAttributeLabelUpdateRequest updateLabelRequest)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
@@ -533,11 +515,9 @@ Result<String> result = entityAttributeApi.updateEntityAttributeLabel(1000000416
 |11005|Entity attribute label is mandatory||
 |11006|Entity attribute label is too long||
 
-
-
 ### Delete entity attribute
 
-This api allows the third party system  delete entity attribute.
+This api allows the third party system delete entity attribute.
 
 **API**
 
@@ -545,7 +525,7 @@ This api allows the third party system  delete entity attribute.
 public Result<String> deleteEntityAttribute(Long attributeId)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Parameter Name | Type | Nullable | Description                    |
 | :------------- | :--- | :------- | :----------------------------- |

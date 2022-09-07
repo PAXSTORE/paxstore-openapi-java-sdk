@@ -1,6 +1,7 @@
 ## TerminalFirmware API
 
-All the push firmware to terminal related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.terminalFirmware.TerminalFirmwareApi*.
+All the push firmware to terminal related APIs are encapsulated in the class *
+com.pax.market.api.sdk.java.api.terminalFirmware.TerminalFirmwareApi*.
 
 **Constructors of TerminalFirmwareApi**
 
@@ -16,11 +17,9 @@ public TerminalFirmwareApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
 ### Push firmware
 
 Push firmware API allow the third party system push a firmware to terminal.
-
 
 **API**
 
@@ -28,24 +27,24 @@ Push firmware API allow the third party system push a firmware to terminal.
 public Result<String> pushFirmware2Terminal(PushFirmware2TerminalRequest pushFirmware2TerminalRequest)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |pushFirmware2TerminalRequest|PushFirmware2TerminalRequest|false|The push firmware request object. The structure shows below.|
 
-
 Structure of class PushFirmware2TerminalRequest
 
-|Property Name|Type|Nullable|Description|
-|:---|:---|:---|:---|
-|tid|String|true|The tid of terminal|
-|serialNo|String|true|The serial number of terminal|
-|fmName|String|false|The fmName which indicate the firmware you want to push to the terminal|
+| Property Name | Type    | Nullable | Description                                                                                             |
+|:--------------|:--------|:---------|:--------------------------------------------------------------------------------------------------------|
+| tid           | String  | true     | The tid of terminal                                                                                     |
+| serialNo      | String  | true     | The serial number of terminal                                                                           |
+| fmName        | String  | false    | The fmName which indicate the firmware you want to push to the terminal                                 |
+| wifiOnly      | Boolean | true     | Whether to download over Wi-Fi or Cable network only, don’t allow to download over the cellular network |
+| effectiveTime | Date    | true     | The time when to start the push task                                                                    |
+| expiredTime   | Date    | true     | The time when to stop the push task                                                                     |
 
 Note: tid and serialNo cannot be empty at same time.
-
 
 **Sample codes**
 
@@ -86,12 +85,11 @@ terminalFirmwareApi.pushFirmware2Terminal(pushFirmware2TerminalRequest);
 }
 ```
 
-
 **Possible validation errors**
 
 > <font color=red>Parameter createTerminalFirmwareRequest cannot be null!</font>  
-> <font color=red>The property serialNo and tid in createTerminalFirmwareRequest cannot be blank at same time!</font> 
-> <font color=red>fmName:may not be empty</font> 
+> <font color=red>The property serialNo and tid in createTerminalFirmwareRequest cannot be blank at same time!</font>
+> <font color=red>fmName:may not be empty</font>
 
 **Possible business codes**
 
@@ -106,10 +104,10 @@ terminalFirmwareApi.pushFirmware2Terminal(pushFirmware2TerminalRequest);
 |8112|Same version of pending terminal firmware already exists|&nbsp;|
 |8113|Same version of active terminal firmware already exists|&nbsp;|
 
-
 ### Search firmware push history
 
-The search firmware push history API allows third party system to search pushed firmwares to the specified terminal by page.
+The search firmware push history API allows third party system to search pushed firmwares to the specified terminal by
+page.
 **API**
 
 ```
@@ -180,11 +178,11 @@ The type in dataSet is PushFirmwareTaskDTO. And the structure like below.
 |actionStatus|String|the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)|
 |activatedDate|Date|the push firmware activated date|
 
-**Possible client validation errors**  
+**Possible client validation errors**
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
 **Possible business codes**
 
@@ -196,7 +194,6 @@ The type in dataSet is PushFirmwareTaskDTO. And the structure like below.
 ### Get push firmware history by id
 
 Get terminal push firmware history by id.
-
 
 **API**
 
@@ -225,7 +222,6 @@ Result<PushFirmwareTaskDTO> result = terminalFirmwareApi.getPushFirmwareTask(178
 	"validationErrors": ["Parameter pushFirmwareTaskId cannot be null and cannot be less than 1!"]
 }
 ```
-
 
 **Server side validation failed sample result(JSON formatted)**
 
@@ -265,7 +261,6 @@ The type of data is PushFirmwareTaskDTO, and the structure shows below.
 |errorCode|int|the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes)|
 |activatedDate|Date|the push firmware activated date|
 
-
 **Possible client validation errors**
 
 
@@ -278,13 +273,10 @@ The type of data is PushFirmwareTaskDTO, and the structure shows below.
 |:---|:---|:---|
 |8101|Terminal firmware not found|&nbsp;|
 
-
-
-
 ### Disable firmware push by serial number(TID) and firmware name
 
-This api allows the third Party system disable an exist push by specifying the serial number of terminal and the firmware name. 
-
+This api allows the third Party system disable an exist push by specifying the serial number of terminal and the
+firmware name.
 
 **API**
 
@@ -292,13 +284,11 @@ This api allows the third Party system disable an exist push by specifying the s
 public Result<String> disablePushFirmwareTask(DisablePushFirmwareTask disablePushFirmwareTask)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |disablePushFirmwareTask|DisablePushFirmwareTask|false|The disable request object. The structure shows below.|
-
 
 Structure of class DisablePushFirmwareTask
 
@@ -309,7 +299,6 @@ Structure of class DisablePushFirmwareTask
 |fmName|String|false|The fmName which indicate the firmware you want to suspend the terminal push task|
 
 Note: tid and serialNo cannot be empty at same time.
-
 
 **Sample codes**
 
@@ -347,11 +336,10 @@ terminalFirmwareApi.disablePushFirmwareTask(disablePushFirmwareTask);
 }
 ```
 
-
 **Possible validation errors**
 
 > <font color=red>Parameter suspendTerminalApkRequest cannot be null!</font>  
-> <font color=red>The property serialNo and tid in suspendTerminalApkRequest cannot be blank at same time!</font> 
+> <font color=red>The property serialNo and tid in suspendTerminalApkRequest cannot be blank at same time!</font>
 > <font color=red>fmName:may not be empty</font>
 
 

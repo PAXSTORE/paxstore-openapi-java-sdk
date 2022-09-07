@@ -1,11 +1,17 @@
 ## TerminalRki API
 
-All the push RKI to terminal related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.terminalRki.TerminalRkiApi*.
+All the push RKI to terminal related APIs are encapsulated in the class *
+com.pax.market.api.sdk.java.api.terminalRki.TerminalRkiApi*.
 
 **Introduction**
 
-With the growing maturity of the PAX RKI solution. PAX already provides customers with remote key injection services. Through the remote key update, the POS operation and maintenance company replaces the terminal with the LKI for the local key update, reducing its operation and maintenance costs. The Global administrator can manage the RKI server in the global center, And assign one instance to the marketplace. Reseller admin configures RKI user token and gets key template to identify by request RKI server. Push RKI task to terminal. You can get error detail from the UI page If the bind failed. When an error occurred during the download phase. Please go to the terminal detail page download the logcat file.
-
+With the growing maturity of the PAX RKI solution. PAX already provides customers with remote key injection services.
+Through the remote key update, the POS operation and maintenance company replaces the terminal with the LKI for the
+local key update, reducing its operation and maintenance costs. The Global administrator can manage the RKI server in
+the global center, And assign one instance to the marketplace. Reseller admin configures RKI user token and gets key
+template to identify by request RKI server. Push RKI task to terminal. You can get error detail from the UI page If the
+bind failed. When an error occurred during the download phase. Please go to the terminal detail page download the logcat
+file.
 
 **Constructors of TerminalRkiApi**
 
@@ -21,12 +27,9 @@ public TerminalRkiApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
-
 ### Push Rki
 
 Push Rki API allow the third party system push a Rki to terminal.
-
 
 **API**
 
@@ -34,24 +37,23 @@ Push Rki API allow the third party system push a Rki to terminal.
 public Result<String> pushRki2Terminal(PushRki2TerminalRequest pushRki2TerminalRequest)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |pushRki2TerminalRequest|PushRki2TerminalRequest|false|The push Rki request object. The structure shows below.|
 
-
 Structure of class PushRki2TerminalRequest
 
-|Property Name|Type|Nullable|Description|
-|:---|:---|:---|:---|
-|tid|String|true|The tid of terminal|
-|serialNo|String|true|The serial number of terminal|
-|rkiKey|String|false|The rki key which indicate you want to push RKI Key template to the terminal|
+| Property Name | Type   | Nullable | Description                                                                  |
+|:--------------|:-------|:---------|:-----------------------------------------------------------------------------|
+| tid           | String | true     | The tid of terminal                                                          |
+| serialNo      | String | true     | The serial number of terminal                                                |
+| rkiKey        | String | false    | The rki key which indicate you want to push RKI Key template to the terminal |
+| effectiveTime | Date   | true     | The time when to start the push task                                         |
+| expiredTime   | Date   | true     | The time when to stop the push task                                          |
 
 Note: tid and serialNo cannot be empty at same time.
-
 
 **Sample codes**
 
@@ -92,12 +94,11 @@ terminalRkiApi.pushRki2Terminal(pushRki2TerminalRequest);
 }
 ```
 
-
 **Possible validation errors**
 
 > <font color=red>Parameter pushRki2TerminalRequest cannot be null!</font>  
-> <font color=red>The property serialNo and tid in pushRki2TerminalRequest cannot be blank at same time!</font> 
-> <font color=red>rkiKey:may not be empty</font> 
+> <font color=red>The property serialNo and tid in pushRki2TerminalRequest cannot be blank at same time!</font>
+> <font color=red>rkiKey:may not be empty</font>
 
 
 **Possible business codes**
@@ -111,10 +112,10 @@ terminalRkiApi.pushRki2Terminal(pushRki2TerminalRequest);
 |2053|Pending push RKI task for this terminal already exists|&nbsp;|
 |2054|Active push RKI task for this terminal already exists|&nbsp;|
 
-
 ### Search Rki push history
 
-The search Rki push history API allows third party system to search pushed rki task list to the specified terminal by page.
+The search Rki push history API allows third party system to search pushed rki task list to the specified terminal by
+page.
 **API**
 
 ```
@@ -132,7 +133,6 @@ public Result<PushRkiTaskDTO> searchPushRkiTasks(int pageNo, int pageSize, Searc
 |terminalTid|String|false|search filter by terminal tid|
 |rkiKey|String|true|search filter by rki key|
 |status|PushStatus|true|the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend|
-
 
 **Sample codes**
 
@@ -186,16 +186,15 @@ The type in dataSet is PushRkiTaskDTO. And the structure like below.
 |remarks|String|the push Rki result remarks|
 |errorCode|int|the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes)|
 
-**Possible client validation errors**  
+**Possible client validation errors**
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
 ### Get push Rki history by id
 
 Get terminal push Rki history by id.
-
 
 **API**
 
@@ -224,7 +223,6 @@ Result<PushRkiTaskDTO> result = terminalRkiApi.getPushRkiTask(17850L);
 	"validationErrors": ["Parameter pushRkiTaskId cannot be null and cannot be less than 1!"]
 }
 ```
-
 
 **Server side validation failed sample result(JSON formatted)**
 
@@ -264,7 +262,6 @@ The type of data is PushRkiTaskDTO, and the structure shows below.
 |activatedDate|Date|the push Rki activated date|
 |remarks|String|the push Rki result remarks|
 
-
 **Possible client validation errors**
 
 
@@ -296,11 +293,10 @@ The type of data is PushRkiTaskDTO, and the structure shows below.
 |12|The push is disabled|
 |27|Unable To Bind Terminal RKI Key|
 
-
 ### Disable Rki push by serial number(TID) and Rki name
 
-This api allows the third Party system disable an exist push by specifying the serial number of terminal and the Rki name. 
-
+This api allows the third Party system disable an exist push by specifying the serial number of terminal and the Rki
+name.
 
 **API**
 
@@ -308,13 +304,11 @@ This api allows the third Party system disable an exist push by specifying the s
 public Result<String> disablePushRkiTask(DisablePushRkiTask disablePushRkiTask)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |disablePushRkiTask|DisablePushRkiTask|false|The disable request object. The structure shows below.|
-
 
 Structure of class DisablePushRkiTask
 
@@ -325,7 +319,6 @@ Structure of class DisablePushRkiTask
 |rkiKey|String|false|The rki key which indicate you want to suspend the terminal push rki task|
 
 Note: tid and serialNo cannot be empty at same time.
-
 
 **Sample codes**
 
@@ -363,11 +356,10 @@ terminalRkiApi.disablePushRkiTask(disablePushRkiTask);
 }
 ```
 
-
 **Possible validation errors**
 
 > <font color=red>Parameter suspendTerminalApkRequest cannot be null!</font>  
-> <font color=red>The property serialNo and tid in suspendTerminalApkRequest cannot be blank at same time!</font> 
+> <font color=red>The property serialNo and tid in suspendTerminalApkRequest cannot be blank at same time!</font>
 > <font color=red>fmName:may not be empty</font>
 
 

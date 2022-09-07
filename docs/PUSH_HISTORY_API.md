@@ -1,6 +1,7 @@
 ## PushHistory API
 
-Push history API is used to search the push result. The related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.pushHistory.PushHistoryApi*.
+Push history API is used to search the push result. The related APIs are encapsulated in the class *
+com.pax.market.api.sdk.java.api.pushHistory.PushHistoryApi*.
 
 **Constructors of TerminalApkApi**
 
@@ -16,10 +17,10 @@ public PushHistoryApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
 ### **SearchParameterPushHistory**
 
-SearchParameterPushHistory API allow the third party system  to find all the terminal push history of parameter application
+SearchParameterPushHistory API allow the third party system to find all the terminal push history of parameter
+application
 
 **API**
 
@@ -27,7 +28,7 @@ SearchParameterPushHistory API allow the third party system  to find all the ter
 public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Name        | Type       | Nullable | Description                                                  |
 | :---------- | :--------- | :------- | :----------------------------------------------------------- |
@@ -37,8 +38,6 @@ public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, in
 | serialNo    | String     | true     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
-
-
 
 **Sample codes**
 
@@ -110,26 +109,27 @@ The type in dataSet of is ParameterPushHistoryDTO. And the structure shows like 
 
 |Property Name|Type|Description|
 |:--|:--|:--|
-|TerminalId		|long	|the id of terminal|
-|SerialNo		|string	|the serial number of terminal|
-|AppName		|string	|the name of the app pushed|
-|VersionName	|string	|the version name of app|
-|PushStartTime	|long	|the start time of the push, it is millisecond|
-|AppPushTime	|long	|app push time|
-|AppPushStatus	|string	|the push result status, value can be Success and Fail|
-|AppPushError	|string	|the reason of app push fail|
-|ParameterTemplateName	|string	|the pushed parameter template name|
-|ParameterPushTime|long	|parameter push time|
+|TerminalId |long |the id of terminal|
+|SerialNo |string |the serial number of terminal|
+|AppName |string |the name of the app pushed|
+|VersionName |string |the version name of app|
+|PushStartTime |long |the start time of the push, it is millisecond|
+|AppPushTime |long |app push time|
+|AppPushStatus |string |the push result status, value can be Success and Fail|
+|AppPushError |string |the reason of app push fail|
+|ParameterTemplateName |string |the pushed parameter template name|
+|ParameterPushTime|long |parameter push time|
 |ParameterPushStatus|string|the parameter push result status, value can be Success and Fail|
 |ParameterPushError|string|the reason of parameter push failed|
-|ParameterValues|string	|raw parameter values, parameter key is the parameter file id combined parameter pid, parameter variables are not replaced|
+|ParameterValues|string |raw parameter values, parameter key is the parameter file id combined parameter pid, parameter
+variables are not replaced|
 |ParameterVariables|string|parameter variables|
-|PushType		|string	|push type, value can be Terminal or Group|
-
+|PushType |string |push type, value can be Terminal or Group|
 
 ### **SearchLatestParameterPushHistory**
 
-SearchLatestParameterPushHistory API allow the third party system  to find all the terminal latest push history of parameter application
+SearchLatestParameterPushHistory API allow the third party system to find all the terminal latest push history of
+parameter application
 
 **API**
 
@@ -137,7 +137,7 @@ SearchLatestParameterPushHistory API allow the third party system  to find all t
 public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Name        | Type       | Nullable | Description                                                  |
 | :---------- | :--------- | :------- | :----------------------------------------------------------- |
@@ -147,8 +147,6 @@ public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistory(int page
 | serialNo    | String     | true     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
-
-
 
 **Sample codes**
 
@@ -220,26 +218,27 @@ The type in dataSet of is ParameterPushHistoryDTO. And the structure shows like 
 
 |Property Name|Type|Description|
 |:--|:--|:--|
-|TerminalId		|long	|the id of terminal|
-|SerialNo		|string	|the serial number of terminal|
-|AppName		|string	|the name of the app pushed|
-|VersionName	|string	|the version name of app|
-|PushStartTime	|long	|the start time of the push, it is millisecond|
-|AppPushTime	|long	|app push time|
-|AppPushStatus	|string	|the push result status, value can be Success and Fail|
-|AppPushError	|string	|the reason of app push fail|
-|ParameterTemplateName	|string	|the pushed parameter template name|
-|ParameterPushTime|long	|parameter push time|
+|TerminalId |long |the id of terminal|
+|SerialNo |string |the serial number of terminal|
+|AppName |string |the name of the app pushed|
+|VersionName |string |the version name of app|
+|PushStartTime |long |the start time of the push, it is millisecond|
+|AppPushTime |long |app push time|
+|AppPushStatus |string |the push result status, value can be Success and Fail|
+|AppPushError |string |the reason of app push fail|
+|ParameterTemplateName |string |the pushed parameter template name|
+|ParameterPushTime|long |parameter push time|
 |ParameterPushStatus|string|the parameter push result status, value can be Success and Fail|
 |ParameterPushError|string|the reason of parameter push failed|
-|ParameterValues|string	|raw parameter values, parameter key is the parameter file id combined parameter pid, parameter variables are not replaced|
+|ParameterValues|string |raw parameter values, parameter key is the parameter file id combined parameter pid, parameter
+variables are not replaced|
 |ParameterVariables|string|parameter variables|
-|PushType		|string	|push type, value can be Terminal or Group|
-
+|PushType |string |push type, value can be Terminal or Group|
 
 ### **SearchOptimizedParameterPushHistory**
 
-SearchOptimizedParameterPushHistory API allow the third party system  to find all the optimized terminal push history of parameter application
+SearchOptimizedParameterPushHistory API allow the third party system to find all the optimized terminal push history of
+parameter application
 
 **API**
 
@@ -247,7 +246,7 @@ SearchOptimizedParameterPushHistory API allow the third party system  to find al
 public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Name        | Type       | Nullable | Description                                                  |
 | :---------- | :--------- | :------- | :----------------------------------------------------------- |
@@ -257,8 +256,6 @@ public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHist
 | serialNo    | String     | true     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
-
-
 
 **Sample codes**
 
@@ -328,24 +325,25 @@ The type in dataSet of is OptimizedParameterPushHistoryDTO. And the structure sh
 
 |Property Name|Type|Description|
 |:--|:--|:--|
-|TerminalId		|long	|the id of terminal|
-|SerialNo		|string	|the serial number of terminal|
-|AppName		|string	|the name of the app pushed|
-|VersionName	|string	|the version name of app|
-|PushStartTime	|long	|the start time of the push, it is millisecond|
-|AppPushTime	|long	|app push time|
-|AppPushStatus	|string	|the push result status, value can be Success and Fail|
-|AppPushError	|string	|the reason of app push fail|
-|ParameterTemplateName	|string	|the pushed parameter template name|
-|ParameterPushTime|long	|parameter push time|
+|TerminalId |long |the id of terminal|
+|SerialNo |string |the serial number of terminal|
+|AppName |string |the name of the app pushed|
+|VersionName |string |the version name of app|
+|PushStartTime |long |the start time of the push, it is millisecond|
+|AppPushTime |long |app push time|
+|AppPushStatus |string |the push result status, value can be Success and Fail|
+|AppPushError |string |the reason of app push fail|
+|ParameterTemplateName |string |the pushed parameter template name|
+|ParameterPushTime|long |parameter push time|
 |ParameterPushStatus|string|the parameter push result status, value can be Success and Fail|
 |ParameterPushError|string|the reason of parameter push failed|
-|Parameters|map	|optimized parameter values, parameter variables are replaced, parameter key is the parameter pid|
-|PushType		|string	|push type, value can be Terminal or Group|
+|Parameters|map |optimized parameter values, parameter variables are replaced, parameter key is the parameter pid|
+|PushType |string |push type, value can be Terminal or Group|
 
 ### **SearchLatestOptimizedParameterPushHistory**
 
-SearchLatestOptimizedParameterPushHistory API allow the third party system  to find all the optimized terminal push history of parameter application
+SearchLatestOptimizedParameterPushHistory API allow the third party system to find all the optimized terminal push
+history of parameter application
 
 **API**
 
@@ -353,7 +351,7 @@ SearchLatestOptimizedParameterPushHistory API allow the third party system  to f
 public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Name        | Type       | Nullable | Description                                                  |
 | :---------- | :--------- | :------- | :----------------------------------------------------------- |
@@ -363,8 +361,6 @@ public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPu
 | serialNo    | String     | true     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
-
-
 
 **Sample codes**
 
@@ -434,17 +430,17 @@ The type in dataSet of is OptimizedParameterPushHistoryDTO. And the structure sh
 
 |Property Name|Type|Description|
 |:--|:--|:--|
-|TerminalId		|long	|the id of terminal|
-|SerialNo		|string	|the serial number of terminal|
-|AppName		|string	|the name of the app pushed|
-|VersionName	|string	|the version name of app|
-|PushStartTime	|long	|the start time of the push, it is millisecond|
-|AppPushTime	|long	|app push time|
-|AppPushStatus	|string	|the push result status, value can be Success and Fail|
-|AppPushError	|string	|the reason of app push fail|
-|ParameterTemplateName	|string	|the pushed parameter template name|
-|ParameterPushTime|long	|parameter push time|
+|TerminalId |long |the id of terminal|
+|SerialNo |string |the serial number of terminal|
+|AppName |string |the name of the app pushed|
+|VersionName |string |the version name of app|
+|PushStartTime |long |the start time of the push, it is millisecond|
+|AppPushTime |long |app push time|
+|AppPushStatus |string |the push result status, value can be Success and Fail|
+|AppPushError |string |the reason of app push fail|
+|ParameterTemplateName |string |the pushed parameter template name|
+|ParameterPushTime|long |parameter push time|
 |ParameterPushStatus|string|the parameter push result status, value can be Success and Fail|
 |ParameterPushError|string|the reason of parameter push failed|
-|Parameters|map	|optimized parameter values, parameter variables are replaced, parameter key is the parameter pid|
-|PushType		|string	|push type, value can be Terminal or Group|
+|Parameters|map |optimized parameter values, parameter variables are replaced, parameter key is the parameter pid|
+|PushType |string |push type, value can be Terminal or Group|

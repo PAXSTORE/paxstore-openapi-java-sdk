@@ -1,6 +1,7 @@
 ## TerminalGroup API
 
-All APIs related to terminal grouping operations are encapsulated in this class *com.pax.market.api.sdk.java.api.terminalGroup.TerminalGroupApi*.
+All APIs related to terminal grouping operations are encapsulated in this class *
+com.pax.market.api.sdk.java.api.terminalGroup.TerminalGroupApi*.
 
 **Constructors of TerminalGroupApi**
 
@@ -16,11 +17,10 @@ public TerminalGroupApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
-
 ### Search terminal group
 
-The search terminal group API allows third party system to Search by terminal group status or group name or resellers or models or dynamic group by page.
+The search terminal group API allows third party system to Search by terminal group status or group name or resellers or
+models or dynamic group by page.
 
 **API**
 
@@ -28,8 +28,7 @@ The search terminal group API allows third party system to Search by terminal gr
 public Result<TerminalGroupDTO> searchTerminalGroup(int pageNo, int pageSize, TerminalGroupSearchOrderBy orderBy, TerminalGroupStatus status, String name, String resellerNames, String modelNames, Boolean isDynamic)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
@@ -38,10 +37,9 @@ public Result<TerminalGroupDTO> searchTerminalGroup(int pageNo, int pageSize, Te
 |orderBy|TerminalGroupSearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalGroupSearchOrderBy.CreatedDate_desc and TerminalGroupSearchOrderBy.CreatedDate_asc and TerminalGroupSearchOrderBy.Name.|
 |status|TerminalGroupStatus|true|The value of status can be one of  TerminalGroupStatus.PENDING and TerminalGroupStatus.ACTIVE and TerminalGroupStatus.SUSPEND.|
 |name|String|true|The name of group|
-|resellerNames|String|true|The names of reseller. Multiple names can be separated by ','.                                                           For example, 'resellerName1,resellerName2'|
-|modelNames|String|true|The names of model. Multiple names can be separated by ','.                                                           For example, 'modelName1,modelName2'|
+|resellerNames|String|true|The names of reseller. Multiple names can be separated by ','. For example, 'resellerName1,resellerName2'|
+|modelNames|String|true|The names of model. Multiple names can be separated by ','. For example, 'modelName1,modelName2'|
 |isDynamic|Boolean|true|True or false dynamic grouping|
-
 
 **Sample codes**
 
@@ -119,14 +117,13 @@ The type in dataSet is TerminalGroupDTO. And the structure like below.
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
 **Possible business codes**
 
 | Business Code | Message                          | Description |
 | :------------ | :------------------------------- | :---------- |
 | 2202          | Terminal group status is invalid |             |
-
 
 ### Get terminal group
 
@@ -208,7 +205,7 @@ The type in data is TerminalGroupDTO. And the structure like below.
 | containSubResellerTerminal | Boolean      | Include sub resellers or not                                 |
 | merchantNames              | List\<String\> | the merchant names                                           |
 
-**Possible client validation errors**  
+**Possible client validation errors**
 
 > <font color="red">Parameter groupId cannot be null and cannot be less than 1!</font>
 
@@ -273,7 +270,6 @@ Result<TerminalGroupDTO> result = terminalGroupApi.createTerminalGroup(createReq
 	"validationErrors": ["Parameter terminalGroupCreateRequest cannot be null!"]
 }
 ```
-
 
 **Server side validation failed sample result(JSON formatted)**
 
@@ -351,13 +347,9 @@ The type in data is TerminalGroupDTO. And the structure like below.
 |1713| The associated model is not activate         ||
 |1773| The associated reseller is not activate      ||
 
-
-
-
 ### Search terminal
 
 This API is provided to the third party system to add terminals and search terminals in the terminal group.
-
 
 **API**
 
@@ -365,7 +357,7 @@ This API is provided to the third party system to add terminals and search termi
 public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy,TerminalStatus status, String modelName,  String resellerName, String merchantName, String serialNo, String excludeGroupId)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Parameter Name | Type                              | Nullable | Description                                                  |
 | :------------- | :-------------------------------- | :------- | :----------------------------------------------------------- |
@@ -456,14 +448,11 @@ The type in dataSet is SimpleTerminalDTO. And the structure like below.
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
-
-
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
 ### Update terminal group
 
 This api allows the third party system update terminal group.
-
 
 **API**
 
@@ -471,14 +460,12 @@ This api allows the third party system update terminal group.
 public Result<TerminalGroupDTO> updateTerminalGroup(Long groupId ,UpdateTerminalGroupRequest updateRequest)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |groupId|Long|false|The id of terminal group|
 |updateRequest|UpdateTerminalGroupRequest|false||
-
 
 Structure of class UpdateTerminalGroupRequest
 
@@ -490,7 +477,8 @@ Structure of class UpdateTerminalGroupRequest
 |resellerName|String|true|the name of reseller, if the value is null API won't update the origial value of this property|
 |merchantNameList|List\<String\>|true|the name of merchants|
 
-Note: name, description, modelName, resellerName, and merchantNameList cannot be empty at same time. When it is not inactive, only name and description can be modified.
+Note: name, description, modelName, resellerName, and merchantNameList cannot be empty at same time. When it is not
+inactive, only name and description can be modified.
 
 **Sample codes**
 
@@ -551,7 +539,7 @@ TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.c
 
 **Possible validation errors**
 
-> <font color=red>Parameter UpdateTerminalGroupRequestcannot be null!</font>  
+> <font color=red>Parameter UpdateTerminalGroupRequestcannot be null!</font>
 
 **Possible business codes**
 
@@ -573,8 +561,6 @@ TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.c
 |2156|Terminal group name already exists||
 |13102|Terminal group is not inactive, only name and description can be modified||
 
-
-
 ### Active group
 
 This api allows the third party system active terminal group.
@@ -585,7 +571,7 @@ This api allows the third party system active terminal group.
 public Result<String> activeGroup(Long groupId)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Parameter Name | Type | Nullable | Description              |
 | :------------- | :--- | :------- | :----------------------- |
@@ -635,8 +621,6 @@ Result<String> result = terminalGroupApi.activeGroup(16549L);
 | 1773          | The associated reseller is not activate |             |
 | 2158          | Terminal group has been activated       |             |
 
-
-
 ### Disable group
 
 This api allows the third party system disable terminal group.
@@ -647,7 +631,7 @@ This api allows the third party system disable terminal group.
 public Result<String> disableGroup(Long groupId)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Parameter Name | Type | Nullable | Description              |
 | :------------- | :--- | :------- | :----------------------- |
@@ -693,8 +677,6 @@ Result<String> result = terminalGroupApi.disableGroup(16549L);
 | 2150          | Terminal group not found              |             |
 | 2155          | Terminal group has been not activated |             |
 
-
-
 ### Delete group
 
 This api allows the third party system delete terminal group
@@ -705,7 +687,7 @@ This api allows the third party system delete terminal group
 public Result<String> deleteGroup(Long groupId)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Parameter Name | Type | Nullable | Description              |
 | :------------- | :--- | :------- | :----------------------- |
@@ -751,8 +733,6 @@ Result<String> result = terminalGroupApi.deleteGroup(16549L);
 | 2150          | Terminal group not found                      |             |
 | 2165          | The terminal group is active,unable to delete |             |
 
-
-
 ### Search terminals in group
 
 This API is provided to the third party system to search terminals in the current terminal group.
@@ -763,7 +743,7 @@ This API is provided to the third party system to search terminals in the curren
 public  Result<SimpleTerminalDTO> searchTerminalsInGroup(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy, Long groupId, String serialNo, String merchantNames)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Parameter Name | Type                              | Nullable | Description                                                  |
 | :------------- | :-------------------------------- | :------- | :----------------------------------------------------------- |
@@ -849,7 +829,7 @@ The type in dataSet is SimpleTerminalDTO. And the structure like below.
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
 **Possible business codes**
 
@@ -857,8 +837,6 @@ The type in dataSet is SimpleTerminalDTO. And the structure like below.
 | :------------ | :------------------------------------------ | :---------- |
 | 1835          | Dynamic group cannot be queried by merchant |             |
 | 2150          | Terminal group not found                    |             |
-
-
 
 ### Add terminal to group
 
@@ -870,7 +848,7 @@ This api allows the third party system add terminal to group.
  public Result<String> addTerminalToGroup(Long groupId, Set<Long> terminalIds)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Parameter Name | Type      | Nullable | Description                                    |
 | :------------- | :-------- | :------- | :--------------------------------------------- |
@@ -938,7 +916,7 @@ This api allows the third party system remove terminal out group.
 public Result<String> removeTerminalOutGroup(Long groupId, Set<Long> terminalIds)
 ```
 
-**Input parameter(s) description**  
+**Input parameter(s) description**
 
 | Parameter Name | Type      | Nullable | Description                                    |
 | :------------- | :-------- | :------- | :--------------------------------------------- |

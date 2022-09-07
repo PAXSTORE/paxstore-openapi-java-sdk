@@ -1,6 +1,7 @@
 ## TerminalVariable API
 
-All terminal variable related APIs are encapsulated in classes *com.pax.market.api.sdk.java.api.terminalVariable.TerminalVariableApi*.
+All terminal variable related APIs are encapsulated in classes *
+com.pax.market.api.sdk.java.api.terminalVariable.TerminalVariableApi*.
 
 **Constructors of TerminalApkParameter**
 
@@ -18,7 +19,8 @@ public TerminalVariableApi(String baseUrl, String apiKey, String apiSecret);
 
 ### Get terminal variable by tid , serialNo , packageName, key, source
 
-The get terminal variable API allows third party system to get terminal variable by tid , serialNo , packageName, key, source
+The get terminal variable API allows third party system to get terminal variable by tid , serialNo , packageName, key,
+source
 
 **API**
 
@@ -26,8 +28,7 @@ The get terminal variable API allows third party system to get terminal variable
 public Result<ParameterVariableDTO> getTerminalVariable(int pageNo, int pageSize , SearchOrderBy orderBy,String tid , String serialNo , String packageName, String key, VariableSource source)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
@@ -108,17 +109,14 @@ The type in dataSet is ParameterVariableDTO. And the structure like below.
 | createdDate    | Long   |                             |
 | updatedDate    | Long   |                             |
 
-**Possible client validation errors**  
+**Possible client validation errors**
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 100</font>  
-> <font color=red>Parameter tid and serialNo cannot be null at same time!</font> 
-
-
+> <font color=red>Parameter tid and serialNo cannot be null at same time!</font>
 
 ### Create a terminal variable
-
 
 **API**
 
@@ -202,8 +200,8 @@ Result<String> createResult = terminalVariableApi.createTerminalVariable(createR
 
 **Possible validation errors**
 
-> <font color=red>variableList can not be empty</font> 
-> <font color=red>The parameter serialNo and tid  cannot be blank at same time!</font> 
+> <font color=red>variableList can not be empty</font>
+> <font color=red>The parameter serialNo and tid cannot be blank at same time!</font>
 
 
 
@@ -217,12 +215,9 @@ Result<String> createResult = terminalVariableApi.createTerminalVariable(createR
 | 2026          | Tid and serialNo cannot be empty at same time                |             |
 | 13101         | Invalid terminal parameter variables                         |             |
 
-
-
 ### Update terminal variable by id
 
-Update terminal variable  by id.
-
+Update terminal variable by id.
 
 **API**
 
@@ -299,8 +294,6 @@ Result<String> updateResult = terminalVariableApi.updateTerminalVariable(termina
 |13100|Variable not found||
 |13101|Invalid terminal parameter variables||
 
-
-
 ### Delete terminal variable by terminal variable id
 
 The delete terminal variable API allows third party system to delete terminal variable.
@@ -311,8 +304,7 @@ The delete terminal variable API allows third party system to delete terminal va
 public Result<String> deleteTerminalVariable(Long terminalVariableId)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
@@ -357,9 +349,7 @@ Result<String> deleteResult = terminalVariableApi.deleteTerminalVariable(termina
 | 113           | Your request is invalid, please try again or contact marketplace administrator |             |
 | 13100         | Variable not found                                           |             |
 
-
-
-### Batch  delete terminalvariable 
+### Batch  delete terminalvariable
 
 **API**
 
@@ -367,7 +357,7 @@ Result<String> deleteResult = terminalVariableApi.deleteTerminalVariable(termina
 public Result<String> batchDeletionTerminalVariable(TerminalParameterVariableDeleteRequest batchDeletionRequest)
 ```
 
-**Input parameter(s) description** 
+**Input parameter(s) description**
 
 | Parameter Name       | Type                                   | Nullable | Description                                                 |
 | :------------------- | :------------------------------------- | :------- | :---------------------------------------------------------- |
@@ -407,7 +397,6 @@ Result<String> batchDeletionResult = terminalVariableApi.batchDeletionTerminalVa
 	"businessCode": 0
 }
 ```
-
 
 **Possible validation errors**
 
