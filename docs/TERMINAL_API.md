@@ -216,6 +216,11 @@ TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225", true, true, true);
 ```
 
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York", "KFC", TerminalStatus.Active, "sn0101012225", true, true, true);
+```
+
 **Client side validation failed sample result(JSON formatted)**
 
 ```
