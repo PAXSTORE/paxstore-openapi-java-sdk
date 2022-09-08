@@ -30,22 +30,31 @@ information in result please use another search terminals API
 ```
 public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID)
 ```
+```
+public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, String resellerName, String merchantName, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID)
+```
 
 **Input parameter(s) description**
 
-| Name| Type | Nullable|Description |
-|:---- | :----|:----|:----|
-|pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 100|
-|orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
-|status|TerminalStatus|true|the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
-|snNameTID|String|true|search by serial number,name and TID(exactly match)|
+| Name         | Type                  | Nullable | Description                                                                                                                                                                                                       |
+|:-------------|:----------------------|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pageNo       | int                   | false    | page number, value must >=1                                                                                                                                                                                       |
+| pageSize     | int                   | false    | the record number per page, range is 1 to 100                                                                                                                                                                     |
+| orderBy      | TerminalSearchOrderBy | true     | the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default. |
+| resellerName | String                | true     | search terminals under the reseller or it's sub-resellers                                                                                                                                                         |
+| merchantName | String                | true     | search terminals under the reseller merchant                                                                                                                                                                      |
+| status       | TerminalStatus        | true     | the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend                                                                                                  |
+| snNameTID    | String                | true     | search by serial number,name and TID(exactly match)                                                                                                                                                               |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225");
+```
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York", "KFC", TerminalStatus.Active, "sn0101012225");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -193,6 +202,9 @@ parameter(s) description
 ```
 public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID, boolean includeGeoLocation, boolean includeInstalledApks, boolean includeInstalledFirmware)
 ```
+```
+public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, String resellerName, String merchantName, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID, boolean includeGeoLocation, boolean includeInstalledApks, boolean includeInstalledFirmware)
+```
 
 **Input parameter(s) description**
 
@@ -215,7 +227,6 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSear
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225", true, true, true);
 ```
-
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York", "KFC", TerminalStatus.Active, "sn0101012225", true, true, true);
