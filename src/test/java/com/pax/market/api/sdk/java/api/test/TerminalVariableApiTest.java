@@ -13,8 +13,8 @@ package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalVariable.TerminalVariableApi;
-import com.pax.market.api.sdk.java.api.terminalVariable.dto.ParameterVariable;
-import com.pax.market.api.sdk.java.api.terminalVariable.dto.ParameterVariableDTO;
+import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariable;
+import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariableDTO;
 import com.pax.market.api.sdk.java.api.terminalVariable.dto.TerminalParameterVariableDeleteRequest;
 import com.pax.market.api.sdk.java.api.terminalVariable.dto.TerminalParameterVariableRequest;
 import org.junit.Assert;
