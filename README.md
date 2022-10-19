@@ -229,6 +229,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [Merchant Category APIs](docs/MERCHANT_CATEGORY_API.md)
 
+## [Merchant Variable APIs](docs/MERCHANT_VARIABLE_API.md)
+
 ## [Terminal Apk APIs](docs/TERMINAL_APK_API.md)
 
 ## [Terminal Firmware APIs](docs/TERMINAL_FIRMWARE_API.md)
