@@ -314,6 +314,7 @@ field in result is null.
 ```
 public Result<TerminalDTO> getTerminal(Long terminalId);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks);
 ```
 
 **Input parameter(s) description**
@@ -592,6 +593,42 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 }
 ```
 
+```
+{
+	"businessCode": 0,
+	"data": {
+		"id": 908627,
+		"name": "test8000999",
+		"tid": "BTG7KFTY",
+		"serialNo": "TEST8000999",
+		"status": "A",
+		"merchantName": "pax",
+		"modelName": "A930",
+		"resellerName": "Jesse",
+		"location": "",
+		"remark":"",
+		"createdDate": 1552536099000,
+		"lastActiveTime": 1552536095000,
+		 "installedApks": [
+      {
+        "appName": "cloudMsg1",
+        "packageName": "app1.clouldmsg.com.cloudmsg1",
+        "versionName": "1.0",
+        "versionCode": 1,
+        "installTime": 1541137822000
+      },
+      {
+        "appName": "sdkDemo",
+        "packageName": "com.pax.android.demoapp",
+        "versionName": "7.2.3",
+        "versionCode": 135,
+        "installTime": 1596416582000
+      }
+    ]
+	}
+}
+```
+
 The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
 
 **Possible validation errors**
@@ -860,6 +897,101 @@ The type of data in result is same as search terminal API.
 |2350|Terminal Serial No.{0} already exists in other marketplace sandbox|&nbsp;|
 |2401|Terminal TID is invalid|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
+
+
+
+## Copy a terminal
+
+Copy terminal API allows the thirdparty system to copy a terminal by  origin terminal id.
+
+**API**
+
+```
+public Result<TerminalDTO> copyTerminal(TerminalCopyRequest terminalCopyRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name      | Type                | Nullable | Description                                              |
+| :------------------ | :------------------ | :------- | :------------------------------------------------------- |
+| terminalCopyRequest | TerminalCopyRequest | false    | copy terminal request object. The structure shows below. |
+
+Structure of class TerminalCopyRequest
+
+| Property Name | Type   | Nullable | Description                                                  |
+| :------------ | :----- | :------- | :----------------------------------------------------------- |
+| terminalId    | Long   | true     | The  id of terminal                                          |
+| name          | String | false    | The name of terminal, max length is 64.                      |
+| tid           | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 15. |
+| serialNo      | String | true     | The serial number of terminal. If the status is active the serial number is mandatory. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalCopyRequest copyRequest = new TerminalCopyRequest();
+copyRequest.setTerminalId(13453434534L);
+copyRequest.setName("COPY_FROM_13453434534");
+copyRequest.setSerialNo("TJ0000002");
+Result<TerminalDTO> copyResult = terminalApi.copyTerminal(copyRequest);
+logger.debug("Result of copy terminal: {}",copyResult.toString());
+Assert.assertTrue(copyResult.getBusinessCode() == 0);
+```
+
+**Client validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalCopyRequest cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+    "id": 1510297435111460,
+    "name": "COPY_FROM_909822",
+    "tid": "HSZG4FTS",
+    "serialNo": "TJ00001002",
+    "status": "A",
+    "merchantName": "TESTpukMerchant",
+    "modelName": "A930",
+    "resellerName": "shifan",
+    "location": "",
+    "remark": "324324223",
+    "createdDate": 1666850737890,
+    "lastActiveTime": 1666850736044
+	}
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalCopyRequest cannot be null!</font>  
+
+**Possible business codes**
+
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 1800          | Terminal not found         |             |
+| 1817          | Terminal name is mandatory |             |
+| 1818          | Terminal name is too long  |             |
+| 1828          | TID already used           |             |
+
+
 
 ### Activate a terminal
 

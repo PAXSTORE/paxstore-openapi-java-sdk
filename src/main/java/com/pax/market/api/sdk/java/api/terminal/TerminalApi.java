@@ -52,6 +52,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String UPDATE_TERMINAL_URL = "/v1/3rdsys/terminals/{terminalId}";
 
+    protected static final String COPY_TERMINAL_URL = "/v1/3rdsys/terminals/copy";
+
     protected static final String ADD_TERMINAL_TO_GROUP_URL = "/v1/3rdsys/terminals/groups";
 
     protected static final String UPDATE_TERMINAL_REMOTE_CONFIG_URL = "/v1/3rdsys/terminals/{terminalId}/config";
@@ -119,10 +121,14 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
 
     public Result<TerminalDTO> getTerminal(Long terminalId) {
-       return getTerminal(terminalId,false);
+       return getTerminal(terminalId,false,false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList) {
+        return getTerminal(terminalId, includeDetailInfoList, false);
+    }
+
+    public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks) {
         logger.debug("terminalId=" + terminalId);
         List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
         if (validationErrs.size() > 0) {
@@ -131,6 +137,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_URL.replace("{terminalId}", terminalId.toString()));
         request.addRequestParam("includeDetailInfoList", String.valueOf(includeDetailInfoList));
+        request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<>(terminalResponse);
     }
@@ -225,6 +232,22 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(terminalUpdateRequest, TerminalUpdateRequest.class));
+        TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
+        return new Result<>(terminalResponse);
+    }
+
+
+    public Result<TerminalDTO> copyTerminal(TerminalCopyRequest terminalCopyRequest) {
+        List<String> validationErrs = validateCreate(terminalCopyRequest, "parameter.terminalCopyRequest.null");
+        if (validationErrs.size() > 0) {
+            return new Result<>(validationErrs);
+        }
+        logger.debug("terminalId=" + terminalCopyRequest.getTerminalId());
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(COPY_TERMINAL_URL);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(terminalCopyRequest, TerminalCopyRequest.class));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<>(terminalResponse);
     }

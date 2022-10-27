@@ -102,7 +102,17 @@ public class TerminalApiTest {
     	Result<String> activateResult = terminalApi.activateTerminal(terminalId);
     	logger.debug("Result of activate terminal: {}",activateResult.toString());
     	Assert.assertTrue(activateResult.getBusinessCode() == 0);
-    	
+
+
+		//TEST copy
+		TerminalCopyRequest copyRequest = new TerminalCopyRequest();
+		copyRequest.setTerminalId(909822L);
+		copyRequest.setName("COPY_FROM_909822");
+		copyRequest.setSerialNo("TJ00001002");
+		Result<TerminalDTO> copyResult = terminalApi.copyTerminal(copyRequest);
+		logger.debug("Result of copy terminal: {}",copyResult.toString());
+		Assert.assertTrue(copyResult.getBusinessCode() == 0);
+
     	//Test disable
     	Result<String> disableResult = terminalApi.disableTerminal(terminalId);
     	logger.debug("Result of disable terminal: {}",disableResult.toString());
@@ -111,7 +121,11 @@ public class TerminalApiTest {
     	//Test delete
     	Result<String> deleteResult = terminalApi.deleteTerminal(terminalId);
     	logger.debug("Result of delete terminal: {}",deleteResult.toString());
-    	Assert.assertTrue(deleteResult.getBusinessCode() == 0);
+		Assert.assertTrue(deleteResult.getBusinessCode() == 0);
+
+		Result<String> deleteCopyResult = terminalApi.deleteTerminal(copyResult.getData().getId());
+		logger.debug("Result of delete copy terminal: {}",deleteCopyResult.toString());
+    	Assert.assertTrue(deleteCopyResult.getBusinessCode() == 0);
 
 
     }
@@ -122,7 +136,14 @@ public class TerminalApiTest {
     	Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId,true);
     	logger.debug("Result of get terminal: {}",getResult.toString());
     	Assert.assertTrue(getResult.getBusinessCode() == 0);
+    }
 
+    @Test
+    public void testGetTerminalIncludeInstalledApks() {
+    	Long terminalId = 909822L;
+    	Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId,false, true);
+    	logger.debug("Result of get terminal: {}",getResult.toString());
+    	Assert.assertTrue(getResult.getBusinessCode() == 0);
     }
     
 	@Test
