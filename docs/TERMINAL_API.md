@@ -669,7 +669,7 @@ Structure of class TerminalCreateRequest
 |modelName|String|true|The model name of terminal. Max length is 64.|
 |location|String|true|The location of terminal, max length is 64.|
 |remark|String|true|The remark of terminal, max length is 500.|
-|status|String|true|Status of terminal, valus can be one of A(Active) and P(Pendding). If status is null the initial status is P(Pendding) when creating.|
+|status|String|true|Status of terminal, value can be one of A(Active) and P(Pendding). If status is null the initial status is P(Pendding) when creating.|
 
 **Sample codes**
 
@@ -924,6 +924,7 @@ Structure of class TerminalCopyRequest
 | name          | String | false    | The name of terminal, max length is 64.                      |
 | tid           | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 15. |
 | serialNo      | String | true     | The serial number of terminal. If the status is active the serial number is mandatory. |
+| status        | String | false    | Status of terminal, value can be one of A(Active) and P(Pendding).Set value through TerminalApi.TerminalStatus.Active or TerminalApi.TerminalStatus.Inactive |
 
 **Sample codes**
 
@@ -933,6 +934,7 @@ TerminalCopyRequest copyRequest = new TerminalCopyRequest();
 copyRequest.setTerminalId(13453434534L);
 copyRequest.setName("COPY_FROM_13453434534");
 copyRequest.setSerialNo("TJ0000002");
+copyRequest.setStatus(TerminalStatus.Active);
 Result<TerminalDTO> copyResult = terminalApi.copyTerminal(copyRequest);
 logger.debug("Result of copy terminal: {}",copyResult.toString());
 Assert.assertTrue(copyResult.getBusinessCode() == 0);

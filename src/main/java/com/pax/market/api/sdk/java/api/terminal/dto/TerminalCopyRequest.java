@@ -12,6 +12,7 @@
 
 package com.pax.market.api.sdk.java.api.terminal.dto;
 
+import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -37,6 +38,9 @@ public class TerminalCopyRequest implements Serializable {
 
     @Length(max=32)
     protected String serialNo;
+
+    @NotBlank
+    protected String status;
 
     public Long getTerminalId() {
         return terminalId;
@@ -69,4 +73,13 @@ public class TerminalCopyRequest implements Serializable {
     public void setSerialNo(String serialNo) {
         this.serialNo = serialNo;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(TerminalStatus status) {
+        this.status = status.val();
+    }
+
 }

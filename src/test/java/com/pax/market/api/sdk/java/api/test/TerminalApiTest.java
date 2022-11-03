@@ -109,6 +109,7 @@ public class TerminalApiTest {
 		copyRequest.setTerminalId(909822L);
 		copyRequest.setName("COPY_FROM_909822");
 		copyRequest.setSerialNo("TJ00001002");
+		copyRequest.setStatus(TerminalStatus.Inactive);
 		Result<TerminalDTO> copyResult = terminalApi.copyTerminal(copyRequest);
 		logger.debug("Result of copy terminal: {}",copyResult.toString());
 		Assert.assertTrue(copyResult.getBusinessCode() == 0);
