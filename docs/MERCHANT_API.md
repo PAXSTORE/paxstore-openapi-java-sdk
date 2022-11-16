@@ -1,10 +1,11 @@
 ## Merchant APIs
 
-The merchant APIs allow thirdparty system search merchants, get a merchant, create/update a merchant, activate/disable a merchant and delete a exist merchant.
-All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.merchant.MerchantApi*.   
+The merchant APIs allow thirdparty system search merchants, get a merchant, create/update a merchant, activate/disable a
+merchant and delete a exist merchant.
+All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.merchant.MerchantApi*.
 
-User can customize the additional attributes for merchant. To add/delete/update merchant's additional entity attributes please using marketplace admin login and go to page via General Setting -> Entity Attribute Setting.  
-
+User can customize the additional attributes for merchant. To add/delete/update merchant's additional entity attributes
+please using marketplace admin login and go to page via General Setting -> Entity Attribute Setting.
 
 **Constructors of MerchantAPI**
 
@@ -12,7 +13,7 @@ User can customize the additional attributes for merchant. To add/delete/update 
 public MerchantApi(String baseUrl, String apiKey, String apiSecret);
 ```
 
-Constructor parameters description   
+Constructor parameters description
 
 |Name|Type|Description|
 |:---|:---|:---|
@@ -20,10 +21,9 @@ Constructor parameters description
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
 ### Search merchants
 
-The search merchants API allows thirdparty system to search merchants by page.   
+The search merchants API allows thirdparty system to search merchants by page.
 
 **API**
 
@@ -104,18 +104,16 @@ The structure of class SimpleResellerDTO
 |id|Long|The id of reseller.|
 |name|String|The name of reseller.|
 
-
-**Possible client validation errors**  
+**Possible client validation errors**
 
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
-
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
 ### Get a merchant
 
 The get merchant API allows the thirdparty system get a merchant by merchant ID.
-If the merchant does not exist the data field in result is null. 
+If the merchant does not exist the data field in result is null.
 
 **API**
 
@@ -201,7 +199,7 @@ The structure of SimpleResellerDTO already described in Search Merchants chapter
 
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>
 
 **Possible business codes**
 
@@ -209,10 +207,10 @@ The structure of SimpleResellerDTO already described in Search Merchants chapter
 |:---|:---|:---|
 |1720|Merchant doesn't exist|&nbsp;|
 
-
 ### Create a merchant
 
-Create merchant API allows thirdparty system create a merchant. If create successful SDK will return the created merchant in result.
+Create merchant API allows thirdparty system create a merchant. If create successful SDK will return the created
+merchant in result.
 
 **API**
 
@@ -243,7 +241,6 @@ Structure of class MerchantCreateRequest
 |merchantCategoryNames|List\<String\>|true|Merchant categories. Make sure the categories are available.|
 |entityAttributeValues|LinkedHashMap\<String, String\>|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
 |activateWhenCreate|Boolean|true|Whether to activate the merchant when create, default value is false|
-
 
 **Sample codes**
 
@@ -325,7 +322,7 @@ The type of data in result is same as the get reseller API.
 > <font color=red>postcode:length must be between 0 and 16</font>  
 > <font color=red>address:length must be between 0 and 255</font>  
 > <font color=red>email:not a well-formed email address</font>  
-> <font color=red>description:length must be between 0 and 3000</font>  
+> <font color=red>description:length must be between 0 and 3000</font>
 
 **Possible business codes**
 
@@ -348,7 +345,6 @@ The type of data in result is same as the get reseller API.
 |1112|Phone No. is invalid|&nbsp;|
 |3400|Country code is invalid|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
-
 
 ### Update a merchant
 
@@ -383,7 +379,6 @@ Structure of class MerchantUpdateRequest
 |createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant|
 |merchantCategoryNames|List\<String\>|true|Merchant categories. Make sure the categories are available.|
 |entityAttributeValues|LinkedHashMap\<String, String\>|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
-
 
 **Sample codes**
 
@@ -450,13 +445,11 @@ Result<MerchantDTO> result = merchantApi.updateMerchant(72594L, request);
 }
 ```
 
-
-
 The data type in result is same as get merchant API.
 
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font> 
+> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>
 > <font color=red>Parameter merchantUpdateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
 > <font color=red>name:length must be between 0 and 64</font>  
@@ -468,7 +461,7 @@ The data type in result is same as get merchant API.
 > <font color=red>postcode:length must be between 0 and 16</font>  
 > <font color=red>address:length must be between 0 and 255</font>  
 > <font color=red>email:not a well-formed email address</font>  
-> <font color=red>description:length must be between 0 and 3000</font>  
+> <font color=red>description:length must be between 0 and 3000</font>
 
 
 **Possible business codes**
@@ -494,14 +487,9 @@ The data type in result is same as get merchant API.
 |1773|The associated reseller is not activate|&nbsp;|
 |1936|The merchant is not inactive,merchant email cannot be updated!|Only the pending merchant can update the email|
 
-
-
-
-
-
 ### Activate a merchant
 
-Activate merchant API allows the thirdparty system activate a inactive merchant. 
+Activate merchant API allows the thirdparty system activate a inactive merchant.
 If activate successfully there's no response content from remote server.
 
 **API**
@@ -541,7 +529,6 @@ Result<String> result = merchantApi.activateMerchant(72590L);
 }
 ```
 
-
 **Successful sample result(JSON formatted)**
 
 ```
@@ -550,9 +537,8 @@ Result<String> result = merchantApi.activateMerchant(72590L);
 }
 ```
 
-
 **Possible client validation errors**
-> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>
 
 
 **Possible business codes**
@@ -563,7 +549,6 @@ Result<String> result = merchantApi.activateMerchant(72590L);
 |1759|Reseller doesn't exist|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
 |1892|The merchant has already been activated!|&nbsp;|
-
 
 ### Disable a merchant
 
@@ -581,7 +566,6 @@ public Result<String> disableMerchant(Long merchantId)
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |merchantId|Long|false|The merchant id.|
-
 
 **Sample codes**
 
@@ -616,11 +600,9 @@ Result<String> result = merchantApi.disableMerchant(72594L);
 }
 ```
 
-
-
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>
 
 
 **Possible business codes**
@@ -630,8 +612,6 @@ Result<String> result = merchantApi.disableMerchant(72594L);
 |1720|Merchant doesn't exist|&nbsp;|
 |1887|The merchant is not active,unable to disable!|&nbsp;|
 |1797|The merchant has active terminals|&nbsp;|
-
-
 
 ### Delete a merchant
 
@@ -649,7 +629,6 @@ public Result<String> deleteMerchant(Long merchantId)
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |merchantId|Long|false|The merchant id.|
-
 
 **Sample codes**
 
@@ -686,7 +665,7 @@ Result<String> result = merchantApi.deleteMerchant(72593L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>
 
 
 **Possible business codes**
@@ -696,8 +675,6 @@ Result<String> result = merchantApi.deleteMerchant(72593L);
 |1720|Merchant doesn't exist|&nbsp;|
 |1876|The merchant is active,unable to delete!|&nbsp;|
 |1786|The merchant has been used by terminal|&nbsp;|
-
-
 
 ### Replace merchant email
 
@@ -716,7 +693,6 @@ public Result<String> replaceMerchantEmail(Long merchantId, String email, boolea
 |merchantId|Long|false|The merchant id|
 |email|String|true|The new email|
 |createUser|boolean|false|Indicate whether to create user when replace the email|
-
 
 **Sample codes**
 
@@ -755,7 +731,7 @@ Result<String> result = merchantApi.replaceMerchantEmail(72593L, "zhangsan@pax.c
 
 > <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
 > <font color="red">Parameter email format invalid!</font>
-> <font color="red">Parameter email is too long, maxlength is 255!</font>  
+> <font color="red">Parameter email is too long, maxlength is 255!</font>
 
 
 

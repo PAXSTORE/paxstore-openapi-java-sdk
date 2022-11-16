@@ -1,10 +1,17 @@
 ## TerminalGroupRki API
 
-All the push RKI to terminal related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.terminalGroupRki.TerminalGroupRkiApi*.
+All the push RKI to terminal related APIs are encapsulated in the class *
+com.pax.market.api.sdk.java.api.terminalGroupRki.TerminalGroupRkiApi*.
 
 **Introduction**
 
-With the growing maturity of the PAX RKI solution. PAX already provides customers with remote key injection services. Through the remote key update, the POS operation and maintenance company replaces the terminal with the LKI for the local key update, reducing its operation and maintenance costs. The Global administrator can manage the RKI server in the global center, And assign one instance to the marketplace. Reseller admin configures RKI user token and gets key template to identify by request RKI server. Batch push RKI task to terminal group. You can get error detail from the UI page If the bind failed. When an error occurred during the download phase. Please go to the terminal detail page download the logcat file.
+With the growing maturity of the PAX RKI solution. PAX already provides customers with remote key injection services.
+Through the remote key update, the POS operation and maintenance company replaces the terminal with the LKI for the
+local key update, reducing its operation and maintenance costs. The Global administrator can manage the RKI server in
+the global center, And assign one instance to the marketplace. Reseller admin configures RKI user token and gets key
+template to identify by request RKI server. Batch push RKI task to terminal group. You can get error detail from the UI
+page If the bind failed. When an error occurred during the download phase. Please go to the terminal detail page
+download the logcat file.
 
 **Constructors of TerminalGroupRkiApi**
 
@@ -20,11 +27,10 @@ public TerminalGroupRkiApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
-
 ### Search Group Push Rki Task
 
-The search group push rki task API allows third party system to search pushed rki task list to the specified group by page.
+The search group push rki task API allows third party system to search pushed rki task list to the specified group by
+page.
 
 **API**
 
@@ -34,15 +40,15 @@ public Result<TerminalGroupRkiDTO> searchGroupPushRkiTask(int pageNo, int pageSi
 
 **Input parameter(s) description**
 
-| Name        | Type          | Nullable | Description                                                  |
-| :---------- | :------------ | :------- | :----------------------------------------------------------- |
-| pageNo      | int           | false    | page number, value must >=1                                  |
-| pageSize    | int           | false    | the record number per page, range is 1 to 100                |
+| Name        | Type          | Nullable | Description                                                                                                                                                                                                               |
+|:------------|:--------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pageNo      | int           | false    | page number, value must >=1                                                                                                                                                                                               |
+| pageSize    | int           | false    | the record number per page, range is 1 to 100                                                                                                                                                                             |
 | orderBy     | SearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.CreatedDate_desc and SearchOrderBy.CreatedDate_asc. |
-| groupId     | Long          | false    | the id of the group                                          |
-| pendingOnly | Boolean       | true     | Indicate whether to search the pending push task only        |
-| historyOnly | Boolean       | true     | Indicate whether to search history push task only            |
-| keyWords    | String        | true     | Key words， it will match rkiKey                             |
+| groupId     | Long          | false    | the id of the group                                                                                                                                                                                                       |
+| pendingOnly | Boolean       | true     | Indicate whether to search the pending push task only                                                                                                                                                                     |
+| historyOnly | Boolean       | true     | Indicate whether to search history push task only                                                                                                                                                                         |
+| keyWords    | String        | true     | Key words， it will match rkiKey                                                                                                                                                                                           |
 
 **Sample codes**
 
@@ -102,31 +108,27 @@ Result<TerminalGroupRkiDTO> result = terminalGroupRkiApi.searchGroupPushRkiTask(
 
 The type in dataSet is TerminalGroupRkiDTO. And the structure like below.
 
-| Name          | Type      | Description                                                  |
-| :------------ | :-------- | :----------------------------------------------------------- |
-| id            | Long      | the id of group push Rki record                              |
-| rkiKey        | String    | the key of RKI                                               |
-| status        | String    | the status of push Rki, value can be one of A(Active) and S(Suspend) |
-| actionStatus  | String    | the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status) |
-| activatedDate | Timestamp | the push Rki activated date                                  |
-| effectiveTime | Timestamp | the push Rki effective date                                  |
-| remarks       | String    | the push Rki result remarks                                  |
+| Name          | Type      | Description                                                                                       |
+|:--------------|:----------|:--------------------------------------------------------------------------------------------------|
+| id            | Long      | the id of group push Rki record                                                                   |
+| rkiKey        | String    | the key of RKI                                                                                    |
+| status        | String    | the status of push Rki, value can be one of A(Active) and S(Suspend)                              |
+| actionStatus  | String    | the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)        |
+| activatedDate | Timestamp | the push Rki activated date                                                                       |
+| effectiveTime | Timestamp | the push Rki effective date                                                                       |
+| remarks       | String    | the push Rki result remarks                                                                       |
 | errorCode     | int       | the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes) |
-| pendingCount  | int       |                                                              |
-| successCount  | int       |                                                              |
-| failedCount   | int       |                                                              |
-| completed     | Boolean   | push complete                                                |
-| pushLimit     | int       | the push limit count                                         |
+| pendingCount  | int       |                                                                                                   |
+| successCount  | int       |                                                                                                   |
+| failedCount   | int       |                                                                                                   |
+| completed     | Boolean   | push complete                                                                                     |
+| pushLimit     | int       | the push limit count                                                                              |
 
-**Possible client validation errors**  
+**Possible client validation errors**
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
-
-
-
-
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
 ### Get group push rki task by id
 
@@ -224,8 +226,6 @@ The type of data is TerminalGroupRkiDTO, and Refer to search group push rki task
 | 12         | The push is disabled            |
 | 27         | Unable To Bind Terminal RKI Key |
 
-
-
 ### Push rki to group
 
 Push rki to group API allow the third party system push a Rki to group.
@@ -236,20 +236,20 @@ Push rki to group API allow the third party system push a Rki to group.
 public Result<TerminalGroupRkiDTO> pushRkiKey2Group(CreateTerminalGroupRkiRequest createRequest)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |createRequest|CreateTerminalGroupRkiRequest|false|The create request object. The structure shows below.|
 
-
 Structure of class CreateTerminalGroupRkiRequest
 
-|Property Name|Type|Nullable|Description|
-|:---|:---|:---|:---|
-|groupId|String|false|The id of group|
-|rkiKey|String|false|The rki key which indicate you want to push RKI Key template to the terminal|
+| Property Name | Type   | Nullable | Description                                                                  |
+|:--------------|:-------|:---------|:-----------------------------------------------------------------------------|
+| groupId       | String | false    | The id of group                                                              |
+| rkiKey        | String | false    | The rki key which indicate you want to push RKI Key template to the terminal |
+| effectiveTime | Date   | true     | The time when to start the push task                                         |
+| expiredTime   | Date   | true     | The time when to stop the push task                                          |
 
 **Sample codes**
 
@@ -301,35 +301,31 @@ Result<TerminalGroupRkiDTO> result = terminalGroupRkiApi.pushRkiKey2Group(create
 }
 ```
 
-
 **Possible validation errors**
 
 > <font color=red>Parameter groupPushRkiRequest cannot be null!</font>  
-> <font color=red>Terminal Group Id  cannot be null and cannot be less than 1！</font>
+> <font color=red>Terminal Group Id cannot be null and cannot be less than 1！</font>
 
 <br>
 
 The type of data is TerminalGroupRkiDTO, and Refer to search group push rki task Api for structure .
 
-
 **Possible business codes**
 
-|Business Code|Message|Description|
-|:---|:---|:---|
-|131|Insufficient access right||
-|2150|Terminal group not found|&nbsp;|
-|2060|Failed to activate push task: PAX Auth System Connect Error||
-|9293|Reseller RKI user token is not ready||
-|18002|RKI push task not found||
-|18004|Pending RKI push task already exist|&nbsp;|
-|18005|Active RKI push task already exist|&nbsp;|
-|18006|Invalid RKI push task status||
-
-
+| Business Code | Message                                                     | Description |
+|:--------------|:------------------------------------------------------------|:------------|
+| 131           | Insufficient access right                                   ||
+| 2150          | Terminal group not found                                    | &nbsp;      |
+| 2060          | Failed to activate push task: PAX Auth System Connect Error ||
+| 9293          | Reseller RKI user token is not ready                        ||
+| 18002         | RKI push task not found                                     ||
+| 18004         | Pending RKI push task already exist                         | &nbsp;      |
+| 18005         | Active RKI push task already exist                          | &nbsp;      |
+| 18006         | Invalid RKI push task status                                ||
 
 ### Disable Rki push by group push rki task id
 
-This api allows the third Party system disable an exist push by  group push rki task id.
+This api allows the third Party system disable an exist push by group push rki task id.
 
 **API**
 
@@ -337,8 +333,7 @@ This api allows the third Party system disable an exist push by  group push rki 
 public Result<TerminalGroupRkiDTO> disableGroupRkiPushTask(Long groupPushRkiTaskId)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
@@ -390,10 +385,9 @@ Result<TerminalGroupRkiDTO> result = terminalGroupRkiApi.disableGroupRkiPushTask
 }
 ```
 
-
 **Possible validation errors**
 
-> <font color=red>Parameter groupPushRkiTaskId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter groupPushRkiTaskId cannot be null and cannot be less than 1!</font>
 
 
 **Possible business codes**

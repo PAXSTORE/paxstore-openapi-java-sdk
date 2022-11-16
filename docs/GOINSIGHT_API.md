@@ -2,7 +2,7 @@
 
 GoInsight APIs allow third party system search app bizData form goInsight.
 
-All the GoInsight related APIs are in the class *com.pax.market.api.sdk.java.api.goInsight.GoInsightApi*.   
+All the GoInsight related APIs are in the class *com.pax.market.api.sdk.java.api.goInsight.GoInsightApi*.
 
 **Constructors of GoInsightApi**
 
@@ -56,7 +56,8 @@ Part of the timeZone available ids
 ### Search APP BizData
 
 The search app bizData API allow the third party system search data.<br/>
-Note: This result of this API depends on the API query settings in GoInsight. Paging needs to be set when the query result set type is a details data.
+Note: This result of this API depends on the API query settings in GoInsight. Paging needs to be set when the query
+result set type is a details data.
 
 **API**
 
@@ -251,7 +252,7 @@ Structure of class Column
 |displayName|String|The dataset filed's display name|
 |type|String|Data analysis type of dataset field. Value can be one of Dimension, Measure and Image|
 
-Structure of class Row  
+Structure of class Row
 
 |Property Name|Type|Description|
 |:---|:---|:---|

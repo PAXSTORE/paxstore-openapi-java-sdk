@@ -14,7 +14,9 @@ public class PushFirmwareTaskDTO implements Serializable {
     private String terminalSN;
     private String fmName;
     private Long activatedDate;
+    private Boolean wifiOnly;
     private Long effectiveTime;
+    private Long expiredTime;
     private String status;
     private int actionStatus;
     private int errorCode;
@@ -51,12 +53,28 @@ public class PushFirmwareTaskDTO implements Serializable {
         this.activatedDate = activatedDate;
     }
 
+    public Boolean getWifiOnly() {
+        return wifiOnly;
+    }
+
+    public void setWifiOnly(Boolean wifiOnly) {
+        this.wifiOnly = wifiOnly;
+    }
+
     public Long getEffectiveTime() {
         return effectiveTime;
     }
 
     public void setEffectiveTime(Long effectiveTime) {
         this.effectiveTime = effectiveTime;
+    }
+
+    public Long getExpiredTime() {
+        return expiredTime;
+    }
+
+    public void setExpiredTime(Long expiredTime) {
+        this.expiredTime = expiredTime;
     }
 
     public String getStatus() {
@@ -90,7 +108,9 @@ public class PushFirmwareTaskDTO implements Serializable {
                 ", terminalSN='" + terminalSN + '\'' +
                 ", fmName='" + fmName + '\'' +
                 ", activatedDate=" + activatedDate +
+                ", wifiOnly=" + wifiOnly +
                 ", effectiveTime=" + effectiveTime +
+                ", expiredTime=" + expiredTime +
                 ", status='" + status + '\'' +
                 ", actionStatus=" + actionStatus +
                 ", errorCode=" + errorCode +

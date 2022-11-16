@@ -1,8 +1,9 @@
 ## Terminal APIs
 
-Terminal APIs allow thirdparty system search terminals, get a terminal, create a terminal, update a terminal, activate a terminal, disable a terminal and delete a exist terminal.
+Terminal APIs allow thirdparty system search terminals, get a terminal, create a terminal, update a terminal, activate a
+terminal, disable a terminal and delete a exist terminal.
 
-All the terminal APIs are in the class *com.pax.market.api.sdk.java.api.terminal.TerminalApi*.   
+All the terminal APIs are in the class *com.pax.market.api.sdk.java.api.terminal.TerminalApi*.
 
 **Constructors of TerminalApi**
 
@@ -18,34 +19,42 @@ public TerminalApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
-
 ### Search terminals
 
-The search terminal API allow the thirdparty system search terminals by page. 
-Note: This result of this API does not include the geolocation, firmware and installed application, if you need those 3 information in result please use another search terminals API
+The search terminal API allow the thirdparty system search terminals by page.
+Note: This result of this API does not include the geolocation, firmware and installed application, if you need those 3
+information in result please use another search terminals API
 
 **API**
 
 ```
 public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID)
 ```
+```
+public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, String resellerName, String merchantName, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID)
+```
 
 **Input parameter(s) description**
 
-| Name| Type | Nullable|Description |
-|:---- | :----|:----|:----|
-|pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 100|
-|orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
-|status|TerminalStatus|true|the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
-|snNameTID|String|true|search by serial number,name and TID(exactly match)|
+| Name         | Type                  | Nullable | Description                                                                                                                                                                                                       |
+|:-------------|:----------------------|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pageNo       | int                   | false    | page number, value must >=1                                                                                                                                                                                       |
+| pageSize     | int                   | false    | the record number per page, range is 1 to 100                                                                                                                                                                     |
+| orderBy      | TerminalSearchOrderBy | true     | the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default. |
+| resellerName | String                | true     | search terminals under the reseller or it's sub-resellers                                                                                                                                                         |
+| merchantName | String                | true     | search terminals under the reseller merchant                                                                                                                                                                      |
+| status       | TerminalStatus        | true     | the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend                                                                                                  |
+| snNameTID    | String                | true     | search by serial number,name and TID(exactly match)                                                                                                                                                               |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225");
+```
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York", "KFC", TerminalStatus.Active, "sn0101012225");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -114,15 +123,14 @@ Structure of class TerminalLocationDTO
 |lat|Double|The latitude of geography location|
 |lng|Double|The longitude of geography location|
 
-Structure of class TerminalInstalledFirmwareDTO  
+Structure of class TerminalInstalledFirmwareDTO
 
 |Property Name|Type|Description|
 |:---|:---|:---|
 |firmwareName|String|Firmware name|
 |installTime|Date|Firmware installed date|
 
-
-Structure of class TerminalInstalledApkDTO  
+Structure of class TerminalInstalledApkDTO
 
 |Property Name|Type|Description|
 |:---|:---|:---|
@@ -182,34 +190,46 @@ Structure of class TerminalDeviceHistoryDTO
 
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
-### Search terminals include geo location, installed app and firmware  
-This API is similar to the search terminals API, it has additional 3 parameters, the details please refer to the Input parameter(s) description
+### Search terminals include geo location, installed app and firmware
 
-**API**  
+This API is similar to the search terminals API, it has additional 3 parameters, the details please refer to the Input
+parameter(s) description
+
+**API**
+
 ```
 public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID, boolean includeGeoLocation, boolean includeInstalledApks, boolean includeInstalledFirmware)
+```
+```
+public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, String resellerName, String merchantName, TerminalSearchOrderBy orderBy, TerminalStatus status, String snNameTID, boolean includeGeoLocation, boolean includeInstalledApks, boolean includeInstalledFirmware)
 ```
 
 **Input parameter(s) description**
 
-| Name| Type | Nullable|Description |
-|:---- | :----|:----|:----|
-|pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 100|
-|orderBy|TerminalSearchOrderBy|true|the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default.|
-|status|TerminalStatus|true|the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend|
-|snNameTID|String|true|search by serial number,name and TID|
-|includeGeoLocation|boolean|true|whether to include geo location information in search result|
-|includeInstalledApks|boolean|true|whether to include install applications in search result|
-|includeInstalledFirmware|boolean|true|whether to include the firmware version of the terminal in search result|
+| Name                     | Type | Nullable| Description                                                                                                                                                                                                       |
+|:-------------------------| :----|:----|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pageNo                   |int|false| page number, value must >=1                                                                                                                                                                                       |
+| pageSize                 |int|false| the record number per page, range is 1 to 100                                                                                                                                                                     |
+| orderBy                  |TerminalSearchOrderBy|true| the sort order by field name, value can be one of TerminalSearchOrderBy.Name, TerminalSearchOrderBy.Tid and TerminalSearchOrderBy.SerialNo. If pass null parameter the search result will order by id by default. |
+| resellerName             |String|true| search terminals under the reseller or it's sub-resellers                                                                                                                                                         |
+| merchantName             |String|true| search terminals under the reseller merchant                                                                                                                                                                      |
+| status                   |TerminalStatus|true| the terminal status<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend                                                                                                  |
+| snNameTID                |String|true| search by serial number,name and TID                                                                                                                                                                              |
+| includeGeoLocation       |boolean|true| whether to include geo location information in search result                                                                                                                                                      |
+| includeInstalledApks     |boolean|true| whether to include install applications in search result                                                                                                                                                          |
+| includeInstalledFirmware |boolean|true| whether to include the firmware version of the terminal in search result                                                                                                                                          |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225", true, true, true);
+```
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York", "KFC", TerminalStatus.Active, "sn0101012225", true, true, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -278,19 +298,16 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalSta
 
 The type in dataSet of result is TerminalDTO.
 
-
-
 **Possible validation errors**
 
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
-> <font color=red>pageSize:must be less than or equal to 100</font>  
-
-
+> <font color=red>pageSize:must be less than or equal to 100</font>
 
 ### Get a terminal
 
-The get terminal API allows the thirdparty system get a terminal by terminal id. If the termianl does not exist the data field in result is null.
+The get terminal API allows the thirdparty system get a terminal by terminal id. If the termianl does not exist the data
+field in result is null.
 
 **API**
 
@@ -304,7 +321,6 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
-
 
 **Sample codes**
 
@@ -576,14 +592,11 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 }
 ```
 
-
-
 The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
-
 
 **Possible validation errors**
 
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
 
 **Possible business codes**
 
@@ -591,11 +604,9 @@ The type of data in result is TerminalDTO. Its structure already shows in search
 |:---|:---|:---|
 |1801|Terminal doesn't exist|&nbsp;|
 
-
 ### Create a terminal
 
 Create merchant API allow the thirdparty system create a terminal remotely.
-
 
 **API**
 
@@ -623,7 +634,6 @@ Structure of class TerminalCreateRequest
 |remark|String|true|The remark of terminal, max length is 500.|
 |status|String|true|Status of terminal, valus can be one of A(Active) and P(Pendding). If status is null the initial status is P(Pendding) when creating.|
 
-
 **Sample codes**
 
 ```
@@ -639,7 +649,6 @@ createReq.setModelName("A920");
 createReq.setStatus(TerminalStatus.Active);
 Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
 ```
-
 
 **Server side validation failed sample result(JSON formatted)**
 
@@ -684,7 +693,7 @@ The type of data in result is same as search terminal API.
 > <font color=red>merchantName:length must be between 0 and 64</font>  
 > <font color=red>resellerName:length must be between 0 and 64</font>  
 > <font color=red>modelName:length must be between 0 and 64</font>  
-> <font color=red>location:length must be between 0 and 32</font>  
+> <font color=red>location:length must be between 0 and 32</font>
 
 
 **Possible business codes**
@@ -713,7 +722,6 @@ The type of data in result is same as search terminal API.
 |1773|The associated reseller is not activate|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
 |2350|Terminal Serial No.{0} already exists in other marketplace sandbox||
-
 
 ### Update a terminal
 
@@ -744,7 +752,6 @@ Structure of class TerminalUpdateRequest
 |modelName|String|false|The model name of terminal. Max length is 64.|
 |location|String|true|The location of terminal, max length is 64.|
 |remark|String|true|The remark of terminal, max length is 500.|
-
 
 **Sample codes**
 
@@ -814,7 +821,7 @@ The type of data in result is same as search terminal API.
 > <font color=red>merchantName:length must be between 0 and 64</font>  
 > <font color=red>resellerName:length must be between 0 and 64</font>  
 > <font color=red>modelName:length must be between 0 and 64</font>  
-> <font color=red>location:length must be between 0 and 32</font>  
+> <font color=red>location:length must be between 0 and 32</font>
 
 **Possible business codes**
 
@@ -854,12 +861,9 @@ The type of data in result is same as search terminal API.
 |2401|Terminal TID is invalid|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
 
-
-
 ### Activate a terminal
 
 Activate terminal API allows the thirdparty system to activate a terminal by terminal id.
-
 
 **API**
 
@@ -872,7 +876,6 @@ public Result<String> activateTerminal(Long terminalId)
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
-
 
 **Sample codes**
 
@@ -909,7 +912,7 @@ Result<String> result = terminalApi.activateTerminal(907560L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
 
 **Possible business codes**
 
@@ -922,8 +925,7 @@ Result<String> result = terminalApi.activateTerminal(907560L);
 |1700|Model doesn't exist|&nbsp;|
 |1713|The associated model is not activate|&nbsp;|
 
-
-### Disable a terminal  
+### Disable a terminal
 
 The disable terminal API allows the thirdparty system disable a terminal by terminal id.
 If disable successfully there's not response content from remote server.
@@ -933,7 +935,6 @@ If disable successfully there's not response content from remote server.
 ```
 public Result<String> disableTerminal(Long terminalId)
 ```
-
 
 **Input parameter(s) description**
 
@@ -976,7 +977,7 @@ Result<String> result = terminalApi.disableTerminal(907560L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
 
 **Possible business codes**
 
@@ -985,11 +986,10 @@ Result<String> result = terminalApi.disableTerminal(907560L);
 |1800|Terminal not found|&nbsp;|
 |1888|The terminal is not active,unable to disable!|&nbsp;|
 
-
-### Move a terminal  
+### Move a terminal
 
 The move terminal API allows the thirdparty system move a terminal to another reseller and merchant by terminal id.
-If the terminal is not applicable for the exist groups after move, the terminal will be removed from the groups. 
+If the terminal is not applicable for the exist groups after move, the terminal will be removed from the groups.
 If move successfully there's not response content from remote server.
 
 **API**
@@ -998,7 +998,6 @@ If move successfully there's not response content from remote server.
 public Result<String> moveTerminal(Long terminalId, String resellerName, String merchantName)
 ```
 
-
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
@@ -1006,7 +1005,6 @@ public Result<String> moveTerminal(Long terminalId, String resellerName, String 
 |terminalId|Long|false|The terminal id.|
 |resellerName|String|false|The target reseller name to move.|
 |merchantName|String|false|The target merchant name to move.|
-
 
 **Sample codes**
 
@@ -1045,7 +1043,7 @@ Result<String> result = terminalApi.moveTerminal(907560L, "targetReseller", "tar
 
 > <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
 > <font color=red>resellerName:may not be empty</font>  
-> <font color=red>merchantName:may not be empty</font>  
+> <font color=red>merchantName:may not be empty</font>
 
 **Possible business codes**
 
@@ -1059,8 +1057,7 @@ Result<String> result = terminalApi.moveTerminal(907560L, "targetReseller", "tar
 |1737|The associated merchant is not activate|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
 
-
-### Delete a terminal  
+### Delete a terminal
 
 Delete terminal API allows the thirdparty system delete a exist terminal by terminal id.
 If delete successfully there's no response content from remote server.
@@ -1071,13 +1068,11 @@ If delete successfully there's no response content from remote server.
 public Result<String> deleteTerminal(Long terminalId)
 ```
 
-
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
-
 
 **Sample codes**
 
@@ -1114,7 +1109,7 @@ Result<String> result = terminalApi.deleteTerminal(907560L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
 
 **Possible business codes**
 
@@ -1123,9 +1118,7 @@ Result<String> result = terminalApi.deleteTerminal(907560L);
 |1800|Terminal not found|&nbsp;|
 |1877|The terminal is active,unable to delete!|&nbsp;|
 
-
-
-### Batch add terminal to group  
+### Batch add terminal to group
 
 Batch add terminal to group API allows the thirdparty system to add terminals to one or more groups.
 
@@ -1192,7 +1185,7 @@ Result<String> result = terminalApi.batchAddTerminalToGroup(groupRequest);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalGroupRequest cannot be null!</font>  
+> <font color=red>Parameter terminalGroupRequest cannot be null!</font>
 
 **Possible business codes**
 
@@ -1266,7 +1259,7 @@ Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConf
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
 
 **Possible business codes**
 
@@ -1329,7 +1322,7 @@ Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(909744L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
 
 **Possible business codes**
 
@@ -1392,15 +1385,13 @@ Result<TerminalPedDTO> result = terminalApi.getTerminalPed(909755L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1 !</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1 !</font>
 
 **Possible business codes**
 
 | Business Code | Message            | Description |
 | :------------ | :----------------- | :---------- |
 | 1800          | Terminal not found |             |
-
-
 
 ### Move terminal
 
@@ -1419,8 +1410,6 @@ public Result<String> moveTerminal(Long terminalId, String resellerName, String 
 | terminalId     | Long | false    | Terminal's id. |
 | resellerName| String | false | The target reseller name the terminal move to|
 | merchantName| String | false | The target merchant name the terminal move to|
-
-
 
 **Sample codes**
 
@@ -1459,7 +1448,7 @@ Result<String> result = terminalApi.moveTerminal(terminalId, "PAX", "6666");
 
 > <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
 > <font color=red>Parameter resellerName is mandatory!</font>  
-> <font color=red>Parameter merchantName is mandatory!</font> 
+> <font color=red>Parameter merchantName is mandatory!</font>
 
 **Possible business codes**
 
@@ -1469,10 +1458,6 @@ Result<String> result = terminalApi.moveTerminal(terminalId, "PAX", "6666");
 | 1759          | Reseller doesn't exist |             |
 | 1720          | Merchant doesn't exist |             |
 | 1937          | Merchant is not belong to the given Reseller! |             |
-
-
-
-
 
 ### Push Command to Terminal
 
@@ -1527,7 +1512,7 @@ Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCm
 **Possible client validation errors**
 
 > <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
-> <font color=red>Parameter command cannot be null!</font> 
+> <font color=red>Parameter command cannot be null!</font>
 
 **Possible business codes**
 

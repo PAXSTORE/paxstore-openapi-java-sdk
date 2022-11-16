@@ -1,6 +1,7 @@
 ## TerminalApkParameter API
 
-All terminal related APK parameter APIs are encapsulated in classes *com.pax.market.api.sdk.java.api.terminalApkParameter.TerminalApkParameterApi*.
+All terminal related APK parameter APIs are encapsulated in classes *
+com.pax.market.api.sdk.java.api.terminalApkParameter.TerminalApkParameterApi*.
 
 **Constructors of TerminalApkParameter**
 
@@ -16,11 +17,9 @@ public TerminalApkParameterApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
-
 ### search terminal apk parameter by templateName ,packageName,versionName
 
-search terminal  apk parameter history by templateName ,packageName  ,versionName.
+search terminal apk parameter history by templateName ,packageName ,versionName.
 
 **API**
 
@@ -28,8 +27,7 @@ search terminal  apk parameter history by templateName ,packageName  ,versionNam
  public Result<ApkParameterDTO> searchTerminalApkParameter(int pageNo, int pageSize , SearchOrderBy orderBy,String templateName ,String packageName, String versionName)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
@@ -128,17 +126,13 @@ The structure of class ApkFileDTO
 | permissions   | String | Android OS Authorization. |
 | paxPermission | String | Paydroid Authorizationr.  |
 
-**Possible client validation errors**  
+**Possible client validation errors**
 
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 100</font>  
 > <font color=red>Parameter packageName is mandatory!</font>  
-> <font color=red>Parameter versionName is mandatory!</font>  
-
-
-
-
+> <font color=red>Parameter versionName is mandatory!</font>
 
 ```
 public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId);
@@ -213,7 +207,8 @@ Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter
 }
 ```
 
-The type in dataSet is ApkParameterDTO. And the Structure is like ApkParameterDTO returned by searchTerminalApkParameter Api.
+The type in dataSet is ApkParameterDTO. And the Structure is like ApkParameterDTO returned by searchTerminalApkParameter
+Api.
 
 ### Create a Apk Parameter
 
@@ -305,14 +300,11 @@ Result<String> result = terminalApkParameterApi.createApkParameter(createApkPara
 > <font color=red>name:may not be empty</font>  
 > <font color=red>parameters and base64FileParameters cannot be null at same time!</font>  
 > <font color=red>Exceed max counter (10) of file type parameters!</font>  
-> <font color=red>Exceed max size (500kb) per file type parameters!</font>  
-
-
+> <font color=red>Exceed max size (500kb) per file type parameters!</font>
 
 ### Update terminal apk parameter by id
 
 Update terminal apk parameter by id.
-
 
 **API**
 
@@ -335,7 +327,7 @@ Structure of class UpdateApkParameterRequest
 | parameters        | Map\<String, String\> | true     | The parameter key and value, the key the PID in template |
 |base64FileParameters|List\<FileParameter\> |true      | The parameter of file type|
 
-Note:UpdateApkParameterRequest cannot be empty or  paramTemplateName and  parameters cannot be empty at same time.
+Note:UpdateApkParameterRequest cannot be empty or paramTemplateName and parameters cannot be empty at same time.
 
 **Sample codes**
 
@@ -382,13 +374,12 @@ Result<String> result = terminalApkParameterApi.updateApkParameter(apkParameterI
 s}
 ```
 
-
 **Possible validation errors**
 
 > <font color="red">Parameter apkParameterId cannot be null and cannot be less than 1!</font>  
 > <font color=red>Parameter apkParameterUpdateRequest cannot be null!</font>  
 > <font color=red>Exceed max counter (10) of file type parameters!</font>  
-> <font color=red>Exceed max size (500kb) per file type parameters!</font>  
+> <font color=red>Exceed max size (500kb) per file type parameters!</font>
 
 
 **Possible business codes**
@@ -400,8 +391,6 @@ s}
 |1759|Reseller doesn't exist||
 |9001|Push template not found||
 
-
-
 ### Delete apk parameter by apk parameter id
 
 The delete apk parameter API allows third party system to delete apk parameter
@@ -412,13 +401,11 @@ The delete apk parameter API allows third party system to delete apk parameter
 public Result<String> deleteApkParameter(Long apkParameterId)
 ```
 
-**Input parameter(s) description**  
-
+**Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |apkParameterId|Long|false|the  apk parameter's id|
-
 
 **Sample codes**
 

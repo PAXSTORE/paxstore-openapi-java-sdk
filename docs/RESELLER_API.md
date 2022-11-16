@@ -1,8 +1,9 @@
 ## Manage resellers
 
-All the reseller related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.reseller.ResellerApi*.  
+All the reseller related APIs are encapsulated in the class *com.pax.market.api.sdk.java.api.reseller.ResellerApi*.
 
-User can customize the additional attributes for reseller. To add/delete/update reseller's additional entity attributes please using marketplace admin login and go to page via General Setting -> Entity Attribute Setting.
+User can customize the additional attributes for reseller. To add/delete/update reseller's additional entity attributes
+please using marketplace admin login and go to page via General Setting -> Entity Attribute Setting.
 
 **Constructors of ResellerAPI**
 
@@ -18,7 +19,6 @@ public ResellerApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
 <br>
 
 ### Search resellers
@@ -33,7 +33,6 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 
 **Input parameter(s) description**
 
-
 | Name| Type | Nullable|Description |
 |:--- | :---|:---|:---|
 |pageNo|int|false|page number, value must >=1|
@@ -46,13 +45,10 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 
 **Sample codes**
 
-
 ```
 ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super", ResellerStatus.Suspend);
 ```
-
-
 
 **Client side validation failed sample result(JSON formatted)**
 
@@ -108,6 +104,7 @@ The type in dataSet of is ResellerPageDTO. And the structure shows like below.
 |postcode|String|the postcode of reseller|
 |email|String|the email of reseller|
 |status|String|the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)|
+
 <br>
 
 **Possible client validation errors**
@@ -116,12 +113,9 @@ The type in dataSet of is ResellerPageDTO. And the structure shows like below.
 > <font color="red">pageNo:must be greater than or equal to 1</font><br>
 > <font color="red">pageSize:must be less than or equal to 100</font>
 
-
-
-
 ### Get a reseller
 
-Get reseller by reseller id. 
+Get reseller by reseller id.
 
 **API**
 
@@ -150,7 +144,6 @@ Result<ResellerDTO> result = resellerApi.getReseller(17850L);
 	"validationErrors": ["Parameter resellerId cannot be null and cannot be less than 1!"]
 }
 ```
-
 
 **Server side validation failed sample result(JSON formatted)**
 
@@ -199,6 +192,7 @@ The type of data is ResellerDTO, and the structure shows below.
 |status|String|the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)|
 |parent|SimpleResellerDTO|reseller's parent|
 |entityAttributeValues|LinkedHashMap\<String, String\>|dynamic attributes|
+
 <br>
 Structure of SimpleResellerDTO
 
@@ -206,8 +200,6 @@ Structure of SimpleResellerDTO
 |:---|:---|:---|
 |id|Long|the id of reseller|
 |name|String|the name of reseller|
-
-
 
 **Possible client validation errors**
 
@@ -250,7 +242,6 @@ Structure of class ResellerCreateRequest
 |parentResellerName|String|true|Parent reseller name, if it is empty will set the root reseller of current marketplace as the parent reseller|
 |entityAttributeValues|LinkedHashMap\<String, String\>|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
 |activateWhenCreate|Boolean|true|Whether to activate the reseller when create, default value is false|
-
 
 **Sample codes**
 
@@ -388,7 +379,6 @@ Structure of class ResellerUpdateRequest
 |parentResellerName|String|true|Do not suggest set value for this property. If set value please keep the parentResellerName same as the original parentResellerName. Otherwise API will return a 1830 business code.|
 |entityAttributeValues|LinkedHashMap\<String, String\>|false|Dynamic attributes. Whether the attributes is required or not depends on the attributes configuration.|
 
-
 **Sample codes**
 
 ```
@@ -423,8 +413,7 @@ Result<ResellerDTO> result = resellerApi.updateReseller(17850L, request);
 }
 ```
 
-Note: the code in message is the dynamic attribute for the above failed sample result   
-
+Note: the code in message is the dynamic attribute for the above failed sample result
 
 **Successful sample result(JSON formatted)**
 
@@ -452,7 +441,7 @@ Note: the code in message is the dynamic attribute for the above failed sample r
 
 Type of data is ResellerDTO, same as the API get reseller.
 
-**Possible client validation errors**  
+**Possible client validation errors**
 
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font><br/>
 > <font color="red">Parameter resellerUpdateRequest cannot be null!</font><br/>
@@ -496,12 +485,12 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1925|The reseller is not inactive,reseller email cannot be updated!|The update reseller API can only update the email for the inactive reseller. To change the email for other resellers please use the replaceResellerEmail API|
 |1830|Cannot update reseller's parent|Cannot change the reseller's parent when updating a reseller|
 
-
 ### Activate a reseller
 
 **API**
 
-If activate reseller successfully there's not response content from remote server. So the data field in result is null whether activate sucessfully not not.
+If activate reseller successfully there's not response content from remote server. So the data field in result is null
+whether activate sucessfully not not.
 
 ```
 public Result<String> activateReseller(Long resellerId)
@@ -546,7 +535,6 @@ Result<String> result = resellerApi.activateReseller(51739L);
 }
 ```
 
-
 **Possible client validation errors**
 
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font>
@@ -561,13 +549,12 @@ Result<String> result = resellerApi.activateReseller(51739L);
 |1891|The reseller has already been activated!|&nbsp;|
 |1894|The reseller's parent is not active|&nbsp;|
 
-
-
 ### Disable a reseller
 
 **API**
 
-If disable successfully there's no response content from remote server. So the data field in result is null whether disable successfully or not.
+If disable successfully there's no response content from remote server. So the data field in result is null whether
+disable successfully or not.
 
 ```
 public Result<String> disableReseller(Long resellerId)
@@ -612,8 +599,6 @@ Result<String> result = resellerApi.disableReseller(51739L);
 }
 ```
 
-
-
 **Possible client validation errors**
 
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font>
@@ -635,7 +620,8 @@ Result<String> result = resellerApi.disableReseller(51739L);
 
 **API**
 
-If delete reseller successfully there's not response content from remote server. And the data field in result is always null.
+If delete reseller successfully there's not response content from remote server. And the data field in result is always
+null.
 
 ```
 public Result<String> deleteReseller(Long resellerId)
@@ -680,7 +666,6 @@ Result<String> result = resellerApi.deleteReseller(51739L);
 }
 ```
 
-
 **Possible client validation errors**
 
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font>
@@ -696,8 +681,6 @@ Result<String> result = resellerApi.deleteReseller(51739L);
 |1785|The reseller has been used by terminal|&nbsp;|
 |1788|The reseller has been used by terminal group|&nbsp;|
 |1780|The reseller has sub-resellers|&nbsp;|
-
-
 
 ### Replace reseller email
 
@@ -749,7 +732,6 @@ Result<String> result = resellerApi.replaceResellerEmail(51739L, "zhangsan@pax.c
 }
 ```
 
-
 **Possible client validation errors**
 
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font>
@@ -779,24 +761,21 @@ public Result<ResellerRkiKeyPageDTO> searchResellerRkiKeyList(Long resellerId, i
 
 **Input parameter(s) description**
 
-
 | Name| Type | Nullable|Description |
 |:--- | :---|:---|:---|
 |resellerId|Long|false|The reseller's id.|
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 1000|
 |rkiKey|String|true|search filter by RKI key|
+
 <br/>
 
 **Sample codes**
-
 
 ```
 ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ResellerRkiKeyPageDTO> resultRkiKey = resellerApi.searchResellerRkiKeyList(51739L, 1, 10, null);
 ```
-
-
 
 **Client side validation failed sample result(JSON formatted)**
 
@@ -833,6 +812,7 @@ The type in dataSet of is ResellerRkiKeyPageDTO. And the structure shows like be
 |Property Name|Type|Description|
 |:---|:---|:---|
 |keyId|String|the identifier of RKI key template|
+
 <br>
 
 **Possible client validation errors**

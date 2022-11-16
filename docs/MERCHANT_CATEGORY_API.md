@@ -1,9 +1,9 @@
 ## Merchant Category APIs
 
+The merchant category APIs allow thirdparty system get merchant categories by name, create merchante category, update
+merchant category, delete merchant category and batch create merchant categories.
 
-The merchant category APIs allow thirdparty system get merchant categories by name, create merchante category, update merchant category, delete merchant category and batch create merchant categories.  
-
-All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.merchant.category.MerchantCategoryApi*.   
+All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.merchant.category.MerchantCategoryApi*.
 
 **Constructors of MerchantCategoryApi**
 
@@ -11,7 +11,7 @@ All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.merchant
 public MerchantCategoryApi(String baseUrl, String apiKey, String apiSecret);  
 ```
 
-Constructor parameters description   
+Constructor parameters description
 
 |Name|Type|Description|
 |:---|:---|:---|
@@ -19,10 +19,9 @@ Constructor parameters description
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
 ### Get merchant categories
 
-The get merchant categories API allows thirdparty system to search the merchant categories by name. 
+The get merchant categories API allows thirdparty system to search the merchant categories by name.
 
 **API**
 
@@ -36,15 +35,12 @@ public Result<ArrayList<MerchantCategoryDTO>> getMerchantCategories(String name)
 |:--- | :---|:---|:---|
 |name|String|true|name of merchant category, if name is null API will return all the merchant categories|
 
-
 **Sample codes**
 
 ```
 MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCategories("Fast Foods");
 ```
-
-
 
 **Successful sample result(JSON formatted)**
 
@@ -61,19 +57,13 @@ Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCate
 
 The structure of the class MerchantCategoryDTO like below.
 
-
 |Property Name|Type|Description|
 |:---|:---|:---|
 |id|Long|The id of merchant category.|
 |name|String|The name of merchant category.|
 |remarks|String|The remarks of merchant category.|
 
-
-
-
 ### Create a merchant category
-
-
 
 **API**
 
@@ -93,8 +83,6 @@ Structure of class MerchantCategoryCreateRequest
 |:---|:---|:---|:---|
 |name|String|false|Name of merchant category,max length is 128.|
 |remarks|String|true|Remarks of merchant category, max length is 255.|
-
-
 
 **Sample codes**
 
@@ -137,16 +125,14 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(
 }
 ```
 
-
-
 **Possible client validation errors**
 > <font color=red>Parameter merchantCategoryCreateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
 > <font color=red>name:length must be between 0 and 128</font>  
-> <font color=red>remarks:length must be between 0 and 255</font>  
- 
+> <font color=red>remarks:length must be between 0 and 255</font>
 
-**Possible business codes**  
+
+**Possible business codes**
 
 |Business Code|Message|Description|
 |:---|:---|:---|
@@ -154,7 +140,6 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.createMerchantCategory(
 |16002|Merchant category name is mandatory|&nbsp;|
 |16003|Merchant category name is too long|&nbsp;|
 |16004|Merchant category remarks is too long|&nbsp;|
-
 
 ### Update a merchant category
 
@@ -179,8 +164,6 @@ Structure of class MerchantCategoryUpdateRequest
 |:---|:---|:---|:---|
 |name|String|false|Merchant category name, max length is 128.|
 |remarks|String|true|Remarks of merchant category, max length is 255.|
-
-
 
 **Sample codes**
 
@@ -223,17 +206,13 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(
 }
 ```
 
-
-
-
-
 **Possible client validation errors**
 
 > <font color=red>Parameter merchantCategoryId cannot be null and cannot be less than 1</font>  
 > <font color=red>Parameter merchantCategoryUpdateRequest cannot be null!</font>  
 > <font color=red>name:may not be empty</font>  
 > <font color=red>name:length must be between 0 and 128</font>  
-> <font color=red>remarks:length must be between 0 and 255</font> 
+> <font color=red>remarks:length must be between 0 and 255</font>
 
 
 
@@ -247,15 +226,11 @@ Result<MerchantCategoryDTO> result = merchantCategoryApi.updateMerchantCategory(
 |16003|Merchant category name is too long|&nbsp;|
 |16004|Merchant category remarks is too long|&nbsp;|
 
-
-
-
 ### Delete a merchant category
 
 Delete merchant category API allows the thirdparty system delete a exist merchant category by id.
 
-
-**API**  
+**API**
 
 ```
 public Result<String> deleteMerchantCategory(Long merchantCategoryId)
@@ -266,7 +241,6 @@ public Result<String> deleteMerchantCategory(Long merchantCategoryId)
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |merchantCategoryId|Long|false|The merchant category id.|
-
 
 **Sample codes**
 
@@ -303,7 +277,7 @@ Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 
 **Possible client validation errors**
 
-> <font color=red>Parameter merchantCategoryId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter merchantCategoryId cannot be null and cannot be less than 1!</font>
 
 
 **Possible business codes**
@@ -312,13 +286,7 @@ Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 |:---|:---|:---|
 |16000|Merchant category not found|&nbsp;|
 
-
-
-
-
 ### Batch create a merchant categories
-
-
 
 **API**
 
@@ -332,10 +300,6 @@ public Result<ArrayList<MerchantCategoryDTO>> batchCreateMerchantCategory(List<M
 |:---|:---|:---|:---|
 |merchantCategoryBatchCreateRequest|List\<MerchantCategoryCreateRequest\>|false|List of merchant category to create|
 |skipExist|boolean|true|if the value is true, then the name of category in create list exist in system will skip when create, if the value is false then all the categories in create list won't created in system. The default value is false.|
-
-
-
-
 
 **Sample codes**
 
@@ -374,7 +338,6 @@ Result<ArrayList<MerchantCategoryDTO>> result = merchantCategoryApi.batchCreateM
 }
 ```
 
-
 **Successful sample result(JSON formatted)**
 
 ```
@@ -396,18 +359,15 @@ Result<ArrayList<MerchantCategoryDTO>> result = merchantCategoryApi.batchCreateM
 }
 ```
 
-
-
 **Possible client validation errors**
 > <font color=red>Parameter merchantCategoryBatchCreateRequest cannot be null and empty!</font>  
 > <font color=red>All the category names in the list cannot be blank!</font>  
 > <font color=red>Merchant category name '[NAME]' is too long!</font>  
-> <font color=red>Merchant category remarks '[REMARKS]' is too long!</font>  
+> <font color=red>Merchant category remarks '[REMARKS]' is too long!</font>
 
 Note: [NAME] and [REMARKS] will be replaced by name and remarks of merchant category in batch create list.
- 
 
-**Possible business codes**  
+**Possible business codes**
 
 |Business Code|Message|Description|
 |:---|:---|:---|

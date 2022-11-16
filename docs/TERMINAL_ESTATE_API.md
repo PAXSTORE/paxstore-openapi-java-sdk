@@ -2,7 +2,7 @@
 
 Terminal Estate APIs allow thirdParty system verify terminal estate by serialNo.
 
-All the terminal estate APIs are in the class *com.pax.market.api.sdk.java.api.terminalEstate.TerminalEstateApi*.   
+All the terminal estate APIs are in the class *com.pax.market.api.sdk.java.api.terminalEstate.TerminalEstateApi*.
 
 **Constructors of TerminalEstateApi**
 
@@ -18,9 +18,7 @@ public TerminalEstateApi(String baseUrl, String apiKey, String apiSecret);
 |apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
-
-
-### Verify Terminal Estate  
+### Verify Terminal Estate
 
 The verify terminal estate API allows the thirdParty system verify terminal estate by terminal serialNo.
 If terminal estate exist there's not response content from remote server.
@@ -31,13 +29,11 @@ If terminal estate exist there's not response content from remote server.
 public Result<String> verifyTerminalEstate(terminalSerialNo)
 ```
 
-
 **Input parameter(s) description**
 
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |serialNo|String|false|The terminal serialNo.|
-
 
 **Sample codes**
 
@@ -76,7 +72,7 @@ If the property BusinessCode of result is 0, then means the terminal exist in te
 
 **Possible client validation errors**
 
-> <font color=red>Parameter serialNo cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter serialNo cannot be null and cannot be less than 1!</font>
 
 **Possible business codes**
 

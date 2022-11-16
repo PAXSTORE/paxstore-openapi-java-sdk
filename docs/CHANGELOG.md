@@ -1,154 +1,200 @@
-# Changelog  
+# Changelog
 
-## 8.5.1  
-### Bug Fix  
+## 8.6.0
+### Improvement
+* The fields such as effectiveTime and expiredTime are added respectively for terminal and group push related tasks.
+* Search terminals API is updated, add resellerName and merchantName parameters.
+
+
+
+
+## 8.5.1
+
+### Bug Fix
+
 * Make fields contact, country and phone are not mandatory in update merchant API.
-Please upgrade SDK to 8.5.1 if developer is using version 8.5.0.
+  Please upgrade SDK to 8.5.1 if developer is using version 8.5.0.
 
+## 8.5.0
 
-## 8.5.0  
-### Improvement  
-* Updated get terminal details API to support return accessory list.  
+### Improvement
+
+* Updated get terminal details API to support return accessory list.
 * Updated create merchant API, fields email, contact, country and phone are not mandatory anymore.
 
-### Breaking 
-* The API TerminalAPI.getTerminal(Long terminalId, boolean includeDetailInfoList) is not compatible with the old API, 
-the structure of the return result is not same as before. It will cause compile fail if developer do not change codes after upgrading SDK to 8.5.
-Please refer to the API document. 
+### Breaking
 
+* The API TerminalAPI.getTerminal(Long terminalId, boolean includeDetailInfoList) is not compatible with or old API,
+  the structure of the return result is not same as before. It will cause compile fail if developer do not change codes
+  after upgrading SDK to 8.5.
+  Please refer to the API document.
 
-## 8.3.0  
-### New Feature  
+## 8.3.0
+
+### New Feature
+
 * Add group RKI related APIs
 
-### Improvement  
+### Improvement
+
 * Remove log4j dependency, developers need to choose the log implementations by self
 
-## 8.2.0  
+## 8.2.0
+
 ### New Feature
-* Terminal added new property 'Remark'  
 
-### Improvement  
-* The max length of Location property in terminal increased to 64  
+* Terminal added new property 'Remark'
 
+### Improvement
 
-## 8.1.0  
+* The max length of Location property in terminal increased to 64
+
+## 8.1.0
+
 Please note all the changes is based on PAXStore version 8.1.0.
 
-### New Feature   
+### New Feature
+
 * PushHistoryApi supports search latest parameter push history
 * PushHistoryApi supports search optimized parameter push history
 * PushHistoryApi supports search latest optimized parameter push history
 
-### Improvement  
+### Improvement
+
 * Add new search app API to support search apps filter by reseller
 * Add new search push firmware task API to support search by tasks filter by serial number
 * TerminalApkApi supports push a parameter app inherite parameters from the lastest success push history
 * EntityAttributeApi does not support regular expression anymore
 
 ### Breaking Changes
-* GROUP is removed from enum VariableSource, if you are using it when search terminal variables you need to change codes 
 
-## 8.0  
-### New Feature  
+* GROUP is removed from enum VariableSource, if you are using it when search terminal variables you need to change codes
+
+## 8.0
+
+### New Feature
+
 * Terminal API supports get details when get single terminal
 
-### Improvement  
+### Improvement
+
 * Provide the get method for the properties rateLimit, rateLimitRemain and rateLimitReset in the class Result
 
-## 7.4.0  
-### New Feature  
-* Terminal API supports push command(lock, unlock, restart) to terminal  
+## 7.4.0
 
+### New Feature
 
-## 7.3.1  
+* Terminal API supports push command(lock, unlock, restart) to terminal
+
+## 7.3.1
 
 ### Improvement
+
 * Add name and fileSize properties to ApkDTO in search application result
 
-## 7.3  
+## 7.3
 
 ### Improvement
-* Change the SDK default connection timeout and read timeout value from 30 seconds to 5 seconds 
+
+* Change the SDK default connection timeout and read timeout value from 30 seconds to 5 seconds
 
 ### Breaking Changes
-* Max records per page is reduced from 1000 to 100 (except GoInsightApi). If pass a value greate than 100 SDK validation will fail
+
+* Max records per page is reduced from 1000 to 100 (except GoInsightApi). If pass a value greate than 100 SDK validation
+  will fail
 * Developer inforamtion is removed from search result of AppApi
 
+## 7.2.0
 
-## 7.2.0  
-
-### New Features(To support these new features server side application must upgrade to version 7.2.0)  
+### New Features(To support these new features server side application must upgrade to version 7.2.0)
 
 * Merchant supports new properties 'city' and 'province'
 * Add new terminal related APIs in TerminalApi
-  1. Move terminal to another reseller and merchant  ```moveTerminal(Long terminalId, String resellerName, String merchantName) ```  
-  2. Get terminal PED information  ```getTerminalPed(Long terminalId)```  
-  3. Get terminal configuration(allow replacement)  ```getTerminalConfig(Long terminalId)```  
-  4. Update terminal configuration(allow replacement)  ```updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest)```
+    1. Move terminal to another reseller and
+       merchant  ```moveTerminal(Long terminalId, String resellerName, String merchantName) ```
+    2. Get terminal PED information  ```getTerminalPed(Long terminalId)```
+    3. Get terminal configuration(allow replacement)  ```getTerminalConfig(Long terminalId)```
+    4. Update terminal configuration(allow
+       replacement)  ```updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest)```
 
 ### Dependency Change
-* Remove lombok dependency  
-* Update guava from 20.0 to 28.2  
+
+* Remove lombok dependency
+* Update guava from 20.0 to 28.2
 * Update hibernate-validator to 5.3.5.Final
 
-  
+## 7.1.1
 
-## 7.1.1  
+### New Features(To support these new features Paxstore must upgrade to version 7.1.1)
 
-### New Features(To support these new features Paxstore must upgrade to version 7.1.1)  
 * Add GoInsight related APIs
-  1. Find app business data by query code  ```findDataFromInsight(String queryCode)```  
-  2. Find app business data by query code and date range  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType)```  
-  3. Find app business data by query code, date range and page  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize)```
+    1. Find app business data by query code  ```findDataFromInsight(String queryCode)```
+    2. Find app business data by query code and date
+       range  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType)```
+    3. Find app business data by query code, date range and
+       page  ```findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize)```
 
-## 7.1.0  
-### New Features(To support these new features Paxstore must upgrade to version 7.1)  
-* Add entity attribute APIs (EntityAttributeApi)  
-  1. Get entity attribute by id  ```getEntityAttribute(Long attributeId)```  
-  2. Search entity attribute  ```searchEntityAttributes(int pageNo, int pageSize, SearchOrderBy orderBy, String key , EntityAttributeType entityType)```  
-  3. Create entity attribute(this API is market level, reseller has not permission)  ```createEntityAttribute(EntityAttributeCreateRequest createRequest)```  
-  4. Update entity attribute(this API is market level, reseller has not permission)  ```updateEntityAttribute(Long attributeId, EntityAttributeUpdateRequest updateRequest)```  
-  5. Update entity attribute label(this API is market level, reseller has not permission)  ```updateEntityAttributeLabel(Long attributeId, EntityAttributeLabelUpdateRequest updateLabelRequest)```  
-  6. Delete entity attribute(this API is market level, reseller has not permission)  ```deleteEntityAttribute(Long attributeId)```  
-  <br>
-* Add terminal group related APIs (TerminalGroupApi)  
-  1. Search terminal group  ```searchTerminalGroup(int pageNo, int pageSize,TerminalGroupSearchOrderBy orderBy, TerminalGroupStatus status, String name,String resellerNames,String modelNames, Boolean isDynamic)```   
-  2. Get terminal group by id  ```getTerminalGroup(Long groupId)```  
-  3. Create terminal group  ```createTerminalGroup(CreateTerminalGroupRequest createRequest)```  
-  4. Search terminal  ```searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy, TerminalStatus status, String modelName, String resellerName, String serialNo, String excludeGroupId)```  
-  5. Update terminal group  ```updateTerminalGroup(Long groupId ,UpdateTerminalGroupRequest updateRequest)```  
-  6. Activate terminal group```activeGroup(Long groupId)```  
-  7. Disable terminal group  ```disableGroup(Long groupId)```  
-  8. Delete terminal group  ```deleteGroup(Long groupId)```  
-  9. Search terminals in group  ```searchTerminalsInGroup(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy, Long groupId, String serialNo, String merchantNames)```  
-  10. Add terminal(s) to group  ```addTerminalToGroup(Long groupId, Set<Long> terminalIds)```  
-  11. Remove terminal(s) out of group  ```removeTerminalOutGroup(Long groupId, Set<Long> terminalIds)```  
-  <br>
-* Add terminal group push related APIs (TerminalGroupApkApi)  
-  1. Get terminal group push task  ```getTerminalGroupApk(Long groupApkId)```  
-  2. Get terminal group push task and include specified parameters in result  ```getTerminalGroupApk(Long groupApkId, List<String> pidList)```  
-  3. Search terminal group push task  ```searchTerminalGroupApk(int pageNo, int pageSize, SearchOrderBy orderBy , Long groupId, Boolean pendingOnly, Boolean historyOnly, String keyWords)```  
-  4. Create terminal group push task  ```createAndActiveGroupApk(CreateTerminalGroupApkRequest createRequest)```  
-  5. Suspend terminal group push task  ```suspendTerminalGroupApk(Long groupApkId)```  
-  6. Delete terminal group push task  ```deleteTerminalGroupApk(Long groupApkId)```  
-  <br>
-* Add terminal RKI(remote key injection) APIs (TerminalRkiApi)  
-  1. Push RKI key to terminal  ```pushRkiKey2Terminal(PushRki2TerminalRequest pushRki2TerminalRequest)```  
-  2. Search RKI push task  ```searchPushRkiTasks(int pageNo, int pageSize, SearchOrderBy orderBy, String terminalTid, String rkiKey, PushStatus status)```  
-  3. Get RKI push task  ```getPushRkiTask(Long pushRkiTaskId)```  
-  4. Disable RKI push task  ```disablePushRkiTask(DisablePushRkiTask disablePushRkiTask)```  
-  <br>
-* Update terminal APIs (TerminalApi)  
-  1. Batch add terminal(s) to group(s)  ```batchAddTerminalToGroup(TerminalGroupRequest groupRequest)```
-  <br>
-* Update reseller APIs (ResellerApi)  
-  1. Search reseller RKI keys  ```searchResellerRkiKeyList(Long resellerId, int pageNo, int pageSize, String rkiKey)```  
-  
+## 7.1.0
 
+### New Features(To support these new features Paxstore must upgrade to version 7.1)
 
-## 7.0  
+* Add entity attribute APIs (EntityAttributeApi)
+    1. Get entity attribute by id  ```getEntityAttribute(Long attributeId)```
+    2. Search entity
+       attribute  ```searchEntityAttributes(int pageNo, int pageSize, SearchOrderBy orderBy, String key , EntityAttributeType entityType)```
+    3. Create entity attribute(this API is market level, reseller has not
+       permission)  ```createEntityAttribute(EntityAttributeCreateRequest createRequest)```
+    4. Update entity attribute(this API is market level, reseller has not
+       permission)  ```updateEntityAttribute(Long attributeId, EntityAttributeUpdateRequest updateRequest)```
+    5. Update entity attribute label(this API is market level, reseller has not
+       permission)  ```updateEntityAttributeLabel(Long attributeId, EntityAttributeLabelUpdateRequest updateLabelRequest)```
+    6. Delete entity attribute(this API is market level, reseller has not
+       permission)  ```deleteEntityAttribute(Long attributeId)```  
+       <br>
+* Add terminal group related APIs (TerminalGroupApi)
+    1. Search terminal
+       group  ```searchTerminalGroup(int pageNo, int pageSize,TerminalGroupSearchOrderBy orderBy, TerminalGroupStatus status, String name,String resellerNames,String modelNames, Boolean isDynamic)```
+    2. Get terminal group by id  ```getTerminalGroup(Long groupId)```
+    3. Create terminal group  ```createTerminalGroup(CreateTerminalGroupRequest createRequest)```
+    4. Search
+       terminal  ```searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy, TerminalStatus status, String modelName, String resellerName, String serialNo, String excludeGroupId)```
+    5. Update terminal group  ```updateTerminalGroup(Long groupId ,UpdateTerminalGroupRequest updateRequest)```
+    6. Activate terminal group```activeGroup(Long groupId)```
+    7. Disable terminal group  ```disableGroup(Long groupId)```
+    8. Delete terminal group  ```deleteGroup(Long groupId)```
+    9. Search terminals in
+       group  ```searchTerminalsInGroup(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy, Long groupId, String serialNo, String merchantNames)```
+    10. Add terminal(s) to group  ```addTerminalToGroup(Long groupId, Set<Long> terminalIds)```
+    11. Remove terminal(s) out of group  ```removeTerminalOutGroup(Long groupId, Set<Long> terminalIds)```  
+        <br>
+* Add terminal group push related APIs (TerminalGroupApkApi)
+    1. Get terminal group push task  ```getTerminalGroupApk(Long groupApkId)```
+    2. Get terminal group push task and include specified parameters in
+       result  ```getTerminalGroupApk(Long groupApkId, List<String> pidList)```
+    3. Search terminal group push
+       task  ```searchTerminalGroupApk(int pageNo, int pageSize, SearchOrderBy orderBy , Long groupId, Boolean pendingOnly, Boolean historyOnly, String keyWords)```
+    4. Create terminal group push task  ```createAndActiveGroupApk(CreateTerminalGroupApkRequest createRequest)```
+    5. Suspend terminal group push task  ```suspendTerminalGroupApk(Long groupApkId)```
+    6. Delete terminal group push task  ```deleteTerminalGroupApk(Long groupApkId)```  
+       <br>
+* Add terminal RKI(remote key injection) APIs (TerminalRkiApi)
+    1. Push RKI key to terminal  ```pushRkiKey2Terminal(PushRki2TerminalRequest pushRki2TerminalRequest)```
+    2. Search RKI push
+       task  ```searchPushRkiTasks(int pageNo, int pageSize, SearchOrderBy orderBy, String terminalTid, String rkiKey, PushStatus status)```
+    3. Get RKI push task  ```getPushRkiTask(Long pushRkiTaskId)```
+    4. Disable RKI push task  ```disablePushRkiTask(DisablePushRkiTask disablePushRkiTask)```  
+       <br>
+* Update terminal APIs (TerminalApi)
+    1. Batch add terminal(s) to group(s)  ```batchAddTerminalToGroup(TerminalGroupRequest groupRequest)```
+       <br>
+* Update reseller APIs (ResellerApi)
+    1. Search reseller RKI
+       keys  ```searchResellerRkiKeyList(Long resellerId, int pageNo, int pageSize, String rkiKey)```
+
+## 7.0
+
 ### New Features
+
 * Add new search terminal API to include geo location, firmware and installed app in search result
 
 * Add push template related APIs (TerminalApkParameterApi)
@@ -171,7 +217,7 @@ Please note all the changes is based on PAXStore version 8.1.0.
 
   Delete terminal variable by terminal variable id
 
-  Batch  delete terminalvariable 
+  Batch delete terminalvariable
 
 * Add search push history result API (PushHistoryApi)
 
@@ -181,27 +227,26 @@ Please note all the changes is based on PAXStore version 8.1.0.
 
 * Support file type parameter when push app and parameter to terminal
 
-## 6.3.1  
+## 6.3.1
 
-### New Features  
+### New Features
+
 * Add get single push firmware history API
 * Add search push firmware history API
 * Add Suspend push firmware API
 
+### Breaking Changes
 
-### Breaking Changes  
 * The return object type change for pushFirmware2Terminal API
 
+## 6.3
 
-## 6.3  
-
-### New Features  
+### New Features
 
 * Add search app API
 * Add push firmware to terminal API
 * Add disable APK push API
 * Add uninstall APP API
-
 
 ### Improvement
 
@@ -209,59 +254,62 @@ Please note all the changes is based on PAXStore version 8.1.0.
 * Support retry when API encounter network issue
 * Add API request rate limit
 
-
-
-
 ## 6.2.1
 
-### Improvement  
+### Improvement
 
 Add location field to response for terminal related APIs
 
+## 6.2
 
-
-## 6.2  
-
-### Improvement  
+### Improvement
 
 * Support activate the reseller when create reseller, this improvement only works with PAXSTORE v6.2 and later.
 * Support activate the merchant when create merchant, this improvement only works with PAXSTORE v6.2 and later.
 
-### Bug Fixes  
+### Bug Fixes
 
-### Breaking Changes  
+### Breaking Changes
+
 NA
 
-## 6.1 
+## 6.1
 
 ### Improvement
 
 * Separate replace merchant email from update merchant API, add additional replace merchant email API.
 * Separate replace reseller email from update merchant API, add additional replace reseller email API.
 * Do not create user when create reseller but in activate reseller step. Won't affect code.
-* *email* is not mandatory for updating merchant and reseller. If *email* is empty when call update merchant or reseller API the email won't be updated.
-* *resellerName* is not mandatory for updating merchant. If *resellerName* is empty when call update merchant API the merchant's reseller won't be updated.
-* *parentResellerName* is not mandatory for updating reseller and we suggest the developers pass null when updating reseller as the API does not support changing reseller's parent. To reserve this parameter is to make sure SDK is compatible with old version. 
+* *email* is not mandatory for updating merchant and reseller. If *email* is empty when call update merchant or reseller
+  API the email won't be updated.
+* *resellerName* is not mandatory for updating merchant. If *resellerName* is empty when call update merchant API the
+  merchant's reseller won't be updated.
+* *parentResellerName* is not mandatory for updating reseller and we suggest the developers pass null when updating
+  reseller as the API does not support changing reseller's parent. To reserve this parameter is to make sure SDK is
+  compatible with old version.
 
 ### Bug Fixes
 
 ### Breaking Changes
 
-* Add a new property *createUserFlag* in the MerchantCreateRequest and MerchantUpdateRequest to indicate whether to create user, the default value is false. The old version API will create user in create merchant step. The impact is if user udpated SDK to this version and does not do any code change, the API won't create user when creating merchant and activating merchant. If user still need create user for the created merchant he need to set *createuserFlag* to true when creating or updating a merchant.
+* Add a new property *createUserFlag* in the MerchantCreateRequest and MerchantUpdateRequest to indicate whether to
+  create user, the default value is false. The old version API will create user in create merchant step. The impact is
+  if user udpated SDK to this version and does not do any code change, the API won't create user when creating merchant
+  and activating merchant. If user still need create user for the created merchant he need to set *createuserFlag* to
+  true when creating or updating a merchant.
 
-* The update reseller API cannot update the parent anymore. 
+* The update reseller API cannot update the parent anymore.
 
+## 6.0.2
 
-## 6.0.2  
-
-### New Features  
+### New Features
 
 * Add merchant category releated APIs
 * Add terminal apk API
 
-### Bug Fixes  
+### Bug Fixes
 
+### Breaking Changes
 
-### Breaking Changes  
 NA
 
