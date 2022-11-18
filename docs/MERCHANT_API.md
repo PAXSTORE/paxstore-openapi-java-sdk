@@ -75,6 +75,10 @@ Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, null, "2fecc"
 				"name": "New York"
 			},
 			"country": "CN",
+            "province":"JiangSu",
+            "city":"Suzhou",
+            "postcode":"215000",
+            "address":"Room 501, Building B2, Genwayl-Park, No.88, Dongchang Road, Suzhou Industrial Park, Jiangsu",
 			"contact": "Sam",
 			"email": "sam@pax.com",
 			"phone": "444888",
@@ -92,6 +96,10 @@ The type in dataSet is MerchantPageDTO. And the structure like below.
 |name|String|The name of merchant.|
 |reseller|SimpleResellerDTO|The reseller of the merchant belongs to.|
 |country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
+|province|String|province|
+|city|String|the city|
+|postcode|String|the postcode|
+|address|String|the address of the merchant|
 |contact|String|Contact of merchant.|
 |email|String|Email of merchant.|
 |phone|String|Phone number of merchant.|
@@ -172,6 +180,10 @@ Result<MerchantDTO> result = merchantApi.getMerchant(72590L);
 			"name": "New York"
 		},
 		"country": "CN",
+		"province":"JiangSu",
+        "city":"Suzhou",
+        "postcode":"215000",
+        "address":"Room 501, Building B2, Genwayl-Park, No.88, Dongchang Road, Suzhou Industrial Park, Jiangsu",
 		"contact": "tanjie",
 		"email": "tanjie2456@pax.com",
 		"phone": "444888",
@@ -188,6 +200,10 @@ The type of data in result is MerchantDTO, and the structure shows below.
 |name|String|The name of merchant.|
 |reseller|SimpleResellerDTO|The reseller of the merchant belongs to.|
 |country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
+|province|String|province|
+|city|String|the city|
+|postcode|String|the postcode|
+|address|String|the address of the merchant|
 |contact|String|Contact of merchant.|
 |email|String|Email of merchant.|
 |phone|String|Phone number of merchant.|
@@ -234,6 +250,8 @@ Structure of class MerchantCreateRequest
 |contact|String|true|Contact of merchant, max length is 64.|
 |country|String|true|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |phone|String|true|Phone number of merchant, max length is 32.|
+|province|String|false|Max length is 64.|
+|city|String|false|Max length is 32.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
@@ -373,7 +391,9 @@ Structure of class MerchantUpdateRequest
 |contact|String|true|Contact of merchant, max length is 64.|
 |country|String|true|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |phone|String|true|Phone number of merchant, max length is 32.|
+|province|String|false|Max length is 64.|
 |postcode|String|true|Postcode of merchant, max length is 16.|
+|city|String|false|Max length is 255.|
 |address|String|true|Address of merchant, max length is 255.|
 |description|String|true|Description of merchant, max length is 3000.|
 |createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant|
