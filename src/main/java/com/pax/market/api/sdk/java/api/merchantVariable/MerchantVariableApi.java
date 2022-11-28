@@ -159,7 +159,7 @@ public class MerchantVariableApi extends BaseThirdPartySysApi {
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(BATCH_DELETE_MERCHANT_VARIABLE_URL);
-        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+        request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(batchDeleteRequest, MerchantVariableDeleteRequest.class));
         return emptyResult(client, request);
