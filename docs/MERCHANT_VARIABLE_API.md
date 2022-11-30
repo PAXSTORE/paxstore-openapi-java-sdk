@@ -139,7 +139,7 @@ Structure of class ParameterVariable
 | Property Name | Type   | Nullable | Description                                    |
 | :------------ | :----- | :------- | :--------------------------------------------- |
 | packageName   | String | true     | The app package name                           |
-| type          | String | true     | Merchant variable type, T(text) or P(password) |
+| type          | String | false     | Merchant variable type, T(text) or P(password) |
 | key           | String | false    | Merchant variable key                          |
 | value         | String | true     | Merchant variable value                        |
 | remarks       | String | false    | Comment                                        |
@@ -239,7 +239,7 @@ Structure of class MerchantVariableUpdateRequest
 | Property Name | Type   | Nullable | Description                                    |
 | :------------ | :----- | :------- | :--------------------------------------------- |
 | packageName   | String | true     | The name of param template                     |
-| type          | String | true     | Merchant variable type, T(text) or P(password) |
+| type          | String | false     | Merchant variable type, T(text) or P(password) |
 | key           | String | false    | Merchant variable key                          |
 | value         | String | true     | Merchant variable value                        |
 | remarks       | String | true     | Comment                                        |
