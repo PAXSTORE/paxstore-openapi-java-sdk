@@ -782,7 +782,7 @@ Structure of class TerminalUpdateRequest
 |Property Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |name|String|false|The name of terminal, max length is 64.|
-|tid|String|true|The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 15.|
+|tid|String|true|The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16.|
 |serialNo|String|true|The serial number of terminal. If the status is active the serial number is mandatory.|
 |merchantName|String|true|The merchant of terminal belongs to. If the initial is active then merchantName is mandatory. The max length is 64. Make sure the merchant belongs to the given reseller|
 |resellerName|String|false|The reseller of terminal belongs to. Max length is 64.|
@@ -920,9 +920,9 @@ Structure of class TerminalCopyRequest
 
 | Property Name | Type   | Nullable | Description                                                  |
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
-| terminalId    | Long   | true     | The  id of terminal                                          |
+| terminalId    | Long   | false    | The  id of terminal                                          |
 | name          | String | false    | The name of terminal, max length is 64.                      |
-| tid           | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 15. |
+| tid           | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16. |
 | serialNo      | String | true     | The serial number of terminal. If the status is active the serial number is mandatory. |
 | status        | String | false    | Status of terminal, value can be one of A(Active) and P(Pendding).Set value through TerminalApi.TerminalStatus.Active or TerminalApi.TerminalStatus.Inactive |
 
