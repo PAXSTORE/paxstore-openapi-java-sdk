@@ -31,7 +31,8 @@ public class AppApi extends BaseThirdPartySysApi {
     public Result<AppPageDTO> searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
                                              String name, AppOsType osType, AppChargeType chargeType,
                                              AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
-                                             Boolean specificReseller, Boolean specificMerchantCategory,Boolean includeSubscribedApp, String resellerName){
+                                             Boolean specificReseller, Boolean specificMerchantCategory,
+                                             Boolean includeSubscribedApp, String resellerName, String modelName){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -76,6 +77,11 @@ public class AppApi extends BaseThirdPartySysApi {
             request.addRequestParam("resellerName", resellerName);
         }
 
+
+        if(modelName != null){
+            request.addRequestParam("modelName", modelName);
+        }
+
         AppPageResponse appPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), AppPageResponse.class);
         Result<AppPageDTO> result = new Result<AppPageDTO>(appPageResponse);
 
@@ -86,14 +92,22 @@ public class AppApi extends BaseThirdPartySysApi {
                                         String name, AppOsType osType, AppChargeType chargeType,
                                         AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
                                         Boolean specificReseller, Boolean specificMerchantCategory) {
-        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, false,null);
+        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, false,null, null);
     }
 
     public Result<AppPageDTO> searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
                                         String name, AppOsType osType, AppChargeType chargeType,
                                         AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
                                         Boolean specificReseller, Boolean specificMerchantCategory, Boolean includeSubscribedApp) {
-        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, includeSubscribedApp,null);
+        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, includeSubscribedApp,null, null);
+    }
+
+    public Result<AppPageDTO> searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
+                                        String name, AppOsType osType, AppChargeType chargeType,
+                                        AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
+                                        Boolean specificReseller, Boolean specificMerchantCategory,
+                                        Boolean includeSubscribedApp, String resellerName) {
+        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, includeSubscribedApp,resellerName, null);
     }
 
     public enum ApkStatus {
