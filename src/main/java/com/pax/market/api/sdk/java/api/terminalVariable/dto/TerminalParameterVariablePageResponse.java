@@ -12,6 +12,7 @@
 package com.pax.market.api.sdk.java.api.terminalVariable.dto;
 
 import com.pax.market.api.sdk.java.api.base.dto.PageResponse;
+import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariableDTO;
 
 /**
  * @Description

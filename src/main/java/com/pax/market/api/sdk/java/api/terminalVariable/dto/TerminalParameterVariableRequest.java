@@ -12,6 +12,8 @@
 package com.pax.market.api.sdk.java.api.terminalVariable.dto;
 
 
+import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariable;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,8 +25,7 @@ import java.util.List;
  */
 
 public class TerminalParameterVariableRequest implements Serializable{
-
-
+    private static final long serialVersionUID = 4501382736321506678L;
     private String tid;
     private String serialNo;
     private List<ParameterVariable> variableList;

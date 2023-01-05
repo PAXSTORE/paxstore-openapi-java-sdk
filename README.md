@@ -173,7 +173,7 @@ To integrate with this SDK please add below dependency by updating the pom.xml f
 <dependency>
     <groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-    <version>8.6.0</version>
+    <version>8.7.0</version>
 </dependency>
 ```
 
@@ -239,6 +239,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 ## [Terminal APIs](docs/TERMINAL_API.md)
 
 ## [Merchant Category APIs](docs/MERCHANT_CATEGORY_API.md)
+
+## [Merchant Variable APIs](docs/MERCHANT_VARIABLE_API.md)
 
 ## [Terminal Apk APIs](docs/TERMINAL_APK_API.md)
 

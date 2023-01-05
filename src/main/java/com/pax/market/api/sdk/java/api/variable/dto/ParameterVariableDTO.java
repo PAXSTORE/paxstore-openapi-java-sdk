@@ -9,7 +9,7 @@
  *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
  * ********************************************************************************
  */
-package com.pax.market.api.sdk.java.api.terminalVariable.dto;
+package com.pax.market.api.sdk.java.api.variable.dto;
 
 
 
