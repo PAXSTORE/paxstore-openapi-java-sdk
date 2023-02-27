@@ -14,7 +14,6 @@ package com.pax.market.api.sdk.java.api.terminalApkParameter.dto;
 
 
 import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.List;
@@ -31,18 +30,10 @@ public class CreateApkParameterRequest implements Serializable {
     private static final long serialVersionUID = 7885347596280390769L;
 
 
-    @NotBlank
     private String packageName;
-
-    @NotBlank
     private String version;
-
-    @NotBlank
     private String name;
-
-    @NotBlank
     private String paramTemplateName;
-
     private Map<String, String> parameters;
 
     private List<FileParameter> base64FileParameters;

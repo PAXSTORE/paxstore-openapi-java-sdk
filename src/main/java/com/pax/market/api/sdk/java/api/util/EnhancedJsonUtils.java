@@ -21,7 +21,6 @@ import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * @author tanjie
@@ -119,7 +118,7 @@ public class EnhancedJsonUtils {
                 break;
 
         }
-        message = MessageBoudleUtil.getMessage(message, Locale.getDefault());
+        message = MessageBundleUtils.getMessage(message);
         return getSdkJson(resultCode, message);
     }
 

@@ -24,7 +24,9 @@ import com.pax.market.api.sdk.java.api.terminalGroupRki.dto.CreateTerminalGroupR
 import com.pax.market.api.sdk.java.api.terminalGroupRki.dto.TerminalGroupRkiDTO;
 import com.pax.market.api.sdk.java.api.terminalGroupRki.dto.TerminalGroupRkiPageResponse;
 import com.pax.market.api.sdk.java.api.terminalGroupRki.dto.TerminalGroupRkiResponse;
+import com.pax.market.api.sdk.java.api.terminalGroupRki.validator.CreateTerminalGroupRkiRequestValidator;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,8 +57,8 @@ public class TerminalGroupRkiApi extends BaseThirdPartySysApi {
     private static final String SUSPEND_TERMINAL_GROUP_RKI_URL = "/v1/3rdsys/terminalGroupRki/{groupRkiId}/suspend";
 
     public Result<TerminalGroupRkiDTO> searchGroupPushRkiTask(int pageNo, int pageSize, SearchOrderBy orderBy , Long groupId, Boolean pendingOnly, Boolean historyOnly, String keyWords){
-        logger.debug("groupId="+groupId);
-        List<String> validationErrId = validateId(groupId, "parameter.terminalGroupId.invalid");
+        logger.debug("groupId= {}", groupId);
+        List<String> validationErrId = Validators.validateId(groupId, "parameter.id.invalid", "terminalGroupId");
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -64,10 +66,10 @@ public class TerminalGroupRkiApi extends BaseThirdPartySysApi {
         if (orderBy != null) {
             page.setOrderBy(orderBy.val());
         }
-        List<String> validationErrs = validate(page);
+        List<String> validationErrs = Validators.validatePageRequest(page);
         validationErrs.addAll(validationErrId);
-        if (validationErrs.size() > 0) {
-            return new Result<TerminalGroupRkiDTO>(validationErrs);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_GROUP_RKI_URL, page);
@@ -86,28 +88,27 @@ public class TerminalGroupRkiApi extends BaseThirdPartySysApi {
         }
 
         TerminalGroupRkiPageResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupRkiPageResponse.class);
-        return new Result<TerminalGroupRkiDTO>(resp);
+        return new Result<>(resp);
     }
 
 
     public Result<TerminalGroupRkiDTO> getGroupPushRkiTask(Long groupPushRkiTaskId){
-        logger.debug("groupPushRkiTaskId="+groupPushRkiTaskId);
-        List<String> validationErrs = validateId(groupPushRkiTaskId, "parameter.groupPushRkiTaskId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<TerminalGroupRkiDTO>(validationErrs);
+        logger.debug("groupPushRkiTaskId= {}",groupPushRkiTaskId);
+        List<String> validationErrs = Validators.validateId(groupPushRkiTaskId, "parameter.id.invalid", "groupPushRkiTaskId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_GROUP_RKI_URL.replace("{groupRkiId}", groupPushRkiTaskId+""));
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
         TerminalGroupRkiResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupRkiResponse.class);
-        return new Result<TerminalGroupRkiDTO>(resp);
+        return new Result<>(resp);
     }
 
     public Result<TerminalGroupRkiDTO> pushRkiKey2Group(CreateTerminalGroupRkiRequest createRequest){
-        List<String> validationErrs = validateCreateGroupTerminalRki(createRequest);
-
-        if(validationErrs.size()>0) {
-            return new Result<TerminalGroupRkiDTO>(validationErrs);
+        List<String> validationErrs = CreateTerminalGroupRkiRequestValidator.validate(createRequest);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(CREATE_TERMINAL_GROUP_RKI_URL);
@@ -115,36 +116,23 @@ public class TerminalGroupRkiApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(createRequest, CreateTerminalGroupRkiRequest.class));
         Response response = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
-        Result<TerminalGroupRkiDTO> result = new Result<TerminalGroupRkiDTO>(response);
-        return result;
+        return new Result<>(response);
     }
 
-    private List<String> validateCreateGroupTerminalRki(CreateTerminalGroupRkiRequest request) {
-        List<String> validationErrs = new ArrayList<String>();
-        if(request == null) {
-            validationErrs.add(getMessage("parameter.groupPushRkiRequest.null"));
-        }else {
-            validationErrs.addAll(validate(request));
-            if(request.getGroupId() == null || request.getGroupId() < 0L) {
-                validationErrs.add(getMessage("parameter.terminalGroupId.invalid"));
-            }
-        }
-        return validationErrs;
-    }
 
 
     public Result<TerminalGroupRkiDTO> disableGroupRkiPushTask(Long groupPushRkiTaskId){
-        logger.debug("groupPushRkiTaskId="+groupPushRkiTaskId);
-        List<String> validationErrs = validateId(groupPushRkiTaskId, "parameter.groupPushRkiTaskId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<TerminalGroupRkiDTO>(validationErrs);
+        logger.debug("groupPushRkiTaskId= {}", groupPushRkiTaskId);
+        List<String> validationErrs = Validators.validateId(groupPushRkiTaskId, "parameter.id.invalid", "groupPushRkiTaskId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(SUSPEND_TERMINAL_GROUP_RKI_URL.replace("{groupRkiId}", groupPushRkiTaskId+""));
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         TerminalGroupRkiResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupRkiResponse.class);
-        return new Result<TerminalGroupRkiDTO>(resp);
+        return new Result<>(resp);
     }
 
 }

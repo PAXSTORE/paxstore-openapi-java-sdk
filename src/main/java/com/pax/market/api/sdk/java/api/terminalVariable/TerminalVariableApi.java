@@ -23,6 +23,7 @@ import com.pax.market.api.sdk.java.api.terminalVariable.dto.*;
 import com.pax.market.api.sdk.java.api.util.CryptoUtils;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariable;
 import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariableDTO;
 import org.slf4j.Logger;
@@ -60,7 +61,7 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
-        List<String> validationErrs = validate(page);
+        List<String> validationErrs = Validators.validatePageRequest(page);
         if(StringUtils.isEmpty(tid) && StringUtils.isEmpty(serialNo)) {
             validationErrs.add(getMessage("param.tid.serialNo.empty.atSameTime"));
         }
@@ -87,8 +88,7 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
 
         TerminalParameterVariablePageResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalParameterVariablePageResponse.class);
-        Result<ParameterVariableDTO> result = new Result<ParameterVariableDTO>(resp);
-        return result;
+        return new Result<>(resp);
     }
 
     private void encryptPasswordVariable(ParameterVariable parameterVariable) {
@@ -101,12 +101,12 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
     }
 
     public Result<String> createTerminalVariable(TerminalParameterVariableRequest createRequest){
-        List<String> validationErrs = validateCreate( createRequest,"parameter.terminalVariableRequest.null");
+        List<String> validationErrs = Validators.validateCreate(createRequest,"parameter.terminalVariableRequest.null");
         if(StringUtils.isEmpty(createRequest.getTid()) && StringUtils.isEmpty(createRequest.getSerialNo())) {
-            validationErrs.add(getMessage("param.tid.serialNo.empty.atSameTime"));
+            validationErrs.add(getMessage("parameter.sn.tid.empty"));
         }
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         for (ParameterVariable parameterVariable : createRequest.getVariableList()) {
             encryptPasswordVariable(parameterVariable);
@@ -117,8 +117,7 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(createRequest, TerminalParameterVariableRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<>(emptyResponse);
     }
 
     public Result<String> updateTerminalVariable(Long terminalVariableId, ParameterVariable updateRequest){
@@ -131,8 +130,7 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(updateRequest, ParameterVariable.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<>(emptyResponse);
     }
 
     public Result<String> deleteTerminalVariable(Long terminalVariableId){
@@ -144,14 +142,14 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
     }
 
     public Result<String> batchDeletionTerminalVariable(TerminalParameterVariableDeleteRequest batchDeletionRequest){
-        List<String> validationErrs = validateDelete( batchDeletionRequest,"parameter.batchDeletionRequest.null");
-        if(batchDeletionRequest!=null) {
+        List<String> validationErrs = Validators.validateObject(batchDeletionRequest,"batchDeletionRequest");
+        if(batchDeletionRequest != null) {
             if(batchDeletionRequest.getVariableIds() == null || batchDeletionRequest.getVariableIds().isEmpty()) {
                 validationErrs.add(getMessage("variableIds.is.empty"));
             }
         }
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -163,16 +161,17 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
     }
 
     private Result<String>  validateTerminalVariableId(Long terminalVariableId){
-        logger.debug("terminalVariableId="+terminalVariableId);
-        List<String> validationErrs = validateId(terminalVariableId, "parameter.terminalVariableId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
-        }else return new Result<String>();
+        logger.debug("terminalVariableId= {}", terminalVariableId);
+        List<String> validationErrs = Validators.validateId(terminalVariableId, "parameter.id.invalid", "terminalVariableId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        return new Result<>();
     }
 
     private Result<String>  emptyResult(ThirdPartySysApiClient client,SdkRequest request) {
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        return  new Result<String>(emptyResponse);
+        return  new Result<>(emptyResponse);
     }
     public enum SearchOrderBy {
         Variable_desc("createdDate DESC"),

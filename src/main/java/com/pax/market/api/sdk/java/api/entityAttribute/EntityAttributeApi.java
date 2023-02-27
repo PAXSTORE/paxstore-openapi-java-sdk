@@ -22,6 +22,7 @@ import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.entityAttribute.dto.*;
 import com.pax.market.api.sdk.java.api.terminalVariable.TerminalVariableApi;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,10 +55,10 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
     }
 
     public Result<EntityAttributeDTO> getEntityAttribute(Long attributeId){
-        logger.debug("attributeId="+attributeId);
-        List<String> validationErrs = validateId(attributeId, "parameter.attributeId.invalid");
+        logger.debug("attributeId= {}", attributeId);
+        List<String> validationErrs = Validators.validateId(attributeId, "parameter.id.invalid", "attributeId");
         if(validationErrs.size()>0) {
-            return new Result<EntityAttributeDTO>(validationErrs);
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_ENTITY_ATTRIBUTES_URL.replace("{attributeId}", attributeId+""));
@@ -76,7 +77,7 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
         if(orderBy!=null) {
             page.setOrderBy(orderBy.val);
         }
-        List<String> validationErrs = validate(page);
+        List<String> validationErrs = Validators.validatePageRequest(page);
         if(validationErrs.size()>0) {
             return new Result<EntityAttributeDTO>(validationErrs);
         }
@@ -94,9 +95,9 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
 
 
     public Result<EntityAttributeDTO> createEntityAttribute(EntityAttributeCreateRequest createRequest){
-        List<String> validationErrs = validateCreate( createRequest,"parameter.attributeCreateRequest.null");
-        if(validationErrs.size()>0) {
-            return new Result<EntityAttributeDTO>(validationErrs);
+        List<String> validationErrs = Validators.validateCreate( createRequest,"parameter.attributeCreateRequest.null");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -105,16 +106,15 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(createRequest, EntityAttributeCreateRequest.class));
         EntityAttributeResponse entityAttributeResponse = EnhancedJsonUtils.fromJson(client.execute(request), EntityAttributeResponse.class);
-        Result<EntityAttributeDTO> result = new Result<EntityAttributeDTO>(entityAttributeResponse);
-        return result;
+        return new Result<>(entityAttributeResponse);
     }
 
 
     public Result<EntityAttributeDTO>  updateEntityAttribute(Long attributeId, EntityAttributeUpdateRequest updateRequest) {
-        logger.debug("attributeId="+attributeId);
-        List<String> validationErrs = validateUpdate(attributeId, updateRequest,"parameter.attributeId.invalid","parameter.attributeUpdateRequest.null");
-        if(validationErrs.size()>0) {
-            return new Result<EntityAttributeDTO>(validationErrs);
+        logger.debug("attributeId = {}", attributeId);
+        List<String> validationErrs = Validators.validateUpdate(attributeId, updateRequest,"parameter.attributeId.invalid","parameter.attributeUpdateRequest.null");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(UPDATE_ENTITY_ATTRIBUTES_URL.replace("{attributeId}", attributeId+""));
@@ -122,14 +122,13 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(updateRequest, EntityAttributeUpdateRequest.class));
         EntityAttributeResponse entityAttributeResponse = EnhancedJsonUtils.fromJson(client.execute(request), EntityAttributeResponse.class);
-        Result<EntityAttributeDTO> result = new Result<EntityAttributeDTO>(entityAttributeResponse);
-        return result;
+        return new Result<>(entityAttributeResponse);
     }
 
     public Result<String>  updateEntityAttributeLabel(Long attributeId, EntityAttributeLabelUpdateRequest updateLabelRequest) {
         List<String> validationErr = validateAttributeId(attributeId);
         if(updateLabelRequest == null) {
-            validationErr.add(getMessage("parameter.updateLabelRequest.null"));
+            validationErr.add(getMessage("parameter.not.null", "updateLabelRequest"));
         }
         if(!validationErr.isEmpty()){
             return new Result<>(validationErr);
@@ -140,8 +139,7 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(updateLabelRequest, EntityAttributeLabelUpdateRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<>(emptyResponse);
     }
 
     public Result<String> deleteEntityAttribute(Long attributeId){
@@ -153,8 +151,7 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(DELETE_ENTITY_ATTRIBUTES_URL.replace("{attributeId}", attributeId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<>(emptyResponse);
     }
 
     public enum SearchOrderBy {
@@ -194,8 +191,8 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
     }
 
     private List<String>  validateAttributeId(Long attributeId){
-        logger.debug("attributeId="+attributeId);
-        List<String> validationErrs = validateId(attributeId,"parameter.attributeId.invalid");
+        logger.debug("attributeId = {}", attributeId);
+        List<String> validationErrs = Validators.validateId(attributeId,"parameter.id.invalid", "attributeId");
         return validationErrs;
     }
 

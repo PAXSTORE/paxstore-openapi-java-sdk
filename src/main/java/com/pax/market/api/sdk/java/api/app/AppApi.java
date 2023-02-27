@@ -8,6 +8,7 @@ import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 
 import java.util.List;
 import java.util.Locale;
@@ -41,9 +42,9 @@ public class AppApi extends BaseThirdPartySysApi {
             page.setOrderBy(orderBy.val);
         }
 
-        List<String> validationErrs = validate(page);
-        if(validationErrs.size()>0) {
-            return new Result<AppPageDTO>(validationErrs);
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_APP_URL, page);
         request.addRequestParam("name", name);

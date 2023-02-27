@@ -12,7 +12,6 @@
 
 package com.pax.market.api.sdk.java.api.terminalGroupRki.dto;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -27,9 +26,7 @@ public class CreateTerminalGroupRkiRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long groupId;
-    @NotBlank
     private String rkiKey;
-
     private Date effectiveTime;
     private Date expiredTime;
 

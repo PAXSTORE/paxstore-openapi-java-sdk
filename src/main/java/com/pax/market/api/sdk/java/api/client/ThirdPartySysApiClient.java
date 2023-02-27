@@ -174,6 +174,8 @@ public class ThirdPartySysApiClient {
 		} else {
 			response = ThirdPartySysHttpUtils.compressRequest(requestUrl, request.getRequestMethod().getValue(), connectTimeout, readTimeout, request.getRequestBody(), request.getHeaderMap(), request.getSaveFilePath(), retryTimes);
 		}
+		logger.debug("language: {}", request.getHeaderMap().toString() );
+
 		return response;
 	}
 

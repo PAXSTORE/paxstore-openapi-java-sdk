@@ -11,8 +11,6 @@
  */
 package com.pax.market.api.sdk.java.api.terminal.dto;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 
@@ -26,15 +24,11 @@ public class TerminalMoveRequest implements Serializable{
 	/**
 	 * The Reseller name.
 	 */
-	@NotBlank
-	@Length(max=64)
 	protected String resellerName;
 
 	/**
 	 * The Merchant name.
 	 */
-	@NotBlank
-	@Length(max=64)
 	protected String merchantName;
 
 

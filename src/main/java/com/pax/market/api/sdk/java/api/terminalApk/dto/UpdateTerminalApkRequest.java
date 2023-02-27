@@ -2,18 +2,16 @@ package com.pax.market.api.sdk.java.api.terminalApk.dto;
 
 import java.io.Serializable;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * suspend/uninstall terminal apk request body
  */
 public class UpdateTerminalApkRequest implements Serializable{
 
-    private static final long serialVersionUID = 898895155179531805L;
 
+    private static final long serialVersionUID = 898895155179531805L;
     private String tid;
     private String serialNo;
-    @NotBlank
     private String packageName;
 
     public String getTid() {

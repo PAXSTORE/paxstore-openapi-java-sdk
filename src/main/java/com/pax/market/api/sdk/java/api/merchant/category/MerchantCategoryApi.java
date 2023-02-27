@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.pax.market.api.sdk.java.api.merchant.category.validator.MerchantCategoryBatchCreateRequestValidator;
+import com.pax.market.api.sdk.java.api.merchant.category.validator.MerchantCategoryCreateRequestValidator;
+import com.pax.market.api.sdk.java.api.merchant.category.validator.MerchantCategoryUpdateRequestValidator;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,10 +39,6 @@ public class MerchantCategoryApi extends BaseThirdPartySysApi{
 	private static final String DELETE_CATEGORY_URL = "/v1/3rdsys/merchantCategories/{merchantCategoryId}";
 	
 	private static final String BATCH_CREATE_CATEGORY_URL = "/v1/3rdsys/merchantCategories/batch";
-	
-	private static final int MAX_LENGTH_CATEGORY_NAME = 128;
-	
-	private static final int MAX_LENGTH_CATEGORY_REMARKS = 255;
 
 	public MerchantCategoryApi(String baseUrl, String apiKey, String apiSecret) {
 		super(baseUrl, apiKey, apiSecret);
@@ -60,10 +60,9 @@ public class MerchantCategoryApi extends BaseThirdPartySysApi{
 	}
 	
 	public Result<MerchantCategoryDTO> createMerchantCategory(MerchantCategoryCreateRequest merchantCategoryCreateRequest){
-		List<String> validationErrs = validateCreate(merchantCategoryCreateRequest, "parameter.merchantCategoryCreateRequest.null");
-		
-		if(validationErrs.size()>0) {
-			return new Result<MerchantCategoryDTO>(validationErrs);
+		List<String> validationErrs = MerchantCategoryCreateRequestValidator.validate(merchantCategoryCreateRequest);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(CREATE_CATEGORY_URL);
@@ -76,10 +75,10 @@ public class MerchantCategoryApi extends BaseThirdPartySysApi{
 	}
 	
 	public Result<MerchantCategoryDTO> updateMerchantCategory(Long merchantCategoryId, MerchantCategoryUpdateRequest merchantCategoryUpdateRequest){
-		List<String> validationErrs = validateUpdate(merchantCategoryId, merchantCategoryUpdateRequest, "parameter.merchantCategoryId.invalid", "parameter.merchantCategoryUpdateRequest.null");
+		List<String> validationErrs = MerchantCategoryUpdateRequestValidator.validate(merchantCategoryId, merchantCategoryUpdateRequest);
 		
-		if(validationErrs.size()>0) {
-			return new Result<MerchantCategoryDTO>(validationErrs);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		
@@ -94,24 +93,23 @@ public class MerchantCategoryApi extends BaseThirdPartySysApi{
 	}
 	
 	public Result<String> deleteMerchantCategory(Long merchantCategoryId) {
-		List<String> validationErrs = validateId(merchantCategoryId, "parameter.merchantCategoryId.invalid");
+		List<String> validationErrs = Validators.validateId(merchantCategoryId, "parameter.id.invalid","merchantCategoryId");
 		
-		if(validationErrs.size()>0) {
-			return new Result<String>(validationErrs);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(DELETE_CATEGORY_URL.replace("{merchantCategoryId}", merchantCategoryId.toString()));
 		request.setRequestMethod(RequestMethod.DELETE);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-		Result<String> result = new Result<String>(emptyResponse);
-		return result;
+		return new Result<String>(emptyResponse);
 	}
 	
 	public Result<ArrayList<MerchantCategoryDTO>> batchCreateMerchantCategory(List<MerchantCategoryCreateRequest> merchantCategoryBatchCreateRequest, boolean skipExist){
-		List<String> validationErrs = validateBatchCreate(merchantCategoryBatchCreateRequest);
-		if(validationErrs.size()>0) {
-			return new Result<ArrayList<MerchantCategoryDTO>>(validationErrs);
+		List<String> validationErrs = MerchantCategoryBatchCreateRequestValidator.validate(merchantCategoryBatchCreateRequest);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(BATCH_CREATE_CATEGORY_URL);
@@ -120,37 +118,7 @@ public class MerchantCategoryApi extends BaseThirdPartySysApi{
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
 		request.setRequestBody(new Gson().toJson(merchantCategoryBatchCreateRequest, List.class));
 		MerchantCategoryListResponseDTO categoryList = EnhancedJsonUtils.fromJson(client.execute(request), MerchantCategoryListResponseDTO.class);
-		Result<ArrayList<MerchantCategoryDTO>> result = new Result<ArrayList<MerchantCategoryDTO>>(categoryList);
-		return result;
+		return new Result<ArrayList<MerchantCategoryDTO>>(categoryList);
 	}
-	
-	private List<String> validateBatchCreate(List<MerchantCategoryCreateRequest> merchantCategoryBatchCreateRequest){
-		List<String> validationErrs = new ArrayList<String>();
-		if(merchantCategoryBatchCreateRequest == null || merchantCategoryBatchCreateRequest.size() == 0) {
-			validationErrs.add(super.getMessage("parameter.merchantCategoryBatchCreateRequest.invalid"));
-		}else {
-			for(int i=0;i<merchantCategoryBatchCreateRequest.size();i++) {
-				MerchantCategoryCreateRequest category = merchantCategoryBatchCreateRequest.get(i);
-				if(StringUtils.isEmpty(category.getName())) {
-					validationErrs.add(super.getMessage("merchantCategory.name.null"));
-					break;
-				}
-			}
-			
-			for(int i=0;i<merchantCategoryBatchCreateRequest.size();i++) {
-				MerchantCategoryCreateRequest category = merchantCategoryBatchCreateRequest.get(i);
-				if(category.getName()!=null && category.getName().length()>MAX_LENGTH_CATEGORY_NAME) {
-					validationErrs.add(super.getMessage("merchanteCategory.name.too.long").replaceAll("\\[NAME\\]", category.getName()));
-				}
-			}
-			
-			for(int i=0;i<merchantCategoryBatchCreateRequest.size();i++) {
-				MerchantCategoryCreateRequest category = merchantCategoryBatchCreateRequest.get(i);
-				if(category.getRemarks()!=null && category.getRemarks().length()>MAX_LENGTH_CATEGORY_REMARKS) {
-					validationErrs.add(super.getMessage("merchanteCategory.remarks.too.long").replaceAll("\\[REMARKS\\]", category.getRemarks()));
-				}
-			}
-		}
-		return validationErrs;
-	}
+
 }

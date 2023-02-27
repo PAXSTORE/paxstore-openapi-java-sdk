@@ -7,6 +7,7 @@ import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResponse;
 import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResultDTO;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +47,7 @@ public class GoInsightApi extends BaseThirdPartySysApi {
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize){
-        List<String> validationErrs = validateStr(queryCode, "parameter.queryCode.invalid");
+        List<String> validationErrs = Validators.validateStr(queryCode, "parameter.queryCode.invalid");
         if (queryCode != null && queryCode.length() != QUERY_CODE_LENGTH){
             validationErrs.add(getMessage("parameter.queryCode.length.invalid"));
         }

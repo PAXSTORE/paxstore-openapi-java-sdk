@@ -6,6 +6,7 @@ import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,17 +32,16 @@ public class TerminalEstateApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> verifyTerminalEstate(String serialNo) {
-        logger.debug("serialNo="+serialNo);
-        List<String> validationErrs = validateStr(serialNo, "parameter.serialNo.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.serialNo.invalid");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(VERIFY_ESTATE_URL.replace("{serialNo}", serialNo));
 
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<String>(emptyResponse);
     }
 }
