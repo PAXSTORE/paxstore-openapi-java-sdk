@@ -34,7 +34,7 @@ public class ResellerUpdateRequestValidator {
     public static List<String> validate(Long resellerId, ResellerUpdateRequest validateTarget) {
         List<String> validationErrs = new ArrayList<>();
 
-        validationErrs.addAll(Validators.validateId(resellerId, "parameter.resellerId.invalid"));
+        validationErrs.addAll(Validators.validateId(resellerId, "parameter.id.invalid", "resellerId"));
         validationErrs.addAll(Validators.validateObject(validateTarget, "resellerUpdateRequest"));
 
         validationErrs.addAll(Validators.validateRange(validateTarget.getParentResellerName(), "parentResellerName", Constants.MIN_0, Constants.MAX_64));

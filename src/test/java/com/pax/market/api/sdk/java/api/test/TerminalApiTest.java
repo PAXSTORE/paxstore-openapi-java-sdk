@@ -106,7 +106,7 @@ public class TerminalApiTest {
 
 		//TEST copy
 		TerminalCopyRequest copyRequest = new TerminalCopyRequest();
-		copyRequest.setTerminalId(909822L);
+		copyRequest.setTerminalId(terminalId);
 		copyRequest.setName("COPY_FROM_909822");
 		copyRequest.setSerialNo("TJ00001002");
 		copyRequest.setStatus(TerminalStatus.Inactive);

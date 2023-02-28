@@ -97,7 +97,7 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     }
 
     public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId, List<String> pidList){
-        List<String> validationErrs= Validators.validateId(apkParameterId, "parameter.terminalApkParameterId.invalid");
+        List<String> validationErrs= Validators.validateId(apkParameterId, "parameter.id.invalid", "terminalApkParameterId");
         if(!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
@@ -143,7 +143,7 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> deleteApkParameter(Long apkParameterId){
-        List<String> validationErrs = Validators.validateId( apkParameterId,"parameter.terminalApkParameterId.invalid");
+        List<String> validationErrs = Validators.validateId( apkParameterId,"parameter.id.invalid", "terminalApkParameterId");
         if(!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }

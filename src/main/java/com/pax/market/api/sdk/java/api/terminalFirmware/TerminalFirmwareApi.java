@@ -78,7 +78,7 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
                                                                String terminalTid, String fmName, PushStatus status){
 
         logger.debug("terminalTid= {}", terminalTid);
-        List<String> validationErrs = Validators.validateStr(terminalTid, "parameter.searchPushFirmwareTasks.terminalTid.empty");
+        List<String> validationErrs = Validators.validateStr(terminalTid, "parameter.not.null", "terminalTid");
         if(!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
@@ -87,10 +87,10 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
     }
 
     public Result<PushFirmwareTaskDTO> getPushFirmwareTask(Long pushFirmwareTaskId){
-        logger.debug("pushFirmwareTaskId="+pushFirmwareTaskId);
-        List<String> validationErrs = Validators.validateId(pushFirmwareTaskId, "parameter.pushFirmwareTaskId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<PushFirmwareTaskDTO>(validationErrs);
+        logger.debug("pushFirmwareTaskId= {}", pushFirmwareTaskId);
+        List<String> validationErrs = Validators.validateId(pushFirmwareTaskId, "parameter.id.invalid", "pushFirmwareTaskId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_FIRMWARE_URL.replace("{terminalFirmwareId}", pushFirmwareTaskId+""));

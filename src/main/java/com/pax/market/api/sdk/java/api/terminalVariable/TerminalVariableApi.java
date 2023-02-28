@@ -101,7 +101,7 @@ public class TerminalVariableApi  extends BaseThirdPartySysApi {
     }
 
     public Result<String> createTerminalVariable(TerminalParameterVariableRequest createRequest){
-        List<String> validationErrs = Validators.validateCreate(createRequest,"parameter.terminalVariableRequest.null");
+        List<String> validationErrs = Validators.validateObject(createRequest,"terminalVariableRequest");
         if(StringUtils.isEmpty(createRequest.getTid()) && StringUtils.isEmpty(createRequest.getSerialNo())) {
             validationErrs.add(getMessage("parameter.sn.tid.empty"));
         }

@@ -114,7 +114,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalGroupDTO> createTerminalGroup(CreateTerminalGroupRequest createRequest){
-        List<String> validationErrs = Validators.validateCreate( createRequest,"parameter.terminalGroupCreateRequest.null");
+        List<String> validationErrs = Validators.validateObject(createRequest,"terminalGroupCreateRequest");
         if(!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
@@ -166,9 +166,10 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
 
 
     public Result<TerminalGroupDTO> updateTerminalGroup(Long groupId ,UpdateTerminalGroupRequest updateRequest){
-        List<String> validationErrs = Validators.validateUpdate( groupId,updateRequest,"parameter.terminalGroupId.invalid","parameter.terminalGroupUpdateRequest.null");
+        List<String> validationErrs = Validators.validateId(groupId,"parameter.id.invalid","terminalGroupId");
+        validationErrs.addAll(Validators.validateObject(updateRequest, "terminalGroupUpdateRequest"));
         if(!validationErrs.isEmpty()) {
-            return new Result<TerminalGroupDTO>(validationErrs);
+            return new Result<>(validationErrs);
         }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -178,7 +179,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(updateRequest, UpdateTerminalGroupRequest.class));
         TerminalGroupResponse terminalGroupResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupResponse.class);
-        return new Result<TerminalGroupDTO>(terminalGroupResponse);
+        return new Result<>(terminalGroupResponse);
     }
 
     public Result<String> activeGroup(Long groupId){
@@ -232,7 +233,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         }
         List<String> validationErrs = Validators.validatePageRequest(page);
         if(groupId == null) {
-            validationErrs.add(getMessage("parameter.groupId.null"));
+            validationErrs.add(getMessage("parameter.id.null", "groupId"));
         }
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);

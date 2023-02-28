@@ -107,7 +107,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 
     public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId, List<String> pidList){
         logger.debug("terminalApkId= {}", terminalApkId);
-        List<String> validationErrs = Validators.validateId(terminalApkId, "parameter.terminalApkId.invalid");
+        List<String> validationErrs = Validators.validateId(terminalApkId, "parameter.id.invalid", "terminalApkId");
         if(!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }

@@ -47,6 +47,13 @@ public final class Validators {
         return validationErrs;
     }
 
+    public static List<String> validateStr(String str, String errorMsgKey, String fieldName) {
+        List<String> validationErrs = new ArrayList<>();
+        if (isBlank(str)) {
+            validationErrs.add(getMessage(errorMsgKey, fieldName));
+        }
+        return validationErrs;
+    }
 
 
     public static <T> List<String> validateCreate(T createReq, String beanEmptyMsgKey) {

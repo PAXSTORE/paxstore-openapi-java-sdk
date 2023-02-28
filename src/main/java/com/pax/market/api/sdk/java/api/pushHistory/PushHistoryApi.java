@@ -132,7 +132,7 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
     }
 
     private <T extends Serializable> Result<T> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime, String onlyLastPushHistory, String optimizeParameters, Type responseType) {
-        List<String> validationErrsP = Validators.validateStr(packageName, "parameter.packageName.null");
+        List<String> validationErrsP = Validators.validateStr(packageName, "parameter.not.null", "packageName");
         if(!validationErrsP.isEmpty()){
             return new Result<>(validationErrsP);
         }

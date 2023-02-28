@@ -95,7 +95,7 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
 
 
     public Result<EntityAttributeDTO> createEntityAttribute(EntityAttributeCreateRequest createRequest){
-        List<String> validationErrs = Validators.validateCreate( createRequest,"parameter.attributeCreateRequest.null");
+        List<String> validationErrs = Validators.validateObject(createRequest,"attributeCreateRequest");
         if(!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
@@ -112,7 +112,8 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
 
     public Result<EntityAttributeDTO>  updateEntityAttribute(Long attributeId, EntityAttributeUpdateRequest updateRequest) {
         logger.debug("attributeId = {}", attributeId);
-        List<String> validationErrs = Validators.validateUpdate(attributeId, updateRequest,"parameter.attributeId.invalid","parameter.attributeUpdateRequest.null");
+        List<String> validationErrs = Validators.validateId(attributeId,"parameter.id.invalid","attributeId");
+        validationErrs.addAll(Validators.validateObject(updateRequest, "attributeUpdateRequest"));
         if(!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }

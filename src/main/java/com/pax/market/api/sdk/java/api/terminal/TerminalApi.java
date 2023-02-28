@@ -133,8 +133,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks) {
-        logger.debug("terminalId= {}", terminalId);
-        List<String> validationErrs = Validators.validateId(terminalId, "parameter.terminalId.invalid");
+        logger.debug("terminalId = {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
@@ -266,7 +266,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     public Result<String> updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest){
         logger.debug("terminalId= {}", terminalId);
-        List<String> validationErrs = Validators.validateUpdate(terminalId, terminalConfigUpdateRequest, "parameter.terminalId.invalid", "parameter.terminalRemoteConfigRequest.null");
+        List<String> validationErrs = Validators.validateId(terminalId,"parameter.id.invalid", "terminalId");
+        validationErrs.addAll(Validators.validateObject(terminalConfigUpdateRequest, "terminalRemoteConfigRequest"));
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }

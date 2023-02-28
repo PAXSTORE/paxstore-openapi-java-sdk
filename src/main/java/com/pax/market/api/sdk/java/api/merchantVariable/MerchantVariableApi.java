@@ -100,7 +100,7 @@ public class MerchantVariableApi extends BaseThirdPartySysApi {
 
 
     public Result<String> createMerchantVariable(MerchantVariableCreateRequest createRequest) {
-        List<String> validationErrs = Validators.validateCreate(createRequest, "parameter.merchantVariableCreateRequest.null");
+        List<String> validationErrs = Validators.validateObject(createRequest, "merchantVariableCreateRequest");
         validationErrs.addAll(Validators.validateId(createRequest.getMerchantId(), "parameter.id.invalid","merchantId"));
         if (createRequest.getVariableList() == null || createRequest.getVariableList().isEmpty()) {
             validationErrs.add(getMessage("parameter.not.null", "merchantVariable list"));

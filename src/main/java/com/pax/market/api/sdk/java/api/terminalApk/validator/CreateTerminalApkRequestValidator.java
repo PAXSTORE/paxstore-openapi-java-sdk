@@ -47,7 +47,7 @@ public class CreateTerminalApkRequestValidator {
                 validationErrs.add(getMessage("parameter.not.null", "packageName"));
             }
             if(StringUtils.isEmpty(validateTarget.getSerialNo()) && StringUtils.isEmpty(validateTarget.getTid())) {
-                validationErrs.add(getMessage("parameter.createTerminalApkRequest.sn.tid.empty"));
+                validationErrs.add(getMessage("parameter.sn.tid.empty"));
             }
             if(!StringUtils.isEmpty(validateTarget.getTemplateName())) {
                 if(validateTarget.getTemplateName().split("\\"+ TEMPLATE_NAME_DELIMITER).length > MAX_TEMPLATE_SIZE) {

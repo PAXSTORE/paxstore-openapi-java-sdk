@@ -20,6 +20,7 @@ import java.util.TimeZone;
 public class GoInsightApi extends BaseThirdPartySysApi {
     private final static String SEARCH_GO_INSIGHT_DATA_URL = "/v1/3rdsys/goInsight/data/app-biz";
     private final static int QUERY_CODE_LENGTH = 8;
+    private final static int MAX_LENGTH = 1000;
 
     public GoInsightApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -51,10 +52,10 @@ public class GoInsightApi extends BaseThirdPartySysApi {
         if (queryCode != null && queryCode.length() != QUERY_CODE_LENGTH){
             validationErrs.add(getMessage("parameter.queryCode.length.invalid"));
         }
-        if (pageSize != null && (pageSize <=0 || pageSize > 1000)){
+        if (pageSize != null && (pageSize <=0 || pageSize > MAX_LENGTH)){
             validationErrs.add(getMessage("insight.pageSize.length.invalid"));
         }
-        if (validationErrs.size() > 0) {
+        if (!validationErrs.isEmpty()) {
             return new Result<DataQueryResultDTO>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
