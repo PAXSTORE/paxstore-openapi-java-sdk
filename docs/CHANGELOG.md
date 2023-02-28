@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.8.0
+### New Feature
+* Add search field modelName to app API
+* Remove dependency `hibernate-validator` and use custom validation.  
+  There may be some error messages in the custom validation process that are different from the error messages provided by the original dependency
+  
+
 ## 8.7.0
 ### New Feature
 * Add merchant variable APIs
