@@ -25,6 +25,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
 		<javadoc.opts>-Xdoclint:none</javadoc.opts>
+
+        <gson.version>2.3</gson.version>
+        <slf4j.version>1.7.12</slf4j.version>
+        <guava.version>29.0-jre</guava.version>
+        <common-lang.version>3.6</common-lang.version>
+        <junit.version>4.13.1</junit.version>
+        <logback.version>1.2.11</logback.version>
     </properties>
 
     <licenses>
@@ -36,58 +43,60 @@
 
     <developers>
         <developer>
-            <name>jay</name>
-            <email>tanjie@paxsz.com.com</email>
+            <name>Jay</name>
+            <email>tanjie@szzolon.com</email>
             <organization>pax</organization>
         </developer>
         <developer>
             <name>Max</name>
-            <email>wangzh@paxsz.com</email>
+            <email>wangzh@szzolon.com</email>
             <organization>pax</organization>
         </developer>
         <developer>
             <name>ShiFan</name>
-            <email>shifan@paxsz.com</email>
+            <email>shifan@szzolon.com</email>
             <organization>pax</organization>
         </developer>
     </developers>
 
     <dependencies>
-	    <dependency>
-		    <groupId>org.glassfish.web</groupId>
-		    <artifactId>el-impl</artifactId>
-		    <version>2.2</version>
-		</dependency>
 		<dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-			<version>2.3</version>
+			<version>${gson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-			<version>1.7.12</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-			<version>4.13.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.7</version>
+			<version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.6</version>
+            <version>${common-lang.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>29.0-jre</version>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
