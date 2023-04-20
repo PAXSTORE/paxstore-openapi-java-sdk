@@ -28,9 +28,11 @@ import com.pax.market.api.sdk.java.api.terminal.validator.TerminalRequestValidat
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.validate.Validators;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -67,6 +69,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String GET_TERMINAL_PED_STATUS_URL = "/v1/3rdsys/terminals/{terminalId}/ped";
 
     protected static final String PUSH_TERMINAL_ACTION_URL = "/v1/3rdsys/terminals/{terminalId}/operation";
+
+    protected static final String GET_TERMINAL_NETWORK_URL = "/v1/3rdsys/terminals/network";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -322,6 +326,29 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addRequestParam("command", command.val());
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<>(emptyResponse);
+    }
+
+
+    public Result<TerminalNetworkDTO> getTerminalNetwork(String serialNo, String tid){
+        List<String> validationErrs = new ArrayList<>();
+        if(StringUtils.isEmpty(serialNo) &&StringUtils.isEmpty(tid)) {
+            validationErrs.add(getMessage("parameter.sn.tid.empty"));
+        }
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_NETWORK_URL);
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        if (serialNo != null) {
+            request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        }
+        if (tid != null) {
+            request.addRequestParam("tid", StringUtils.trim(tid));
+        }
+        TerminalNetworkResponse terminalNetworkResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalNetworkResponse.class);
+        return  new Result<>(terminalNetworkResponse);
     }
 
     public enum TerminalStatus {

@@ -208,4 +208,11 @@ public class TerminalApiTest {
 		logger.debug("Result of push terminal action {}",result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
 	}
+
+	@Test
+	public void testGetTerminalNetwork(){
+		Result<TerminalNetworkDTO> result = terminalApi.getTerminalNetwork("TEST8000999","BTG7KFTY");
+		logger.debug("Result of get Terminal network: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+	}
 }
