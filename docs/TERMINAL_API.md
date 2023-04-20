@@ -1661,3 +1661,94 @@ Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCm
 | 15096         | The terminal is being locked or unlocked |             |
 | 15099         | Terminal restart in progress             |             |
 
+
+
+### Get terminal network information
+
+Get terminal network information by terminal serialNo or tid.
+
+**API**
+
+```
+public Result<TerminalNetworkDTO> getTerminalNetwork(String serialNo, String tid)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description          |
+| :------------- | :----- | :------- | :------------------- |
+| serialNo       | String | true     | Terminal's serialNo. |
+| tid            | String | true     | Terminal's tid.      |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalPedDTO> result = terminalApi.getTerminalNetwork("TEST8000999", "BTG7KFTY");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serialNo and tid in request cannot be blank at same time!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data: {
+	     "id":908627,
+	     "tid":"BTG7KFTY",
+         "serialNo":"TEST8000999",
+         "status":"A",
+         "battery":91,
+	     "onlineStatus":0,
+	     "network":"NETWORK_WIFI"
+	     "macAddress":"A1:D1:B2:4C:14:FF"
+	     }
+}
+```
+
+The type in dataSet of result is TerminalDTO. The structure shows below.
+
+Structure of class TerminalNetworkDTO
+
+| Property Name | Type    | Description                                                  |
+| :------------ | :------ | :----------------------------------------------------------- |
+| id            | Long    | Terminal's id.                                               |
+| tid           | String  | Terminal's tid.                                              |
+| serialNo      | String  | Terminal's serialNo.                                         |
+| status        | String  | Terminal's status.<br/> the value can be TerminalStatus.Active, TerminalStatus.Inactive, TerminalStatus.Suspend |
+| battery       | Float   | Terminal's battery.                                          |
+| onlineStatus  | Integer | Terminal's online status.<br/> the value can be 0,1,2.<br/>0 represents unknown, 1 represents offline, and 2 represents online |
+| network       | String  | Terminal's network status.<br/>the value can be NETWORK_WIFI, NETWORK_5G,NETWORK_4G,NETWORK_3G,NETWORK_2G,<br/>NETWORK_ETHERNET,NETWORK_UNKNOWN |
+| macAddress    | String  | Terminal's MAC address info.                                 |
+
+
+
+**Possible client validation errors**
+
+> <font color=red>The property serialNo and tid in request cannot be blank at same time! !</font>
+
+**Possible business codes**
+
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 2028          | Terminal not found         |             |
+| 2039          | Tid mismatch with serialNo |             |
+
+### 
