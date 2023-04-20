@@ -150,7 +150,7 @@ public final class Validators {
 
     public static List<String> validateRange(String str, String paramName, Integer min, Integer max) {
         List<String> validationErrs = new ArrayList<>();
-        if (str != null) {
+        if (str != null && (str.length() < min || str.length() > max)) {
             validationErrs.add(getMessage("parameter.range.length", paramName, min, max));
         }
         return validationErrs;

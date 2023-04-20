@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.8.1
+
+### Bug Fix
+
+* Fix validateRange method in custom validation.
+
+
 ## 8.8.0
 ### New Feature
 * Add search field modelName to app API
