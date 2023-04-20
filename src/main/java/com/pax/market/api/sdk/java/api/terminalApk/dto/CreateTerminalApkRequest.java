@@ -1,10 +1,7 @@
 package com.pax.market.api.sdk.java.api.terminalApk.dto;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,19 +18,12 @@ public class CreateTerminalApkRequest implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String tid;
-	
 	private String serialNo;
-
-	@NotBlank
 	private String packageName;
-	
 	private String version;
-	
 	private String templateName;
-	
 	private Map<String, String> parameters;
 	private List<FileParameter> base64FileParameters;
-
 	private String pushTemplateName;
 	private Boolean inheritPushHistory;
 	private boolean forceUpdate;

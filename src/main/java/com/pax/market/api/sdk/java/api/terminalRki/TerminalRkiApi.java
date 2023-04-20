@@ -9,12 +9,13 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminalRki.dto.*;
+import com.pax.market.api.sdk.java.api.terminalRki.validator.PushRkiBasicRequestValidator;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,10 +41,10 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
     }
 
     public Result<PushRkiTaskDTO> pushRkiKey2Terminal(PushRki2TerminalRequest pushRki2TerminalRequest){
-        List<String> validationErrs = validateCreateTerminalRki(pushRki2TerminalRequest);
+        List<String> validationErrs = PushRkiBasicRequestValidator.validate(pushRki2TerminalRequest, "pushRki2TerminalRequest");
 
-        if(validationErrs.size()>0) {
-            return new Result<PushRkiTaskDTO>(validationErrs);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(CREATE_TERMINAL_RKI_KEY_URL);
@@ -51,8 +52,7 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(pushRki2TerminalRequest, PushRki2TerminalRequest.class));
         Response response = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
-        Result<PushRkiTaskDTO> result = new Result<PushRkiTaskDTO>(response);
-        return result;
+        return new Result<>(response);
     }
 
     public Result<PushRkiTaskDTO> searchPushRkiTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
@@ -65,13 +65,14 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
             page.setOrderBy(orderBy.val());
         }
 
-        List<String> validationErrs = validate(page);
-        if(validationErrs.size()>0) {
-            return new Result<PushRkiTaskDTO>(validationErrs);
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
+
         if(StringUtils.isEmpty(terminalTid)) {
-            validationErrs.add(super.getMessage("parameter.searchPushRkiTasks.terminalTid.empty"));
-            return new Result<PushRkiTaskDTO>(validationErrs);
+            validationErrs.add(getMessage("parameter.not.null", "terminalTid"));
+            return new Result<>(validationErrs);
         }
 
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_RKI_KEY_LIST_URL, page);
@@ -88,24 +89,23 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
     }
 
     public Result<PushRkiTaskDTO> getPushRkiTask(Long pushRkiTaskId){
-        logger.debug("pushRkiTaskId="+pushRkiTaskId);
-        List<String> validationErrs = validateId(pushRkiTaskId, "parameter.pushRkiTaskId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<PushRkiTaskDTO>(validationErrs);
+        logger.debug("pushRkiTaskId= {}", pushRkiTaskId);
+        List<String> validationErrs = Validators.validateId(pushRkiTaskId, "parameter.id.invalid", "pushRkiTaskId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_RKI_KEY_URL.replace("{terminalRkiId}", pushRkiTaskId+""));
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
         PushRkiTaskResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), PushRkiTaskResponse.class);
-        Result<PushRkiTaskDTO> result = new Result<PushRkiTaskDTO>(resp);
-        return result;
+        return new Result<>(resp);
     }
 
     public Result<String> disablePushRkiTask(DisablePushRkiTask disablePushRkiTask){
-        List<String> validationErrs = validateDisablePushRki(disablePushRkiTask);
+        List<String> validationErrs = PushRkiBasicRequestValidator.validate(disablePushRkiTask, "disablePushRkiTask");
 
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(SUSPEND_TERMINAL_RKI_KEY_URL);
@@ -113,33 +113,7 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(disablePushRkiTask, DisablePushRkiTask.class));
         Response resp = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
-        Result<String> result = new Result<String>(resp);
-        return result;
+        return new Result<>(resp);
     }
 
-    private List<String> validateCreateTerminalRki(PushRki2TerminalRequest request) {
-        List<String> validationErrs = new ArrayList<String>();
-        if(request == null) {
-            validationErrs.add(super.getMessage("parameter.pushRki2TerminalRequest.null"));
-        }else {
-            validationErrs.addAll(validate(request));
-            if(StringUtils.isEmpty(request.getSerialNo()) && StringUtils.isEmpty(request.getTid())) {
-                validationErrs.add(super.getMessage("parameter.pushRki2TerminalRequest.sn.tid.empty"));
-            }
-        }
-        return validationErrs;
-    }
-
-    private List<String> validateDisablePushRki(DisablePushRkiTask disablePushRkiTask) {
-        List<String> validationErrs = new ArrayList<String>();
-        if(disablePushRkiTask == null) {
-            validationErrs.add(super.getMessage("parameter.disablePushRkiTask.null"));
-        }else {
-            validationErrs.addAll(validate(disablePushRkiTask));
-            if(StringUtils.isEmpty(disablePushRkiTask.getSerialNo()) && StringUtils.isEmpty(disablePushRkiTask.getTid())) {
-                validationErrs.add(super.getMessage("parameter.disablePushRkiTask.sn.tid.empty"));
-            }
-        }
-        return validationErrs;
-    }
 }

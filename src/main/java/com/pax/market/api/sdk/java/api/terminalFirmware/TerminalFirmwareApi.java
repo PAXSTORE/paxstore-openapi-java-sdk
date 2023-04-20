@@ -9,12 +9,12 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminalFirmware.dto.*;
+import com.pax.market.api.sdk.java.api.terminalFirmware.validator.PushFirmwareTaskBasicRequestValidator;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
-import com.pax.market.api.sdk.java.api.util.StringUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,10 +39,9 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
     }
 
     public Result<PushFirmwareTaskDTO> pushFirmware2Terminal(PushFirmware2TerminalRequest pushFirmware2TerminalRequest){
-        List<String> validationErrs = validateCreateTerminalFirmware(pushFirmware2TerminalRequest);
-
-        if(validationErrs.size()>0) {
-            return new Result<PushFirmwareTaskDTO>(validationErrs);
+        List<String> validationErrs = PushFirmwareTaskBasicRequestValidator.validate(pushFirmware2TerminalRequest, "pushFirmware2TerminalRequest");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(CREATE_TERMINAL_FIRMWARE_URL);
@@ -50,8 +49,7 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(pushFirmware2TerminalRequest, PushFirmware2TerminalRequest.class));
         Response response = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
-        Result<PushFirmwareTaskDTO> result = new Result<PushFirmwareTaskDTO>(response);
-        return result;
+        return new Result<PushFirmwareTaskDTO>(response);
     }
 
     public Result<PushFirmwareTaskDTO> searchPushFirmwareTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
@@ -73,28 +71,26 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
         }
 
         PushFirmwareTaskPageResponse pageResponse = EnhancedJsonUtils.fromJson(client.execute(request), PushFirmwareTaskPageResponse.class);
-        Result<PushFirmwareTaskDTO> result = new Result<PushFirmwareTaskDTO>(pageResponse);
-
-        return result;
+        return new Result<PushFirmwareTaskDTO>(pageResponse);
     }
 
     public Result<PushFirmwareTaskDTO> searchPushFirmwareTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
                                                                String terminalTid, String fmName, PushStatus status){
 
-        logger.debug("terminalTid="+terminalTid);
-        List<String> validationErrs = validateStr(terminalTid, "parameter.searchPushFirmwareTasks.terminalTid.empty");
-        if(validationErrs.size()>0) {
-            return new Result<PushFirmwareTaskDTO>(validationErrs);
+        logger.debug("terminalTid= {}", terminalTid);
+        List<String> validationErrs = Validators.validateStr(terminalTid, "parameter.not.null", "terminalTid");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         return searchPushFirmwareTasks(pageNo, pageSize, orderBy, terminalTid, fmName, status,null);
     }
 
     public Result<PushFirmwareTaskDTO> getPushFirmwareTask(Long pushFirmwareTaskId){
-        logger.debug("pushFirmwareTaskId="+pushFirmwareTaskId);
-        List<String> validationErrs = validateId(pushFirmwareTaskId, "parameter.pushFirmwareTaskId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<PushFirmwareTaskDTO>(validationErrs);
+        logger.debug("pushFirmwareTaskId= {}", pushFirmwareTaskId);
+        List<String> validationErrs = Validators.validateId(pushFirmwareTaskId, "parameter.id.invalid", "pushFirmwareTaskId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_FIRMWARE_URL.replace("{terminalFirmwareId}", pushFirmwareTaskId+""));
@@ -105,10 +101,9 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> disablePushFirmwareTask(DisablePushFirmwareTask disablePushFirmwareTask){
-        List<String> validationErrs = validateDisablePushFirmware(disablePushFirmwareTask);
-
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
+        List<String> validationErrs = PushFirmwareTaskBasicRequestValidator.validate(disablePushFirmwareTask, "disablePushFirmwareTask");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(SUSPEND_TERMINAL_FIRMWARE_URL);
@@ -116,34 +111,8 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(disablePushFirmwareTask, DisablePushFirmwareTask.class));
         Response resp = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
-        Result<String> result = new Result<String>(resp);
-        return result;
+        return new Result<String>(resp);
     }
 
-    private List<String> validateCreateTerminalFirmware(PushFirmware2TerminalRequest createTerminalFirmwareRequest) {
-        List<String> validationErrs = new ArrayList<String>();
-        if(createTerminalFirmwareRequest == null) {
-            validationErrs.add(super.getMessage("parameter.createTerminalFirmwareRequest.null"));
-        }else {
-            validationErrs.addAll(validate(createTerminalFirmwareRequest));
-            if(StringUtils.isEmpty(createTerminalFirmwareRequest.getSerialNo()) && StringUtils.isEmpty(createTerminalFirmwareRequest.getTid())) {
-                validationErrs.add(super.getMessage("parameter.createTerminalFirmwareRequest.sn.tid.empty"));
-            }
-        }
-        return validationErrs;
-    }
-
-    private List<String> validateDisablePushFirmware(DisablePushFirmwareTask disablePushFirmwareTask) {
-        List<String> validationErrs = new ArrayList<String>();
-        if(disablePushFirmwareTask == null) {
-            validationErrs.add(super.getMessage("parameter.disablePushFirmwareTask.null"));
-        }else {
-            validationErrs.addAll(validate(disablePushFirmwareTask));
-            if(StringUtils.isEmpty(disablePushFirmwareTask.getSerialNo()) && StringUtils.isEmpty(disablePushFirmwareTask.getTid())) {
-                validationErrs.add(super.getMessage("parameter.disablePushFirmwareTask.sn.tid.empty"));
-            }
-        }
-        return validationErrs;
-    }
 
 }

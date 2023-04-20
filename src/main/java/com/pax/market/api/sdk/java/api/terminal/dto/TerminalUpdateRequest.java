@@ -13,13 +13,6 @@ package com.pax.market.api.sdk.java.api.terminal.dto;
 
 import java.io.Serializable;
 
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-
 /**
  *
  * @author tanjie
@@ -29,30 +22,13 @@ public class TerminalUpdateRequest implements Serializable{
 	
 	private static final long serialVersionUID = 748906161939046192L;
 
-	@NotBlank
-	@Length(max=64)
 	protected String name;
-
-	@Length(max=16, min=8)
 	protected String tid;
-    
-	@Length(max=32)
 	protected String serialNo;
-    
-	@Length(max=64)
 	protected String merchantName;
-	
-	@NotBlank
-	@Length(max=64)
 	protected String resellerName;
-    
-    @Length(max=64)
     protected String modelName;
-
-	@Length(max=64)
 	protected String location;
-
-	@Length(max=500)
 	protected String remark;
 
 	public String getName() {

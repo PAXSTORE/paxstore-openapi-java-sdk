@@ -13,10 +13,6 @@
 package com.pax.market.api.sdk.java.api.terminal.dto;
 
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -24,22 +20,12 @@ import java.io.Serializable;
  * @date 2022/10/27
  */
 public class TerminalCopyRequest implements Serializable {
-    private static final long serialVersionUID = 6115925447542164992L;
 
-    @NotNull
+    private static final long serialVersionUID = -1306127685990446219L;
     private Long terminalId;
-
-    @NotBlank
-    @Length(max=64)
     protected String name;
-
-    @Length(max=16, min=8)
     protected String tid;
-
-    @Length(max=32)
     protected String serialNo;
-
-    @NotBlank
     protected String status;
 
     public Long getTerminalId() {

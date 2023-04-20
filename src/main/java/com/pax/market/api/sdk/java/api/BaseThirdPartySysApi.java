@@ -14,15 +14,11 @@ package com.pax.market.api.sdk.java.api;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.exception.InvalidParamException;
-import com.pax.market.api.sdk.java.api.util.MessageBoudleUtil;
+import com.pax.market.api.sdk.java.api.util.MessageBundleUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import java.util.*;
 
 /**
@@ -61,7 +57,6 @@ public class BaseThirdPartySysApi{
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
         setDefaultTZ(null);
-        factory = Validation.buildDefaultValidatorFactory();
     }
 
     public BaseThirdPartySysApi(String baseUrl, String apiKey, String apiSecret, TimeZone timeZone) {
@@ -72,7 +67,6 @@ public class BaseThirdPartySysApi{
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
         setDefaultTZ(timeZone);
-        factory = Validation.buildDefaultValidatorFactory();
     }
 
     @Deprecated
@@ -85,7 +79,6 @@ public class BaseThirdPartySysApi{
         this.apiSecret = apiSecret;
         setDefaultLocal(locale);
         setDefaultTZ(null);
-        factory = Validation.buildDefaultValidatorFactory();
     }
 
     @Deprecated
@@ -98,7 +91,6 @@ public class BaseThirdPartySysApi{
         this.apiSecret = apiSecret;
         setDefaultLocal(locale);
         setDefaultTZ(timeZone);
-        factory = Validation.buildDefaultValidatorFactory();
     }
 
     private void setDefaultLocal(Locale locale){
@@ -155,71 +147,16 @@ public class BaseThirdPartySysApi{
         }
 		return request;
 	}
-	
-	private static ValidatorFactory factory = null;
-	
+
 	protected static String getMessage(String key) {
-		return MessageBoudleUtil.getMessage(key, Locale.getDefault());
+		return MessageBundleUtils.getMessage(key);
 	}
 
-    protected static <T> List<String> validate(T t) {
-        Validator validator = factory.getValidator();
-        Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
-        List<String> messageList = new ArrayList<String>();
-        for (ConstraintViolation<T> constraintViolation : constraintViolations) {
-            messageList.add(constraintViolation.getPropertyPath().toString()+":"+constraintViolation.getMessage());
-        }
-        return messageList;
-    }
-    
-    protected static List<String> validateId(Long id, String errorMsgKey){
-    	List<String> validationErrs = new ArrayList<String>();
-		if(id == null || id<0L) {
-			validationErrs.add(getMessage(errorMsgKey));
-		}
-		return validationErrs;
+	protected static String getMessage(String key,  Object... args) {
+		return MessageBundleUtils.getMessage(key, args);
 	}
 
-    protected static List<String> validateStr(String str, String errorMsgKey){
-        List<String> validationErrs = new ArrayList<String>();
-        if(str == null || str.equals("")) {
-            validationErrs.add(getMessage(errorMsgKey));
-        }
-        return validationErrs;
-    }
-    
-    protected static <T> List<String> validateCreate(T createReq, String beanEmptyMsgKey){
-    	List<String> validationErrs = new ArrayList<String>();
-		if(createReq== null) {
-			validationErrs.add(getMessage(beanEmptyMsgKey));
-			return validationErrs;
-		}else {
-			return validate(createReq);
-		}
-	} 
-	
-	protected static List<String> validateUpdate(Long id, Object updateReq, String idInvalidMsgKey, String beanEmptyMsgKey){
-		List<String> validationErrs = new ArrayList<String>();
-		if(id == null || id<0L) {
-			validationErrs.add(getMessage(idInvalidMsgKey));
-		}
-		if(updateReq == null) {
-			validationErrs.add(getMessage(beanEmptyMsgKey));
-		}else {
-			validationErrs.addAll(validate(updateReq));
-		}
-		return validationErrs;
-	}
 
-    protected static List<String> validateDelete( Object deleteReq, String beanEmptyMsgKey){
-        List<String> validationErrs = new ArrayList<String>();
-        if(deleteReq == null) {
-            validationErrs.add(getMessage(beanEmptyMsgKey));
-        }else {
-            validationErrs.addAll(validate(deleteReq));
-        }
-        return validationErrs;
-    }
 
     public void setSDKConnectTimeout(int connectTimeout) {
         if(connectTimeout<0) {

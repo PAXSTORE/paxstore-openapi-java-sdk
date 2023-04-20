@@ -24,6 +24,7 @@ import com.pax.market.api.sdk.java.api.pushHistory.dto.ParameterPushHistoryDTO;
 import com.pax.market.api.sdk.java.api.pushHistory.dto.ParameterPushHistoryPageResponse;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -131,16 +132,16 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
     }
 
     private <T extends Serializable> Result<T> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime, String onlyLastPushHistory, String optimizeParameters, Type responseType) {
-        List<String> validationErrsP = validateStr(packageName, "parameter.packageName.null");
-        if(validationErrsP.size()>0){
+        List<String> validationErrsP = Validators.validateStr(packageName, "parameter.not.null", "packageName");
+        if(!validationErrsP.isEmpty()){
             return new Result<>(validationErrsP);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
-        List<String> validationErrs = validate(page);
-        if (validationErrs.size() > 0) {
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_APP_PUSH_HISTORY_URL, page);

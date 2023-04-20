@@ -14,12 +14,6 @@ package com.pax.market.api.sdk.java.api.reseller.dto;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 
-import javax.validation.constraints.Min;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-
 
 /**
  *
@@ -30,36 +24,15 @@ public class ResellerUpdateRequest implements Serializable{
 	
 	private static final long serialVersionUID = 5335902988326152825L;
 
-	@NotBlank
-	@Length(max=64)
+
 	private String name;
-	
-	@Length(max=255)
-	@Email
 	private String email;
-	
-	@NotBlank
-	@Length(max=64)
 	private String country;
-	
-	@NotBlank
-	@Length(max=64)
 	private String contact;
-	
-	@NotBlank
-	@Length(max=32)
     private String phone;
-
-	@Length(max=16)
     private String postcode;
-	
-	@Length(max=255)
     private String address;
-
-	@Length(max=255)
     private String company;
-	
-	@Length(max=64)
 	private String parentResellerName;
 	
 	

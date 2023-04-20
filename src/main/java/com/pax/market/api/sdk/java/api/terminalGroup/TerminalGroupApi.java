@@ -23,6 +23,7 @@ import com.pax.market.api.sdk.java.api.terminal.TerminalApi;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.*;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,8 +72,8 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         if (orderBy != null) {
             page.setOrderBy(orderBy.val());
         }
-        List<String> validationErrs = validate(page);
-        if (validationErrs.size() > 0) {
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        if (!validationErrs.isEmpty()) {
             return new Result<TerminalGroupDTO>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_GROUP_URL, page);
@@ -103,20 +104,19 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
     public Result<TerminalGroupDTO> getTerminalGroup(Long groupId){
         List<String> validationErrs = validateGroupId(groupId);
         if(!validationErrs.isEmpty()) {
-            return new Result<TerminalGroupDTO>(validationErrs);
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_GROUP_URL.replace("{groupId}", groupId.toString()+""));
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
         TerminalGroupResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupResponse.class);
-        Result<TerminalGroupDTO> result = new Result<TerminalGroupDTO>(resp);
-        return result;
+        return new Result<TerminalGroupDTO>(resp);
     }
 
     public Result<TerminalGroupDTO> createTerminalGroup(CreateTerminalGroupRequest createRequest){
-        List<String> validationErrs = validateCreate( createRequest,"parameter.terminalGroupCreateRequest.null");
-        if(validationErrs.size()>0) {
-            return new Result<TerminalGroupDTO>(validationErrs);
+        List<String> validationErrs = Validators.validateObject(createRequest,"terminalGroupCreateRequest");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -125,8 +125,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(createRequest, CreateTerminalGroupRequest.class));
         TerminalGroupResponse terminalGroupResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupResponse.class);
-        Result<TerminalGroupDTO> result = new Result<TerminalGroupDTO>(terminalGroupResponse);
-        return result;
+        return new Result<TerminalGroupDTO>(terminalGroupResponse);
     }
 
     public  Result<SimpleTerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.TerminalSearchOrderBy orderBy, TerminalStatus status,
@@ -139,9 +138,9 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         if (orderBy != null) {
             page.setOrderBy(orderBy.val());
         }
-        List<String> validationErrs = validate(page);
-        if (validationErrs.size() > 0) {
-            return new Result<SimpleTerminalDTO>(validationErrs);
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_URL, page);
 
@@ -162,15 +161,15 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
             request.addRequestParam("excludeGroupId", excludeGroupId);
         }
         SimpleTerminalPageResponse terminalPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), SimpleTerminalPageResponse.class);
-        Result<SimpleTerminalDTO> result = new Result<SimpleTerminalDTO>(terminalPageResponse);
-        return result;
+        return new Result<SimpleTerminalDTO>(terminalPageResponse);
     }
 
 
     public Result<TerminalGroupDTO> updateTerminalGroup(Long groupId ,UpdateTerminalGroupRequest updateRequest){
-        List<String> validationErrs = validateUpdate( groupId,updateRequest,"parameter.terminalGroupId.invalid","parameter.terminalGroupUpdateRequest.null");
-        if(validationErrs.size()>0) {
-            return new Result<TerminalGroupDTO>(validationErrs);
+        List<String> validationErrs = Validators.validateId(groupId,"parameter.id.invalid","terminalGroupId");
+        validationErrs.addAll(Validators.validateObject(updateRequest, "terminalGroupUpdateRequest"));
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -180,8 +179,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(updateRequest, UpdateTerminalGroupRequest.class));
         TerminalGroupResponse terminalGroupResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupResponse.class);
-        Result<TerminalGroupDTO> result = new Result<TerminalGroupDTO>(terminalGroupResponse);
-        return result;
+        return new Result<>(terminalGroupResponse);
     }
 
     public Result<String> activeGroup(Long groupId){
@@ -233,12 +231,12 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
             }
 
         }
-        List<String> validationErrs = validate(page);
+        List<String> validationErrs = Validators.validatePageRequest(page);
         if(groupId == null) {
-            validationErrs.add(getMessage("parameter.groupId.null"));
+            validationErrs.add(getMessage("parameter.id.null", "groupId"));
         }
-        if (validationErrs.size() > 0) {
-            return new Result<SimpleTerminalDTO>(validationErrs);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_IN_GROUP_URL.replace("{groupId}", groupId.toString()), page);
@@ -252,8 +250,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         }
 
         SimpleTerminalPageResponse terminalPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), SimpleTerminalPageResponse.class);
-        Result<SimpleTerminalDTO> result = new Result<SimpleTerminalDTO>(terminalPageResponse);
-        return result;
+        return new Result<SimpleTerminalDTO>(terminalPageResponse);
     }
 
 
@@ -286,9 +283,8 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
 
 
     private List<String>  validateGroupId(Long groupId){
-        logger.debug("groupId="+groupId);
-        List<String> validationErrs = validateId(groupId, "parameter.terminalGroupId.invalid");
-        return validationErrs;
+        logger.debug("groupId= {}", groupId);
+        return Validators.validateId(groupId, "parameter.id.invalid", "terminalGroupId");
     }
 
     private Result<String>  emptyResult(ThirdPartySysApiClient client,SdkRequest request) {

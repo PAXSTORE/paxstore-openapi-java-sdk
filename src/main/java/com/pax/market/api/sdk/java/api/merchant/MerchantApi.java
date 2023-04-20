@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import com.pax.market.api.sdk.java.api.merchant.validator.MerchantCreateRequestValidator;
+import com.pax.market.api.sdk.java.api.merchant.validator.MerchantUpdateRequestValidator;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +37,7 @@ import com.pax.market.api.sdk.java.api.merchant.dto.MerchantPageResponse;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantResponseDTO;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantUpdateRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
-import com.pax.market.api.sdk.java.api.util.MessageBoudleUtil;
+import com.pax.market.api.sdk.java.api.util.MessageBundleUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantPageDTO;
 
@@ -54,6 +57,8 @@ public class MerchantApi extends BaseThirdPartySysApi{
 	private static final String DISABLE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}/disable";
 	private static final String DELETE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}";
 	private static final String REPLACE_MERCHANT_EMAIL_URL = "/v1/3rdsys/merchants/{merchantId}/replaceEmail";
+	private static final String INVALID_ID = "parameter.id.invalid";
+	private static final String MERCHANT_ID = "merchantId";
 
 	public MerchantApi(String baseUrl, String apiKey, String apiSecret) {
 		super(baseUrl, apiKey, apiSecret);
@@ -73,7 +78,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 			page.setOrderBy(orderBy.val);
 		}
 		
-		List<String> validationErrs = validate(page);
+		List<String> validationErrs = Validators.validatePageRequest(page);
 		if(validationErrs.size()>0) {
 			return new Result<MerchantPageDTO>(validationErrs);
 		}
@@ -90,10 +95,10 @@ public class MerchantApi extends BaseThirdPartySysApi{
 
 	
 	public Result<MerchantDTO>  getMerchant(Long merchantId) {
-		logger.debug("merchantId="+merchantId);
-		List<String> validationErrs = validateId(merchantId, "parameter.merchantId.invalid");
-		if(validationErrs.size()>0) {
-			return new Result<MerchantDTO>(validationErrs);
+		logger.debug("merchantId= {}", merchantId);
+		List<String> validationErrs = Validators.validateId(merchantId, INVALID_ID, MERCHANT_ID);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(GET_MERCHANT_URL.replace("{merchantId}", merchantId+""));
@@ -104,10 +109,9 @@ public class MerchantApi extends BaseThirdPartySysApi{
 	}
 	
 	public Result<MerchantDTO>  createMerchant(MerchantCreateRequest merchantCreateRequest) {
-		List<String> validationErrs = validateCreate(merchantCreateRequest, "parameter.merchantCreateRequest.null");
-		
-		if(validationErrs.size()>0) {
-			return new Result<MerchantDTO>(validationErrs);
+		List<String> validationErrs = MerchantCreateRequestValidator.validate(merchantCreateRequest);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(CREATE_MERCHANT_URL);
@@ -115,15 +119,14 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
 		request.setRequestBody(new Gson().toJson(merchantCreateRequest, MerchantCreateRequest.class));
 		MerchantResponseDTO merchantResponseDTO = EnhancedJsonUtils.fromJson(client.execute(request), MerchantResponseDTO.class);
-        Result<MerchantDTO> result = new Result<MerchantDTO>(merchantResponseDTO);
-        return result;
+		return new Result<>(merchantResponseDTO);
 	}
 	
 	public Result<MerchantDTO>  updateMerchant(Long merchantId, MerchantUpdateRequest merchantUpdateRequest) {
-		logger.debug("merchantId="+merchantId);
-		List<String> validationErrs = validateUpdate(merchantId, merchantUpdateRequest, "parameter.merchantId.invalid", "parameter.merchantUpdateRequest.null");
-		if(validationErrs.size()>0) {
-			return new Result<MerchantDTO>(validationErrs);
+		logger.debug("merchantId= {}", merchantId);
+		List<String> validationErrs = MerchantUpdateRequestValidator.validate(merchantId, merchantUpdateRequest);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(UPDATE_MERCHANT_URL.replace("{merchantId}", merchantId+""));
@@ -131,29 +134,27 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
 		request.setRequestBody(new Gson().toJson(merchantUpdateRequest, MerchantUpdateRequest.class));
 		MerchantResponseDTO merchantResponseDTO = EnhancedJsonUtils.fromJson(client.execute(request), MerchantResponseDTO.class);
-        Result<MerchantDTO> result = new Result<MerchantDTO>(merchantResponseDTO);
-        return result;
+		return new Result<>(merchantResponseDTO);
 	}
 	
 	public Result<String> activateMerchant(Long merchantId) {
-		logger.debug("merchantId="+merchantId);
-		List<String> validationErrs = validateId(merchantId, "parameter.merchantId.invalid");
-		if(validationErrs.size()>0) {
-			return new Result<String>(validationErrs);
+		logger.debug("merchantId= {}", merchantId);
+		List<String> validationErrs = Validators.validateId(merchantId, INVALID_ID, MERCHANT_ID);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(ACTIVATE_MERCHANT_URL.replace("{merchantId}", merchantId.toString()));
 		request.setRequestMethod(RequestMethod.PUT);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-		Result<String> result = new Result<String>(emptyResponse);
-		return result;
+		return new Result<>(emptyResponse);
 	}
 	
 	public Result<String> disableMerchant(Long merchantId) {
-		logger.debug("merchantId="+merchantId);
-		List<String> validationErrs = validateId(merchantId, "parameter.merchantId.invalid");
-		if(validationErrs.size()>0) {
-			return new Result<String>(validationErrs);
+		logger.debug("merchantId= {}", merchantId);
+		List<String> validationErrs = Validators.validateId(merchantId, INVALID_ID, MERCHANT_ID);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(DISABLE_MERCHANT_URL.replace("{merchantId}", merchantId.toString()));
@@ -164,44 +165,44 @@ public class MerchantApi extends BaseThirdPartySysApi{
 	}
 	
 	public Result<String> deleteMerchant(Long merchantId) {
-		logger.debug("merchantId="+merchantId);
-		List<String> validationErrs = validateId(merchantId, "parameter.merchantId.invalid");
-		if(validationErrs.size()>0) {
-			return new Result<String>(validationErrs);
+		logger.debug("merchantId= {}", merchantId);
+		List<String> validationErrs = Validators.validateId(merchantId, INVALID_ID, MERCHANT_ID);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(DELETE_MERCHANT_URL.replace("{merchantId}", merchantId.toString()));
 		request.setRequestMethod(RequestMethod.DELETE);
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-		Result<String> result = new Result<String>(emptyResponse);
-		return result;
+		return new Result<>(emptyResponse);
 	} 
 	
 	public Result<String> replaceMerchantEmail(Long merchantId, String email, boolean createUser){
-		logger.debug("merchantId="+merchantId);
-		List<String> validationErrs = validateId(merchantId, "parameter.merchantId.invalid");
+		logger.debug("merchantId= {}", merchantId);
+		List<String> validationErrs = Validators.validateId(merchantId, INVALID_ID, MERCHANT_ID);
 		if(StringUtils.isNotBlank(email) && !StringUtils.isValidEmailAddress(email)) {
-			validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.invalid", Locale.getDefault()));
+			validationErrs.add(MessageBundleUtils.getMessage("parameter.email.invalid"));
 		}
-		if(StringUtils.length(email) > 255) {
-			validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.toolong", Locale.getDefault()));
+		if(StringUtils.length(email) > Constants.MAX_255) {
+			validationErrs.add(MessageBundleUtils.getMessage("parameter.too.long", "email"));
 		}
-		if(validationErrs.size()>0) {
-			return new Result<String>(validationErrs);
+		if(!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
 		}
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		SdkRequest request = createSdkRequest(REPLACE_MERCHANT_EMAIL_URL.replace("{merchantId}", merchantId.toString()));
 		request.setRequestMethod(RequestMethod.POST);
 		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-		Map<String, Object> requestBodyMap = new HashMap<String, Object>();
+		Map<String, Object> requestBodyMap = new HashMap<>();
 		requestBodyMap.put("email", email);
 		requestBodyMap.put("createUser", createUser);
 		request.setRequestBody(new Gson().toJson(requestBodyMap, Map.class));
 
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-		Result<String> result = new Result<String>(emptyResponse);
-		return result;
+		return new Result<>(emptyResponse);
 	}
+
+
 	
 	public enum MerchantStatus {
 		Active("A"),

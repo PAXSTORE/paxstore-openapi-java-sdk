@@ -8,6 +8,7 @@ import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 
 import java.util.List;
 import java.util.Locale;
@@ -31,7 +32,8 @@ public class AppApi extends BaseThirdPartySysApi {
     public Result<AppPageDTO> searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
                                              String name, AppOsType osType, AppChargeType chargeType,
                                              AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
-                                             Boolean specificReseller, Boolean specificMerchantCategory,Boolean includeSubscribedApp, String resellerName){
+                                             Boolean specificReseller, Boolean specificMerchantCategory,
+                                             Boolean includeSubscribedApp, String resellerName, String modelName){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -40,9 +42,9 @@ public class AppApi extends BaseThirdPartySysApi {
             page.setOrderBy(orderBy.val);
         }
 
-        List<String> validationErrs = validate(page);
-        if(validationErrs.size()>0) {
-            return new Result<AppPageDTO>(validationErrs);
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_APP_URL, page);
         request.addRequestParam("name", name);
@@ -76,6 +78,11 @@ public class AppApi extends BaseThirdPartySysApi {
             request.addRequestParam("resellerName", resellerName);
         }
 
+
+        if(modelName != null){
+            request.addRequestParam("modelName", modelName);
+        }
+
         AppPageResponse appPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), AppPageResponse.class);
         Result<AppPageDTO> result = new Result<AppPageDTO>(appPageResponse);
 
@@ -86,14 +93,22 @@ public class AppApi extends BaseThirdPartySysApi {
                                         String name, AppOsType osType, AppChargeType chargeType,
                                         AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
                                         Boolean specificReseller, Boolean specificMerchantCategory) {
-        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, false,null);
+        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, false,null, null);
     }
 
     public Result<AppPageDTO> searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
                                         String name, AppOsType osType, AppChargeType chargeType,
                                         AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
                                         Boolean specificReseller, Boolean specificMerchantCategory, Boolean includeSubscribedApp) {
-        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, includeSubscribedApp,null);
+        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, includeSubscribedApp,null, null);
+    }
+
+    public Result<AppPageDTO> searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
+                                        String name, AppOsType osType, AppChargeType chargeType,
+                                        AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,
+                                        Boolean specificReseller, Boolean specificMerchantCategory,
+                                        Boolean includeSubscribedApp, String resellerName) {
+        return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, includeSubscribedApp,resellerName, null);
     }
 
     public enum ApkStatus {

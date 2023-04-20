@@ -11,8 +11,6 @@
  */
 package com.pax.market.api.sdk.java.api.base.dto;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 import com.pax.market.api.sdk.java.api.constant.Constants;
 
@@ -24,12 +22,8 @@ import com.pax.market.api.sdk.java.api.constant.Constants;
 public class PageRequestDTO{
 
 
-	@Min(1)
-    private int pageNo = 1;
-	
-	@Min(1)
-	@Max(100)
-    private int pageSize = Constants.DEFAULT_PAGE_SIZE;
+    private Integer pageNo = 1;
+    private Integer pageSize = Constants.DEFAULT_PAGE_SIZE;
     private String orderBy;
 
 	public int getPageNo() {

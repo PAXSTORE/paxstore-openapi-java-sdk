@@ -21,9 +21,12 @@ import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.*;
+import com.pax.market.api.sdk.java.api.terminalApkParameter.validator.CreateApkParameterRequestValidator;
+import com.pax.market.api.sdk.java.api.terminalApkParameter.validator.UpdateApkParameterRequestValidator;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.FileUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,8 +48,6 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     private static final String UPDATE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters/{apkParameterId}";
     private static final String DELETE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters/{apkParameterId}";
 
-    private static final int MAX_FILE_TYPE_PARAMETER_COUNTER = 10;
-    private static final int MAX_FILE_TYPE_PARAMETER_SIZE = 500;
 
     public TerminalApkParameterApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -64,15 +65,15 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
         if(orderBy!=null) {
             page.setOrderBy(orderBy.val);
         }
-        List<String> validationErrs = validate(page);
+        List<String> validationErrs = Validators.validatePageRequest(page);
         if(StringUtils.isEmpty(packageName)) {
             validationErrs.add(getMessage("parameter.packageName.mandatory"));
         }
         if(StringUtils.isEmpty(versionName)) {
             validationErrs.add(getMessage("parameter.versionName.mandatory"));
         }
-        if(validationErrs.size()>0) {
-            return new Result<ApkParameterDTO>(validationErrs);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_APK_PARAMETER_URL, page);
@@ -88,8 +89,7 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
         request.setRequestMethod(SdkRequest.RequestMethod.GET);
 
         ApkParameterPageResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), ApkParameterPageResponse.class);
-        Result<ApkParameterDTO> result = new Result<ApkParameterDTO>(resp);
-        return result;
+        return new Result<>(resp);
     }
 
     public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId){
@@ -97,9 +97,9 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     }
 
     public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId, List<String> pidList){
-        List<String> validationErrs= validateId(apkParameterId, "parameter.terminalApkParameterId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<ApkParameterDTO>(validationErrs);
+        List<String> validationErrs= Validators.validateId(apkParameterId, "parameter.id.invalid", "terminalApkParameterId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_APK_PARAMETER_URL.replace("{apkParameterId}", apkParameterId.toString()));
@@ -108,28 +108,13 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
             request.addRequestParam("pidList", StringUtils.join(pidList, ","));
         }
         ApkParameterResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), ApkParameterResponse.class);
-        Result<ApkParameterDTO> result = new Result<ApkParameterDTO>(resp);
-        return result;
+        return new Result<ApkParameterDTO>(resp);
     }
 
     public Result<String> createApkParameter(CreateApkParameterRequest createApkParameterRequest){
-        List<String> validationErrs = validateCreate( createApkParameterRequest,"parameter.apkParameterCreateRequest.null");
-        if(createApkParameterRequest.getParameters() == null && createApkParameterRequest.getBase64FileParameters()==null) {
-            validationErrs.add(getMessage("parametersBase64FileParameters.not.null.atsame"));
-        }
-        if(createApkParameterRequest.getBase64FileParameters() != null && !createApkParameterRequest.getBase64FileParameters().isEmpty()) {
-            if(createApkParameterRequest.getBase64FileParameters().size()>MAX_FILE_TYPE_PARAMETER_COUNTER) {
-                validationErrs.add(getMessage("parametersBase64FileParameters.over.maxCounter"));
-            }
-            for(FileParameter fileParameter: createApkParameterRequest.getBase64FileParameters()) {
-                if(FileUtils.getBase64FileSizeKB(fileParameter.getFileData()) > MAX_FILE_TYPE_PARAMETER_SIZE) {
-                    validationErrs.add(getMessage("parametersBase64FileParameters.over.maxSize"));
-                    break;
-                }
-            }
-        }
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
+        List<String> validationErrs = CreateApkParameterRequestValidator.validate(createApkParameterRequest);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(CREATE_APK_PARAMETER_URL);
@@ -137,26 +122,15 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(createApkParameterRequest, CreateApkParameterRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<>(emptyResponse);
     }
 
 
     public Result<String> updateApkParameter(Long apkParameterId,UpdateApkParameterRequest updateApkParameterRequest){
-        List<String> validationErrs = validateUpdate( apkParameterId,updateApkParameterRequest,"parameter.terminalApkParameterId.invalid","parameter.apkParameterUpdateRequest.null");
-        if(updateApkParameterRequest.getBase64FileParameters() != null && !updateApkParameterRequest.getBase64FileParameters().isEmpty()) {
-            if(updateApkParameterRequest.getBase64FileParameters().size()>MAX_FILE_TYPE_PARAMETER_COUNTER) {
-                validationErrs.add(getMessage("parametersBase64FileParameters.over.maxCounter"));
-            }
-            for(FileParameter fileParameter: updateApkParameterRequest.getBase64FileParameters()) {
-                if(FileUtils.getBase64FileSizeKB(fileParameter.getFileData()) > MAX_FILE_TYPE_PARAMETER_SIZE) {
-                    validationErrs.add(getMessage("parametersBase64FileParameters.over.maxSize"));
-                    break;
-                }
-            }
-        }
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
+        List<String> validationErrs = UpdateApkParameterRequestValidator.validate(apkParameterId, updateApkParameterRequest);
+
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -165,20 +139,19 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(updateApkParameterRequest, UpdateApkParameterRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        Result<String> result = new Result<String>(emptyResponse);
-        return result;
+        return new Result<>(emptyResponse);
     }
 
     public Result<String> deleteApkParameter(Long apkParameterId){
-        List<String> validationErrs = validateId( apkParameterId,"parameter.terminalApkParameterId.invalid");
-        if(validationErrs.size()>0) {
-            return new Result<String>(validationErrs);
+        List<String> validationErrs = Validators.validateId( apkParameterId,"parameter.id.invalid", "terminalApkParameterId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(DELETE_APK_PARAMETER_URL.replace("{apkParameterId}",apkParameterId+""));
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
-        return  new Result<String>(emptyResponse);
+        return  new Result<>(emptyResponse);
     }
 
     public enum SearchOrderBy {

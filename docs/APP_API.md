@@ -27,6 +27,8 @@ The search apps API allows thirdparty system to search apps for page.
 **API**
 
 ```
+public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy, String name, AppOsType osType, AppChargeType chargeType,AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,Boolean specificReseller,Boolean specificMerchantCategory, Boolean includeSubscribedApp, String resellerName, 
+String modelName);
 public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy, String name, AppOsType osType, AppChargeType chargeType,AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,Boolean specificReseller,Boolean specificMerchantCategory, Boolean includeSubscribedApp, String resellerName);
 public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
 String name, AppOsType osType, AppChargeType chargeType, AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,Boolean specificReseller,Boolean specificMerchantCategory, Boolean includeSubscribedApp);
@@ -36,27 +38,28 @@ String name, AppOsType osType, AppChargeType chargeType, AppBaseType baseType, A
 
 **Input parameter(s) description**
 
-| Name                     | Type             | Nullable | Description                                                                                                                                                                                                                                                                                                                                           |
-|:-------------------------|:-----------------|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pageNo                   | int              | false    | page number, value must >=1                                                                                                                                                                                                                                                                                                                           |
-| pageSize                 | int              | false    | the record number per page, range is 1 to 100                                                                                                                                                                                                                                                                                                         |
+| Name                     | Type             | Nullable | Description                                                  |
+| :----------------------- | :--------------- | :------- | :----------------------------------------------------------- |
+| pageNo                   | int              | false    | page number, value must >=1                                  |
+| pageSize                 | int              | false    | the record number per page, range is 1 to 100                |
 | orderBy                  | AppSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of AppSearchOrderBy.AppName_desc, AppSearchOrderBy.AppName_asc, AppSearchOrderBy.Emial_desc, AppSearchOrderBy.Emial_asc, AppSearchOrderBy.UpdatedDate_desc and AppSearchOrderBy.UpdatedDate_asc. |
-| name                     | String           | true     | search filter by app name(parsed from apk file）, package name or the developer's name                                                                                                                                                                                                                                                                 |
-| appStatus                | AppStatus        | true     | the app status<br/> the value can be AppStatus.Active, AppStatus.Suspend                                                                                                                                                                                                                                                                              |
-| apkStatus                | ApkStatus        | true     | the apk status<br/> the value can be ApkStatus.Pending, ApkStatus.Online, ApkStatus.Rejected, ApkStatus.Offline                                                                                                                                                                                                                                       |
-| osType                   | AppOsType        | true     | the app osType<br/> the value can be AppOsType.Android, AppOsType.Traditional                                                                                                                                                                                                                                                                         |
-| baseType                 | AppBaseType      | true     | the app baseType<br/> the value can be AppBaseType.Normal, AppBaseType.Parameter                                                                                                                                                                                                                                                                      |
-| chargeType               | AppChargeType    | true     | the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging                                                                                                                                                                                                                                                                   |
-| specificReseller         | Boolean          | true     | specific reseller<br/> value can be one of true(yes) and false(no)                                                                                                                                                                                                                                                                                    |
-| specificMerchantCategory | Boolean          | true     | specific merchant category<br/> value can be one of true(yes) and false(no)                                                                                                                                                                                                                                                                           |
-| includeSubscribedApp     | Boolean          | true     | include the subscribed app, value can be one of true(yes) and false(no)                                                                                                                                                                                                                                                                               |
-| resellerName             | String           | true     | search filter by reseller name, search out the app to which the reseller belongs                                                                                                                                                                                                                                                                      |
+| name                     | String           | true     | search filter by app name(parsed from apk file）, package name or the developer's name |
+| appStatus                | AppStatus        | true     | the app status<br/> the value can be AppStatus.Active, AppStatus.Suspend |
+| apkStatus                | ApkStatus        | true     | the apk status<br/> the value can be ApkStatus.Pending, ApkStatus.Online, ApkStatus.Rejected, ApkStatus.Offline |
+| osType                   | AppOsType        | true     | the app osType<br/> the value can be AppOsType.Android, AppOsType.Traditional |
+| baseType                 | AppBaseType      | true     | the app baseType<br/> the value can be AppBaseType.Normal, AppBaseType.Parameter |
+| chargeType               | AppChargeType    | true     | the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging |
+| specificReseller         | Boolean          | true     | specific reseller<br/> value can be one of true(yes) and false(no) |
+| specificMerchantCategory | Boolean          | true     | specific merchant category<br/> value can be one of true(yes) and false(no) |
+| includeSubscribedApp     | Boolean          | true     | include the subscribed app, value can be one of true(yes) and false(no) |
+| resellerName             | String           | true     | search filter by reseller name, search out the app to which the reseller belongs |
+| modelName                | String           | true     | search filter by model name, search out the app to which the model belongs |
 
 **Sample codes**
 
 ```
 AppApi AppApi = new  AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate_desc,"", AppOsType.Android, AppChargeType.Free, AppBaseType.Normal, AppStatus.Active, ApkStatus.Online, false, false, null);
+Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate_desc,"", AppOsType.Android, AppChargeType.Free, AppBaseType.Normal, AppStatus.Active, ApkStatus.Online, false, false, null, null);
 ```
 
 **Client side validation failed sample result(JSON formatted)**

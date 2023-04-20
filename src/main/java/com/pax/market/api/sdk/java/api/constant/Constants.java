@@ -66,12 +66,26 @@ public class Constants {
      */
     public static final String CONTENT_TYPE_JSON = "application/json;charset=utf-8";
 
-    
-    public static final int DEFAULT_PAGE_SIZE = 10;
-    
+
     public static final String THIRD_PARTY_API_SDK_LANGUAGE = "Java";
-    public static final String THIRD_PARTY_API_SDK_VERSION = "8.7.0";
+    public static final String THIRD_PARTY_API_SDK_VERSION = "8.8.0";
     public static final String REQ_HEADER_SDK_LANG = "SDK-Language";
     public static final String REQ_HEADER_SDK_VERSION = "SDK-Version";
 
+
+
+
+    public static final int DEFAULT_PAGE_SIZE = 10;
+    public static final int MIN_PAGE_NO = 1;
+    public static final int MIN_PAGE_SIZE = 1;
+    public static final int MAX_PAGE_SIZE = 100;
+    public static final int MAX_16 = 16;
+    public static final int MAX_32 = 32;
+    public static final int MAX_64 = 64;
+    public static final int MAX_128 = 128;
+    public static final int MAX_255 = 255;
+    public static final int MAX_500 = 500;
+    public static final int MAX_3000 = 3000;
+    public static final int MIN_0 = 0;
+    public static final int MIN_8 = 8;
 }

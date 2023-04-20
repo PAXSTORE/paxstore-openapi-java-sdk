@@ -12,9 +12,6 @@
 package com.pax.market.api.sdk.java.api.terminalGroupApk.dto;
 
 import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -29,18 +26,11 @@ public class CreateTerminalGroupApkRequest implements Serializable {
 
     private static final long serialVersionUID = -5645272376227693380L;
 
-    @NotNull
     private Long groupId;
-
     private String pushTemplateName;
-
-    @NotBlank
     private String packageName;
-
     private String version;
-
     private String templateName;
-
     private Map<String, String> parameters;
     private List<FileParameter> base64FileParameters;
     private Boolean inheritPushHistory;

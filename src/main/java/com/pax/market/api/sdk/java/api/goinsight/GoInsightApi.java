@@ -7,6 +7,7 @@ import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResponse;
 import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResultDTO;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 
 import java.util.List;
 import java.util.Locale;
@@ -19,6 +20,7 @@ import java.util.TimeZone;
 public class GoInsightApi extends BaseThirdPartySysApi {
     private final static String SEARCH_GO_INSIGHT_DATA_URL = "/v1/3rdsys/goInsight/data/app-biz";
     private final static int QUERY_CODE_LENGTH = 8;
+    private final static int MAX_LENGTH = 1000;
 
     public GoInsightApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -46,14 +48,14 @@ public class GoInsightApi extends BaseThirdPartySysApi {
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize){
-        List<String> validationErrs = validateStr(queryCode, "parameter.queryCode.invalid");
+        List<String> validationErrs = Validators.validateStr(queryCode, "parameter.queryCode.invalid");
         if (queryCode != null && queryCode.length() != QUERY_CODE_LENGTH){
             validationErrs.add(getMessage("parameter.queryCode.length.invalid"));
         }
-        if (pageSize != null && (pageSize <=0 || pageSize > 1000)){
+        if (pageSize != null && (pageSize <=0 || pageSize > MAX_LENGTH)){
             validationErrs.add(getMessage("insight.pageSize.length.invalid"));
         }
-        if (validationErrs.size() > 0) {
+        if (!validationErrs.isEmpty()) {
             return new Result<DataQueryResultDTO>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());

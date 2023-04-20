@@ -21,9 +21,12 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest.RequestMethod;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.reseller.dto.*;
+import com.pax.market.api.sdk.java.api.reseller.validator.ResellerCreateRequestValidator;
+import com.pax.market.api.sdk.java.api.reseller.validator.ResellerUpdateRequestValidator;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
-import com.pax.market.api.sdk.java.api.util.MessageBoudleUtil;
+import com.pax.market.api.sdk.java.api.util.MessageBundleUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +61,7 @@ public class ResellerApi extends BaseThirdPartySysApi {
     }
 
     public Result<ResellerPageDTO> searchReseller(int pageNo, int pageSize, ResellerSearchOrderBy orderBy, String name, ResellerStatus status) {
-        logger.debug("name=" + name + "|status=" + status);
+        logger.debug("name= {} | status= {}", name, status);
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -66,7 +69,7 @@ public class ResellerApi extends BaseThirdPartySysApi {
         if (orderBy != null) {
             page.setOrderBy(orderBy.val);
         }
-        List<String> validationErrs = validate(page);
+        List<String> validationErrs = Validators.validatePageRequest(page);
         if (validationErrs.size() > 0) {
             return new Result<>(validationErrs);
         }
@@ -80,8 +83,8 @@ public class ResellerApi extends BaseThirdPartySysApi {
     }
 
     public Result<ResellerDTO> getReseller(Long resellerId) {
-        logger.debug("resellerId=" + resellerId);
-        List<String> validationErrs = validateId(resellerId, "parameter.resellerId.invalid");
+        logger.debug("resellerId= {}", resellerId);
+        List<String> validationErrs = Validators.validateId(resellerId, "parameter.id.invalid", "resellerId");
         if (validationErrs.size() > 0) {
             return new Result<>(validationErrs);
         }
@@ -93,8 +96,7 @@ public class ResellerApi extends BaseThirdPartySysApi {
     }
 
     public Result<ResellerDTO> createReseller(ResellerCreateRequest resellerCreateRequest) {
-        List<String> validationErrs = validateCreate(resellerCreateRequest, "parameter.resellerCreateRequest.null");
-
+        List<String> validationErrs = ResellerCreateRequestValidator.validate(resellerCreateRequest);
         if (validationErrs.size() > 0) {
             return new Result<>(validationErrs);
         }
@@ -108,8 +110,8 @@ public class ResellerApi extends BaseThirdPartySysApi {
     }
 
     public Result<ResellerDTO> updateReseller(Long resellerId, ResellerUpdateRequest resellerUpdateRequest) {
-        logger.debug("resellerId=" + resellerId);
-        List<String> validationErrs = validateUpdate(resellerId, resellerUpdateRequest, "parameter.resellerId.invalid", "parameter.resellerUpdateRequest.null");
+        logger.debug("resellerId= {}", resellerId);
+        List<String> validationErrs = ResellerUpdateRequestValidator.validate(resellerId, resellerUpdateRequest);
         if (validationErrs.size() > 0) {
             return new Result<>(validationErrs);
         }
@@ -123,8 +125,8 @@ public class ResellerApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> activateReseller(Long resellerId) {
-        logger.debug("resellerId=" + resellerId);
-        List<String> validationErrs = validateId(resellerId, "parameter.resellerId.invalid");
+        logger.debug("resellerId= {}", resellerId);
+        List<String> validationErrs = Validators.validateId(resellerId, "parameter.id.invalid","resellerId");
         if (validationErrs.size() > 0) {
             return new Result<>(validationErrs);
         }
@@ -136,8 +138,8 @@ public class ResellerApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> disableReseller(Long resellerId) {
-        logger.debug("resellerId=" + resellerId);
-        List<String> validationErrs = validateId(resellerId, "parameter.resellerId.invalid");
+        logger.debug("resellerId= {}", resellerId);
+        List<String> validationErrs = Validators.validateId(resellerId, "parameter.id.invalid", "resellerId");
         if (validationErrs.size() > 0) {
             return new Result<>(validationErrs);
         }
@@ -149,8 +151,8 @@ public class ResellerApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> deleteReseller(Long resellerId) {
-        logger.debug("resellerId=" + resellerId);
-        List<String> validationErrs = validateId(resellerId, "parameter.resellerId.invalid");
+        logger.debug("resellerId= {}", resellerId);
+        List<String> validationErrs = Validators.validateId(resellerId, "parameter.id.invalid", "resellerId");
         if (validationErrs.size() > 0) {
             return new Result<>(validationErrs);
         }
@@ -162,13 +164,13 @@ public class ResellerApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> replaceResellerEmail(Long resellerId, String email) {
-        logger.debug("resellerId=" + resellerId);
-        List<String> validationErrs = validateId(resellerId, "parameter.resellerId.invalid");
+        logger.debug("resellerId={}", resellerId);
+        List<String> validationErrs = Validators.validateId(resellerId, "parameter.id.invalid","resellerId");
         if (!StringUtils.isValidEmailAddress(email)) {
-            validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.invalid", Locale.getDefault()));
+            validationErrs.add(MessageBundleUtils.getMessage("parameter.email.invalid"));
         }
-        if (email != null && email.length() > 255) {
-            validationErrs.add(MessageBoudleUtil.getMessage("parameter.email.toolong", Locale.getDefault()));
+        if (email != null && email.length() > Constants.MAX_255) {
+            validationErrs.add(MessageBundleUtils.getMessage("parameter.too.long", "email"));
         }
         if (validationErrs.size() > 0) {
             return new Result<>(validationErrs);
@@ -190,7 +192,7 @@ public class ResellerApi extends BaseThirdPartySysApi {
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
 
-        List<String> validationErrs = validate(page);
+        List<String> validationErrs = Validators.validatePageRequest(page);
         if (validationErrs.size() > 0) {
             return new Result<>(validationErrs);
         }

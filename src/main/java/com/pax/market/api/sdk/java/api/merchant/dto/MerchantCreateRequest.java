@@ -12,9 +12,6 @@
 package com.pax.market.api.sdk.java.api.merchant.dto;
 
 import com.pax.market.api.sdk.java.api.merchant.MerchantApi.MerchantStatus;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
@@ -27,46 +24,17 @@ import java.util.List;
  */
 public class MerchantCreateRequest implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3538521345884170907L;
-	
-	@NotBlank
-	@Length(max=64)
 	private String name;
-
-	@Length(max=255)
-	@Email
 	private String email;
-	
-	@NotBlank
-	@Length(max=64)
     private String resellerName;
-	
-	@Length(max=64)
 	private String contact;
-
-	@Length(max=64)
-    private String country;
-	
-    @Length(max=32)
+	private String country;
 	private String phone;
-
-
-	@Length(max=64)
-	private String province;
-
-	@Length(max=255)
+    private String province;
 	private String city;
-	
-    @Length(max=16)
 	private String postcode;
-
-    @Length(max=255)
     private String address;
-    
-    @Length(max=3000)
     private String description;
     
     private Boolean createUserFlag = Boolean.FALSE;

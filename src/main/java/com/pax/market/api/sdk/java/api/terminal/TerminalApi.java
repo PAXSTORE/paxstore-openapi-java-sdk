@@ -22,8 +22,12 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest.RequestMethod;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminal.dto.*;
+import com.pax.market.api.sdk.java.api.terminal.validator.TerminalCopyRequestValidator;
+import com.pax.market.api.sdk.java.api.terminal.validator.TerminalMoveRequestValidator;
+import com.pax.market.api.sdk.java.api.terminal.validator.TerminalRequestValidator;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -93,8 +97,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
         if (orderBy != null) {
             page.setOrderBy(orderBy.val);
         }
-        List<String> validationErrs = validate(page);
-        if (validationErrs.size() > 0) {
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_URL, page);
@@ -129,9 +133,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks) {
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId = {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -143,9 +147,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> activateTerminal(Long terminalId) {
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid","terminalId");
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -156,9 +160,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> disableTerminal(Long terminalId) {
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -169,17 +173,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> moveTerminal(Long terminalId, String resellerName, String merchantName) {
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
-        if (validationErrs.size() > 0) {
-            return new Result<>(validationErrs);
-        }
-        validationErrs = validateStr(resellerName, "parameter.resellerName.invalid");
-        if (validationErrs.size() > 0) {
-            return new Result<>(validationErrs);
-        }
-        validationErrs = validateStr(merchantName, "parameter.merchantName.invalid");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId = {}", terminalId);
+        List<String> validationErrs = TerminalMoveRequestValidator.validate(terminalId, resellerName, merchantName);
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -195,9 +191,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> deleteTerminal(Long terminalId) {
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid","terminalId");
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -208,8 +204,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalDTO> createTerminal(TerminalCreateRequest terminalCreateRequest) {
-        List<String> validationErrs = validateCreate(terminalCreateRequest, "parameter.terminalCreateRequest.null");
-        if (validationErrs.size() > 0) {
+        List<String> validationErrs = TerminalRequestValidator.validate(terminalCreateRequest, "terminalCreateRequest");
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -222,9 +218,10 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalDTO> updateTerminal(Long terminalId, TerminalUpdateRequest terminalUpdateRequest) {
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateUpdate(terminalId, terminalUpdateRequest, "parameter.terminalId.invalid", "parameter.terminalUpdateRequest.null");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid","terminalId");
+        validationErrs.addAll(TerminalRequestValidator.validate(terminalUpdateRequest, "terminalUpdateRequest"));
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -238,11 +235,11 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
 
     public Result<TerminalDTO> copyTerminal(TerminalCopyRequest terminalCopyRequest) {
-        List<String> validationErrs = validateCreate(terminalCopyRequest, "parameter.terminalCopyRequest.null");
-        if (validationErrs.size() > 0) {
+        List<String> validationErrs = TerminalCopyRequestValidator.validate(terminalCopyRequest);
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
-        logger.debug("terminalId=" + terminalCopyRequest.getTerminalId());
+        logger.debug("terminalId= {}", terminalCopyRequest.getTerminalId());
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(COPY_TERMINAL_URL);
         request.setRequestMethod(RequestMethod.POST);
@@ -253,8 +250,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> batchAddTerminalToGroup(TerminalGroupRequest groupRequest){
-        List<String> validationErrs = validateCreate(groupRequest, "parameter.terminalGroupRequest.null");
-        if (validationErrs.size() > 0) {
+        List<String> validationErrs = Validators.validateObject(groupRequest, "terminalGroupRequest");
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -268,9 +265,10 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> updateTerminalConfig(Long terminalId, TerminalConfigUpdateRequest terminalConfigUpdateRequest){
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateUpdate(terminalId, terminalConfigUpdateRequest, "parameter.terminalId.invalid", "parameter.terminalRemoteConfigRequest.null");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId,"parameter.id.invalid", "terminalId");
+        validationErrs.addAll(Validators.validateObject(terminalConfigUpdateRequest, "terminalRemoteConfigRequest"));
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -283,9 +281,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalConfigDTO> getTerminalConfig(Long terminalId){
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -297,9 +295,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<TerminalPedDTO> getTerminalPed(Long terminalId){
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateId(terminalId, "parameter.terminalId.invalid");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId = {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid","terminalId");
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
@@ -311,9 +309,10 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command){
-        logger.debug("terminalId=" + terminalId);
-        List<String> validationErrs = validateUpdate(terminalId, command, "parameter.terminalId.invalid", "parameter.terminalPushCmdRequest.null");
-        if (validationErrs.size() > 0) {
+        logger.debug("terminalId={}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
+        validationErrs.addAll(Validators.validateObject(command,"terminalPushCmdRequest"));
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());

@@ -1,6 +1,5 @@
 package com.pax.market.api.sdk.java.api.terminalRki.dto;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 
@@ -13,7 +12,6 @@ public class PushRkiBasicRequest implements Serializable {
     private static final long serialVersionUID = 5497430690607921010L;
     private String tid;
     private String serialNo;
-    @NotBlank
     private String rkiKey;
 
     public String getTid() {

@@ -1,6 +1,5 @@
 package com.pax.market.api.sdk.java.api.terminalFirmware.dto;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 
@@ -13,7 +12,6 @@ public class PushFirmwareTaskBasicRequest implements Serializable {
     private static final long serialVersionUID = 140544918229486863L;
     private String tid;
     private String serialNo;
-    @NotBlank
     private String fmName;
 
     public String getTid() {

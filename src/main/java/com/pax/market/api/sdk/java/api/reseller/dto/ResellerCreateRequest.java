@@ -13,12 +13,6 @@ package com.pax.market.api.sdk.java.api.reseller.dto;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-
-import com.google.gson.annotations.Expose;
 import com.pax.market.api.sdk.java.api.reseller.ResellerApi.ResellerStatus;
 
 /**
@@ -30,42 +24,16 @@ public class ResellerCreateRequest implements Serializable{
 
 	private static final long serialVersionUID = -898044224050582642L;
 	
-	@Length(max=64)
 	private String parentResellerName;
-	
-	@NotBlank
-	@Length(max=255)
-	@Email
 	private String email;
-	
-	@NotBlank
-	@Length(max=64)
 	private String name;
-	
-	
-	@NotBlank
-	@Length(max=64)
 	private String country;
-	
-	@NotBlank
-	@Length(max=64)
 	private String contact;
-	
-	@NotBlank
-	@Length(max=32)
     private String phone;
-
-	@Length(max=16)
     private String postcode;
-	
-	@Length(max=255)
     private String address;
-
-	@Length(max=255)
     private String company;
-	
 	private Boolean activateWhenCreate = Boolean.FALSE;
-	
 	private String status;
 	
 	

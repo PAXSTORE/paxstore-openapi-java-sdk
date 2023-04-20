@@ -25,6 +25,7 @@ import com.pax.market.api.sdk.java.api.merchantVariable.dto.*;
 import com.pax.market.api.sdk.java.api.util.CryptoUtils;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
+import com.pax.market.api.sdk.java.api.validate.Validators;
 import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,9 +60,9 @@ public class MerchantVariableApi extends BaseThirdPartySysApi {
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
-        List<String> validationErrs = validate(page);
-        validationErrs.addAll(validateId(merchantId, "parameter.merchantId.invalid"));
-        if (validationErrs.size() > 0) {
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        validationErrs.addAll(Validators.validateId(merchantId, "parameter.id.invalid","merchantId"));
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         if (orderBy != null) {
@@ -99,13 +100,13 @@ public class MerchantVariableApi extends BaseThirdPartySysApi {
 
 
     public Result<String> createMerchantVariable(MerchantVariableCreateRequest createRequest) {
-        List<String> validationErrs = validateCreate(createRequest, "parameter.merchantVariableCreateRequest.null");
-        validationErrs.addAll(validateId(createRequest.getMerchantId(), "parameter.merchantId.invalid"));
-        if (createRequest.getVariableList() == null || createRequest.getVariableList().size() == 0) {
-            validationErrs.add(getMessage("parameter.merchantVariables.invalid"));
+        List<String> validationErrs = Validators.validateObject(createRequest, "merchantVariableCreateRequest");
+        validationErrs.addAll(Validators.validateId(createRequest.getMerchantId(), "parameter.id.invalid","merchantId"));
+        if (createRequest.getVariableList() == null || createRequest.getVariableList().isEmpty()) {
+            validationErrs.add(getMessage("parameter.not.null", "merchantVariable list"));
         }
-        if (validationErrs.size() > 0) {
-            return new Result<String>(validationErrs);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         for (ParameterVariable parameterVariable : createRequest.getVariableList()) {
@@ -121,8 +122,9 @@ public class MerchantVariableApi extends BaseThirdPartySysApi {
 
 
     public Result<String> updateMerchantVariable(Long merchantVariableId, MerchantVariableUpdateRequest updateRequest) {
-        List<String> validationErrs = validateUpdate(merchantVariableId, updateRequest, "parameter.merchantVariableId.invalid", "parameter.merchantVariableUpdateRequest.null");
-        if (validationErrs.size() > 0) {
+        List<String> validationErrs = Validators.validateId(merchantVariableId, "parameter.id.invalid","merchantVariableId" );
+        validationErrs.addAll(Validators.validateObject(updateRequest, "merchantVariableUpdateRequest"));
+        if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         encryptPasswordVariable(updateRequest);
@@ -135,10 +137,10 @@ public class MerchantVariableApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> deleteMerchantVariable(Long merchantVariableId) {
-        logger.debug("merchantVariableId=" + merchantVariableId);
-        List<String> validationErrs = validateId(merchantVariableId, "parameter.merchantVariableId.invalid");
-        if (validationErrs.size() > 0) {
-            return new Result<String>(validationErrs);
+        logger.debug("merchantVariableId= {}", merchantVariableId);
+        List<String> validationErrs = Validators.validateId(merchantVariableId, "parameter.id.invalid","merchantVariableId");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(DELETE_MERCHANT_VARIABLE_URL.replace("{merchantVariableId}", merchantVariableId + ""));
@@ -147,14 +149,14 @@ public class MerchantVariableApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> batchDeletionMerchantVariable(MerchantVariableDeleteRequest batchDeleteRequest) {
-        List<String> validationErrs = validateDelete(batchDeleteRequest, "parameter.merchantVariableDeleteRequest.null");
+        List<String> validationErrs = Validators.validateObject(batchDeleteRequest, "merchantVariableDeleteRequest");
         if (batchDeleteRequest != null) {
             if (batchDeleteRequest.getVariableIds() == null || batchDeleteRequest.getVariableIds().isEmpty()) {
                 validationErrs.add(getMessage("variableIds.is.empty"));
             }
         }
-        if (validationErrs.size() > 0) {
-            return new Result<String>(validationErrs);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
         }
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
