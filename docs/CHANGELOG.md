@@ -1,4 +1,7 @@
 # Changelog
+## 8.8.2
+* Fix isValidEmailAddress method in custom validation.
+* Fix method removeTerminalOutGroup in TerminalGroupApi.
 
 ## 8.8.1
 
