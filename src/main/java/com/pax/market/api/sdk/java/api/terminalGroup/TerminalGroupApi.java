@@ -277,7 +277,7 @@ public class TerminalGroupApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(REMOVE_TERMINAL_OUT_GROUP_URL.replace("{groupId}", groupId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(terminalIds, TerminalGroupRequest.class));
+        request.setRequestBody(new Gson().toJson(terminalIds, Set.class));
         return emptyResult(client,request);
     }
 

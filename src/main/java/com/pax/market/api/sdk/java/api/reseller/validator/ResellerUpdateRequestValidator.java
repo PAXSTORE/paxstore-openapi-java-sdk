@@ -41,7 +41,7 @@ public class ResellerUpdateRequestValidator {
 
         validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getName(), "email", Constants.MAX_255));
 
-        if(!StringUtils.isValidEmailAddress(validateTarget.getEmail())) {
+        if(StringUtils.isNotBlank(validateTarget.getEmail()) && !StringUtils.isValidEmailAddress(validateTarget.getEmail())) {
             validationErrs.add(MessageBundleUtils.getMessage("parameter.email.invalid"));
         }
 
