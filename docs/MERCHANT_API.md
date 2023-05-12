@@ -208,6 +208,7 @@ The type of data in result is MerchantDTO, and the structure shows below.
 |email|String|Email of merchant.|
 |phone|String|Phone number of merchant.|
 |status|String|Status of merchant. Value can be one of A(Active), P(Pendding) and S(Suspend)|
+|description|String|The description of merchant, max length is 3000|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|Dynamic attributes of merchant.|
 |merchantCategory|List\<MerchantCategoryDTO\>|Categories of merchant belongs to.|
 
@@ -320,7 +321,8 @@ Result<MerchantDTO> result = merchantApi.createMerchant(request);
 		"contact": "sam",
 		"email": "sam@pax.com",
 		"phone": "444888",
-		"status": "P"
+		"status": "P",
+		"description":"merchant"
 	}
 }
 ```
@@ -460,7 +462,8 @@ Result<MerchantDTO> result = merchantApi.updateMerchant(72594L, request);
 		"contact": "Jack",
 		"email": "jack@kfc.com.cn",
 		"phone": "86869999",
-		"status": "P"
+		"status": "P",
+		"description":"merchant"
 	}
 }
 ```
