@@ -1,7 +1,10 @@
 # Changelog
+
+### Bug Fix
 ## 8.8.2
 * Fix isValidEmailAddress method in custom validation.
 * Fix method removeTerminalOutGroup in TerminalGroupApi.
+* Add field description to the merchant API document.
 
 ## 8.8.1
 
