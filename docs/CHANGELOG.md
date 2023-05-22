@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.8.3  
+### Improvement  
+* Update guava and gson version  
+
 ## 8.8.2
 ### Bug Fix
 * Fix isValidEmailAddress method in custom validation.
