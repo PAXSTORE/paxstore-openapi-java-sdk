@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.8.3  
+### Improvement  
+* Update guava and gson version  
+
+## 8.8.2
+### Bug Fix
+* Fix isValidEmailAddress method in custom validation.
+* Fix method removeTerminalOutGroup in TerminalGroupApi.
+* Add field description to the merchant API document.
+
 ## 8.8.1
 
 ### Bug Fix
