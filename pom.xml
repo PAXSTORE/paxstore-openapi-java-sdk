@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-	<version>9.0.0-SNAPSHOT</version>
+	<version>9.0.0</version>
     <name>OpenAPI Java SDK</name>
     <description>OpenAPI Java SDK</description>
     <url>https://github.com/PAXSTORE/paxstore-openapi-java-sdk</url>
@@ -91,6 +91,12 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
