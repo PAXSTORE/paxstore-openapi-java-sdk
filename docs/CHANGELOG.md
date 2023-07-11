@@ -1,4 +1,7 @@
 # Changelog
+## 9.0.0
+### New Feature
+* Add get terminal network information API
 
 ## 8.8.3  
 ### Improvement  
