@@ -1,4 +1,10 @@
 # Changelog
+
+# Changelog
+## 9.1.0
+### New Feature
+* Add `filteredCount` field to the Terminal Group Apk  document.
+
 ## 9.0.0
 ### New Feature
 * Add get terminal network information API
