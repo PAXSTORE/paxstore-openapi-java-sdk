@@ -72,12 +72,14 @@ Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.getTerminalGroupA
 	"data": {
     	"groupApkParam": {
 			"failedCount": 0,
+			"filteredCount": 0,
 			"pendingCount": 8,
 			"paramTemplateName": "PassWord_Param02.xml",
 			"successCount": 0
 		},
 		"apkVersionName": "10.3.8.30",
 		"failedCount": 0,
+		"filteredCount": 0,
 		"actionStatus": 1,
 		"apkPackageName": "com.baidu.tieba",
 		"pendingCount": 8,
@@ -163,12 +165,14 @@ Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.searchTerminalGro
 		"dataSet": [{
 		"groupApkParam": {
 			"failedCount": 0,
+			"filteredCount": 0,
 			"pendingCount": 0,
 			"paramTemplateName": "paramTemplate.xml",
 			"successCount": 0
 		},
 		"apkVersionName": "5.01.07",
 		"failedCount": 0,
+		"filteredCount": 0,
 		"actionStatus": 0,
 		"apkPackageName": "com.pax.android.demoapp",
 		"pendingCount": 0,
@@ -184,31 +188,33 @@ Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.searchTerminalGro
 
 The type in dataSet is SimpleTerminalGroupApkDTO. And the structure like below.
 
-| Name           | Type                     | Description                                                                                                      |
-|:---------------|:-------------------------|:-----------------------------------------------------------------------------------------------------------------|
-| id             | Long                     | the id of terminal group apk                                                                                     |
-| apkPackageName | String                   | the packageName of terminal group apk                                                                            |
-| apkVersionName | String                   | the version name of terminal group apk                                                                           |
-| apkVersionCode | Long                     | the version code of terminal group apk                                                                           |
-| effectiveTime  | String                   |                                                                                                                  |
-| expiredTime    | String                   ||
-| updatedDate    | String                   ||
+| Name           | Type                     | Description                                                  |
+| :------------- | :----------------------- | :----------------------------------------------------------- |
+| id             | Long                     | the id of terminal group apk                                 |
+| apkPackageName | String                   | the packageName of terminal group apk                        |
+| apkVersionName | String                   | the version name of terminal group apk                       |
+| apkVersionCode | Long                     | the version code of terminal group apk                       |
+| effectiveTime  | String                   |                                                              |
+| expiredTime    | String                   |                                                              |
+| updatedDate    | String                   |                                                              |
 | actionStatus   | int                      | the action status, value can be 0 and 1, please refer to [Action Status](APPENDIX.md#user-content-action-status) |
-| status         | String                   | the push status                                                                                                  |
-| pendingCount   | int                      ||
-| successCount   | int                      ||
-| failedCount    | int                      ||
-| groupApkParam  | TerminalGroupApkParamDTO | the structure like below                                                                                         |
+| status         | String                   | the push status                                              |
+| pendingCount   | int                      |                                                              |
+| successCount   | int                      |                                                              |
+| failedCount    | int                      |                                                              |
+| filteredCount  | int                      |                                                              |
+| groupApkParam  | TerminalGroupApkParamDTO | the structure like below                                     |
 
 The type in data is TerminalGroupApkParamDTO. And the structure like below.
 
 | Name                 | Type                 | Description                       |
-|:---------------------|:---------------------|:----------------------------------|
+| :------------------- | :------------------- | :-------------------------------- |
 | paramTemplateName    | String               |                                   |
 | configuredParameters | Map\<String,String\> | Configuration parameters in param |
 | pendingCount         | int                  |                                   |
 | successCount         | int                  |                                   |
 | failedCount          | int                  |                                   |
+| filteredCount        | Int                  |                                   |
 
 **Possible client validation errors**
 
@@ -313,12 +319,14 @@ Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.createAndActiveGr
 	"data": {
 		"groupApkParam": {
 			"failedCount": 0,
+			"filteredCount": 0,
 			"pendingCount": 0,
 			"paramTemplateName": "123 (3).xml",
 			"successCount": 0
 		},
 		"apkVersionName": "10.3.8.30",
 		"failedCount": 0,
+		"filteredCount": 0,
 		"actionStatus": 0,
 		"apkPackageName": "com.baidu.tieba",
 		"pendingCount": 0,
@@ -403,12 +411,14 @@ Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.suspendTerminalGr
 	"data": {
 		"groupApkParam": {
 			"failedCount": 0,
+			"filteredCount": 0,
 			"pendingCount": 0,
 			"paramTemplateName": "123 (3).xml",
 			"successCount": 0
 		},
 		"apkVersionName": "10.3.8.30",
 		"failedCount": 0,
+		"filteredCount": 0,
 		"actionStatus": 0,
 		"apkPackageName": "com.baidu.tieba",
 		"pendingCount": 0,

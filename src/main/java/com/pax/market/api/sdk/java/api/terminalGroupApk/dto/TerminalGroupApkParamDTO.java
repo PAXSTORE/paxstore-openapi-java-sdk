@@ -23,6 +23,7 @@ public class TerminalGroupApkParamDTO implements Serializable {
     private int pendingCount;
     private int successCount;
     private int failedCount;
+    private int filteredCount;
 
     public String getParamTemplateName() {
         return paramTemplateName;
@@ -64,6 +65,15 @@ public class TerminalGroupApkParamDTO implements Serializable {
         this.failedCount = failedCount;
     }
 
+
+    public int getFilteredCount() {
+        return filteredCount;
+    }
+
+    public void setFilteredCount(int filteredCount) {
+        this.filteredCount = filteredCount;
+    }
+
     @Override
     public String toString() {
         return "TerminalGroupApkParamDTO{" +
@@ -72,6 +82,7 @@ public class TerminalGroupApkParamDTO implements Serializable {
                 ", pendingCount=" + pendingCount +
                 ", successCount=" + successCount +
                 ", failedCount=" + failedCount +
+                ", filteredCount=" + filteredCount +
                 '}';
     }
 }
