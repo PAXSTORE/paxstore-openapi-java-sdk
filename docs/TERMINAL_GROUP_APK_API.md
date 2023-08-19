@@ -208,13 +208,13 @@ The type in dataSet is SimpleTerminalGroupApkDTO. And the structure like below.
 The type in data is TerminalGroupApkParamDTO. And the structure like below.
 
 | Name                 | Type                 | Description                       |
-| :------------------- | :------------------- | :-------------------------------- |
+| :------------------- |:---------------------| :-------------------------------- |
 | paramTemplateName    | String               |                                   |
 | configuredParameters | Map\<String,String\> | Configuration parameters in param |
 | pendingCount         | int                  |                                   |
 | successCount         | int                  |                                   |
 | failedCount          | int                  |                                   |
-| filteredCount        | Int                  |                                   |
+| filteredCount        | int                  |                                   |
 
 **Possible client validation errors**
 
