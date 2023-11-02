@@ -3,8 +3,6 @@
 The app APIs allow thirdparty system search apps.
 All the app APIs are in the class *com.pax.market.api.sdk.java.api.app.AppApi*.
 
-User can customize the additional attributes for app. To featch app's additional entity attributes please using
-marketplace admin login and go to page via General Setting -> Entity Attribute Setting.
 
 **Constructors of AppAPI**
 
