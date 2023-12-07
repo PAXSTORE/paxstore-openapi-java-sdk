@@ -16,6 +16,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.constant.ResultCode;
+import com.pax.market.api.sdk.java.api.exception.GatewayException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.net.ssl.*;
@@ -40,7 +41,6 @@ public abstract class ThirdPartySysHttpUtils {
 	private static final int BUFFER_SIZE = 4096;
 	private static final String DEFAULT_CHARSET = Constants.CHARSET_UTF8;
 	private static Locale locale = Locale.CHINA;
-	private static JsonParser jsonParser = new JsonParser();
 
 	/**
      * Sets local.
@@ -118,15 +118,23 @@ public abstract class ThirdPartySysHttpUtils {
 			return RetryUtils.retry(() -> {
 				return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, false, headerMap, saveFilePath);
 			}, e -> isExceptionShouldRetry(e), retryTimes);
+		} catch (GatewayException e) {
+			if(e.getResponseCode() == 502) {
+				return EnhancedJsonUtils.getSdkJson(ResultCode.BAD_GATEWAY);
+			}else{
+				return EnhancedJsonUtils.getSdkJson(ResultCode.GATEWAY_TIMEOUT);
+			}
 		} catch (Exception e) {
-			FileUtils.deleteFile(saveFilePath);
-			logger.error("Exception Occurred. Details: {}", e.toString());
+			logger.error("Exception Occurred", e);
 			if(e instanceof IOException) {
 				return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
 			}else{
 				return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_RQUEST_EXCEPTION);
 			}
-
+		} finally {
+			if(StringUtils.isNotBlank(saveFilePath)) {
+				FileUtils.deleteFile(saveFilePath);
+			}
 		}
 	}
 
@@ -147,12 +155,19 @@ public abstract class ThirdPartySysHttpUtils {
 			return RetryUtils.retry(() -> {
 				return request(requestUrl, requestMethod, connectTimeout, readTimeout, userData, true, headerMap, saveFilePath);
 			}, e -> isExceptionShouldRetry(e), retryTimes);
-		} catch (Exception e) {
+		} catch (GatewayException e) {
+			if(e.getResponseCode() == 502) {
+				return EnhancedJsonUtils.getSdkJson(ResultCode.BAD_GATEWAY);
+			}else{
+				return EnhancedJsonUtils.getSdkJson(ResultCode.GATEWAY_TIMEOUT);
+			}
+		}catch (Exception e) {
+			logger.error("Exception Occurred", e);
+			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
+		}finally{
 			if(StringUtils.isNotBlank(saveFilePath)) {
 				FileUtils.deleteFile(saveFilePath);
 			}
-			logger.error("Occurred. Details: {}", e.toString());
-			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_UN_CONNECT);
 		}
 	}
 
@@ -161,13 +176,15 @@ public abstract class ThirdPartySysHttpUtils {
     		return true;
 		} else if(e instanceof SocketTimeoutException){
     		return true;
+		} else if(e instanceof GatewayException && ((GatewayException) e).getResponseCode() == 502) {
+			return true;
 		}else{
     		return false;
 		}
 	}
 
 	private static String request(String requestUrl, String requestMethod, int connectTimeout, int readTimeout, String userData, boolean compressData,
-								  Map<String, String> headerMap, String saveFilePath) throws ConnectException, SocketTimeoutException{
+								  Map<String, String> headerMap, String saveFilePath) throws ConnectException, SocketTimeoutException, GatewayException {
 		HttpURLConnection urlConnection = null;
 		try {
 			urlConnection = getConnection(requestUrl, connectTimeout, readTimeout);
@@ -178,7 +195,7 @@ public abstract class ThirdPartySysHttpUtils {
 			}else if(e instanceof SocketTimeoutException){
 				throw (SocketTimeoutException)e;
 			}
-			logger.error("IOException Occurred. Details: {}", e.toString());
+			logger.error("IOException Occurred", e);
 		} finally {
 			if(urlConnection != null) {
 				urlConnection.disconnect();
@@ -188,7 +205,7 @@ public abstract class ThirdPartySysHttpUtils {
 	}
 
 	private static String finalRequest(HttpURLConnection urlConnection, String requestMethod, String userData, boolean compressData,
-									   Map<String, String> headerMap, String saveFilePath) throws ConnectException,SocketTimeoutException{
+									   Map<String, String> headerMap, String saveFilePath) throws ConnectException,SocketTimeoutException, GatewayException{
 		StringBuilder stringBuilder = new StringBuilder();
 		BufferedReader bufferedReader = null;
 		FileOutputStream fileOutputStream = null;
@@ -220,9 +237,9 @@ public abstract class ThirdPartySysHttpUtils {
 				try {
 					outputStream = urlConnection.getOutputStream();
 					if (!compressData) {
-						outputStream.write(userData.getBytes("UTF-8"));
+						outputStream.write(userData.getBytes(DEFAULT_CHARSET));
 					} else {
-						String hexString = AlgHelper.bytes2HexString(compressData(userData.getBytes("UTF-8")));
+						String hexString = AlgHelper.bytes2HexString(compressData(userData.getBytes(DEFAULT_CHARSET)));
 						outputStream.write(hexString.getBytes());
 					}
 					Map<String, List<String>> map = urlConnection.getHeaderFields();
@@ -263,14 +280,18 @@ public abstract class ThirdPartySysHttpUtils {
 			rateLimitReset = map.get("X-RateLimit-Reset")==null?"":map.get("X-RateLimit-Reset").get(0);
 			List<String> contentTypeHeaders = map.get("Content-Type");
 			String contentType = contentTypeHeaders!=null && contentTypeHeaders.size()>0?contentTypeHeaders.get(0):"";
-			if (urlConnection.getResponseCode() == 200 || urlConnection.getResponseCode() == 201
-					|| urlConnection.getResponseCode() == 204) {
-				bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+			int responseCode = urlConnection.getResponseCode();
+			if (responseCode == 200 || responseCode == 201 || responseCode == 204) {
+				bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), DEFAULT_CHARSET));
+			} else if(responseCode == 502) {
+				throw new GatewayException(502, "Encounter 502 response code");
+			} else if(responseCode == 504) {
+				throw new GatewayException(594, "Encounter 504 response code");
 			} else {
 				if(urlConnection.getErrorStream() != null) {
-					bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), "utf-8"));
+					bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), DEFAULT_CHARSET));
 				} else {
-					bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+					bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), DEFAULT_CHARSET));
 				}
 			}
 
@@ -287,7 +308,7 @@ public abstract class ThirdPartySysHttpUtils {
 			}else if(!StringUtils.startsWith(resultStr, "{")){
 				resultStr=String.format("{%s}", resultStr);
 			}
-			JsonObject json = jsonParser.parse(resultStr).getAsJsonObject();
+			JsonObject json = JsonParser.parseString(resultStr).getAsJsonObject();
 			json.addProperty("rateLimit", rateLimit);
 			json.addProperty("rateLimitRemain", rateLimitRemain);
 			json.addProperty("rateLimitReset", rateLimitReset);
@@ -308,7 +329,9 @@ public abstract class ThirdPartySysHttpUtils {
 			FileUtils.deleteFile(filePath);
 			logger.error("FileNotFoundException Occurred. Details: {}", fileNotFoundException.toString());
 			return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_FILE_NOT_FOUND);
-		} catch (Exception ignored) {
+		} catch(GatewayException e) {
+			throw e;
+		}catch (Exception ignored) {
 			FileUtils.deleteFile(filePath);
 			logger.error("Exception Occurred. Details: {}", ignored.toString());
 		} finally {

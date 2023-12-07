@@ -78,47 +78,7 @@ public class EnhancedJsonUtils {
      * @return the sdk json
      */
     public static String getSdkJson(int resultCode) {
-        String message = "";
-        switch (resultCode) {
-            case ResultCode.SDK_PARAM_ERROR:
-                message = "16100";
-                break;
-            case ResultCode.SDK_UNINIT:
-                message = "16101";
-                break;
-            case ResultCode.SDK_DEC_ERROR:
-                message = "16102";
-                break;
-            case ResultCode.SDK_JSON_ERROR:
-                message = "16103";
-                break;
-            case ResultCode.SDK_CONNECT_TIMEOUT:
-                message = "16104";
-                break;
-            case ResultCode.SDK_UN_CONNECT:
-                message = "16105";
-                break;
-            case ResultCode.SDK_RQUEST_EXCEPTION:
-                message = "16106";
-                break;
-            case ResultCode.SDK_UNZIP_FAILED:
-                message = "16107";
-                break;
-            case ResultCode.SDK_MD_FAILED:
-                message = "16108";
-                break;
-            case ResultCode.SDK_REPLACE_VARIABLES_FAILED:
-                message = "16109";
-                break;
-            case ResultCode.SDK_INIT_FAILED:
-                message = "16110";
-                break;
-            case ResultCode.SDK_FILE_NOT_FOUND:
-                message = "16111";
-                break;
-
-        }
-        message = MessageBundleUtils.getMessage(message);
+        String message = MessageBundleUtils.getMessage(resultCode+"");
         return getSdkJson(resultCode, message);
     }
 
