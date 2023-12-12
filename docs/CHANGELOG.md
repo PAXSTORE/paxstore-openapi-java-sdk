@@ -1,6 +1,10 @@
 # Changelog
 
-# Changelog
+## 9.2.0  
+### Improvement  
+* Improved retry strategy. When server return 502 response code the retry will work too.
+
+
 ## 9.1.0
 ### New Feature
 * Add `filteredCount` field to the Terminal Group Apk  document.
