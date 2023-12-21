@@ -1,5 +1,7 @@
 package com.pax.market.api.sdk.java.api.terminalRki.dto;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 
 /**
@@ -12,15 +14,15 @@ public class PushRki2TerminalRequest extends PushRkiBasicRequest {
 
     private static final long serialVersionUID = 1L;
 
-    private Date effectiveTime;
-    private Date expiredTime;
+    private String effectiveTime;
+    private String expiredTime;
 
     /**
      * Gets effective time.
      *
      * @return the effective time
      */
-    public Date getEffectiveTime() {
+    public String getEffectiveTime() {
         return effectiveTime;
     }
 
@@ -30,7 +32,9 @@ public class PushRki2TerminalRequest extends PushRkiBasicRequest {
      * @param effectiveTime the effective time
      */
     public void setEffectiveTime(Date effectiveTime) {
-        this.effectiveTime = effectiveTime;
+        if(effectiveTime != null) {
+            this.effectiveTime = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.format(effectiveTime);
+        }
     }
 
     /**
@@ -38,7 +42,7 @@ public class PushRki2TerminalRequest extends PushRkiBasicRequest {
      *
      * @return the expired time
      */
-    public Date getExpiredTime() {
+    public String getExpiredTime() {
         return expiredTime;
     }
 
@@ -48,6 +52,8 @@ public class PushRki2TerminalRequest extends PushRkiBasicRequest {
      * @param expiredTime the expired time
      */
     public void setExpiredTime(Date expiredTime) {
-        this.expiredTime = expiredTime;
+        if(expiredTime != null) {
+            this.expiredTime = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.format(expiredTime);
+        }
     }
 }

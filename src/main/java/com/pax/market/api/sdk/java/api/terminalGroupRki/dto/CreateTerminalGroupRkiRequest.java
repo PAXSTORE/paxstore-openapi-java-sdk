@@ -13,6 +13,8 @@
 package com.pax.market.api.sdk.java.api.terminalGroupRki.dto;
 
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,8 +29,8 @@ public class CreateTerminalGroupRkiRequest implements Serializable {
 
     private Long groupId;
     private String rkiKey;
-    private Date effectiveTime;
-    private Date expiredTime;
+    private String effectiveTime;
+    private String expiredTime;
 
     /**
      * Gets groupId.
@@ -71,7 +73,7 @@ public class CreateTerminalGroupRkiRequest implements Serializable {
      *
      * @return the effective time
      */
-    public Date getEffectiveTime() {
+    public String getEffectiveTime() {
         return effectiveTime;
     }
 
@@ -81,7 +83,9 @@ public class CreateTerminalGroupRkiRequest implements Serializable {
      * @param effectiveTime the effective time
      */
     public void setEffectiveTime(Date effectiveTime) {
-        this.effectiveTime = effectiveTime;
+        if(effectiveTime != null) {
+            this.effectiveTime = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.format(effectiveTime);
+        }
     }
 
     /**
@@ -89,7 +93,7 @@ public class CreateTerminalGroupRkiRequest implements Serializable {
      *
      * @return the expired time
      */
-    public Date getExpiredTime() {
+    public String getExpiredTime() {
         return expiredTime;
     }
 
@@ -99,6 +103,9 @@ public class CreateTerminalGroupRkiRequest implements Serializable {
      * @param expiredTime the expired time
      */
     public void setExpiredTime(Date expiredTime) {
-        this.expiredTime = expiredTime;
+        if(expiredTime != null) {
+            this.expiredTime = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.format(expiredTime);
+        }
+
     }
 }

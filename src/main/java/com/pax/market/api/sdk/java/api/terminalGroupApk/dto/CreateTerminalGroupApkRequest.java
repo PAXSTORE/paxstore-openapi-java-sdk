@@ -12,6 +12,8 @@
 package com.pax.market.api.sdk.java.api.terminalGroupApk.dto;
 
 import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -36,8 +38,8 @@ public class CreateTerminalGroupApkRequest implements Serializable {
     private Boolean inheritPushHistory;
     private boolean forceUpdate;
     private boolean wifiOnly;
-    private Date effectiveTime;
-    private Date expiredTime;
+    private String effectiveTime;
+    private String expiredTime;
 
     /**
      * Gets group id.
@@ -224,7 +226,7 @@ public class CreateTerminalGroupApkRequest implements Serializable {
      *
      * @return the effective time
      */
-    public Date getEffectiveTime() {
+    public String getEffectiveTime() {
         return effectiveTime;
     }
 
@@ -234,7 +236,9 @@ public class CreateTerminalGroupApkRequest implements Serializable {
      * @param effectiveTime the effective time
      */
     public void setEffectiveTime(Date effectiveTime) {
-        this.effectiveTime = effectiveTime;
+        if(effectiveTime != null) {
+            this.effectiveTime = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.format(effectiveTime);
+        }
     }
 
     /**
@@ -242,7 +246,7 @@ public class CreateTerminalGroupApkRequest implements Serializable {
      *
      * @return the expired time
      */
-    public Date getExpiredTime() {
+    public String getExpiredTime() {
         return expiredTime;
     }
 
@@ -252,6 +256,8 @@ public class CreateTerminalGroupApkRequest implements Serializable {
      * @param expiredTime the expired time
      */
     public void setExpiredTime(Date expiredTime) {
-        this.expiredTime = expiredTime;
+        if(expiredTime != null) {
+            this.expiredTime = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.format(expiredTime);
+        }
     }
 }
