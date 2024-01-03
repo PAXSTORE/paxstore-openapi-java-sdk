@@ -29,6 +29,7 @@ import com.pax.market.api.sdk.java.api.terminal.dto.TerminalUpdateRequest;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TimeZone;
 
 
 /**
@@ -169,6 +170,8 @@ public class TerminalApiTest {
 		Long terminalId = 909744L;
 		TerminalConfigUpdateRequest terminalConfigUpdateRequest = new TerminalConfigUpdateRequest();
 		terminalConfigUpdateRequest.setAllowReplacement(true);
+		terminalConfigUpdateRequest.setAutomaticTimezoneEnable(false);
+		terminalConfigUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
 	    Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
 		logger.debug("Result of update Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);

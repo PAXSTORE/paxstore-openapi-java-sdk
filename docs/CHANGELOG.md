@@ -1,5 +1,9 @@
 # Changelog
 
+## 9.3.0
+### New Feature
+* Add terminal time zone configuration.
+
 ## 9.2.0  
 ### Improvement  
 * Improved retry strategy. When server return 502 response code the retry will work too.

@@ -22,6 +22,8 @@ import java.io.Serializable;
 public class TerminalConfigUpdateRequest implements Serializable {
     private static final long serialVersionUID = -4927756870104996001L;
     private Boolean allowReplacement;
+    private Boolean automaticTimezoneEnable;
+    private String timeZone;
 
     public Boolean getAllowReplacement() {
         return allowReplacement;
@@ -29,5 +31,21 @@ public class TerminalConfigUpdateRequest implements Serializable {
 
     public void setAllowReplacement(Boolean allowReplacement) {
         this.allowReplacement = allowReplacement;
+    }
+
+    public Boolean getAutomaticTimezoneEnable() {
+        return automaticTimezoneEnable;
+    }
+
+    public void setAutomaticTimezoneEnable(Boolean automaticTimezoneEnable) {
+        this.automaticTimezoneEnable = automaticTimezoneEnable;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
     }
 }

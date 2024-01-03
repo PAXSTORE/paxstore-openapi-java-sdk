@@ -1351,9 +1351,11 @@ public Result<String> updateTerminalConfig(Long terminalId, TerminalConfigUpdate
 
 Structure of class TerminalRemoteConfigRequest
 
-| Property Name    | Type    | Nullable | Description                                                  |
-| :--------------- | :------ | :------- | :----------------------------------------------------------- |
-| allowReplacement | Boolean | false    | Whether allow terminal replacement by API or input serial number on termial |
+| Property Name           | Type    | Nullable | Description                                                                                                                                    |
+|:------------------------|:--------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
+| allowReplacement        | Boolean | false    | Whether allow terminal replacement by API or input serial number on terminal                                                                   |
+| automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                   |
+| timeZone                | String  | true     | The terminal time zone. When the "automaticTimezoneEnable" field and "timeZone" field are both null, it means clearing the time zone configuration |
 
 **Sample codes**
 
@@ -1362,6 +1364,8 @@ TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api
 Long terminalId = 909744L;
 TerminalConfigUpdateRequest terminalConfigUpdateRequest = new TerminalConfigUpdateRequest();
 terminalConfigUpdateRequest.setAllowReplacement(true);
+terminalConfigUpdateRequest.setAutomaticTimezoneEnable(false);
+terminalConfigUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
 Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
 ```
 
@@ -1401,6 +1405,7 @@ Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConf
 | :------------ | :----------------------------------------------------------- | :---------- |
 | 1800          | Terminal not found                                           |             |
 | 1838          | It is not allowed to change the terminal level "Terminal Replacement" status. please make sure reseller level terminal replacement settings are enabled. |             |
+| 1903          | When the "automaticTimezoneEnable" field is false, the "timeZone" field cannot be empty.                                                                 |             |
 
 ### Get terminal configuration
 
@@ -1449,7 +1454,9 @@ Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(909744L);
 {
 	"businessCode": 0,
 	"data": {
-		"allowReplacement": true
+		"allowReplacement": true,
+		"automaticTimezoneEnable": false,
+		"timeZone": "UTC"
 	}
 }
 ```

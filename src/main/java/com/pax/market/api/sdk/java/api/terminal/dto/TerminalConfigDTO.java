@@ -24,6 +24,8 @@ public class TerminalConfigDTO implements Serializable {
 
     private static final long serialVersionUID = 6509938259306387562L;
     private Boolean allowReplacement;
+    private Boolean automaticTimezoneEnable;
+    private String timeZone;
 
     public Boolean getAllowReplacement() {
         return allowReplacement;
@@ -31,5 +33,21 @@ public class TerminalConfigDTO implements Serializable {
 
     public void setAllowReplacement(Boolean allowReplacement) {
         this.allowReplacement = allowReplacement;
+    }
+
+    public Boolean getAutomaticTimezoneEnable() {
+        return automaticTimezoneEnable;
+    }
+
+    public void setAutomaticTimezoneEnable(Boolean automaticTimezoneEnable) {
+        this.automaticTimezoneEnable = automaticTimezoneEnable;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
     }
 }
