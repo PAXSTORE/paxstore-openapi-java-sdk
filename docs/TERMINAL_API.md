@@ -1402,10 +1402,11 @@ Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConf
 **Possible business codes**
 
 | Business Code | Message                                                      | Description |
-| :------------ | :----------------------------------------------------------- | :---------- |
+|:--------------| :----------------------------------------------------------- | :---------- |
 | 1800          | Terminal not found                                           |             |
 | 1838          | It is not allowed to change the terminal level "Terminal Replacement" status. please make sure reseller level terminal replacement settings are enabled. |             |
 | 1903          | When the "automaticTimezoneEnable" field is false, the "timeZone" field cannot be empty.                                                                 |             |
+| 1904          | Incorrect time zone                                                                 |             |
 
 ### Get terminal configuration
 
