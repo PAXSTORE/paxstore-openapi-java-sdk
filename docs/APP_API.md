@@ -114,17 +114,18 @@ Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate
 
 The type in dataSet is AppPageDTO. And the structure like below.
 
-| Property Name    | Type           | Description                                                      |
-|:-----------------|:---------------|:-----------------------------------------------------------------|
-| id               | Long           | The id of app.                                                   |
-| name             | String         | The name of app.                                                 |
-| packageName      | String         | The packageName of app.                                          |
-| status           | String         | Status of app. Value can be one of A(Active) and S(Suspend)      |
+| Property Name    | Type           | Description            |
+|:-----------------|:---------------|:-----------------------|
+| id               | Long           | The id of app.         |
+| name             | String         | The name of app.       |
+| packageName      | String         | The packageName of app. |
+| status           | String         | Status of app. Value can be one of A(Active) and S(Suspend) |
 | osType           | String         | OsType of app. Value can be one of A(Android) and T(Traditional) |
-| chargeType       | Integer        | chargeType of app. Value can be one of 0(Free) and 1(Charing)    |
-| specificReseller | Boolean        | whether make app specific reseller.                              |
-| downloads        | Long           | downloads of app.                                                |
-| apkList          | List\<ApkDTO\> | App version list.                                                |
+| chargeType       | Integer        | chargeType of app. Value can be one of 0(Free) and 1(Charing) |
+| specificReseller | Boolean        | whether make app specific reseller. |
+| downloads        | Long           | downloads of app.      |
+| apkList          | List\<ApkDTO\> | App version list.      |
+| entityAttributeValues          | LinkedHashMap<String, String> | App Entity Attributes. |
 
 The structure of class ApkDTO
 
