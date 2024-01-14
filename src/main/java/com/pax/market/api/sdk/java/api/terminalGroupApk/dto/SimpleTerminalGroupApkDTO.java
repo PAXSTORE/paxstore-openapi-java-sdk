@@ -37,6 +37,7 @@ public class SimpleTerminalGroupApkDTO implements Serializable {
     private int pendingCount;
     private int successCount;
     private int failedCount;
+    private int filteredCount;
     private TerminalGroupApkParamDTO groupApkParam;
 
     public Long getId() {
@@ -151,6 +152,14 @@ public class SimpleTerminalGroupApkDTO implements Serializable {
         this.failedCount = failedCount;
     }
 
+    public int getFilteredCount() {
+        return filteredCount;
+    }
+
+    public void setFilteredCount(int filteredCount) {
+        this.filteredCount = filteredCount;
+    }
+
     public TerminalGroupApkParamDTO getGroupApkParam() {
         return groupApkParam;
     }
@@ -176,6 +185,7 @@ public class SimpleTerminalGroupApkDTO implements Serializable {
                 ", pendingCount=" + pendingCount +
                 ", successCount=" + successCount +
                 ", failedCount=" + failedCount +
+                ", filteredCount=" + filteredCount +
                 ", groupApkParam=" + groupApkParam +
                 '}';
     }

@@ -31,14 +31,14 @@ public class MessageBundleUtils {
 
 
     public static String getMessage(String key) {
-        return getMessage(key, Locale.getDefault(), null);
+        return getMessage(key, Locale.ENGLISH, null);
     }
 
     public static String getMessage(String key, Object... args) {
         return getMessage(key, Locale.getDefault(), args);
     }
 
-    public static String getMessage(String key, Locale locale, Object[] args) {
+    private static String getMessage(String key, Locale locale, Object[] args) {
         if (locale == null) {
             locale = Locale.getDefault();
         }

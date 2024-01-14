@@ -3,7 +3,6 @@
 The app APIs allow thirdparty system search apps.
 All the app APIs are in the class *com.pax.market.api.sdk.java.api.app.AppApi*.
 
-
 **Constructors of AppAPI**
 
 ```

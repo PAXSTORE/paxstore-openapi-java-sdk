@@ -82,7 +82,8 @@ Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, null, "2fecc"
 			"contact": "Sam",
 			"email": "sam@pax.com",
 			"phone": "444888",
-			"status": "A"
+			"status": "A",
+			"description": "This is a new merchant"
 		}]
 	}
 }
@@ -90,20 +91,21 @@ Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, null, "2fecc"
 
 The type in dataSet is MerchantPageDTO. And the structure like below.
 
-|Property Name|Type|Description|
-|:---|:---|:---|
-|id|Long|The id of merchant.|
-|name|String|The name of merchant.|
-|reseller|SimpleResellerDTO|The reseller of the merchant belongs to.|
-|country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
-|province|String|province|
-|city|String|the city|
-|postcode|String|the postcode|
-|address|String|the address of the merchant|
-|contact|String|Contact of merchant.|
-|email|String|Email of merchant.|
-|phone|String|Phone number of merchant.|
-|status|String|Status of merchant. Value can be one of A(Active), P(Pendding) and S(Suspend)|
+|Property Name|Type| Description                                                                               |
+|:---|:---|:------------------------------------------------------------------------------------------|
+|id|Long| The id of merchant.                                                                       |
+|name|String| The name of merchant.                                                                     |
+|reseller|SimpleResellerDTO| The reseller of the merchant belongs to.                                                  |
+|country|String| the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes) |
+|province|String| province                                                                                  |
+|city|String| the city                                                                                  |
+|postcode|String| the postcode                                                                              |
+|address|String| the address of the merchant                                                               |
+|contact|String| Contact of merchant.                                                                      |
+|email|String| Email of merchant.                                                                        |
+|phone|String| Phone number of merchant.                                                                 |
+|status|String| Status of merchant. Value can be one of A(Active), P(Pendding) and S(Suspend)             |
+|description|String| The description of the merchant                                                           |
 
 The structure of class SimpleResellerDTO
 
@@ -243,23 +245,23 @@ public Result<MerchantDTO>  createMerchant(MerchantCreateRequest merchantCreateR
 
 Structure of class MerchantCreateRequest
 
-|Property Name|Type|Nullable|Description|
-|:---|:---|:---|:---|
-|name|String|false|Merchant name, max length is 64.|
-|email|String|true|Email of merchant, max length is 255.|
-|resellerName|String|false|Reseller name of merchant, max length is 64. Make sure the reseller exist.|
-|contact|String|true|Contact of merchant, max length is 64.|
-|country|String|true|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
-|phone|String|true|Phone number of merchant, max length is 32.|
-|province|String|false|Max length is 64.|
-|city|String|false|Max length is 32.|
-|postcode|String|true|Postcode of merchant, max length is 16.|
-|address|String|true|Address of merchant, max length is 255.|
-|description|String|true|Description of merchant, max length is 3000.|
-|createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant, the default value is false|
-|merchantCategoryNames|List\<String\>|true|Merchant categories. Make sure the categories are available.|
-|entityAttributeValues|LinkedHashMap\<String, String\>|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
-|activateWhenCreate|Boolean|true|Whether to activate the merchant when create, default value is false|
+|Property Name|Type| Nullable |Description|
+|:---|:---|:---------|:---|
+|name|String| false    |Merchant name, max length is 64.|
+|email|String| true     |Email of merchant, max length is 255.|
+|resellerName|String| false    |Reseller name of merchant, max length is 64. Make sure the reseller exist.|
+|contact|String| true     |Contact of merchant, max length is 64.|
+|country|String| true     |the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
+|phone|String| true     |Phone number of merchant, max length is 32.|
+|province|String| true     |Max length is 64.|
+|city|String| true     |Max length is 32.|
+|postcode|String| true     |Postcode of merchant, max length is 16.|
+|address|String| true     |Address of merchant, max length is 255.|
+|description|String| true     |Description of merchant, max length is 3000.|
+|createUserFlag|Boolean| true     |Indicate whether to create user when activate the merchant, the default value is false|
+|merchantCategoryNames|List\<String\>| true     |Merchant categories. Make sure the categories are available.|
+|entityAttributeValues|LinkedHashMap\<String, String\>| true     |Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
+|activateWhenCreate|Boolean| true     |Whether to activate the merchant when create, default value is false|
 
 **Sample codes**
 

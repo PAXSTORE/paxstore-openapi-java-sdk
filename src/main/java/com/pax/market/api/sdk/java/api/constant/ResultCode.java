@@ -14,60 +14,61 @@ package com.pax.market.api.sdk.java.api.constant;
 /**
  * The type Result code.
  */
-public class ResultCode {
+public interface ResultCode {
     /**
      * The constant SUCCESS.
      */
-    public static final int SUCCESS = 0;
+    int SUCCESS = 0;
     /**
      * The constant SDK_PARAM_ERROR.
      */
-    public static final int SDK_PARAM_ERROR = 16100;
+    int SDK_PARAM_ERROR = 16100;
     /**
      * The constant SDK_UNINIT.
      */
-    public static final int SDK_UNINIT = 16101;
+    int SDK_UNINIT = 16101;
     /**
      * The constant SDK_DEC_ERROR.
      */
-    public static final int SDK_DEC_ERROR = 16102;
+    int SDK_DEC_ERROR = 16102;
     /**
      * The constant SDK_JSON_ERROR.
      */
-    public static final int SDK_JSON_ERROR = 16103;
+    int SDK_JSON_ERROR = 16103;
     /**
      * The constant SDK_CONNECT_TIMEOUT.
      */
-    public static final int SDK_CONNECT_TIMEOUT = 16104;
+    int SDK_CONNECT_TIMEOUT = 16104;
     /**
      * The constant SDK_UN_CONNECT.
      */
-    public static final int SDK_UN_CONNECT = 16105;
+    int SDK_UN_CONNECT = 16105;
     /**
      * The constant SDK_RQUEST_EXCEPTION.
      */
-    public static final int SDK_RQUEST_EXCEPTION = 16106;
+    int SDK_RQUEST_EXCEPTION = 16106;
 
     /**
      * The constant SDK_UNZIP_FAILED.
      */
-    public static final int SDK_UNZIP_FAILED = 16107;
+    int SDK_UNZIP_FAILED = 16107;
     /**
      * The constant SDK_MD_FAILED.
      */
-    public static final int SDK_MD_FAILED = 16108;
+    int SDK_MD_FAILED = 16108;
     /**
      * The constant SDK_REPLACE_VARIABLES_FAILED.
      */
-    public static final int SDK_REPLACE_VARIABLES_FAILED = 16109;
+    int SDK_REPLACE_VARIABLES_FAILED = 16109;
     /**
      * The constant SDK_INIT_FAILED.
      */
-    public static final int SDK_INIT_FAILED = 16110;
+    int SDK_INIT_FAILED = 16110;
     /**
      * The constant FILE_NOT_FOUND.
      */
-    public static final int SDK_FILE_NOT_FOUND = 16111;
+    int SDK_FILE_NOT_FOUND = 16111;
 
-
+    int BAD_GATEWAY = 16112;
+    int GATEWAY_TIMEOUT = 16113;
 }

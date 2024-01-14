@@ -94,14 +94,14 @@ Result<MerchantVariableDTO> result = merchantVariableApi.searchMerchantVariable(
 The type in dataSet is MerchantVariableDTO. And the structure like below.
 
 | Property Name  | Type   | Description                                    |
-| -------------- | ------ | ---------------------------------------------- |
+| -------------- | ------ |------------------------------------------------|
 | id             | Long   | The id of merchant variable                    |
 | appPackageName | String | The app package name                           |
 | appName        | String | The app name                                   |
 | type           | String | Merchant variable type, T(text) or P(password) |
 | key            | String | Merchant variable key                          |
 | value          | String | Merchant variable value                        |
-| remarks        | String | Comment                                        |
+| remarks        | String | Remark                                         |
 | source         | String | Source type,M(Market) or C(Merchant)           |
 | createdDate    | Long   |                                                |
 | updatedDate    | Long   |                                                |
@@ -144,7 +144,7 @@ Structure of class ParameterVariable
 |
 | key           | String | false    | Merchant variable key                          |
 | value         | String | true     | Merchant variable value                        |
-| remarks       | String | false    | Comment                                        |
+| remarks       | String | true    | Remark                                        |
 
 **Sample codes**
 
@@ -246,7 +246,7 @@ Structure of class MerchantVariableUpdateRequest
 |
 | key           | String | false    | Merchant variable key                          |
 | value         | String | true     | Merchant variable value                        |
-| remarks       | String | true     | Comment                                        |
+| remarks       | String | true     | Remark                                        |
 
 Note: updateRequest cannot be empty
 

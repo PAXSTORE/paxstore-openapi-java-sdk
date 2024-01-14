@@ -1,5 +1,7 @@
 package com.pax.market.api.sdk.java.api.terminalFirmware.dto;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.util.Date;
 
 /**
@@ -13,8 +15,8 @@ public class PushFirmware2TerminalRequest extends PushFirmwareTaskBasicRequest {
     private static final long serialVersionUID = 1L;
 
     private boolean wifiOnly;
-    private Date effectiveTime;
-    private Date expiredTime;
+    private String effectiveTime;
+    private String expiredTime;
 
     /**
      * Whether to download over Wi-Fi or Cable network only, don’t allow to download over the cellular network
@@ -39,7 +41,7 @@ public class PushFirmware2TerminalRequest extends PushFirmwareTaskBasicRequest {
      *
      * @return the effective time
      */
-    public Date getEffectiveTime() {
+    public String getEffectiveTime() {
         return effectiveTime;
     }
 
@@ -49,7 +51,9 @@ public class PushFirmware2TerminalRequest extends PushFirmwareTaskBasicRequest {
      * @param effectiveTime the effective time
      */
     public void setEffectiveTime(Date effectiveTime) {
-        this.effectiveTime = effectiveTime;
+        if(effectiveTime != null) {
+            this.effectiveTime = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.format(effectiveTime);
+        }
     }
 
     /**
@@ -57,7 +61,7 @@ public class PushFirmware2TerminalRequest extends PushFirmwareTaskBasicRequest {
      *
      * @return the expired time
      */
-    public Date getExpiredTime() {
+    public String getExpiredTime() {
         return expiredTime;
     }
 
@@ -67,6 +71,8 @@ public class PushFirmware2TerminalRequest extends PushFirmwareTaskBasicRequest {
      * @param expiredTime the expired time
      */
     public void setExpiredTime(Date expiredTime) {
-        this.expiredTime = expiredTime;
+        if(expiredTime != null) {
+            this.expiredTime = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.format(expiredTime);
+        }
     }
 }

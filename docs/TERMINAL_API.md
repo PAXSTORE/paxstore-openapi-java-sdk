@@ -918,13 +918,13 @@ public Result<TerminalDTO> copyTerminal(TerminalCopyRequest terminalCopyRequest)
 
 Structure of class TerminalCopyRequest
 
-| Property Name | Type   | Nullable | Description                                                  |
-| :------------ | :----- | :------- | :----------------------------------------------------------- |
-| terminalId    | Long   | false    | The  id of terminal                                          |
-| name          | String | false    | The name of terminal, max length is 64.                      |
-| tid           | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16. |
-| serialNo      | String | true     | The serial number of terminal. If the status is active the serial number is mandatory. |
-| status        | String | false    | Status of terminal, value can be one of A(Active) and P(Pendding).Set value through TerminalApi.TerminalStatus.Active or TerminalApi.TerminalStatus.Inactive |
+| Property Name | Type   | Nullable | Description                                                                                                                                                                                        |
+| :------------ | :----- | :------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| terminalId    | Long   | false    | The  id of terminal                                                                                                                                                                                |
+| name          | String | false    | The name of terminal, max length is 64.                                                                                                                                                            |
+| tid           | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16.                                                                                |
+| serialNo      | String | true     | The serial number of terminal. If the status is active the serial number is mandatory.                                                                                                             |
+| status        | String | false    | Status of terminal, value can be one of A(Active) and P(Pendding). A is for Active and P is for Pendding |
 
 **Sample codes**
 
@@ -1684,7 +1684,7 @@ public Result<TerminalNetworkDTO> getTerminalNetwork(String serialNo, String tid
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalPedDTO> result = terminalApi.getTerminalNetwork("TEST8000999", "BTG7KFTY");
+Result<TerminalNetworkDTO> result = terminalApi.getTerminalNetwork("TEST8000999", "BTG7KFTY");
 ```
 
 **Client side validation failed sample result(JSON formatted)**

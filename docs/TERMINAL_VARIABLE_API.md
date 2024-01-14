@@ -143,7 +143,7 @@ Structure of class ParameterVariable
 | Property Name | Type   | Nullable | Description             |
 | :------------ | :----- | :------- | :---------------------- |
 | packageName   | String | true     | The app package name    |
-| type          | String | true     | Terminal variable type, T(text) or P(password), When it is empty, the default value is "T"
+| type          | String | true     | Terminal variable type, T(text) or P(password), when it is empty, the default value is "T"
 
 |
 | key           | String | false    | Terminal variable key   |
@@ -239,7 +239,7 @@ Structure of class ParameterVariable
 | Property Name | Type   | Nullable | Description                |
 | :------------ | :----- | :------- | :------------------------- |
 | packageName   | String | true     | The name of param template |
-| type          | String | true     | Terminal variable type, T(text) or P(password), When it is empty, the default value is "T"
+| type          | String | true     | Terminal variable type, T(text) or P(password), when it is empty, the default value is "T"
 
 |
 | key           | String | false    | Terminal variable key      |
