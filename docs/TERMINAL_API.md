@@ -759,6 +759,7 @@ The type of data in result is same as search terminal API.
 |1773|The associated reseller is not activate|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
 |2350|Terminal Serial No.{0} already exists in other marketplace sandbox||
+|9200|Terminal upper limit exceeded||
 
 ### Update a terminal
 
@@ -986,12 +987,13 @@ Assert.assertTrue(copyResult.getBusinessCode() == 0);
 
 **Possible business codes**
 
-| Business Code | Message                    | Description |
-| :------------ | :------------------------- | :---------- |
-| 1800          | Terminal not found         |             |
-| 1817          | Terminal name is mandatory |             |
-| 1818          | Terminal name is too long  |             |
-| 1828          | TID already used           |             |
+| Business Code | Message                       | Description |
+| :------------ | :---------------------------- | :---------- |
+| 1800          | Terminal not found            |             |
+| 1817          | Terminal name is mandatory    |             |
+| 1818          | Terminal name is too long     |             |
+| 1828          | TID already used              |             |
+| 9200          | Terminal upper limit exceeded |             |
 
 
 
