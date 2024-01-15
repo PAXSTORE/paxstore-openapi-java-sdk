@@ -114,8 +114,10 @@ terminalRkiApi.pushRki2Terminal(pushRki2TerminalRequest);
 
 ### Search Rki push history
 
-The search Rki push history API allows third party system to search pushed rki task list to the specified terminal by
-page.
+The search Rki push history API allows third party system to search pushed rki task list to the specified terminal by page.
+
+<font color=red>tips：</font> Compatible with older versions, returns Status : A(Active) when the status parameter is C(Completed)  
+
 **API**
 
 ```
@@ -132,7 +134,7 @@ public Result<PushRkiTaskDTO> searchPushRkiTasks(int pageNo, int pageSize, Searc
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.CreatedDate_desc and SearchOrderBy.CreatedDate_asc.|
 |terminalTid|String|false|search filter by terminal tid|
 |rkiKey|String|true|search filter by rki key|
-|status|PushStatus|true|the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend|
+|status|PushStatus|true|the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend, PushStatus.Completed|
 
 **Sample codes**
 
