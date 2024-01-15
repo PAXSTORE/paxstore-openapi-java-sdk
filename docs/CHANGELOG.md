@@ -2,9 +2,7 @@
 
 ## 9.2.1
 ### Bug Fix
-* TerminalApkApi.searchTerminalApk, TerminalRkiApi.searchPushRkiTasks, TerminalFirmwareApi.searchPushFirmwareTasks :
-  PushStatus.Active remains the same as before.  
-  Compatible with older versions, returns content A(Active) when the status parameter is C(Completed)
+* Compatible with older versions, TerminalApkApi, TerminalRkiApi, and TerminalFirmwareApi all return A(Active) for parameters or responses related to status when it is C(Completed).
 
 ### Improvement
 * Add possible error codes for TERMINAL_API doc.
