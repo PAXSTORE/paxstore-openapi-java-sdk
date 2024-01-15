@@ -1363,7 +1363,7 @@ Structure of class TerminalTimeZoneUpdateRequest
 |:------------------------|:--------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
 | timeZone                | String  | true     | The terminal time zone |
-| idDelete                | Boolean | false    | Whether to delete the terminal time zone configuration |
+| isDelete                | Boolean | false    | Whether to delete the terminal time zone configuration |
 
 **Sample codes**
 
