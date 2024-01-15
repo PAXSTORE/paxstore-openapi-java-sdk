@@ -1359,10 +1359,11 @@ Structure of class TerminalReplacementUpdateRequest
 
 Structure of class TerminalTimeZoneUpdateRequest
 
-| Property Name           | Type    | Nullable | Description                                                                                                                                    |
-|:------------------------|:--------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
-| automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                   |
-| timeZone                | String  | true     | The terminal time zone. When the "automaticTimezoneEnable" field and "timeZone" field are both null, it means clearing the time zone configuration |
+| Property Name           | Type    | Nullable | Description                                                                                                                                   |
+|:------------------------|:--------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+| automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
+| timeZone                | String  | true     | The terminal time zone |
+| idDelete                | Boolean | false    | Whether to delete the terminal time zone configuration |
 
 **Sample codes**
 
