@@ -193,7 +193,8 @@ public class BaseThirdPartySysApi{
 
     public enum PushStatus {
         Active("A"),
-        Suspend("S");
+        Suspend("S"),
+        Completed("C");
         private String val;
         private PushStatus(String status) {
             this.val = status;

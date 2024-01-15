@@ -106,8 +106,10 @@ terminalFirmwareApi.pushFirmware2Terminal(pushFirmware2TerminalRequest);
 
 ### Search firmware push history
 
-The search firmware push history API allows third party system to search pushed firmwares to the specified terminal by
-page.
+The search firmware push history API allows third party system to search pushed firmwares to the specified terminal by page.
+
+<font color=red>tips：</font> Compatible with older versions, returns Status : A(Active) when the status parameter is C(Completed)  
+
 **API**
 
 ```
@@ -125,7 +127,7 @@ String serialNo)
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.CreatedDate_desc and SearchOrderBy.CreatedDate_asc.|
 |terminalTid|String|true|search filter by terminal tid, <br/>when the parameter serialNo has a value, it can be null, otherwise, it cannot be empty|
 |fmName|String|true|search filter by firmware name|
-|status|PushStatus|true|the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend|
+|status|PushStatus|true|the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend, PushStatus.Completed|
 |serialNo|String|true|search filter by terminal serial no|
 
 **Sample codes**
