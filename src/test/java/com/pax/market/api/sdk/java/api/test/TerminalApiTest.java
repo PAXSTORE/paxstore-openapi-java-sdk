@@ -166,13 +166,24 @@ public class TerminalApiTest {
 	}
 
 	@Test
-	public void testUpdateTerminalConfig(){
+	public void testUpdateTerminalReplacementConfig(){
 		Long terminalId = 909744L;
-		TerminalConfigUpdateRequest terminalConfigUpdateRequest = new TerminalConfigUpdateRequest();
-		terminalConfigUpdateRequest.setAllowReplacement(true);
-		terminalConfigUpdateRequest.setAutomaticTimezoneEnable(false);
-		terminalConfigUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
-	    Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
+		TerminalReplacementUpdateRequest terminalReplacementUpdateRequest = new TerminalReplacementUpdateRequest();
+		terminalReplacementUpdateRequest.setAllowReplacement(true);
+	    Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalReplacementUpdateRequest);
+		logger.debug("Result of update Terminal Config: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+
+	}
+
+	@Test
+	public void testUpdateTerminalTimeZoneConfig(){
+		Long terminalId = 1547947831459887L;
+		TerminalTimeZoneUpdateRequest terminalTimeZoneUpdateRequest = new TerminalTimeZoneUpdateRequest();
+		terminalTimeZoneUpdateRequest.setAutomaticTimezoneEnable(false);
+		terminalTimeZoneUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
+		terminalTimeZoneUpdateRequest.setDelete(Boolean.TRUE);
+		Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalTimeZoneUpdateRequest);
 		logger.debug("Result of update Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 
