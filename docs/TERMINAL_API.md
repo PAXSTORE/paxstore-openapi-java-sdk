@@ -1344,16 +1344,23 @@ public Result<String> updateTerminalConfig(Long terminalId, TerminalConfigUpdate
 
 **Input parameter(s) description**
 
-| Parameter Name              | Type                        | Nullable | Description                                                  |
-| :-------------------------- | :-------------------------- | :------- | :----------------------------------------------------------- |
-| terminalId                  | Long                        | false    | Terminal's id.                                               |
-| terminalConfigUpdateRequest | TerminalConfigUpdateRequest | false    | Update terminal config request object. The structure shows below. |
+| Parameter Name                   | Type                        | Nullable | Description                                                                   |
+|:---------------------------------| :-------------------------- | :------- |:------------------------------------------------------------------------------|
+| terminalId                       | Long                        | false    | Terminal's id.                                                                |
+| terminalConfigUpdateRequest      | TerminalConfigUpdateRequest | false    | Update terminal config request object. The structure shows below.             |
+| terminalReplacementUpdateRequest | TerminalReplacementUpdateRequest | false    | Update terminal replacement config request object. The structure shows below. |
+| terminalTimeZoneUpdateRequest    | TerminalTimeZoneUpdateRequest | false    | Update terminal time zone config request object. The structure shows below.   |
 
-Structure of class TerminalRemoteConfigRequest
+Structure of class TerminalReplacementUpdateRequest
 
 | Property Name           | Type    | Nullable | Description                                                                                                                                    |
 |:------------------------|:--------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
 | allowReplacement        | Boolean | false    | Whether allow terminal replacement by API or input serial number on terminal                                                                   |
+
+Structure of class TerminalTimeZoneUpdateRequest
+
+| Property Name           | Type    | Nullable | Description                                                                                                                                    |
+|:------------------------|:--------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
 | automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                   |
 | timeZone                | String  | true     | The terminal time zone. When the "automaticTimezoneEnable" field and "timeZone" field are both null, it means clearing the time zone configuration |
 
@@ -1362,10 +1369,14 @@ Structure of class TerminalRemoteConfigRequest
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Long terminalId = 909744L;
-TerminalConfigUpdateRequest terminalConfigUpdateRequest = new TerminalConfigUpdateRequest();
-terminalConfigUpdateRequest.setAllowReplacement(true);
-terminalConfigUpdateRequest.setAutomaticTimezoneEnable(false);
-terminalConfigUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
+TerminalReplacementUpdateRequest terminalReplacementUpdateRequest = new TerminalReplacementUpdateRequest();
+terminalReplacementUpdateRequest.setAllowReplacement(true);
+Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
+
+TerminalTimeZoneUpdateRequest terminalTimeZoneUpdateRequest = new TerminalTimeZoneUpdateRequest();
+terminalTimeZoneUpdateRequest.setAutomaticTimezoneEnable(false);
+terminalTimeZoneUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
+terminalTimeZoneUpdateRequest.setDelete(Boolean.TRUE);
 Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
 ```
 
