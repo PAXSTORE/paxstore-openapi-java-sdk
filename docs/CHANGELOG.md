@@ -6,6 +6,9 @@
   PushStatus.Active remains the same as before.  
   Compatible with older versions, returns content A(Active) when the status parameter is C(Completed)
 
+### Improvement
+* Add possible error codes for TERMINAL_API doc.
+
 
 ## 9.2.0  
 ### Improvement  
