@@ -137,7 +137,7 @@ public Result<EntityAttributeDTO> searchEntityAttributes(int pageNo, int pageSiz
 |pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of EntityAttributeApi.SearchOrderBy.EntityType_desc and EntityAttributeApi.SearchOrderBy.EntityType_asc.|
 |key|String|true|the value of the enity attribute key|
-|entityType|EntityAttributeType|true|The value of this parameter can be one of EntityAttributeApi.EntityAttributeType.entityTypeMerchant   and EntityAttributeApi.EntityAttributeType.entityTypeReseller.|
+|entityType|EntityAttributeType|true|The value of this parameter can be one of EntityAttributeApi.EntityAttributeType.Merchant,  EntityAttributeApi.EntityAttributeType.Reseller and  EntityAttributeApi.EntityAttributeType.App|
 
 **Sample codes**
 
@@ -233,7 +233,7 @@ Structure of class EntityAttributeCreateRequest.
 
 | Property Name | Type                | Nullable | Description                                                  |
 | :------------ | :------------------ | :------- | :----------------------------------------------------------- |
-| entityType    | EntityAttributeType | false    | The value of this parameter can be one of EntityAttributeApi.EntityAttributeType.Merchant and EntityAttributeApi.EntityAttributeType.Reseller. |
+| entityType    | EntityAttributeType | false    | The value of this parameter can be one of EntityAttributeApi.EntityAttributeType.Merchant,  EntityAttributeApi.EntityAttributeType.Reseller and  EntityAttributeApi.EntityAttributeType.App |
 | inputType     | EntityInputType     | false    | The value of this parameter can be one of EntityAttributeApi.EntityInputType.Text and EntityAttributeApi.EntityInputType.Selector. |
 | minLength     | Integer             | true     |                                                              |
 | maxLength     | Integer             | true     |                                                              |
