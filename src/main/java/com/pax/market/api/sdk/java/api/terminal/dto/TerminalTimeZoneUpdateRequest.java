@@ -16,16 +16,15 @@ public class TerminalTimeZoneUpdateRequest extends TerminalConfigUpdateRequest {
 
     private static final long serialVersionUID = 1L;
 
-    private Boolean automaticTimezoneEnable;
+    private Boolean automaticTimeZoneEnable;
     private String timeZone;
-    private Boolean isDelete;
 
-    public Boolean getAutomaticTimezoneEnable() {
-        return automaticTimezoneEnable;
+    public Boolean getAutomaticTimeZoneEnable() {
+        return automaticTimeZoneEnable;
     }
 
-    public void setAutomaticTimezoneEnable(Boolean automaticTimezoneEnable) {
-        this.automaticTimezoneEnable = automaticTimezoneEnable;
+    public void setAutomaticTimeZoneEnable(Boolean automaticTimeZoneEnable) {
+        this.automaticTimeZoneEnable = automaticTimeZoneEnable;
     }
 
     public String getTimeZone() {
@@ -34,13 +33,5 @@ public class TerminalTimeZoneUpdateRequest extends TerminalConfigUpdateRequest {
 
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
-    }
-
-    public Boolean getDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(Boolean delete) {
-        isDelete = delete;
     }
 }

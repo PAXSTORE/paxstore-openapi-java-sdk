@@ -1363,7 +1363,6 @@ Structure of class TerminalTimeZoneUpdateRequest
 |:------------------------|:--------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
 | timeZone                | String  | true     | The terminal time zone |
-| isDelete                | Boolean | false    | Whether to delete the terminal time zone configuration |
 
 **Sample codes**
 
@@ -1377,7 +1376,6 @@ Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConf
 TerminalTimeZoneUpdateRequest terminalTimeZoneUpdateRequest = new TerminalTimeZoneUpdateRequest();
 terminalTimeZoneUpdateRequest.setAutomaticTimezoneEnable(false);
 terminalTimeZoneUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
-terminalTimeZoneUpdateRequest.setDelete(Boolean.TRUE);
 Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
 ```
 
@@ -1467,9 +1465,7 @@ Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(909744L);
 {
 	"businessCode": 0,
 	"data": {
-		"allowReplacement": true,
-		"automaticTimezoneEnable": false,
-		"timeZone": "UTC"
+		"allowReplacement": true
 	}
 }
 ```
