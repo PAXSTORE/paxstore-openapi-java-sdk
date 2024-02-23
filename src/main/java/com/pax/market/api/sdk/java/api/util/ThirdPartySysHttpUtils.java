@@ -222,7 +222,7 @@ public abstract class ThirdPartySysHttpUtils {
 					urlConnection.setRequestProperty(entry.getKey(), entry.getValue());
 				}
 			}
-			if ("GET".equalsIgnoreCase(requestMethod) || "DELETE".equalsIgnoreCase(requestMethod)) {
+			if ("GET".equalsIgnoreCase(requestMethod)) {
 				urlConnection.connect();
 			} else {
 				urlConnection.setDoOutput(true);
