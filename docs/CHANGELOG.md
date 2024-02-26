@@ -3,6 +3,7 @@
 ## 9.3.0
 ### New Feature
 * Add terminal time zone configuration.
+* Add terminal geoFence whiteList configuration Api: create,delete Api.
 
 ## 9.2.0  
 ### Improvement  
