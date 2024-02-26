@@ -285,12 +285,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         if (terminalConfigUpdateRequest instanceof TerminalReplacementUpdateRequest) {
             requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalReplacementUpdateRequest.class);
         } else {
-            TerminalTimeZoneUpdateRequest terminalTimeZoneUpdateRequest = (TerminalTimeZoneUpdateRequest) terminalConfigUpdateRequest;
-            if (BooleanUtils.isTrue(terminalTimeZoneUpdateRequest.getDelete())) {
-                terminalTimeZoneUpdateRequest.setTimeZone("");
-                terminalTimeZoneUpdateRequest.setAutomaticTimezoneEnable(null);
-            }
-            requestBody = gson.toJson(terminalTimeZoneUpdateRequest, TerminalTimeZoneUpdateRequest.class);
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalTimeZoneUpdateRequest.class);
         }
         request.setRequestBody(requestBody);
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);

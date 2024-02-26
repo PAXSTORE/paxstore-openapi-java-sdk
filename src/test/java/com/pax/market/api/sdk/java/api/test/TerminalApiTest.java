@@ -180,9 +180,8 @@ public class TerminalApiTest {
 	public void testUpdateTerminalTimeZoneConfig(){
 		Long terminalId = 1547947831459887L;
 		TerminalTimeZoneUpdateRequest terminalTimeZoneUpdateRequest = new TerminalTimeZoneUpdateRequest();
-		terminalTimeZoneUpdateRequest.setAutomaticTimezoneEnable(false);
+		terminalTimeZoneUpdateRequest.setAutomaticTimeZoneEnable(false);
 		terminalTimeZoneUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
-		terminalTimeZoneUpdateRequest.setDelete(Boolean.TRUE);
 		Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalTimeZoneUpdateRequest);
 		logger.debug("Result of update Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
