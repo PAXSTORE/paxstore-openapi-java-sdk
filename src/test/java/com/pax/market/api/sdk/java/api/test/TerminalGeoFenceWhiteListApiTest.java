@@ -2,6 +2,7 @@ package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalGeoFenceWhiteList.TerminalGeoFenceWhiteListApi;
+import com.pax.market.api.sdk.java.api.terminalGeoFenceWhiteList.dto.TerminalGeoFenceWhiteListDTO;
 import com.pax.market.api.sdk.java.api.terminalGeoFenceWhiteList.dto.TerminalGeoFenceWhiteListRequest;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,6 +21,14 @@ public class TerminalGeoFenceWhiteListApiTest {
     @Before
     public void init(){
         terminalGeoFenceWhiteListApi = new TerminalGeoFenceWhiteListApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+    }
+
+    @Test
+    public void testSearchGeoFenceWhiteList(){
+        String serialNo = "";
+        Result<TerminalGeoFenceWhiteListDTO> result = terminalGeoFenceWhiteListApi.searchGeoFenceWhiteList(1,10, TerminalGeoFenceWhiteListApi.SearchOrderBy.CreatedDate_desc, serialNo);
+        logger.debug("Result of  search geofence whitelist: {}",result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
     }
 
     @Test
