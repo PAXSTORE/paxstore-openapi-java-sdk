@@ -268,6 +268,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [GoInsight APIs](docs/GOINSIGHT_API.md)
 
+## [Terminal_Geofence_WhiteList APIs](docs/TERMINAL_GEOFENCE_WHITELIST_API.md)
+
 
 
 
