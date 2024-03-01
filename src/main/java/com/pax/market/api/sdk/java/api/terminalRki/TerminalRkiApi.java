@@ -51,7 +51,7 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(pushRki2TerminalRequest, PushRki2TerminalRequest.class));
-        Response response = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
+        PushRkiTaskResponse response = EnhancedJsonUtils.fromJson(client.execute(request), PushRkiTaskResponse.class);
         return new Result<>(response);
     }
 
