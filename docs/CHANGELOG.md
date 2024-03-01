@@ -2,7 +2,7 @@
 
 ## 9.2.2
 ### Bug Fix
-* Fix default type conversion:  TerminalFirmwareApi.pushFirmware2Terminal,TerminalRkiApi.pushRkiKey2Group,TerminalGroupRkiApi.pushRkiKey2Group
+* Fix default type conversion:  TerminalFirmwareApi.pushFirmware2Terminal,TerminalRkiApi.pushRkiKey2Terminal,TerminalGroupRkiApi.pushRkiKey2Group
 
 
 ## 9.2.1
