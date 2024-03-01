@@ -48,7 +48,7 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(pushFirmware2TerminalRequest, PushFirmware2TerminalRequest.class));
-        Response response = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
+        PushFirmwareTaskResponse response = EnhancedJsonUtils.fromJson(client.execute(request), PushFirmwareTaskResponse.class);
         return new Result<PushFirmwareTaskDTO>(response);
     }
 

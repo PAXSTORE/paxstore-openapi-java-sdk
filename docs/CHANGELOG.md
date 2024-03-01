@@ -5,6 +5,20 @@
 * Add terminal time zone configuration.
 * Add terminal geoFence whiteList configuration Api: search，create,delete Api.
 
+
+## 9.2.2
+### Bug Fix
+* Fix default type conversion:  TerminalFirmwareApi.pushFirmware2Terminal,TerminalRkiApi.pushRkiKey2Terminal,TerminalGroupRkiApi.pushRkiKey2Group
+
+
+## 9.2.1
+### Bug Fix
+* Compatible with older versions, TerminalApkApi, TerminalRkiApi, and TerminalFirmwareApi all return A(Active) for parameters or responses related to status when it is C(Completed).
+
+### Improvement
+* Add possible error codes for TERMINAL_API doc.
+
+
 ## 9.2.0  
 ### Improvement  
 * Improved retry strategy. When server return 502 response code the retry will work too.

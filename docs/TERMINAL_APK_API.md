@@ -147,6 +147,9 @@ terminalApkApi.createTerminalApk(createTerminalApkRequest);
 ### Search apk push history
 
 The search apk push history API allows third party system to search pushed apks to the specified terminal by page.
+
+<font color=red>tips：</font> Compatible with older versions, returns Status : A(Active) when the status parameter is C(Completed)  
+
 **API**
 
 ```
@@ -156,14 +159,14 @@ public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, Search
 
 **Input parameter(s) description**
 
-| Name           | Type          | Nullable | Description                                                                                                                                                                                                               |
-|:---------------|:--------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pageNo         | int           | false    | page number, value must >=1                                                                                                                                                                                               |
-| pageSize       | int           | false    | the record number per page, range is 1 to 100                                                                                                                                                                             |
+| Name           | Type          | Nullable | Description                                                  |
+| :------------- | :------------ | :------- | :----------------------------------------------------------- |
+| pageNo         | int           | false    | page number, value must >=1                                  |
+| pageSize       | int           | false    | the record number per page, range is 1 to 100                |
 | orderBy        | SearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.CreatedDate_desc and SearchOrderBy.CreatedDate_asc. |
-| terminalTid    | String        | false    | search filter by terminal tid                                                                                                                                                                                             |
-| appPackageName | String        | true     | search filter by app packageName                                                                                                                                                                                          |
-| status         | PushStatus    | true     | the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend                                                                                                                                               |
+| terminalTid    | String        | false    | search filter by terminal tid                                |
+| appPackageName | String        | true     | search filter by app packageName                             |
+| status         | PushStatus    | true     | the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend, PushStatus.Completed |
 
 **Sample codes**
 
@@ -207,14 +210,14 @@ Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,12,SearchOrde
 
 The type in dataSet is TerminalApkDTO. And the structure like below.
 
-| Name           | Type   | Description                                                                                |
-|:---------------|:-------|:-------------------------------------------------------------------------------------------|
-| id             | Long   | the id of terminal apk                                                                     |
-| apkPackageName | String | the packageName of apk                                                                     |
-| apkVersionName | String | the version name of apk                                                                    |
-| apkVersionCode | Long   | the version code of apk                                                                    |
-| terminalSN     | String | the serialNo of terminal                                                                   |
-| status         | String | the status of terminal apk, value can be one of A(Active) and S(Suspend)                   |
+| Name           | Type   | Description                                                  |
+| :------------- | :----- | :----------------------------------------------------------- |
+| id             | Long   | the id of terminal apk                                       |
+| apkPackageName | String | the packageName of apk                                       |
+| apkVersionName | String | the version name of apk                                      |
+| apkVersionCode | Long   | the version code of apk                                      |
+| terminalSN     | String | the serialNo of terminal                                     |
+| status         | String | the status of terminal apk, value can be one of A(Active) and S(Suspend) |
 | actionStatus   | String | the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status) |
 
 **Possible client validation errors**

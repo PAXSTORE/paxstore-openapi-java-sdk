@@ -115,7 +115,7 @@ public class TerminalGroupRkiApi extends BaseThirdPartySysApi {
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(createRequest, CreateTerminalGroupRkiRequest.class));
-        Response response = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
+        TerminalGroupRkiResponse response = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupRkiResponse.class);
         return new Result<>(response);
     }
 
