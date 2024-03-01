@@ -1,5 +1,10 @@
 # Changelog
 
+## 9.2.2
+### Bug Fix
+* Fix default type conversion:  TerminalFirmwareApi.pushFirmware2Terminal,TerminalRkiApi.pushRkiKey2Terminal,TerminalGroupRkiApi.pushRkiKey2Group
+
+
 ## 9.2.1
 ### Bug Fix
 * Compatible with older versions, TerminalApkApi, TerminalRkiApi, and TerminalFirmwareApi all return A(Active) for parameters or responses related to status when it is C(Completed).
