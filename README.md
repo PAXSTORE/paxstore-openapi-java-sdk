@@ -173,7 +173,7 @@ To integrate with this SDK please add below dependency by updating the pom.xml f
 <dependency>
     <groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-    <version>9.2.2</version>
+    <version>9.3.0</version>
 </dependency>
 ```
 
@@ -267,6 +267,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 ## [Terminal RKI APIs](docs/TERMINAL_RKI_API.md)
 
 ## [GoInsight APIs](docs/GOINSIGHT_API.md)
+
+## [Terminal Geofence WhiteList APIs](docs/TERMINAL_GEOFENCE_WHITELIST_API.md)
 
 
 

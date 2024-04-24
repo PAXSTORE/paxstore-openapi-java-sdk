@@ -28,6 +28,7 @@ import com.pax.market.api.sdk.java.api.terminal.validator.TerminalRequestValidat
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.validate.Validators;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -279,7 +280,14 @@ public class TerminalApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(UPDATE_TERMINAL_REMOTE_CONFIG_URL.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(terminalConfigUpdateRequest, TerminalConfigUpdateRequest.class));
+        String requestBody;
+        Gson gson = new Gson();
+        if (terminalConfigUpdateRequest instanceof TerminalReplacementUpdateRequest) {
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalReplacementUpdateRequest.class);
+        } else {
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalTimeZoneUpdateRequest.class);
+        }
+        request.setRequestBody(requestBody);
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<>(emptyResponse);
     }

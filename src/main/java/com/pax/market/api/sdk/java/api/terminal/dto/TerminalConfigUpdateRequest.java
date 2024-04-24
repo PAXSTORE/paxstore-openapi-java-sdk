@@ -19,15 +19,7 @@ import java.io.Serializable;
  * @Author: Shawn
  * @Date: 2020/3/19
  */
-public class TerminalConfigUpdateRequest implements Serializable {
+public abstract class TerminalConfigUpdateRequest implements Serializable {
     private static final long serialVersionUID = -4927756870104996001L;
-    private Boolean allowReplacement;
 
-    public Boolean getAllowReplacement() {
-        return allowReplacement;
-    }
-
-    public void setAllowReplacement(Boolean allowReplacement) {
-        this.allowReplacement = allowReplacement;
-    }
 }

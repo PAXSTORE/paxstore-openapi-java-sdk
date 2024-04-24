@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.3.0
+### New Feature
+* Add terminal time zone configuration.
+* Add terminal geoFence whiteList configuration Api: search，create,delete Api.
+
+
 ## 9.2.2
 ### Bug Fix
 * Fix default type conversion:  TerminalFirmwareApi.pushFirmware2Terminal,TerminalRkiApi.pushRkiKey2Terminal,TerminalGroupRkiApi.pushRkiKey2Group

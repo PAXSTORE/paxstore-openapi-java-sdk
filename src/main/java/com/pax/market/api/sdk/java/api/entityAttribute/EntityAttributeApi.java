@@ -169,7 +169,8 @@ public class EntityAttributeApi  extends BaseThirdPartySysApi {
 
     public enum EntityAttributeType {
         Merchant("Merchant"),
-        Reseller("Reseller");
+        Reseller("Reseller"),
+        App("App");
         private String val;
         private EntityAttributeType(String entityType) {
             this.val = entityType;

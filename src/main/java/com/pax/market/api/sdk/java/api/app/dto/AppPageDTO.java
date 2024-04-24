@@ -16,6 +16,7 @@ package com.pax.market.api.sdk.java.api.app.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -36,6 +37,7 @@ public class AppPageDTO implements Serializable {
     private BigDecimal price;
     private Long downloads;             // 下载次数
     private List<ApkDTO> apkList;
+    private LinkedHashMap<String, String> entityAttributeValues;
 
     public Long getId() {
         return id;
@@ -117,6 +119,15 @@ public class AppPageDTO implements Serializable {
         this.apkList = apkList;
     }
 
+    public LinkedHashMap<String, String> getEntityAttributeValues() {
+        return entityAttributeValues;
+    }
+
+    public void setEntityAttributeValues(LinkedHashMap<String, String> entityAttributeValues) {
+        this.entityAttributeValues = entityAttributeValues;
+    }
+
+
     @Override
     public String toString() {
         return "AppPageDTO{" +
@@ -130,6 +141,7 @@ public class AppPageDTO implements Serializable {
                 ", price=" + price +
                 ", downloads=" + downloads +
                 ", apkList=" + apkList +
+                ", entityAttributeValues=" + entityAttributeValues +
                 '}';
     }
 }

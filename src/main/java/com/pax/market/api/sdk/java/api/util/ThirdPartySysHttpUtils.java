@@ -222,7 +222,7 @@ public abstract class ThirdPartySysHttpUtils {
 					urlConnection.setRequestProperty(entry.getKey(), entry.getValue());
 				}
 			}
-			if ("GET".equalsIgnoreCase(requestMethod) || "DELETE".equalsIgnoreCase(requestMethod)) {
+			if ("GET".equalsIgnoreCase(requestMethod)) {
 				urlConnection.connect();
 			} else {
 				urlConnection.setDoOutput(true);
@@ -286,7 +286,7 @@ public abstract class ThirdPartySysHttpUtils {
 			} else if(responseCode == 502) {
 				throw new GatewayException(502, "Encounter 502 response code");
 			} else if(responseCode == 504) {
-				throw new GatewayException(594, "Encounter 504 response code");
+				throw new GatewayException(504, "Encounter 504 response code");
 			} else {
 				if(urlConnection.getErrorStream() != null) {
 					bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(), DEFAULT_CHARSET));
@@ -300,13 +300,12 @@ public abstract class ThirdPartySysHttpUtils {
 				stringBuilder.append(str);
 			}
 			String resultStr = stringBuilder.toString();
-			if(!StringUtils.containsIgnoreCase(contentType, "json") && StringUtils.isNotBlank(resultStr)) {
-				logger.warn(resultStr);
-			}
-			if(StringUtils.isBlank(resultStr)) {
-				resultStr= "{}";
-			}else if(!StringUtils.startsWith(resultStr, "{")){
-				resultStr=String.format("{%s}", resultStr);
+			if(!StringUtils.containsIgnoreCase(contentType, "json")) {
+				logger.error("Response code{}, ContentType {} is not supported", responseCode, contentType);
+				if(StringUtils.isNotBlank(resultStr)) {
+					logger.error("Response content={}", resultStr);
+				}
+				return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_CONNECT_TIMEOUT);
 			}
 			JsonObject json = JsonParser.parseString(resultStr).getAsJsonObject();
 			json.addProperty("rateLimit", rateLimit);
@@ -321,10 +320,8 @@ public abstract class ThirdPartySysHttpUtils {
 			}else{
 				throw localSocketTimeoutException;
 			}
-
 		} catch (ConnectException localConnectException) {
 			throw localConnectException;
-
 		} catch (FileNotFoundException fileNotFoundException) {
 			FileUtils.deleteFile(filePath);
 			logger.error("FileNotFoundException Occurred. Details: {}", fileNotFoundException.toString());
