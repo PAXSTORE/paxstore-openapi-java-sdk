@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-	<version>9.3.0</version>
+	<version>9.3.1</version>
     <name>OpenAPI Java SDK</name>
     <description>OpenAPI Java SDK</description>
     <url>https://github.com/PAXSTORE/paxstore-openapi-java-sdk</url>
