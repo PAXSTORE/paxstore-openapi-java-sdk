@@ -1487,12 +1487,13 @@ public Result<TerminalDTO> copyTerminalBySn(TerminalCopyRequest terminalCopyRequ
 
 Structure of class TerminalCopyRequest
 
-| Property Name | Type   | Nullable | Description                                                                                                                                                                                        |
-| :------------ | :----- | :------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name          | String | false    | The name of terminal, max length is 64.                                                                                                                                                            |
-| tid           | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16.                                                                                |
-| serialNo      | String | false     | The serial number of terminal. If the status is active the serial number is mandatory.                                                                                                             |
-| status        | String | false    | Status of terminal, value can be one of A(Active) and P(Pendding). A is for Active and P is for Pendding |
+| Property Name    | Type   | Nullable | Description                                                                                                         |
+|:-----------------| :----- |:---------|:--------------------------------------------------------------------------------------------------------------------|
+| name             | String | false    | The name of terminal, max length is 64.                                                                             |
+| tid              | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16. |
+| sourceSerialNo   | String | false    | The serial number of source terminal. The serial number is mandatory.                                               |
+| serialNo         | String | false    | The serial number of terminal. If the status is active the serial number is mandatory.                              |
+| status           | String | false    | Status of terminal, value can be one of A(Active) and P(Pendding). A is for Active and P is for Pendding            |
 
 **Sample codes**
 
@@ -1501,6 +1502,7 @@ TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api
 TerminalCopyRequest copyRequest = new TerminalCopyRequest();
 copyRequest.setTerminalId(13453434534L);
 copyRequest.setName("COPY_FROM_13453434534");
+copyRequest.setSourceSerialNo("TJ0000001");
 copyRequest.setSerialNo("TJ0000002");
 copyRequest.setStatus(TerminalStatus.Active);
 Result<TerminalDTO> copyResult = terminalApi.copyTerminalBySn(copyRequest);

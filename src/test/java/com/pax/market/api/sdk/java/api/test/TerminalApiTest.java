@@ -251,11 +251,9 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 	public void testBatchAddTerminalToGroupBySn(){
 		TerminalSnGroupRequest groupRequest = new TerminalSnGroupRequest();
 		Set<String> serialNoList = new HashSet<>();
-		serialNoList.add("SN6132522");
-		serialNoList.add("SN6685133");
+		serialNoList.add("SN20240520001");
 		Set<Long> groupIds = new HashSet<>();
-		groupIds.add(16529L);
-		groupIds.add(16527L);
+		groupIds.add(1001566019L);
 		groupRequest.setSerialNos(serialNoList);
 		groupRequest.setGroupIds(groupIds);
 		Result<String> result = terminalApi.batchAddTerminalToGroupBySn(groupRequest);

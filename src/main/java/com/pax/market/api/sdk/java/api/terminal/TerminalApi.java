@@ -87,7 +87,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String COPY_TERMINAL_URL_BY_SN = "/v1/3rdsys/terminal/copy";
 
-    protected static final String ADD_TERMINAL_TO_GROUP_URL_BY_SN = "/v1/3rdsys/terminal/group";
+    protected static final String ADD_TERMINAL_TO_GROUP_URL_BY_SN = "/v1/3rdsys/terminal/groups";
 
     protected static final String UPDATE_TERMINAL_REMOTE_CONFIG_URL_BY_SN = "/v1/3rdsys/terminal/config";
 
@@ -490,12 +490,12 @@ public class TerminalApi extends BaseThirdPartySysApi {
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
-        logger.debug("serialNo= {}", terminalCopyRequest.getSerialNo());
+        logger.debug("sourceSerialNo={},serialNo= {}", terminalCopyRequest.getSourceSerialNo(), terminalCopyRequest.getSerialNo());
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(COPY_TERMINAL_URL_BY_SN);
         request.setRequestMethod(RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(terminalCopyRequest, TerminalCopyRequest.class));
+        request.setRequestBody(new Gson().toJson(terminalCopyRequest, TerminalSnCopyRequest.class));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<>(terminalResponse);
     }
