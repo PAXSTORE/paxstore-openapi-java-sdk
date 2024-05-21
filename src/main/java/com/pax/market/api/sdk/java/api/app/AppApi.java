@@ -174,8 +174,8 @@ public class AppApi extends BaseThirdPartySysApi {
     }
 
     public enum AppSearchOrderBy {
-        AppName_desc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci DESC"),
-        AppName_asc("CONVERT( app.name USING gbk ) COLLATE gbk_chinese_ci ASC"),
+        AppName_desc("app.name DESC"),
+        AppName_asc("app.name ASC"),
         UpdatedDate_desc("app.updated_date DESC"),
         UpdatedDate_asc("app.updated_date ASC");
         private String val;

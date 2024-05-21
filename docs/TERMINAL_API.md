@@ -1029,7 +1029,7 @@ Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
 ```
 {
 	"businessCode": 2321,
-	"message": "Terminal Serial No.sn0101012237 already exists"
+	"message": "Terminal Serial No.sn0101012237 has been registered"
 }
 ```
 
@@ -1090,12 +1090,13 @@ The type of data in result is same as search terminal API.
 |1804|Terminal merchant is mandatory|&nbsp;|
 |1802|Terminal SN is mandatory|&nbsp;|
 |1828|TID already used|&nbsp;|
-|2321|Terminal Serial No.{0} already exists||
+|2321|Terminal Serial No.{0} has been registered||
+|2331|Terminal Serial No.{0} has been registered in the developer sandbox||
+|2332|Terminal Serial No.{0} is not available, please contact the support team for further assistance||
 |2349|Terminal TID length is 8 to 15|&nbsp;|
 |1737|The associated merchant is not activate|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
-|2350|Terminal Serial No.{0} already exists in other marketplace sandbox||
 |9200|Terminal upper limit exceeded||
 
 ### Update a terminal
@@ -1229,10 +1230,11 @@ The type of data in result is same as search terminal API.
 |1929|The terminal is not inactive,model cannot be updated!||
 |1937|Merchant is not belong to the given Reseller!|&nbsp;|
 |2312|Terminal Serial No. accept alphanumeric|&nbsp;Alphanumeric and max length is 16|
-|2321|Terminal Serial No.{0} already exists|&nbsp;|
+|2321|Terminal Serial No.{0} has been registered||
+|2331|Terminal Serial No.{0} has been registered in the developer sandbox||
+|2332|Terminal Serial No.{0} is not available, please contact the support team for further assistance||
 |2326|Terminal reseller is mandatory|&nbsp;|
 |2349|Terminal TID length is 8 to 15|&nbsp;|
-|2350|Terminal Serial No.{0} already exists in other marketplace sandbox|&nbsp;|
 |2401|Terminal TID is invalid|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 9.3.1
+### Bug Fix
+* Fix AppApi.AppSearchOrderBy.AppName_desc and AppApi.AppSearchOrderBy.AppName_asc
+
 ## 9.3.0
 ### New Feature
 * Add terminal time zone configuration.
