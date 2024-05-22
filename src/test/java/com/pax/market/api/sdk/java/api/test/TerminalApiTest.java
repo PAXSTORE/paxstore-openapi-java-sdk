@@ -251,9 +251,10 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 	public void testBatchAddTerminalToGroupBySn(){
 		TerminalSnGroupRequest groupRequest = new TerminalSnGroupRequest();
 		Set<String> serialNoList = new HashSet<>();
-		serialNoList.add("SN20240520001");
+		serialNoList.add("QWJQW027");
+		serialNoList.add("QWJQW028");
 		Set<Long> groupIds = new HashSet<>();
-		groupIds.add(1001566019L);
+		groupIds.add(1001567300L);
 		groupRequest.setSerialNos(serialNoList);
 		groupRequest.setGroupIds(groupIds);
 		Result<String> result = terminalApi.batchAddTerminalToGroupBySn(groupRequest);
@@ -275,7 +276,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testGetTerminalConfigBySn(){
-		String serialNo = "SN6132522";
+		String serialNo = "";
 		Result<TerminalConfigDTO> result = terminalApi.getTerminalConfigBySn(serialNo);
 		logger.debug("Result of get Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
@@ -285,7 +286,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testGetTerminalPedBySn(){
-		String serialNo = "SN6132522";
+		String serialNo = "";
 		Result<TerminalPedDTO> result = terminalApi.getTerminalPedBySn(serialNo);
 		logger.debug("Result of get Terminal ped: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
@@ -293,7 +294,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testMoveTerminalBySn() {
-		String serialNo = "SN6132522";
+		String serialNo = "";
 		Result<String> result = terminalApi.moveTerminalBySn(serialNo, "PAX", "6666");
 		logger.debug("Result of move Terminal {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
@@ -306,4 +307,36 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 		logger.debug("Result of push terminal action {}",result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
 	}
+
+	@Test
+	public void testActivateTerminalBySn() {
+		String serialNo = "";
+		Result<String> result = terminalApi.activateTerminalBySn(serialNo);
+		logger.debug("Result of activateTerminalBySn {}",result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testDeleteTerminalBySn() {
+		String serialNo = "";
+		Result<String> result = terminalApi.deleteTerminalBySn(serialNo);
+		logger.debug("Result of deleteTerminalBySn {}",result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testCopyTerminalBySn() {
+//		String serialNo = "EMPTY1716345320431";
+		String serialNo = "08200001522336";
+		TerminalSnCopyRequest request=new TerminalSnCopyRequest();
+		request.setSourceSerialNo(serialNo);
+		request.setSerialNo("");
+		request.setStatus(TerminalStatus.Active);
+		Result<TerminalDTO> result = terminalApi.copyTerminalBySn(request);
+		logger.debug("Result of testCopyTerminalBySn {}",result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+
+
 }
