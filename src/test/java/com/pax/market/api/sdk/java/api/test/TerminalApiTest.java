@@ -331,7 +331,8 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 		TerminalSnCopyRequest request=new TerminalSnCopyRequest();
 		request.setSourceSerialNo(serialNo);
 		request.setSerialNo("");
-		request.setStatus(TerminalStatus.Active);
+		request.setStatus(TerminalStatus.Inactive);
+		request.setName("MyTerminal240524");
 		Result<TerminalDTO> result = terminalApi.copyTerminalBySn(request);
 		logger.debug("Result of testCopyTerminalBySn {}",result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
