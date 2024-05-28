@@ -87,10 +87,10 @@ public class CryptoUtils {
             query.append(body);
         }
 
-        // 4. 使用MD5/HMAC加密
+        // 4. 使用MD5/HMAC_SHA256加密
         byte[] bytes;
-        if (Constants.SIGN_METHOD_HMAC.equals(signMethod)) {
-            bytes = encryptHMAC(query.toString(), secret);
+        if (Constants.SIGN_METHOD_HMAC_SHA256.equals(signMethod)) {
+            bytes = encryptHmacSha256(query.toString(), secret);
         } else {
             query.append(secret);
             bytes = encryptMD5(query.toString());
@@ -124,10 +124,10 @@ public class CryptoUtils {
             query.append(body);
         }
 
-        // 3. 使用MD5/HMAC加密
+        // 3. 使用MD5/HMAC_SHA256加密
         byte[] bytes;
-        if (Constants.SIGN_METHOD_HMAC.equals(signMethod)) {
-            bytes = encryptHMAC(query.toString(), secret);
+        if (Constants.SIGN_METHOD_HMAC_SHA256.equals(signMethod)) {
+            bytes = encryptHmacSha256(query.toString(), secret);
         } else {
             query.append(secret);
             bytes = encryptMD5(query.toString());
@@ -137,9 +137,9 @@ public class CryptoUtils {
         return byte2hex(bytes);
     }
 
-    private static byte[] encryptHMAC(String data, String secret) throws GeneralSecurityException, IOException {
+    private static byte[] encryptHmacSha256(String data, String secret) throws GeneralSecurityException, IOException {
         byte[] bytes;
-        SecretKey secretKey = new SecretKeySpec(secret.getBytes(Constants.CHARSET_UTF8), "HmacMD5");
+        SecretKey secretKey = new SecretKeySpec(secret.getBytes(Constants.CHARSET_UTF8), Constants.SIGN_METHOD_HMAC_SHA256);
         Mac mac = Mac.getInstance(secretKey.getAlgorithm());
         mac.init(secretKey);
         bytes = mac.doFinal(data.getBytes(Constants.CHARSET_UTF8));

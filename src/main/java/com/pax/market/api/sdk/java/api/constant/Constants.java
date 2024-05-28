@@ -53,10 +53,9 @@ public class Constants {
     public static final String ACCESS_LANGUAGE = "Accept-Language";
 
     /**
-     * HMAC签名方式
+     * HmacSHA256签名方式
      */
-    public static final String SIGN_METHOD_HMAC = "hmac";
-
+    public static final String SIGN_METHOD_HMAC_SHA256 = "HmacSHA256";
     /**
      * The constant CONTENT_TYPE.
      */

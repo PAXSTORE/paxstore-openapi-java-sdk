@@ -47,7 +47,8 @@ public class ThirdPartySysApiClient {
     /**
      * The Sign method.
      */
-    protected String signMethod = Constants.SIGN_METHOD_HMAC;
+    protected String signMethod = Constants.SIGN_METHOD_HMAC_SHA256;
+
     /**
      * The Connect timeout.
      */
