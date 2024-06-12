@@ -643,7 +643,7 @@ The type of data in result is TerminalDTO. Its structure already shows in search
 
 ### Get a terminal by serial no
 
-The get terminal API allows the thirdparty system get a terminal by terminal id. If the termianl does not exist the data
+The get terminal API allows the thirdparty system get a terminal by terminal serial no. If the termianl does not exist the data
 field in result is null.
 
 **API**
@@ -1473,7 +1473,7 @@ Assert.assertTrue(copyResult.getBusinessCode() == 0);
 
 ## Copy a terminal by serial no
 
-Copy terminal API allows the thirdparty system to copy a terminal by  origin terminal id.
+Copy terminal API allows the thirdparty system to copy a terminal by  origin terminal serial no.
 
 **API**
 
@@ -2332,7 +2332,7 @@ Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConf
 
 ### Update terminal configuration serialNo
 
-Update terminal configuration like whether allow terminal replacement by API or input serial number on terminal.
+Update terminal configuration like whether allow terminal replacement by API or input serial no on terminal.
 
 **API**
 
