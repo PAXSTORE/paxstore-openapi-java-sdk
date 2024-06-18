@@ -1892,7 +1892,7 @@ Result<String> result = terminalApi.moveTerminal(907560L, "targetReseller", "tar
 
 ### Move a terminal by serial no
 
-The move terminal API allows the thirdparty system move a terminal to another reseller and merchant by terminal id.
+The move terminal API allows the thirdparty system move a terminal to another reseller and merchant by terminal serialNo.
 If the terminal is not applicable for the exist groups after move, the terminal will be removed from the groups.
 If move successfully there's not response content from remote server.
 
