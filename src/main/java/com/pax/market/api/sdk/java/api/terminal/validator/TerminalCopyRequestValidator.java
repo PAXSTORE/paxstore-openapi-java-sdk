@@ -14,6 +14,7 @@ package com.pax.market.api.sdk.java.api.terminal.validator;
 
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalCopyRequest;
+import com.pax.market.api.sdk.java.api.terminal.dto.TerminalSnCopyRequest;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
 import com.pax.market.api.sdk.java.api.validate.Validators;
 
@@ -34,6 +35,22 @@ public class TerminalCopyRequestValidator {
             validationErrs.add(getMessage("parameter.not.null", "terminalCopyRequest"));
         }else {
             validationErrs.addAll(Validators.validateLongNull(validateTarget.getTerminalId(), "terminalId"));
+            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getName(), "name", Constants.MAX_64));
+            validationErrs.addAll(Validators.validateRange(validateTarget.getTid(), "tid", Constants.MIN_8, Constants.MAX_16));
+            validationErrs.addAll(Validators.validateStrMax(validateTarget.getSerialNo(), "serialNo", Constants.MAX_32));
+            if (StringUtils.isBlank(validateTarget.getStatus())){
+                validationErrs.add(getMessage("parameter.not.null","status"));
+            }
+
+        }
+        return validationErrs;
+    }
+
+    public static List<String> validateSerialNo(TerminalSnCopyRequest validateTarget) {
+        List<String> validationErrs = new ArrayList<>();
+        if (validateTarget == null){
+            validationErrs.add(getMessage("parameter.not.null", "terminalCopyRequest"));
+        }else {
             validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getName(), "name", Constants.MAX_64));
             validationErrs.addAll(Validators.validateRange(validateTarget.getTid(), "tid", Constants.MIN_8, Constants.MAX_16));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getSerialNo(), "serialNo", Constants.MAX_32));

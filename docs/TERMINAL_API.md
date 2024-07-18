@@ -641,6 +641,343 @@ The type of data in result is TerminalDTO. Its structure already shows in search
 |:---|:---|:---|
 |1801|Terminal doesn't exist|&nbsp;|
 
+### Get a terminal by serial no
+
+The get terminal API allows the thirdparty system get a terminal by terminal serial no. If the termianl does not exist the data
+field in result is null.
+
+**API**
+
+```
+public Result<TerminalDTO> getTerminalBySn(String serialNo)
+public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList)
+public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   |Nullable| Description             |
+|:---------------|:-------|:---|:------------------------|
+| serialNo       | String |false| The terminal serial no. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+//simple info
+Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522");
+//includeDetailInfoList, whether to return Detail Info and Accessory List 
+Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",true);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter serial no cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1801,
+	"message": "Terminal doesn't exist"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"id": 908627,
+		"name": "test8000999",
+		"tid": "BTG7KFTY",
+		"serialNo": "TEST8000999",
+		"status": "A",
+		"merchantName": "pax",
+		"modelName": "A930",
+		"resellerName": "Jesse",
+		"location": "",
+		"remark":"",
+		"createdDate": 1552536099000,
+		"lastActiveTime": 1552536095000
+	}
+}
+```
+
+```HTML
+{
+	"businessCode": 0,
+	"data": {
+		"id": 908627,
+		"name": "test8000999",
+		"tid": "BTG7KFTY",
+		"serialNo": "TEST8000999",
+		"status": "A",
+		"merchantName": "pax",
+		"modelName": "A930",
+		"resellerName": "Jesse",
+		"location": "",
+		"remark":"",
+		"createdDate": 1552536099000,
+		"lastActiveTime": 1552536095000,
+		"terminalDetail": {
+			"pn": "A920-3AW-RD5-21EU",
+			"screenResolution": "720px * 1280px",
+			"language": "English",
+			"ip": "192.168.5.213",
+			"timeZone": "GMT +08:00",
+			"macAddress": "A4:D4:B2:4C:14:FE"
+		},
+		"terminalAccessory": [{
+			"basic": [{
+				"name": "SN",
+				"content": "1140073435"
+			}, {
+				"name": "MACH",
+				"content": "Q20"
+			}, {
+				"name": "OS",
+				"content": "Prolin2.7.66"
+			}],
+			"hardware": [{
+				"name": "PCD",
+				"content": "Y"
+			}, {
+				"name": "MSR",
+				"content": "Y"
+			}, {
+				"name": "SCI",
+				"content": "Y"
+			}, {
+				"name": "BOARDID",
+				"content": "Q20_M06_P00"
+			}, {
+				"name": "BLUETOOTH"
+			}, {
+				"name": "ETHERNET"
+			}, {
+				"name": "WIFI"
+			}, {
+				"name": "WIRELESS"
+			}, {
+				"name": "MODEM"
+			}, {
+				"name": "PRINTER"
+			}, {
+				"name": "BARCODE"
+			}, {
+				"name": "FLASH",
+				"content": "128MB"
+			}, {
+				"name": "FREEFLASH",
+				"content": "58.41M"
+			}, {
+				"name": "RAM",
+				"content": "246.50MB"
+			}, {
+				"name": "SECURITY LEVEL",
+				"content": "1"
+			}, {
+				"name": "SECURITY MODE",
+				"content": "2"
+			}, {
+				"name": "TOUCHSCREEN",
+				"content": "Y"
+			}, {
+				"name": "CIPHER_CHIP"
+			}],
+			"installApps": [{
+				"name": "browser",
+				"content": "2.00.10"
+			}],
+			"history": [{
+				"name": "MAINAPP/config.xml",
+				"status": "Success",
+				"installTime": 1588053636000,
+				"fileSize": 102,
+				"fileType": "Private file",
+				"source": "Remote Upgrade"
+			}, {
+				"name": "MAINAPP/sys_param.p",
+				"status": "Success",
+				"installTime": 1588053633000,
+				"fileSize": 135,
+				"fileType": "Private file",
+				"source": "Remote Upgrade"
+			}, {
+				"name": "MAINAPP/sys_cap.p",
+				"status": "Success",
+				"installTime": 1588053630000,
+				"fileSize": 234,
+				"fileType": "Private file",
+				"source": "Remote Upgrade"
+			}, {
+				"name": "browser.aip",
+				"status": "Success",
+				"installTime": 1588053240000,
+				"fileSize": 2165940,
+				"fileType": "Application",
+				"source": "Local Upgrade"
+			}, {
+				"name": "prolin-pelican-2.7.66.8833R_SIG.zip",
+				"version": "2.00.10",
+				"status": "Success",
+				"installTime": 1588041153000,
+				"fileSize": 17890812,
+				"fileType": "Firmware",
+				"source": "Local Upgrade"
+			}]
+		},{
+            "basic": [{
+                "name": "SN",
+                "content": "1140073438"
+            }, {
+                "name": "Q20",
+                "content": "Q20"
+            }, {
+                "name": "OS",
+                "content": "Prolin2.7.2"
+            }],
+            "hardware": [{
+                "name": "PCD",
+                "content": "Y"
+            }, {
+                "name": "MSR",
+                "content": "Y"
+            }, {
+                "name": "SCI",
+                "content": "Y"
+            }, {
+                "name": "BOARDID",
+                "content": "Q20_M06_P01"
+            }, {
+                "name": "BLUETOOTH"
+            }, {
+                "name": "ETHERNET"
+            }, {
+                "name": "WIFI"
+            }, {
+                "name": "WIRELESS"
+            }, {
+                "name": "MODEM"
+            }, {
+                "name": "PRINTER"
+            }, {
+                "name": "BARCODE"
+            }, {
+                "name": "FLASH",
+                "content": "256MB"
+            }, {
+                "name": "FREEFLASH",
+                "content": "88.52M"
+            }, {
+                "name": "RAM",
+                "content": "325.50MB"
+            }, {
+                "name": "SECURITY LEVEL",
+                "content": "1"
+            }, {
+                "name": "SECURITY MODE",
+                "content": "2"
+            }, {
+                "name": "TOUCHSCREEN",
+                "content": "Y"
+            }, {
+                "name": "CIPHER_CHIP"
+            }],
+            "installApps": [{
+                "name": "NeptuneLite",
+                "content": "2.01.01"
+            }],
+            "history": [{
+                "name": "MAINAPP/sys_param.p",
+                "status": "Success",
+                "installTime": 1651113398000,
+                "fileSize": 135,
+                "fileType": "Private file",
+                "source": "Remote Upgrade"
+            }, {
+                "name": "MAINAPP/sys_cap.p",
+                "status": "Success",
+                "installTime": 16511133980000,
+                "fileSize": 234,
+                "fileType": "Private file",
+                "source": "Remote Upgrade"
+            }, {
+                "name": "browser.aip",
+                "status": "Success",
+                "installTime": 16511133980000,
+                "fileSize": 2165940,
+                "fileType": "Application",
+                "source": "Local Upgrade"
+            }, {
+                "name": "prolin-pelican-2.7.66.8833R_SIG.zip",
+                "version": "2.00.10",
+                "status": "Success",
+                "installTime": 1651113948000,
+                "fileSize": 17890812,
+                "fileType": "Firmware",
+                "source": "Local Upgrade"
+            }]
+        }]
+	}
+}
+```
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"id": 908627,
+		"name": "test8000999",
+		"tid": "BTG7KFTY",
+		"serialNo": "TEST8000999",
+		"status": "A",
+		"merchantName": "pax",
+		"modelName": "A930",
+		"resellerName": "Jesse",
+		"location": "",
+		"remark":"",
+		"createdDate": 1552536099000,
+		"lastActiveTime": 1552536095000,
+		 "installedApks": [
+      {
+        "appName": "cloudMsg1",
+        "packageName": "app1.clouldmsg.com.cloudmsg1",
+        "versionName": "1.0",
+        "versionCode": 1,
+        "installTime": 1541137822000
+      },
+      {
+        "appName": "sdkDemo",
+        "packageName": "com.pax.android.demoapp",
+        "versionName": "7.2.3",
+        "versionCode": 135,
+        "installTime": 1596416582000
+      }
+    ]
+	}
+}
+```
+
+The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
+
+**Possible validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|1801|Terminal doesn't exist|&nbsp;|
+
 ### Create a terminal
 
 Create merchant API allow the thirdparty system create a terminal remotely.
@@ -901,7 +1238,144 @@ The type of data in result is same as search terminal API.
 |2401|Terminal TID is invalid|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
 
+### Update a terminal by serial no
 
+Update terminal API allows the thirdparty system update a exist terminal by serial no.
+
+**API**
+
+```
+public Result<TerminalDTO> updateTerminalBySn(String serialNo, TerminalUpdateRequest terminalUpdateRequest)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name| Type                  |Nullable| Description                                                |
+|:---|:----------------------|:---|:-----------------------------------------------------------|
+|serialNo| String                |false| Terminal's serial no.                                      |
+|terminalUpdateRequest| TerminalUpdateRequest |false| Update terminal request object. The structure shows below. |
+
+Structure of class TerminalUpdateRequest
+
+|Property Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|name|String|false|The name of terminal, max length is 64.|
+|tid|String|true|The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16.|
+|serialNo|String|true|The serial number of terminal. If the status is active the serial number is mandatory.|
+|merchantName|String|true|The merchant of terminal belongs to. If the initial is active then merchantName is mandatory. The max length is 64. Make sure the merchant belongs to the given reseller|
+|resellerName|String|false|The reseller of terminal belongs to. Max length is 64.|
+|modelName|String|false|The model name of terminal. Max length is 64.|
+|location|String|true|The location of terminal, max length is 64.|
+|remark|String|true|The remark of terminal, max length is 500.|
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
+updateReq.setName("KFC-TML-001");
+updateReq.setModelName("A920");
+updateReq.setLocation("CN");
+updateReq.setRemark("Terminal Remark");
+updateReq.setSerialNo("sn010101211226");
+updateReq.setResellerName("New York");
+updateReq.setMerchantName("KFC");
+//Result<TerminalDTO> result = terminalApi.updateTerminalBySn("sn010101211226", updateReq);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1804,
+	"message": "Terminal merchant is mandatory"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"id": 907560,
+		"name": "KFC-TML-001",
+		"tid": "53K5M9OS",
+		"serialNo": "sn010101211226",
+		"status": "S",
+		"merchantName": "KFC",
+		"modelName": "A920",
+		"resellerName": "New York",
+		"location": "CN",
+		"remark":"Termianl Remark"
+	}
+}
+```
+
+The type of data in result is same as search terminal API.
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalUpdateRequest cannot be null!</font>  
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
+> <font color=red>modelName:may not be empty</font>  
+> <font color=red>resellerName:may not be empty</font>  
+> <font color=red>name:may not be empty</font>  
+> <font color=red>name:length must be between 0 and 64</font>  
+> <font color=red>tid:length must be between 8 and 15</font>  
+> <font color=red>serialNo:length must be between 0 and 32</font>  
+> <font color=red>merchantName:length must be between 0 and 64</font>  
+> <font color=red>resellerName:length must be between 0 and 64</font>  
+> <font color=red>modelName:length must be between 0 and 64</font>  
+> <font color=red>location:length must be between 0 and 32</font>
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|1700|Model doesn't exist||
+|1713|The associated model is not activate||
+|1720|Merchant doesn't exist||
+|1737|The associated merchant is not activate||
+|1759|Reseller doesn't exist|&nbsp;|
+|1773|The associated reseller is not activate||
+|1800|Terminal not found|&nbsp;|
+|1802|Terminal SN is mandatory||
+|1803|Terminal model is mandatory||
+|1804|Terminal merchant is mandatory||
+|1806|Terminal SN is too long||
+|1807|Terminal model is too long||
+|1808|Terminal merchant is too long||
+|1809|Terminal location is too long||
+|1811|The terminal has already been activated,unable to update reseller.||
+|1813|Push task has already been added, unable to update model.||
+|1814|Push task has already been added,unable to update reseller.||
+|1817|Terminal name is mandatory||
+|1818|Terminal name is too long||
+|1828|TID already used||
+|1859|Model {0} is not available, please contact administrator||
+|1898|TID cannot be updated when terminal is active||
+|1912|Terminal is disabled, TID cannot be updated!||
+|1928|The terminal is active,terminal SN cannot be updated!||
+|1929|The terminal is not inactive,model cannot be updated!||
+|1937|Merchant is not belong to the given Reseller!|&nbsp;|
+|2312|Terminal Serial No. accept alphanumeric|&nbsp;Alphanumeric and max length is 16|
+|2321|Terminal Serial No.{0} already exists|&nbsp;|
+|2326|Terminal reseller is mandatory|&nbsp;|
+|2349|Terminal TID length is 8 to 15|&nbsp;|
+|2350|Terminal Serial No.{0} already exists in other marketplace sandbox|&nbsp;|
+|2401|Terminal TID is invalid|&nbsp;|
+|2412|Your terminal SN not exist in asset|&nbsp;|
 
 ## Copy a terminal
 
@@ -997,6 +1471,100 @@ Assert.assertTrue(copyResult.getBusinessCode() == 0);
 | 1828          | TID already used              |             |
 | 9200          | Terminal upper limit exceeded |             |
 
+## Copy a terminal by serial no
+
+Copy terminal API allows the thirdparty system to copy a terminal by  origin terminal serial no.
+
+**API**
+
+```
+public Result<TerminalDTO> copyTerminalBySn(TerminalCopyRequest terminalCopyRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name      | Type                | Nullable | Description                                              |
+| :------------------ | :------------------ | :------- | :------------------------------------------------------- |
+| terminalCopyRequest | TerminalCopyRequest | false    | copy terminal request object. The structure shows below. |
+
+Structure of class TerminalCopyRequest
+
+| Property Name    | Type   | Nullable | Description                                                                                                         |
+|:-----------------| :----- |:---------|:--------------------------------------------------------------------------------------------------------------------|
+| name             | String | false    | The name of terminal, max length is 64.                                                                             |
+| tid              | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16. |
+| sourceSerialNo   | String | false    | The serial number of source terminal. The serial number is mandatory.                                               |
+| serialNo         | String | false    | The serial number of terminal. If the status is active the serial number is mandatory.                              |
+| status           | String | false    | Status of terminal, value can be one of A(Active) and P(Pendding). A is for Active and P is for Pendding            |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalCopyRequest copyRequest = new TerminalCopyRequest();
+copyRequest.setTerminalId(13453434534L);
+copyRequest.setName("COPY_FROM_13453434534");
+copyRequest.setSourceSerialNo("TJ0000001");
+copyRequest.setSerialNo("TJ0000002");
+copyRequest.setStatus(TerminalStatus.Active);
+Result<TerminalDTO> copyResult = terminalApi.copyTerminalBySn(copyRequest);
+logger.debug("Result of copy terminal: {}",copyResult.toString());
+Assert.assertTrue(copyResult.getBusinessCode() == 0);
+```
+
+**Client validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalCopyRequest cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+    "id": 1510297435111460,
+    "name": "COPY_FROM_909822",
+    "tid": "HSZG4FTS",
+    "serialNo": "TJ00001002",
+    "status": "A",
+    "merchantName": "TESTpukMerchant",
+    "modelName": "A930",
+    "resellerName": "shifan",
+    "location": "",
+    "remark": "324324223",
+    "createdDate": 1666850737890,
+    "lastActiveTime": 1666850736044
+	}
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalCopyRequest cannot be null!</font>
+
+**Possible business codes**
+
+| Business Code | Message                       | Description |
+| :------------ | :---------------------------- | :---------- |
+| 1800          | Terminal not found            |             |
+| 1817          | Terminal name is mandatory    |             |
+| 1818          | Terminal name is too long     |             |
+| 1828          | TID already used              |             |
+| 9200          | Terminal upper limit exceeded |             |
 
 
 ### Activate a terminal
@@ -1063,6 +1631,71 @@ Result<String> result = terminalApi.activateTerminal(907560L);
 |1700|Model doesn't exist|&nbsp;|
 |1713|The associated model is not activate|&nbsp;|
 
+### Activate a terminal by serial no
+
+Activate terminal API allows the thirdparty system to activate a terminal by serial no.
+
+**API**
+
+```
+public Result<String> activateTerminalBySn(String serialNo)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name| Type   |Nullable| Description             |
+|:---|:-------|:---|:------------------------|
+|serialNo| String |false| The terminal serial no. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminalApi.activateTerminalBySn("SN6132522");
+```
+
+**Client validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|1800|Terminal not found|&nbsp;|
+|1893|The terminal has already been activated!|&nbsp;|
+|1802|Terminal SN is mandatory|&nbsp;|
+|1804|Terminal merchant is mandatory|&nbsp;|
+|1700|Model doesn't exist|&nbsp;|
+|1713|The associated model is not activate|&nbsp;|
+
+
 ### Disable a terminal
 
 The disable terminal API allows the thirdparty system disable a terminal by terminal id.
@@ -1093,6 +1726,67 @@ Result<String> result = terminalApi.disableTerminal(907560L);
 {
 	"businessCode": -1,
 	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1888,
+	"message": "The terminal is not active,unable to disable!"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|1800|Terminal not found|&nbsp;|
+|1888|The terminal is not active,unable to disable!|&nbsp;|
+
+### Disable a terminal by serial no
+
+The disable terminal API allows the thirdparty system disable a terminal by serial no.
+If disable successfully there's not response content from remote server.
+
+**API**
+
+```
+public Result<String> disableTerminalBySn(String serialNo) 
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   |Nullable|Description|
+|:---------------|:-------|:---|:---|
+| serialNo       | String |false|The terminal serial no.|
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminalApi.disableTerminalBySn("TJ00001002");
+```
+
+**Client validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminal serial no cannot be null!"]
 }
 ```
 
@@ -1195,6 +1889,78 @@ Result<String> result = terminalApi.moveTerminal(907560L, "targetReseller", "tar
 |1737|The associated merchant is not activate|&nbsp;|
 |1773|The associated reseller is not activate|&nbsp;|
 
+
+### Move a terminal by serial no
+
+The move terminal API allows the thirdparty system move a terminal to another reseller and merchant by terminal serialNo.
+If the terminal is not applicable for the exist groups after move, the terminal will be removed from the groups.
+If move successfully there's not response content from remote server.
+
+**API**
+
+```
+public Result<String> moveTerminalBySn(String serialNo, String resellerName, String merchantName)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|terminalId|Long|false|The terminal id.|
+|resellerName|String|false|The target reseller name to move.|
+|merchantName|String|false|The target merchant name to move.|
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminalApi.moveTerminalBySn("SN6132522", "targetReseller", "targetMerchant");
+```
+
+**Client validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminal serialNo cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2402,
+	"message": "The terminal is not active or disabled!"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>resellerName:may not be empty</font>  
+> <font color=red>merchantName:may not be empty</font>
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|1800|Terminal not found|&nbsp;|
+|2402|The terminal is not active or disabled, unable to move!|&nbsp;|
+|1759|Reseller doesn't exist|&nbsp;|
+|1720|Merchant doesn't exist|&nbsp;|
+|1937|Merchant is not belong to the given Reseller!|&nbsp;|
+|1737|The associated merchant is not activate|&nbsp;|
+|1773|The associated reseller is not activate|&nbsp;|
+
 ### Delete a terminal
 
 Delete terminal API allows the thirdparty system delete a exist terminal by terminal id.
@@ -1211,6 +1977,67 @@ public Result<String> deleteTerminal(Long terminalId)
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminalApi.deleteTerminal(907560L);
+```
+
+**Client validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1877,
+	"message": "The terminal is active,unable to delete!"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|1800|Terminal not found|&nbsp;|
+|1877|The terminal is active,unable to delete!|&nbsp;|
+
+### Delete a terminal by serial no
+
+Delete terminal API allows the thirdparty system delete a exist terminal by terminal serial no.
+If delete successfully there's no response content from remote server.
+
+**API**
+
+```
+public Result<String> deleteTerminalBySn(String serialNo) 
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   |Nullable| Description            |
+|:---------------|:-------|:---|:-----------------------|
+| serialNo       | String |false| The terminal serialNo. |
 
 **Sample codes**
 
@@ -1336,6 +2163,87 @@ Result<String> result = terminalApi.batchAddTerminalToGroup(groupRequest);
 | 2164          | Terminal model mismatched                                    |             |
 | 2167          | Terminal group exceeded the max terminal count limit, please create new terminal group to put the terminal |             |
 
+### Batch add terminal to group by serialNo
+
+Batch add terminal to group API allows the thirdparty system to add terminals to one or more groups.
+
+**API**
+
+```
+public Result<String> batchAddTerminalToGroupBySn(TerminalSnGroupRequest groupRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type                 | Nullable | Description                                                  |
+| :------------- | :------------------- | :------- | :----------------------------------------------------------- |
+| groupRequest   | TerminalGroupRequest | false    | add terminals to group request object. The structure shows below. |
+
+Structure of class TerminalGroupRequest
+
+| Property Name | Type      | Nullable | Description            |
+| :------------ | :-------- | :------- |:-----------------------|
+| serialNos   | Set\<Long\> | false    | terminal serialNo list |
+| groupIds      | Set\<Long\> | false    | group id list          |
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalSnGroupRequest groupRequest = new TerminalSnGroupRequest();
+Set<String> serialNoList = new HashSet<>();
+serialNoList.add("SN6132522");
+serialNoList.add("SN6685133");
+Set<Long> groupIds = new HashSet<>();
+groupIds.add(16529L);
+groupIds.add(16527L);
+groupRequest.setSerialNos(serialNoList);
+groupRequest.setGroupIds(groupIds);
+Result<String> result = terminalApi.batchAddTerminalToGroupBySn(groupRequest);
+```
+
+**Client validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalGroupRequest cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2150,
+	"message": "Terminal group not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalGroupRequest cannot be null!</font>
+
+**Possible business codes**
+
+| Business Code | Message                                                      | Description |
+| :------------ | :----------------------------------------------------------- | :---------- |
+| 1800          | Terminal not found                                           |             |
+| 1810          | Terminal is not active                                       |             |
+| 2150          | Terminal group not found                                     |             |
+| 2163          | Terminal reseller mismatched                                 |             |
+| 2164          | Terminal model mismatched                                    |             |
+| 2167          | Terminal group exceeded the max terminal count limit, please create new terminal group to put the terminal |             |
+
+
+
 ### Update terminal configuration
 
 Update terminal configuration like whether allow terminal replacement by API or input serial number on terminal.
@@ -1422,6 +2330,92 @@ Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConf
 | 1903          | When the "automaticTimezoneEnable" field is false, the "timeZone" field cannot be empty.                                                                 |             |
 | 1904          | Incorrect time zone                                                                 |             |
 
+### Update terminal configuration serialNo
+
+Update terminal configuration like whether allow terminal replacement by API or input serial no on terminal.
+
+**API**
+
+```
+public Result<String> updateTerminalConfigBySn(String serialNo, TerminalConfigUpdateRequest terminalConfigUpdateRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name                   | Type                             | Nullable | Description                                                                   |
+|:---------------------------------|:---------------------------------| :------- |:------------------------------------------------------------------------------|
+| serialNo                       | String                           | false    | Terminal's serialNo.                                                                |
+| terminalConfigUpdateRequest      | TerminalConfigUpdateRequest      | false    | Update terminal config request object. The structure shows below.             |
+| terminalReplacementUpdateRequest | TerminalReplacementUpdateRequest | false    | Update terminal replacement config request object. The structure shows below. |
+| terminalTimeZoneUpdateRequest    | TerminalTimeZoneUpdateRequest    | false    | Update terminal time zone config request object. The structure shows below.   |
+
+Structure of class TerminalReplacementUpdateRequest
+
+| Property Name           | Type    | Nullable | Description                                                                                                                                    |
+|:------------------------|:--------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
+| allowReplacement        | Boolean | false    | Whether allow terminal replacement by API or input serial number on terminal                                                                   |
+
+Structure of class TerminalTimeZoneUpdateRequest
+
+| Property Name           | Type    | Nullable | Description                                                                                                                                   |
+|:------------------------|:--------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+| automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
+| timeZone                | String  | true     | The terminal time zone |
+
+**Sample codes**
+
+```
+String serialNo = "SN6132522";
+TerminalReplacementUpdateRequest terminalReplacementUpdateRequest = new TerminalReplacementUpdateRequest();
+terminalReplacementUpdateRequest.setAllowReplacement(true);
+Result<String> result = terminalApi.updateTerminalConfigBySn(serialNo,terminalConfigUpdateRequest);
+
+TerminalTimeZoneUpdateRequest terminalTimeZoneUpdateRequest = new TerminalTimeZoneUpdateRequest();
+terminalTimeZoneUpdateRequest.setAutomaticTimezoneEnable(false);
+terminalTimeZoneUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
+Result<String> result = terminalApi.updateTerminalConfigBySn(serialNo,terminalConfigUpdateRequest);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+| Business Code | Message                                                      | Description |
+|:--------------| :----------------------------------------------------------- | :---------- |
+| 1800          | Terminal not found                                           |             |
+| 1838          | It is not allowed to change the terminal level "Terminal Replacement" status. please make sure reseller level terminal replacement settings are enabled. |             |
+| 1903          | When the "automaticTimezoneEnable" field is false, the "timeZone" field cannot be empty.                                                                 |             |
+| 1904          | Incorrect time zone                                                                 |             |
+
+
 ### Get terminal configuration
 
 Get terminal configuration.
@@ -1451,6 +2445,69 @@ Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(909744L);
 {
 	"businessCode": -1,
 	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"allowReplacement": true
+	}
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+| Business Code | Message                | Description |
+| :------------ | :--------------------- | :---------- |
+| 1800          | Terminal not found     |             |
+| 1801          | Terminal doesn't exist |             |
+
+### Get terminal configuration by serialNo
+
+Get terminal configuration.
+
+**API**
+
+```
+public Result<TerminalConfigDTO> getTerminalConfigBySn(String serialNo)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description    |
+|:---------------|:-------| :------- | :------------- |
+| serialNo       | String | false    | Terminal's serialNo. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalConfigDTO> result = terminalApi.getTerminalConfigBySn("SN6132522");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminal SerialNo cannot be null!"]
 }
 ```
 
@@ -1547,6 +2604,68 @@ Result<TerminalPedDTO> result = terminalApi.getTerminalPed(909755L);
 | :------------ | :----------------- | :---------- |
 | 1800          | Terminal not found |             |
 
+### Get terminal PED information by serialNo
+
+Get terminal PED information by terminal serialNo.
+
+**API**
+
+```
+public Result<TerminalPedDTO> getTerminalPedBySn(String serialNo)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description    |
+| :------------- |:-------| :------- | :------------- |
+| serialNo     | String | false    | Terminal's serialNo. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalPedDTO> result = terminalApi.getTerminalPedBySn("SN6132522");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminal serialNo cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"info": "[{\"SK/TPK\": [{\"kcv\": \"B03273DC0000000000\", \"slot\": \"2\"}]}, {\"TDES DUKPT\": [{\"ksi\": \"FFFF539SD99336FCA00001\", \"slot\": \"1\"}, {\"ksi\": \"FFFF98765D400CB600001\", \"slot\": \"3\"}, {\"ksi\": \"FFFF9876D5400CB200001\", \"slot\": \"4\"}, {\"ksi\": \"FFFF98765D43347000001\", \"slot\": \"5\"}, {\"ksi\": \"FFFF987654C92DA200001\", \"slot\": \"11\"}]}]"
+	}
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1 !</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+
 ### Move terminal
 
 Move a terminal to another reseller and merchant
@@ -1570,6 +2689,72 @@ public Result<String> moveTerminal(Long terminalId, String resellerName, String 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = terminalApi.moveTerminal(terminalId, "PAX", "6666");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter resellerName is mandatory!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter resellerName is mandatory!</font>  
+> <font color=red>Parameter merchantName is mandatory!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+| 1759          | Reseller doesn't exist |             |
+| 1720          | Merchant doesn't exist |             |
+| 1937          | Merchant is not belong to the given Reseller! |             |
+
+### Move terminal
+
+Move a terminal to another reseller and merchant
+
+**API**
+
+```
+public Result<String> moveTerminalBySn(String serialNo, String resellerName, String merchantName)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description    |
+| :------------- |:-------| :------- | :------------- |
+| serialNo     | String | false    | Terminal's serialNo. |
+| resellerName| String | false | The target reseller name the terminal move to|
+| merchantName| String | false | The target merchant name the terminal move to|
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminalApi.moveTerminalBySn("SN6132522", "PAX", "6666");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -1681,6 +2866,73 @@ Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCm
 | 15096         | The terminal is being locked or unlocked |             |
 | 15099         | Terminal restart in progress             |             |
 
+### Push Command to Terminal by serialNo
+
+Push lock, unlock and restart command to terminal
+
+**API**
+
+```
+public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.TerminalPushCmd command)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name              | Type            | Nullable | Description                     |
+| :-------------------------- |:----------------| :------- | :------------------------------ |
+| serialNo                  | String          | false    | Terminal's serialNo.                  |
+| command | TerminalPushCmd | false    | Value can be TerminalPushCmd.Lock, TerminalPushCmd.Unlock and TerminalPushCmd.Restart |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCmd.Lock);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1801,
+	"message": "Terminal doesn't exist"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter command cannot be null!</font>
+
+**Possible business codes**
+
+| Business Code | Message                                  | Description |
+| :------------ | :--------------------------------------- | :---------- |
+| 135           | Request parameter is missing or invalid  |             |
+| 997           | Malformed or illegal request             |             |
+| 1801          | Terminal doesn't exist                   |             |
+| 1896          | The terminal is offline                  |             |
+| 15094         | Terminal is locked                       |             |
+| 15095         | Terminal has been unlocked               |             |
+| 15096         | The terminal is being locked or unlocked |             |
+| 15099         | Terminal restart in progress             |             |
 
 
 ### Get terminal network information
