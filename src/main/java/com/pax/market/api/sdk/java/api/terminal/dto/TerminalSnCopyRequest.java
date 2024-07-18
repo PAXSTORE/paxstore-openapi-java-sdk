@@ -68,4 +68,15 @@ public class TerminalSnCopyRequest implements Serializable {
     public void setSourceSerialNo(String sourceSerialNo) {
         this.sourceSerialNo = sourceSerialNo;
     }
+
+    @Override
+    public String toString() {
+        return "TerminalSnCopyRequest{" +
+                "name='" + name + '\'' +
+                ", tid='" + tid + '\'' +
+                ", serialNo='" + serialNo + '\'' +
+                ", sourceSerialNo='" + sourceSerialNo + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
