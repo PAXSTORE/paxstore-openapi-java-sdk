@@ -39,21 +39,21 @@ import java.util.TimeZone;
  * @date 2018-07-02
  */
 public class TerminalApiTest {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(TerminalApiTest.class.getSimpleName());
-	
+
 	TerminalApi terminalApi;
-	
+
 	@Before
     public void init(){
-    	terminalApi = new  TerminalApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+		terminalApi = new  TerminalApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
     }
 
     @Test
     public void testSearchTerminalList(){
-    	Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, TerminalStatus.Inactive, "14494956");
+		Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, TerminalSearchOrderBy.Name, TerminalStatus.Inactive, "14494956");
 		logger.debug("Result of search terminal: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
+		Assert.assertTrue(result.getBusinessCode() == 0);
     }
 
 	@Test
@@ -66,44 +66,44 @@ public class TerminalApiTest {
 
     @Test
     public void testCreateTerminal() {
-    	TerminalCreateRequest createReq = new TerminalCreateRequest();
-    	createReq.setName("KFC-TML-03");
-    	createReq.setMerchantName("merchant test");
-    	createReq.setResellerName("reseller test");
-    	createReq.setLocation("USA");
-    	createReq.setSerialNo("TJ000002");
-    	createReq.setModelName("A920");
+		TerminalCreateRequest createReq = new TerminalCreateRequest();
+		createReq.setName("KFC-TML-03");
+		createReq.setMerchantName("merchant test");
+		createReq.setResellerName("reseller test");
+		createReq.setLocation("USA");
+		createReq.setSerialNo("TJ000002");
+		createReq.setModelName("A920");
 
 
-    	Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
-    	logger.debug("Result of create terminal: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
-    	
-    	Long terminalId = result.getData().getId();
-    	
-    	
-    	Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId);
-    	logger.debug("Result of get terminal: {}",getResult.toString());
-    	Assert.assertTrue(getResult.getBusinessCode() == 0);
-    	
-    	
-    	//test update
-    	TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
-    	updateReq.setName("KFC-TML-JS");
-    	updateReq.setModelName("A920");
-    	updateReq.setLocation("CN");
-    	updateReq.setSerialNo("TJ000002");
-    	updateReq.setResellerName("reseller test");
-    	updateReq.setMerchantName("merchant test");
-    	
-    	Result<TerminalDTO> updateResult = terminalApi.updateTerminal(terminalId, updateReq);
-    	logger.debug("Result of update terminal: {}",updateResult.toString());
-    	Assert.assertTrue(updateResult.getBusinessCode() == 0);
-    	
-    	//Test activate
-    	Result<String> activateResult = terminalApi.activateTerminal(terminalId);
-    	logger.debug("Result of activate terminal: {}",activateResult.toString());
-    	Assert.assertTrue(activateResult.getBusinessCode() == 0);
+		Result<TerminalDTO> result = terminalApi.createTerminal(createReq);
+		logger.debug("Result of create terminal: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+
+		Long terminalId = result.getData().getId();
+
+
+		Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId);
+		logger.debug("Result of get terminal: {}",getResult.toString());
+		Assert.assertTrue(getResult.getBusinessCode() == 0);
+
+
+		//test update
+		TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
+		updateReq.setName("KFC-TML-JS");
+		updateReq.setModelName("A920");
+		updateReq.setLocation("CN");
+		updateReq.setSerialNo("TJ000002");
+		updateReq.setResellerName("reseller test");
+		updateReq.setMerchantName("merchant test");
+
+		Result<TerminalDTO> updateResult = terminalApi.updateTerminal(terminalId, updateReq);
+		logger.debug("Result of update terminal: {}",updateResult.toString());
+		Assert.assertTrue(updateResult.getBusinessCode() == 0);
+
+		//Test activate
+		Result<String> activateResult = terminalApi.activateTerminal(terminalId);
+		logger.debug("Result of activate terminal: {}",activateResult.toString());
+		Assert.assertTrue(activateResult.getBusinessCode() == 0);
 
 
 		//TEST copy
@@ -116,39 +116,39 @@ public class TerminalApiTest {
 		logger.debug("Result of copy terminal: {}",copyResult.toString());
 		Assert.assertTrue(copyResult.getBusinessCode() == 0);
 
-    	//Test disable
-    	Result<String> disableResult = terminalApi.disableTerminal(terminalId);
-    	logger.debug("Result of disable terminal: {}",disableResult.toString());
-    	Assert.assertTrue(disableResult.getBusinessCode() == 0);
-    	
-    	//Test delete
-    	Result<String> deleteResult = terminalApi.deleteTerminal(terminalId);
-    	logger.debug("Result of delete terminal: {}",deleteResult.toString());
+		//Test disable
+		Result<String> disableResult = terminalApi.disableTerminal(terminalId);
+		logger.debug("Result of disable terminal: {}",disableResult.toString());
+		Assert.assertTrue(disableResult.getBusinessCode() == 0);
+
+		//Test delete
+		Result<String> deleteResult = terminalApi.deleteTerminal(terminalId);
+		logger.debug("Result of delete terminal: {}",deleteResult.toString());
 		Assert.assertTrue(deleteResult.getBusinessCode() == 0);
 
 		Result<String> deleteCopyResult = terminalApi.deleteTerminal(copyResult.getData().getId());
 		logger.debug("Result of delete copy terminal: {}",deleteCopyResult.toString());
-    	Assert.assertTrue(deleteCopyResult.getBusinessCode() == 0);
+		Assert.assertTrue(deleteCopyResult.getBusinessCode() == 0);
 
 
     }
 
     @Test
     public void testGetTerminalIncludeAccessoryInfo() {
-    	Long terminalId = 908627L;
-    	Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId,true);
-    	logger.debug("Result of get terminal: {}",getResult.toString());
-    	Assert.assertTrue(getResult.getBusinessCode() == 0);
+		Long terminalId = 908627L;
+		Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId,true);
+		logger.debug("Result of get terminal: {}",getResult.toString());
+		Assert.assertTrue(getResult.getBusinessCode() == 0);
     }
 
     @Test
     public void testGetTerminalIncludeInstalledApks() {
-    	Long terminalId = 909822L;
-    	Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId,false, true);
-    	logger.debug("Result of get terminal: {}",getResult.toString());
-    	Assert.assertTrue(getResult.getBusinessCode() == 0);
+		Long terminalId = 909822L;
+		Result<TerminalDTO> getResult = terminalApi.getTerminal(terminalId,false, true);
+		logger.debug("Result of get terminal: {}",getResult.toString());
+		Assert.assertTrue(getResult.getBusinessCode() == 0);
     }
-    
+
 	@Test
 	public void testBatchAddTerminalToGroup(){
 		TerminalGroupRequest groupRequest = new TerminalGroupRequest();
@@ -158,9 +158,9 @@ public class TerminalApiTest {
 		Set<Long> groupIds = new HashSet<>();
 		groupIds.add(16529L);
 		groupIds.add(16527L);
- 		groupRequest.setTerminalIds(terminalIds);
+		groupRequest.setTerminalIds(terminalIds);
 		groupRequest.setGroupIds(groupIds);
-	    Result<String> result = terminalApi.batchAddTerminalToGroup(groupRequest);
+		Result<String> result = terminalApi.batchAddTerminalToGroup(groupRequest);
 		logger.debug("Result of search terminal: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 
@@ -171,7 +171,7 @@ public class TerminalApiTest {
 		Long terminalId = 909744L;
 		TerminalReplacementUpdateRequest terminalReplacementUpdateRequest = new TerminalReplacementUpdateRequest();
 		terminalReplacementUpdateRequest.setAllowReplacement(true);
-	    Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalReplacementUpdateRequest);
+		Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalReplacementUpdateRequest);
 		logger.debug("Result of update Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 
@@ -192,7 +192,7 @@ public class TerminalApiTest {
 	@Test
 	public void testGetTerminalConfig(){
 		Long terminalId = 90974L;
-	    Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(terminalId);
+		Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(terminalId);
 		logger.debug("Result of get Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 
@@ -202,7 +202,7 @@ public class TerminalApiTest {
     @Test
 	public void testGetTerminalPed(){
 		Long terminalId = 909755L;
-	    Result<TerminalPedDTO> result = terminalApi.getTerminalPed(terminalId);
+		Result<TerminalPedDTO> result = terminalApi.getTerminalPed(terminalId);
 		logger.debug("Result of get Terminal ped: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 	}
@@ -241,7 +241,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testGetTerminalIncludeInstalledApksBySn() {
-		String serialNo = "SN6132522";
+		String serialNo = "SN9989311";
 		Result<TerminalDTO> getResult = terminalApi.getTerminalBySn(serialNo,false, true);
 		logger.debug("Result of get terminal: {}",getResult.toString());
 		Assert.assertTrue(getResult.getBusinessCode() == 0);
@@ -251,8 +251,8 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 	public void testBatchAddTerminalToGroupBySn(){
 		TerminalSnGroupRequest groupRequest = new TerminalSnGroupRequest();
 		Set<String> serialNoList = new HashSet<>();
-		serialNoList.add("QWJQW027");
-		serialNoList.add("QWJQW028");
+		serialNoList.add("SN9989311");
+//		serialNoList.add("QWJQW028");
 		Set<Long> groupIds = new HashSet<>();
 		groupIds.add(1001567300L);
 		groupRequest.setSerialNos(serialNoList);
@@ -265,7 +265,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testUpdateTerminalConfigBySn(){
-		String serialNo = "SN6132522";
+		String serialNo = "SN9989311";
 		TerminalReplacementUpdateRequest terminalConfigUpdateRequest = new TerminalReplacementUpdateRequest();
 		terminalConfigUpdateRequest.setAllowReplacement(true);
 		Result<String> result = terminalApi.updateTerminalConfigBySn(serialNo,terminalConfigUpdateRequest);
@@ -276,7 +276,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testGetTerminalConfigBySn(){
-		String serialNo = "";
+		String serialNo = "SN9989311";
 		Result<TerminalConfigDTO> result = terminalApi.getTerminalConfigBySn(serialNo);
 		logger.debug("Result of get Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
@@ -286,7 +286,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testGetTerminalPedBySn(){
-		String serialNo = "";
+		String serialNo = "SN9989311";
 		Result<TerminalPedDTO> result = terminalApi.getTerminalPedBySn(serialNo);
 		logger.debug("Result of get Terminal ped: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
@@ -294,7 +294,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testMoveTerminalBySn() {
-		String serialNo = "";
+		String serialNo = "SN9989311";
 		Result<String> result = terminalApi.moveTerminalBySn(serialNo, "PAX", "6666");
 		logger.debug("Result of move Terminal {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
@@ -310,7 +310,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testActivateTerminalBySn() {
-		String serialNo = "";
+		String serialNo = "08200001522336";
 		Result<String> result = terminalApi.activateTerminalBySn(serialNo);
 		logger.debug("Result of activateTerminalBySn {}",result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
@@ -318,7 +318,7 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 
 	@Test
 	public void testDeleteTerminalBySn() {
-		String serialNo = "";
+		String serialNo = "08200001522336";
 		Result<String> result = terminalApi.deleteTerminalBySn(serialNo);
 		logger.debug("Result of deleteTerminalBySn {}",result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
@@ -338,6 +338,40 @@ public void testGetTerminalIncludeAccessoryInfoBySn() {
 		Assert.assertEquals(0, result.getBusinessCode());
 	}
 
+	@Test
+	public void testUpdateTerminalBySn() {
+		TerminalUpdateRequest updateRequest = new TerminalUpdateRequest();
+		updateRequest.setSerialNo("SN9989311");
+		updateRequest.setName("Terminal No.7637");
+		updateRequest.setResellerName("PAX");
+		updateRequest.setRemark("new Remark2024");
+		updateRequest.setModelName("A920");
 
+		Result<TerminalDTO> terminalDTOResult = terminalApi.updateTerminalBySn("SN9989311", updateRequest);
+		if(terminalDTOResult.getData()!=null) {
+			logger.debug("Result of testCopyTerminalBySn {}",terminalDTOResult.getData().toString());
+		}else{
+			logger.debug("Result of testCopyTerminalBySn {}", terminalDTOResult.toString());
+		}
+		Assert.assertEquals(0, terminalDTOResult.getBusinessCode());
+	}
+
+	@Test
+	public void testDisableTerminalBySn() {
+		Result<String> result = terminalApi.disableTerminalBySn("SN9989311");
+		logger.debug("Result of testDisableTerminalBySn {}",result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testGetTerminalBySn() {
+		Result<TerminalDTO> terminalBySn = terminalApi.getTerminalBySn("SN9989311");
+		if(terminalBySn.getData()!=null) {
+			logger.debug("Result of testGetTerminalBySn {}",terminalBySn.getData().toString());
+		}else{
+			logger.debug("Result of testGetTerminalBySn {}", terminalBySn.toString());
+		}
+		Assert.assertEquals(0, terminalBySn.getBusinessCode());
+	}
 
 }

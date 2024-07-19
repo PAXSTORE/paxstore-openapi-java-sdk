@@ -527,7 +527,14 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
-        request.setRequestBody(new Gson().toJson(terminalConfigUpdateRequest, TerminalConfigUpdateRequest.class));
+        String requestBody;
+        Gson gson = new Gson();
+        if (terminalConfigUpdateRequest instanceof TerminalReplacementUpdateRequest) {
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalReplacementUpdateRequest.class);
+        } else {
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalTimeZoneUpdateRequest.class);
+        }
+        request.setRequestBody(requestBody);
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<>(emptyResponse);
     }
