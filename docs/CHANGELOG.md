@@ -1,5 +1,9 @@
 # Changelog
 
+## 9.3.2
+### Bug Fix
+* Fix the handling for HTTP status 204
+
 ## 9.3.1
 ### Bug Fix
 * Fix AppApi.AppSearchOrderBy.AppName_desc and AppApi.AppSearchOrderBy.AppName_asc
