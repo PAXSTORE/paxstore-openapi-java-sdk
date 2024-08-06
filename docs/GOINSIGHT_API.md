@@ -66,16 +66,18 @@ public Result<DataQueryResultDTO> findDataFromInsight(String queryCode)
 public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType)
 public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, Integer pageNo, Integer pageSize)
 public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize)
+public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, List<GoInsightCustomFilter> customFilterList, Integer pageNo, Integer pageSize)
 ```
 
 **Input parameter(s) description**
 
-| Name| Type | Nullable|Description |
-|:---- | :----|:----|:----|
-|queryCode|String|false|search by GoInsight api query code|
-|rangeType|TimestampRangeType|true|you can choose the range of data results for search|
-|pageNo|int|true|page number, value must >= 1|
-|pageSize|int|true|the record number per page, range is 1 to 100 for details data query, range is 1 to 1000 for statistics data query|
+| Name| Type | Nullable| Description                                                                                                        |
+|:---- | :----|:----|:-------------------------------------------------------------------------------------------------------------------|
+|queryCode|String|false| search by GoInsight api query code                                                                                 |
+|rangeType|TimestampRangeType|true| you can choose the range of data results for search                                                                |
+|customFilterList|List<GoInsightCustomFilter>|true| you can add custom filter for search                                                                               |
+|pageNo|int|true| page number, value must >= 1                                                                                       |
+|pageSize|int|true| the record number per page, range is 1 to 100 for details data query, range is 1 to 1000 for statistics data query |
 
 Note: The pageNo param will be ignore when your query result set type is statistics chart.
 
@@ -112,12 +114,37 @@ Value of enum TimestampRangeType
 |THIS_YEAR|This Year|
 |THIS_YEAR_BY_QUARTER|This Year (by quarter)|
 
+The structure of class GoInsightCustomFilter
+
+|Property Name|Type| Description                                                               |
+|:---|:---|:--------------------------------------------------------------------------|
+|cloName|String| Filter by this column.                                                    |
+|filterValue|String| The filter value, Separated by commas. Supports a maximum of 100 filters. |
+
+Value of enum CustomColName
+
+| Value | Description            |
+|:---- |:-----------------------|
+|RESELLER| Filter by reseller     |
+|MERCHANT| Filter by mechant      |
+|TERMINAL| Filter by terminal     |
+|FACTORY| Filter by manufacturer |
+|MODEL| Filter by model |
+
 **Sample codes**
 
 ```
 String[] ids = TimeZone.getAvailableIDs();
 //TimeZone tz1 = TimeZone.getTimeZone(ids[2]);
 TimeZone tz = TimeZone.getTimeZone("Etc/GMT-1");
+
+//build custom filter
+List<GoInsightCustomFilter> customFilterList = new ArrayList<>();
+GoInsightCustomFilter terminalSNs = new GoInsightCustomFilter();
+terminalSNs.setCloName(CustomColName.TERMINAL);
+terminalSNs.setFilterValue("SN123,SN456,SN789");
+customFilterList.add(terminalSNs);
+
 GoInsightApi goInsightApi = new GoInsightApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN", tz);
 Result<DataQueryResultDTO> resultData = goInsightApi.findDataFromInsight("ahh3y62t");
 ```
