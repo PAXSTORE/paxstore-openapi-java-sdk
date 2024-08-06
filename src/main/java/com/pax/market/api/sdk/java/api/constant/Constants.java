@@ -87,4 +87,7 @@ public class Constants {
     public static final int MAX_3000 = 3000;
     public static final int MIN_0 = 0;
     public static final int MIN_8 = 8;
+    public static final int HTTP_NO_CONTENT = 204;
+
+
 }
