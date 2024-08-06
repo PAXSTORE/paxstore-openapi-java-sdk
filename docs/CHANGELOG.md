@@ -1,5 +1,13 @@
 # Changelog
 
+## 9.4.0
+### New Feature
+* New support for terminal API based on serialNo
+
+### Bug Fix
+* Fix the handling for HTTP status 204
+
+
 ## 9.3.1
 ### Bug Fix
 * Fix AppApi.AppSearchOrderBy.AppName_desc and AppApi.AppSearchOrderBy.AppName_asc

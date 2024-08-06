@@ -26,9 +26,9 @@ import com.pax.market.api.sdk.java.api.terminal.validator.TerminalCopyRequestVal
 import com.pax.market.api.sdk.java.api.terminal.validator.TerminalMoveRequestValidator;
 import com.pax.market.api.sdk.java.api.terminal.validator.TerminalRequestValidator;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
+import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalSnGroupRequest;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.validate.Validators;
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +72,30 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String PUSH_TERMINAL_ACTION_URL = "/v1/3rdsys/terminals/{terminalId}/operation";
 
     protected static final String GET_TERMINAL_NETWORK_URL = "/v1/3rdsys/terminals/network";
+//=====20240507新增
+    protected static final String GET_TERMINAL_URL_BY_SN = "/v1/3rdsys/terminal";
 
+    protected static final String ACTIVE_TERMINAL_URL_BY_SN = "/v1/3rdsys/terminal/active";
+
+    protected static final String DISABLE_TERMINAL_URL_BY_SN = "/v1/3rdsys/terminal/disable";
+
+    protected static final String MOVE_TERMINAL_URL_BY_SN = "/v1/3rdsys/terminal/move";
+
+    protected static final String DELETE_TERMINAL_URL_BY_SN = "/v1/3rdsys/terminal";
+
+    protected static final String UPDATE_TERMINAL_URL_BY_SN = "/v1/3rdsys/terminal";
+
+    protected static final String COPY_TERMINAL_URL_BY_SN = "/v1/3rdsys/terminal/copy";
+
+    protected static final String ADD_TERMINAL_TO_GROUP_URL_BY_SN = "/v1/3rdsys/terminal/groups";
+
+    protected static final String UPDATE_TERMINAL_REMOTE_CONFIG_URL_BY_SN = "/v1/3rdsys/terminal/config";
+
+    protected static final String GET_TERMINAL_REMOTE_CONFIG_URL_BY_SN = "/v1/3rdsys/terminal/config";
+
+    protected static final String GET_TERMINAL_PED_STATUS_URL_BY_SN = "/v1/3rdsys/terminal/ped";
+
+    protected static final String PUSH_TERMINAL_ACTION_URL_BY_SN = "/v1/3rdsys/terminal/operation";
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -357,6 +380,210 @@ public class TerminalApi extends BaseThirdPartySysApi {
         }
         TerminalNetworkResponse terminalNetworkResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalNetworkResponse.class);
         return  new Result<>(terminalNetworkResponse);
+    }
+
+
+    public Result<TerminalDTO> getTerminalBySn(String serialNo) {
+        return getTerminalBySn(serialNo, false, false);
+    }
+
+    public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList) {
+        return getTerminalBySn(serialNo, includeDetailInfoList, false);
+    }
+
+    public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_URL_BY_SN);
+        request.addRequestParam("includeDetailInfoList", String.valueOf(includeDetailInfoList));
+        request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
+        return new Result<>(terminalResponse);
+    }
+
+    public Result<String> activateTerminalBySn(String serialNo) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(ACTIVE_TERMINAL_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<String> disableTerminalBySn(String serialNo) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(DISABLE_TERMINAL_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<String> moveTerminalBySn(String serialNo, String resellerName, String merchantName) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(MOVE_TERMINAL_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        TerminalMoveRequest terminalMoveRequest = new TerminalMoveRequest();
+        terminalMoveRequest.setResellerName(resellerName);
+        terminalMoveRequest.setMerchantName(merchantName);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.setRequestBody(new Gson().toJson(terminalMoveRequest, TerminalMoveRequest.class));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<String> deleteTerminalBySn(String serialNo) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(DELETE_TERMINAL_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.DELETE);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<TerminalDTO> updateTerminalBySn(String serialNo, TerminalUpdateRequest terminalUpdateRequest) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(TerminalRequestValidator.validate(terminalUpdateRequest, "terminalUpdateRequest"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(UPDATE_TERMINAL_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.setRequestBody(new Gson().toJson(terminalUpdateRequest, TerminalUpdateRequest.class));
+        TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
+        return new Result<>(terminalResponse);
+    }
+
+
+    public Result<TerminalDTO> copyTerminalBySn(TerminalSnCopyRequest terminalCopyRequest) {
+        List<String> validationErrs = TerminalCopyRequestValidator.validateSerialNo(terminalCopyRequest);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        logger.debug("sourceSerialNo={},serialNo= {}", terminalCopyRequest.getSourceSerialNo(), terminalCopyRequest.getSerialNo());
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(COPY_TERMINAL_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(terminalCopyRequest, TerminalSnCopyRequest.class));
+        TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
+        return new Result<>(terminalResponse);
+    }
+
+    public Result<String> batchAddTerminalToGroupBySn(TerminalSnGroupRequest groupRequest){
+        List<String> validationErrs = Validators.validateObject(groupRequest, "terminalGroupRequest");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(ADD_TERMINAL_TO_GROUP_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(groupRequest, TerminalSnGroupRequest.class));
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<>(emptyResponse);
+
+    }
+
+    public Result<String> updateTerminalConfigBySn(String serialNo, TerminalConfigUpdateRequest terminalConfigUpdateRequest){
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(Validators.validateObject(terminalConfigUpdateRequest, "terminalRemoteConfigRequest"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(UPDATE_TERMINAL_REMOTE_CONFIG_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        String requestBody;
+        Gson gson = new Gson();
+        if (terminalConfigUpdateRequest instanceof TerminalReplacementUpdateRequest) {
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalReplacementUpdateRequest.class);
+        } else {
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalTimeZoneUpdateRequest.class);
+        }
+        request.setRequestBody(requestBody);
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<>(emptyResponse);
+    }
+
+    public Result<TerminalConfigDTO> getTerminalConfigBySn(String serialNo){
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_REMOTE_CONFIG_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        TerminalConfigResponse terminalConfigResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalConfigResponse.class);
+        return new Result<>(terminalConfigResponse);
+    }
+
+    public Result<TerminalPedDTO> getTerminalPedBySn(String serialNo){
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_PED_STATUS_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        TerminalPedResponse terminalPedResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalPedResponse.class);
+        return  new Result<>(terminalPedResponse);
+    }
+
+    public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.TerminalPushCmd command){
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(Validators.validateObject(command,"terminalPushCmdRequest"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_ACTION_URL_BY_SN);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.addRequestParam("command", command.val());
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<>(emptyResponse);
     }
 
     public enum TerminalStatus {
