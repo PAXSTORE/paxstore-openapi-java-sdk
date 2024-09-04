@@ -107,6 +107,7 @@ The rate of successful authorised api requests is 3000 per 10min, which means th
 Successfully authorised connections must be used with the correct External System Access Key and External System Access Secret, and the Exit IP of the external system integration server must be successfully configured in the External System Configuration.
 
 Failed requests with unsuccessful authorisation will first report an error code as below, and the rate of failed requests with unsuccessful authorisation is limited to 20 requests every 30 minutes, and after reaching 20 requests in 30mins, a mandatory wait of 30 minutes is required for the next attempt, in order to prevent customers from unlimited requests for guessing the real key Secret or other important information, and protect the security of the customer's system integration.
+
 The returned HTTP headers of any API request show your current rate limit status:
 
 |Header Name|Description|
