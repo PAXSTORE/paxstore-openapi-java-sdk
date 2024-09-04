@@ -103,11 +103,10 @@ Below figure listed the global business codes, those business codes may appear i
 
 ## Request rate limit
 
-For API requests using apiKey and apiSecret, you can make up to 3000 requests per 10 minutes. Authenticated requests are associated with the apiKey and apiSecret. This means that all thirdparty systems using the same apiKey and apiSecret share the same quota of 3000 requests per 10 minutes.
+The rate of successful authorised api requests is 3000 per 10min, which means that all third party systems using the same External System Access Key and External System Access Secre from one same reseller share the quota of 3000 requests per 10 minutes.
+Successfully authorised connections must be used with the correct External System Access Key and External System Access Secret, and the Exit IP of the external system integration server must be successfully configured in the External System Configuration.
 
-
-For unauthenticated requests, the rate limit allows for up to 20 requests per 30 minutes. Unauthenticated requests are associated with the originating IP address.
-
+Failed requests with unsuccessful authorisation will first report an error code as below, and the rate of failed requests with unsuccessful authorisation is limited to 20 requests every 30 minutes, and after reaching 20 requests in 30mins, a mandatory wait of 30 minutes is required for the next attempt, in order to prevent customers from unlimited requests for guessing the real key Secret or other important information, and protect the security of the customer's system integration.
 The returned HTTP headers of any API request show your current rate limit status:
 
 |Header Name|Description|
