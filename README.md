@@ -63,25 +63,39 @@ Below figure listed the global business codes, those business codes may appear i
 
 |Business Code|Message|Description|
 |:--|:--|:--|
-|0||Successful API call.
-|16105|Cannot connect to remote server!|The remote server is down or the constructor argument *baseUrl* is not correct.|
-|16104|Connection timeout!|Encounter SocketTimeoutException.|
-|16106|Request error!|Please check the error log or send the error log to support.|
-|16111|BaseUrl not correct!|The API BaseUrl may not correct|
-|16103|JSON error!||
-|129|Authentication failed||
+|0||Successful API call.|
+|101|Invalid request method|The request method is not correct|
+|102|Access token is missing||
+|103|Access token is invalid||
 |104|Client key is missing or invalid||
+|105|External System Integration not enable||
 |108|Marketplace is not available||
 |109|Marketplace is not active||
-|105|External System Integration not enable||
-|103|Access token is invalid||
-|102|Access token is missing|&nbsp;|
-|101|Invalid request method|The request method is not correct|
-|113|Request parameter is missing or invalid||
+|113|Request parameter is missing or invalid|                                                              |
+|129|Authentication failed||
+|130|Marketplace has not been activated||
+|131|Insufficient access right||
+|136|Current marketplace is in migration progress, please try later||
 |429|Too many request|Request number exceed the maximum number in the current rate limit window|
 |997|Malformed or illegal request|The JSON in request body is not a valid JSON|
 |998|Bad request||
 |999|Unknown error|Unknow error, please contact with support.|
+|1005|Marketplace not found||
+|1006|Marketplace is expired||
+|1309|Marketplace has been suspended||
+|1759|Reseller doesn't exist||
+|9101|License has been expired||
+|9102|License is not effective||
+|9103|Licensee mismatched||
+|9104|License not found||
+|13103|You are not allowed to call this API because of calling frequently||
+|13107|IP address not found||
+|13108|Source IP not allowed||
+|16103|JSON error!||
+|16104|Connection timeout!|Encounter SocketTimeoutException.|
+|16105|Cannot connect to remote server!|The remote server is down or the constructor argument *baseUrl* is not correct.|
+|16106|Request error!|Please check the error log or send the error log to support.|
+|16111|BaseUrl not correct!|The API BaseUrl may not correct|
 
 <br/>
 <br/>
