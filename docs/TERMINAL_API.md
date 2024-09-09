@@ -106,8 +106,10 @@ Structure of class TerminalDTO
 |merchantName|String|The merchant of terminal belongs to.|
 |modelName|String|Model name of terminal.|
 |resellerName|String|The reseller of terminal belongs to.|
-|createdDate|Date|The create time|
+|createdDate|Date|The created time|
+|updatedDate|Date|The updated time|
 |lastActiveTime|Date|The activation time|
+|lastAccessTime|Date|The last access time|
 |location|String|The location|
 |remark|String|The remark|
 |geoLocation|TerminalLocationDTO| The geography location of the terminal|
@@ -262,6 +264,10 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York",
 			"resellerName": "New York",
 			"location": "USA",
 			"remark":"",
+			"createdDate": 1725591969000,
+      "updatedDate": 1725591969000,
+      "lastActiveTime": 1725591969000,
+      "lastAccessTime": 1725777409853,
 			"geoLocation": {
 				"lng": 120.77595,
 				"lat": 31.308021
@@ -368,7 +374,9 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"location": "",
 		"remark":"",
 		"createdDate": 1552536099000,
-		"lastActiveTime": 1552536095000
+		"updatedDate": 1725591969000,
+		"lastActiveTime": 1552536095000,
+    "lastAccessTime": 1725777409853
 	}
 }
 ```
@@ -388,7 +396,9 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"location": "",
 		"remark":"",
 		"createdDate": 1552536099000,
+    "updatedDate": 1725591969000,
 		"lastActiveTime": 1552536095000,
+    "lastAccessTime": 1725777409853,
 		"terminalDetail": {
 			"pn": "A920-3AW-RD5-21EU",
 			"screenResolution": "720px * 1280px",
@@ -608,7 +618,9 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"location": "",
 		"remark":"",
 		"createdDate": 1552536099000,
+		"updatedDate": 1725591969000,
 		"lastActiveTime": 1552536095000,
+		"lastAccessTime": 1725777409853,
 		 "installedApks": [
       {
         "appName": "cloudMsg1",
