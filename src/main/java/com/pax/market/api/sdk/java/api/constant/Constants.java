@@ -67,7 +67,7 @@ public class Constants {
 
 
     public static final String THIRD_PARTY_API_SDK_LANGUAGE = "Java";
-    public static final String THIRD_PARTY_API_SDK_VERSION = "9.5.0";
+    public static final String THIRD_PARTY_API_SDK_VERSION = "9.6.0";
     public static final String REQ_HEADER_SDK_LANG = "SDK-Language";
     public static final String REQ_HEADER_SDK_VERSION = "SDK-Version";
 
