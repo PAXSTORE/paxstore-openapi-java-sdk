@@ -31,6 +31,8 @@ import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import static com.pax.market.api.sdk.java.api.constant.Constants.HTTP_NO_CONTENT;
+
 
 /**
  * 网络工具类。
@@ -300,14 +302,19 @@ public abstract class ThirdPartySysHttpUtils {
 				stringBuilder.append(str);
 			}
 			String resultStr = stringBuilder.toString();
-			if(!StringUtils.containsIgnoreCase(contentType, "json")) {
+			if(!StringUtils.containsIgnoreCase(contentType, "json") && (responseCode !=  HTTP_NO_CONTENT) ) {
 				logger.error("Response code{}, ContentType {} is not supported", responseCode, contentType);
 				if(StringUtils.isNotBlank(resultStr)) {
 					logger.error("Response content={}", resultStr);
 				}
-				return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_CONNECT_TIMEOUT);
+				return EnhancedJsonUtils.getSdkJson(ResultCode.SDK_JSON_ERROR);
 			}
-			JsonObject json = JsonParser.parseString(resultStr).getAsJsonObject();
+			JsonObject json;
+			if(StringUtils.isBlank(resultStr) && responseCode ==  HTTP_NO_CONTENT) {
+				json = new JsonObject();
+			}else {
+				json = JsonParser.parseString(resultStr).getAsJsonObject();
+			}
 			json.addProperty("rateLimit", rateLimit);
 			json.addProperty("rateLimitRemain", rateLimitRemain);
 			json.addProperty("rateLimitReset", rateLimitReset);
