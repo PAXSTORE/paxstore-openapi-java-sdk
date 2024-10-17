@@ -52,11 +52,11 @@ public class ThirdPartySysApiClient {
     /**
      * The Connect timeout.
      */
-    protected int connectTimeout = 5000; 			// 默认连接超时时间为30秒
+    protected int connectTimeout = 10000; 			// 默认连接超时时间为30秒
     /**
      * The Read timeout.
      */
-    protected int readTimeout = 5000; 				// 默认响应超时时间为30秒
+    protected int readTimeout = 10000; 				// 默认响应超时时间为30秒
     
     private boolean isThirdPartySys = false;
 
