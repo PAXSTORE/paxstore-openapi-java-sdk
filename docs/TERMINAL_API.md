@@ -145,6 +145,8 @@ Structure of class TerminalInstalledApkDTO
 
 Structure of class TerminalDetailDTO
 
+_**tips: Only return this information in getTerminal or getTerminalBySn**_
+
 | Property Name    | Type   | Description                  |
 | :--------------- | :----- | :--------------------------- |
 | pn               | String | Terminal's pn                |
