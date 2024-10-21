@@ -248,8 +248,6 @@ public abstract class ThirdPartySysHttpUtils {
 					rateLimit = map.get("X-RateLimit-Limit")==null?"":map.get("X-RateLimit-Limit").get(0);
 					rateLimitRemain = map.get("X-RateLimit-Remaining")==null?"":map.get("X-RateLimit-Remaining").get(0);
 					rateLimitReset = map.get("X-RateLimit-Reset")==null?"":map.get("X-RateLimit-Reset").get(0);
-		
-					
 				} finally {
 					if (outputStream != null) {
 						outputStream.close();
@@ -271,9 +269,6 @@ public abstract class ThirdPartySysHttpUtils {
 				while ((bytesRead = urlConnection.getInputStream().read(buffer)) != -1) {
 					fileOutputStream.write(buffer, 0, bytesRead);
 				}
-
-
-
 				return EnhancedJsonUtils.getSdkJson(ResultCode.SUCCESS, filePath);
 			}
 			Map<String, List<String>> map = urlConnection.getHeaderFields();

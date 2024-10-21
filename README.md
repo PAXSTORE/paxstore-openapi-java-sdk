@@ -63,25 +63,39 @@ Below figure listed the global business codes, those business codes may appear i
 
 |Business Code|Message|Description|
 |:--|:--|:--|
-|0||Successful API call.
-|16105|Cannot connect to remote server!|The remote server is down or the constructor argument *baseUrl* is not correct.|
-|16104|Connection timeout!|Encounter SocketTimeoutException.|
-|16106|Request error!|Please check the error log or send the error log to support.|
-|16111|BaseUrl not correct!|The API BaseUrl may not correct|
-|16103|JSON error!||
-|129|Authentication failed||
+|0||Successful API call.|
+|101|Invalid request method|The request method is not correct|
+|102|Access token is missing||
+|103|Access token is invalid||
 |104|Client key is missing or invalid||
+|105|External System Integration not enable||
 |108|Marketplace is not available||
 |109|Marketplace is not active||
-|105|External System Integration not enable||
-|103|Access token is invalid||
-|102|Access token is missing|&nbsp;|
-|101|Invalid request method|The request method is not correct|
-|113|Request parameter is missing or invalid||
+|113|Request parameter is missing or invalid|                                                              |
+|129|Authentication failed||
+|130|Marketplace has not been activated||
+|131|Insufficient access right||
+|136|Current marketplace is in migration progress, please try later||
 |429|Too many request|Request number exceed the maximum number in the current rate limit window|
 |997|Malformed or illegal request|The JSON in request body is not a valid JSON|
 |998|Bad request||
 |999|Unknown error|Unknow error, please contact with support.|
+|1005|Marketplace not found||
+|1006|Marketplace is expired||
+|1309|Marketplace has been suspended||
+|1759|Reseller doesn't exist||
+|9101|License has been expired||
+|9102|License is not effective||
+|9103|Licensee mismatched||
+|9104|License not found||
+|13103|You are not allowed to call this API because of calling frequently||
+|13107|IP address not found||
+|13108|Source IP not allowed||
+|16103|JSON error!||
+|16104|Connection timeout!|Encounter SocketTimeoutException.|
+|16105|Cannot connect to remote server!|The remote server is down or the constructor argument *baseUrl* is not correct.|
+|16106|Request error!|Please check the error log or send the error log to support.|
+|16111|BaseUrl not correct!|The API BaseUrl may not correct|
 
 <br/>
 <br/>
@@ -89,10 +103,10 @@ Below figure listed the global business codes, those business codes may appear i
 
 ## Request rate limit
 
-For API requests using apiKey and apiSecret, you can make up to 3000 requests per 10 minutes. Authenticated requests are associated with the apiKey and apiSecret. This means that all thirdparty systems using the same apiKey and apiSecret share the same quota of 3000 requests per 10 minutes.
+The rate of successful authorised api requests is 3000 per 10min, which means that all third party systems using the same External System Access Key and External System Access Secre from one same reseller share the quota of 3000 requests per 10 minutes.
+Successfully authorised connections must be used with the correct External System Access Key and External System Access Secret, and the Exit IP of the external system integration server must be successfully configured in the External System Configuration.
 
-
-For unauthenticated requests, the rate limit allows for up to 20 requests per 30 minutes. Unauthenticated requests are associated with the originating IP address.
+Failed requests with unsuccessful authorisation will first report an error code as below, and the rate of failed requests with unsuccessful authorisation is limited to 20 requests every 30 minutes, and after reaching 20 requests in 30mins, a mandatory wait of 30 minutes is required for the next attempt, in order to prevent customers from unlimited requests for guessing the real key Secret or other important information, and protect the security of the customer's system integration.
 
 The returned HTTP headers of any API request show your current rate limit status:
 
@@ -173,7 +187,7 @@ To integrate with this SDK please add below dependency by updating the pom.xml f
 <dependency>
     <groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-    <version>9.4.0</version>
+    <version>9.5.0</version>
 </dependency>
 ```
 

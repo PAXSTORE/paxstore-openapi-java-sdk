@@ -4,23 +4,26 @@ import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
+import com.pax.market.api.sdk.java.api.constant.Constants;
+import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryRequest;
 import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResponse;
 import com.pax.market.api.sdk.java.api.goinsight.dto.DataQueryResultDTO;
+import com.pax.market.api.sdk.java.api.goinsight.dto.GoInsightCustomFilter;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.validate.Validators;
+import com.google.gson.Gson;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * @author liukai
  * @date 2020/3/23
  */
 public class GoInsightApi extends BaseThirdPartySysApi {
-    private final static String SEARCH_GO_INSIGHT_DATA_URL = "/v1/3rdsys/goInsight/data/app-biz";
+    private final static String SEARCH_GO_INSIGHT_DATA_URL = "/v1/3rdsys/goInsight/data/app-biz/{queryCode}";
     private final static int QUERY_CODE_LENGTH = 8;
     private final static int MAX_LENGTH = 1000;
+    private final static int MAX_CUSTOM_FILTER_LENGTH = 100;
 
     public GoInsightApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -40,14 +43,19 @@ public class GoInsightApi extends BaseThirdPartySysApi {
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode){
-        return findDataFromInsight(queryCode, null,null, null);
+        return findDataFromInsight(queryCode, null, null,null, null);
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType){
-        return findDataFromInsight(queryCode, rangeType,null, null);
+        return findDataFromInsight(queryCode, rangeType, null,null, null);
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize){
+        return findDataFromInsight(queryCode, rangeType, null,pageNo, pageSize);
+    }
+
+    public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType,
+                                                          List<GoInsightCustomFilter> customFilterList, Integer pageNo, Integer pageSize){
         List<String> validationErrs = Validators.validateStr(queryCode, "parameter.queryCode.invalid");
         if (queryCode != null && queryCode.length() != QUERY_CODE_LENGTH){
             validationErrs.add(getMessage("parameter.queryCode.length.invalid"));
@@ -55,23 +63,46 @@ public class GoInsightApi extends BaseThirdPartySysApi {
         if (pageSize != null && (pageSize <=0 || pageSize > MAX_LENGTH)){
             validationErrs.add(getMessage("insight.pageSize.length.invalid"));
         }
+        if(Objects.nonNull(customFilterList)){
+            for(GoInsightCustomFilter filter:customFilterList){
+                String filterErr = validateCustomFilter(filter.getCloName(), filter.getFilterValue());
+                if(filterErr != null){
+                    validationErrs.add(filterErr);
+                }
+            }
+        }
         if (!validationErrs.isEmpty()) {
-            return new Result<DataQueryResultDTO>(validationErrs);
+            return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(SEARCH_GO_INSIGHT_DATA_URL.replace("{queryCode}", queryCode));
-        request.addRequestParam("queryCode", queryCode);
-        if(pageNo != null && pageNo > 0 && pageSize != null && pageSize > 0){
-            request.addRequestParam("pageSize", pageSize+"");
-            request.addRequestParam("pageNo", pageNo+"");
-        }
+        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        DataQueryRequest queryRequest = new DataQueryRequest();
         if(rangeType != null){
-            request.addRequestParam("timeRangeType", rangeType.val+"");
+            queryRequest.setTimeRangeType(rangeType.val);
         }
+        if(Objects.nonNull(customFilterList)){
+            queryRequest.setCustomFilterList(customFilterList);
+        }
+        if(pageNo != null && pageNo > 0 && pageSize != null){
+            queryRequest.setPageNo(pageNo);
+            queryRequest.setPageSize(pageSize);
+        }
+        request.setRequestBody(new Gson().toJson(queryRequest, DataQueryRequest.class));
 
         DataQueryResponse dataQueryResponse = EnhancedJsonUtils.fromJson(client.execute(request), DataQueryResponse.class);
-        Result<DataQueryResultDTO> result = new Result<DataQueryResultDTO>(dataQueryResponse);
-        return result;
+        return new Result<>(dataQueryResponse);
+    }
+
+    private String validateCustomFilter(String colName, String filterValue) {
+        if(filterValue != null){
+            String[] filters = filterValue.split(",");
+            if(filters.length > MAX_CUSTOM_FILTER_LENGTH){
+                return String.format("The %s filter value size can not over %d", colName, MAX_CUSTOM_FILTER_LENGTH);
+            }
+        }
+        return null;
     }
 
     /**

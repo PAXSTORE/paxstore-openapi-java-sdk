@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.5.0
+### New Feature
+* New support for GoInsight API - `findDataFromInsight` queries through parameter `customFilterList`
+* Modify `README.md` - Explanation of Problems Encountered in Optimizing the SDK Authentication Process and the Enhancement of Error Codes
+* Version greater than or equal to 9.5.0 authentication signature encryption upgrade
+
 ## 9.4.0
 ### New Feature
 * New support for terminal API based on serialNo

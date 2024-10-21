@@ -53,10 +53,9 @@ public class Constants {
     public static final String ACCESS_LANGUAGE = "Accept-Language";
 
     /**
-     * HMAC签名方式
+     * HmacSHA256签名方式
      */
-    public static final String SIGN_METHOD_HMAC = "hmac";
-
+    public static final String SIGN_METHOD_HMAC_SHA256 = "HmacSHA256";
     /**
      * The constant CONTENT_TYPE.
      */
@@ -68,7 +67,7 @@ public class Constants {
 
 
     public static final String THIRD_PARTY_API_SDK_LANGUAGE = "Java";
-    public static final String THIRD_PARTY_API_SDK_VERSION = "9.4.0";
+    public static final String THIRD_PARTY_API_SDK_VERSION = "9.5.0";
     public static final String REQ_HEADER_SDK_LANG = "SDK-Language";
     public static final String REQ_HEADER_SDK_VERSION = "SDK-Version";
 
