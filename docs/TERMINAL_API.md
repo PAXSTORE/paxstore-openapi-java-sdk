@@ -2270,12 +2270,16 @@ public Result<String> updateTerminalConfig(Long terminalId, TerminalConfigUpdate
 
 **Input parameter(s) description**
 
-| Parameter Name                   | Type                        | Nullable | Description                                                                   |
-|:---------------------------------| :-------------------------- | :------- |:------------------------------------------------------------------------------|
-| terminalId                       | Long                        | false    | Terminal's id.                                                                |
-| terminalConfigUpdateRequest      | TerminalConfigUpdateRequest | false    | Update terminal config request object. The structure shows below.             |
-| terminalReplacementUpdateRequest | TerminalReplacementUpdateRequest | false    | Update terminal replacement config request object. The structure shows below. |
-| terminalTimeZoneUpdateRequest    | TerminalTimeZoneUpdateRequest | false    | Update terminal time zone config request object. The structure shows below.   |
+| Parameter Name                     | Type                        | Nullable | Description                                                                            |
+|:-----------------------------------| :-------------------------- | :------- |:---------------------------------------------------------------------------------------|
+| terminalId                         | Long                        | false    | Terminal's id.                                                                         |
+| terminalConfigUpdateRequest        | TerminalConfigUpdateRequest | false    | Update terminal config request object. The structure shows below.                      |
+| terminalReplacementUpdateRequest   | TerminalReplacementUpdateRequest | false    | Update terminal replacement config request object. The structure shows below.          |
+| terminalTimeZoneUpdateRequest      | TerminalTimeZoneUpdateRequest | false    | Update terminal time zone config request object. The structure shows below.            |
+| terminalLanguageUpdateRequest      | TerminalLanguageUpdateRequest | false    | Update terminal language config request object. The structure shows below.             |
+| terminalWifiUpdateRequest          | TerminalWifiUpdateRequest | false    | Update terminal wifi config request array object. The structure shows below.           |
+| terminalApnUpdateRequest           | TerminalApnUpdateRequest | false    | Update terminal apn config request array object. The structure shows below.            |
+| terminalWifiBlackListUpdateRequest | TerminalWifiBlackListUpdateRequest | false    | Update terminal wifi blackList config request array object. The structure shows below. |
 
 Structure of class TerminalReplacementUpdateRequest
 
@@ -2290,6 +2294,71 @@ Structure of class TerminalTimeZoneUpdateRequest
 | automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
 | timeZone                | String  | true     | The terminal time zone |
 
+Structure of class TerminalLanguageUpdateRequest
+
+| Property Name | Type   | Nullable | Description                                                                                                       |
+|:--------------|:-------|:---------|:------------------------------------------------------------------------------------------------------------------|
+| language      | String | false    | language symbol, English US is en-us, Japanese is ja-jp, Chinese is zh-cn, Spanish is es-es, Russian is ru-ru etc |
+
+Structure of class TerminalWifiUpdateRequest
+
+| Property Name | Type    | Nullable | Description                                   |
+|:--------------|:--------|:---------|:----------------------------------------------|
+| wifi          | String | true     | Array JSON string of WifiConfig Class as bellow |
+
+Structure of class WifiConfig
+
+| Property Name | Type    | Nullable | Description                                                  |
+|:--------------|:--------|:---------|:-------------------------------------------------------------|
+| SSID          | String  | false    | Wi-Fi Account                                                |
+| cipherType          | Integer | false    | Security setting, 0 is None,1 is WEP, 2 is WPA/WPA2 PSK      |
+| password          | String  | false    | Wi-Fi Password                                               |
+| proxyType          | Integer | false    | Proxy setting,0 is None, 1 is Manual, 2 is Proxy auto-config |
+| hostName          | String | true     | Proxy Host Name, it is mandaory when proxyType is 1          |
+| port          | Integer | true     | Proxy Port, it is mandaory when proxyType is 1               |
+| pacUrl          | String  | true     | Proxy auto-config URL, it is mandaory when proxyType is 2    |
+
+Structure of class TerminalApnUpdateRequest
+
+| Property Name | Type    | Nullable | Description                                  |
+|:--------------|:--------|:---------|:---------------------------------------------|
+| apn           | String | false    | Array JSON string of ApnConfig Class as bellow |
+
+Structure of class ApnConfig
+
+| Property Name | Type    | Nullable | Description                                                          |
+|:--------------|:--------|:---------|:---------------------------------------------------------------------|
+| name          | String  | false    | Name                                                                 |
+| apn          | String  | false    | APN                                                                  |
+| type          | String  | false    | APN type, value should be default,mms,supl,wap,net,ia,ims,hipri,xcap |
+| proxy          | String  | true    | Proxy Host                                                           |
+| port          | String  | true     | Proxy Port                                                           |
+| user          | String  | true     | Username                                                             |
+| password          | String  | true     | Password                                                             |
+| server          | String  | true     | Server                                                               |
+| mmsc          | String  | true     | mmsc                                                                 |
+| mmsproxy          | String  | true     | mms proxy                                                            |
+| mmsport          | String  | true     | mms port                                                             |
+| mcc          | String  | true     | mcc                                                                  |
+| mnc          | String  | true     | mnc                                                                  |
+| authtype          | Integer | true     | Authentication Type, 0 is  None,1 is PAP,2 is CHAP,3 is PAP/CHAP     |
+| protocol          | String  | true     | APN Protocol, value should be IP, IPV6, IPV4V6                       |
+| roaming_protocol          | String  | true     | Roaming Protocol, value should be IP, IPV6, IPV4V6                   |
+| mvno_type          | String  | true     | MVNO Type, None is "", Other values are spn,imsi,gid,iccid           |
+| mvno_match_data          | String  | true     | MVNO Value, value should be IP, IPV6, IPV4V6                         |
+
+Structure of class TerminalWifiBlackListUpdateRequest
+
+| Property Name | Type    | Nullable | Description                                        |
+|:--------------|:--------|:---------|:---------------------------------------------------|
+| blackList     | String | false    | Array JSON string of BlackListConfig Class as bellow |
+
+Structure of class BlackListConfig
+
+| Property Name | Type    | Nullable | Description                                                          |
+|:--------------|:--------|:---------|:---------------------------------------------------------------------|
+| wifiName          | String  | false    | Name                                                                 |
+
 **Sample codes**
 
 ```
@@ -2303,6 +2372,34 @@ TerminalTimeZoneUpdateRequest terminalTimeZoneUpdateRequest = new TerminalTimeZo
 terminalTimeZoneUpdateRequest.setAutomaticTimezoneEnable(false);
 terminalTimeZoneUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
 Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
+
+TerminalWifiUpdateRequest terminalWifiUpdateRequest = new TerminalWifiUpdateRequest();
+TerminalWifiUpdateRequest.WifiConfig wifiConfig1 = EnhancedJsonUtils.fromJson("{\"SSID\":\"pax20\",\"password\":\"12345678\",\"cipherType\":2,\"proxyType\":0}", TerminalWifiUpdateRequest.WifiConfig.class);
+TerminalWifiUpdateRequest.WifiConfig wifiConfig2 = EnhancedJsonUtils.fromJson("{\"SSID\":\"pax30\",\"password\":\"12345678\",\"cipherType\":2,\"proxyType\":0}", TerminalWifiUpdateRequest.WifiConfig.class);
+List<TerminalWifiUpdateRequest.WifiConfig> wifiConfigList = new ArrayList<>();
+wifiConfigList.add(wifiConfig1);
+wifiConfigList.add(wifiConfig2);
+terminalWifiUpdateRequest.setWifiList(wifiConfigList);
+Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalWifiUpdateRequest);
+
+TerminalApnUpdateRequest terminalApnUpdateRequest = new TerminalApnUpdateRequest();
+TerminalApnUpdateRequest.ApnConfig apnConfig1 = EnhancedJsonUtils.fromJson("{\"name\":\"MyApn20\",\"mcc\":\"101\",\"mnc\":\"102\",\"apn\":\"APN01\",\"user\":\"\",\"proxy\":\"\",\"mmsport\":\"100\",\"mmsc\":\"\",\"authtype\":1,\"type\":\"net\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\",\"checked\":false}", TerminalApnUpdateRequest.ApnConfig.class);
+TerminalApnUpdateRequest.ApnConfig apnConfig2 = EnhancedJsonUtils.fromJson("{\"name\":\"MyApn30\",\"mcc\":\"101\",\"mnc\":\"102\",\"apn\":\"APN01\",\"user\":\"\",\"proxy\":\"\",\"mmsport\":\"100\",\"mmsc\":\"\",\"authtype\":1,\"type\":\"net\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\",\"checked\":false}", TerminalApnUpdateRequest.ApnConfig.class);
+List<TerminalApnUpdateRequest.ApnConfig> apnConfigList = new ArrayList<>();
+apnConfigList.add(apnConfig1);
+apnConfigList.add(apnConfig2);
+terminalApnUpdateRequest.setApnList(apnConfigList);
+Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalApnUpdateRequest);
+		
+TerminalWifiBlackListUpdateRequest terminalWifiBlackListUpdateRequest = new TerminalWifiBlackListUpdateRequest();
+TerminalWifiBlackListUpdateRequest.BlackListConfig blackListConfig1 = EnhancedJsonUtils.fromJson("{\"wifiName\":\"testwifi1\"}", TerminalWifiBlackListUpdateRequest.BlackListConfig.class);
+TerminalWifiBlackListUpdateRequest.BlackListConfig blackListConfig2 = EnhancedJsonUtils.fromJson("{\"wifiName\":\"testwifi2\"}", TerminalWifiBlackListUpdateRequest.BlackListConfig.class);
+List<TerminalWifiBlackListUpdateRequest.BlackListConfig> blackListConfigList = new ArrayList<>();
+blackListConfigList.add(blackListConfig1);
+blackListConfigList.add(blackListConfig2);
+terminalWifiBlackListUpdateRequest.setBlackList(blackListConfigList);
+Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalWifiBlackListUpdateRequest);		
+
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -2477,8 +2574,15 @@ Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(909744L);
 {
 	"businessCode": 0,
 	"data": {
-		"allowReplacement": true
-	}
+		"allowReplacement": false,
+		"language": "zh-cn",
+		"wifiList": "[{\"password\":\"12345678\",\"cipherType\":\"2\",\"proxyType\":\"0\"},{\"password\":\"12345678\",\"cipherType\":\"2\",\"proxyType\":\"0\"}]",
+		"apnList": "[{\"name\":\"MyApn20\",\"apn\":\"APN01\",\"type\":\"net\",\"proxy\":\"\",\"user\":\"\",\"mmsc\":\"\",\"mmsport\":\"100\",\"mcc\":\"101\",\"mnc\":\"102\",\"authtype\":\"1\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\"},{\"name\":\"MyApn30\",\"apn\":\"APN01\",\"type\":\"net\",\"proxy\":\"\",\"user\":\"\",\"mmsc\":\"\",\"mmsport\":\"100\",\"mcc\":\"101\",\"mnc\":\"102\",\"authtype\":\"1\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\"}]",
+		"blackList": "[{\"wifiName\":\"testwifi1\"},{\"wifiName\":\"testwifi2\"}]"
+	},
+	"rateLimit": "3000",
+	"rateLimitRemain": "2998",
+	"rateLimitReset": "1729495336615"
 }
 ```
 

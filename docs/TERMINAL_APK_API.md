@@ -24,7 +24,7 @@ Push apk API allow the third party system push a apk to terminal. And max reques
 **API**
 
 ```
-public Result<String> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest)
+public Result<TerminalApkDTO> createTerminalApk(CreateTerminalApkRequest createTerminalApkRequest)
 ```
 
 **Input parameter(s) description**
