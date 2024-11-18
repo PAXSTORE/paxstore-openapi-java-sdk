@@ -23,6 +23,7 @@ import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminal.dto.*;
 import com.pax.market.api.sdk.java.api.terminal.validator.TerminalCopyRequestValidator;
+import com.pax.market.api.sdk.java.api.terminal.validator.TerminalMessageRequestValidator;
 import com.pax.market.api.sdk.java.api.terminal.validator.TerminalMoveRequestValidator;
 import com.pax.market.api.sdk.java.api.terminal.validator.TerminalRequestValidator;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
@@ -96,6 +97,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String GET_TERMINAL_PED_STATUS_URL_BY_SN = "/v1/3rdsys/terminal/ped";
 
     protected static final String PUSH_TERMINAL_ACTION_URL_BY_SN = "/v1/3rdsys/terminal/operation";
+    protected static final String SEND_TERMINAL_MESSAGE = "/v1/3rdsys/terminals/{terminalId}/send/message";
+    protected static final String SEND_TERMINAL_MESSAGE_BY_SN = "/v1/3rdsys/terminal/send/message";
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -383,6 +386,23 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
 
+    public Result<String> pushTerminalMessage(Long terminalId, TerminalMessageRequest terminalMessageRequest){
+        logger.debug("terminalId={}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid","terminalId");
+        validationErrs.addAll(TerminalMessageRequestValidator.validate(terminalMessageRequest, "terminalMessageRequest"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SEND_TERMINAL_MESSAGE.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(terminalMessageRequest, TerminalMessageRequest.class));
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<>(emptyResponse);
+    }
+
+
     public Result<TerminalDTO> getTerminalBySn(String serialNo) {
         return getTerminalBySn(serialNo, false, false);
     }
@@ -582,6 +602,24 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
         request.addRequestParam("command", command.val());
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<>(emptyResponse);
+    }
+
+
+    public Result<String> pushTerminalMessageBySn(String serialNo, TerminalMessageRequest terminalMessageRequest){
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(TerminalMessageRequestValidator.validate(terminalMessageRequest, "terminalMessageRequest"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SEND_TERMINAL_MESSAGE_BY_SN);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.setRequestBody(new Gson().toJson(terminalMessageRequest, TerminalMessageRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<>(emptyResponse);
     }

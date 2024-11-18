@@ -3035,4 +3035,157 @@ Structure of class TerminalNetworkDTO
 | 2028          | Terminal not found         |             |
 | 2039          | Tid mismatch with serialNo |             |
 
-### 
+
+
+### Push Terminal Message
+
+push terminal message by terminal id.
+
+**API**
+
+```
+public Result<String> pushTerminalMessage(Long terminalId, TerminalMessageRequest terminalMessageRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name         | Type                   | Nullable | Description    |
+| :--------------------- | :--------------------- | :------- | :------------- |
+| terminalId             | String                 | false    | Terminal's id. |
+| terminalMessageRequest | TerminalMessageRequest | false    |                |
+
+Structure of class TerminalMessageRequest
+
+| Property Name | Type   | Nullable | Description                                 |
+| :------------ | :----- | -------- | :------------------------------------------ |
+| title         | String | false    | The length limit for message titles is 64   |
+| content       | String | false    | The length limit for message content is 256 |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long terminalId = 162006737459222L
+TerminalMessageRequest request = new TerminalMessageRequest();
+request.setTitle("Test Title");
+request.setContent("Test Content");
+Result<String> result = terminalApi.pushTerminalMessage(terminalId,request);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible business codes**
+
+| Business Code | Message                              | Description |
+| :------------ | :----------------------------------- | :---------- |
+| 1800          | Terminal not found                   |             |
+| 1810          | Terminal is not active               |             |
+| 1896          | The terminal is offline!             |             |
+| 1803          | Terminal model is mandatory          |             |
+| 2123          | Push message title cannot be empty   |             |
+| 2124          | Push message title is too long       |             |
+| 2125          | Push message content cannot be empty |             |
+| 2126          | Push message content is too long     |             |
+
+
+
+### Push Terminal Message By Serial No
+
+push terminal message by terminal serial no.
+
+**API**
+
+```
+public Result<String> pushTerminalMessageBySn(Long terminalId, TerminalMessageRequest terminalMessageRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name         | Type                   | Nullable | Description    |
+| :--------------------- | :--------------------- | :------- | :------------- |
+| terminalId             | String                 | false    | Terminal's id. |
+| terminalMessageRequest | TerminalMessageRequest | false    |                |
+
+Structure of class TerminalMessageRequest
+
+| Property Name | Type   | Nullable | Description                                 |
+| :------------ | :----- | -------- | :------------------------------------------ |
+| title         | String | false    | The length limit for message titles is 64   |
+| content       | String | false    | The length limit for message content is 256 |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String serialNo = "TESTBYSN"
+TerminalMessageRequest request = new TerminalMessageRequest();
+request.setTitle("Test Title");
+request.setContent("Test Content");
+Result<String> resultBySn = terminalApi.pushTerminalMessageBySn(serialNo,request);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible business codes**
+
+| Business Code | Message                              | Description |
+| :------------ | :----------------------------------- | :---------- |
+| 1800          | Terminal not found                   |             |
+| 1810          | Terminal is not active               |             |
+| 1896          | The terminal is offline!             |             |
+| 1803          | Terminal model is mandatory          |             |
+| 2123          | Push message title cannot be empty   |             |
+| 2124          | Push message title is too long       |             |
+| 2125          | Push message content cannot be empty |             |
+| 2126          | Push message content is too long     |             |
+

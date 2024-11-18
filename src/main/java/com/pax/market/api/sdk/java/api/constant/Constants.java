@@ -83,6 +83,7 @@ public class Constants {
     public static final int MAX_64 = 64;
     public static final int MAX_128 = 128;
     public static final int MAX_255 = 255;
+    public static final int MAX_256 = 256;
     public static final int MAX_500 = 500;
     public static final int MAX_3000 = 3000;
     public static final int MIN_0 = 0;

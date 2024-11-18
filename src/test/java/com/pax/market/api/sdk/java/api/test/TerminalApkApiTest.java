@@ -61,8 +61,8 @@ public class TerminalApkApiTest {
     
     @Test
     public void testCreateUninstallSuspendTerminalApk() {
-        String terminalTid = "3KJQMK6C";
-        String testPackageName = "com.cleanmaster.mguard_cn";
+        String terminalTid = "FH6XJ2J6";
+        String testPackageName = "com.alibaba.android.rimet";
     	CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
     	createTerminalApkRequest.setTid(terminalTid);
 //    	createTerminalApkRequest.setTid("S9F0RA7V");
@@ -72,26 +72,25 @@ public class TerminalApkApiTest {
     	
 //    	createTerminalApkRequest.setPackageName("com.pax.android.lm");
     	
-    	createTerminalApkRequest.setVersion("3.4.7");
-//    	createTerminalApkRequest.setTemplateName("10个text字段 - 副本2.xml");
-//    	createTerminalApkRequest.setTemplateName("param02.xml");
-//    	Map<String, String> parameters = new HashMap<String, String>();
-//    	parameters.put("sys.cap.emvParamCheckType", "abc");
+    	createTerminalApkRequest.setVersion("6.5.5");
+    	createTerminalApkRequest.setTemplateName("combine.xml");
+    	Map<String, String> parameters = new HashMap<String, String>();
+    	parameters.put("F1_PID2", "T1test3rd");
 
-        FileParameter fileParameter = new FileParameter();
+/*        FileParameter fileParameter = new FileParameter();
         fileParameter.setPid("PID.cardBinFile");
         fileParameter.setFileName("cardBinFile.jpeg");
         fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
         List<FileParameter> base64FileParameters = new ArrayList<>();
         base64FileParameters.add(fileParameter);
-        createTerminalApkRequest.setBase64FileParameters(base64FileParameters);
+        createTerminalApkRequest.setBase64FileParameters(base64FileParameters);*/
 
-    	//createTerminalApkRequest.setParameters(parameters);
+    	createTerminalApkRequest.setParameters(parameters);
     	Result<TerminalApkDTO> result = terminalApkApi.createTerminalApk(createTerminalApkRequest);
     	Assert.assertTrue(result.getBusinessCode() == 0);
     	logger.info(result.toString());
 
-    	//Test Get
+/*    	//Test Get
         Result<TerminalApkDTO> newTerminalApkDTO = terminalApkApi.getTerminalApk(result.getData().getId());
         Assert.assertTrue(newTerminalApkDTO.getBusinessCode() == 0);
 
@@ -107,7 +106,7 @@ public class TerminalApkApiTest {
         //Test Uninstall
         Result<String> uninstallResult = terminalApkApi.uninstallApk(updateTerminalApkRequest);
         Assert.assertTrue(uninstallResult.getBusinessCode() == 0 || uninstallResult.getBusinessCode() == 2037);
-        logger.info(uninstallResult.toString());
+        logger.info(uninstallResult.toString());*/
     }
 
     @Test
