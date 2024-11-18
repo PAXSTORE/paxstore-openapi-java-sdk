@@ -97,8 +97,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String GET_TERMINAL_PED_STATUS_URL_BY_SN = "/v1/3rdsys/terminal/ped";
 
     protected static final String PUSH_TERMINAL_ACTION_URL_BY_SN = "/v1/3rdsys/terminal/operation";
-    protected static final String SEND_TERMINAL_MESSAGE = "/v1/3rdsys/terminals/{terminalId}/send/message";
-    protected static final String SEND_TERMINAL_MESSAGE_BY_SN = "/v1/3rdsys/terminal/send/message";
+    protected static final String PUSH_TERMINAL_MESSAGE = "/v1/3rdsys/terminals/{terminalId}/push/message";
+    protected static final String PUSH_TERMINAL_MESSAGE_BY_SN = "/v1/3rdsys/terminal/push/message";
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -402,7 +402,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(SEND_TERMINAL_MESSAGE.replace("{terminalId}", terminalId.toString()));
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_MESSAGE.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(terminalMessageRequest, TerminalMessageRequest.class));
@@ -623,7 +623,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(SEND_TERMINAL_MESSAGE_BY_SN);
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_MESSAGE_BY_SN);
         request.setRequestMethod(RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
