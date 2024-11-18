@@ -26,6 +26,20 @@ public class TerminalConfigDTO implements Serializable {
     private Boolean allowReplacement;
     private Boolean automaticTimezoneEnable;
     private String timeZone;
+    private String language;
+    /**
+     * wifi list
+     * */
+    private String wifiList;
+    /**
+     * apn config list
+     * */
+    private String apnList;
+    /**
+     * wifi black list
+     * */
+    private String blackList;
+
 
     public Boolean getAllowReplacement() {
         return allowReplacement;
@@ -49,5 +63,37 @@ public class TerminalConfigDTO implements Serializable {
 
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getWifiList() {
+        return wifiList;
+    }
+
+    public void setWifiList(String wifiList) {
+        this.wifiList = wifiList;
+    }
+
+    public String getApnList() {
+        return apnList;
+    }
+
+    public void setApnList(String apnList) {
+        this.apnList = apnList;
+    }
+
+    public String getBlackList() {
+        return blackList;
+    }
+
+    public void setBlackList(String blackList) {
+        this.blackList = blackList;
     }
 }

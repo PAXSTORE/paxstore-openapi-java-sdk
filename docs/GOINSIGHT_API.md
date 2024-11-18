@@ -83,36 +83,32 @@ Note: The pageNo param will be ignore when your query result set type is statist
 
 Value of enum TimestampRangeType
 
-| Value | Description |
-|:---- |:----|
-|LAST_HOUR|Last Hour|
-|YESTERDAY|Yesterday|
-|LAST_WEEK|Last Week|
-|LAST_MONTH|Last Month|
-|LAST_QUARTER|Last Quarter|
-|LAST_YEAR|Last Year|
-|LAST_YEAR_BY_QUARTER|Last Year (by quarter)|
-|RECENT_5_MIN|Recent 5 Minute: Past 5m|
-|RECENT_30_MIN|Recent 30 Minute: Past 30m|
-|RECENT_HOUR|Recent Hour: Past 1h|
-|RECENT_3_HOUR|Recent 3 Hour: Past 3h|
-|RECENT_DAY|Recent Day: Past 24h|
-|RECENT_2_DAY|Recent 2 Day: Past 48h|
-|RECENT_5_DAY|Recent 5 Day: Past 120h|
-|RECENT_WEEK|Recent Week|
-|RECENT_MONTH|Recent Month|
-|RECENT_3_MONTH|Recent 3 Month|
-|RECENT_6_MONTH|Recent 6 Month|
-|RECENT_YEAR|Recent Year|
-|RECENT_YEAR_BY_QUARTER|Recent Year (by quarter)|
-|THIS_HOUR|This Hour|
-|TODAY|Today|
-|THIS_WEEK|This Week|
-|THIS_MONTH|This Month|
-|THIS_QUARTER|This Quarter|
-|THIS_QUARTER_BY_WEEK|This Quarter (by week)|
-|THIS_YEAR|This Year|
-|THIS_YEAR_BY_QUARTER|This Year (by quarter)|
+| Value | Description      |
+|:---- |:-----------------|
+|LAST_HOUR| Last Hour        |
+|YESTERDAY| Yesterday        |
+|LAST_WEEK| Previous Week    |
+|LAST_MONTH| Previous Month   |
+|LAST_QUARTER| Previous Quarter |
+|LAST_YEAR| Previous Year    |
+|RECENT_5_MIN| Last 5 Minutes   |
+|RECENT_30_MIN| Last 30 Minutes  |
+|RECENT_HOUR| Last 60 Minutes  |
+|RECENT_3_HOUR| Last 3 Hours     |
+|RECENT_DAY| Last 24 Hours    |
+|RECENT_2_DAY| Last 2 Days      |
+|RECENT_5_DAY| Last 5 Days      |
+|RECENT_WEEK| Last 7 Days      |
+|RECENT_MONTH| Last 30 Days     |
+|RECENT_3_MONTH| Last 90 Days     |
+|RECENT_6_MONTH| Last 180 Days    |
+|RECENT_YEAR| Last 365 Days    |
+|THIS_HOUR| This Hour        |
+|TODAY| Today            |
+|THIS_WEEK| This Week        |
+|THIS_MONTH| This Month       |
+|THIS_QUARTER| This Quarter     |
+|THIS_YEAR| This Year        |
 
 The structure of class GoInsightCustomFilter
 

@@ -15,6 +15,7 @@ package com.pax.market.api.sdk.java.api.test;
 import com.pax.market.api.sdk.java.api.terminal.dto.*;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalSnGroupRequest;
+import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,9 +29,7 @@ import com.pax.market.api.sdk.java.api.terminal.dto.TerminalCreateRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalUpdateRequest;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 
 
 /**
@@ -190,12 +189,72 @@ public class TerminalApiTest {
 	}
 
 	@Test
+	public void testUpdateTerminalApnConfig(){
+		Long terminalId = 1639497804546092L;
+		TerminalApnUpdateRequest terminalApnUpdateRequest = new TerminalApnUpdateRequest();
+		TerminalApnUpdateRequest.ApnConfig apnConfig1 = EnhancedJsonUtils.fromJson("{\"name\":\"MyApn20\",\"mcc\":\"101\",\"mnc\":\"102\",\"apn\":\"APN01\",\"user\":\"\",\"proxy\":\"\",\"mmsport\":\"100\",\"mmsc\":\"\",\"authtype\":1,\"type\":\"net\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\"}", TerminalApnUpdateRequest.ApnConfig.class);
+		TerminalApnUpdateRequest.ApnConfig apnConfig2 = EnhancedJsonUtils.fromJson("{\"name\":\"MyApn30\",\"mcc\":\"101\",\"mnc\":\"102\",\"apn\":\"APN01\",\"user\":\"\",\"proxy\":\"\",\"mmsport\":\"100\",\"mmsc\":\"\",\"authtype\":1,\"type\":\"net\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\"}", TerminalApnUpdateRequest.ApnConfig.class);
+		List<TerminalApnUpdateRequest.ApnConfig> apnConfigList = new ArrayList<>();
+		apnConfigList.add(apnConfig1);
+		apnConfigList.add(apnConfig2);
+		terminalApnUpdateRequest.setApnList(apnConfigList);
+
+		Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalApnUpdateRequest);
+		logger.debug("Result of update Terminal Config: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+
+	}
+
+	@Test
+	public void testUpdateTerminalWifiConfig(){
+		Long terminalId = 1639497804546092L;
+		TerminalWifiUpdateRequest terminalWifiUpdateRequest = new TerminalWifiUpdateRequest();
+		TerminalWifiUpdateRequest.WifiConfig wifiConfig1 = EnhancedJsonUtils.fromJson("{\"SSID\":\"pax20\",\"password\":\"12345678\",\"cipherType\":2,\"proxyType\":0}", TerminalWifiUpdateRequest.WifiConfig.class);
+		TerminalWifiUpdateRequest.WifiConfig wifiConfig2 = EnhancedJsonUtils.fromJson("{\"SSID\":\"pax30\",\"password\":\"12345678\",\"cipherType\":2,\"proxyType\":0}", TerminalWifiUpdateRequest.WifiConfig.class);
+		List<TerminalWifiUpdateRequest.WifiConfig> wifiConfigList = new ArrayList<>();
+		wifiConfigList.add(wifiConfig1);
+		wifiConfigList.add(wifiConfig2);
+		terminalWifiUpdateRequest.setWifiList(wifiConfigList);
+		Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalWifiUpdateRequest);
+		logger.debug("Result of update Terminal Config: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+
+	}
+
+	@Test
+	public void testUpdateTerminalLangConfig(){
+		Long terminalId = 1639497804546092L;
+		TerminalLanguageUpdateRequest terminalLanguageUpdateRequest = new TerminalLanguageUpdateRequest();
+		terminalLanguageUpdateRequest.setLanguage("ja-jp");
+		Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalLanguageUpdateRequest);
+		logger.debug("Result of update Terminal Config: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+
+	}
+
+	@Test
+	public void testUpdateTerminalWifiBlackListConfig(){
+		Long terminalId = 1639497804546092L;
+		TerminalWifiBlackListUpdateRequest terminalWifiBlackListUpdateRequest = new TerminalWifiBlackListUpdateRequest();
+		TerminalWifiBlackListUpdateRequest.BlackListConfig blackListConfig1 = EnhancedJsonUtils.fromJson("{\"wifiName\":\"testwifi1\"}", TerminalWifiBlackListUpdateRequest.BlackListConfig.class);
+		TerminalWifiBlackListUpdateRequest.BlackListConfig blackListConfig2 = EnhancedJsonUtils.fromJson("{\"wifiName\":\"testwifi2\"}", TerminalWifiBlackListUpdateRequest.BlackListConfig.class);
+		List<TerminalWifiBlackListUpdateRequest.BlackListConfig> blackListConfigList = new ArrayList<>();
+		blackListConfigList.add(blackListConfig1);
+		blackListConfigList.add(blackListConfig2);
+		terminalWifiBlackListUpdateRequest.setBlackList(blackListConfigList);
+
+		Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalWifiBlackListUpdateRequest);
+		logger.debug("Result of update Terminal Config: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+
+	}
+
+	@Test
 	public void testGetTerminalConfig(){
-		Long terminalId = 90974L;
+		Long terminalId = 1639497804546092L;
 		Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(terminalId);
 		logger.debug("Result of get Terminal Config: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
-
 	}
 
 

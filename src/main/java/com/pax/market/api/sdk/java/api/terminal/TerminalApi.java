@@ -310,8 +310,16 @@ public class TerminalApi extends BaseThirdPartySysApi {
         Gson gson = new Gson();
         if (terminalConfigUpdateRequest instanceof TerminalReplacementUpdateRequest) {
             requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalReplacementUpdateRequest.class);
-        } else {
+        } else if(terminalConfigUpdateRequest instanceof TerminalTimeZoneUpdateRequest){
             requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalTimeZoneUpdateRequest.class);
+        } else if(terminalConfigUpdateRequest instanceof TerminalApnUpdateRequest){
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalApnUpdateRequest.class);
+        } else if(terminalConfigUpdateRequest instanceof TerminalWifiUpdateRequest){
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalWifiUpdateRequest.class);
+        } else if(terminalConfigUpdateRequest instanceof TerminalWifiBlackListUpdateRequest){
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalWifiBlackListUpdateRequest.class);
+        } else {
+            requestBody = gson.toJson(terminalConfigUpdateRequest, TerminalLanguageUpdateRequest.class);
         }
         request.setRequestBody(requestBody);
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
