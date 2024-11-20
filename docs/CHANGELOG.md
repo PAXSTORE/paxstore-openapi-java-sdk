@@ -1,11 +1,5 @@
 # Changelog
 
-## 9.6.0
-### New Feature
-* Add pushTerminalMessage API
-* Add pushTerminalMessageBySn API
-
-
 ## 9.5.0
 ### New Feature
 * New support for GoInsight API - `findDataFromInsight` queries through parameter `customFilterList`
