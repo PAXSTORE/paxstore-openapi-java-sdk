@@ -455,7 +455,7 @@ public class TerminalApiTest {
 
 	@Test
 	public void testTerminalCpuStatisticById() {
-		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatistic(1639491781525547L);
+		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatistic(terminalId);
 		if(terminalCpuStatistic.getData()!=null) {
 			logger.debug("Result of testTerminalCpuStatistic {}",terminalCpuStatistic.getData().toString());
 		}else{
@@ -466,7 +466,7 @@ public class TerminalApiTest {
 
 	@Test
 	public void testTerminalCpuStatisticBySN() {
-		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatisticBySn("SUBSN108");
+		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatisticBySn(serialNo);
 		if(terminalCpuStatistic.getData()!=null) {
 			logger.debug("Result of testTerminalCpuStatistic {}",terminalCpuStatistic.getData().toString());
 		}else{
