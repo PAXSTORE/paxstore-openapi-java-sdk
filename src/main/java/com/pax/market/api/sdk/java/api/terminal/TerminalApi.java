@@ -99,7 +99,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String PUSH_TERMINAL_ACTION_URL_BY_SN = "/v1/3rdsys/terminal/operation";
     protected static final String PUSH_TERMINAL_MESSAGE = "/v1/3rdsys/terminals/{terminalId}/push/message";
     protected static final String PUSH_TERMINAL_MESSAGE_BY_SN = "/v1/3rdsys/terminal/push/message";
-
+    protected static final String GET_TERMINAL_CPU_STATISTIC = "/v1/3rdsys/terminals/{terminalId}/cpu/statistics";
+    protected static final String GET_TERMINAL_CPU_STATISTIC_BY_SN = "/v1/3rdsys/terminal/cpu/statistics";
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
     }
@@ -630,6 +631,31 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.setRequestBody(new Gson().toJson(terminalMessageRequest, TerminalMessageRequest.class));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<>(emptyResponse);
+    }
+
+    public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatisticById(Long terminalId) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_CPU_STATISTIC.replace("{terminalId}", terminalId.toString()));
+        TerminalCpuStatisticResponse terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalCpuStatisticResponse.class);
+        return new Result<>(terminalResponse);
+    }
+
+    public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatisticBySn(String serialNo) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_CPU_STATISTIC_BY_SN);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        TerminalCpuStatisticResponse terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalCpuStatisticResponse.class);
+        return new Result<>(terminalResponse);
     }
 
     public enum TerminalStatus {

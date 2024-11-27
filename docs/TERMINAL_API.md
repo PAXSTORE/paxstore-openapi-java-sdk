@@ -3293,3 +3293,159 @@ Result<String> resultBySn = terminalApi.pushTerminalMessageBySn(serialNo,request
 | 2125          | Push message content cannot be empty |             |
 | 2126          | Push message content is too long     |             |
 
+### Get terminal CPU and RAM usage statistic by id
+
+Get terminal cpu, ram, battery usage.
+
+**API**
+
+```
+public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatistic(Long terminalId) 
+```
+
+**Path variable(s) description**
+
+| Parameter Name | Type | Nullable | Description  |
+| :------------- | :--- | :------- | :----------- |
+| terminalId     | Long | true     | Terminal id. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatistic(1639491781525547L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property terminalId can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"totalBatteryUsage": 0.000000,
+		"totalCpuUsage": 1.0,
+		"totalRamUsage": 596234240,
+		"totalStorageUsage": 58703872
+	}
+}
+```
+
+The type in dataSet of result is TerminalCpuStatisticsDTO. The structure shows below.
+
+Structure of class TerminalCpuStatisticsDTO
+
+| Property Name     | Type       | Description                       |
+| :---------------- | :--------- | :-------------------------------- |
+| totalBatteryUsage | BigDecimal | total battery usage               |
+| totalCpuUsage     | Double     | total cpu usage, value 1 means 1% |
+| totalRamUsage     | Long       | total ram usage.                  |
+| totalStorageUsage | Long       | total storage usage               |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 2028          | Terminal not found |             |
+
+
+
+### Get terminal CPU and RAM usage statistic by SN
+
+Get terminal cpu, ram, battery usage by terminal serial no.
+
+**API**
+
+```
+public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatisticBySn(String serialNo)
+```
+
+**Path variable(s) description**
+
+| Parameter Name | Type | Nullable | Description  |
+| :------------- | :--- | :------- | :----------- |
+| terminalId     | Long | true     | Terminal id. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatisticBySn("SUBSN108");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serinalNo can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"totalBatteryUsage": 0.000000,
+		"totalCpuUsage": 1.0,
+		"totalRamUsage": 596234240,
+		"totalStorageUsage": 58703872
+	}
+}
+```
+
+The type in dataSet of result is TerminalCpuStatisticsDTO. The structure shows below.
+
+Structure of class TerminalCpuStatisticsDTO
+
+| Property Name     | Type       | Description                       |
+| :---------------- | :--------- | :-------------------------------- |
+| totalBatteryUsage | BigDecimal | total battery usage               |
+| totalCpuUsage     | Double     | total cpu usage, value 1 means 1% |
+| totalRamUsage     | Long       | total ram usage.                  |
+| totalStorageUsage | Long       | total storage usage               |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 2028          | Terminal not found |             |
+
+
+

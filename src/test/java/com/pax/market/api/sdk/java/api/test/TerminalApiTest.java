@@ -453,4 +453,25 @@ public class TerminalApiTest {
 		Assert.assertEquals(0, resultBySn.getBusinessCode());
 	}
 
+	@Test
+	public void testTerminalCpuStatisticById() {
+		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatisticById(1639491781525547L);
+		if(terminalCpuStatistic.getData()!=null) {
+			logger.debug("Result of testTerminalCpuStatistic {}",terminalCpuStatistic.getData().toString());
+		}else{
+			logger.debug("Result of testTerminalCpuStatistic {}", terminalCpuStatistic.toString());
+		}
+		Assert.assertEquals(0, terminalCpuStatistic.getBusinessCode());
+	}
+
+	@Test
+	public void testTerminalCpuStatisticBySN() {
+		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatisticBySn("SUBSN108");
+		if(terminalCpuStatistic.getData()!=null) {
+			logger.debug("Result of testTerminalCpuStatistic {}",terminalCpuStatistic.getData().toString());
+		}else{
+			logger.debug("Result of testTerminalCpuStatistic {}", terminalCpuStatistic.toString());
+		}
+		Assert.assertEquals(0, terminalCpuStatistic.getBusinessCode());
+	}
 }
