@@ -48,7 +48,7 @@ Description
 <td>MYS</td><td>Malaysia</td><td>马来西亚</td><td>Malaysia</td><td>马来西亚</td>
 </tr>
 <tr>
-<td>JP</td><td>Japan</td><td>日本</td><td>Japan</td><td>日本</td>
+<td>JPN</td><td>Japan</td><td>日本</td><td>Japan</td><td>日本</td>
 </tr>
 <tr>
 <td>IND</td><td>India</td><td>印度</td><td>India</td><td>印度</td>
