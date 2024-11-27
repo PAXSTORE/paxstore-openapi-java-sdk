@@ -3,6 +3,8 @@
 ### New Feature
 * Add pushTerminalMessage API
 * Add pushTerminalMessageBySn API
+* Add getTerminalCpuStatistic API
+* Add getTerminalCpuStatisticBySn API
 
 ## 9.5.0
 ### New Feature

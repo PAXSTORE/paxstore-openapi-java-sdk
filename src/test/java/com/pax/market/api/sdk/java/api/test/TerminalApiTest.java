@@ -455,7 +455,7 @@ public class TerminalApiTest {
 
 	@Test
 	public void testTerminalCpuStatisticById() {
-		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatisticById(1639491781525547L);
+		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatistic(1639491781525547L);
 		if(terminalCpuStatistic.getData()!=null) {
 			logger.debug("Result of testTerminalCpuStatistic {}",terminalCpuStatistic.getData().toString());
 		}else{

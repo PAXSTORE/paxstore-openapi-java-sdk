@@ -633,7 +633,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return  new Result<>(emptyResponse);
     }
 
-    public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatisticById(Long terminalId) {
+    public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatistic(Long terminalId) {
         logger.debug("terminalId= {}", terminalId);
         List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
         if (!validationErrs.isEmpty()) {
@@ -641,6 +641,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(GET_TERMINAL_CPU_STATISTIC.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         TerminalCpuStatisticResponse terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalCpuStatisticResponse.class);
         return new Result<>(terminalResponse);
     }
