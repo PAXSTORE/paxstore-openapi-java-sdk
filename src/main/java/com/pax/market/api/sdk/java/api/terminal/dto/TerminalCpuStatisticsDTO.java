@@ -22,18 +22,9 @@ import java.math.BigDecimal;
 public class TerminalCpuStatisticsDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private BigDecimal totalBatteryUsage = new BigDecimal(0);
     private Double totalCpuUsage = 0D;
-    private Long totalRamUsage = 0L;
     private Long totalStorageUsage = 0L;
 
-    public BigDecimal getTotalBatteryUsage() {
-        return totalBatteryUsage;
-    }
-
-    public void setTotalBatteryUsage(BigDecimal totalBatteryUsage) {
-        this.totalBatteryUsage = totalBatteryUsage;
-    }
 
     public Double getTotalCpuUsage() {
         return totalCpuUsage;
@@ -41,14 +32,6 @@ public class TerminalCpuStatisticsDTO implements Serializable {
 
     public void setTotalCpuUsage(Double totalCpuUsage) {
         this.totalCpuUsage = totalCpuUsage;
-    }
-
-    public Long getTotalRamUsage() {
-        return totalRamUsage;
-    }
-
-    public void setTotalRamUsage(Long totalRamUsage) {
-        this.totalRamUsage = totalRamUsage;
     }
 
     public Long getTotalStorageUsage() {

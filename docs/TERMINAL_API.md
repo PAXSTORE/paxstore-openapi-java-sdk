@@ -3418,9 +3418,7 @@ Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalC
 {
 	"businessCode": 0,
 	"data": {
-		"totalBatteryUsage": 0.000000,
 		"totalCpuUsage": 1.0,
-		"totalRamUsage": 596234240,
 		"totalStorageUsage": 58703872
 	}
 }
@@ -3432,9 +3430,7 @@ Structure of class TerminalCpuStatisticsDTO
 
 | Property Name     | Type       | Description                       |
 | :---------------- | :--------- | :-------------------------------- |
-| totalBatteryUsage | BigDecimal | total battery usage               |
 | totalCpuUsage     | Double     | total cpu usage, value 1 means 1% |
-| totalRamUsage     | Long       | total ram usage.                  |
 | totalStorageUsage | Long       | total storage usage               |
 
 **Possible client validation errors**
