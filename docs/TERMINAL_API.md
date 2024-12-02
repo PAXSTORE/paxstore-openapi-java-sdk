@@ -3306,8 +3306,8 @@ public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatistic(Long terminalId)
 **Path variable(s) description**
 
 | Parameter Name | Type | Nullable | Description  |
-| :------------- | :--- | :------- | :----------- |
-| terminalId     | Long | true     | Terminal id. |
+| :------------- | :--- |:---------| :----------- |
+| terminalId     | Long | false    | Terminal id. |
 
 **Sample codes**
 
