@@ -3383,9 +3383,9 @@ public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatisticBySn(String seria
 
 **Path variable(s) description**
 
-| Parameter Name | Type | Nullable | Description  |
-| :------------- | :--- | :------- | :----------- |
-| terminalId     | Long | true     | Terminal id. |
+| Parameter Name | Type   | Nullable | Description  |
+| :------------- |:-------|:---------| :----------- |
+| serialNo     | String | false        |  |
 
 **Sample codes**
 
