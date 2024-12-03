@@ -12,6 +12,8 @@
 package com.pax.market.api.sdk.java.api.test;
 
 
+import com.pax.market.api.sdk.java.api.base.dto.DownloadTaskDTO;
+import com.pax.market.api.sdk.java.api.terminal.dto.TerminalLogRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.*;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalSnGroupRequest;
@@ -473,5 +475,47 @@ public class TerminalApiTest {
 			logger.debug("Result of testTerminalCpuStatistic {}", terminalCpuStatistic.toString());
 		}
 		Assert.assertEquals(0, terminalCpuStatistic.getBusinessCode());
+	}
+
+	@Test
+	public void testCollectTerminalLog() {
+		TerminalLogRequest request = new TerminalLogRequest();
+		request.setType("L");
+		Result<String> result = terminalApi.collectTerminalLog(terminalId,request);
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testCollectTerminalLogBySn() {
+		TerminalLogRequest request = new TerminalLogRequest();
+		request.setType("L");
+		Result<String> result = terminalApi.collectTerminalLogBySn(serialNo,request);
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testSearchTerminalLog() {
+		Result<TerminalLogDTO> result = terminalApi.searchTerminalLog(1, 10, terminalId);
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testSearchTerminalLogBySn() {
+		Result<TerminalLogDTO> result = terminalApi.searchTerminalLogBySn(1, 10, serialNo);
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testGetTerminalLogDownloadTask() {
+		Long terminalLogId = 1018664888L;
+		Result<DownloadTaskDTO> result = terminalApi.getTerminalLogDownloadTask(terminalId, terminalLogId);
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testGetTerminalLogDownloadTaskBySn() {
+		Long terminalLogId = 1018664888L;
+		Result<DownloadTaskDTO> result = terminalApi.getTerminalLogDownloadTaskBySn(serialNo, terminalLogId);
+		Assert.assertEquals(0, result.getBusinessCode());
 	}
 }
