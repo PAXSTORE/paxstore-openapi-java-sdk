@@ -3293,9 +3293,9 @@ Result<String> resultBySn = terminalApi.pushTerminalMessageBySn(serialNo,request
 | 2125          | Push message content cannot be empty |             |
 | 2126          | Push message content is too long     |             |
 
-### Get terminal CPU and RAM usage statistic by id
+### Get terminal CPU and Storage usage statistic by id
 
-Get terminal cpu, ram, battery usage.
+Get terminal cpu, storage usage.
 
 **API**
 
@@ -3340,9 +3340,7 @@ Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalC
 {
 	"businessCode": 0,
 	"data": {
-		"totalBatteryUsage": 0.000000,
 		"totalCpuUsage": 1.0,
-		"totalRamUsage": 596234240,
 		"totalStorageUsage": 58703872
 	}
 }
@@ -3353,11 +3351,9 @@ The type in dataSet of result is TerminalCpuStatisticsDTO. The structure shows b
 Structure of class TerminalCpuStatisticsDTO
 
 | Property Name     | Type       | Description                       |
-| :---------------- | :--------- | :-------------------------------- |
-| totalBatteryUsage | BigDecimal | total battery usage               |
+| :---------------- | :--------- |:----------------------------------|
 | totalCpuUsage     | Double     | total cpu usage, value 1 means 1% |
-| totalRamUsage     | Long       | total ram usage.                  |
-| totalStorageUsage | Long       | total storage usage               |
+| totalStorageUsage | Long       | total storage usage, unit is byte |
 
 **Possible client validation errors**
 
@@ -3371,9 +3367,9 @@ Structure of class TerminalCpuStatisticsDTO
 
 
 
-### Get terminal CPU and RAM usage statistic by SN
+### Get terminal CPU and Storage usage statistic by SN
 
-Get terminal cpu, ram, battery usage by terminal serial no.
+Get terminal cpu, storage usage by terminal serial no.
 
 **API**
 
@@ -3429,9 +3425,9 @@ The type in dataSet of result is TerminalCpuStatisticsDTO. The structure shows b
 Structure of class TerminalCpuStatisticsDTO
 
 | Property Name     | Type       | Description                       |
-| :---------------- | :--------- | :-------------------------------- |
+| :---------------- | :--------- |:----------------------------------|
 | totalCpuUsage     | Double     | total cpu usage, value 1 means 1% |
-| totalStorageUsage | Long       | total storage usage               |
+| totalStorageUsage | Long       | total storage usage, unit is byte |
 
 **Possible client validation errors**
 
@@ -3442,6 +3438,7 @@ Structure of class TerminalCpuStatisticsDTO
 | Business Code | Message            | Description |
 | :------------ | :----------------- | :---------- |
 | 2028          | Terminal not found |             |
+| 1802          | Terminal SN is mandatory |             |
 
 
 
