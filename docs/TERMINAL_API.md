@@ -3460,10 +3460,10 @@ public Result<String> collectTerminalLog(Long terminalId, TerminalLogRequest ter
 Structure of class TerminalLogRequest
 
 | Property Name | Type   | Nullable | Description                                                  |
-| :------------ | :----- | -------- | :----------------------------------------------------------- |
+| :------------ | :----- | -------- |:-------------------------------------------------------------|
 | type          | String | false    | The type of terminal log, allowable values are "L", "D", "S" |
 | beginDate     | String | true     | The begin date of terminal detail log                        |
-| endDate       | String | true     | The enddate of terminal detail log                           |
+| endDate       | String | true     | The end date of terminal detail log                         |
 
 **Sample codes**
 
@@ -3599,9 +3599,9 @@ public Result<TerminalLogDTO> searchTerminalLog(int pageNo, int pageSize, Long t
 **Input parameter(s) description**
 
 | Parameter Name | Type | Nullable | Description                                   |
-| :------------- | :--- | :------- | :-------------------------------------------- |
-| pageNo         | int  | false    | page number, value must >=1                   |
-| pageSize       | int  | false    | the record number per page, range is 1 to 100 |
+| :------------- | :--- |:---------| :-------------------------------------------- |
+| pageNo         | int  | true     | page number, value must >=1                   |
+| pageSize       | int  | true     | the record number per page, range is 1 to 100 |
 | terminalId     | Long | false    | Terminal's id.                                |
 
 **Sample codes**
@@ -3687,9 +3687,9 @@ public Result<TerminalLogDTO> searchTerminalLog(int pageNo, int pageSize, String
 **Input parameter(s) description**
 
 | Parameter Name | Type   | Nullable | Description                                   |
-| :------------- | :----- | :------- | :-------------------------------------------- |
-| pageNo         | int    | false    | page number, value must >=1                   |
-| pageSize       | int    | false    | the record number per page, range is 1 to 100 |
+| :------------- | :----- |:---------| :-------------------------------------------- |
+| pageNo         | int    | true     | page number, value must >=1                   |
+| pageSize       | int    | true        | the record number per page, range is 1 to 100 |
 | serialNo       | String | false    | The terminal serial no.                       |
 
 **Sample codes**
