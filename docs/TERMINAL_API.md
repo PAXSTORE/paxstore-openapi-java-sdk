@@ -3440,5 +3440,503 @@ Structure of class TerminalCpuStatisticsDTO
 | 2028          | Terminal not found |             |
 | 1802          | Terminal SN is mandatory |             |
 
+### Collect Terminal Log
+
+collect terminal log.
+
+**API**
+
+```
+public Result<String> collectTerminalLog(Long terminalId, TerminalLogRequest terminalLogRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name       | Type               | Nullable | Description    |
+| :------------------- | :----------------- | :------- | :------------- |
+| terminalId           | Long               | false    | Terminal's id. |
+| *terminalLogRequest* | TerminalLogRequest | false    |                |
+
+Structure of class TerminalLogRequest
+
+| Property Name | Type   | Nullable | Description                                                  |
+| :------------ | :----- | -------- | :----------------------------------------------------------- |
+| type          | String | false    | The type of terminal log, allowable values are "L", "D", "S" |
+| beginDate     | String | true     | The begin date of terminal detail log                        |
+| endDate       | String | true     | The enddate of terminal detail log                           |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long terminalId = "908627L"
+TerminalLogRequest request = new TerminalLogRequest();
+request.setType("L");
+Result<String> result = terminalApi.collectTerminalLog(terminalId,request);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                      | Description |
+| :------------ | :--------------------------- | :---------- |
+| 1800          | Terminal not found           |             |
+| 14001         | Terminal log type is invalid |             |
+
+### Collect Terminal Log By Serial No
+
+collect terminal log by serial no.
+
+**API**
+
+```
+public Result<String> collectTerminalLog(String serialNo, TerminalLogRequest terminalLogRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name       | Type               | Nullable | Description                |
+| :------------------- | :----------------- | :------- | :------------------------- |
+| serialNo             | String             | false    | Serial number of terminal. |
+| *terminalLogRequest* | TerminalLogRequest | false    |                            |
+
+Structure of class TerminalLogRequest
+
+| Property Name | Type   | Nullable | Description                                                  |
+| :------------ | :----- | -------- | :----------------------------------------------------------- |
+| type          | String | false    | The type of terminal log, allowable values are "L", "D", "S" |
+| beginDate     | String | true     | The begin date of terminal detail log                        |
+| endDate       | String | true     | The enddate of terminal detail log                           |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String serialNo = "SUBSN108"
+TerminalLogRequest request = new TerminalLogRequest();
+request.setType("L");
+Result<String> resultBySn = terminalApi.collectTerminalLogBySn(serialNo,request);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serinalNo can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter serialNo cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                      | Description |
+| :------------ | :--------------------------- | :---------- |
+| 1800          | Terminal not found           |             |
+| 14001         | Terminal log type is invalid |             |
+
+### Search Terminal Logs
+
+search terminal logs.
+
+**API**
+
+```
+public Result<TerminalLogDTO> searchTerminalLog(int pageNo, int pageSize, Long terminalId)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type | Nullable | Description                                   |
+| :------------- | :--- | :------- | :-------------------------------------------- |
+| pageNo         | int  | false    | page number, value must >=1                   |
+| pageSize       | int  | false    | the record number per page, range is 1 to 100 |
+| terminalId     | Long | false    | Terminal's id.                                |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long terminalId = "908627L"
+Result<TerminalLogDTO> result = terminalApi.searchTerminalLog(1,10,terminalId);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageSize:must be greater than or equal to 1", "pageNo:must be greater than or equal to 1","Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"pageInfo": {
+		"pageNo": 1,
+		"limit": 10,
+		"totalCount": 1,
+		"hasNext": false,
+		"dataSet": [{
+			"id": 907558,
+			"type": "L",
+			"title": "logcat-2024-12-03 14:13:36"
+		}]
+	}
+}
+```
+
+The type in dataSet of result is TerminalLogDTO. The structure shows below.
+
+Structure of class TerminalLogDTO
+
+| Property Name | Type   | Description           |
+| ------------- | ------ | --------------------- |
+| id            | Long   | Terminal log's id.    |
+| type          | String | Terminal log's type.  |
+| title         | String | Terminal log's title. |
+
+**Possible validation errors**
+
+> <font color=red>pageSize:must be greater than or equal to 1</font>   
+> <font color=red>pageNo:must be greater than or equal to 1</font>   
+> <font color=red>pageSize:must be less than or equal to 100</font>
+>
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+
+### Search Terminal Logs By Serial No
+
+search terminal logs by serial no.
+
+**API**
+
+```
+public Result<TerminalLogDTO> searchTerminalLog(int pageNo, int pageSize, String serialNo)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                                   |
+| :------------- | :----- | :------- | :-------------------------------------------- |
+| pageNo         | int    | false    | page number, value must >=1                   |
+| pageSize       | int    | false    | the record number per page, range is 1 to 100 |
+| serialNo       | String | false    | The terminal serial no.                       |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String serialNo = "SUBSN108"
+Result<TerminalLogDTO> result = terminalApi.searchTerminalLog(1,10,serialNo);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageSize:must be greater than or equal to 1", "pageNo:must be greater than or equal to 1","Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"pageInfo": {
+		"pageNo": 1,
+		"limit": 10,
+		"totalCount": 1,
+		"hasNext": false,
+		"dataSet": [{
+			"id": 907558,
+			"type": "L",
+			"title": "logcat-2024-12-03 14:13:36"
+		}]
+	}
+}
+```
+
+The type in dataSet of result is TerminalLogDTO. The structure shows below.
+
+Structure of class TerminalLogDTO
+
+| Property Name | Type   | Description           |
+| ------------- | ------ | --------------------- |
+| id            | Long   | Terminal log's id.    |
+| type          | String | Terminal log's type.  |
+| title         | String | Terminal log's title. |
+
+**Possible validation errors**
+
+> <font color=red>pageSize:must be greater than or equal to 1</font>   
+> <font color=red>pageNo:must be greater than or equal to 1</font>   
+> <font color=red>pageSize:must be less than or equal to 100</font>
+>
+> <font color=red>Parameter serialNo cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+
+### Get Terminal Log Download Task
+
+get terminal log download task.
+
+**API**
+
+```
+ public Result<DownloadTaskDTO> getTerminalLogDownloadTask(Long terminalId, Long terminalLogId) 
+```
+
+**Input parameter(s) description**
+
+| Parameter Name  | Type | Nullable | Description        |
+| :-------------- | :--- | :------- | :----------------- |
+| terminalId      | Long | false    | Terminal's id.     |
+| *terminalLogId* | Long | false    | Terminal log's id. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long terminalId = "908627L";
+Long terminalLogId = "908624L";
+Result<DownloadTaskDTO> result = terminalApi.getTerminalLogDownloadTask(terminalId,terminalLogId);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"fileName": "Logcat-A920-IMP8000000020-2024-11-29_15_10_10.zip",
+		"downloadUrl": "https://api..whatspos.com/p-market-web/v1/common/files/f7af52e72e8a5780f1895b3c2d997c7a",
+		"signature": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJmaWxlTmFtZSI6IkxvZ2NhdC1udWxsLUlNUDgwMDAwMDAwMjAtMjAyN",
+		"expireSeconds": 1712474124,
+		"keyPairId": "KX8VKGY3RK4NN
+	}
+}
+```
+
+The type of data in result is DownloadTaskDTO. The structure shows below.
+
+Structure of class DownloadTaskDTO
+
+| Property Name | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| fileName      | String | The file name of log              |
+| downloadUrl   | String | The download url of terminal log  |
+| signature     | String | The value of CloudFront-Signature |
+| expireSeconds | Long   | The value of expireSeconds        |
+| keyPairId     | String | The value of keyPairId            |
+
+When you access the download url you must set three cookies, the keys are "CloudFront-Signature", "CloudFront-Expires", "CloudFront-Key-Pair-Id" and the values are signature , expireSeconds and keyPairId.
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+>
+> <font color=red>Parameter terminalLogId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+| 16111         | File not found     |             |
+
+
+
+### Get Terminal Log Download Task By Serial No
+
+get terminal log download task by serial no.
+
+**API**
+
+```
+public Result<DownloadTaskDTO> getTerminalLogDownloadTaskBySn(String serialNo, Long terminalLogId)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name  | Type   | Nullable | Description                |
+| :-------------- | :----- | :------- | :------------------------- |
+| serialNo        | String | false    | Serial number of terminal. |
+| *terminalLogId* | Long   | false    | Terminal log's id.         |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String serialNo = "SUBSN108";
+Long terminalLogId = "908624L";
+Result<DownloadTaskDTO> result = terminalApi.getTerminalLogDownloadTaskBySn(serialNo,terminalLogId);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serinalNo can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"fileName": "Logcat-A920-IMP8000000020-2024-11-29_15_10_10.zip",
+		"downloadUrl": "https://api..whatspos.com/p-market-web/v1/common/files/f7af52e72e8a5780f1895b3c2d997c7a",
+		"signature": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJmaWxlTmFtZSI6IkxvZ2NhdC1udWxsLUlNUDgwMDAwMDAwMjAtMjAyN",
+		"expireSeconds": 1712474124,
+		"keyPairId": "KX8VKGY3RK4NN
+	}
+}
+```
+
+The type of data in result is DownloadTaskDTO. The structure shows below.
+
+Structure of class DownloadTaskDTO
+
+| Property Name | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| fileName      | String | The file name of log             |
+| downloadUrl   | String | The download url of terminal log |
+| signature     | String | CloudFront-Signature             |
+| expireSeconds | Long   | CloudFront-Expires               |
+| keyPairId     | String | CloudFront-Key-Pair-Id           |
+
+When you access the download url you must set three cookies, the keys are "CloudFront-Signature", "CloudFront-Expires", "CloudFront-Key-Pair-Id" and the values are signature , expireSeconds and keyPairId.
+
+**Possible client validation errors**
+
+> <font color=red>Parameter serialNo cannot be empty!</font>
+>
+> <font color=red>Parameter terminalLogId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+| 16111         | File not found     |             |
+
 
 
