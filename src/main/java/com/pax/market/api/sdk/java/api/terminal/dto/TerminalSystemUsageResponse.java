@@ -13,7 +13,7 @@ package com.pax.market.api.sdk.java.api.terminal.dto;
 
 import com.pax.market.api.sdk.java.api.base.dto.Response;
 
-public class TerminalCpuStatisticResponse extends Response<TerminalCpuStatisticsDTO>{
+public class TerminalSystemUsageResponse extends Response<TerminalSystemUsageDTO>{
 
     private static final long serialVersionUID = -727612044205705882L;
 

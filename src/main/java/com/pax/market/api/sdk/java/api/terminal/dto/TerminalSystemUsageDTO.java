@@ -13,18 +13,19 @@
 package com.pax.market.api.sdk.java.api.terminal.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * @author shifan
  * @date 2022/10/20
  */
-public class TerminalCpuStatisticsDTO implements Serializable {
+public class TerminalSystemUsageDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Double totalCpuUsage = 0D;
     private Long totalStorageUsage = 0L;
-
+    private Long totalRamUsage;
+    private Long totalRAM;
+    private Long totalStorage;
 
     public Double getTotalCpuUsage() {
         return totalCpuUsage;
@@ -40,5 +41,29 @@ public class TerminalCpuStatisticsDTO implements Serializable {
 
     public void setTotalStorageUsage(Long totalStorageUsage) {
         this.totalStorageUsage = totalStorageUsage;
+    }
+
+    public Long getTotalRamUsage() {
+        return totalRamUsage;
+    }
+
+    public void setTotalRamUsage(Long totalRamUsage) {
+        this.totalRamUsage = totalRamUsage;
+    }
+
+    public Long getTotalRAM() {
+        return totalRAM;
+    }
+
+    public void setTotalRAM(Long totalRAM) {
+        this.totalRAM = totalRAM;
+    }
+
+    public Long getTotalStorage() {
+        return totalStorage;
+    }
+
+    public void setTotalStorage(Long totalStorage) {
+        this.totalStorage = totalStorage;
     }
 }

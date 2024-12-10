@@ -456,25 +456,25 @@ public class TerminalApiTest {
 	}
 
 	@Test
-	public void testTerminalCpuStatisticById() {
-		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatistic(terminalId);
-		if(terminalCpuStatistic.getData()!=null) {
-			logger.debug("Result of testTerminalCpuStatistic {}",terminalCpuStatistic.getData().toString());
+	public void testTerminalSystemUsageBySN() {
+		Result<TerminalSystemUsageDTO> terminalSystemUsage = terminalApi.getTerminalSystemUsageBySn("SUBSN108");
+		if(terminalSystemUsage.getData()!=null) {
+			logger.debug("Result of testTerminalCpuStatistic {}",terminalSystemUsage.getData().toString());
 		}else{
-			logger.debug("Result of testTerminalCpuStatistic {}", terminalCpuStatistic.toString());
+			logger.debug("Result of testTerminalCpuStatistic {}", terminalSystemUsage.toString());
 		}
-		Assert.assertEquals(0, terminalCpuStatistic.getBusinessCode());
+		Assert.assertEquals(0, terminalSystemUsage.getBusinessCode());
 	}
 
 	@Test
-	public void testTerminalCpuStatisticBySN() {
-		Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatisticBySn(serialNo);
-		if(terminalCpuStatistic.getData()!=null) {
-			logger.debug("Result of testTerminalCpuStatistic {}",terminalCpuStatistic.getData().toString());
+	public void testTerminalSystemUsageById() {
+		Result<TerminalSystemUsageDTO> terminalSystemUsage = terminalApi.getTerminalSystemUsageById(1639491781525547L);
+		if(terminalSystemUsage.getData()!=null) {
+			logger.debug("Result of testTerminalCpuStatistic {}",terminalSystemUsage.getData().toString());
 		}else{
-			logger.debug("Result of testTerminalCpuStatistic {}", terminalCpuStatistic.toString());
+			logger.debug("Result of testTerminalCpuStatistic {}", terminalSystemUsage.toString());
 		}
-		Assert.assertEquals(0, terminalCpuStatistic.getBusinessCode());
+		Assert.assertEquals(0, terminalSystemUsage.getBusinessCode());
 	}
 
 	@Test

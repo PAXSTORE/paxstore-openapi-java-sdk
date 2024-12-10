@@ -97,8 +97,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String PUSH_TERMINAL_ACTION_URL_BY_SN = "/v1/3rdsys/terminal/operation";
     protected static final String PUSH_TERMINAL_MESSAGE = "/v1/3rdsys/terminals/{terminalId}/push/message";
     protected static final String PUSH_TERMINAL_MESSAGE_BY_SN = "/v1/3rdsys/terminal/push/message";
-    protected static final String GET_TERMINAL_CPU_STATISTIC = "/v1/3rdsys/terminals/{terminalId}/cpu/statistics";
-    protected static final String GET_TERMINAL_CPU_STATISTIC_BY_SN = "/v1/3rdsys/terminal/cpu/statistics";
+    protected static final String GET_TERMINAL_SYSTEM_USAGE_BY_ID = "/v1/3rdsys/terminals/{terminalId}/system/usage";
+    protected static final String GET_TERMINAL_SYSTEM_USAGE_BY_SN = "/v1/3rdsys/terminal/system/usage";
     protected static final String COLLECT_TERMINAL_LOG = "/v1/3rdsys/terminals/{terminalId}/collect/log";
     protected static final String COLLECT_TERMINAL_LOG_BY_SN = "/v1/3rdsys/terminal/collect/log";
     protected static final String SEARCH_TERMINAL_LOG = "/v1/3rdsys/terminals/{terminalId}/logs";
@@ -637,30 +637,29 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return  new Result<>(emptyResponse);
     }
 
-    public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatistic(Long terminalId) {
+    public Result<TerminalSystemUsageDTO> getTerminalSystemUsageById(Long terminalId) {
         logger.debug("terminalId= {}", terminalId);
         List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(GET_TERMINAL_CPU_STATISTIC.replace("{terminalId}", terminalId.toString()));
-        request.setRequestMethod(RequestMethod.GET);
-        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        TerminalCpuStatisticResponse terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalCpuStatisticResponse.class);
+        SdkRequest request = createSdkRequest(GET_TERMINAL_SYSTEM_USAGE_BY_ID.replace("{terminalId}", StringUtils.trim(String.valueOf(terminalId))));
+
+        TerminalSystemUsageResponse terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalSystemUsageResponse.class);
         return new Result<>(terminalResponse);
     }
 
-    public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatisticBySn(String serialNo) {
+    public Result<TerminalSystemUsageDTO> getTerminalSystemUsageBySn(String serialNo) {
         logger.debug("serialNo= {}", serialNo);
         List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(GET_TERMINAL_CPU_STATISTIC_BY_SN);
+        SdkRequest request = createSdkRequest(GET_TERMINAL_SYSTEM_USAGE_BY_SN);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
-        TerminalCpuStatisticResponse terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalCpuStatisticResponse.class);
+        TerminalSystemUsageResponse terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalSystemUsageResponse.class);
         return new Result<>(terminalResponse);
     }
 

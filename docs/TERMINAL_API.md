@@ -3293,27 +3293,27 @@ Result<String> resultBySn = terminalApi.pushTerminalMessageBySn(serialNo,request
 | 2125          | Push message content cannot be empty |             |
 | 2126          | Push message content is too long     |             |
 
-### Get terminal CPU and Storage usage statistic by id
+### Get terminal system usage by id
 
-Get terminal cpu, storage usage.
+Get terminal cpu, ram, storage usage.
 
 **API**
 
 ```
-public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatistic(Long terminalId) 
+public Result<TerminalSystemUsageDTO> getTerminalSystemUsageById(Long terminalId)
 ```
 
 **Path variable(s) description**
 
-| Parameter Name | Type | Nullable | Description  |
-| :------------- | :--- |:---------| :----------- |
-| terminalId     | Long | false    | Terminal id. |
+| Parameter Name | Type   | Nullable | Description     |
+|:---------------|:-------| :------- |:----------------|
+| terminalId     | Long   | true     | Terminal id.    |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatistic(1639491781525547L);
+Result<TerminalSystemUsageDTO> terminalCpuStatistic = terminalApi.getTerminalSystemUsageById(1639491781525547L);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -3341,19 +3341,25 @@ Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalC
 	"businessCode": 0,
 	"data": {
 		"totalCpuUsage": 1.0,
-		"totalStorageUsage": 58703872
+		"totalStorageUsage": 301666304,
+		"totalRamUsage": 596234240,
+		"totalRAM": 908165120,
+		"totalStorage": 3984334848
 	}
 }
 ```
 
-The type in dataSet of result is TerminalCpuStatisticsDTO. The structure shows below.
+The type in dataSet of result is TerminalSystemUsageDTO. The structure shows below.
 
-Structure of class TerminalCpuStatisticsDTO
+Structure of class TerminalSystemUsageDTO
 
-| Property Name     | Type       | Description                       |
-| :---------------- | :--------- |:----------------------------------|
-| totalCpuUsage     | Double     | total cpu usage, value 1 means 1% |
-| totalStorageUsage | Long       | total storage usage, unit is byte |
+| Property Name | Type       | Description                       |
+| :------------ |:-----------|:----------------------------------|
+| totalCpuUsage           | Double     | total cpu usage, value 1 means 1% |
+| totalRamUsage      | Long       | total ram usage, unit is byte.    |
+| totalRAM      | Long       | total ram size, unit is byte.     |
+| totalStorageUsage        | Long     | total storage usage, unit is byte |
+| totalStorage      | Long       | total storage size, unit is byte. |
 
 **Possible client validation errors**
 
@@ -3361,33 +3367,33 @@ Structure of class TerminalCpuStatisticsDTO
 
 **Possible business codes**
 
-| Business Code | Message            | Description |
-| :------------ | :----------------- | :---------- |
-| 2028          | Terminal not found |             |
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 2028          | Terminal not found         |             |
 
 
 
-### Get terminal CPU and Storage usage statistic by SN
+### Get terminal system usage by SN
 
-Get terminal cpu, storage usage by terminal serial no.
+Get terminal cpu, ram, storage usage by terminal serial no.
 
 **API**
 
 ```
-public Result<TerminalCpuStatisticsDTO> getTerminalCpuStatisticBySn(String serialNo)
+public Result<TerminalSystemUsageDTO> getTerminalSystemUsageBySn(String serialNo)
 ```
 
 **Path variable(s) description**
 
-| Parameter Name | Type   | Nullable | Description  |
-| :------------- |:-------|:---------| :----------- |
-| serialNo     | String | false        |  |
+| Parameter Name | Type   | Nullable | Description     |
+|:---------------|:-------| :------- |:----------------|
+| terminalId     | Long   | true     | Terminal id.    |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalCpuStatisticBySn("SUBSN108");
+Result<TerminalSystemUsageDTO> terminalCpuStatistic = terminalApi.getTerminalSystemUsageBySn("SUBSN108");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -3415,19 +3421,25 @@ Result<TerminalCpuStatisticsDTO> terminalCpuStatistic = terminalApi.getTerminalC
 	"businessCode": 0,
 	"data": {
 		"totalCpuUsage": 1.0,
-		"totalStorageUsage": 58703872
+		"totalStorageUsage": 301666304,
+		"totalRamUsage": 596234240,
+		"totalRAM": 908165120,
+		"totalStorage": 3984334848
 	}
 }
 ```
 
-The type in dataSet of result is TerminalCpuStatisticsDTO. The structure shows below.
+The type in dataSet of result is TerminalSystemUsageDTO. The structure shows below.
 
-Structure of class TerminalCpuStatisticsDTO
+Structure of class TerminalSystemUsageDTO
 
-| Property Name     | Type       | Description                       |
-| :---------------- | :--------- |:----------------------------------|
-| totalCpuUsage     | Double     | total cpu usage, value 1 means 1% |
-| totalStorageUsage | Long       | total storage usage, unit is byte |
+| Property Name | Type       | Description                       |
+| :------------ |:-----------|:----------------------------------|
+| totalCpuUsage           | Double     | total cpu usage, value 1 means 1% |
+| totalRamUsage      | Long       | total ram usage, unit is byte.    |
+| totalRAM      | Long       | total ram size, unit is byte.     |
+| totalStorageUsage        | Long     | total storage usage, unit is byte |
+| totalStorage      | Long       | total storage size, unit is byte. |
 
 **Possible client validation errors**
 
@@ -3435,10 +3447,10 @@ Structure of class TerminalCpuStatisticsDTO
 
 **Possible business codes**
 
-| Business Code | Message            | Description |
-| :------------ | :----------------- | :---------- |
-| 2028          | Terminal not found |             |
-| 1802          | Terminal SN is mandatory |             |
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 2028          | Terminal not found         |             |
+
 
 ### Collect Terminal Log
 
