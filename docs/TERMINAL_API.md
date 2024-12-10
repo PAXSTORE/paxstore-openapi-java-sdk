@@ -3462,8 +3462,8 @@ Structure of class TerminalLogRequest
 | Property Name | Type   | Nullable | Description                                                  |
 | :------------ | :----- | -------- |:-------------------------------------------------------------|
 | type          | String | false    | The type of terminal log, allowable values are "L", "D", "S" |
-| beginDate     | String | true     | The begin date of terminal detail log, example: "2024-12-01"  |
-| endDate       | String | true     | The end date of terminal detail log, example: "2024-12-01"                        |
+| beginDate     | String | true     | The begin date of terminal detail log, example: "2024-12-01" |
+| endDate       | String | true     | The end date of terminal detail log, example: "2024-12-01"   |
 
 **Sample codes**
 
@@ -3533,10 +3533,10 @@ public Result<String> collectTerminalLog(String serialNo, TerminalLogRequest ter
 Structure of class TerminalLogRequest
 
 | Property Name | Type   | Nullable | Description                                                  |
-| :------------ | :----- | -------- | :----------------------------------------------------------- |
+| :------------ | :----- | -------- |:-------------------------------------------------------------|
 | type          | String | false    | The type of terminal log, allowable values are "L", "D", "S" |
-| beginDate     | String | true     | The begin date of terminal detail log                        |
-| endDate       | String | true     | The enddate of terminal detail log                           |
+| beginDate     | String | true     | The begin date of terminal detail log, example: "2024-12-01" |
+| endDate       | String | true     | The enddate of terminal detail log, example: "2024-12-01"    |
 
 **Sample codes**
 
