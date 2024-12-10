@@ -100,11 +100,11 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String GET_TERMINAL_CPU_STATISTIC = "/v1/3rdsys/terminals/{terminalId}/cpu/statistics";
     protected static final String GET_TERMINAL_CPU_STATISTIC_BY_SN = "/v1/3rdsys/terminal/cpu/statistics";
     protected static final String COLLECT_TERMINAL_LOG = "/v1/3rdsys/terminals/{terminalId}/collect/log";
-    protected static final String COLLECT_TERMINAL_LOG_BY_SN = "/v1/3rdsys/terminals/collect/log";
+    protected static final String COLLECT_TERMINAL_LOG_BY_SN = "/v1/3rdsys/terminal/collect/log";
     protected static final String SEARCH_TERMINAL_LOG = "/v1/3rdsys/terminals/{terminalId}/logs";
-    protected static final String SEARCH_TERMINAL_LOG_BY_SN = "/v1/3rdsys/terminals/logs";
+    protected static final String SEARCH_TERMINAL_LOG_BY_SN = "/v1/3rdsys/terminal/logs";
     protected static final String GET_TERMINAL_LOG_DOWNLOAD_URL = "/v1/3rdsys/terminals/{terminalId}/logs/{terminalLogId}/download-task";
-    protected static final String GET_TERMINAL_LOG_DOWNLOAD_URL_BY_SN = "/v1/3rdsys/terminals/logs/{terminalLogId}/download-task";
+    protected static final String GET_TERMINAL_LOG_DOWNLOAD_URL_BY_SN = "/v1/3rdsys/terminal/logs/{terminalLogId}/download-task";
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
     }
