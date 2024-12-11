@@ -1,10 +1,19 @@
 # Changelog
 ## 9.6.0
 ### New Feature
-* Add pushTerminalMessage API
-* Add pushTerminalMessageBySn API
-* Add getTerminalCpuStatistic API
-* Add getTerminalCpuStatisticBySn API
+* Add the return field `updatedDate` and `lastAccessTime` in Search Terminal API
+* Add TerminalApi - `pushTerminalMessage` API
+* Add TerminalApi - `pushTerminalMessageBySn` API
+* Add TerminalApi - `getTerminalSystemUsageById` API
+* Add TerminalApi - `getTerminalSystemUsageBySn` API
+* Add TerminalApi - `collectTerminalLog` API
+* Add TerminalApi - `collectTerminalLogBySn` API
+* Add TerminalApi - `searchTerminalLog` API
+* Add TerminalApi - `searchTerminalLogBySn` API
+* Add TerminalApi - `getTerminalLogDownloadTask` API
+* Add TerminalApi - `getTerminalLogDownloadTaskBySn` API
+
+
 
 ## 9.5.0
 ### New Feature
