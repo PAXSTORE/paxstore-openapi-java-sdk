@@ -3313,7 +3313,7 @@ public Result<TerminalSystemUsageDTO> getTerminalSystemUsageById(Long terminalId
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalSystemUsageDTO> terminalCpuStatistic = terminalApi.getTerminalSystemUsageById(1639491781525547L);
+Result<TerminalSystemUsageDTO> terminalSystemUsage = terminalApi.getTerminalSystemUsageById(1639491781525547L);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -3393,7 +3393,7 @@ public Result<TerminalSystemUsageDTO> getTerminalSystemUsageBySn(String serialNo
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalSystemUsageDTO> terminalCpuStatistic = terminalApi.getTerminalSystemUsageBySn("SUBSN108");
+Result<TerminalSystemUsageDTO> terminalSystemUsage = terminalApi.getTerminalSystemUsageBySn("SUBSN108");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -3473,7 +3473,7 @@ Structure of class TerminalLogRequest
 
 | Property Name | Type   | Nullable | Description                                                  |
 | :------------ | :----- | -------- |:-------------------------------------------------------------|
-| type          | String | false    | The type of terminal log, allowable values are "L", "D", "S" |
+| type          | String | false    | The type of terminal log, L(Logcat), D(Detail Log), S(Geolocation Log) |
 | beginDate     | String | true     | The begin date of terminal detail log, example: "2024-12-01" |
 | endDate       | String | true     | The end date of terminal detail log, example: "2024-12-01"   |
 
@@ -3546,7 +3546,7 @@ Structure of class TerminalLogRequest
 
 | Property Name | Type   | Nullable | Description                                                  |
 | :------------ | :----- | -------- |:-------------------------------------------------------------|
-| type          | String | false    | The type of terminal log, allowable values are "L", "D", "S" |
+| type          | String | false    | The type of terminal log, L(Logcat), D(Detail Log), S(Geolocation Log) |
 | beginDate     | String | true     | The begin date of terminal detail log, example: "2024-12-01" |
 | endDate       | String | true     | The end date of terminal detail log, example: "2024-12-01"   |
 
