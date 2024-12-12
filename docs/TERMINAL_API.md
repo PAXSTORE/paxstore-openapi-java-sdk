@@ -3951,4 +3951,153 @@ When you access the download url you must set three cookies, the keys are "Cloud
 | 16111         | File not found     |             |
 
 
+### Change terminal model by id
+
+Change terminal model by id, factoryName, modelName.
+
+**API**
+
+```
+public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, String modelName) 
+```
+
+**Path variable(s) description**
+
+| Parameter Name | Type   | Nullable | Description     |
+|:---------------|:-------| :------- |:----------------|
+| terminalId     | Long   | true     | Terminal id.    |
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                   |
+| :------------- | :----- |:---------|:------------------------------|
+| factoryName       | String | true     | new factory name of terminal. |
+| modelName            | String | false    | new model name of terminal.   |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<EmptyResponse> responseResult = terminalApi.changeModelBySN("SUBSN108", "PAX", "A920");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property terminalId can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"message":""
+}
+```
+
+The type in dataSet of result is EmptyResponse. The structure shows below.
+
+Structure of class EmptyResponse
+
+| Property Name | Type   | Description   |
+| :------------ |:-------|:--------------|
+| businessCode           | Long   | 0 is success  |
+| message      | String | error message |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 2028          | Terminal not found         |             |
+
+
+
+### Change terminal model by Serial No
+
+Change terminal model by serialNo, factoryName, modelName.
+
+**API**
+
+```
+public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName, String modelName)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                   |
+|:---------------| :----- |:---------|:------------------------------|
+| serialNo       | String | true     | serial No of terminal.        |
+| factoryName    | String | true     | new factory name of terminal. |
+| modelName      | String | false    | new model name of terminal.   |
+
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<EmptyResponse> responseResult = terminalApi.changeModel("POS10008", "PAX", "A920");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serinalNo can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"message": ""
+}
+```
+
+The type in dataSet of result is EmptyResponse. The structure shows below.
+
+Structure of class EmptyResponse
+
+| Property Name | Type   | Description   |
+| :------------ |:-------|:--------------|
+| businessCode           | Long   | 0 is success  |
+| message      | String | error message |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 2028          | Terminal not found         |             |
 

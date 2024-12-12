@@ -105,6 +105,11 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String SEARCH_TERMINAL_LOG_BY_SN = "/v1/3rdsys/terminal/logs";
     protected static final String GET_TERMINAL_LOG_DOWNLOAD_URL = "/v1/3rdsys/terminals/{terminalId}/logs/{terminalLogId}/download-task";
     protected static final String GET_TERMINAL_LOG_DOWNLOAD_URL_BY_SN = "/v1/3rdsys/terminal/logs/{terminalLogId}/download-task";
+
+    protected static final String CHANGE_TERMINAL_MODEL_BY_ID = "/v1/3rdsys/terminals/{terminalId}/model";
+    protected static final String CHANGE_TERMINAL_MODEL_BY_SN = "/v1/3rdsys/terminal/model";
+
+
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
     }
@@ -769,6 +774,46 @@ public class TerminalApi extends BaseThirdPartySysApi {
         DownloadTaskResponse downloadTaskDTO = EnhancedJsonUtils.fromJson(client.execute(request), DownloadTaskResponse.class);
         return new Result<>(downloadTaskDTO);
     }
+
+    public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, String modelName) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(factoryName), "parameter.not.empty", "factoryName"));
+        validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(CHANGE_TERMINAL_MODEL_BY_ID.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("factoryName", StringUtils.trim(factoryName));
+        request.addRequestParam("modelName", StringUtils.trim(modelName));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName, String modelName) {
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(factoryName), "parameter.not.empty", "factoryName"));
+        validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(CHANGE_TERMINAL_MODEL_BY_SN);
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.addRequestParam("factoryName", StringUtils.trim(factoryName));
+        request.addRequestParam("modelName", StringUtils.trim(modelName));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
 
     public enum TerminalStatus {
         Active("A"),

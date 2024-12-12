@@ -13,6 +13,7 @@ package com.pax.market.api.sdk.java.api.test;
 
 
 import com.pax.market.api.sdk.java.api.base.dto.DownloadTaskDTO;
+import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalLogRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.*;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
@@ -293,6 +294,8 @@ public class TerminalApiTest {
 
 	private final String serialNo = "TESTBYSN";
 	private final Long terminalId = 1620067374596136L;
+	private final String factoryName = "PAX";
+	private final String modelName = "E500";
 
 	@Test
 	public void testTerminalBySn() {
@@ -517,5 +520,17 @@ public class TerminalApiTest {
 		Long terminalLogId = 1018664888L;
 		Result<DownloadTaskDTO> result = terminalApi.getTerminalLogDownloadTaskBySn(serialNo, terminalLogId);
 		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testChangeModelBySN() {
+		Result<EmptyResponse> responseResult = terminalApi.changeModelBySN("SUBSN108", factoryName, modelName);
+		Assert.assertEquals(0, responseResult.getBusinessCode());
+	}
+
+	@Test
+	public void testChangeModelById() {
+		Result<EmptyResponse> responseResult = terminalApi.changeModel(1639491781525547L, factoryName, modelName);
+		Assert.assertEquals(0, responseResult.getBusinessCode());
 	}
 }
