@@ -778,7 +778,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
     public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, String modelName) {
         logger.debug("terminalId= {}", terminalId);
         List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
-        validationErrs.addAll(Validators.validateStr(String.valueOf(factoryName), "parameter.not.empty", "factoryName"));
+//        validationErrs.addAll(Validators.validateStr(String.valueOf(factoryName), "parameter.not.empty", "factoryName"));
         validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
@@ -788,7 +788,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(CHANGE_TERMINAL_MODEL_BY_ID.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.addRequestParam("factoryName", StringUtils.trim(factoryName));
+        if (StringUtils.isNotBlank(StringUtils.trim(factoryName))) {
+            request.addRequestParam("factoryName", StringUtils.trim(factoryName));
+        }
         request.addRequestParam("modelName", StringUtils.trim(modelName));
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<>(emptyResponse);
@@ -797,7 +799,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
     public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName, String modelName) {
         logger.debug("serialNo={}", serialNo);
         List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
-        validationErrs.addAll(Validators.validateStr(String.valueOf(factoryName), "parameter.not.empty", "factoryName"));
+//        validationErrs.addAll(Validators.validateStr(String.valueOf(factoryName), "parameter.not.empty", "factoryName"));
         validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
@@ -808,7 +810,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
-        request.addRequestParam("factoryName", StringUtils.trim(factoryName));
+        if (StringUtils.isNotBlank(StringUtils.trim(factoryName))) {
+            request.addRequestParam("factoryName", StringUtils.trim(factoryName));
+        }
         request.addRequestParam("modelName", StringUtils.trim(modelName));
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<>(emptyResponse);
