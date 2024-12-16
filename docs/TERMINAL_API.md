@@ -4043,7 +4043,7 @@ public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName
 
 | Parameter Name | Type   | Nullable | Description                   |
 |:---------------| :----- |:---------|:------------------------------|
-| serialNo       | String | true     | serial No of terminal.        |
+| serialNo       | String | false    | serial No of terminal.        |
 | factoryName    | String | true     | new factory name of terminal. |
 | modelName      | String | false    | new model name of terminal.   |
 
