@@ -778,7 +778,6 @@ public class TerminalApi extends BaseThirdPartySysApi {
     public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, String modelName) {
         logger.debug("terminalId= {}", terminalId);
         List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
-//        validationErrs.addAll(Validators.validateStr(String.valueOf(factoryName), "parameter.not.empty", "factoryName"));
         validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
@@ -799,7 +798,6 @@ public class TerminalApi extends BaseThirdPartySysApi {
     public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName, String modelName) {
         logger.debug("serialNo={}", serialNo);
         List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
-//        validationErrs.addAll(Validators.validateStr(String.valueOf(factoryName), "parameter.not.empty", "factoryName"));
         validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
         if (!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
