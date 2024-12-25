@@ -1,4 +1,10 @@
 # Changelog
+
+## 9.7.0
+### New Feature
+* Add the return field `iccid2` in TerminalApi - `getTerminal` or `getTerminalBySn` API
+
+
 ## 9.6.0
 ### New Feature
 * Add the return field `updatedDate` and `lastAccessTime` in Search Terminal API
