@@ -30,6 +30,7 @@ public class TerminalDetailDTO implements Serializable {
     private String timeZone;
     private String macAddress;
     private String iccid;
+    private String iccid2;
     private String cellid;
 
     public String getPn() {
@@ -104,6 +105,14 @@ public class TerminalDetailDTO implements Serializable {
         this.iccid = iccid;
     }
 
+    public String getIccid2() {
+        return iccid2;
+    }
+
+    public void setIccid2(String iccid2) {
+        this.iccid2 = iccid2;
+    }
+
     public String getCellid() {
         return cellid;
     }
@@ -124,6 +133,7 @@ public class TerminalDetailDTO implements Serializable {
                 ", timeZone='" + timeZone + '\'' +
                 ", macAddress='" + macAddress + '\'' +
                 ", iccid='" + iccid + '\'' +
+                ", iccid2='" + iccid2 + '\'' +
                 ", cellid='" + cellid + '\'' +
                 '}';
     }

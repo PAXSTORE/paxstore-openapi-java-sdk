@@ -148,7 +148,7 @@ Structure of class TerminalDetailDTO
 _**tips: Only return this information in getTerminal or getTerminalBySn**_
 
 | Property Name    | Type   | Description                  |
-| :--------------- | :----- | :--------------------------- |
+|:-----------------| :----- |:-----------------------------|
 | pn               | String | Terminal's pn                |
 | osVersion        | String | Terminal's android version   |
 | imei             | String | Terminal's IMEI              |
@@ -158,6 +158,7 @@ _**tips: Only return this information in getTerminal or getTerminalBySn**_
 | timeZone         | String | Terminal's time zone         |
 | macAddress       | String | Terminal's MAC address       |
 | iccid            | String | Terminal's ICCID             |
+| iccid2           | String | Terminal's ICCID2            |
 | cellid           | String | Terminal's Cellid            |
 
 Structure of class TerminalAccessoryDTO
@@ -378,7 +379,7 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"createdDate": 1552536099000,
 		"updatedDate": 1725591969000,
 		"lastActiveTime": 1552536095000,
-    "lastAccessTime": 1725777409853
+        "lastAccessTime": 1725777409853
 	}
 }
 ```
@@ -407,7 +408,9 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 			"language": "English",
 			"ip": "192.168.5.213",
 			"timeZone": "GMT +08:00",
-			"macAddress": "A4:D4:B2:4C:14:FE"
+      "macAddress": "A4:D4:B2:4C:14:FE",
+			"iccid": "89860322472007320056",
+			"iccid2": "80000322472007326856"
 		},
 		"terminalAccessory": [{
 			"basic": [{
@@ -746,7 +749,9 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",true);
 			"language": "English",
 			"ip": "192.168.5.213",
 			"timeZone": "GMT +08:00",
-			"macAddress": "A4:D4:B2:4C:14:FE"
+			"macAddress": "A4:D4:B2:4C:14:FE",
+			"iccid": "89860322472007320056",
+			"iccid2": "80000322472007326856"
 		},
 		"terminalAccessory": [{
 			"basic": [{
