@@ -212,8 +212,8 @@ public class TerminalApiTest {
 	public void testUpdateTerminalWifiConfig(){
 		Long terminalId = 1639497804546092L;
 		TerminalWifiUpdateRequest terminalWifiUpdateRequest = new TerminalWifiUpdateRequest();
-		TerminalWifiUpdateRequest.WifiConfig wifiConfig1 = EnhancedJsonUtils.fromJson("{\"SSID\":\"pax20\",\"password\":\"12345678\",\"cipherType\":2,\"proxyType\":0}", TerminalWifiUpdateRequest.WifiConfig.class);
-		TerminalWifiUpdateRequest.WifiConfig wifiConfig2 = EnhancedJsonUtils.fromJson("{\"SSID\":\"pax30\",\"password\":\"12345678\",\"cipherType\":2,\"proxyType\":0}", TerminalWifiUpdateRequest.WifiConfig.class);
+		TerminalWifiUpdateRequest.WifiConfig wifiConfig1 = EnhancedJsonUtils.fromJson("{\"ssid\":\"pax30\",\"password\":\"12345678\",\"cipherType\":2,\"hostName\": \"1.1.1.1\",\"proxyType\":1,\"checked\": false}", TerminalWifiUpdateRequest.WifiConfig.class);
+		TerminalWifiUpdateRequest.WifiConfig wifiConfig2 = EnhancedJsonUtils.fromJson("{\"ssid\":\"pax40\",\"password\":\"12345678\",\"cipherType\":2,\"hostName\": \"1.1.1.1\",\"proxyType\":1,\"checked\": false}", TerminalWifiUpdateRequest.WifiConfig.class);
 		List<TerminalWifiUpdateRequest.WifiConfig> wifiConfigList = new ArrayList<>();
 		wifiConfigList.add(wifiConfig1);
 		wifiConfigList.add(wifiConfig2);
