@@ -12,6 +12,8 @@
 * Add TerminalApi - `searchTerminalLogBySn` API
 * Add TerminalApi - `getTerminalLogDownloadTask` API
 * Add TerminalApi - `getTerminalLogDownloadTaskBySn` API
+* Add TerminalApi - `changeModel` API
+* Add TerminalApi - `changeModelBySN` API
 
 
 
