@@ -116,7 +116,6 @@ public class GoInsightApi extends BaseThirdPartySysApi {
         LAST_MONTH("p1m"),
         LAST_QUARTER("p1q"),
         LAST_YEAR("p1y"),
-        LAST_YEAR_BY_QUARTER("p1ybq"),
 
         RECENT_5_MIN("r5min"),
         RECENT_30_MIN("r30min"),
@@ -131,16 +130,13 @@ public class GoInsightApi extends BaseThirdPartySysApi {
         RECENT_3_MONTH_BY_WEEK("r3mbw"),
         RECENT_6_MONTH("r6m"),
         RECENT_YEAR("r1y"),
-        RECENT_YEAR_BY_QUARTER("r1ybq"),
 
         THIS_HOUR("t1h"),
         TODAY("t1d"),
         THIS_WEEK("t1w"),
         THIS_MONTH("t1m"),
         THIS_QUARTER("t1q"),
-        THIS_QUARTER_BY_WEEK("t1qbw"),
-        THIS_YEAR("t1y"),
-        THIS_YEAR_BY_QUARTER("t1ybq");
+        THIS_YEAR("t1y");
 
         TimestampRangeType(String val) {
             this.val = val;

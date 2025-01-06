@@ -14,15 +14,14 @@ package com.pax.market.api.sdk.java.api.terminal;
 
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
-import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
-import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
-import com.pax.market.api.sdk.java.api.base.dto.Result;
+import com.pax.market.api.sdk.java.api.base.dto.*;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest.RequestMethod;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.terminal.dto.*;
 import com.pax.market.api.sdk.java.api.terminal.validator.TerminalCopyRequestValidator;
+import com.pax.market.api.sdk.java.api.terminal.validator.TerminalMessageRequestValidator;
 import com.pax.market.api.sdk.java.api.terminal.validator.TerminalMoveRequestValidator;
 import com.pax.market.api.sdk.java.api.terminal.validator.TerminalRequestValidator;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
@@ -96,6 +95,20 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String GET_TERMINAL_PED_STATUS_URL_BY_SN = "/v1/3rdsys/terminal/ped";
 
     protected static final String PUSH_TERMINAL_ACTION_URL_BY_SN = "/v1/3rdsys/terminal/operation";
+    protected static final String PUSH_TERMINAL_MESSAGE = "/v1/3rdsys/terminals/{terminalId}/push/message";
+    protected static final String PUSH_TERMINAL_MESSAGE_BY_SN = "/v1/3rdsys/terminal/push/message";
+    protected static final String GET_TERMINAL_SYSTEM_USAGE_BY_ID = "/v1/3rdsys/terminals/{terminalId}/system/usage";
+    protected static final String GET_TERMINAL_SYSTEM_USAGE_BY_SN = "/v1/3rdsys/terminal/system/usage";
+    protected static final String COLLECT_TERMINAL_LOG = "/v1/3rdsys/terminals/{terminalId}/collect/log";
+    protected static final String COLLECT_TERMINAL_LOG_BY_SN = "/v1/3rdsys/terminal/collect/log";
+    protected static final String SEARCH_TERMINAL_LOG = "/v1/3rdsys/terminals/{terminalId}/logs";
+    protected static final String SEARCH_TERMINAL_LOG_BY_SN = "/v1/3rdsys/terminal/logs";
+    protected static final String GET_TERMINAL_LOG_DOWNLOAD_URL = "/v1/3rdsys/terminals/{terminalId}/logs/{terminalLogId}/download-task";
+    protected static final String GET_TERMINAL_LOG_DOWNLOAD_URL_BY_SN = "/v1/3rdsys/terminal/logs/{terminalLogId}/download-task";
+
+    protected static final String CHANGE_TERMINAL_MODEL_BY_ID = "/v1/3rdsys/terminals/{terminalId}/model";
+    protected static final String CHANGE_TERMINAL_MODEL_BY_SN = "/v1/3rdsys/terminal/model";
+
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -391,6 +404,23 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
 
+    public Result<String> pushTerminalMessage(Long terminalId, TerminalMessageRequest terminalMessageRequest){
+        logger.debug("terminalId={}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid","terminalId");
+        validationErrs.addAll(TerminalMessageRequestValidator.validate(terminalMessageRequest, "terminalMessageRequest"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_MESSAGE.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(terminalMessageRequest, TerminalMessageRequest.class));
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<>(emptyResponse);
+    }
+
+
     public Result<TerminalDTO> getTerminalBySn(String serialNo) {
         return getTerminalBySn(serialNo, false, false);
     }
@@ -593,6 +623,199 @@ public class TerminalApi extends BaseThirdPartySysApi {
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<>(emptyResponse);
     }
+
+
+    public Result<String> pushTerminalMessageBySn(String serialNo, TerminalMessageRequest terminalMessageRequest){
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(TerminalMessageRequestValidator.validate(terminalMessageRequest, "terminalMessageRequest"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_MESSAGE_BY_SN);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.setRequestBody(new Gson().toJson(terminalMessageRequest, TerminalMessageRequest.class));
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<>(emptyResponse);
+    }
+
+    public Result<TerminalSystemUsageDTO> getTerminalSystemUsageById(Long terminalId) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_SYSTEM_USAGE_BY_ID.replace("{terminalId}", StringUtils.trim(String.valueOf(terminalId))));
+
+        TerminalSystemUsageResponse terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalSystemUsageResponse.class);
+        return new Result<>(terminalResponse);
+    }
+
+    public Result<TerminalSystemUsageDTO> getTerminalSystemUsageBySn(String serialNo) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_TERMINAL_SYSTEM_USAGE_BY_SN);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        TerminalSystemUsageResponse terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalSystemUsageResponse.class);
+        return new Result<>(terminalResponse);
+    }
+
+    public Result<String> collectTerminalLog(Long terminalId, TerminalLogRequest terminalLogRequest) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(COLLECT_TERMINAL_LOG.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(terminalLogRequest, TerminalLogRequest.class));
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<>(emptyResponse);
+    }
+
+    public Result<String> collectTerminalLogBySn(String serialNo, TerminalLogRequest terminalLogRequest) {
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(COLLECT_TERMINAL_LOG_BY_SN);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.setRequestBody(new Gson().toJson(terminalLogRequest, TerminalLogRequest.class));
+        EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return  new Result<>(emptyResponse);
+    }
+
+    public Result<TerminalLogDTO> searchTerminalLog(int pageNo, int pageSize, Long terminalId) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        PageRequestDTO page = new PageRequestDTO();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        validationErrs = Validators.validatePageRequest(page);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = getPageRequest(SEARCH_TERMINAL_LOG.replace("{terminalId}", terminalId.toString()), page);
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        TerminalLogPageResponse terminalLogPageDTO = EnhancedJsonUtils.fromJson(client.execute(request), TerminalLogPageResponse.class);
+        return new Result<>(terminalLogPageDTO);
+    }
+
+    public Result<TerminalLogDTO> searchTerminalLogBySn(int pageNo, int pageSize, String serialNo) {
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        PageRequestDTO page = new PageRequestDTO();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        validationErrs = Validators.validatePageRequest(page);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = getPageRequest(SEARCH_TERMINAL_LOG_BY_SN, page);
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        TerminalLogPageResponse terminalLogPageDTO = EnhancedJsonUtils.fromJson(client.execute(request), TerminalLogPageResponse.class);
+        return new Result<>(terminalLogPageDTO);
+    }
+
+    public Result<DownloadTaskDTO> getTerminalLogDownloadTask(Long terminalId, Long terminalLogId) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(terminalLogId), "parameter.not.empty", "terminalLogId"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(GET_TERMINAL_LOG_DOWNLOAD_URL.replace("{terminalId}", terminalId.toString()).replace("{terminalLogId}", terminalLogId.toString()));
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        DownloadTaskResponse downloadTaskDTO = EnhancedJsonUtils.fromJson(client.execute(request), DownloadTaskResponse.class);
+        return new Result<>(downloadTaskDTO);
+    }
+
+    public Result<DownloadTaskDTO> getTerminalLogDownloadTaskBySn(String serialNo, Long terminalLogId) {
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(terminalLogId), "parameter.not.empty", "terminalLogId"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(GET_TERMINAL_LOG_DOWNLOAD_URL_BY_SN.replace("{terminalLogId}", terminalLogId.toString()));
+        request.setRequestMethod(RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        DownloadTaskResponse downloadTaskDTO = EnhancedJsonUtils.fromJson(client.execute(request), DownloadTaskResponse.class);
+        return new Result<>(downloadTaskDTO);
+    }
+
+    public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, String modelName) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(CHANGE_TERMINAL_MODEL_BY_ID.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        if (StringUtils.isNotBlank(StringUtils.trim(factoryName))) {
+            request.addRequestParam("factoryName", StringUtils.trim(factoryName));
+        }
+        request.addRequestParam("modelName", StringUtils.trim(modelName));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName, String modelName) {
+        logger.debug("serialNo={}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(CHANGE_TERMINAL_MODEL_BY_SN);
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        if (StringUtils.isNotBlank(StringUtils.trim(factoryName))) {
+            request.addRequestParam("factoryName", StringUtils.trim(factoryName));
+        }
+        request.addRequestParam("modelName", StringUtils.trim(modelName));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
 
     public enum TerminalStatus {
         Active("A"),
