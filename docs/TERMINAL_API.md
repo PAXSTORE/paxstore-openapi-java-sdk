@@ -1379,7 +1379,7 @@ The type of data in result is same as search terminal API.
 |2401|Terminal TID is invalid|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
 
-## Copy a terminal
+### Copy a terminal
 
 Copy terminal API allows the thirdparty system to copy a terminal by  origin terminal id.
 
