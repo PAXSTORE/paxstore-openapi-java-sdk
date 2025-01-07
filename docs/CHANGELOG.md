@@ -14,8 +14,34 @@
 * Add TerminalApi - `getTerminalLogDownloadTaskBySn` API
 * Add TerminalApi - `changeModel` API
 * Add TerminalApi - `changeModelBySN` API
-
-
+* Add EmmAppApi - `searchEmmApp` API
+* Add EmmAppApi - `createEmmApp` API
+* Add EmmAppApi - `getEmmAppDetail` API
+* Add EmmAppApi - `removeEmmApp` API
+* Add EmmAppApi - `searchSubscribeEmmApp` API
+* Add EmmAppApi - `subscribeEmmApp` API
+* Add EmmAppApi - `unSubscribeEmmApp` API
+* Add EmmAppApi - `getEmmAppPermissionList` API
+* Add EmmDeviceApi - `createRegisterQRCode` API
+* Add EmmDeviceApi - `searchEmmDevice` API
+* Add EmmDeviceApi - `getEmmDevice` API
+* Add EmmDeviceApi - `updateEmmDevice` API
+* Add EmmDeviceApi - `batchMoveEmmDevice` API
+* Add EmmDeviceApi - `deleteEmmDevice` API
+* Add EmmDeviceApi - `batchDeleteEmmDevice` API
+* Add EmmDeviceApi - `rebootEmmDevice` API
+* Add EmmDeviceApi - `lockEmmDeviceScreen` API
+* Add EmmDeviceApi - `resetEmmDevicePassword` API
+* Add EmmDeviceApi - `startEmmDeviceLostMode` API
+* Add EmmDeviceApi - `stopEmmDeviceLostMode` API
+* Add EmmDeviceApi - `submitEmmZteQuickUploadRecord` API
+* Add EmmDeviceDetailApi - `getEmmDeviceDashboardDetail` API
+* Add EmmDeviceDetailApi - `getEmmDeviceDashboardMonitor` API
+* Add EmmDeviceDetailApi - `searchDeviceInstalledApp` API
+* Add EmmPolicyApi - `getResellerEmmPolicy` API
+* Add EmmPolicyApi - `getMerchantEmmPolicy` API
+* Add EmmPolicyApi - `createResellerEmmPolicy` API
+* Add EmmPolicyApi - `createMerchantEmmPolicy` API
 
 ## 9.5.0
 ### New Feature
