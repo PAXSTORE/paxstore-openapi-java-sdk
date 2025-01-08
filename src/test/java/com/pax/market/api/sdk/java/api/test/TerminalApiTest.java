@@ -294,7 +294,6 @@ public class TerminalApiTest {
 
 	private final String serialNo = "TESTBYSN";
 	private final Long terminalId = 1620067374596136L;
-	private final String factoryName = "PAX";
 	private final String modelName = "E500";
 
 	@Test
@@ -524,13 +523,13 @@ public class TerminalApiTest {
 
 	@Test
 	public void testChangeModelBySN() {
-		Result<EmptyResponse> responseResult = terminalApi.changeModelBySN("SUBSN108", factoryName, modelName);
+		Result<EmptyResponse> responseResult = terminalApi.changeModelBySN(serialNo, modelName);
 		Assert.assertEquals(0, responseResult.getBusinessCode());
 	}
 
 	@Test
 	public void testChangeModelById() {
-		Result<EmptyResponse> responseResult = terminalApi.changeModel(1639491781525547L, factoryName, modelName);
+		Result<EmptyResponse> responseResult = terminalApi.changeModel(terminalId, modelName);
 		Assert.assertEquals(0, responseResult.getBusinessCode());
 	}
 }

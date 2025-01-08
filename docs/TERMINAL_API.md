@@ -3958,12 +3958,12 @@ When you access the download url you must set three cookies, the keys are "Cloud
 
 ### Change terminal model by id
 
-Change terminal model by id, factoryName, modelName.
+Change terminal model by id, modelName.
 
 **API**
 
 ```
-public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, String modelName) 
+public Result<EmptyResponse> changeModel(Long terminalId, String modelName) 
 ```
 
 **Path variable(s) description**
@@ -3976,14 +3976,13 @@ public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, St
 
 | Parameter Name | Type   | Nullable | Description                   |
 | :------------- | :----- |:---------|:------------------------------|
-| factoryName       | String | true     | new factory name of terminal. |
 | modelName            | String | false    | new model name of terminal.   |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<EmptyResponse> responseResult = terminalApi.changeModelBySN("SUBSN108", "PAX", "A920");
+Result<EmptyResponse> responseResult = terminalApi.changeModelBySN("SUBSN108", "A920");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -4036,12 +4035,12 @@ Structure of class EmptyResponse
 
 ### Change terminal model by Serial No
 
-Change terminal model by serialNo, factoryName, modelName.
+Change terminal model by serialNo, modelName.
 
 **API**
 
 ```
-public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName, String modelName)
+public Result<EmptyResponse> changeModelBySN(String serialNo, String modelName)
 ```
 
 **Input parameter(s) description**
@@ -4049,7 +4048,6 @@ public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName
 | Parameter Name | Type   | Nullable | Description                   |
 |:---------------| :----- |:---------|:------------------------------|
 | serialNo       | String | false    | serial No of terminal.        |
-| factoryName    | String | true     | new factory name of terminal. |
 | modelName      | String | false    | new model name of terminal.   |
 
 
@@ -4057,7 +4055,7 @@ public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<EmptyResponse> responseResult = terminalApi.changeModel("POS10008", "PAX", "A920");
+Result<EmptyResponse> responseResult = terminalApi.changeModel("POS10008", "A920");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
