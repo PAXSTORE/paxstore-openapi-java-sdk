@@ -35,7 +35,7 @@ public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, in
 | pageNo      | int        | false    | page number, value must >=1                                  |
 | pageSize    | int        | false    | the record number per page, range is 1 to 100                |
 | packageName | String     | false    | search filter by app packageName                             |
-| serialNo    | String     | true     | only terminal with specified serialNo will search out        |
+| serialNo    | String     | false     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
 
@@ -43,7 +43,7 @@ public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, in
 
 ```
 PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHistory(1, 2,  "com.pax.android.demoapp", null, PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
+Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHistory(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -64,7 +64,7 @@ Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHisto
   "pageNo": 1,
   "limit": 2,
   "hasNext": true,
-  "totalCount": 17,
+  "totalCount": 2,
   "dataset": [
     {
       "parameterPushStatus": "Success",
@@ -77,7 +77,7 @@ Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHisto
       "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575274373000,
-      "serialNo": "HMP4C15A12000186",
+      "serialNo": "1170000652",
       "pushType": "Terminal",
       "parameterVariables": "{\"#{test}\": \"44\"}",
       "parameterValues": "{\"sys_F2_sys_param_termId\": \"#{test}\", \"sys_F2_sys_param_merCode\": \"000000000000001\", \"sys_F2_sys_param_merName\": \"Union Pay\", \"sys_F2_sys_param_acqInsCode\": \"00000000000\"}",
@@ -144,7 +144,7 @@ public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistory(int page
 | pageNo      | int        | false    | page number, value must >=1                                  |
 | pageSize    | int        | false    | the record number per page, range is 1 to 100                |
 | packageName | String     | false    | search filter by app packageName                             |
-| serialNo    | String     | true     | only terminal with specified serialNo will search out        |
+| serialNo    | String     | false     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
 
@@ -152,7 +152,7 @@ public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistory(int page
 
 ```
 PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchLatestParameterPushHistory(1, 2,  "com.pax.android.demoapp", null, PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
+Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchLatestParameterPushHistory(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -173,7 +173,7 @@ Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchLatestParameterPus
   "pageNo": 1,
   "limit": 2,
   "hasNext": true,
-  "totalCount": 17,
+  "totalCount": 1,
   "dataset": [
     {
       "parameterPushStatus": "Success",
@@ -186,27 +186,10 @@ Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchLatestParameterPus
       "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575274373000,
-      "serialNo": "HMP4C15A12000186",
+      "serialNo": "1170000652",
       "pushType": "Terminal",
       "parameterVariables": "{\"#{test}\": \"44\"}",
       "parameterValues": "{\"sys_F2_sys_param_termId\": \"#{test}\", \"sys_F2_sys_param_merCode\": \"000000000000001\", \"sys_F2_sys_param_merName\": \"Union Pay\", \"sys_F2_sys_param_acqInsCode\": \"00000000000\"}",
-      "appPushError": null
-    },
-    {
-      "parameterPushStatus": "Success",
-      "appPushStatus": "Success",
-      "appName": "PAXSTORE SDK Demo",
-      "appPushTime": 1575102052000,
-      "pushStartTime": 1575102000000,
-      "terminalId": 1013403370,
-      "versionName": "5.02.02",
-      "parameterTemplateName": "parameter.xml",
-      "parameterPushError": null,
-      "parameterPushTime": 1575102054000,
-      "serialNo": "1170000652",
-      "pushType": "Terminal",
-      "parameterVariables": "{}",
-      "parameterValues": "{\"sys_F1_sys_cap_test01\": \"333\", \"sys_F1_sys_cap_test02\": \"111\"}",
       "appPushError": null
     }
   ]
@@ -253,7 +236,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHist
 | pageNo      | int        | false    | page number, value must >=1                                  |
 | pageSize    | int        | false    | the record number per page, range is 1 to 100                |
 | packageName | String     | false    | search filter by app packageName                             |
-| serialNo    | String     | true     | only terminal with specified serialNo will search out        |
+| serialNo    | String     | false     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
 
@@ -261,7 +244,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHist
 
 ```
 PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchOptimizedParameterPushHistory(1, 2,  "com.pax.android.demoapp", null, PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
+Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchOptimizedParameterPushHistory(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -295,7 +278,7 @@ Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchOptimized
       "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575274373000,
-      "serialNo": "HMP4C15A12000186",
+      "serialNo": "1170000652",
       "pushType": "Terminal",
       "parameters": "{\"sys.param.termId\": \"44\", \"sys.param.merCode\": \"000000000000001\", \"sys.param.merName\": \"Union Pay\", \"sys.param.acqInsCode\": \"00000000000\"}",
       "appPushError": null
@@ -358,7 +341,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPu
 | pageNo      | int        | false    | page number, value must >=1                                  |
 | pageSize    | int        | false    | the record number per page, range is 1 to 100                |
 | packageName | String     | false    | search filter by app packageName                             |
-| serialNo    | String     | true     | only terminal with specified serialNo will search out        |
+| serialNo    | String     | false     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
 
@@ -366,7 +349,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPu
 
 ```
 PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchLatestOptimizedParameterPushHistory(1, 2,  "com.pax.android.demoapp", null, PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
+Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchLatestOptimizedParameterPushHistory(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -387,7 +370,7 @@ Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchLatestOpt
   "pageNo": 1,
   "limit": 2,
   "hasNext": true,
-  "totalCount": 17,
+  "totalCount": 1,
   "dataset": [
     {
       "parameterPushStatus": "Success",
@@ -400,25 +383,9 @@ Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchLatestOpt
       "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575274373000,
-      "serialNo": "HMP4C15A12000186",
-      "pushType": "Terminal",
-      "parameters": "{\"sys.param.termId\": \"44\", \"sys.param.merCode\": \"000000000000001\", \"sys.param.merName\": \"Union Pay\", \"sys.param.acqInsCode\": \"00000000000\"}",
-      "appPushError": null
-    },
-    {
-      "parameterPushStatus": "Success",
-      "appPushStatus": "Success",
-      "appName": "PAXSTORE SDK Demo",
-      "appPushTime": 1575102052000,
-      "pushStartTime": 1575102000000,
-      "terminalId": 1013403370,
-      "versionName": "5.02.02",
-      "parameterTemplateName": "parameter.xml",
-      "parameterPushError": null,
-      "parameterPushTime": 1575102054000,
       "serialNo": "1170000652",
       "pushType": "Terminal",
-      "parameters": "{\"sys.cap.test01\": \"333\", \"sys.cap.test02\": \"111\"}",
+      "parameters": "{\"sys.param.termId\": \"44\", \"sys.param.merCode\": \"000000000000001\", \"sys.param.merName\": \"Union Pay\", \"sys.param.acqInsCode\": \"00000000000\"}",
       "appPushError": null
     }
   ]
