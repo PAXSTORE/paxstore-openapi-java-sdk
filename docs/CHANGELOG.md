@@ -42,6 +42,7 @@
 * Add EmmPolicyApi - `getMerchantEmmPolicy` API
 * Add EmmPolicyApi - `createResellerEmmPolicy` API
 * Add EmmPolicyApi - `createMerchantEmmPolicy` API
+* Add AppApi - `getAppCost` API
 
 ## 9.5.0
 ### New Feature
