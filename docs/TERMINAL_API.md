@@ -1396,7 +1396,7 @@ The type of data in result is same as search terminal API.
 |2401|Terminal TID is invalid|&nbsp;|
 |2412|Your terminal SN not exist in asset|&nbsp;|
 
-## Copy a terminal
+### Copy a terminal
 
 Copy terminal API allows the thirdparty system to copy a terminal by  origin terminal id.
 
@@ -2315,13 +2315,13 @@ Structure of class WifiConfig
 
 | Property Name | Type    | Nullable | Description                                                  |
 |:--------------|:--------|:---------|:-------------------------------------------------------------|
-| SSID          | String  | false    | Wi-Fi Account                                                |
-| cipherType          | Integer | false    | Security setting, 0 is None,1 is WEP, 2 is WPA/WPA2 PSK      |
-| password          | String  | false    | Wi-Fi Password                                               |
-| proxyType          | Integer | false    | Proxy setting,0 is None, 1 is Manual, 2 is Proxy auto-config |
-| hostName          | String | true     | Proxy Host Name, it is mandaory when proxyType is 1          |
+| ssid          | String  | false    | Wi-Fi Account                                                |
+| cipherType    | Integer | false    | Security setting, 0 is None,1 is WEP, 2 is WPA/WPA2 PSK      |
+| password      | String  | false    | Wi-Fi Password                                               |
+| proxyType     | Integer | false    | Proxy setting,0 is None, 1 is Manual, 2 is Proxy auto-config |
+| hostName      | String | true     | Proxy Host Name, it is mandaory when proxyType is 1          |
 | port          | Integer | true     | Proxy Port, it is mandaory when proxyType is 1               |
-| pacUrl          | String  | true     | Proxy auto-config URL, it is mandaory when proxyType is 2    |
+| pacUrl        | String  | true     | Proxy auto-config URL, it is mandaory when proxyType is 2    |
 
 Structure of class TerminalApnUpdateRequest
 

@@ -271,5 +271,90 @@ The type in dataSet of result is AppPageDTO.
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 1000</font>  
 
+### Get App Cost
+
+Get app cost by resellerId and appId.
+
+**API**
+
+```
+public Result<AppCostDTO> getAppCost(Long resellerId, Long appId) {
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type | Nullable | Description  |
+| :------------- | :--- | :------- | :----------- |
+| resellerId     | Long | false    | Reseller Id. |
+| appId          | Long | false    | App Id       |
+
+**Sample codes**
+
+```
+AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<AppCostDTO> result = appApi.getAppCost(1L, 1L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property appId can't be empty!","The property resellerId can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1759,
+	"message": "Reseller doesn't exist"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"paid": true,
+		"chargeType": 1,
+		"price": 8.88,
+		"currency": 58703872,
+		"freeTrialDay" : 5
+	}
+}
+```
+
+The type in dataSet of result is AppCostDTO. The structure shows below.
+
+Structure of class AppCostDTO
+
+| Property Name | Type       | Description                                                  |
+| :------------ | :--------- | :----------------------------------------------------------- |
+| paid          | Boolean    | The app is paid                                              |
+| chargeType    | Integer    | ChargeType of app, 0 is totally free and 1 is one time purchase and 2 is require subscription and 3 is app purchase and 4 is monthly fee |
+| price         | BigDecimal | The app price                                                |
+| text          | String     | The app text                                                 |
+| currency      | String     | The app price currency                                       |
+| freeTrialDay  | Integer    | The app free trial days                                      |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter appId cannot be empty!</font>
+>
+> <font color=red>Parameter resellerId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                | Description |
+| :------------ | :--------------------- | :---------- |
+| 1759          | Reseller doesn't exist |             |
+| 1000          | App not found          |             |
+
+
+
 
 

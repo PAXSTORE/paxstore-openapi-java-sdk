@@ -30,7 +30,7 @@ public class TerminalWifiUpdateRequest extends TerminalConfigUpdateRequest {
     }
 
     public static class WifiConfig implements Serializable {
-        private String SSID;
+        private String ssid;
         private String password;
         private String cipherType;
         private String proxyType;
@@ -38,12 +38,12 @@ public class TerminalWifiUpdateRequest extends TerminalConfigUpdateRequest {
         private String port;
         private String pacUrl;
 
-        public String getSSID() {
-            return SSID;
+        public String getSsid() {
+            return ssid;
         }
 
-        public void setSSID(String SSID) {
-            this.SSID = SSID;
+        public void setSsid(String ssid) {
+            this.ssid = ssid;
         }
 
         public String getPassword() {

@@ -1,6 +1,8 @@
 package com.pax.market.api.sdk.java.api.app;
 
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
+import com.pax.market.api.sdk.java.api.app.dto.AppCostDTO;
+import com.pax.market.api.sdk.java.api.app.dto.AppCostResponse;
 import com.pax.market.api.sdk.java.api.app.dto.AppPageDTO;
 import com.pax.market.api.sdk.java.api.app.dto.AppPageResponse;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
@@ -20,6 +22,7 @@ import java.util.Locale;
 public class AppApi extends BaseThirdPartySysApi {
 
     private static final String SEARCH_APP_URL = "/v1/3rdsys/apps";
+    private static final String GET_APP_COST_URL = "/v1/3rdsys/apps/app-cost";
 
     public AppApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -109,6 +112,21 @@ public class AppApi extends BaseThirdPartySysApi {
                                         Boolean specificReseller, Boolean specificMerchantCategory,
                                         Boolean includeSubscribedApp, String resellerName) {
         return this.searchApp(pageNo, pageSize, orderBy, name, osType, chargeType, baseType, appStatus, apkStatus, specificReseller, specificMerchantCategory, includeSubscribedApp,resellerName, null);
+    }
+
+    public Result<AppCostDTO> getAppCost(Long resellerId, Long appId) {
+        List<String> validationErrs = Validators.validateId(resellerId, "parameter.not.empty", "resellerId");
+        validationErrs.addAll(Validators.validateId(appId, "parameter.not.empty", "appId"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_APP_COST_URL);
+        request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        request.addRequestParam("resellerId", resellerId.toString());
+        request.addRequestParam("appId", appId.toString());
+        AppCostResponse appCostDTO = EnhancedJsonUtils.fromJson(client.execute(request), AppCostResponse.class);
+        return new Result<>(appCostDTO);
     }
 
     public enum ApkStatus {

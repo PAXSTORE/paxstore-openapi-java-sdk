@@ -7,6 +7,7 @@ import com.pax.market.api.sdk.java.api.app.AppApi.AppStatus;
 import com.pax.market.api.sdk.java.api.app.AppApi.AppBaseType;
 import com.pax.market.api.sdk.java.api.app.AppApi.AppChargeType;
 import com.pax.market.api.sdk.java.api.app.AppApi.AppOsType;
+import com.pax.market.api.sdk.java.api.app.dto.AppCostDTO;
 import com.pax.market.api.sdk.java.api.app.dto.AppPageDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import org.junit.Assert;
@@ -41,6 +42,12 @@ public class AppApiTest  {
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
 
+    @Test
+    public void testGetAppCost() {
+        Result<AppCostDTO> result = appApi.getAppCost(1L, 1L);
+        logger.debug("Result of search app:{}", result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
     @Test
     public void testSearchAppWithSubscribedApp() {
         Result<AppPageDTO> result = appApi.searchApp(1,1, AppSearchOrderBy.UpdatedDate_desc,
