@@ -106,8 +106,10 @@ Structure of class TerminalDTO
 |merchantName|String|The merchant of terminal belongs to.|
 |modelName|String|Model name of terminal.|
 |resellerName|String|The reseller of terminal belongs to.|
-|createdDate|Date|The create time|
+|createdDate|Date|The created time|
+|updatedDate|Date|The updated time|
 |lastActiveTime|Date|The activation time|
+|lastAccessTime|Date|The last access time|
 |location|String|The location|
 |remark|String|The remark|
 |geoLocation|TerminalLocationDTO| The geography location of the terminal|
@@ -264,6 +266,10 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York",
 			"resellerName": "New York",
 			"location": "USA",
 			"remark":"",
+			"createdDate": 1725591969000,
+      "updatedDate": 1725591969000,
+      "lastActiveTime": 1725591969000,
+      "lastAccessTime": 1725777409853,
 			"geoLocation": {
 				"lng": 120.77595,
 				"lat": 31.308021
@@ -370,7 +376,9 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"location": "",
 		"remark":"",
 		"createdDate": 1552536099000,
-		"lastActiveTime": 1552536095000
+		"updatedDate": 1725591969000,
+		"lastActiveTime": 1552536095000,
+    "lastAccessTime": 1725777409853
 	}
 }
 ```
@@ -390,7 +398,9 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"location": "",
 		"remark":"",
 		"createdDate": 1552536099000,
+    "updatedDate": 1725591969000,
 		"lastActiveTime": 1552536095000,
+    "lastAccessTime": 1725777409853,
 		"terminalDetail": {
 			"pn": "A920-3AW-RD5-21EU",
 			"screenResolution": "720px * 1280px",
@@ -610,7 +620,9 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"location": "",
 		"remark":"",
 		"createdDate": 1552536099000,
+		"updatedDate": 1725591969000,
 		"lastActiveTime": 1552536095000,
+		"lastAccessTime": 1725777409853,
 		 "installedApks": [
       {
         "appName": "cloudMsg1",
@@ -2258,12 +2270,16 @@ public Result<String> updateTerminalConfig(Long terminalId, TerminalConfigUpdate
 
 **Input parameter(s) description**
 
-| Parameter Name                   | Type                        | Nullable | Description                                                                   |
-|:---------------------------------| :-------------------------- | :------- |:------------------------------------------------------------------------------|
-| terminalId                       | Long                        | false    | Terminal's id.                                                                |
-| terminalConfigUpdateRequest      | TerminalConfigUpdateRequest | false    | Update terminal config request object. The structure shows below.             |
-| terminalReplacementUpdateRequest | TerminalReplacementUpdateRequest | false    | Update terminal replacement config request object. The structure shows below. |
-| terminalTimeZoneUpdateRequest    | TerminalTimeZoneUpdateRequest | false    | Update terminal time zone config request object. The structure shows below.   |
+| Parameter Name                     | Type                        | Nullable | Description                                                                            |
+|:-----------------------------------| :-------------------------- | :------- |:---------------------------------------------------------------------------------------|
+| terminalId                         | Long                        | false    | Terminal's id.                                                                         |
+| terminalConfigUpdateRequest        | TerminalConfigUpdateRequest | false    | Update terminal config request object. The structure shows below.                      |
+| terminalReplacementUpdateRequest   | TerminalReplacementUpdateRequest | false    | Update terminal replacement config request object. The structure shows below.          |
+| terminalTimeZoneUpdateRequest      | TerminalTimeZoneUpdateRequest | false    | Update terminal time zone config request object. The structure shows below.            |
+| terminalLanguageUpdateRequest      | TerminalLanguageUpdateRequest | false    | Update terminal language config request object. The structure shows below.             |
+| terminalWifiUpdateRequest          | TerminalWifiUpdateRequest | false    | Update terminal wifi config request array object. The structure shows below.           |
+| terminalApnUpdateRequest           | TerminalApnUpdateRequest | false    | Update terminal apn config request array object. The structure shows below.            |
+| terminalWifiBlackListUpdateRequest | TerminalWifiBlackListUpdateRequest | false    | Update terminal wifi blackList config request array object. The structure shows below. |
 
 Structure of class TerminalReplacementUpdateRequest
 
@@ -2278,6 +2294,71 @@ Structure of class TerminalTimeZoneUpdateRequest
 | automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
 | timeZone                | String  | true     | The terminal time zone |
 
+Structure of class TerminalLanguageUpdateRequest
+
+| Property Name | Type   | Nullable | Description                                                                                                       |
+|:--------------|:-------|:---------|:------------------------------------------------------------------------------------------------------------------|
+| language      | String | false    | language symbol, English US is en-us, Japanese is ja-jp, Chinese is zh-cn, Spanish is es-es, Russian is ru-ru etc |
+
+Structure of class TerminalWifiUpdateRequest
+
+| Property Name | Type    | Nullable | Description                                   |
+|:--------------|:--------|:---------|:----------------------------------------------|
+| wifi          | String | true     | Array JSON string of WifiConfig Class as bellow |
+
+Structure of class WifiConfig
+
+| Property Name | Type    | Nullable | Description                                                  |
+|:--------------|:--------|:---------|:-------------------------------------------------------------|
+| ssid          | String  | false    | Wi-Fi Account                                                |
+| cipherType    | Integer | false    | Security setting, 0 is None,1 is WEP, 2 is WPA/WPA2 PSK      |
+| password      | String  | false    | Wi-Fi Password                                               |
+| proxyType     | Integer | false    | Proxy setting,0 is None, 1 is Manual, 2 is Proxy auto-config |
+| hostName      | String | true     | Proxy Host Name, it is mandaory when proxyType is 1          |
+| port          | Integer | true     | Proxy Port, it is mandaory when proxyType is 1               |
+| pacUrl        | String  | true     | Proxy auto-config URL, it is mandaory when proxyType is 2    |
+
+Structure of class TerminalApnUpdateRequest
+
+| Property Name | Type    | Nullable | Description                                  |
+|:--------------|:--------|:---------|:---------------------------------------------|
+| apn           | String | false    | Array JSON string of ApnConfig Class as bellow |
+
+Structure of class ApnConfig
+
+| Property Name | Type    | Nullable | Description                                                          |
+|:--------------|:--------|:---------|:---------------------------------------------------------------------|
+| name          | String  | false    | Name                                                                 |
+| apn          | String  | false    | APN                                                                  |
+| type          | String  | false    | APN type, value should be default,mms,supl,wap,net,ia,ims,hipri,xcap |
+| proxy          | String  | true    | Proxy Host                                                           |
+| port          | String  | true     | Proxy Port                                                           |
+| user          | String  | true     | Username                                                             |
+| password          | String  | true     | Password                                                             |
+| server          | String  | true     | Server                                                               |
+| mmsc          | String  | true     | mmsc                                                                 |
+| mmsproxy          | String  | true     | mms proxy                                                            |
+| mmsport          | String  | true     | mms port                                                             |
+| mcc          | String  | true     | mcc                                                                  |
+| mnc          | String  | true     | mnc                                                                  |
+| authtype          | Integer | true     | Authentication Type, 0 is  None,1 is PAP,2 is CHAP,3 is PAP/CHAP     |
+| protocol          | String  | true     | APN Protocol, value should be IP, IPV6, IPV4V6                       |
+| roaming_protocol          | String  | true     | Roaming Protocol, value should be IP, IPV6, IPV4V6                   |
+| mvno_type          | String  | true     | MVNO Type, None is "", Other values are spn,imsi,gid,iccid           |
+| mvno_match_data          | String  | true     | MVNO Value, value should be IP, IPV6, IPV4V6                         |
+
+Structure of class TerminalWifiBlackListUpdateRequest
+
+| Property Name | Type    | Nullable | Description                                        |
+|:--------------|:--------|:---------|:---------------------------------------------------|
+| blackList     | String | false    | Array JSON string of BlackListConfig Class as bellow |
+
+Structure of class BlackListConfig
+
+| Property Name | Type    | Nullable | Description                                                          |
+|:--------------|:--------|:---------|:---------------------------------------------------------------------|
+| wifiName          | String  | false    | Name                                                                 |
+
 **Sample codes**
 
 ```
@@ -2291,6 +2372,34 @@ TerminalTimeZoneUpdateRequest terminalTimeZoneUpdateRequest = new TerminalTimeZo
 terminalTimeZoneUpdateRequest.setAutomaticTimezoneEnable(false);
 terminalTimeZoneUpdateRequest.setTimeZone(TimeZone.getDefault().getID());
 Result<String> result = terminalApi.updateTerminalConfig(terminalId,terminalConfigUpdateRequest);
+
+TerminalWifiUpdateRequest terminalWifiUpdateRequest = new TerminalWifiUpdateRequest();
+TerminalWifiUpdateRequest.WifiConfig wifiConfig1 = EnhancedJsonUtils.fromJson("{\"SSID\":\"pax20\",\"password\":\"12345678\",\"cipherType\":2,\"proxyType\":0}", TerminalWifiUpdateRequest.WifiConfig.class);
+TerminalWifiUpdateRequest.WifiConfig wifiConfig2 = EnhancedJsonUtils.fromJson("{\"SSID\":\"pax30\",\"password\":\"12345678\",\"cipherType\":2,\"proxyType\":0}", TerminalWifiUpdateRequest.WifiConfig.class);
+List<TerminalWifiUpdateRequest.WifiConfig> wifiConfigList = new ArrayList<>();
+wifiConfigList.add(wifiConfig1);
+wifiConfigList.add(wifiConfig2);
+terminalWifiUpdateRequest.setWifiList(wifiConfigList);
+Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalWifiUpdateRequest);
+
+TerminalApnUpdateRequest terminalApnUpdateRequest = new TerminalApnUpdateRequest();
+TerminalApnUpdateRequest.ApnConfig apnConfig1 = EnhancedJsonUtils.fromJson("{\"name\":\"MyApn20\",\"mcc\":\"101\",\"mnc\":\"102\",\"apn\":\"APN01\",\"user\":\"\",\"proxy\":\"\",\"mmsport\":\"100\",\"mmsc\":\"\",\"authtype\":1,\"type\":\"net\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\",\"checked\":false}", TerminalApnUpdateRequest.ApnConfig.class);
+TerminalApnUpdateRequest.ApnConfig apnConfig2 = EnhancedJsonUtils.fromJson("{\"name\":\"MyApn30\",\"mcc\":\"101\",\"mnc\":\"102\",\"apn\":\"APN01\",\"user\":\"\",\"proxy\":\"\",\"mmsport\":\"100\",\"mmsc\":\"\",\"authtype\":1,\"type\":\"net\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\",\"checked\":false}", TerminalApnUpdateRequest.ApnConfig.class);
+List<TerminalApnUpdateRequest.ApnConfig> apnConfigList = new ArrayList<>();
+apnConfigList.add(apnConfig1);
+apnConfigList.add(apnConfig2);
+terminalApnUpdateRequest.setApnList(apnConfigList);
+Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalApnUpdateRequest);
+		
+TerminalWifiBlackListUpdateRequest terminalWifiBlackListUpdateRequest = new TerminalWifiBlackListUpdateRequest();
+TerminalWifiBlackListUpdateRequest.BlackListConfig blackListConfig1 = EnhancedJsonUtils.fromJson("{\"wifiName\":\"testwifi1\"}", TerminalWifiBlackListUpdateRequest.BlackListConfig.class);
+TerminalWifiBlackListUpdateRequest.BlackListConfig blackListConfig2 = EnhancedJsonUtils.fromJson("{\"wifiName\":\"testwifi2\"}", TerminalWifiBlackListUpdateRequest.BlackListConfig.class);
+List<TerminalWifiBlackListUpdateRequest.BlackListConfig> blackListConfigList = new ArrayList<>();
+blackListConfigList.add(blackListConfig1);
+blackListConfigList.add(blackListConfig2);
+terminalWifiBlackListUpdateRequest.setBlackList(blackListConfigList);
+Result<String> result = terminalApi.updateTerminalConfig(terminalId, terminalWifiBlackListUpdateRequest);		
+
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -2465,8 +2574,15 @@ Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(909744L);
 {
 	"businessCode": 0,
 	"data": {
-		"allowReplacement": true
-	}
+		"allowReplacement": false,
+		"language": "zh-cn",
+		"wifiList": "[{\"password\":\"12345678\",\"cipherType\":\"2\",\"proxyType\":\"0\"},{\"password\":\"12345678\",\"cipherType\":\"2\",\"proxyType\":\"0\"}]",
+		"apnList": "[{\"name\":\"MyApn20\",\"apn\":\"APN01\",\"type\":\"net\",\"proxy\":\"\",\"user\":\"\",\"mmsc\":\"\",\"mmsport\":\"100\",\"mcc\":\"101\",\"mnc\":\"102\",\"authtype\":\"1\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\"},{\"name\":\"MyApn30\",\"apn\":\"APN01\",\"type\":\"net\",\"proxy\":\"\",\"user\":\"\",\"mmsc\":\"\",\"mmsport\":\"100\",\"mcc\":\"101\",\"mnc\":\"102\",\"authtype\":\"1\",\"protocol\":\"IP\",\"roaming_protocol\":\"IP\",\"mvno_type\":\"spn\",\"mvno_match_data\":\"\"}]",
+		"blackList": "[{\"wifiName\":\"testwifi1\"},{\"wifiName\":\"testwifi2\"}]"
+	},
+	"rateLimit": "3000",
+	"rateLimitRemain": "2998",
+	"rateLimitReset": "1729495336615"
 }
 ```
 
@@ -3025,4 +3141,963 @@ Structure of class TerminalNetworkDTO
 | 2028          | Terminal not found         |             |
 | 2039          | Tid mismatch with serialNo |             |
 
-### 
+### Push Terminal Message
+
+push terminal message by terminal id.
+
+**API**
+
+```
+public Result<String> pushTerminalMessage(Long terminalId, TerminalMessageRequest terminalMessageRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name         | Type                   | Nullable | Description    |
+| :--------------------- | :--------------------- | :------- | :------------- |
+| terminalId             | String                 | false    | Terminal's id. |
+| terminalMessageRequest | TerminalMessageRequest | false    |                |
+
+Structure of class TerminalMessageRequest
+
+| Property Name | Type   | Nullable | Description                                 |
+| :------------ | :----- | -------- | :------------------------------------------ |
+| title         | String | false    | The length limit for message titles is 64   |
+| content       | String | false    | The length limit for message content is 256 |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long terminalId = 162006737459222L
+TerminalMessageRequest request = new TerminalMessageRequest();
+request.setTitle("Test Title");
+request.setContent("Test Content");
+Result<String> result = terminalApi.pushTerminalMessage(terminalId,request);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible business codes**
+
+| Business Code | Message                              | Description |
+| :------------ | :----------------------------------- | :---------- |
+| 1800          | Terminal not found                   |             |
+| 1810          | Terminal is not active               |             |
+| 1896          | The terminal is offline!             |             |
+| 1803          | Terminal model is mandatory          |             |
+| 2123          | Push message title cannot be empty   |             |
+| 2124          | Push message title is too long       |             |
+| 2125          | Push message content cannot be empty |             |
+| 2126          | Push message content is too long     |             |
+
+
+
+### Push Terminal Message By Serial No
+
+push terminal message by terminal serial no.
+
+**API**
+
+```
+public Result<String> pushTerminalMessageBySn(Long terminalId, TerminalMessageRequest terminalMessageRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name         | Type                   | Nullable | Description    |
+| :--------------------- | :--------------------- | :------- | :------------- |
+| terminalId             | String                 | false    | Terminal's id. |
+| terminalMessageRequest | TerminalMessageRequest | false    |                |
+
+Structure of class TerminalMessageRequest
+
+| Property Name | Type   | Nullable | Description                                 |
+| :------------ | :----- | -------- | :------------------------------------------ |
+| title         | String | false    | The length limit for message titles is 64   |
+| content       | String | false    | The length limit for message content is 256 |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String serialNo = "TESTBYSN"
+TerminalMessageRequest request = new TerminalMessageRequest();
+request.setTitle("Test Title");
+request.setContent("Test Content");
+Result<String> resultBySn = terminalApi.pushTerminalMessageBySn(serialNo,request);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible business codes**
+
+| Business Code | Message                              | Description |
+| :------------ | :----------------------------------- | :---------- |
+| 1800          | Terminal not found                   |             |
+| 1810          | Terminal is not active               |             |
+| 1896          | The terminal is offline!             |             |
+| 1803          | Terminal model is mandatory          |             |
+| 2123          | Push message title cannot be empty   |             |
+| 2124          | Push message title is too long       |             |
+| 2125          | Push message content cannot be empty |             |
+| 2126          | Push message content is too long     |             |
+
+### Get terminal system usage by id
+
+Get terminal cpu, ram, storage usage.
+
+**API**
+
+```
+public Result<TerminalSystemUsageDTO> getTerminalSystemUsageById(Long terminalId)
+```
+
+**Path variable(s) description**
+
+| Parameter Name | Type   | Nullable | Description     |
+|:---------------|:-------| :------- |:----------------|
+| terminalId     | Long   | true     | Terminal id.    |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalSystemUsageDTO> terminalSystemUsage = terminalApi.getTerminalSystemUsageById(1639491781525547L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property terminalId can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"totalCpuUsage": 1.0,
+		"totalStorageUsage": 301666304,
+		"totalRamUsage": 596234240,
+		"totalRAM": 908165120,
+		"totalStorage": 3984334848
+	}
+}
+```
+
+The type in dataSet of result is TerminalSystemUsageDTO. The structure shows below.
+
+Structure of class TerminalSystemUsageDTO
+
+| Property Name | Type       | Description                       |
+| :------------ |:-----------|:----------------------------------|
+| totalCpuUsage           | Double     | total cpu usage, value 1 means 1% |
+| totalRamUsage      | Long       | total ram usage, unit is byte.    |
+| totalRAM      | Long       | total ram size, unit is byte.     |
+| totalStorageUsage        | Long     | total storage usage, unit is byte |
+| totalStorage      | Long       | total storage size, unit is byte. |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 2028          | Terminal not found         |             |
+
+
+
+### Get terminal system usage by SN
+
+Get terminal cpu, ram, storage usage by terminal serial no.
+
+**API**
+
+```
+public Result<TerminalSystemUsageDTO> getTerminalSystemUsageBySn(String serialNo)
+```
+
+**Path variable(s) description**
+
+| Parameter Name | Type   | Nullable | Description     |
+|:---------------|:-------| :------- |:----------------|
+| terminalId     | Long   | true     | Terminal id.    |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalSystemUsageDTO> terminalSystemUsage = terminalApi.getTerminalSystemUsageBySn("SUBSN108");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serinalNo can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"totalCpuUsage": 1.0,
+		"totalStorageUsage": 301666304,
+		"totalRamUsage": 596234240,
+		"totalRAM": 908165120,
+		"totalStorage": 3984334848
+	}
+}
+```
+
+The type in dataSet of result is TerminalSystemUsageDTO. The structure shows below.
+
+Structure of class TerminalSystemUsageDTO
+
+| Property Name | Type       | Description                       |
+| :------------ |:-----------|:----------------------------------|
+| totalCpuUsage           | Double     | total cpu usage, value 1 means 1% |
+| totalRamUsage      | Long       | total ram usage, unit is byte.    |
+| totalRAM      | Long       | total ram size, unit is byte.     |
+| totalStorageUsage        | Long     | total storage usage, unit is byte |
+| totalStorage      | Long       | total storage size, unit is byte. |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 2028          | Terminal not found         |             |
+
+
+### Collect Terminal Log
+
+collect terminal log.
+
+**API**
+
+```
+public Result<String> collectTerminalLog(Long terminalId, TerminalLogRequest terminalLogRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name       | Type               | Nullable | Description    |
+| :------------------- | :----------------- | :------- | :------------- |
+| terminalId           | Long               | false    | Terminal's id. |
+| *terminalLogRequest* | TerminalLogRequest | false    |                |
+
+Structure of class TerminalLogRequest
+
+| Property Name | Type   | Nullable | Description                                                  |
+| :------------ | :----- | -------- |:-------------------------------------------------------------|
+| type          | String | false    | The type of terminal log, L(Logcat), D(Detail Log), S(Geolocation Log) |
+| beginDate     | String | true     | The begin date of terminal detail log, example: "2024-12-01" |
+| endDate       | String | true     | The end date of terminal detail log, example: "2024-12-01"   |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long terminalId = "908627L"
+TerminalLogRequest request = new TerminalLogRequest();
+request.setType("L");
+Result<String> result = terminalApi.collectTerminalLog(terminalId,request);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                      | Description |
+| :------------ | :--------------------------- | :---------- |
+| 1800          | Terminal not found           |             |
+| 14001         | Terminal log type is invalid |             |
+
+### Collect Terminal Log By Serial No
+
+collect terminal log by serial no.
+
+**API**
+
+```
+public Result<String> collectTerminalLog(String serialNo, TerminalLogRequest terminalLogRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name       | Type               | Nullable | Description                |
+| :------------------- | :----------------- | :------- | :------------------------- |
+| serialNo             | String             | false    | Serial number of terminal. |
+| *terminalLogRequest* | TerminalLogRequest | false    |                            |
+
+Structure of class TerminalLogRequest
+
+| Property Name | Type   | Nullable | Description                                                  |
+| :------------ | :----- | -------- |:-------------------------------------------------------------|
+| type          | String | false    | The type of terminal log, L(Logcat), D(Detail Log), S(Geolocation Log) |
+| beginDate     | String | true     | The begin date of terminal detail log, example: "2024-12-01" |
+| endDate       | String | true     | The end date of terminal detail log, example: "2024-12-01"   |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String serialNo = "SUBSN108"
+TerminalLogRequest request = new TerminalLogRequest();
+request.setType("L");
+Result<String> resultBySn = terminalApi.collectTerminalLogBySn(serialNo,request);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serinalNo can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter serialNo cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                      | Description |
+| :------------ | :--------------------------- | :---------- |
+| 1800          | Terminal not found           |             |
+| 14001         | Terminal log type is invalid |             |
+
+### Search Terminal Logs
+
+search terminal logs.
+
+**API**
+
+```
+public Result<TerminalLogDTO> searchTerminalLog(int pageNo, int pageSize, Long terminalId)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type | Nullable | Description                                   |
+| :------------- | :--- |:---------| :-------------------------------------------- |
+| pageNo         | int  | true     | page number, value must >=1                   |
+| pageSize       | int  | true     | the record number per page, range is 1 to 100 |
+| terminalId     | Long | false    | Terminal's id.                                |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long terminalId = "908627L"
+Result<TerminalLogDTO> result = terminalApi.searchTerminalLog(1,10,terminalId);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageSize:must be greater than or equal to 1", "pageNo:must be greater than or equal to 1","Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"pageInfo": {
+		"pageNo": 1,
+		"limit": 10,
+		"totalCount": 1,
+		"hasNext": false,
+		"dataSet": [{
+			"id": 907558,
+			"type": "L",
+			"title": "logcat-2024-12-03 14:13:36"
+		}]
+	}
+}
+```
+
+The type in dataSet of result is TerminalLogDTO. The structure shows below.
+
+Structure of class TerminalLogDTO
+
+| Property Name | Type   | Description           |
+| ------------- | ------ | --------------------- |
+| id            | Long   | Terminal log's id.    |
+| type          | String | Terminal log's type.  |
+| title         | String | Terminal log's title. |
+
+**Possible validation errors**
+
+> <font color=red>pageSize:must be greater than or equal to 1</font>   
+> <font color=red>pageNo:must be greater than or equal to 1</font>   
+> <font color=red>pageSize:must be less than or equal to 100</font>
+>
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+
+### Search Terminal Logs By Serial No
+
+search terminal logs by serial no.
+
+**API**
+
+```
+public Result<TerminalLogDTO> searchTerminalLog(int pageNo, int pageSize, String serialNo)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                                   |
+| :------------- | :----- |:---------| :-------------------------------------------- |
+| pageNo         | int    | true     | page number, value must >=1                   |
+| pageSize       | int    | true        | the record number per page, range is 1 to 100 |
+| serialNo       | String | false    | The terminal serial no.                       |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String serialNo = "SUBSN108"
+Result<TerminalLogDTO> result = terminalApi.searchTerminalLog(1,10,serialNo);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageSize:must be greater than or equal to 1", "pageNo:must be greater than or equal to 1","Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"pageInfo": {
+		"pageNo": 1,
+		"limit": 10,
+		"totalCount": 1,
+		"hasNext": false,
+		"dataSet": [{
+			"id": 907558,
+			"type": "L",
+			"title": "logcat-2024-12-03 14:13:36"
+		}]
+	}
+}
+```
+
+The type in dataSet of result is TerminalLogDTO. The structure shows below.
+
+Structure of class TerminalLogDTO
+
+| Property Name | Type   | Description           |
+| ------------- | ------ | --------------------- |
+| id            | Long   | Terminal log's id.    |
+| type          | String | Terminal log's type.  |
+| title         | String | Terminal log's title. |
+
+**Possible validation errors**
+
+> <font color=red>pageSize:must be greater than or equal to 1</font>   
+> <font color=red>pageNo:must be greater than or equal to 1</font>   
+> <font color=red>pageSize:must be less than or equal to 100</font>
+>
+> <font color=red>Parameter serialNo cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+
+### Get Terminal Log Download Task
+
+get terminal log download task.
+
+**API**
+
+```
+ public Result<DownloadTaskDTO> getTerminalLogDownloadTask(Long terminalId, Long terminalLogId) 
+```
+
+**Input parameter(s) description**
+
+| Parameter Name  | Type | Nullable | Description        |
+| :-------------- | :--- | :------- | :----------------- |
+| terminalId      | Long | false    | Terminal's id.     |
+| *terminalLogId* | Long | false    | Terminal log's id. |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Long terminalId = "908627L";
+Long terminalLogId = "908624L";
+Result<DownloadTaskDTO> result = terminalApi.getTerminalLogDownloadTask(terminalId,terminalLogId);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"fileName": "Logcat-A920-IMP8000000020-2024-11-29_15_10_10.zip",
+		"downloadUrl": "https://api..whatspos.com/p-market-web/v1/common/files/f7af52e72e8a5780f1895b3c2d997c7a",
+		"signature": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJmaWxlTmFtZSI6IkxvZ2NhdC1udWxsLUlNUDgwMDAwMDAwMjAtMjAyN",
+		"expireSeconds": 1712474124,
+		"keyPairId": "KX8VKGY3RK4NN
+	}
+}
+```
+
+The type of data in result is DownloadTaskDTO. The structure shows below.
+
+Structure of class DownloadTaskDTO
+
+| Property Name | Type   | Description                       |
+| ------------- | ------ | --------------------------------- |
+| fileName      | String | The file name of log              |
+| downloadUrl   | String | The download url of terminal log  |
+| signature     | String | The value of CloudFront-Signature |
+| expireSeconds | Long   | The value of expireSeconds        |
+| keyPairId     | String | The value of keyPairId            |
+
+When you access the download url you must set three cookies, the keys are "CloudFront-Signature", "CloudFront-Expires", "CloudFront-Key-Pair-Id" and the values are signature , expireSeconds and keyPairId.
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+>
+> <font color=red>Parameter terminalLogId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+| 16111         | File not found     |             |
+
+
+
+### Get Terminal Log Download Task By Serial No
+
+get terminal log download task by serial no.
+
+**API**
+
+```
+public Result<DownloadTaskDTO> getTerminalLogDownloadTaskBySn(String serialNo, Long terminalLogId)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name  | Type   | Nullable | Description                |
+| :-------------- | :----- | :------- | :------------------------- |
+| serialNo        | String | false    | Serial number of terminal. |
+| *terminalLogId* | Long   | false    | Terminal log's id.         |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String serialNo = "SUBSN108";
+Long terminalLogId = "908624L";
+Result<DownloadTaskDTO> result = terminalApi.getTerminalLogDownloadTaskBySn(serialNo,terminalLogId);
+
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serinalNo can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"fileName": "Logcat-A920-IMP8000000020-2024-11-29_15_10_10.zip",
+		"downloadUrl": "https://api..whatspos.com/p-market-web/v1/common/files/f7af52e72e8a5780f1895b3c2d997c7a",
+		"signature": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJmaWxlTmFtZSI6IkxvZ2NhdC1udWxsLUlNUDgwMDAwMDAwMjAtMjAyN",
+		"expireSeconds": 1712474124,
+		"keyPairId": "KX8VKGY3RK4NN
+	}
+}
+```
+
+The type of data in result is DownloadTaskDTO. The structure shows below.
+
+Structure of class DownloadTaskDTO
+
+| Property Name | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| fileName      | String | The file name of log             |
+| downloadUrl   | String | The download url of terminal log |
+| signature     | String | CloudFront-Signature             |
+| expireSeconds | Long   | CloudFront-Expires               |
+| keyPairId     | String | CloudFront-Key-Pair-Id           |
+
+When you access the download url you must set three cookies, the keys are "CloudFront-Signature", "CloudFront-Expires", "CloudFront-Key-Pair-Id" and the values are signature , expireSeconds and keyPairId.
+
+**Possible client validation errors**
+
+> <font color=red>Parameter serialNo cannot be empty!</font>
+>
+> <font color=red>Parameter terminalLogId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 1800          | Terminal not found |             |
+| 16111         | File not found     |             |
+
+
+### Change terminal model by id
+
+Change terminal model by id, factoryName, modelName.
+
+**API**
+
+```
+public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, String modelName) 
+```
+
+**Path variable(s) description**
+
+| Parameter Name | Type   | Nullable | Description     |
+|:---------------|:-------| :------- |:----------------|
+| terminalId     | Long   | true     | Terminal id.    |
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                   |
+| :------------- | :----- |:---------|:------------------------------|
+| factoryName       | String | true     | new factory name of terminal. |
+| modelName            | String | false    | new model name of terminal.   |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<EmptyResponse> responseResult = terminalApi.changeModelBySN("SUBSN108", "PAX", "A920");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property terminalId can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"message":""
+}
+```
+
+The type in dataSet of result is EmptyResponse. The structure shows below.
+
+Structure of class EmptyResponse
+
+| Property Name | Type   | Description   |
+| :------------ |:-------|:--------------|
+| businessCode           | Long   | 0 is success  |
+| message      | String | error message |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 2028          | Terminal not found         |             |
+
+
+
+### Change terminal model by Serial No
+
+Change terminal model by serialNo, factoryName, modelName.
+
+**API**
+
+```
+public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName, String modelName)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                   |
+|:---------------| :----- |:---------|:------------------------------|
+| serialNo       | String | false    | serial No of terminal.        |
+| factoryName    | String | true     | new factory name of terminal. |
+| modelName      | String | false    | new model name of terminal.   |
+
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<EmptyResponse> responseResult = terminalApi.changeModel("POS10008", "PAX", "A920");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serinalNo can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"message": ""
+}
+```
+
+The type in dataSet of result is EmptyResponse. The structure shows below.
+
+Structure of class EmptyResponse
+
+| Property Name | Type   | Description   |
+| :------------ |:-------|:--------------|
+| businessCode           | Long   | 0 is success  |
+| message      | String | error message |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                    | Description |
+| :------------ | :------------------------- | :---------- |
+| 2028          | Terminal not found         |             |
+

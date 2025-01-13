@@ -67,7 +67,7 @@ public class Constants {
 
 
     public static final String THIRD_PARTY_API_SDK_LANGUAGE = "Java";
-    public static final String THIRD_PARTY_API_SDK_VERSION = "9.5.0";
+    public static final String THIRD_PARTY_API_SDK_VERSION = "9.6.0";
     public static final String REQ_HEADER_SDK_LANG = "SDK-Language";
     public static final String REQ_HEADER_SDK_VERSION = "SDK-Version";
 
@@ -83,6 +83,7 @@ public class Constants {
     public static final int MAX_64 = 64;
     public static final int MAX_128 = 128;
     public static final int MAX_255 = 255;
+    public static final int MAX_256 = 256;
     public static final int MAX_500 = 500;
     public static final int MAX_3000 = 3000;
     public static final int MIN_0 = 0;

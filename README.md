@@ -187,7 +187,7 @@ To integrate with this SDK please add below dependency by updating the pom.xml f
 <dependency>
     <groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-    <version>9.5.0</version>
+    <version>9.6.0</version>
 </dependency>
 ```
 
@@ -283,6 +283,14 @@ See the [Apache 2.0 license](LICENSE) file for details.
 ## [GoInsight APIs](docs/GOINSIGHT_API.md)
 
 ## [Terminal Geofence WhiteList APIs](docs/TERMINAL_GEOFENCE_WHITELIST_API.md)
+
+## [EMM App APIs](docs/EMM_APP_API.md)
+
+## [EMM Device APIs](docs/EMM_DEVICE_API.md)
+
+## [EMM Device Detail APIs](docs/EMM_DEVICE_DETAIL_API.md)
+
+## [EMM Policy APIs](docs/EMM_POLICY_API.md)
 
 
 

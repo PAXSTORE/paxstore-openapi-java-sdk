@@ -21,5 +21,5 @@ public interface TestConstants {
 	String API_BASE_URL = "https://api.whatspos.com/p-market-api";
 	String API_KEY = "XXXXXXXX";
 	String API_SECRET = "XXXXXXXXXXXXXXXX";
-	
+
 }

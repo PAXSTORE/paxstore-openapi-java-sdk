@@ -43,9 +43,13 @@ public class TerminalDTO implements Serializable{
 
 	private Date createdDate;
 
+	private Date updatedDate;
+
 	private Date lastActiveTime;
 
-    private String location;
+	private Date lastAccessTime;
+
+	private String location;
 
 	private String remark;
 
@@ -195,6 +199,22 @@ public class TerminalDTO implements Serializable{
 		this.terminalAccessoryList = terminalAccessoryList;
 	}
 
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public Date getLastAccessTime() {
+		return lastAccessTime;
+	}
+
+	public void setLastAccessTime(Date lastAccessTime) {
+		this.lastAccessTime = lastAccessTime;
+	}
+
 	@Override
 	public String toString() {
 		return "TerminalDTO{" +
@@ -207,8 +227,11 @@ public class TerminalDTO implements Serializable{
 				", modelName='" + modelName + '\'' +
 				", resellerName='" + resellerName + '\'' +
 				", createdDate=" + createdDate +
+				", updatedDate=" + updatedDate +
 				", lastActiveTime=" + lastActiveTime +
+				", lastAccessTime=" + lastAccessTime +
 				", location='" + location + '\'' +
+				", remark='" + remark + '\'' +
 				", geoLocation=" + geoLocation +
 				", installedFirmware=" + installedFirmware +
 				", installedApks=" + installedApks +
