@@ -23,7 +23,7 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
 
     private static final Logger logger = LoggerFactory.getLogger(EmmAppApi.class);
 
-    private static final String CREATE_REGISTER_QR_CODE_URL = "/v1/3rdsys/emm/devices/register-qrcode/create";
+    private static final String CREATE_REGISTER_QR_CODE_URL = "/v1/3rdsys/emm/devices/register-qrcode";
     private static final String SEARCH_EMM_DEVICE_URL = "/v1/3rdsys/emm/devices";
     private static final String GET_EMM_DEVICE_URL = "/v1/3rdsys/emm/devices/{deviceId}";
     private static final String UPDATE_EMM_DEVICE_URL = "/v1/3rdsys/emm/devices/{deviceId}";

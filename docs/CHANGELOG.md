@@ -1,4 +1,9 @@
-# Changelog
+# Changelog  
+
+## 9.6.1  
+### Bug Fix  
+* Fix EMM related API issue, please upgrade to SDK version 9.6.1
+
 ## 9.6.0
 ### New Feature
 * Add the return field `updatedDate` and `lastAccessTime` in Search Terminal API

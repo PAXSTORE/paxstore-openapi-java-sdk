@@ -22,8 +22,7 @@ public class EmmAppApi extends BaseThirdPartySysApi {
 
     private static final Logger logger = LoggerFactory.getLogger(EmmAppApi.class);
 
-    private static final String SEARCH_EMM_APP_URL = "/v1/3rdsys/emm/apps";
-    private static final String CREATE_EMM_APP_URL = "/v1/3rdsys/emm/apps/create";
+    private static final String EMM_APP_URL = "/v1/3rdsys/emm/apps";
     private static final String GET_EMM_APP_DETAIL_URL = "/v1/3rdsys/emm/apps/{appId}";
     private static final String DELETE_EMM_APP_URL = "/v1/3rdsys/emm/apps/{appId}";
     private static final String SEARCH_RESELLER_SUBSCRIBE_EMM_APP_URL = "/v1/3rdsys/emm/apps/subscription";
@@ -64,7 +63,7 @@ public class EmmAppApi extends BaseThirdPartySysApi {
             return new Result<>(validationErrs);
         }
 
-        SdkRequest request = getPageRequest(SEARCH_EMM_APP_URL, page);
+        SdkRequest request = getPageRequest(EMM_APP_URL, page);
 
         request.addRequestParam("resellerName", resellerName);
         if (name != null) {
@@ -92,7 +91,7 @@ public class EmmAppApi extends BaseThirdPartySysApi {
         logger.debug("emmAppCreateRequest= {}", new Gson().toJson(emmAppCreateRequest, EmmAppCreateRequest.class));
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(CREATE_EMM_APP_URL);
+        SdkRequest request = createSdkRequest(EMM_APP_URL);
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(emmAppCreateRequest, EmmAppCreateRequest.class));
