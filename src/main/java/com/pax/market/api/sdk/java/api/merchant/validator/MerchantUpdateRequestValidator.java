@@ -37,12 +37,12 @@ public class MerchantUpdateRequestValidator {
         if(validateTarget == null) {
             validationErrs.add(getMessage("parameter.not.null", "merchantUpdateRequest"));
         }else {
-            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getName(), "name", Constants.MAX_64));
+            validationErrs.addAll(Validators.validateStrMax(validateTarget.getName(), "name", Constants.MAX_64));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getEmail(), "email", Constants.MAX_255));
             if(StringUtils.isNotBlank(validateTarget.getEmail()) && !StringUtils.isValidEmailAddress(validateTarget.getEmail())) {
                 validationErrs.add(getMessage("parameter.email.invalid"));
             }
-            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getResellerName(), "resellerName", Constants.MAX_64));
+            validationErrs.addAll(Validators.validateStrMax(validateTarget.getResellerName(), "resellerName", Constants.MAX_64));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getContact(), "contact", Constants.MAX_64));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getCountry(), "country", Constants.MAX_64));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getPhone(), "phone", Constants.MAX_32));
