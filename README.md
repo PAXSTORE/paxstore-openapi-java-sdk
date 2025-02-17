@@ -292,6 +292,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 
 ## [EMM Policy APIs](docs/EMM_POLICY_API.md)
 
+## [Factory_Model APIs](docs/FACTORY_MODEL_API.md)
+
 
 
 

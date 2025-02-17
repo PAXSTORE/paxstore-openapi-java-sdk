@@ -4,6 +4,7 @@
 ### New Feature
 * Add the return field `iccid2` in TerminalApi - `getTerminal` or `getTerminalBySn` API
 * Remove parameter factoryName from TerminalApi - `changeModel`,`changeModelBySN` API
+* Add FactoryModelApi - `searchFactoryModels` API
 
 
 ## 9.6.1  

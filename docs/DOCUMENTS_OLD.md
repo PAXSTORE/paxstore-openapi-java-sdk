@@ -1,4 +1,6 @@
 
+### [9.6.0](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/v9.6.0)
+
 ### [9.5.0](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/v9.5.0)
 
 ### [9.3.1](https://github.com/PAXSTORE/paxstore-openapi-java-sdk/tree/v9.3.1)
