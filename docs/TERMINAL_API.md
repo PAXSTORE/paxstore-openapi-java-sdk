@@ -2978,16 +2978,17 @@ Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCm
 
 **Possible business codes**
 
-| Business Code | Message                                  | Description |
-| :------------ | :--------------------------------------- | :---------- |
-| 135           | Request parameter is missing or invalid  |             |
-| 997           | Malformed or illegal request             |             |
-| 1801          | Terminal doesn't exist                   |             |
-| 1896          | The terminal is offline                  |             |
-| 15094         | Terminal is locked                       |             |
-| 15095         | Terminal has been unlocked               |             |
-| 15096         | The terminal is being locked or unlocked |             |
-| 15099         | Terminal restart in progress             |             |
+| Business Code | Message                                 | Description |
+|:--------------|:----------------------------------------| :---------- |
+| 135           | Request parameter is missing or invalid |             |
+| 997           | Malformed or illegal request            |             |
+| 1801          | Terminal doesn't exist                  |             |
+| 1896          | The terminal is offline                 |             |
+| 15094         | Terminal is locked                      |             |
+| 15095         | Terminal has been unlocked              |             |
+| 15096         | The terminal is being locked            |             |
+| 15097         | The terminal is being unlocked            |             |
+| 15099         | Terminal restart in progress            |             |
 
 ### Push Command to Terminal by serialNo
 
