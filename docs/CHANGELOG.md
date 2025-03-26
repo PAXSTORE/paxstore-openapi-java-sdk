@@ -5,6 +5,7 @@
 * Add the return field `iccid2` in TerminalApi - `getTerminal` or `getTerminalBySn` API
 * Remove parameter factoryName from TerminalApi - `changeModel`,`changeModelBySN` API
 * Add FactoryModelApi - `searchFactoryModels` API
+* TerminalApi - `pushCmdToTerminal`, Optimize the error message for terminal locking
 
 
 ## 9.6.1  
