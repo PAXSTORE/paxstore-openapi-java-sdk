@@ -1,5 +1,9 @@
 # Changelog  
 
+## 9.8.0
+### New Feature
+* Add parameter query `includeInstalledFirmware` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
+
 ## 9.7.0
 ### New Feature
 * Add the return field `iccid2` in TerminalApi - `getTerminal` or `getTerminalBySn` API
