@@ -2362,10 +2362,10 @@ Structure of class TerminalReplacementUpdateRequest
 
 Structure of class TerminalTimeZoneUpdateRequest
 
-| Property Name           | Type    | Nullable | Description                                                                                                                                   |
-|:------------------------|:--------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-| automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
-| timeZone                | String  | true     | The terminal time zone |
+| Property Name           | Type    | Nullable | Description                                                   |
+|:------------------------|:--------|:---------|:--------------------------------------------------------------|
+| automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                  |
+| timeZone                | String  | true     | The terminal time zone [Time Zone](APPENDIX.md#time-zone) |
 
 Structure of class TerminalLanguageUpdateRequest
 
@@ -2544,7 +2544,7 @@ Structure of class TerminalTimeZoneUpdateRequest
 | Property Name           | Type    | Nullable | Description                                                                                                                                   |
 |:------------------------|:--------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
-| timeZone                | String  | true     | The terminal time zone |
+| timeZone                | String  | true     | The terminal time zone [Time Zone](APPENDIX.md#time-zone)|
 
 **Sample codes**
 

@@ -3,6 +3,7 @@
 ## 9.8.0
 ### New Feature
 * Add parameter query `includeInstalledFirmware` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
+* Add APPENDIX.md - Add the description of the timeZone 
 
 ## 9.7.0
 ### New Feature
