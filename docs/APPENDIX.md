@@ -462,7 +462,7 @@ Description
         <tr><td>(GMT+12:00) Petropavlovsk-Kamchatski Standard Time</td><td>Asia/Kamchatka</td></tr>
         <tr><td>(GMT+12:00) Tuvalu Time</td><td>Pacific/Funafuti</td></tr>
         <tr><td>(GMT+12:00) Wake Island Time</td><td>Pacific/Wake</td></tr>
-        <tr><td>(GMT+12:00) Wallis &amp;amp; Futuna Time</td><td>Pacific/Wallis</td></tr>
+        <tr><td>(GMT+12:00) Wallis &amp; Futuna Time</td><td>Pacific/Wallis</td></tr>
         <tr><td>(GMT+12:45) Chatham Time</td><td>Pacific/Chatham</td></tr>
         <tr><td>(GMT+13:00) Apia Time</td><td>Pacific/Apia</td></tr>
         <tr><td>(GMT+13:00) Phoenix Islands Time</td><td>Pacific/Enderbury</td></tr>
