@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PolicyContentDTO implements Serializable {
 
-    private static final long serialVersionUID = 564696332097571894L;
+    private static final long serialVersionUID = -319856507116124453L;
 
     private Boolean adjustVolumeDisabled;
 
@@ -35,7 +35,25 @@ public class PolicyContentDTO implements Serializable {
 
     private Boolean installAppsDisabled;
 
-    private List<String> keyguardDisabledFeatures;
+    private Boolean disableNotificationsOnLockScreens;
+
+    private Boolean disableUnredactedNotificationsOnLockScreens;
+
+    private Boolean ignoreTrustAgentStateOnLockScreens;
+
+    private Boolean disableFingerprintSensorOnLockScreens;
+
+    private Boolean disableFaceAuthentication;
+
+    private Boolean disableAllBiometricAuthentication;
+
+    private Boolean disableAllShortcutsOnLockScreen;
+
+    private Boolean disableAllKeyguardFeatures;
+
+    private Boolean kioskCustomLauncherEnabled;
+
+    private KioskCustomization kioskCustomization;
 
     private String locationMode;
 
@@ -61,9 +79,9 @@ public class PolicyContentDTO implements Serializable {
 
     private List<PermissionGrant> permissionGrants;
 
-    private PackageNameList permittedAccessibilityServices;
+    private List<String> permittedAccessibilityServices;
 
-    private PackageNameList permittedInputMethods;
+    private List<String> permittedInputMethods;
 
     private String playStoreMode;
 
@@ -92,6 +110,7 @@ public class PolicyContentDTO implements Serializable {
     private List<PolicyEnforcementRule> policyEnforcementRules;
 
     private List<ApplicationPolicy> applications;
+
 
     public Boolean getAdjustVolumeDisabled() {
         return adjustVolumeDisabled;
@@ -205,12 +224,84 @@ public class PolicyContentDTO implements Serializable {
         this.installAppsDisabled = installAppsDisabled;
     }
 
-    public List<String> getKeyguardDisabledFeatures() {
-        return keyguardDisabledFeatures;
+    public Boolean getDisableNotificationsOnLockScreens() {
+        return disableNotificationsOnLockScreens;
     }
 
-    public void setKeyguardDisabledFeatures(List<String> keyguardDisabledFeatures) {
-        this.keyguardDisabledFeatures = keyguardDisabledFeatures;
+    public void setDisableNotificationsOnLockScreens(Boolean disableNotificationsOnLockScreens) {
+        this.disableNotificationsOnLockScreens = disableNotificationsOnLockScreens;
+    }
+
+    public Boolean getDisableUnredactedNotificationsOnLockScreens() {
+        return disableUnredactedNotificationsOnLockScreens;
+    }
+
+    public void setDisableUnredactedNotificationsOnLockScreens(Boolean disableUnredactedNotificationsOnLockScreens) {
+        this.disableUnredactedNotificationsOnLockScreens = disableUnredactedNotificationsOnLockScreens;
+    }
+
+    public Boolean getIgnoreTrustAgentStateOnLockScreens() {
+        return ignoreTrustAgentStateOnLockScreens;
+    }
+
+    public void setIgnoreTrustAgentStateOnLockScreens(Boolean ignoreTrustAgentStateOnLockScreens) {
+        this.ignoreTrustAgentStateOnLockScreens = ignoreTrustAgentStateOnLockScreens;
+    }
+
+    public Boolean getDisableFingerprintSensorOnLockScreens() {
+        return disableFingerprintSensorOnLockScreens;
+    }
+
+    public void setDisableFingerprintSensorOnLockScreens(Boolean disableFingerprintSensorOnLockScreens) {
+        this.disableFingerprintSensorOnLockScreens = disableFingerprintSensorOnLockScreens;
+    }
+
+    public Boolean getDisableFaceAuthentication() {
+        return disableFaceAuthentication;
+    }
+
+    public void setDisableFaceAuthentication(Boolean disableFaceAuthentication) {
+        this.disableFaceAuthentication = disableFaceAuthentication;
+    }
+
+    public Boolean getDisableAllBiometricAuthentication() {
+        return disableAllBiometricAuthentication;
+    }
+
+    public void setDisableAllBiometricAuthentication(Boolean disableAllBiometricAuthentication) {
+        this.disableAllBiometricAuthentication = disableAllBiometricAuthentication;
+    }
+
+    public Boolean getDisableAllShortcutsOnLockScreen() {
+        return disableAllShortcutsOnLockScreen;
+    }
+
+    public void setDisableAllShortcutsOnLockScreen(Boolean disableAllShortcutsOnLockScreen) {
+        this.disableAllShortcutsOnLockScreen = disableAllShortcutsOnLockScreen;
+    }
+
+    public Boolean getDisableAllKeyguardFeatures() {
+        return disableAllKeyguardFeatures;
+    }
+
+    public void setDisableAllKeyguardFeatures(Boolean disableAllKeyguardFeatures) {
+        this.disableAllKeyguardFeatures = disableAllKeyguardFeatures;
+    }
+
+    public Boolean getKioskCustomLauncherEnabled() {
+        return kioskCustomLauncherEnabled;
+    }
+
+    public void setKioskCustomLauncherEnabled(Boolean kioskCustomLauncherEnabled) {
+        this.kioskCustomLauncherEnabled = kioskCustomLauncherEnabled;
+    }
+
+    public KioskCustomization getKioskCustomization() {
+        return kioskCustomization;
+    }
+
+    public void setKioskCustomization(KioskCustomization kioskCustomization) {
+        this.kioskCustomization = kioskCustomization;
     }
 
     public String getLocationMode() {
@@ -309,19 +400,19 @@ public class PolicyContentDTO implements Serializable {
         this.permissionGrants = permissionGrants;
     }
 
-    public PackageNameList getPermittedAccessibilityServices() {
+    public List<String> getPermittedAccessibilityServices() {
         return permittedAccessibilityServices;
     }
 
-    public void setPermittedAccessibilityServices(PackageNameList permittedAccessibilityServices) {
+    public void setPermittedAccessibilityServices(List<String> permittedAccessibilityServices) {
         this.permittedAccessibilityServices = permittedAccessibilityServices;
     }
 
-    public PackageNameList getPermittedInputMethods() {
+    public List<String> getPermittedInputMethods() {
         return permittedInputMethods;
     }
 
-    public void setPermittedInputMethods(PackageNameList permittedInputMethods) {
+    public void setPermittedInputMethods(List<String> permittedInputMethods) {
         this.permittedInputMethods = permittedInputMethods;
     }
 
@@ -454,7 +545,16 @@ public class PolicyContentDTO implements Serializable {
                 ", factoryResetDisabled=" + factoryResetDisabled +
                 ", funDisabled=" + funDisabled +
                 ", installAppsDisabled=" + installAppsDisabled +
-                ", keyguardDisabledFeatures=" + keyguardDisabledFeatures +
+                ", disableNotificationsOnLockScreens=" + disableNotificationsOnLockScreens +
+                ", disableUnredactedNotificationsOnLockScreens=" + disableUnredactedNotificationsOnLockScreens +
+                ", ignoreTrustAgentStateOnLockScreens=" + ignoreTrustAgentStateOnLockScreens +
+                ", disableFingerprintSensorOnLockScreens=" + disableFingerprintSensorOnLockScreens +
+                ", disableFaceAuthentication=" + disableFaceAuthentication +
+                ", disableAllBiometricAuthentication=" + disableAllBiometricAuthentication +
+                ", disableAllShortcutsOnLockScreen=" + disableAllShortcutsOnLockScreen +
+                ", disableAllKeyguardFeatures=" + disableAllKeyguardFeatures +
+                ", kioskCustomLauncherEnabled=" + kioskCustomLauncherEnabled +
+                ", kioskCustomization=" + kioskCustomization +
                 ", locationMode='" + locationMode + '\'' +
                 ", maximumTimeToLock=" + maximumTimeToLock +
                 ", microphoneAccess='" + microphoneAccess + '\'' +
@@ -626,6 +726,7 @@ public class PolicyContentDTO implements Serializable {
 
         private String packageName;
 
+
         public Boolean getLockdownEnabled() {
             return lockdownEnabled;
         }
@@ -653,7 +754,7 @@ public class PolicyContentDTO implements Serializable {
 
     public static class PermissionGrant implements Serializable {
 
-        private static final long serialVersionUID = 5725668222110746432L;
+        private static final long serialVersionUID = -9016662889474222431L;
 
         private String permission;
 
@@ -746,6 +847,72 @@ public class PolicyContentDTO implements Serializable {
             return "DeviceRadioState{" +
                     "airplaneModeState='" + airplaneModeState + '\'' +
                     ", minimumWifiSecurityLevel='" + minimumWifiSecurityLevel + '\'' +
+                    '}';
+        }
+    }
+
+    public static class KioskCustomization implements Serializable {
+
+        private static final long serialVersionUID = 4312678361728332944L;
+
+        private String deviceSettings;
+
+        private String powerButtonActions;
+
+        private String statusBar;
+
+        private String systemErrorWarnings;
+
+        private String systemNavigation;
+
+        public String getDeviceSettings() {
+            return deviceSettings;
+        }
+
+        public void setDeviceSettings(String deviceSettings) {
+            this.deviceSettings = deviceSettings;
+        }
+
+        public String getPowerButtonActions() {
+            return powerButtonActions;
+        }
+
+        public void setPowerButtonActions(String powerButtonActions) {
+            this.powerButtonActions = powerButtonActions;
+        }
+
+        public String getStatusBar() {
+            return statusBar;
+        }
+
+        public void setStatusBar(String statusBar) {
+            this.statusBar = statusBar;
+        }
+
+        public String getSystemErrorWarnings() {
+            return systemErrorWarnings;
+        }
+
+        public void setSystemErrorWarnings(String systemErrorWarnings) {
+            this.systemErrorWarnings = systemErrorWarnings;
+        }
+
+        public String getSystemNavigation() {
+            return systemNavigation;
+        }
+
+        public void setSystemNavigation(String systemNavigation) {
+            this.systemNavigation = systemNavigation;
+        }
+
+        @Override
+        public String toString() {
+            return "KioskCustomization{" +
+                    "deviceSettings='" + deviceSettings + '\'' +
+                    ", powerButtonActions='" + powerButtonActions + '\'' +
+                    ", statusBar='" + statusBar + '\'' +
+                    ", systemErrorWarnings='" + systemErrorWarnings + '\'' +
+                    ", systemNavigation='" + systemNavigation + '\'' +
                     '}';
         }
     }
@@ -883,55 +1050,23 @@ public class PolicyContentDTO implements Serializable {
         }
     }
 
-    public static class PackageNameList implements Serializable {
-
-        private static final long serialVersionUID = 710258305299488015L;
-
-        private List<String> packageNames;
-
-        public List<String> getPackageNames() {
-            return packageNames;
-        }
-
-        public void setPackageNames(List<String> packageNames) {
-            this.packageNames = packageNames;
-        }
-
-        @Override
-        public String toString() {
-            return "PackageNameList{" +
-                    "packageNames=" + packageNames +
-                    '}';
-        }
-    }
-
 
     public static class SystemUpdate implements Serializable {
 
-        private static final long serialVersionUID = -8304071455015779850L;
+        private static final long serialVersionUID = -3542880474870490645L;
 
-        private Integer startMinutes;
-
-        private Integer endMinutes;
+        private String startToEndMinutes;
 
         private List<FreezePeriod> freezePeriods;
 
         private String type;
 
-        public Integer getStartMinutes() {
-            return startMinutes;
+        public String getStartToEndMinutes() {
+            return startToEndMinutes;
         }
 
-        public void setStartMinutes(Integer startMinutes) {
-            this.startMinutes = startMinutes;
-        }
-
-        public Integer getEndMinutes() {
-            return endMinutes;
-        }
-
-        public void setEndMinutes(Integer endMinutes) {
-            this.endMinutes = endMinutes;
+        public void setStartToEndMinutes(String startToEndMinutes) {
+            this.startToEndMinutes = startToEndMinutes;
         }
 
         public List<FreezePeriod> getFreezePeriods() {
@@ -953,8 +1088,7 @@ public class PolicyContentDTO implements Serializable {
         @Override
         public String toString() {
             return "SystemUpdate{" +
-                    "startMinutes=" + startMinutes +
-                    ", endMinutes=" + endMinutes +
+                    "startToEndMinutes='" + startToEndMinutes + '\'' +
                     ", freezePeriods=" + freezePeriods +
                     ", type='" + type + '\'' +
                     '}';
@@ -1164,7 +1298,7 @@ public class PolicyContentDTO implements Serializable {
 
     public static class ApplicationPolicy implements Serializable {
 
-        private static final long serialVersionUID = -5559108333429360845L;
+        private static final long serialVersionUID = -1172038935811089166L;
 
         private Long appId;
 
@@ -1178,12 +1312,7 @@ public class PolicyContentDTO implements Serializable {
 
         private String installType;
 
-        private Boolean lockFlag;
-
-        private String lockedByReseller;
-
         private List<AppPermissionGrant> permissionGrants;
-
 
         public Long getAppId() {
             return appId;
@@ -1233,22 +1362,6 @@ public class PolicyContentDTO implements Serializable {
             this.installType = installType;
         }
 
-        public Boolean getLockFlag() {
-            return lockFlag;
-        }
-
-        public void setLockFlag(Boolean lockFlag) {
-            this.lockFlag = lockFlag;
-        }
-
-        public String getLockedByReseller() {
-            return lockedByReseller;
-        }
-
-        public void setLockedByReseller(String lockedByReseller) {
-            this.lockedByReseller = lockedByReseller;
-        }
-
         public List<AppPermissionGrant> getPermissionGrants() {
             return permissionGrants;
         }
@@ -1266,8 +1379,6 @@ public class PolicyContentDTO implements Serializable {
                     ", defaultPermissionPolicy='" + defaultPermissionPolicy + '\'' +
                     ", installPriority='" + installPriority + '\'' +
                     ", installType='" + installType + '\'' +
-                    ", lockFlag=" + lockFlag +
-                    ", lockedByReseller='" + lockedByReseller + '\'' +
                     ", permissionGrants=" + permissionGrants +
                     '}';
         }
