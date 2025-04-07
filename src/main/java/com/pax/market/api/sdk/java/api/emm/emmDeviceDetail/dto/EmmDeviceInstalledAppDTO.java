@@ -5,13 +5,15 @@ import java.util.Date;
 
 public class EmmDeviceInstalledAppDTO implements Serializable {
 
-    private static final long serialVersionUID = -3329679341339362706L;
+    private static final long serialVersionUID = -759874756210966159L;
 
     private Long id;
 
     private Long terminalId;
 
     private String name;
+
+    private String packageName;
 
     private String version;
 
@@ -51,6 +53,14 @@ public class EmmDeviceInstalledAppDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 
     public String getVersion() {
@@ -123,6 +133,7 @@ public class EmmDeviceInstalledAppDTO implements Serializable {
                 "id=" + id +
                 ", terminalId=" + terminalId +
                 ", name='" + name + '\'' +
+                ", packageName='" + packageName + '\'' +
                 ", version='" + version + '\'' +
                 ", type='" + type + '\'' +
                 ", size=" + size +

@@ -22,88 +22,80 @@ public class EmmAppApiTest {
 
     @Test
     public void testSearchEmmAppSuccess() {
-        Result<EmmAppDTO> searchEmmAppSuccessResult1 = emmAppApi.searchEmmApp(1, 12, null, "PAX", null, null, null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult1 = emmAppApi.searchEmmApp(1, 12, null, "PAX", null, null);
         logger.debug("Result1 of search emm app: {}", searchEmmAppSuccessResult1.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult1.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult2 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmAppName_desc, "PAX", null, null, null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult2 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmAppName_desc, "PAX", null, null);
         logger.debug("Result2 of search emm app: {}", searchEmmAppSuccessResult2.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult2.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult3 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmAppName_asc, "PAX", null, null, null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult3 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmAppName_asc, "PAX", null, null);
         logger.debug("Result3 of search emm app: {}", searchEmmAppSuccessResult3.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult3.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult4 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmUpdatedDate_desc, "PAX", null, null, null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult4 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmUpdatedDate_desc, "PAX", null, null);
         logger.debug("Result4 of search emm app: {}", searchEmmAppSuccessResult4.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult4.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult5 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmUpdatedDate_asc, "PAX", null, null, null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult5 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmUpdatedDate_asc, "PAX", null, null);
         logger.debug("Result5 of search emm app: {}", searchEmmAppSuccessResult5.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult5.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult6 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "百度输入法", null, null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult6 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "百度输入法", null);
         logger.debug("Result6 of search emm app: {}", searchEmmAppSuccessResult6.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult6.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult7 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "百度输入法", "com.baidu.input", null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult7 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "com.baidu.input", null);
         logger.debug("Result7 of search emm app: {}", searchEmmAppSuccessResult7.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult7.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult8 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "", "", null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult8 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "", null);
         logger.debug("Result8 of search emm app: {}", searchEmmAppSuccessResult8.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult8.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult9 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmAppName_desc, "PAX", "", "", null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult9 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmAppName_desc, "PAX", "", null);
         logger.debug("Result9 of search emm app: {}", searchEmmAppSuccessResult9.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult2.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult10 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmAppName_asc, "PAX", "", "", null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult10 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmAppName_asc, "PAX", "", null);
         logger.debug("Result10 of search emm app: {}", searchEmmAppSuccessResult10.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult10.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult11 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmUpdatedDate_desc, "PAX", "", "", null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult11 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmUpdatedDate_desc, "PAX", "", null);
         logger.debug("Result11 of search emm app: {}", searchEmmAppSuccessResult11.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult11.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult12 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmUpdatedDate_asc, "PAX", "", "", null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult12 = emmAppApi.searchEmmApp(1, 12, EmmAppApi.EmmAppSearchOrderBy.EmmUpdatedDate_asc, "PAX", "", null);
         logger.debug("Result12 of search emm app: {}", searchEmmAppSuccessResult12.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult12.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult13 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "百度输入法", "", null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult13 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "com.baidu.input", EmmAppApi.EmmAppType.GOOGLE);
         logger.debug("Result13 of search emm app: {}", searchEmmAppSuccessResult13.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult13.getBusinessCode());
 
-        Result<EmmAppDTO> searchEmmAppSuccessResult14 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "百度输入法", "com.baidu.input", null);
+        Result<EmmAppDTO> searchEmmAppSuccessResult14 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "百度输入法", EmmAppApi.EmmAppType.PRIVATE);
         logger.debug("Result14 of search emm app: {}", searchEmmAppSuccessResult14.toString());
         Assert.assertEquals(0, searchEmmAppSuccessResult14.getBusinessCode());
-
-        Result<EmmAppDTO> searchEmmAppSuccessResult15 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "百度输入法", "com.baidu.input", EmmAppApi.EmmAppType.GOOGLE);
-        logger.debug("Result15 of search emm app: {}", searchEmmAppSuccessResult15.toString());
-        Assert.assertEquals(0, searchEmmAppSuccessResult15.getBusinessCode());
-
-        Result<EmmAppDTO> searchEmmAppSuccessResult16 = emmAppApi.searchEmmApp(1, 12, null, "PAX", "百度输入法", "com.baidu.input", EmmAppApi.EmmAppType.PRIVATE);
-        logger.debug("Result16 of search emm app: {}", searchEmmAppSuccessResult16.toString());
-        Assert.assertEquals(0, searchEmmAppSuccessResult16.getBusinessCode());
 
     }
 
 
     @Test
     public void testSearchEmmAppFailByResellerNameIsInvalid() {
-        Result<EmmAppDTO> resellerNameIsNullResult = emmAppApi.searchEmmApp(1, 12, null, null, null, null, null);
+        Result<EmmAppDTO> resellerNameIsNullResult = emmAppApi.searchEmmApp(1, 12, null, null, null, null);
         logger.debug("Result of search emm app result by reseller name is null: {}", resellerNameIsNullResult.toString());
         Assert.assertEquals(-1, resellerNameIsNullResult.getBusinessCode());
 
-        Result<EmmAppDTO> resellerNameIsBlankResult = emmAppApi.searchEmmApp(1, 12, null, null, null, null, null);
+        Result<EmmAppDTO> resellerNameIsBlankResult = emmAppApi.searchEmmApp(1, 12, null, null, null, null);
         logger.debug("Result of search emm app result by reseller name is blank: {}", resellerNameIsBlankResult.toString());
         Assert.assertEquals(-1, resellerNameIsBlankResult.getBusinessCode());
 
-        Result<EmmAppDTO> resellerNameIsTooLongResult = emmAppApi.searchEmmApp(1, 12, null, "PAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAX", null, null, null);
+        Result<EmmAppDTO> resellerNameIsTooLongResult = emmAppApi.searchEmmApp(1, 12, null, "PAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAX", null, null);
         logger.debug("Result of search emm app result by reseller name is too long: {}", resellerNameIsTooLongResult.toString());
         Assert.assertEquals(-1, resellerNameIsTooLongResult.getBusinessCode());
 
-        Result<EmmAppDTO> resellerNameIsNotExistResult = emmAppApi.searchEmmApp(1, 12, null, "resellerNameNotExist", null, null, null);
+        Result<EmmAppDTO> resellerNameIsNotExistResult = emmAppApi.searchEmmApp(1, 12, null, "resellerNameNotExist", null, null);
         logger.debug("Result of search emm app result by reseller name is not exist: {}", resellerNameIsNotExistResult.toString());
         Assert.assertEquals(1759, resellerNameIsNotExistResult.getBusinessCode());
 

@@ -1,16 +1,19 @@
 package com.pax.market.api.sdk.java.api.emm.emmPolicy.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class MerchantEmmPolicyCreateRequest implements Serializable {
 
-    private static final long serialVersionUID = -4046013063756454516L;
+    private static final long serialVersionUID = -8898637992540739976L;
 
     private String resellerName;
 
     private String merchantName;
 
     private PolicyUpdatedContentDTO contentInfo;
+
+    private List<LockedPolicyUpdateDTO> lockedPolicyList;
 
     private Boolean inheritFlag;
 
@@ -38,6 +41,14 @@ public class MerchantEmmPolicyCreateRequest implements Serializable {
         this.contentInfo = contentInfo;
     }
 
+    public List<LockedPolicyUpdateDTO> getLockedPolicyList() {
+        return lockedPolicyList;
+    }
+
+    public void setLockedPolicyList(List<LockedPolicyUpdateDTO> lockedPolicyList) {
+        this.lockedPolicyList = lockedPolicyList;
+    }
+
     public Boolean getInheritFlag() {
         return inheritFlag;
     }
@@ -52,6 +63,7 @@ public class MerchantEmmPolicyCreateRequest implements Serializable {
                 "resellerName='" + resellerName + '\'' +
                 ", merchantName='" + merchantName + '\'' +
                 ", contentInfo=" + contentInfo +
+                ", lockedPolicyList=" + lockedPolicyList +
                 ", inheritFlag=" + inheritFlag +
                 '}';
     }
