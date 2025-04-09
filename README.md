@@ -43,9 +43,6 @@ Below is the structure of class *com.pax.market.api.sdk.java.api.base.dto.Result
 |rateLimit|string(int format)|The maximum number of requests you're permitted to make per 10 minutes.|
 |rateLimitRemain|string(int format)|The number of requests remaining in the current rate limit window.|
 |rateLimitReset|string(long format)|The time at which the current rate limit window resets in UTC epoch millisecond.|
-|rateLimit|string(int format)|The maximum number of requests you're permitted to make per 10 minutes.|
-|rateLimitRemain|string(int format)|The number of requests remaining in the current rate limit window.|
-|rateLimitReset|string(long format)|The time at which the current rate limit window resets in UTC epoch millisecond.|
 
 <br>
 Structure of PageInfo
