@@ -8,7 +8,10 @@
 * TerminalApi - `pushCmdToTerminal`, `pushCmdToTerminalBySn` API, Optimize the error message for terminal locking
 * Add the return field `packageName` in EmmDeviceDetailApi - `searchDeviceInstalledApp` API
 * Modify the parameters `name` and `packageName` to `keyWords` in EmmAppApi - `searchEmmApp` API
-* Modify EMM policy related APIs, Please refer to the corresponding API doc for details
+* Modify EMM policy related APIs, Please refer to the corresponding API doc for details  
+
+### Breaking  
+* The method `searchEmmApp` in EmmAppApi in the new SDK is not compatible with old previous SDK. Please refer to the new feature.
 
 ## 9.6.1  
 ### Bug Fix  
