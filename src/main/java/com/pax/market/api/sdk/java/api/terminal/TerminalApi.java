@@ -775,7 +775,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return new Result<>(downloadTaskDTO);
     }
 
-    public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, String modelName) {
+    public Result<EmptyResponse> changeModel(Long terminalId, String modelName) {
         logger.debug("terminalId= {}", terminalId);
         List<String> validationErrs = Validators.validateStr(String.valueOf(terminalId), "parameter.not.empty", "terminalId");
         validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
@@ -787,15 +787,12 @@ public class TerminalApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(CHANGE_TERMINAL_MODEL_BY_ID.replace("{terminalId}", terminalId.toString()));
         request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        if (StringUtils.isNotBlank(StringUtils.trim(factoryName))) {
-            request.addRequestParam("factoryName", StringUtils.trim(factoryName));
-        }
         request.addRequestParam("modelName", StringUtils.trim(modelName));
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<>(emptyResponse);
     }
 
-    public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName, String modelName) {
+    public Result<EmptyResponse> changeModelBySN(String serialNo, String modelName) {
         logger.debug("serialNo={}", serialNo);
         List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
         validationErrs.addAll(Validators.validateStr(String.valueOf(modelName), "parameter.not.empty", "modelName"));
@@ -808,9 +805,6 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
-        if (StringUtils.isNotBlank(StringUtils.trim(factoryName))) {
-            request.addRequestParam("factoryName", StringUtils.trim(factoryName));
-        }
         request.addRequestParam("modelName", StringUtils.trim(modelName));
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<>(emptyResponse);

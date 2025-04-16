@@ -249,6 +249,7 @@ Result<EmmDeviceInstalledAppDTO> result = emmDeviceDetailApi.searchDeviceInstall
                 "id": 1647075584376890,
                 "terminalId": 1644892713386019,
                 "name": "MAXSTORE for EMM",
+                "packageName": "com.zolon.maxstore.emm",
                 "version": "1.0.8-emm22-SNAPSHOT",
                 "size": 4325132,
                 "installTime": 1735008718000,
@@ -270,6 +271,7 @@ The type in dataSet is EmmDeviceInstalledAppDTO. And the structure like below.
 | id                | Long    | The id of installation app                |
 | terminalId        | Long    | The EMM device id of installation app     |
 | name              | String  | The name of installation app              |
+| packageName       | String  | The package name of installation app      |
 | version           | String  | The version of installation app           |
 | type              | String  | The type of installation app              |
 | size              | Long    | The size of installation app              |

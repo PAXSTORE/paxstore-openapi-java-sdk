@@ -148,7 +148,7 @@ Structure of class TerminalDetailDTO
 _**tips: Only return this information in getTerminal or getTerminalBySn**_
 
 | Property Name    | Type   | Description                  |
-| :--------------- | :----- | :--------------------------- |
+|:-----------------| :----- |:-----------------------------|
 | pn               | String | Terminal's pn                |
 | osVersion        | String | Terminal's android version   |
 | imei             | String | Terminal's IMEI              |
@@ -158,6 +158,7 @@ _**tips: Only return this information in getTerminal or getTerminalBySn**_
 | timeZone         | String | Terminal's time zone         |
 | macAddress       | String | Terminal's MAC address       |
 | iccid            | String | Terminal's ICCID             |
+| iccid2           | String | Terminal's ICCID2            |
 | cellid           | String | Terminal's Cellid            |
 
 Structure of class TerminalAccessoryDTO
@@ -378,7 +379,7 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 		"createdDate": 1552536099000,
 		"updatedDate": 1725591969000,
 		"lastActiveTime": 1552536095000,
-    "lastAccessTime": 1725777409853
+        "lastAccessTime": 1725777409853
 	}
 }
 ```
@@ -407,7 +408,9 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 			"language": "English",
 			"ip": "192.168.5.213",
 			"timeZone": "GMT +08:00",
-			"macAddress": "A4:D4:B2:4C:14:FE"
+      "macAddress": "A4:D4:B2:4C:14:FE",
+			"iccid": "89860322472007320056",
+			"iccid2": "80000322472007326856"
 		},
 		"terminalAccessory": [{
 			"basic": [{
@@ -746,7 +749,9 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",true);
 			"language": "English",
 			"ip": "192.168.5.213",
 			"timeZone": "GMT +08:00",
-			"macAddress": "A4:D4:B2:4C:14:FE"
+			"macAddress": "A4:D4:B2:4C:14:FE",
+			"iccid": "89860322472007320056",
+			"iccid2": "80000322472007326856"
 		},
 		"terminalAccessory": [{
 			"basic": [{
@@ -2973,16 +2978,17 @@ Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCm
 
 **Possible business codes**
 
-| Business Code | Message                                  | Description |
-| :------------ | :--------------------------------------- | :---------- |
-| 135           | Request parameter is missing or invalid  |             |
-| 997           | Malformed or illegal request             |             |
-| 1801          | Terminal doesn't exist                   |             |
-| 1896          | The terminal is offline                  |             |
-| 15094         | Terminal is locked                       |             |
-| 15095         | Terminal has been unlocked               |             |
-| 15096         | The terminal is being locked or unlocked |             |
-| 15099         | Terminal restart in progress             |             |
+| Business Code | Message                                 | Description |
+|:--------------|:----------------------------------------| :---------- |
+| 135           | Request parameter is missing or invalid |             |
+| 997           | Malformed or illegal request            |             |
+| 1801          | Terminal doesn't exist                  |             |
+| 1896          | The terminal is offline                 |             |
+| 15094         | Terminal is locked                      |             |
+| 15095         | Terminal has been unlocked              |             |
+| 15096         | The terminal is being locked            |             |
+| 15097         | The terminal is being unlocked            |             |
+| 15099         | Terminal restart in progress            |             |
 
 ### Push Command to Terminal by serialNo
 
@@ -3043,14 +3049,15 @@ Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCm
 
 | Business Code | Message                                  | Description |
 | :------------ | :--------------------------------------- | :---------- |
-| 135           | Request parameter is missing or invalid  |             |
-| 997           | Malformed or illegal request             |             |
-| 1801          | Terminal doesn't exist                   |             |
-| 1896          | The terminal is offline                  |             |
-| 15094         | Terminal is locked                       |             |
-| 15095         | Terminal has been unlocked               |             |
-| 15096         | The terminal is being locked or unlocked |             |
-| 15099         | Terminal restart in progress             |             |
+| 135           | Request parameter is missing or invalid |             |
+| 997           | Malformed or illegal request            |             |
+| 1801          | Terminal doesn't exist                  |             |
+| 1896          | The terminal is offline                 |             |
+| 15094         | Terminal is locked                      |             |
+| 15095         | Terminal has been unlocked              |             |
+| 15096         | The terminal is being locked            |             |
+| 15097         | The terminal is being unlocked            |             |
+| 15099         | Terminal restart in progress            |             |
 
 
 ### Get terminal network information
@@ -3953,12 +3960,12 @@ When you access the download url you must set three cookies, the keys are "Cloud
 
 ### Change terminal model by id
 
-Change terminal model by id, factoryName, modelName.
+Change terminal model by id, modelName.
 
 **API**
 
 ```
-public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, String modelName) 
+public Result<EmptyResponse> changeModel(Long terminalId, String modelName) 
 ```
 
 **Path variable(s) description**
@@ -3971,14 +3978,13 @@ public Result<EmptyResponse> changeModel(Long terminalId, String factoryName, St
 
 | Parameter Name | Type   | Nullable | Description                   |
 | :------------- | :----- |:---------|:------------------------------|
-| factoryName       | String | true     | new factory name of terminal. |
 | modelName            | String | false    | new model name of terminal.   |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<EmptyResponse> responseResult = terminalApi.changeModelBySN("SUBSN108", "PAX", "A920");
+Result<EmptyResponse> responseResult = terminalApi.changeModelBySN("SUBSN108", "A920");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -4031,12 +4037,12 @@ Structure of class EmptyResponse
 
 ### Change terminal model by Serial No
 
-Change terminal model by serialNo, factoryName, modelName.
+Change terminal model by serialNo, modelName.
 
 **API**
 
 ```
-public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName, String modelName)
+public Result<EmptyResponse> changeModelBySN(String serialNo, String modelName)
 ```
 
 **Input parameter(s) description**
@@ -4044,7 +4050,6 @@ public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName
 | Parameter Name | Type   | Nullable | Description                   |
 |:---------------| :----- |:---------|:------------------------------|
 | serialNo       | String | false    | serial No of terminal.        |
-| factoryName    | String | true     | new factory name of terminal. |
 | modelName      | String | false    | new model name of terminal.   |
 
 
@@ -4052,7 +4057,7 @@ public Result<EmptyResponse> changeModelBySN(String serialNo, String factoryName
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<EmptyResponse> responseResult = terminalApi.changeModel("POS10008", "PAX", "A920");
+Result<EmptyResponse> responseResult = terminalApi.changeModel("POS10008", "A920");
 ```
 
 **Client side validation failed sample result(JSON formatted)**

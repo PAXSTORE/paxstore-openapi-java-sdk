@@ -236,7 +236,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHist
 | pageNo      | int        | false    | page number, value must >=1                                  |
 | pageSize    | int        | false    | the record number per page, range is 1 to 100                |
 | packageName | String     | false    | search filter by app packageName                             |
-| serialNo    | String     | true     | only terminal with specified serialNo will search out        |
+| serialNo    | String     | false     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
 
@@ -341,7 +341,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPu
 | pageNo      | int        | false    | page number, value must >=1                                  |
 | pageSize    | int        | false    | the record number per page, range is 1 to 100                |
 | packageName | String     | false    | search filter by app packageName                             |
-| serialNo    | String     | true     | only terminal with specified serialNo will search out        |
+| serialNo    | String     | false     | only terminal with specified serialNo will search out        |
 | pushStatus  | PushStatus | true     | the push status  the value can be PushStatus.Success, PushStatus.Failed |
 | pushTime    | Date       | true     | search the push history after the push time                  |
 
@@ -383,7 +383,7 @@ Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchLatestOpt
       "parameterTemplateName": "parameter.xml",
       "parameterPushError": null,
       "parameterPushTime": 1575274373000,
-      "serialNo": "HMP4C15A12000186",
+      "serialNo": "1170000652",
       "pushType": "Terminal",
       "parameters": "{\"sys.param.termId\": \"44\", \"sys.param.merCode\": \"000000000000001\", \"sys.param.merName\": \"Union Pay\", \"sys.param.acqInsCode\": \"00000000000\"}",
       "appPushError": null

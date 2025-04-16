@@ -387,22 +387,22 @@ public Result<MerchantDTO>  updateMerchant(Long merchantId, MerchantUpdateReques
 
 Structure of class MerchantUpdateRequest
 
-|Property Name|Type|Nullable|Description|
-|:---|:---|:---|:---|
-|name|String|false|Merchant name, max length is 64.|
-|email|String|true|Email of merchant, max length is 255. If email is empty the API won't change the email.|
-|resellerName|String|true|Reseller name of merchant, max length is 64. Make sure the reseller exist. If resellerName is empty the API won't update the reseller of the merchant|
-|contact|String|true|Contact of merchant, max length is 64.|
-|country|String|true|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
-|phone|String|true|Phone number of merchant, max length is 32.|
-|province|String|false|Max length is 64.|
-|postcode|String|true|Postcode of merchant, max length is 16.|
-|city|String|false|Max length is 255.|
-|address|String|true|Address of merchant, max length is 255.|
-|description|String|true|Description of merchant, max length is 3000.|
-|createUserFlag|Boolean|true|Indicate whether to create user when activate the merchant|
-|merchantCategoryNames|List\<String\>|true|Merchant categories. Make sure the categories are available.|
-|entityAttributeValues|LinkedHashMap\<String, String\>|true|Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
+|Property Name|Type| Nullable |Description|
+|:---|:---|:---------|:---|
+|name|String| true     |Merchant name, max length is 64.|
+|email|String| true     |Email of merchant, max length is 255. If email is empty the API won't change the email.|
+|resellerName|String| true     |Reseller name of merchant, max length is 64. Make sure the reseller exist. If resellerName is empty the API won't update the reseller of the merchant|
+|contact|String| true     |Contact of merchant, max length is 64.|
+|country|String| true     |the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
+|phone|String| true     |Phone number of merchant, max length is 32.|
+|province|String| true     |Max length is 64.|
+|postcode|String| true     |Postcode of merchant, max length is 16.|
+|city|String| true     |Max length is 255.|
+|address|String| true     |Address of merchant, max length is 255.|
+|description|String| true     |Description of merchant, max length is 3000.|
+|createUserFlag|Boolean| true     |Indicate whether to create user when activate the merchant|
+|merchantCategoryNames|List\<String\>| true     |Merchant categories. Make sure the categories are available.|
+|entityAttributeValues|LinkedHashMap\<String, String\>| true     |Dynamic attributes of merchant. Whether the attribute is required or not depend on the configuration of attribute.|
 
 **Sample codes**
 

@@ -187,7 +187,7 @@ To integrate with this SDK please add below dependency by updating the pom.xml f
 <dependency>
     <groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-    <version>9.6.1</version>
+    <version>9.7.0</version>
 </dependency>
 ```
 
@@ -291,6 +291,8 @@ See the [Apache 2.0 license](LICENSE) file for details.
 ## [EMM Device Detail APIs](docs/EMM_DEVICE_DETAIL_API.md)
 
 ## [EMM Policy APIs](docs/EMM_POLICY_API.md)
+
+## [Factory_Model APIs](docs/FACTORY_MODEL_API.md)
 
 
 

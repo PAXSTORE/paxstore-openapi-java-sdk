@@ -43,8 +43,7 @@ public class EmmAppApi extends BaseThirdPartySysApi {
                                           int pageSize,
                                           EmmAppSearchOrderBy orderBy,
                                           String resellerName,
-                                          String name,
-                                          String packageName,
+                                          String keyWords,
                                           EmmAppType type) {
         List<String> validationErrsR = Validators.validateStrNullAndMax(resellerName, "resellerName", Constants.MAX_64);
         if (!validationErrsR.isEmpty()) {
@@ -66,11 +65,8 @@ public class EmmAppApi extends BaseThirdPartySysApi {
         SdkRequest request = getPageRequest(EMM_APP_URL, page);
 
         request.addRequestParam("resellerName", resellerName);
-        if (name != null) {
-            request.addRequestParam("appName", name);
-        }
-        if (packageName != null) {
-            request.addRequestParam("packageName", packageName);
+        if (keyWords != null) {
+            request.addRequestParam("keyWords", keyWords);
         }
         if (type != null) {
             request.addRequestParam("appType", String.valueOf(type.val));

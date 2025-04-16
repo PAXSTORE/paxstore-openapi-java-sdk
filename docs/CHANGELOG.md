@@ -1,5 +1,18 @@
 # Changelog  
 
+## 9.7.0
+### New Feature
+* Add the return field `iccid2` in TerminalApi - `getTerminal` or `getTerminalBySn` API
+* Remove parameter factoryName from TerminalApi - `changeModel`,`changeModelBySN` API
+* Add FactoryModelApi - `searchFactoryModels` API
+* TerminalApi - `pushCmdToTerminal`, `pushCmdToTerminalBySn` API, Optimize the error message for terminal locking
+* Add the return field `packageName` in EmmDeviceDetailApi - `searchDeviceInstalledApp` API
+* Modify the parameters `name` and `packageName` to `keyWords` in EmmAppApi - `searchEmmApp` API
+* Modify EMM policy related APIs, Please refer to the corresponding API doc for details  
+
+### Breaking  
+* The method `searchEmmApp` in EmmAppApi in the new SDK is not compatible with old previous SDK. Please refer to the new feature.
+
 ## 9.6.1  
 ### Bug Fix  
 * Fix EMM related API issue, please upgrade to SDK version 9.6.1

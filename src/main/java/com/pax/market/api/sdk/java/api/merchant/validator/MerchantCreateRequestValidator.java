@@ -14,8 +14,6 @@ package com.pax.market.api.sdk.java.api.merchant.validator;
 
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantCreateRequest;
-import com.pax.market.api.sdk.java.api.terminalApk.dto.UpdateTerminalApkRequest;
-import com.pax.market.api.sdk.java.api.util.MessageBundleUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
 import com.pax.market.api.sdk.java.api.validate.Validators;
 
@@ -37,11 +35,13 @@ public class MerchantCreateRequestValidator {
             validationErrs.add(getMessage("parameter.not.null", "merchantCreateRequest"));
         }else {
             validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getName(), "name", Constants.MAX_64));
-            validationErrs.addAll(Validators.validateStrMax(validateTarget.getEmail(), "email", Constants.MAX_255));
-            if(!StringUtils.isValidEmailAddress(validateTarget.getEmail())) {
-                validationErrs.add(getMessage("parameter.email.invalid"));
-            }
             validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getResellerName(), "resellerName", Constants.MAX_64));
+            if(StringUtils.isNotBlank(validateTarget.getEmail())) {
+                validationErrs.addAll(Validators.validateStrMax(validateTarget.getEmail(), "email", Constants.MAX_255));
+                if (!StringUtils.isValidEmailAddress(validateTarget.getEmail())){
+                    validationErrs.add(getMessage("parameter.email.invalid"));
+                }
+            }
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getContact(), "contact", Constants.MAX_64));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getCountry(), "country", Constants.MAX_64));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getPhone(), "phone", Constants.MAX_32));
