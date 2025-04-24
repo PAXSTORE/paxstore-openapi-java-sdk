@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PolicyContentDTO implements Serializable {
 
-    private static final long serialVersionUID = -319856507116124453L;
+    private static final long serialVersionUID = 6989867119408868680L;
 
     private Boolean adjustVolumeDisabled;
 
@@ -54,6 +54,8 @@ public class PolicyContentDTO implements Serializable {
     private Boolean kioskCustomLauncherEnabled;
 
     private KioskCustomization kioskCustomization;
+
+    private Boolean enableRemoteControl;
 
     private String locationMode;
 
@@ -110,7 +112,6 @@ public class PolicyContentDTO implements Serializable {
     private List<PolicyEnforcementRule> policyEnforcementRules;
 
     private List<ApplicationPolicy> applications;
-
 
     public Boolean getAdjustVolumeDisabled() {
         return adjustVolumeDisabled;
@@ -302,6 +303,14 @@ public class PolicyContentDTO implements Serializable {
 
     public void setKioskCustomization(KioskCustomization kioskCustomization) {
         this.kioskCustomization = kioskCustomization;
+    }
+
+    public Boolean getEnableRemoteControl() {
+        return enableRemoteControl;
+    }
+
+    public void setEnableRemoteControl(Boolean enableRemoteControl) {
+        this.enableRemoteControl = enableRemoteControl;
     }
 
     public String getLocationMode() {
@@ -555,6 +564,7 @@ public class PolicyContentDTO implements Serializable {
                 ", disableAllKeyguardFeatures=" + disableAllKeyguardFeatures +
                 ", kioskCustomLauncherEnabled=" + kioskCustomLauncherEnabled +
                 ", kioskCustomization=" + kioskCustomization +
+                ", enableRemoteControl=" + enableRemoteControl +
                 ", locationMode='" + locationMode + '\'' +
                 ", maximumTimeToLock=" + maximumTimeToLock +
                 ", microphoneAccess='" + microphoneAccess + '\'' +
