@@ -1,5 +1,9 @@
 # Changelog  
 
+## 9.7.1
+### Bug Fix
+* Add the return field `enableRemoteControl` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy` API
+
 ## 9.7.0
 ### New Feature
 * Add the return field `iccid2` in TerminalApi - `getTerminal` or `getTerminalBySn` API

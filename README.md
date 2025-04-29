@@ -44,6 +44,7 @@ Below is the structure of class *com.pax.market.api.sdk.java.api.base.dto.Result
 |rateLimitRemain|string(int format)|The number of requests remaining in the current rate limit window.|
 |rateLimitReset|string(long format)|The time at which the current rate limit window resets in UTC epoch millisecond.|
 
+
 <br>
 Structure of PageInfo
 
@@ -184,7 +185,7 @@ To integrate with this SDK please add below dependency by updating the pom.xml f
 <dependency>
     <groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-    <version>9.7.0</version>
+    <version>9.7.1</version>
 </dependency>
 ```
 

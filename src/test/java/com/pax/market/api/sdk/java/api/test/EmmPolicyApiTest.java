@@ -55,6 +55,7 @@ public class EmmPolicyApiTest {
         request.setResellerName("PAX");
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
 
@@ -215,6 +216,7 @@ public class EmmPolicyApiTest {
         request.setMerchantName("test");
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
         Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
