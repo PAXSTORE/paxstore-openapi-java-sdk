@@ -22,32 +22,31 @@ Constructor parameters description
 
 ### Search EMM apps
 
-The search EMM apps API allows thirdparty system search emm apps by page.
+The search EMM apps API allows thirdparty system search EMM apps by page.
 
 **API**
 
 ```
-public Result<EmmAppDTO> searchEmmApp(int pageNo, int pageSize, EmmAppSearchOrderBy orderBy, String resellerName, String name, String packageName, EmmAppType type);
+public Result<EmmAppDTO> searchEmmApp(int pageNo, int pageSize, EmmAppSearchOrderBy orderBy, String resellerName, String keyWords, EmmAppType type);
 ```
 
 **Input parameter(s) description**
 
 
-| Name         | Type                | Nullable | Description                                                                                                                                                                                                                                                                                                      |
-| :------------- | :-------------------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pageNo       | int                 | false    | page number, value must >=1                                                                                                                                                                                                                                                                                      |
-| pageSize     | int                 | false    | the record number per page, range is 1 to 100                                                                                                                                                                                                                                                                    |
-| orderBy      | EmmAppSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of EmmAppSearchOrderBy.EmmAppName_desc, EmmAppSearchOrderBy.EmmAppName_asc, EmmAppSearchOrderBy.EmmUpdatedDate_desc, EmmAppSearchOrderBy.EmmUpdatedDate_asc |
-| resellerName | String              | false    | search EMM apps under the reseller or it's sub-resellers                                                                                                                                                                                                                                                         |
-| name         | String              | true     | search by EMM app name                                                                                                                                                                                                                                                                                           |
-| packageName  | String              | true     | search by EMM app package name                                                                                                                                                                                                                                                                                   |
-| type         | EmmAppType          | true     | the EMM app type, the value can be one of EmmAppType.GOOGLE, EmmAppType.PRIVATE                                                                                                                                                                                                                                  |
+| Name            | Type                | Nullable | Description                                                                                                                                                                                                                                                                                                                 |
+|:----------------| :-------------------- | :--------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pageNo          | int                 | false    | page number, value must >=1                                                                                                                                                                                                                                                                                                 |
+| pageSize        | int                 | false    | the record number per page, range is 1 to 100                                                                                                                                                                                                                                                                               |
+| orderBy         | EmmAppSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of EmmAppSearchOrderBy.EmmAppName_desc, EmmAppSearchOrderBy.EmmAppName_asc, EmmAppSearchOrderBy.EmmUpdatedDate_desc, EmmAppSearchOrderBy.EmmUpdatedDate_asc            |
+| resellerName    | String              | false    | search EMM apps under the reseller or it's sub-resellers                                                                                                                                                                                                                                                                    |
+| keyWords        | String              | true     | search by EMM app name or package name                                                                                                                                                                                                                                                                                      |
+| type            | EmmAppType          | true     | the EMM app type, the value can be one of EmmAppType.GOOGLE, EmmAppType.PRIVATE                                                                                                                                                                                                                                             |
 
 **Sample codes**
 
 ```
 EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<EmmAppDTO> result = emmAppApi.searchEmmApp(1, 10, EmmAppSearchOrderBy.EmmAppName_desc, null, null, null, EmmAppType.GOOGLE);
+Result<EmmAppDTO> result = emmAppApi.searchEmmApp(1, 10, EmmAppSearchOrderBy.EmmAppName_desc, null, null, EmmAppType.GOOGLE);
 ```
 
 **Client side validation failed sample result(JSON formatted)**

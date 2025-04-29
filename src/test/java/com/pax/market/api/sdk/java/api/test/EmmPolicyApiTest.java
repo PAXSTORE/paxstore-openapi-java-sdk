@@ -1,22 +1,14 @@
 package com.pax.market.api.sdk.java.api.test;
 
+import com.google.common.collect.Lists;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
-import com.pax.market.api.sdk.java.api.emm.emmDevice.EmmDeviceApi;
-import com.pax.market.api.sdk.java.api.emm.emmDevice.dto.EmmDeviceRegisterQRCodeCreateDTO;
-import com.pax.market.api.sdk.java.api.emm.emmDevice.dto.EmmDeviceRegisterQRCodeCreateRequest;
 import com.pax.market.api.sdk.java.api.emm.emmPolicy.EmmPolicyApi;
-import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.EmmPolicyDTO;
-import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.MerchantEmmPolicyCreateRequest;
-import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.PolicyUpdatedContentDTO;
-import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.ResellerEmmPolicyCreateRequest;
+import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Calendar;
-import java.util.Date;
 
 public class EmmPolicyApiTest {
 
@@ -63,8 +55,15 @@ public class EmmPolicyApiTest {
         request.setResellerName("PAX");
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
+
+        LockedPolicyUpdateDTO lockedPolicyUpdateDTO = new LockedPolicyUpdateDTO();
+        lockedPolicyUpdateDTO.setKey("adjustVolumeDisabled");
+        lockedPolicyUpdateDTO.setLockFlag(Boolean.TRUE);
+        request.setLockedPolicyList(Lists.newArrayList(lockedPolicyUpdateDTO));
+
         Result<String> result = emmPolicyApi.createResellerEmmPolicy(request);
         logger.debug("Result of create reseller emm policy: {}", result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
@@ -144,6 +143,24 @@ public class EmmPolicyApiTest {
         Assert.assertEquals(-1, result.getBusinessCode());
     }
 
+    @Test
+    public void testCreateResellerEmmPolicyFailByLockedPolicyKeyIsInvalid() {
+        ResellerEmmPolicyCreateRequest request = new ResellerEmmPolicyCreateRequest();
+        request.setResellerName("PAX");
+
+        PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
+        policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        request.setContentInfo(policyUpdatedContentDTO);
+        request.setInheritFlag(Boolean.FALSE);
+
+        LockedPolicyUpdateDTO lockedPolicyUpdateDTO = new LockedPolicyUpdateDTO();
+        lockedPolicyUpdateDTO.setKey(null);
+        lockedPolicyUpdateDTO.setLockFlag(Boolean.TRUE);
+        request.setLockedPolicyList(Lists.newArrayList(lockedPolicyUpdateDTO));
+        Result<String> lockedPolicyKeyIsInvalidResult = emmPolicyApi.createResellerEmmPolicy(request);
+        logger.debug("Result of create reseller emm policy by locked policy key is invalid: {}", lockedPolicyKeyIsInvalidResult.toString());
+        Assert.assertEquals(61663, lockedPolicyKeyIsInvalidResult.getBusinessCode());
+    }
 
 
     @Test
@@ -199,6 +216,7 @@ public class EmmPolicyApiTest {
         request.setMerchantName("test");
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
         Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
@@ -330,6 +348,26 @@ public class EmmPolicyApiTest {
         request.setInheritFlag(null);
         Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
         logger.debug("Result of create merchant emm policy by inheritFlag is null: {}", result.toString());
+        Assert.assertEquals(-1, result.getBusinessCode());
+    }
+
+    @Test
+    public void testCreateMerchantEmmPolicyFailByLockInvalid() {
+        MerchantEmmPolicyCreateRequest request = new MerchantEmmPolicyCreateRequest();
+        request.setResellerName("PAX");
+        request.setMerchantName("test");
+
+        PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
+        policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        request.setContentInfo(policyUpdatedContentDTO);
+
+        LockedPolicyUpdateDTO lockedPolicyUpdateDTO = new LockedPolicyUpdateDTO();
+        lockedPolicyUpdateDTO.setKey("adjustVolumeDisabled");
+        lockedPolicyUpdateDTO.setLockFlag(Boolean.TRUE);
+        request.setLockedPolicyList(Lists.newArrayList(lockedPolicyUpdateDTO));
+
+        Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
+        logger.debug("Result of create merchant emm policy by lock is invalid: {}", result.toString());
         Assert.assertEquals(-1, result.getBusinessCode());
     }
 

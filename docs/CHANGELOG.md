@@ -3,7 +3,11 @@
 ## 9.8.0
 ### New Feature
 * Add parameter query `includeInstalledFirmware` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
-* Add APPENDIX.md - Add the description of the timeZone 
+* Add APPENDIX.md - Add the description of the timeZone  
+
+## 9.7.1
+### Bug Fix
+* Add the return field `enableRemoteControl` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy` API
 
 ## 9.7.0
 ### New Feature
@@ -11,7 +15,12 @@
 * Remove parameter factoryName from TerminalApi - `changeModel`,`changeModelBySN` API
 * Add FactoryModelApi - `searchFactoryModels` API
 * TerminalApi - `pushCmdToTerminal`, `pushCmdToTerminalBySn` API, Optimize the error message for terminal locking
+* Add the return field `packageName` in EmmDeviceDetailApi - `searchDeviceInstalledApp` API
+* Modify the parameters `name` and `packageName` to `keyWords` in EmmAppApi - `searchEmmApp` API
+* Modify EMM policy related APIs, Please refer to the corresponding API doc for details  
 
+### Breaking  
+* The method `searchEmmApp` in EmmAppApi in the new SDK is not compatible with old previous SDK. Please refer to the new feature.
 
 ## 9.6.1  
 ### Bug Fix  
