@@ -479,3 +479,58 @@ terminalApkApi.uninstallApk(uninstallApkRequest);
 | 2027          | Package name cannot be empty               ||
 | 2037          | This app is not installed on the terminal  ||
 | 2039          | Tid mismatch with serialNo                 | Please check the value of tid and serialNo |
+
+### Delete terminal apk
+
+This api allows the third party system delete terminal apk push task.
+
+**API**
+
+```
+public Result<String> deleteTerminalApk(Long terminalApkId)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable| Description                 |
+|:---|:---|:---|:----------------------------|
+|terminalApkId|Long|false| the id of the apk push task |
+
+**Sample codes**
+
+```
+TerminalApkApi terminaApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminaApkApi.deleteTerminalApk(1743L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Terminal Apk Id cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2001,
+	"message": "Terminal app not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|2001|Terminal app not found||

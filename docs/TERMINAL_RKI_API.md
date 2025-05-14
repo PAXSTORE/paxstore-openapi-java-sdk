@@ -373,3 +373,58 @@ terminalRkiApi.disablePushRkiTask(disablePushRkiTask);
 |2026|Tid and serialNo cannot empty at same time||
 |2056|The rkiKey cannot be empty||
 |2057|Unfinished terminal push Rki not found|
+
+### Delete terminal rki
+
+This api allows the third party system delete terminal rki push task.
+
+**API**
+
+```
+public Result<String> deleteTerminalRki(Long terminalRkiId)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable| Description                    |
+|:---|:---|:---|:-------------------------------|
+|terminalRkiId|Long|false| the id of the rki push task    |
+
+**Sample codes**
+
+```
+TerminalRkiApi terminaRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminaRkiApi.deleteTerminalRki(1743L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Terminal Rki Id cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2051,
+	"message": "The push RKI not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|2051|The push RKI not found||
