@@ -14,6 +14,7 @@ package com.pax.market.api.sdk.java.api.terminalApk;
 
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
+import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Response;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
@@ -46,6 +47,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	private static final String CREATE_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks";
 	private static final String GET_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/{terminalApkId}";
 	private static final String SUSPEND_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/suspend";
+    private static final String DELETE_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/{terminalApkId}";
 	private static final String UNINSTALL_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/uninstall";
 
 
@@ -147,6 +149,19 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         request.setRequestBody(new Gson().toJson(uninstallApkRequest, UpdateTerminalApkRequest.class));
         Response resp = EnhancedJsonUtils.fromJson(client.execute(request), Response.class);
         return new Result<>(resp);
+    }
+
+    public Result<String> deleteTerminalApk(Long terminalApkId) {
+        logger.debug("terminalApkId= {}", terminalApkId);
+        List<String> validationErrs = Validators.validateId(terminalApkId, "parameter.id.invalid", "terminalApkId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(DELETE_TERMINAL_APK_URL.replace("{terminalApkId}", terminalApkId.toString()));
+        request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
     }
 
     public enum SearchOrderBy {

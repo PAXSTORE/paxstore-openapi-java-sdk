@@ -2,6 +2,7 @@ package com.pax.market.api.sdk.java.api.terminalRki;
 
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
+import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Response;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
@@ -31,6 +32,7 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
     private static final String SEARCH_TERMINAL_RKI_KEY_LIST_URL = "/v1/3rdsys/terminalRkis";
     private static final String GET_TERMINAL_RKI_KEY_URL = "/v1/3rdsys/terminalRkis/{terminalRkiId}";
     private static final String SUSPEND_TERMINAL_RKI_KEY_URL = "/v1/3rdsys/terminalRkis/suspend";
+    private static final String DELETE_TERMINAL_RKI_KEY_URL = "/v1/3rdsys/terminalRkis/{terminalRkiId}";
 
     public TerminalRkiApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -116,4 +118,16 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
         return new Result<>(resp);
     }
 
+    public Result<String> deleteTerminalRki(Long terminalRkiId) {
+        logger.debug("terminalRkiId= {}", terminalRkiId);
+        List<String> validationErrs = Validators.validateId(terminalRkiId, "parameter.id.invalid", "terminalRkiId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(DELETE_TERMINAL_RKI_KEY_URL.replace("{terminalFirmwareId}", terminalRkiId.toString()));
+        request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
 }

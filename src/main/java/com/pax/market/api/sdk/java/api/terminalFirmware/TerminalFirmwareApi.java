@@ -2,6 +2,7 @@ package com.pax.market.api.sdk.java.api.terminalFirmware;
 
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
+import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Response;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
@@ -29,6 +30,7 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
     private static final String SEARCH_TERMINAL_FIRMWARE_LIST_URL = "/v1/3rdsys/terminalFirmwares";
     private static final String GET_TERMINAL_FIRMWARE_URL = "/v1/3rdsys/terminalFirmwares/{terminalFirmwareId}";
     private static final String SUSPEND_TERMINAL_FIRMWARE_URL = "/v1/3rdsys/terminalFirmwares/suspend";
+    private static final String DELETE_TERMINAL_FIRMWARE_URL = "/v1/3rdsys/terminalFirmwares/{terminalFirmwareId}";
 
     public TerminalFirmwareApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -114,5 +116,17 @@ public class TerminalFirmwareApi extends BaseThirdPartySysApi {
         return new Result<String>(resp);
     }
 
+    public Result<String> deleteTerminalFirmware(Long terminalFirmwareId) {
+        logger.debug("terminalFirmwareId= {}", terminalFirmwareId);
+        List<String> validationErrs = Validators.validateId(terminalFirmwareId, "parameter.id.invalid", "terminalFirmwareId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(DELETE_TERMINAL_FIRMWARE_URL.replace("{terminalFirmwareId}", terminalFirmwareId.toString()));
+        request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
 
 }
