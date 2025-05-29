@@ -53,11 +53,21 @@ public class EmmPolicyApiTest {
     public void testCreateResellerEmmPolicySuccess() {
         ResellerEmmPolicyCreateRequest request = new ResellerEmmPolicyCreateRequest();
         request.setResellerName("PAX");
+        request.setInheritFlag(Boolean.FALSE);
+
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
+
+        PolicyUpdatedContentDTO.ApplicationPolicy applicationPolicy = new PolicyUpdatedContentDTO.ApplicationPolicy();
+        applicationPolicy.setPackageName("com.zolon.signrotatetest.com.zolon.signrotatetest");
+        applicationPolicy.setAutoUpdateMode("AUTO_UPDATE_DEFAULT");
+        applicationPolicy.setDefaultPermissionPolicy("PROMPT");
+        applicationPolicy.setInstallPriority("DEFAULT");
+        applicationPolicy.setAccessibleTrackId(1681160455323739L);
+        applicationPolicy.setInstallType("AVAILABLE");
+        policyUpdatedContentDTO.setApplications(Lists.newArrayList(applicationPolicy));
         request.setContentInfo(policyUpdatedContentDTO);
-        request.setInheritFlag(Boolean.FALSE);
 
         LockedPolicyUpdateDTO lockedPolicyUpdateDTO = new LockedPolicyUpdateDTO();
         lockedPolicyUpdateDTO.setKey("adjustVolumeDisabled");
@@ -214,11 +224,23 @@ public class EmmPolicyApiTest {
         MerchantEmmPolicyCreateRequest request = new MerchantEmmPolicyCreateRequest();
         request.setResellerName("PAX");
         request.setMerchantName("test");
+
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
+
+        PolicyUpdatedContentDTO.ApplicationPolicy applicationPolicy = new PolicyUpdatedContentDTO.ApplicationPolicy();
+        applicationPolicy.setPackageName("com.zolon.signrotatetest.com.zolon.signrotatetest");
+        applicationPolicy.setAutoUpdateMode("AUTO_UPDATE_DEFAULT");
+        applicationPolicy.setDefaultPermissionPolicy("PROMPT");
+        applicationPolicy.setInstallPriority("DEFAULT");
+        applicationPolicy.setAccessibleTrackId(1681160455323739L);
+        applicationPolicy.setInstallType("AVAILABLE");
+        policyUpdatedContentDTO.setApplications(Lists.newArrayList(applicationPolicy));
+        request.setContentInfo(policyUpdatedContentDTO);
+
         Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
         logger.debug("Result of create merchant emm policy: {}", result.toString());
         Assert.assertEquals(0, result.getBusinessCode());

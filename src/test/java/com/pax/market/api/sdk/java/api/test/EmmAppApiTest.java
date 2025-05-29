@@ -308,4 +308,22 @@ public class EmmAppApiTest {
         Assert.assertEquals(-1, appIdIsNegativeResult.getBusinessCode());
     }
 
+    @Test
+    public void testGetAvailableTestTrackVersionListSuccess() {
+        Result<EmmAppAvailableTestVersionDTO> result = emmAppApi.getAvailableTestTrackVersionList(1681159324958779L);
+        logger.debug("Result of get available test track version list: {}", result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
+
+    @Test
+    public void testGetAvailableTestTrackVersionListFailByAppIdIsInvalid() {
+        Result<EmmAppAvailableTestVersionDTO> appIdIsNullResult = emmAppApi.getAvailableTestTrackVersionList(null);
+        logger.debug("Result of get available test track version list by appId is null: {}", appIdIsNullResult.toString());
+        Assert.assertEquals(-1, appIdIsNullResult.getBusinessCode());
+
+        Result<EmmAppAvailableTestVersionDTO> appIdIsNegativeResult = emmAppApi.getAvailableTestTrackVersionList(-1L);
+        logger.debug("Result of get available test track version list by appId is negative: {}", appIdIsNegativeResult.toString());
+        Assert.assertEquals(-1, appIdIsNegativeResult.getBusinessCode());
+    }
+
 }
