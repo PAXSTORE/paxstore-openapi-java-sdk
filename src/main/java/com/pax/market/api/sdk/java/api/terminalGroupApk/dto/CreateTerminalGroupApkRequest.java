@@ -40,6 +40,7 @@ public class CreateTerminalGroupApkRequest implements Serializable {
     private boolean wifiOnly;
     private String effectiveTime;
     private String expiredTime;
+    private Boolean ignoreUndefinedParameter;
 
     /**
      * Gets group id.
@@ -259,5 +260,23 @@ public class CreateTerminalGroupApkRequest implements Serializable {
         if(expiredTime != null) {
             this.expiredTime = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_TIME_ZONE_FORMAT.format(expiredTime);
         }
+    }
+
+    /**
+     * Gets ignore undefined parameter
+     *
+     * @return the ignore undefined parameter
+     */
+    public Boolean getIgnoreUndefinedParameter() {
+        return ignoreUndefinedParameter;
+    }
+
+    /**
+     * Sets ignore undefined parameter
+     *
+     * @param ignoreUndefinedParameter the ignore undefined parameter
+     */
+    public void setIgnoreUndefinedParameter(Boolean ignoreUndefinedParameter) {
+        this.ignoreUndefinedParameter = ignoreUndefinedParameter;
     }
 }

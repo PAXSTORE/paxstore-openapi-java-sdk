@@ -32,6 +32,7 @@ public class CreateTerminalApkRequest implements Serializable{
 	private boolean wifiOnly;
 	private String effectiveTime;
 	private String expiredTime;
+	private Boolean ignoreUndefinedParameter;
 
 
 	/**
@@ -272,4 +273,21 @@ public class CreateTerminalApkRequest implements Serializable{
 		}
 	}
 
+	/**
+	 * Gets ignore undefined parameter
+	 *
+	 * @return the ignore undefined parameter
+	 */
+	public Boolean getIgnoreUndefinedParameter() {
+		return ignoreUndefinedParameter;
+	}
+
+	/**
+	 * Sets ignore undefined parameter
+	 *
+	 * @param ignoreUndefinedParameter the ignore undefined parameter
+	 */
+	public void setIgnoreUndefinedParameter(Boolean ignoreUndefinedParameter) {
+		this.ignoreUndefinedParameter = ignoreUndefinedParameter;
+	}
 }

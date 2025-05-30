@@ -36,6 +36,7 @@ public class ApkParameterDTO implements Serializable {
     private Long createdDate;
     private Long updatedDate;
     private Boolean apkAvailable;
+    private Boolean ignoreUndefinedParameter;
 
     public Long getId() {
         return id;
@@ -91,6 +92,14 @@ public class ApkParameterDTO implements Serializable {
 
     public void setApkAvailable(Boolean apkAvailable) {
         this.apkAvailable = apkAvailable;
+    }
+
+    public Boolean getIgnoreUndefinedParameter() {
+        return ignoreUndefinedParameter;
+    }
+
+    public void setIgnoreUndefinedParameter(Boolean ignoreUndefinedParameter) {
+        this.ignoreUndefinedParameter = ignoreUndefinedParameter;
     }
 
     @Override
