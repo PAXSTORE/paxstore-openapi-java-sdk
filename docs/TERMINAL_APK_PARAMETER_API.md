@@ -234,7 +234,7 @@ Structure of class CreateApkParameterRequest
 |paramTemplateName| String                | false    |The template file name of paramter application|
 |parameters| Map\<String, String\> | true     |The parameter key and value, the key the PID in template|
 |base64FileParameters| List\<FileParameter\> | true     |The parameter of file type|
-|validateUndefinedParameter| Boolean | true     |       Whether to ignore undefined parameters     |
+|validateUndefinedParameter| Boolean | true     |       Whether to validate undefined parameters     |
 
 Structure of class FileParameter
 
@@ -327,7 +327,7 @@ Structure of class UpdateApkParameterRequest
 | paramTemplateName | String                | true     | The name of param template                              |
 | parameters        | Map\<String, String\> | true     | The parameter key and value, the key the PID in template |
 |base64FileParameters| List\<FileParameter\> | true     | The parameter of file type|
-|validateUndefinedParameter                   | Boolean               | true     |    Whether to ignore undefined parameters |
+|validateUndefinedParameter                   | Boolean               | true     |    Whether to validate undefined parameters |
 
 Note:UpdateApkParameterRequest cannot be empty or paramTemplateName and parameters cannot be empty at same time.
 
