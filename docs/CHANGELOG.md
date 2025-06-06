@@ -4,6 +4,8 @@
 ### New Feature
 * Add parameter query `includeInstalledFirmware` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
 * Add APPENDIX.md - Add the description of the timeZone  
+* Add EmmAppApi - `getAvailableTestTrackVersionList` API
+* Add the return field `accessibleTrackId` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy` API
 
 ## 9.7.1
 ### Bug Fix

@@ -700,3 +700,95 @@ The type of data in result is EmmAppPermissionDTO. The structure like below.
 | 61621         | App not exists                             |             |
 | 61654         | EMM for Android not subscribed             |             |
 | 61656         | The market is not bound to EMM for Android |             |
+
+### Get EMM app available test track version list.
+
+The get EMM app available test track version list API allows the thirdparty system get EMM app available test track version list by app id.
+
+**API**
+
+```
+public Result<EmmAppAvailableTestVersionDTO> getAvailableTestTrackVersionList(Long appId)
+```
+
+**Input parameter(s) description**
+
+
+| Parameter Name | Type | Nullable | Description       |
+| :--------------- | :----- | :--------- | :------------------ |
+| appId          | Long | false    | The id of EMM app |
+
+**Sample codes**
+
+```
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<EmmAppAvailableTestVersionDTO> result = emmAppApi.getAvailableTestTrackVersionList(1646714366722087L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter appId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 61621,
+	"message": "App not exists"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"appAvailableTestVersionList": [
+			{
+				"trackId": -1,
+				"trackAlias": "Production",
+				"versionName": "1.0.11"
+			},
+			{
+				"trackId": 1681160455323739,
+				"trackAlias": "alpha",
+				"versionName": "1.0.12"
+			}
+		]
+	}
+}
+```
+
+The type of data in result is EmmAppAvailableTestVersionDTO. The structure like below.
+
+
+| Property Name               | Type                                 | Description                           |
+|:----------------------------|:-------------------------------------|:--------------------------------------|
+| appAvailableTestVersionList | List\<EmmAppAvailableTestVersion\>   | The available test version of emm app |
+
+Structure of class EmmAppAvailableTestVersion
+
+
+| Property Name | Type   | Description                      |
+|:--------------|:-------|:---------------------------------|
+| trackId       | Long   | The track id of emm app          |
+| trackAlias    | String | The track alias of emm app       |
+| versionName   | String | The track version of emm app     |
+
+**Possible validation errors**
+
+> <font color=red>Parameter appId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+| Business Code   | Message                                     | Description |
+|:----------------|:--------------------------------------------| :------------ |
+| 61621           | App not exists                              |             |
+| 61654           | EMM for Android not subscribed              |             |
+| 61656           | The market is not bound to EMM for Android  |             |
