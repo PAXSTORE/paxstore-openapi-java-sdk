@@ -6,6 +6,9 @@
 * Add APPENDIX.md - Add the description of the timeZone  
 * Add EmmAppApi - `getAvailableTestTrackVersionList` API
 * Add the return field `accessibleTrackId` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy` API
+* Add parameter query `serialNo` 、`pidList` and  return in TerminalApkApi-`searchTerminalApk` API
+* Add parameter query `serialNo` and  return in TerminalRkiApi-`searchPushRkiTasks` API
+
 
 ## 9.7.1
 ### Bug Fix

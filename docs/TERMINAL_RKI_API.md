@@ -132,9 +132,10 @@ public Result<PushRkiTaskDTO> searchPushRkiTasks(int pageNo, int pageSize, Searc
 |pageNo|int|false|page number, value must >=1|
 |pageSize|int|false|the record number per page, range is 1 to 100|
 |orderBy|SearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.CreatedDate_desc and SearchOrderBy.CreatedDate_asc.|
-|terminalTid|String|false|search filter by terminal tid|
+|terminalTid|String|true|search filter by terminal tid|
 |rkiKey|String|true|search filter by rki key|
 |status|PushStatus|true|the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend, PushStatus.Completed|
+|serialNo|String|true|search filter by terminal serialNo|
 
 **Sample codes**
 
@@ -149,7 +150,7 @@ Result<PushRkiTaskDTO> result = terminalRkiApi.searchPushRkiTasks(1,12,SearchOrd
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["pageNo:must be greater than or equal to 1"]
+	"validationErrors": ["The property serialNo and tid in request cannot be blank at same time!"]
 }
 ```
 
@@ -157,21 +158,28 @@ Result<PushRkiTaskDTO> result = terminalRkiApi.searchPushRkiTasks(1,12,SearchOrd
 
 ```
 {
-	"businessCode": 0,
-	"pageInfo": {
-		"pageNo": 1,
-		"limit": 12,
-		"totalCount": 1,
-		"hasNext": false,
-		"dataSet": [{
-			"id": 17850,
-            "rkiKey": "PIN_TEST",
-            "terminalSN": "87879696",
-            "status": "A",
-            "actionStatus": 2,
-            "errorCode": 0
-		}]
-	}
+    "businessCode": 0,
+    "rateLimit": "3000",
+    "rateLimitRemain": "2999",
+    "rateLimitReset": "1751097663064",
+    "pageInfo": {
+        "pageNo": 1,
+        "limit": 1,
+        "totalCount": 4,
+        "hasNext": true,
+        "dataSet": [
+            {
+                "id": 1000000047,
+                "terminalSN": "TESTCLIENT",
+                "rkiKey": "10008723637292",
+                "activatedDate": 1739453763000,
+                "effectiveTime": 1739453700000,
+                "status": "A",
+                "actionStatus": 1,
+                "errorCode": 0
+            }
+        ]
+    }
 }
 ```
 

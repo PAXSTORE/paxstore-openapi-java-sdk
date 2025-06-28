@@ -58,7 +58,12 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
     }
 
     public Result<PushRkiTaskDTO> searchPushRkiTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
-                                                               String terminalTid, String rkiKey, PushStatus status){
+                                                     String terminalTid, String rkiKey, PushStatus status){
+        return searchPushRkiTasks(pageNo, pageSize, orderBy, terminalTid, rkiKey, status, null);
+    }
+
+    public Result<PushRkiTaskDTO> searchPushRkiTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
+                                                               String terminalTid, String rkiKey, PushStatus status, String serialNo){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -72,22 +77,22 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
             return new Result<>(validationErrs);
         }
 
-        if(StringUtils.isEmpty(terminalTid)) {
-            validationErrs.add(getMessage("parameter.not.null", "terminalTid"));
+        if(StringUtils.isEmpty(terminalTid) && StringUtils.isEmpty(serialNo)) {
+            validationErrs.add(getMessage("parameter.sn.tid.empty"));
             return new Result<>(validationErrs);
         }
 
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_RKI_KEY_LIST_URL, page);
         request.addRequestParam("terminalTid", terminalTid);
+        request.addRequestParam("serialNo", serialNo);
         request.addRequestParam("rkiKey", rkiKey);
         if(status != null){
             request.addRequestParam("status", status.val());
         }
 
         PushRkiTaskPageResponse pageResponse = EnhancedJsonUtils.fromJson(client.execute(request), PushRkiTaskPageResponse.class);
-        Result<PushRkiTaskDTO> result = new Result<PushRkiTaskDTO>(pageResponse);
 
-        return result;
+        return new Result<PushRkiTaskDTO>(pageResponse);
     }
 
     public Result<PushRkiTaskDTO> getPushRkiTask(Long pushRkiTaskId){

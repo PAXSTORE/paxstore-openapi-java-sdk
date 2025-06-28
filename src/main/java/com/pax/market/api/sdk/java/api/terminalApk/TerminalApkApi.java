@@ -30,8 +30,11 @@ import com.pax.market.api.sdk.java.api.util.StringUtils;
 import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Description
@@ -59,8 +62,17 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 		super(baseUrl, apiKey, apiSecret, locale);
 	}
 
-	public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
+    public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
                                                     String terminalTid, String appPackageName, PushStatus status){
+        return searchTerminalApk(pageNo, pageSize, orderBy, terminalTid, appPackageName, status, null);
+    }
+
+    public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
+                                                    String terminalTid, String appPackageName, PushStatus status, List<String> pidList){
+        return searchTerminalApk(pageNo, pageSize, orderBy, terminalTid, appPackageName, status, null, pidList);
+    }
+	public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
+                                                    String terminalTid, String appPackageName, PushStatus status, String serialNo, List<String> pidList){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -73,14 +85,18 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
         if(!validationErrs.isEmpty()) {
             return new Result<>(validationErrs);
         }
-        if(StringUtils.isEmpty(terminalTid)) {
-            validationErrs.add(getMessage("parameter.not.null", "terminalTid"));
+        if(StringUtils.isEmpty(terminalTid) && StringUtils.isEmpty(serialNo)) {
+            validationErrs.add(getMessage("parameter.sn.tid.empty"));
             return new Result<>(validationErrs);
         }
 
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_APK_LIST_URL, page);
         request.addRequestParam("terminalTid", terminalTid);
+        request.addRequestParam("serialNo", serialNo);
         request.addRequestParam("appPackageName", appPackageName);
+        if (Objects.nonNull(pidList) && !pidList.isEmpty()){
+            request.addRequestParam("pidList",  StringUtils.join(pidList, ","));
+        }
         if(status != null){
             request.addRequestParam("status", status.val());
         }
