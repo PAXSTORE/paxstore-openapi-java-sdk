@@ -1,5 +1,10 @@
 # Changelog  
 
+## 10.0.0
+### New Feature
+* Add parameter query `includeMasterTerminal` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
+
+
 ## 9.8.0
 ### New Feature
 * Add parameter query `includeInstalledFirmware` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
