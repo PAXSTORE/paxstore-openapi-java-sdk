@@ -117,6 +117,7 @@ Structure of class TerminalDTO
 |installedApks|List\<TerminalInstalledApkDTO\>| The installed applications of the terminal|
 |terminalDetail|TerminalDetailDTO| The terminal detail information |
 |terminalAccessoryList|List\<TerminalAccessoryDTO\>| The terminal accessory information list |
+|masterTerminalSerialNo|String| When the query terminal is an accessory device, return the master terminal serialNo (if any). <br/>Return only in getTerminal and getTerminalBySn |
 
 Structure of class TerminalLocationDTO
 
@@ -325,6 +326,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal);
 ```
 
 **Input parameter(s) description**
@@ -345,6 +347,8 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 Result<TerminalDTO> result = terminalApi.getTerminal(908627L,false, true);
 //includeInstalledFirmware
 Result<TerminalDTO> result = terminalApi.getTerminal(1654906985381944L,false, false, true);
+//includeMasterTerminal
+Result<TerminalDTO> result = terminalApi.getTerminal(1687838810701873L,false, false, false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -679,6 +683,30 @@ Result<TerminalDTO> result = terminalApi.getTerminal(1654906985381944L,false, fa
 }
 ```
 
+```
+{
+    "businessCode": 0,
+    "data": {
+        "id": 1687838810701873,
+        "name": "TESTCLIENTACCESS",
+        "tid": "7QG5HB6Y",
+        "serialNo": "TESTCLIENTACCESS",
+        "status": "A",
+        "merchantName": "gxtest",
+        "modelName": "A960",
+        "resellerName": "shifan",
+        "location": "",
+        "createdDate": 1751509062000,
+        "updatedDate": 1751509062000,
+        "lastActiveTime": 1751509062000,
+        "masterTerminalSerialNo": "TESTPCI6"
+    },
+    "rateLimit": "3000",
+    "rateLimitRemain": "2998",
+    "rateLimitReset": "1751512410904"
+}
+```
+
 
 
 The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
@@ -705,6 +733,7 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware)
+public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal)
 ```
 
 **Input parameter(s) description**
@@ -725,6 +754,8 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",true);
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",false,true);
 //includeInstalledFirmware
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENT",false,false, true);
+//includeMasterTerminal
+Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENTACCESS",false,false, false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -1052,6 +1083,32 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENT",false,fals
     "rateLimitReset": "1743041736048"
 }
 ```
+
+```
+{
+    "businessCode": 0,
+    "data": {
+        "id": 1687838810701873,
+        "name": "TESTCLIENTACCESS",
+        "tid": "7QG5HB6Y",
+        "serialNo": "TESTCLIENTACCESS",
+        "status": "A",
+        "merchantName": "gxtest",
+        "modelName": "A960",
+        "resellerName": "shifan",
+        "location": "",
+        "createdDate": 1751509062000,
+        "updatedDate": 1751509062000,
+        "lastActiveTime": 1751509062000,
+        "masterTerminalSerialNo": "TESTPCI6"
+    },
+    "rateLimit": "3000",
+    "rateLimitRemain": "2999",
+    "rateLimitReset": "1751512850573"
+}
+```
+
+
 
 The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
 

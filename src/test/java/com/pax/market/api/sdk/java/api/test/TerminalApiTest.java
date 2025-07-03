@@ -150,6 +150,13 @@ public class TerminalApiTest {
 		logger.debug("Result of get terminal: {}",getResult.toString());
 		Assert.assertTrue(getResult.getBusinessCode() == 0);
     }
+	@Test
+    public void testGetTerminalIncludeMasterTerminal() {
+		Long terminalId = 1687838810701873L;
+		Result<TerminalDTO> result = terminalApi.getTerminal(terminalId,false, false, false, true);
+		logger.debug("Result of get terminal: {}",EnhancedJsonUtils.toJson(result));
+		Assert.assertTrue(result.getBusinessCode() == 0);
+    }
 
 	@Test
 	public void testBatchAddTerminalToGroup(){
@@ -438,6 +445,13 @@ public class TerminalApiTest {
 	@Test
 	public void testGetTerminalBySn() {
 		Result<TerminalDTO> terminalBySn = terminalApi.getTerminalBySn(serialNo);
+		logger.debug("Result of testGetTerminalBySn {}", terminalBySn.toString());
+		Assert.assertEquals(0, terminalBySn.getBusinessCode());
+	}
+
+	@Test
+	public void testGetTerminalBySnIncludeMasterTerminal() {
+		Result<TerminalDTO> terminalBySn = terminalApi.getTerminalBySn(serialNo, false, false, false,  true);
 		logger.debug("Result of testGetTerminalBySn {}", terminalBySn.toString());
 		Assert.assertEquals(0, terminalBySn.getBusinessCode());
 	}

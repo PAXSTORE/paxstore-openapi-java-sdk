@@ -63,6 +63,9 @@ public class TerminalDTO implements Serializable{
 
 	private List<TerminalAccessoryDTO> terminalAccessoryList;
 
+	private String masterTerminalSerialNo;
+
+
 	public Long getId() {
 		return id;
 	}
@@ -215,6 +218,14 @@ public class TerminalDTO implements Serializable{
 		this.lastAccessTime = lastAccessTime;
 	}
 
+	public String getMasterTerminalSerialNo() {
+		return masterTerminalSerialNo;
+	}
+
+	public void setMasterTerminalSerialNo(String masterTerminalSerialNo) {
+		this.masterTerminalSerialNo = masterTerminalSerialNo;
+	}
+
 	@Override
 	public String toString() {
 		return "TerminalDTO{" +
@@ -237,6 +248,7 @@ public class TerminalDTO implements Serializable{
 				", installedApks=" + installedApks +
 				", terminalDetail=" + terminalDetail +
 				", terminalAccessoryList=" + terminalAccessoryList +
+				", masterTerminalSerialNo='" + masterTerminalSerialNo + '\'' +
 				'}';
 	}
 }
