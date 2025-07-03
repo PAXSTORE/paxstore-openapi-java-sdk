@@ -64,7 +64,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 
     public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
                                                     String terminalTid, String appPackageName, PushStatus status){
-        return searchTerminalApk(pageNo, pageSize, orderBy, terminalTid, appPackageName, status, null);
+        return searchTerminalApk(pageNo, pageSize, orderBy, terminalTid, appPackageName, status, null,null);
     }
 
     public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
