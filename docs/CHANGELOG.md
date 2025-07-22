@@ -11,6 +11,7 @@
 * Add TerminalApkApi - `deleteTerminalApk` API
 * Add TerminalFirmwareApi - `deleteTerminalFirmware` API
 * Add TerminalRkiApi - `deleteTerminalRki` API
+* Add the parameter `validateUndefinedParameter` in TerminalApkParameterApi - `createApkParameter`,`updateApkParameter`, TerminalGroupApkApi - `createAndActiveGroupApk`, TerminalApkApi - `createTerminalApk` API
 
 
 ## 9.7.1
