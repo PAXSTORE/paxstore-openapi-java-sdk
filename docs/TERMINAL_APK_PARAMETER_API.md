@@ -134,6 +134,10 @@ The structure of class ApkFileDTO
 > <font color=red>Parameter packageName is mandatory!</font>  
 > <font color=red>Parameter versionName is mandatory!</font>
 
+### Get a Apk Parameter
+
+**API**
+
 ```
 public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId);
 public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId, List<String> pidList);
@@ -383,7 +387,6 @@ s}
 > <font color=red>Exceed max counter (10) of file type parameters!</font>  
 > <font color=red>Exceed max size (500kb) per file type parameters!</font>
 
-
 **Possible business codes**
 
 |Business Code|Message|Description|
@@ -441,3 +444,87 @@ terminalApkParameterApi.deleteApkParameter(apkParameterId);
 	"businessCode": 0
 }
 ```
+
+
+
+### Get Apk Parameter PidList
+
+**API**
+
+```
+public Result<ApkParameterPidDTO> getApkParameterPidList(String templateName, String packageName, String versionName)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description       |
+| :------------- | :----- | :------- | :---------------- |
+| templateName   | String | false    | Apk parameterName |
+| packageName    | String | false    | Apk packageName   |
+| versionName    | String | false    | Apk versionName   |
+
+**Sample codes**
+
+```
+TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+
+String templateName = "222";
+String packageName = "com.alibaba.android.rimet";
+String versionName = "6.5.5";
+Result<ApkParameterPidDTO> result = terminalApkParameterApi.getApkParameterPidList(templateName, packageName, versionName);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter templateName cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 9001,
+	"message": "Push template not found"
+}
+```
+
+**Successful sample result**
+
+```
+{
+    "businessCode": 0,
+    "data": {
+        "pidList": [
+            "pid1 (sys_F2)",
+            "pid.file.0 (sys_F2)"
+        ]
+    },
+    "rateLimit": "3000",
+    "rateLimitRemain": "2999",
+    "rateLimitReset": "1753426374287"
+}
+```
+
+
+
+The type in dataSet is ApkParameterPidDTO. And the structure like below.
+
+| Property Name | Type         | Description                  |
+| ------------- | ------------ | ---------------------------- |
+| pidList       | List<String> | The pidList of Apk parameter |
+
+**Possible validation errors**
+
+> <font color="red">Parameter templateName cannot be null!</font>  
+> <font color=red>Parameter packageName cannot be null!</font>  
+> <font color=red>Parameter versionName cannot be null!</font>  
+
+**Possible business codes**
+
+| Business Code | Message                 | Description |
+| :------------ | :---------------------- | :---------- |
+| 9001          | Push template not found |             |

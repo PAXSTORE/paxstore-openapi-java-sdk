@@ -3,6 +3,7 @@
 ## 10.0.0
 ### New Feature
 * Add parameter query `includeMasterTerminal` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
+* Add TerminalApkParameter API `findApkParameterPidList` and return pidList
 
 
 ## 9.8.0
