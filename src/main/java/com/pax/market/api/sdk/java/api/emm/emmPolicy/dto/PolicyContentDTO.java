@@ -1308,7 +1308,7 @@ public class PolicyContentDTO implements Serializable {
 
     public static class ApplicationPolicy implements Serializable {
 
-        private static final long serialVersionUID = -1172038935811089166L;
+        private static final long serialVersionUID = -3749713233937660568L;
 
         private Long appId;
 
@@ -1319,6 +1319,8 @@ public class PolicyContentDTO implements Serializable {
         private String defaultPermissionPolicy;
 
         private String installPriority;
+
+        private Long accessibleTrackId;
 
         private String installType;
 
@@ -1364,6 +1366,14 @@ public class PolicyContentDTO implements Serializable {
             this.installPriority = installPriority;
         }
 
+        public Long getAccessibleTrackId() {
+            return accessibleTrackId;
+        }
+
+        public void setAccessibleTrackId(Long accessibleTrackId) {
+            this.accessibleTrackId = accessibleTrackId;
+        }
+
         public String getInstallType() {
             return installType;
         }
@@ -1388,6 +1398,7 @@ public class PolicyContentDTO implements Serializable {
                     ", autoUpdateMode='" + autoUpdateMode + '\'' +
                     ", defaultPermissionPolicy='" + defaultPermissionPolicy + '\'' +
                     ", installPriority='" + installPriority + '\'' +
+                    ", accessibleTrackId=" + accessibleTrackId +
                     ", installType='" + installType + '\'' +
                     ", permissionGrants=" + permissionGrants +
                     '}';

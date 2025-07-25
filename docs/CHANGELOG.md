@@ -1,5 +1,19 @@
 # Changelog  
 
+## 9.8.0
+### New Feature
+* Add parameter query `includeInstalledFirmware` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
+* Add APPENDIX.md - Add the description of the timeZone  
+* Add EmmAppApi - `getAvailableTestTrackVersionList` API
+* Add the return field `accessibleTrackId` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy` API
+* Add parameter query `serialNo` 、`pidList` and  return in TerminalApkApi-`searchTerminalApk` API
+* Add parameter query `serialNo` and  return in TerminalRkiApi-`searchPushRkiTasks` API
+* Add TerminalApkApi - `deleteTerminalApk` API
+* Add TerminalFirmwareApi - `deleteTerminalFirmware` API
+* Add TerminalRkiApi - `deleteTerminalRki` API
+* Add the parameter `validateUndefinedParameter` in TerminalApkParameterApi - `createApkParameter`,`updateApkParameter`, TerminalGroupApkApi - `createAndActiveGroupApk`, TerminalApkApi - `createTerminalApk` API
+
+
 ## 9.7.1
 ### Bug Fix
 * Add the return field `enableRemoteControl` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy` API

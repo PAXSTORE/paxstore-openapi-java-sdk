@@ -29,7 +29,7 @@ public class EmmAppApi extends BaseThirdPartySysApi {
     private static final String RESELLER_SUBSCRIBE_EMM_APP_URL = "/v1/3rdsys/emm/apps/{appId}/subscribe";
     private static final String RESELLER_UNSUBSCRIBE_EMM_APP_URL = "/v1/3rdsys/emm/apps/{appId}/unsubscribe";
     private static final String GET_PERMISSION_LIST_FOR_EMM_APP_URL = "/v1/3rdsys/emm/apps/{appId}/permissions";
-
+    private static final String GET_AVAILABLE_TEST_TRACK_VERSION_LIST_APP_URL = "/v1/3rdsys/emm/apps/{appId}/available/test/versions";
 
     public EmmAppApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -215,6 +215,22 @@ public class EmmAppApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         EmmAppPermissionResponse emmAppPermissionResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmmAppPermissionResponse.class);
         return new Result<>(emmAppPermissionResponse);
+    }
+
+    public Result<EmmAppAvailableTestVersionDTO> getAvailableTestTrackVersionList(Long appId) {
+        logger.debug("appId= {}", appId);
+
+        List<String> validationErrs = Validators.validateId(appId, "parameter.id.invalid", "appId");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_AVAILABLE_TEST_TRACK_VERSION_LIST_APP_URL.replace("{appId}", String.valueOf(appId)));
+        request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        EmmAppAvailableTestVersionResponse emmAppAvailableTestVersionResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmmAppAvailableTestVersionResponse.class);
+        return new Result<>(emmAppAvailableTestVersionResponse);
     }
 
 

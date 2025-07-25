@@ -2,6 +2,7 @@ package com.pax.market.api.sdk.java.api.terminalRki;
 
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
+import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Response;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
@@ -31,6 +32,7 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
     private static final String SEARCH_TERMINAL_RKI_KEY_LIST_URL = "/v1/3rdsys/terminalRkis";
     private static final String GET_TERMINAL_RKI_KEY_URL = "/v1/3rdsys/terminalRkis/{terminalRkiId}";
     private static final String SUSPEND_TERMINAL_RKI_KEY_URL = "/v1/3rdsys/terminalRkis/suspend";
+    private static final String DELETE_TERMINAL_RKI_KEY_URL = "/v1/3rdsys/terminalRkis/{terminalRkiId}";
 
     public TerminalRkiApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -56,7 +58,12 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
     }
 
     public Result<PushRkiTaskDTO> searchPushRkiTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
-                                                               String terminalTid, String rkiKey, PushStatus status){
+                                                     String terminalTid, String rkiKey, PushStatus status){
+        return searchPushRkiTasks(pageNo, pageSize, orderBy, terminalTid, rkiKey, status, null);
+    }
+
+    public Result<PushRkiTaskDTO> searchPushRkiTasks(int pageNo, int pageSize, SearchOrderBy orderBy,
+                                                               String terminalTid, String rkiKey, PushStatus status, String serialNo){
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -70,22 +77,22 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
             return new Result<>(validationErrs);
         }
 
-        if(StringUtils.isEmpty(terminalTid)) {
-            validationErrs.add(getMessage("parameter.not.null", "terminalTid"));
+        if(StringUtils.isEmpty(terminalTid) && StringUtils.isEmpty(serialNo)) {
+            validationErrs.add(getMessage("parameter.sn.tid.empty"));
             return new Result<>(validationErrs);
         }
 
         SdkRequest request = getPageRequest(SEARCH_TERMINAL_RKI_KEY_LIST_URL, page);
         request.addRequestParam("terminalTid", terminalTid);
+        request.addRequestParam("serialNo", serialNo);
         request.addRequestParam("rkiKey", rkiKey);
         if(status != null){
             request.addRequestParam("status", status.val());
         }
 
         PushRkiTaskPageResponse pageResponse = EnhancedJsonUtils.fromJson(client.execute(request), PushRkiTaskPageResponse.class);
-        Result<PushRkiTaskDTO> result = new Result<PushRkiTaskDTO>(pageResponse);
 
-        return result;
+        return new Result<PushRkiTaskDTO>(pageResponse);
     }
 
     public Result<PushRkiTaskDTO> getPushRkiTask(Long pushRkiTaskId){
@@ -116,4 +123,16 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
         return new Result<>(resp);
     }
 
+    public Result<String> deleteTerminalRki(Long terminalRkiId) {
+        logger.debug("terminalRkiId= {}", terminalRkiId);
+        List<String> validationErrs = Validators.validateId(terminalRkiId, "parameter.id.invalid", "terminalRkiId");
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(DELETE_TERMINAL_RKI_KEY_URL.replace("{terminalFirmwareId}", terminalRkiId.toString()));
+        request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
 }

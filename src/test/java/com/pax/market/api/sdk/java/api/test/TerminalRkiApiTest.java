@@ -1,10 +1,13 @@
 package com.pax.market.api.sdk.java.api.test;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalRki.TerminalRkiApi;
 import com.pax.market.api.sdk.java.api.terminalRki.dto.DisablePushRkiTask;
 import com.pax.market.api.sdk.java.api.terminalRki.dto.PushRki2TerminalRequest;
 import com.pax.market.api.sdk.java.api.terminalRki.dto.PushRkiTaskDTO;
+import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,10 +57,19 @@ public class TerminalRkiApiTest {
 
     @Test
     public void testSearchTerminalRkiList() {
-        String terminalTid = "GAPXQNMQ";
-        Result<PushRkiTaskDTO> result = terminalRkiApi.searchPushRkiTasks(1,12,TerminalRkiApi.SearchOrderBy.CreatedDate_desc,
+        String terminalTid = "TESTCLIENT";
+        Result<PushRkiTaskDTO> result = terminalRkiApi.searchPushRkiTasks(1,1,TerminalRkiApi.SearchOrderBy.CreatedDate_desc,
                 terminalTid, "", TerminalRkiApi.PushStatus.Active);
         logger.debug("Result of search terminalRki:{}", result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
+
+    @Test
+    public void testSearchTerminalRkiListBySerialNo() {
+        String serialNo = "TESTCLIENT";
+        Result<PushRkiTaskDTO> result = terminalRkiApi.searchPushRkiTasks(1,1,TerminalRkiApi.SearchOrderBy.CreatedDate_desc,
+                null, "", TerminalRkiApi.PushStatus.Active, serialNo);
+        logger.debug("Result of search terminalRki:{}", EnhancedJsonUtils.toJson(result));
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
 }

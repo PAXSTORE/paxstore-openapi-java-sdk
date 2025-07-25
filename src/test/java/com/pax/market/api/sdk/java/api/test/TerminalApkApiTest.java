@@ -18,6 +18,7 @@ import com.pax.market.api.sdk.java.api.terminalApk.dto.CreateTerminalApkRequest;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkDTO;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.UpdateTerminalApkRequest;
+import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +43,6 @@ public class TerminalApkApiTest {
 	static TerminalApkApi terminalApkApi;
 	
 	static Long createdTerminalId = 0L;
-	
     
     @Before
     public void init(){
@@ -51,11 +51,34 @@ public class TerminalApkApiTest {
 
     @Test
     public void testSearchTerminalApkList() {
-        String terminalTid = "PZYL32EZH";
-        String testPackageName = "zz.dela.cmcc.traffic";
-        Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,12,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
+        String terminalTid = "LNFAJ1HC";
+        String testPackageName = "com.orange.onekeylockscreen";
+        Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,1,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
                 terminalTid, testPackageName, TerminalApkApi.PushStatus.Active);
-        logger.debug("Result of search terminalApk:{}", result.toString());
+        logger.info("Result of search terminalApk:{}", result.toString());
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
+    @Test
+    public void testSearchTerminalApkListTidContainPidList() {
+        String terminalTid = "LNFAJ1HC";
+        String testPackageName = "com.orange.onekeylockscreen";
+        List<String> pidList = new ArrayList<>();
+        pidList.add("sys_F2_pid3");
+        Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,1,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
+                terminalTid, testPackageName, TerminalApkApi.PushStatus.Active, pidList);
+        logger.debug("Result of search terminalApk:{}", EnhancedJsonUtils.toJson(result));
+
+        Assert.assertTrue(result.getBusinessCode() == 0);
+    }
+    @Test
+    public void testSearchTerminalApkListContainPidList() {
+        String serialNo= "TESTCLIENT";
+        String testPackageName = "com.orange.onekeylockscreen";
+        List<String> pidList = new ArrayList<>();
+        pidList.add("sys_F2_pid3");
+        Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,1,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
+                null, testPackageName, TerminalApkApi.PushStatus.Active, serialNo, pidList);
+        logger.info("Result of search terminalApk:{}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
     

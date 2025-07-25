@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class PolicyUpdatedContentDTO implements Serializable {
-
+    
     private static final long serialVersionUID = -8556343226332392597L;
-
+    
     private Boolean adjustVolumeDisabled;
 
     private AdvancedSecurityOverrides advancedSecurityOverrides;
@@ -1309,10 +1309,9 @@ public class PolicyUpdatedContentDTO implements Serializable {
     }
 
 
-
     public static class ApplicationPolicy implements Serializable {
 
-        private static final long serialVersionUID = -2884437498743723567L;
+        private static final long serialVersionUID = 2578807097334044142L;
 
         private String packageName;
 
@@ -1321,6 +1320,8 @@ public class PolicyUpdatedContentDTO implements Serializable {
         private String defaultPermissionPolicy;
 
         private String installPriority;
+
+        private Long accessibleTrackId;
 
         private String installType;
 
@@ -1358,6 +1359,14 @@ public class PolicyUpdatedContentDTO implements Serializable {
             this.installPriority = installPriority;
         }
 
+        public Long getAccessibleTrackId() {
+            return accessibleTrackId;
+        }
+
+        public void setAccessibleTrackId(Long accessibleTrackId) {
+            this.accessibleTrackId = accessibleTrackId;
+        }
+
         public String getInstallType() {
             return installType;
         }
@@ -1381,6 +1390,7 @@ public class PolicyUpdatedContentDTO implements Serializable {
                     ", autoUpdateMode='" + autoUpdateMode + '\'' +
                     ", defaultPermissionPolicy='" + defaultPermissionPolicy + '\'' +
                     ", installPriority='" + installPriority + '\'' +
+                    ", accessibleTrackId=" + accessibleTrackId +
                     ", installType='" + installType + '\'' +
                     ", permissionGrants=" + permissionGrants +
                     '}';

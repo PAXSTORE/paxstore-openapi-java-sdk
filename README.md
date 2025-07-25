@@ -185,7 +185,7 @@ To integrate with this SDK please add below dependency by updating the pom.xml f
 <dependency>
     <groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-    <version>9.7.1</version>
+    <version>9.8.0</version>
 </dependency>
 ```
 

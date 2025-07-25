@@ -38,6 +38,8 @@ public class CreateApkParameterRequest implements Serializable {
 
     private List<FileParameter> base64FileParameters;
 
+    private Boolean validateUndefinedParameter;
+
 
 
     public String getPackageName() {
@@ -86,5 +88,13 @@ public class CreateApkParameterRequest implements Serializable {
 
     public void setBase64FileParameters(List<FileParameter> base64FileParameters) {
         this.base64FileParameters = base64FileParameters;
+    }
+
+    public Boolean getValidateUndefinedParameter() {
+        return validateUndefinedParameter;
+    }
+
+    public void setValidateUndefinedParameter(Boolean validateUndefinedParameter) {
+        this.validateUndefinedParameter = validateUndefinedParameter;
     }
 }

@@ -324,6 +324,7 @@ field in result is null.
 public Result<TerminalDTO> getTerminal(Long terminalId);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware);
 ```
 
 **Input parameter(s) description**
@@ -340,6 +341,10 @@ TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api
 Result<TerminalDTO> result = terminalApi.getTerminal(908627L);
 //includeDetailInfoList, whether to return Detail Info and Accessory List 
 Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
+//includeInstalledApks
+Result<TerminalDTO> result = terminalApi.getTerminal(908627L,false, true);
+//includeInstalledFirmware
+Result<TerminalDTO> result = terminalApi.getTerminal(1654906985381944L,false, false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -646,6 +651,36 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 }
 ```
 
+```
+{
+    "businessCode": 0,
+    "data": {
+        "id": 1654906985381944,
+        "name": "TESTSYNC1",
+        "tid": "LNFAJ1HC",
+        "serialNo": "TESTCLIENT",
+        "status": "A",
+        "merchantName": "gxtest",
+        "modelName": "A970",
+        "resellerName": "shifan",
+        "location": "",
+        "createdDate": 1735805945000,
+        "updatedDate": 1735805945000,
+        "lastActiveTime": 1735805945000,
+        "lastAccessTime": 1742458233386,
+        "installedFirmware": {
+            "firmwareName": "A920Pro_PayDroid_10.0.0_Sagittarius_V1.01_20241205",
+            "installTime": 1708041600000
+        }
+    },
+    "rateLimit": "100",
+    "rateLimitRemain": "98",
+    "rateLimitReset": "1743041736048"
+}
+```
+
+
+
 The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
 
 **Possible validation errors**
@@ -669,6 +704,7 @@ field in result is null.
 public Result<TerminalDTO> getTerminalBySn(String serialNo)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks)
+public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware)
 ```
 
 **Input parameter(s) description**
@@ -685,6 +721,10 @@ TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522");
 //includeDetailInfoList, whether to return Detail Info and Accessory List 
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",true);
+//includeInstalledApks
+Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",false,true);
+//includeInstalledFirmware
+Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENT",false,false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -982,6 +1022,34 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",true);
       }
     ]
 	}
+}
+```
+
+```
+{
+    "businessCode": 0,
+    "data": {
+        "id": 1654906985381944,
+        "name": "TESTSYNC1",
+        "tid": "LNFAJ1HC",
+        "serialNo": "TESTCLIENT",
+        "status": "A",
+        "merchantName": "gxtest",
+        "modelName": "A970",
+        "resellerName": "shifan",
+        "location": "",
+        "createdDate": 1735805945000,
+        "updatedDate": 1735805945000,
+        "lastActiveTime": 1735805945000,
+        "lastAccessTime": 1742458233386,
+        "installedFirmware": {
+            "firmwareName": "A920Pro_PayDroid_10.0.0_Sagittarius_V1.01_20241205",
+            "installTime": 1708041600000
+        }
+    },
+    "rateLimit": "100",
+    "rateLimitRemain": "98",
+    "rateLimitReset": "1743041736048"
 }
 ```
 
@@ -2294,10 +2362,10 @@ Structure of class TerminalReplacementUpdateRequest
 
 Structure of class TerminalTimeZoneUpdateRequest
 
-| Property Name           | Type    | Nullable | Description                                                                                                                                   |
-|:------------------------|:--------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-| automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
-| timeZone                | String  | true     | The terminal time zone |
+| Property Name           | Type    | Nullable | Description                                                   |
+|:------------------------|:--------|:---------|:--------------------------------------------------------------|
+| automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                  |
+| timeZone                | String  | true     | The terminal time zone [Time Zone](APPENDIX.md#time-zone) |
 
 Structure of class TerminalLanguageUpdateRequest
 
@@ -2476,7 +2544,7 @@ Structure of class TerminalTimeZoneUpdateRequest
 | Property Name           | Type    | Nullable | Description                                                                                                                                   |
 |:------------------------|:--------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | automaticTimezoneEnable | Boolean | true     | Enable to use the network-provided time zone                                                                                                  |
-| timeZone                | String  | true     | The terminal time zone |
+| timeZone                | String  | true     | The terminal time zone [Time Zone](APPENDIX.md#time-zone)|
 
 **Sample codes**
 

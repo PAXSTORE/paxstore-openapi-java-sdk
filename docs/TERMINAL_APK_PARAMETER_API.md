@@ -226,14 +226,15 @@ public Result<String> createApkParameter(CreateApkParameterRequest createApkPara
 
 Structure of class CreateApkParameterRequest
 
-| Property Name | Type | Nullable|Description |
-|:--- | :---|:---|:---|
-|packageName|String|false|The package name which indicate the application you want to push to the terminal|
-|version|String|false|The version name of application which you want to push|
-|name|String|false|The template name|
-|paramTemplateName|String|false|The template file name of paramter application|
-|parameters|Map\<String, String\>|true|The parameter key and value, the key the PID in template|
-|base64FileParameters|List\<FileParameter\>|true|The parameter of file type|
+| Property Name | Type                  | Nullable |Description |
+|:--- |:----------------------|:---------|:---|
+|packageName| String                | false    |The package name which indicate the application you want to push to the terminal|
+|version| String                | false    |The version name of application which you want to push|
+|name| String                | false    |The template name|
+|paramTemplateName| String                | false    |The template file name of paramter application|
+|parameters| Map\<String, String\> | true     |The parameter key and value, the key the PID in template|
+|base64FileParameters| List\<FileParameter\> | true     |The parameter of file type|
+|validateUndefinedParameter| Boolean | true     |       Whether to validate undefined parameters     |
 
 Structure of class FileParameter
 
@@ -321,11 +322,12 @@ public Result<String> updateApkParameter(Long apkParameterId,UpdateApkParameterR
 
 Structure of class UpdateApkParameterRequest
 
-| Property Name     | Type                | Nullable | Description                                              |
-| :---------------- | :------------------ | :------- | :------------------------------------------------------- |
-| paramTemplateName | String              | true     | The name of param template                               |
+| Property Name     | Type                  | Nullable | Description                                             |
+| :---------------- |:----------------------|:---------| :------------------------------------------------------ |
+| paramTemplateName | String                | true     | The name of param template                              |
 | parameters        | Map\<String, String\> | true     | The parameter key and value, the key the PID in template |
-|base64FileParameters|List\<FileParameter\> |true      | The parameter of file type|
+|base64FileParameters| List\<FileParameter\> | true     | The parameter of file type|
+|validateUndefinedParameter                   | Boolean               | true     |    Whether to validate undefined parameters |
 
 Note:UpdateApkParameterRequest cannot be empty or paramTemplateName and parameters cannot be empty at same time.
 

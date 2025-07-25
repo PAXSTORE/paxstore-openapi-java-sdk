@@ -35,21 +35,22 @@ public Result<TerminalApkDTO> createTerminalApk(CreateTerminalApkRequest createT
 
 Structure of class TerminalCreateRequest
 
-| Property Name        | Type                  | Nullable | Description                                                                                                                                                                                                                                                                                                                                        |
-|:---------------------|:----------------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| tid                  | String                | true     | The tid of terminal                                                                                                                                                                                                                                                                                                                                |
-| serialNo             | String                | true     | The serial number of terminal                                                                                                                                                                                                                                                                                                                      |
-| packageName          | String                | false    | The package name which indicate the application you want to push to the terminal                                                                                                                                                                                                                                                                   |
-| version              | String                | true     | The version name of application which you want to push, if it is blank API will use the latest version                                                                                                                                                                                                                                             |
-| templateName         | String                | true     | The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10. |
-| parameters           | Map\<String, String\> | false    | The parameter key and value, the key the PID in template                                                                                                                                                                                                                                                                                           |
-| base64FileParameters | List\<FileParameter\> | false    | The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb                                                                                                                                                                                                                         |
-| pushTemplateName     | String                | true     | The push template name                                                                                                                                                                                                                                                                                                                             |
-| inheritPushHistory   | Boolean               | true     | Whether to inherit the latest success push history parameters, inherited parameter values have lower priority than passed-in parameter values                                                                                                                                                                                                      |
-| forceUpdate          | Boolean               | true     | Whether to force the app to update                                                                                                                                                                                                                                                                                                                 |
-| wifiOnly             | Boolean               | true     | Whether to download over Wi-Fi or Cable network only, don’t allow to download over the cellular network                                                                                                                                                                                                                                            |
-| effectiveTime        | Date                  | true     | The time when to start the push task                                                                                                                                                                                                                                                                                                               |
-| expiredTime          | Date                  | true     | The time when to stop the push task                                                                                                                                                                                                                                                                                                                |
+| Property Name             | Type                  | Nullable | Description                                                                                                                                                                                                                                                                                                                                         |
+|:--------------------------|:----------------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| tid                       | String                | true     | The tid of terminal                                                                                                                                                                                                                                                                                                                                 |
+| serialNo                  | String                | true     | The serial number of terminal                                                                                                                                                                                                                                                                                                                       |
+| packageName               | String                | false    | The package name which indicate the application you want to push to the terminal                                                                                                                                                                                                                                                                    |
+| version                   | String                | true     | The version name of application which you want to push, if it is blank API will use the latest version                                                                                                                                                                                                                                              |
+| templateName              | String                | true     | The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10.  |
+| parameters                | Map\<String, String\> | false    | The parameter key and value, the key the PID in template                                                                                                                                                                                                                                                                                            |
+| base64FileParameters      | List\<FileParameter\> | false    | The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb                                                                                                                                                                                                                          |
+| pushTemplateName          | String                | true     | The push template name                                                                                                                                                                                                                                                                                                                              |
+| inheritPushHistory        | Boolean               | true     | Whether to inherit the latest success push history parameters, inherited parameter values have lower priority than passed-in parameter values                                                                                                                                                                                                       |
+| forceUpdate               | Boolean               | true     | Whether to force the app to update                                                                                                                                                                                                                                                                                                                  |
+| wifiOnly                  | Boolean               | true     | Whether to download over Wi-Fi or Cable network only, don’t allow to download over the cellular network                                                                                                                                                                                                                                             |
+| effectiveTime             | Date                  | true     | The time when to start the push task                                                                                                                                                                                                                                                                                                                |
+| expiredTime               | Date                  | true     | The time when to stop the push task                                                                                                                                                                                                                                                                                                                 |
+| validateUndefinedParameter  | Boolean               | true     | Whether to validate undefined parameters                                                                                                                                                                                                                                                                                                              |
 
 Structure of class FileParameter
 
@@ -155,6 +156,15 @@ The search apk push history API allows third party system to search pushed apks 
 ```
 public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
                                                     String terminalTid, String appPackageName, PushStatus status)
+                                                    
+public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
+                                                    String terminalTid, String appPackageName, PushStatus status,
+                                                    List<String> pidList)
+                                                    
+public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, SearchOrderBy orderBy,
+                                                    String terminalTid, String appPackageName, PushStatus status,
+                                                    String serialNo,
+                                                    List<String> pidList)
 ```
 
 **Input parameter(s) description**
@@ -164,16 +174,29 @@ public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, Search
 | pageNo         | int           | false    | page number, value must >=1                                  |
 | pageSize       | int           | false    | the record number per page, range is 1 to 100                |
 | orderBy        | SearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of SearchOrderBy.CreatedDate_desc and SearchOrderBy.CreatedDate_asc. |
-| terminalTid    | String        | false    | search filter by terminal tid                                |
+| terminalTid    | String        | true     | search filter by terminal tid                                |
 | appPackageName | String        | true     | search filter by app packageName                             |
 | status         | PushStatus    | true     | the push status<br/> the value can be PushStatus.Active, PushStatus.Suspend, PushStatus.Completed |
+| serialNo       | String        | true     | search filter by terminal serialNo                           |
+| pidList        | List<String>  | true     | TerminalApkParamDTO.ConfiguredParameters will be returned based on PID |
 
 **Sample codes**
 
 ```
 TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,12,SearchOrderBy.CreatedDate_desc,
+String terminalTid = "LNFAJ1HC";
+String testPackageName = "com.orange.onekeylockscreen";
+
+Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,1,SearchOrderBy.CreatedDate_desc,
                                 terminalTid, testPackageName, PushStatus.Active);
+
+List<String> pidList = new ArrayList<>();
+pidList.add("sys_F2_pid3");
+Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,1,TerminalApkApi.SearchOrderBy.CreatedDate_desc,terminalTid, testPackageName, TerminalApkApi.PushStatus.Active, pidList);
+
+String serialNo= "TESTCLIENT";
+Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,1,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
+                null, testPackageName, TerminalApkApi.PushStatus.Active, serialNo, pidList);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -181,7 +204,7 @@ Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,12,SearchOrde
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["pageNo:must be greater than or equal to 1"]
+	"validationErrors": ["The property serialNo and tid in request cannot be blank at same time!"]
 }
 ```
 
@@ -189,36 +212,65 @@ Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,12,SearchOrde
 
 ```
 {
-	"businessCode": 0,
-	"pageInfo": {
-		"pageNo": 1,
-		"limit": 12,
-		"totalCount": 1,
-		"hasNext": false,
-		"dataSet": [{
-			"id": 17850,
-            "apkPackageName": "com.pax.demo",
-            "apkVersionName": "7.5.0",
-            "apkVersionCode": "75",
-            "terminalSN": "87879696",
-            "status": "A",
-            "actionStatus": 2
-		}]
-	}
+    "businessCode": 0,
+    "rateLimit": "3000",
+    "rateLimitRemain": "2998",
+    "rateLimitReset": "1751097758456",
+    "pageInfo": {
+        "pageNo": 1,
+        "limit": 1,
+        "totalCount": 12,
+        "hasNext": true,
+        "dataSet": [
+            {
+                "id": 13411,
+                "terminalSN": "TESTCLIENT",
+                "apkPackageName": "com.orange.onekeylockscreen",
+                "apkVersionCode": 257,
+                "apkVersionName": "2.5.7",
+                "activatedDate": 1750663292000,
+                "forceUpdate": false,
+                "wifiOnly": false,
+                "effectiveTime": 1750663260000,
+                "status": "A",
+                "actionStatus": 2,
+                "actionTime": 1750663329000,
+                "errorCode": 0,
+                "terminalApkParam": {
+                    "paramTemplateName": "LocalUploadTest.xml",
+                    "actionStatus": 2,
+                    "errorCode": 0,
+                    "configuredParameters": {
+                        "pid3": "99"
+                    }
+                }
+            }
+        ]
+    }
 }
 ```
 
 The type in dataSet is TerminalApkDTO. And the structure like below.
 
-| Name           | Type   | Description                                                  |
-| :------------- | :----- | :----------------------------------------------------------- |
-| id             | Long   | the id of terminal apk                                       |
-| apkPackageName | String | the packageName of apk                                       |
-| apkVersionName | String | the version name of apk                                      |
-| apkVersionCode | Long   | the version code of apk                                      |
-| terminalSN     | String | the serialNo of terminal                                     |
-| status         | String | the status of terminal apk, value can be one of A(Active) and S(Suspend) |
-| actionStatus   | String | the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status) |
+| Name             | Type                | Description                                                  |
+| :--------------- | :------------------ | :----------------------------------------------------------- |
+| id               | Long                | the id of terminal apk                                       |
+| apkPackageName   | String              | the packageName of apk                                       |
+| apkVersionName   | String              | the version name of apk                                      |
+| apkVersionCode   | Long                | the version code of apk                                      |
+| terminalSN       | String              | the serialNo of terminal                                     |
+| status           | String              | the status of terminal apk, value can be one of A(Active) and S(Suspend) |
+| actionStatus     | String              | the action status, please refer to [Action Status](APPENDIX.md#action-status) |
+| terminalApkParam | TerminalApkParamDTO | the apk parameter task information                           |
+
+The type in dataSet is TerminalApkParamDTO. And the structure like below.
+
+| Name                 | Type                | Description                                                  |
+| :------------------- | :------------------ | :----------------------------------------------------------- |
+| paramTemplateName    | String              | The param template name                                      |
+| actionStatus         | int                 | the action status, please refer to  [Action Status](APPENDIX.md#user-content-action-status) |
+| errorCode            | int                 | the action error code, please refer to  [Action Error](APPENDIX.md#action-error-codes) |
+| configuredParameters | Map<String, String> | the apk parameter                                            |
 
 **Possible client validation errors**
 
@@ -296,16 +348,16 @@ Result<TerminalApkDTO> result = terminalApkApi.getTerminalApk(17850L, pidList);
 <br>
 The type of data is TerminalApkDTO, and the structure shows below.
 
-| Name           | Type   | Description                                                                                       |
-|:---------------|:-------|:--------------------------------------------------------------------------------------------------|
-| id             | Long   | the id of terminal apk                                                                            |
-| apkPackageName | String | the packageName of apk                                                                            |
-| apkVersionName | String | the version name of apk                                                                           |
-| apkVersionCode | Long   | the version code of apk                                                                           |
-| terminalSN     | String | the serialNo of terminal                                                                          |
-| status         | String | the status of terminal apk, value can be one of A(Active) and S(Suspend)                          |
-| actionStatus   | String | the action status, please refer to [Action Status](APPENDIX.md#user-content-action-status)        |
-| errorCode      | int    | the error code, please refer to [Action Error Codes](APPENDIX.md#user-content-action-error-codes) |
+| Name           | Type   | Description                                                  |
+| :------------- | :----- | :----------------------------------------------------------- |
+| id             | Long   | the id of terminal apk                                       |
+| apkPackageName | String | the packageName of apk                                       |
+| apkVersionName | String | the version name of apk                                      |
+| apkVersionCode | Long   | the version code of apk                                      |
+| terminalSN     | String | the serialNo of terminal                                     |
+| status         | String | the status of terminal apk, value can be one of A(Active) and S(Suspend) |
+| actionStatus   | String | the action status, please refer to [Action Status](APPENDIX.md#action-status) |
+| errorCode      | int    | the error code, please refer to [Action Error Codes](APPENDIX.md#action-error-codes) |
 
 **Possible client validation errors**
 
@@ -479,3 +531,58 @@ terminalApkApi.uninstallApk(uninstallApkRequest);
 | 2027          | Package name cannot be empty               ||
 | 2037          | This app is not installed on the terminal  ||
 | 2039          | Tid mismatch with serialNo                 | Please check the value of tid and serialNo |
+
+### Delete terminal apk
+
+This api allows the third party system delete terminal apk push task.
+
+**API**
+
+```
+public Result<String> deleteTerminalApk(Long terminalApkId)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable| Description                 |
+|:---|:---|:---|:----------------------------|
+|terminalApkId|Long|false| the id of the apk push task |
+
+**Sample codes**
+
+```
+TerminalApkApi terminaApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminaApkApi.deleteTerminalApk(1743L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Terminal Apk Id cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2001,
+	"message": "Terminal app not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|2001|Terminal app not found||

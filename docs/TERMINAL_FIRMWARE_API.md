@@ -354,3 +354,58 @@ terminalFirmwareApi.disablePushFirmwareTask(disablePushFirmwareTask);
 |2033|FmName cannot be empty||
 |2034|Firmware not found||
 |2040|Unfinished terminal push firmware not found|
+
+### Delete terminal firmware
+
+This api allows the third party system delete terminal frimware push task.
+
+**API**
+
+```
+public Result<String> deleteTerminalFirmware(Long terminalFirmwareId)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable| Description                      |
+|:---|:---|:---|:---------------------------------|
+|terminalFirmwareId|Long|false| the id of the firmware push task |
+
+**Sample codes**
+
+```
+TerminalFirmwareApi terminaFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = terminaFirmwareApi.deleteTerminalFirmware(1743L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Terminal Firmware Id cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 8101,
+	"message": "Terminal firmware has not been found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible business codes**
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|8101|Terminal firmware has not been found||
