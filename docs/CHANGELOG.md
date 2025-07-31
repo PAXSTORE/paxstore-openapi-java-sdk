@@ -5,6 +5,9 @@
 * Add parameter query `includeMasterTerminal` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
 * Add TerminalApkParameter API `findApkParameterPidList` and return pidList
 
+### Dependency Change
+* Update guava from 31.1-jre to 33.4.8-jre
+* Update commons-lang3 3.6 to 3.18.0
 
 ## 9.8.0
 ### New Feature

@@ -334,6 +334,10 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
+|includeDetailInfoList|Boolean|true|Whether to return Detail Info and Accessory Info list, example: false|
+|includeInstalledApks|Boolean|true|Whether to return the installed applications, example: false|
+|includeInstalledFirmware|Boolean|true|Whether to return the installed firmware, example: false|
+|includeMasterTerminal|Boolean|true|whether to return the master terminal serialNo, example: false|
 
 **Sample codes**
 
@@ -741,6 +745,10 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetai
 | Parameter Name | Type   |Nullable| Description             |
 |:---------------|:-------|:---|:------------------------|
 | serialNo       | String |false| The terminal serial no. |
+| includeDetailInfoList | Boolean |true| Whether to return Detail Info and Accessory Info list, example: false |
+| includeInstalledApks | Boolean |true| Whether to return the installed applications, example: false |
+| includeInstalledFirmware | Boolean |true| Whether to return the installed firmware, example: false |
+| includeMasterTerminal | Boolean |true| whether to return the master terminal serialNo, example: false |
 
 **Sample codes**
 
@@ -748,7 +756,7 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetai
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 //simple info
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522");
-//includeDetailInfoList, whether to return Detail Info and Accessory List 
+//includeDetailInfoList
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",true);
 //includeInstalledApks
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",false,true);
