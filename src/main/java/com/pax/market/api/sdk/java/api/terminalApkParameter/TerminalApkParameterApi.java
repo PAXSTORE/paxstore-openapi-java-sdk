@@ -11,7 +11,6 @@
  */
 package com.pax.market.api.sdk.java.api.terminalApkParameter;
 
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
 import com.pax.market.api.sdk.java.api.base.dto.EmptyResponse;
@@ -46,7 +45,6 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
     private static final String CREATE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters";
     private static final String UPDATE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters/{apkParameterId}";
     private static final String DELETE_APK_PARAMETER_URL = "/v1/3rdsys/apkParameters/{apkParameterId}";
-    private static final String GET_APK_PARAMETER_PID_LIST_URL = "/v1/3rdsys/apkParameters/pid/list";
 
 
     public TerminalApkParameterApi(String baseUrl, String apiKey, String apiSecret) {
@@ -152,24 +150,6 @@ public class TerminalApkParameterApi extends BaseThirdPartySysApi {
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<>(emptyResponse);
-    }
-
-    public Result<ApkParameterPidDTO> getApkParameterPidList(String templateName, String packageName, String versionName){
-        List<String> validationErrs = Lists.newArrayList();
-        validationErrs.addAll(Validators.validateStr(templateName, "parameter.not.null", "templateName"));
-        validationErrs.addAll(Validators.validateStr(packageName, "parameter.not.null", "packageName"));
-        validationErrs.addAll(Validators.validateStr(versionName, "parameter.not.null", "versionName"));
-        if(!validationErrs.isEmpty()) {
-            return new Result<>(validationErrs);
-        }
-        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(GET_APK_PARAMETER_PID_LIST_URL);
-        request.setRequestMethod(SdkRequest.RequestMethod.GET);
-        request.addRequestParam("templateName", templateName);
-        request.addRequestParam("packageName", packageName);
-        request.addRequestParam("versionName", versionName);
-        ApkParameterPidResponse resp =  EnhancedJsonUtils.fromJson(client.execute(request), ApkParameterPidResponse.class);
-        return new Result<ApkParameterPidDTO>(resp);
     }
 
     public enum SearchOrderBy {

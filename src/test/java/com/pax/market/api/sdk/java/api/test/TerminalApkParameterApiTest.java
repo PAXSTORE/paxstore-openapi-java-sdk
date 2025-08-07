@@ -16,7 +16,6 @@ import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.TerminalApkParameterApi;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterDTO;
-import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterPidDTO;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.CreateApkParameterRequest;
 
 
@@ -114,15 +113,5 @@ public class TerminalApkParameterApiTest {
         Result<String> deleteResult = terminalApkParameterApi.deleteApkParameter(apkParameterId);
         logger.debug("Result of delete terminal apk parameter: {}",deleteResult.toString());
         Assert.assertTrue(deleteResult.getBusinessCode() == 0);
-    }
-
-    @Test
-    public void testGetApkParameterPidList() throws IOException {
-        String templateName = "222";
-        String packageName = "com.alibaba.android.rimet";
-        String versionName = "6.5.5";
-        Result<ApkParameterPidDTO> result = terminalApkParameterApi.getApkParameterPidList(templateName, packageName, versionName);
-        logger.debug("Result of find terminal apk parameter pidList: {}",result.toString());
-        Assert.assertEquals(0, result.getBusinessCode());
     }
 }

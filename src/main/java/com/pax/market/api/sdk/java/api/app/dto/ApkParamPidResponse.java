@@ -9,10 +9,10 @@
  *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
  * ********************************************************************************
  */
-package com.pax.market.api.sdk.java.api.terminalApkParameter.dto;
+package com.pax.market.api.sdk.java.api.app.dto;
 
 import com.pax.market.api.sdk.java.api.base.dto.Response;
 
-public class ApkParameterPidResponse extends Response<ApkParameterPidDTO> {
+public class ApkParamPidResponse extends Response<ApkParamPidDTO> {
     private static final long serialVersionUID = -2926187249039646034L;
 }

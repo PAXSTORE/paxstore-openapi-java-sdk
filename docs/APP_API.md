@@ -354,7 +354,99 @@ Structure of class AppCostDTO
 | 1759          | Reseller doesn't exist |             |
 | 1000          | App not found          |             |
 
+### Search Apk Param Pid List
+
+**API**
+
+```
+public Result<ApkParamPidDTO> searchApkParamPidList(String paramTemplateName, String packageName, String versionName)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name    | Type   | Nullable | Description                               |
+| :---------------- | :----- | :------- | :---------------------------------------- |
+| paramTemplateName | String | false    | Apk paramTemplateName, example: 1.xml     |
+| packageName       | String | false    | Apk packageName, example: com.app.package |
+| versionName       | String | false    | Apk versionName, example: 1.0             |
+
+**Sample codes**
+
+```
+AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String paramTemplateName = "jesse_password.xml";
+String packageName = "com.orange.onekeylockscreen";
+String versionName = "2.5.7";
+Result<ApkParamPidDTO> result = appApi.searchApkParamPidList(paramTemplateName, packageName, versionName);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter templateName cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1003,
+	"message": "APK not found"
+}
+```
+
+**Successful sample result**
+
+```
+{
+    "businessCode": 0,
+    "data": {
+        "pidList": [
+            "pid1 (sys_F2)",
+            "pid2 (sys_F2)",
+            "pid3 (sys_F2)",
+            "pid4 (sys_F2)",
+            "pid5 (sys_F2)",
+            "pid6 (sys_F2)",
+            "pid7 (sys_F2)",
+            "pid8 (sys_F2)",
+            "pid9 (sys_F2)",
+            "pid10[1] (sys_F2)",
+            "pid10[2] (sys_F2)",
+            "pid10[3] (sys_F2)",
+            "pid11[1] (sys_F2)",
+            "pid11[2] (sys_F2)",
+            "pid12 (sys_F2)"
+        ]
+    },
+    "rateLimit": "3000",
+    "rateLimitRemain": "2999",
+    "rateLimitReset": "1754567994813"
+}
+```
 
 
 
+The type in dataSet is ApkParameterPidDTO. And the structure like below.
 
+| Property Name | Type         | Description              |
+| ------------- | ------------ | ------------------------ |
+| pidList       | List<String> | The pidList of Apk param |
+
+**Possible validation errors**
+
+> <font color="red">Parameter templateName cannot be null!</font>  
+> <font color=red>Parameter packageName cannot be null!</font>  
+> <font color=red>Parameter versionName cannot be null!</font>  
+
+**Possible business codes**
+
+| Business Code | Message                                                      | Description |
+| :------------ | :----------------------------------------------------------- | :---------- |
+| 1003          | APK not found                                                |             |
+| 1111          | Selected parameter templates exceeded the max limit          |             |
+| 1254          | Parameter template not found                                 |             |
+| 12541         | Parameter template {0} can not be found in application {1}({2}) |             |

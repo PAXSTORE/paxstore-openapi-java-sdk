@@ -1,4 +1,4 @@
-package com.pax.market.api.sdk.java.api.terminalApkParameter.dto;
+package com.pax.market.api.sdk.java.api.app.dto;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.List;
  * @author shifan
  * @date 2025/7/25
  */
-public class ApkParameterPidDTO implements Serializable {
+public class ApkParamPidDTO implements Serializable {
     private static final long serialVersionUID = -9196935844145409105L;
 
     private List<String> pidList;
@@ -22,7 +22,7 @@ public class ApkParameterPidDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ApkParameterPidDTO{" +
+        return "ApkParamPidDTO{" +
                 "pidList=" + pidList +
                 '}';
     }
