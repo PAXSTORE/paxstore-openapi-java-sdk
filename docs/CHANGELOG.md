@@ -2,8 +2,9 @@
 
 ## 10.0.0
 ### New Feature
-* Add parameter query `includeMasterTerminal` and return in TerminalApi-`getTerminal`、`getTerminalBySn` API
+* Add parameter query `includeMasterTerminal` and return in TerminalApi-`getTerminal`, `getTerminalBySn` API
 * Add AppApi API `searchApkParameterPidList` and return pidList
+* Add TerminalApi API `pushTerminalSetLauncherAction`, `pushTerminalSetLauncherActionBySN`
 
 ### Dependency Change
 * Update guava from 31.1-jre to 33.4.8-jre

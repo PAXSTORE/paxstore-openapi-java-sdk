@@ -4166,8 +4166,6 @@ Structure of class EmptyResponse
 | :------------ | :------------------------- | :---------- |
 | 2028          | Terminal not found         |             |
 
-
-
 ### Change terminal model by Serial No
 
 Change terminal model by serialNo, modelName.
@@ -4180,10 +4178,10 @@ public Result<EmptyResponse> changeModelBySN(String serialNo, String modelName)
 
 **Input parameter(s) description**
 
-| Parameter Name | Type   | Nullable | Description                   |
-|:---------------| :----- |:---------|:------------------------------|
-| serialNo       | String | false    | serial No of terminal.        |
-| modelName      | String | false    | new model name of terminal.   |
+| Parameter Name | Type   | Nullable | Description                 |
+| :------------- | :----- | :------- | :-------------------------- |
+| serialNo       | String | false    | serial No of terminal.      |
+| modelName      | String | false    | new model name of terminal. |
 
 
 **Sample codes**
@@ -4225,9 +4223,9 @@ The type in dataSet of result is EmptyResponse. The structure shows below.
 Structure of class EmptyResponse
 
 | Property Name | Type   | Description   |
-| :------------ |:-------|:--------------|
-| businessCode           | Long   | 0 is success  |
-| message      | String | error message |
+| :------------ | :----- | :------------ |
+| businessCode  | Long   | 0 is success  |
+| message       | String | error message |
 
 **Possible client validation errors**
 
@@ -4235,7 +4233,167 @@ Structure of class EmptyResponse
 
 **Possible business codes**
 
-| Business Code | Message                    | Description |
-| :------------ | :------------------------- | :---------- |
-| 2028          | Terminal not found         |             |
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 2028          | Terminal not found |             |
 
+
+
+### Push Terminal Set Launcher Action By TerminalId
+
+**API**
+
+```
+public Result<EmptyResponse> pushTerminalSetLauncherAction(Long terminalId, String packageName) 
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description |
+| :------------- | :----- | :------- | :---------- |
+| terminalId     | Long   | false    |             |
+| packageName    | String | false    |             |
+
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String packageName = "com.orange.onekeylockscreen";
+Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherAction(terminalId, packageName);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property packageName can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+    "businessCode": 0,
+    "rateLimit": "3000",
+    "rateLimitRemain": "2999",
+    "rateLimitReset": "1754622738547"
+}
+```
+
+The type in dataSet of result is EmptyResponse. The structure shows below.
+
+Structure of class EmptyResponse
+
+| Property Name | Type   | Description   |
+| :------------ | :----- | :------------ |
+| businessCode  | Long   | 0 is success  |
+| message       | String | error message |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                                          | Description |
+| :------------ | :----------------------------------------------- | :---------- |
+| 131           | Insufficient access right                        |             |
+| 1800          | Terminal not found                               |             |
+| 1896          | The terminal is offline!                         |             |
+| 2064          | Parameter packageName is mandatory               |             |
+| 2065          | Installed application not found                  |             |
+| 2066          | Application is not a launcher application        |             |
+| 2067          | Application has been set as launcher application |             |
+
+
+
+### Push Terminal Set Launcher Action By SN
+
+**API**
+
+```
+public Result<EmptyResponse> pushTerminalSetLauncherActionBySN(String serialNo, String packageName)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description |
+| :------------- | :----- | :------- | :---------- |
+| terminalId     | Long   | false    |             |
+| packageName    | String | false    |             |
+
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+private final String serialNo = "TESTCLIENT";
+String packageName = "com.orange.onekeylockscreen";
+Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherActionBySN(serialNo, packageName);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property packageName can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+    "businessCode": 0,
+    "rateLimit": "3000",
+    "rateLimitRemain": "2999",
+    "rateLimitReset": "1754622738547"
+}
+```
+
+The type in dataSet of result is EmptyResponse. The structure shows below.
+
+Structure of class EmptyResponse
+
+| Property Name | Type   | Description   |
+| :------------ | :----- | :------------ |
+| businessCode  | Long   | 0 is success  |
+| message       | String | error message |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                                          | Description |
+| :------------ | :----------------------------------------------- | :---------- |
+| 131           | Insufficient access right                        |             |
+| 1800          | Terminal not found                               |             |
+| 1896          | The terminal is offline!                         |             |
+| 2064          | Parameter packageName is mandatory               |             |
+| 2065          | Installed application not found                  |             |
+| 2066          | Application is not a launcher application        |             |
+| 2067          | Application has been set as launcher application |             |

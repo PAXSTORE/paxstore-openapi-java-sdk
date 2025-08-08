@@ -546,4 +546,18 @@ public class TerminalApiTest {
 		Result<EmptyResponse> responseResult = terminalApi.changeModel(terminalId, modelName);
 		Assert.assertEquals(0, responseResult.getBusinessCode());
 	}
+
+	@Test
+	public void testPushTerminalSetLauncherActionById() {
+		String packageName = "com.orange.onekeylockscreen";
+		Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherAction(terminalId, packageName);
+		Assert.assertEquals(0, responseResult.getBusinessCode());
+	}
+
+	@Test
+	public void testPushTerminalSetLauncherActionBySN() {
+		String packageName = "com.orange.onekeylockscreen";
+		Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherActionBySN(serialNo, packageName);
+		Assert.assertEquals(0, responseResult.getBusinessCode());
+	}
 }

@@ -108,6 +108,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String CHANGE_TERMINAL_MODEL_BY_ID = "/v1/3rdsys/terminals/{terminalId}/model";
     protected static final String CHANGE_TERMINAL_MODEL_BY_SN = "/v1/3rdsys/terminal/model";
+    protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION = "/v1/3rdsys/terminals/{terminalId}/set/launcher";
+    protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN = "/v1/3rdsys/terminal/set/launcher";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -830,6 +832,42 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
         request.addRequestParam("modelName", StringUtils.trim(modelName));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<EmptyResponse> pushTerminalSetLauncherAction(Long terminalId, String packageName) {
+        logger.debug("terminalId={}, packageName={}", terminalId, packageName);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(packageName), "parameter.not.empty", "packageName"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_SET_LAUNCHER_ACTION.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("packageName", StringUtils.trim(packageName));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+
+    public Result<EmptyResponse> pushTerminalSetLauncherActionBySN(String serialNo, String packageName) {
+        logger.debug("serialNo={}, packageName={}", serialNo, packageName);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(packageName), "parameter.not.empty", "packageName"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.addRequestParam("packageName", StringUtils.trim(packageName));
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<>(emptyResponse);
     }
