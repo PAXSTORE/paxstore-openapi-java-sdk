@@ -4330,8 +4330,8 @@ public Result<EmptyResponse> pushTerminalSetLauncherActionBySN(String serialNo, 
 **Input parameter(s) description**
 
 | Parameter Name | Type   | Nullable | Description |
-| :------------- | :----- | :------- | :---------- |
-| terminalId     | Long   | false    |             |
+|:---------------|:-------| :------- | :---------- |
+| serialNo       | String | false    |             |
 | packageName    | String | false    |             |
 
 
