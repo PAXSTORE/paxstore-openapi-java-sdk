@@ -235,7 +235,7 @@ Structure of class CreateApkParameterRequest
 |packageName| String                | false    |The package name which indicate the application you want to push to the terminal|
 |version| String                | false    |The version name of application which you want to push|
 |name| String                | false    |The template name|
-|paramTemplateName| String                | false    |The template file name of paramter application|
+|paramTemplateName| String                | true     |The template file name of paramter application|
 |parameters| Map\<String, String\> | true     |The parameter key and value, the key the PID in template|
 |base64FileParameters| List\<FileParameter\> | true     |The parameter of file type|
 |validateUndefinedParameter| Boolean | true     |       Whether to validate undefined parameters     |
