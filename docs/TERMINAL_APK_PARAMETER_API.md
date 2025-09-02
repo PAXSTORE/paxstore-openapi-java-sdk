@@ -117,7 +117,7 @@ The structure of class ApkDTO
 | apkType       | String     | base type of apk. Value can be one of N(Normal) and P(Parameter) |
 | apkFileType   | String     | file type of apk. Value can be one of A(Android), P(Prolin) and B(Broadpos) |
 | apkFile       | ApkFileDTO | install package file of apk.                                 |
-| Type       | string | OS type, A is for android, T is for traditional                |
+| osType       | string | OS type, A is for android, T is for traditional                |
 
 The structure of class ApkFileDTO
 

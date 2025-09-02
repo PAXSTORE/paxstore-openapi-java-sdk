@@ -20,27 +20,9 @@ import java.io.Serializable;
 public class EntityAttributeLabelInfo implements Serializable {
 
     private static final long serialVersionUID = -1L;
-   // private Long entityAttributeId;
     private String locale;
     private String label;
 
-    /**
-     * Gets attribute id.
-     *
-     * @return the attribute id
-     */
-  /*  public Long getEntityAttributeId() {
-        return entityAttributeId;
-    }*/
-
-    /**
-     * Sets attribute id.
-     *
-     * @param entityAttributeId the attribute id
-     */
-  /*  public void setEntityAttributeId(Long entityAttributeId) {
-        this.entityAttributeId = entityAttributeId;
-    }*/
 
 
     /**

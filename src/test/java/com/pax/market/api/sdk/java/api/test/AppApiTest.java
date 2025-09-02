@@ -37,8 +37,8 @@ public class AppApiTest  {
 
     @Test
     public void testSearchApp() {
-        Result<AppPageDTO> result = appApi.searchApp(1,12, AppSearchOrderBy.UpdatedDate_desc,
-                "", AppOsType.Android, AppChargeType.Free, AppBaseType.Normal, AppStatus.Active,
+        Result<AppPageDTO> result = appApi.searchApp(1,3, AppSearchOrderBy.UpdatedDate_desc,
+                "", AppOsType.Android, AppChargeType.Free, AppBaseType.Normal, null,
                 ApkStatus.Online, false, null);
         logger.debug("Result of search app:{}", result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);

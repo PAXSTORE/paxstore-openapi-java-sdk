@@ -5,6 +5,8 @@
 * Add parameter query `includeMasterTerminal` and return in TerminalApi-`getTerminal`, `getTerminalBySn` API
 * Add AppApi API `searchApkParameterPidList` and return pidList
 * Add TerminalApi API `pushTerminalSetLauncherAction`, `pushTerminalSetLauncherActionBySN`
+* Optimize documentation and some return fields
+  * a. appPageDTO add `text` field - The app price, when app cost use
 
 ### Dependency Change
 * Update guava from 31.1-jre to 33.4.8-jre
