@@ -35,6 +35,7 @@ public class AppPageDTO implements Serializable {
     private Boolean specificReseller;   // 是否定向发布至代理商
     private Integer chargeType;
     private BigDecimal price;
+    private String text;
     private Long downloads;             // 下载次数
     private List<ApkDTO> apkList;
     private LinkedHashMap<String, String> entityAttributeValues;
@@ -128,6 +129,14 @@ public class AppPageDTO implements Serializable {
     }
 
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     @Override
     public String toString() {
         return "AppPageDTO{" +
@@ -139,6 +148,7 @@ public class AppPageDTO implements Serializable {
                 ", specificReseller=" + specificReseller +
                 ", chargeType=" + chargeType +
                 ", price=" + price +
+                ", text='" + text + '\'' +
                 ", downloads=" + downloads +
                 ", apkList=" + apkList +
                 ", entityAttributeValues=" + entityAttributeValues +
