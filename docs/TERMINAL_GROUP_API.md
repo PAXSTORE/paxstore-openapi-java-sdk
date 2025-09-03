@@ -346,6 +346,7 @@ The type in data is TerminalGroupDTO. And the structure like below.
 |1737| The associated merchant is not activate      ||
 |1713| The associated model is not activate         ||
 |1773| The associated reseller is not activate      ||
+|17203| The product types of the models are inconsistent ||
 
 ### Search terminal
 
