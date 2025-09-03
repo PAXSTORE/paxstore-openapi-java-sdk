@@ -108,8 +108,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String CHANGE_TERMINAL_MODEL_BY_ID = "/v1/3rdsys/terminals/{terminalId}/model";
     protected static final String CHANGE_TERMINAL_MODEL_BY_SN = "/v1/3rdsys/terminal/model";
-    protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION = "/v1/3rdsys/terminals/{terminalId}/set/launcher";
-    protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN = "/v1/3rdsys/terminal/set/launcher";
+    protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION = "/v1/3rdsys/terminals/{terminalId}/launcher";
+    protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN = "/v1/3rdsys/terminal/launcher";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -846,7 +846,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 
         SdkRequest request = createSdkRequest(PUSH_TERMINAL_SET_LAUNCHER_ACTION.replace("{terminalId}", terminalId.toString()));
-        request.setRequestMethod(RequestMethod.POST);
+        request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("packageName", StringUtils.trim(packageName));
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
@@ -864,7 +864,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 
         SdkRequest request = createSdkRequest(PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN);
-        request.setRequestMethod(RequestMethod.POST);
+        request.setRequestMethod(RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
         request.addRequestParam("packageName", StringUtils.trim(packageName));

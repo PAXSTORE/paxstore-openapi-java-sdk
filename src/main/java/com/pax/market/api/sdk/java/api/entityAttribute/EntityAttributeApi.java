@@ -20,7 +20,6 @@ import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.entityAttribute.dto.*;
-import com.pax.market.api.sdk.java.api.terminalVariable.TerminalVariableApi;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
@@ -36,7 +35,7 @@ import java.util.Locale;
  * @Version 7.1
  */
 public class EntityAttributeApi  extends BaseThirdPartySysApi {
-    private static final Logger logger = LoggerFactory.getLogger(TerminalVariableApi.class);
+    private static final Logger logger = LoggerFactory.getLogger(EntityAttributeApi.class);
 
     private static final String GET_ENTITY_ATTRIBUTES_URL = "/v1/3rdsys/attributes/{attributeId}";
     private static final String SEARCH_ENTITY_ATTRIBUTES_URL = "/v1/3rdsys/attributes";
