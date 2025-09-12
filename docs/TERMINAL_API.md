@@ -138,6 +138,7 @@ Structure of class TerminalInstalledApkDTO
 |Property Name|Type|Description|
 |:---|:---|:---|
 |appName|String|Application name|
+|source|String|Application source, P(App Store), S(System App), T(Third Party).Note: Only returned in getTerminal and getTerminalBySn APIs.|
 |packageName|String|Package name of application|
 |versionName|String|Version name of application|
 |versionCode|Long|Version code of application|
@@ -642,6 +643,7 @@ Result<TerminalDTO> result = terminalApi.getTerminal(1687838810701873L,false, fa
 		 "installedApks": [
       {
         "appName": "cloudMsg1",
+        "source":"P",
         "packageName": "app1.clouldmsg.com.cloudmsg1",
         "versionName": "1.0",
         "versionCode": 1,
@@ -649,6 +651,7 @@ Result<TerminalDTO> result = terminalApi.getTerminal(1687838810701873L,false, fa
       },
       {
         "appName": "sdkDemo",
+        "source":"P",
         "packageName": "com.pax.android.demoapp",
         "versionName": "7.2.3",
         "versionCode": 135,

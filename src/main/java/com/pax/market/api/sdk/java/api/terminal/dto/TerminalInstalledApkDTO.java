@@ -22,6 +22,8 @@ public class TerminalInstalledApkDTO implements Serializable {
     private static final long serialVersionUID = -1L;
 
     private String appName;
+
+    private String source;
     private String packageName;
     private String versionName;
     private Long versionCode;
@@ -117,10 +119,20 @@ public class TerminalInstalledApkDTO implements Serializable {
         this.installTime = installTime;
     }
 
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     @Override
     public String toString() {
         return "TerminalInstalledApkDTO{" +
                 "appName='" + appName + '\'' +
+                ", source='" + source + '\'' +
                 ", packageName='" + packageName + '\'' +
                 ", versionName='" + versionName + '\'' +
                 ", versionCode=" + versionCode +
