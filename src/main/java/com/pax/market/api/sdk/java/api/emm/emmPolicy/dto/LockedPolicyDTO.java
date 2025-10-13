@@ -4,13 +4,15 @@ import java.io.Serializable;
 
 public class LockedPolicyDTO implements Serializable {
 
-    private static final long serialVersionUID = -8737023663297593529L;
+    private static final long serialVersionUID = -1779263548478334876L;
 
     private String key;
 
     private Boolean lockFlag;
 
     private String lockedByReseller;
+
+    private String lockedByMerchant;
 
     public String getKey() {
         return key;
@@ -36,12 +38,21 @@ public class LockedPolicyDTO implements Serializable {
         this.lockedByReseller = lockedByReseller;
     }
 
+    public String getLockedByMerchant() {
+        return lockedByMerchant;
+    }
+
+    public void setLockedByMerchant(String lockedByMerchant) {
+        this.lockedByMerchant = lockedByMerchant;
+    }
+
     @Override
     public String toString() {
         return "LockedPolicyDTO{" +
                 "key='" + key + '\'' +
                 ", lockFlag=" + lockFlag +
                 ", lockedByReseller='" + lockedByReseller + '\'' +
+                ", lockedByMerchant='" + lockedByMerchant + '\'' +
                 '}';
     }
 }

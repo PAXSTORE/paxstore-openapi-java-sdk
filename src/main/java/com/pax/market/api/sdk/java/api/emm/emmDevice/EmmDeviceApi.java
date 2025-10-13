@@ -34,6 +34,9 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
     private static final String LOCK_EMM_DEVICE_SCREEN_URL = "/v1/3rdsys/emm/devices/{deviceId}/lockscreen";
     private static final String RESET_EMM_DEVICE_PASSWORD_URL = "/v1/3rdsys/emm/devices/{deviceId}/resetpw";
     private static final String START_EMM_DEVICE_LOST_MODE_URL = "/v1/3rdsys/emm/devices/{deviceId}/startlost";
+    private static final String RESUME_EMM_DEVICE_URL = "/v1/3rdsys/emm/devices/{deviceId}/resume";
+    private static final String DISABLE_EMM_DEVICE_URL = "/v1/3rdsys/emm/devices/{deviceId}/disable";
+    private static final String SYNC_EMM_DEVICE_DETAIL_URL = "/v1/3rdsys/emm/devices/{deviceId}/sync";
     private static final String STOP_EMM_DEVICE_LOST_MODE_URL = "/v1/3rdsys/emm/devices/{deviceId}/stoplost";
     private static final String SUBMIT_EMM_ZTE_QUICK_UPLOAD_RECORD_URL = "/v1/3rdsys/emm/devices/zte/quick-upload";
 
@@ -286,6 +289,56 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<>(emptyResponse);
     }
+
+    public Result<String> resumeEmmDevice(Long deviceId) {
+        logger.debug("deviceId= {}", deviceId);
+
+        List<String> validationErrs = Validators.validateId(deviceId, "parameter.id.invalid", "deviceId");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(RESUME_EMM_DEVICE_URL.replace("{deviceId}", String.valueOf(deviceId)));
+        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<String> disableEmmDevice(Long deviceId) {
+        logger.debug("deviceId= {}", deviceId);
+
+        List<String> validationErrs = Validators.validateId(deviceId, "parameter.id.invalid", "deviceId");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(DISABLE_EMM_DEVICE_URL.replace("{deviceId}", String.valueOf(deviceId)));
+        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<String> syncDeviceDetail(Long deviceId) {
+        logger.debug("deviceId= {}", deviceId);
+
+        List<String> validationErrs = Validators.validateId(deviceId, "parameter.id.invalid", "deviceId");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SYNC_EMM_DEVICE_DETAIL_URL.replace("{deviceId}", String.valueOf(deviceId)));
+        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+
     public Result<String> stopEmmDeviceLostMode(Long deviceId) {
         logger.debug("deviceId= {}", deviceId);
 
