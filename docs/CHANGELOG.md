@@ -5,6 +5,15 @@
 * Add parameter query `includeMasterTerminal` and return in TerminalApi-`getTerminal`, `getTerminalBySn` API
 * Add AppApi API `searchApkParameterPidList` and return pidList
 * Add TerminalApi API `pushTerminalSetLauncherAction`, `pushTerminalSetLauncherActionBySN`
+* Add EmmDeviceApi - `resumeEmmDevice` API
+* Add EmmDeviceApi - `disableEmmDevice` API
+* Add EmmDeviceApi - `syncDeviceDetail` API
+* Add EmmPolicyApi - `getDeviceEmmPolicy` API
+* Add EmmPolicyApi - `createDeviceEmmPolicy` API
+* Add the return field `securityStatus` in EmmDeviceApi - `getEmmDevice` API
+* Add the return field `lockedByMerchant` in EmmPolicyApi - `getDeviceEmmPolicy` API
+* Add the return field `apnPolicy` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
+* Apps uploaded outside the developer console also support test tracks
 * Optimize documentation and some return fields
   * a. appPageDTO add `text` field - The app price, when app cost use
 

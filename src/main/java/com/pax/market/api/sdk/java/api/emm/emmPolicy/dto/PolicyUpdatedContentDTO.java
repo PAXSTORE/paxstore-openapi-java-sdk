@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class PolicyUpdatedContentDTO implements Serializable {
-    
+
     private static final long serialVersionUID = -8556343226332392597L;
-    
+
     private Boolean adjustVolumeDisabled;
 
     private AdvancedSecurityOverrides advancedSecurityOverrides;
@@ -1176,11 +1176,13 @@ public class PolicyUpdatedContentDTO implements Serializable {
 
     public static class DeviceConnectivityManagement implements Serializable {
 
-        private static final long serialVersionUID = 3640956673001472790L;
+        private static final long serialVersionUID = 865155981570981099L;
 
         private String tetheringSettings;
 
         private String usbDataAccess;
+
+        private ApnPolicy apnPolicy;
 
         public String getTetheringSettings() {
             return tetheringSettings;
@@ -1198,15 +1200,287 @@ public class PolicyUpdatedContentDTO implements Serializable {
             this.usbDataAccess = usbDataAccess;
         }
 
+        public ApnPolicy getApnPolicy() {
+            return apnPolicy;
+        }
+
+        public void setApnPolicy(ApnPolicy apnPolicy) {
+            this.apnPolicy = apnPolicy;
+        }
+
         @Override
         public String toString() {
             return "DeviceConnectivityManagement{" +
                     "tetheringSettings='" + tetheringSettings + '\'' +
                     ", usbDataAccess='" + usbDataAccess + '\'' +
+                    ", apnPolicy=" + apnPolicy +
                     '}';
         }
     }
 
+    public static class ApnPolicy implements Serializable {
+
+        private static final long serialVersionUID = 4998957975696484116L;
+
+        private Boolean overrideApns;
+
+        private List<ApnSetting> apnSettings;
+
+        public Boolean getOverrideApns() {
+            return overrideApns;
+        }
+
+        public void setOverrideApns(Boolean overrideApns) {
+            this.overrideApns = overrideApns;
+        }
+
+        public List<ApnSetting> getApnSettings() {
+            return apnSettings;
+        }
+
+        public void setApnSettings(List<ApnSetting> apnSettings) {
+            this.apnSettings = apnSettings;
+        }
+
+        @Override
+        public String toString() {
+            return "ApnPolicy{" +
+                    "overrideApns=" + overrideApns +
+                    ", apnSettings=" + apnSettings +
+                    '}';
+        }
+    }
+
+    public static class ApnSetting implements Serializable {
+
+        private static final long serialVersionUID = -215707488766853656L;
+
+        private String alwaysOnSetting;
+
+        private String apn;
+
+        private List<String> apnTypes;
+
+        private String authType;
+
+        private Integer carrierId;
+
+        private String displayName;
+
+        private String mmsProxyAddress;
+
+        private Integer mmsProxyPort;
+
+        private String mmsc;
+
+        private Integer mtuV4;
+
+        private Integer mtuV6;
+
+        private String mvnoType;
+
+        private List<String> networkTypes;
+
+        private String numericOperatorId;
+
+        private String password;
+
+        private String protocol;
+
+        private String proxyAddress;
+
+        private Integer proxyPort;
+
+        private String roamingProtocol;
+
+        private String username;
+
+        public String getAlwaysOnSetting() {
+            return alwaysOnSetting;
+        }
+
+        public void setAlwaysOnSetting(String alwaysOnSetting) {
+            this.alwaysOnSetting = alwaysOnSetting;
+        }
+
+        public String getApn() {
+            return apn;
+        }
+
+        public void setApn(String apn) {
+            this.apn = apn;
+        }
+
+        public List<String> getApnTypes() {
+            return apnTypes;
+        }
+
+        public void setApnTypes(List<String> apnTypes) {
+            this.apnTypes = apnTypes;
+        }
+
+        public String getAuthType() {
+            return authType;
+        }
+
+        public void setAuthType(String authType) {
+            this.authType = authType;
+        }
+
+        public Integer getCarrierId() {
+            return carrierId;
+        }
+
+        public void setCarrierId(Integer carrierId) {
+            this.carrierId = carrierId;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+
+        public void setDisplayName(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getMmsProxyAddress() {
+            return mmsProxyAddress;
+        }
+
+        public void setMmsProxyAddress(String mmsProxyAddress) {
+            this.mmsProxyAddress = mmsProxyAddress;
+        }
+
+        public Integer getMmsProxyPort() {
+            return mmsProxyPort;
+        }
+
+        public void setMmsProxyPort(Integer mmsProxyPort) {
+            this.mmsProxyPort = mmsProxyPort;
+        }
+
+        public String getMmsc() {
+            return mmsc;
+        }
+
+        public void setMmsc(String mmsc) {
+            this.mmsc = mmsc;
+        }
+
+        public Integer getMtuV4() {
+            return mtuV4;
+        }
+
+        public void setMtuV4(Integer mtuV4) {
+            this.mtuV4 = mtuV4;
+        }
+
+        public Integer getMtuV6() {
+            return mtuV6;
+        }
+
+        public void setMtuV6(Integer mtuV6) {
+            this.mtuV6 = mtuV6;
+        }
+
+        public String getMvnoType() {
+            return mvnoType;
+        }
+
+        public void setMvnoType(String mvnoType) {
+            this.mvnoType = mvnoType;
+        }
+
+        public List<String> getNetworkTypes() {
+            return networkTypes;
+        }
+
+        public void setNetworkTypes(List<String> networkTypes) {
+            this.networkTypes = networkTypes;
+        }
+
+        public String getNumericOperatorId() {
+            return numericOperatorId;
+        }
+
+        public void setNumericOperatorId(String numericOperatorId) {
+            this.numericOperatorId = numericOperatorId;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getProtocol() {
+            return protocol;
+        }
+
+        public void setProtocol(String protocol) {
+            this.protocol = protocol;
+        }
+
+        public String getProxyAddress() {
+            return proxyAddress;
+        }
+
+        public void setProxyAddress(String proxyAddress) {
+            this.proxyAddress = proxyAddress;
+        }
+
+        public Integer getProxyPort() {
+            return proxyPort;
+        }
+
+        public void setProxyPort(Integer proxyPort) {
+            this.proxyPort = proxyPort;
+        }
+
+        public String getRoamingProtocol() {
+            return roamingProtocol;
+        }
+
+        public void setRoamingProtocol(String roamingProtocol) {
+            this.roamingProtocol = roamingProtocol;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        @Override
+        public String toString() {
+            return "ApnSetting{" +
+                    "alwaysOnSetting='" + alwaysOnSetting + '\'' +
+                    ", apn='" + apn + '\'' +
+                    ", apnTypes=" + apnTypes +
+                    ", authType='" + authType + '\'' +
+                    ", carrierId=" + carrierId +
+                    ", displayName='" + displayName + '\'' +
+                    ", mmsProxyAddress='" + mmsProxyAddress + '\'' +
+                    ", mmsProxyPort=" + mmsProxyPort +
+                    ", mmsc='" + mmsc + '\'' +
+                    ", mtuV4=" + mtuV4 +
+                    ", mtuV6=" + mtuV6 +
+                    ", mvnoType='" + mvnoType + '\'' +
+                    ", networkTypes=" + networkTypes +
+                    ", numericOperatorId='" + numericOperatorId + '\'' +
+                    ", password='" + password + '\'' +
+                    ", protocol='" + protocol + '\'' +
+                    ", proxyAddress='" + proxyAddress + '\'' +
+                    ", proxyPort=" + proxyPort +
+                    ", roamingProtocol='" + roamingProtocol + '\'' +
+                    ", username='" + username + '\'' +
+                    '}';
+        }
+    }
 
     public static class PolicyEnforcementRule implements Serializable {
 
