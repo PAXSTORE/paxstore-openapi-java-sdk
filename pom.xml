@@ -31,7 +31,7 @@
         <guava.version>33.4.8-jre</guava.version>
         <common-lang.version>3.18.0</common-lang.version>
         <junit.version>4.13.1</junit.version>
-        <logback.version>1.5.18</logback.version>
+        <logback.version>1.5.19</logback.version>
     </properties>
 
     <licenses>
