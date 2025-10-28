@@ -1,10 +1,8 @@
 package com.pax.market.api.sdk.java.api.app;
 
+import com.google.common.collect.Lists;
 import com.pax.market.api.sdk.java.api.BaseThirdPartySysApi;
-import com.pax.market.api.sdk.java.api.app.dto.AppCostDTO;
-import com.pax.market.api.sdk.java.api.app.dto.AppCostResponse;
-import com.pax.market.api.sdk.java.api.app.dto.AppPageDTO;
-import com.pax.market.api.sdk.java.api.app.dto.AppPageResponse;
+import com.pax.market.api.sdk.java.api.app.dto.*;
 import com.pax.market.api.sdk.java.api.base.dto.PageRequestDTO;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
@@ -23,6 +21,8 @@ public class AppApi extends BaseThirdPartySysApi {
 
     private static final String SEARCH_APP_URL = "/v1/3rdsys/apps";
     private static final String GET_APP_COST_URL = "/v1/3rdsys/apps/app-cost";
+
+    private static final String SEARCH_APK_PARAM_PID_LIST_URL = "/v1/3rdsys/apps/param/pid/list";
 
     public AppApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -127,6 +127,25 @@ public class AppApi extends BaseThirdPartySysApi {
         request.addRequestParam("appId", appId.toString());
         AppCostResponse appCostDTO = EnhancedJsonUtils.fromJson(client.execute(request), AppCostResponse.class);
         return new Result<>(appCostDTO);
+    }
+
+
+    public Result<ApkParamPidDTO> searchApkParamPidList(String paramTemplateName, String packageName, String versionName){
+        List<String> validationErrs = Lists.newArrayList();
+        validationErrs.addAll(Validators.validateStr(paramTemplateName, "parameter.not.null", "paramTemplateName"));
+        validationErrs.addAll(Validators.validateStr(packageName, "parameter.not.null", "packageName"));
+        validationErrs.addAll(Validators.validateStr(versionName, "parameter.not.null", "versionName"));
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SEARCH_APK_PARAM_PID_LIST_URL);
+        request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        request.addRequestParam("paramTemplateName", paramTemplateName);
+        request.addRequestParam("packageName", packageName);
+        request.addRequestParam("versionName", versionName);
+        ApkParamPidResponse resp =  EnhancedJsonUtils.fromJson(client.execute(request), ApkParamPidResponse.class);
+        return new Result<ApkParamPidDTO>(resp);
     }
 
     public enum ApkStatus {

@@ -117,7 +117,7 @@ The structure of class ApkDTO
 | apkType       | String     | base type of apk. Value can be one of N(Normal) and P(Parameter) |
 | apkFileType   | String     | file type of apk. Value can be one of A(Android), P(Prolin) and B(Broadpos) |
 | apkFile       | ApkFileDTO | install package file of apk.                                 |
-| Type       | string | OS type, A is for android, T is for traditional                |
+| osType       | string | OS type, A is for android, T is for traditional                |
 
 The structure of class ApkFileDTO
 
@@ -133,6 +133,10 @@ The structure of class ApkFileDTO
 > <font color=red>pageSize:must be less than or equal to 100</font>  
 > <font color=red>Parameter packageName is mandatory!</font>  
 > <font color=red>Parameter versionName is mandatory!</font>
+
+### Get a Apk Parameter
+
+**API**
 
 ```
 public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId);
@@ -231,7 +235,7 @@ Structure of class CreateApkParameterRequest
 |packageName| String                | false    |The package name which indicate the application you want to push to the terminal|
 |version| String                | false    |The version name of application which you want to push|
 |name| String                | false    |The template name|
-|paramTemplateName| String                | false    |The template file name of paramter application|
+|paramTemplateName| String                | true     |The template file name of paramter application|
 |parameters| Map\<String, String\> | true     |The parameter key and value, the key the PID in template|
 |base64FileParameters| List\<FileParameter\> | true     |The parameter of file type|
 |validateUndefinedParameter| Boolean | true     |       Whether to validate undefined parameters     |
@@ -382,7 +386,6 @@ s}
 > <font color=red>Parameter apkParameterUpdateRequest cannot be null!</font>  
 > <font color=red>Exceed max counter (10) of file type parameters!</font>  
 > <font color=red>Exceed max size (500kb) per file type parameters!</font>
-
 
 **Possible business codes**
 

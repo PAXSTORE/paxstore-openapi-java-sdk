@@ -108,6 +108,8 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
     protected static final String CHANGE_TERMINAL_MODEL_BY_ID = "/v1/3rdsys/terminals/{terminalId}/model";
     protected static final String CHANGE_TERMINAL_MODEL_BY_SN = "/v1/3rdsys/terminal/model";
+    protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION = "/v1/3rdsys/terminals/{terminalId}/launcher";
+    protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN = "/v1/3rdsys/terminal/launcher";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -166,18 +168,26 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
 
     public Result<TerminalDTO> getTerminal(Long terminalId) {
-       return getTerminal(terminalId,false,false,false);
+       return getTerminal(terminalId,false,false,false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList) {
-        return getTerminal(terminalId, includeDetailInfoList, false, false);
+        return getTerminal(terminalId, includeDetailInfoList, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks) {
-        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, false);
+        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, false, false);
     }
 
-    public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks,boolean includeInstalledFirmware) {
+    public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware) {
+        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false);
+    }
+
+    public Result<TerminalDTO> getTerminal(Long terminalId,
+                                           boolean includeDetailInfoList,
+                                           boolean includeInstalledApks,
+                                           boolean includeInstalledFirmware,
+                                           boolean includeMasterTerminal) {
         logger.debug("terminalId = {}", terminalId);
         List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
         if (!validationErrs.isEmpty()) {
@@ -188,6 +198,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addRequestParam("includeDetailInfoList", String.valueOf(includeDetailInfoList));
         request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
         request.addRequestParam("includeInstalledFirmware", String.valueOf(includeInstalledFirmware));
+        request.addRequestParam("includeMasterTerminal", String.valueOf(includeMasterTerminal));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<>(terminalResponse);
     }
@@ -427,18 +438,22 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo) {
-        return getTerminalBySn(serialNo, false, false, false);
+        return getTerminalBySn(serialNo, false, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList) {
-        return getTerminalBySn(serialNo, includeDetailInfoList, false, false);
+        return getTerminalBySn(serialNo, includeDetailInfoList, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks) {
-        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, false);
+        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware) {
+        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false);
+    }
+
+    public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal) {
         logger.debug("serialNo= {}", serialNo);
         List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
         if (!validationErrs.isEmpty()) {
@@ -449,6 +464,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addRequestParam("includeDetailInfoList", String.valueOf(includeDetailInfoList));
         request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
         request.addRequestParam("includeInstalledFirmware", String.valueOf(includeInstalledFirmware));
+        request.addRequestParam("includeMasterTerminal", String.valueOf(includeMasterTerminal));
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<>(terminalResponse);
@@ -816,6 +832,42 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
         request.addRequestParam("modelName", StringUtils.trim(modelName));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    public Result<EmptyResponse> pushTerminalSetLauncherAction(Long terminalId, String packageName) {
+        logger.debug("terminalId={}, packageName={}", terminalId, packageName);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(packageName), "parameter.not.empty", "packageName"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_SET_LAUNCHER_ACTION.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("packageName", StringUtils.trim(packageName));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+
+    public Result<EmptyResponse> pushTerminalSetLauncherActionBySN(String serialNo, String packageName) {
+        logger.debug("serialNo={}, packageName={}", serialNo, packageName);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(Validators.validateStr(String.valueOf(packageName), "parameter.not.empty", "packageName"));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN);
+        request.setRequestMethod(RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.addRequestParam("packageName", StringUtils.trim(packageName));
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<>(emptyResponse);
     }

@@ -150,6 +150,13 @@ public class TerminalApiTest {
 		logger.debug("Result of get terminal: {}",getResult.toString());
 		Assert.assertTrue(getResult.getBusinessCode() == 0);
     }
+	@Test
+    public void testGetTerminalIncludeMasterTerminal() {
+		Long terminalId = 1687838810701873L;
+		Result<TerminalDTO> result = terminalApi.getTerminal(terminalId,false, false, false, true);
+		logger.debug("Result of get terminal: {}",EnhancedJsonUtils.toJson(result));
+		Assert.assertTrue(result.getBusinessCode() == 0);
+    }
 
 	@Test
 	public void testBatchAddTerminalToGroup(){
@@ -443,6 +450,13 @@ public class TerminalApiTest {
 	}
 
 	@Test
+	public void testGetTerminalBySnIncludeMasterTerminal() {
+		Result<TerminalDTO> terminalBySn = terminalApi.getTerminalBySn(serialNo, false, false, false,  true);
+		logger.debug("Result of testGetTerminalBySn {}", terminalBySn.toString());
+		Assert.assertEquals(0, terminalBySn.getBusinessCode());
+	}
+
+	@Test
 	public void testSendTerminalMessage() {
 		//terminal is online
 		TerminalMessageRequest request = new TerminalMessageRequest();
@@ -530,6 +544,20 @@ public class TerminalApiTest {
 	@Test
 	public void testChangeModelById() {
 		Result<EmptyResponse> responseResult = terminalApi.changeModel(terminalId, modelName);
+		Assert.assertEquals(0, responseResult.getBusinessCode());
+	}
+
+	@Test
+	public void testPushTerminalSetLauncherActionById() {
+		String packageName = "com.orange.onekeylockscreen";
+		Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherAction(terminalId, packageName);
+		Assert.assertEquals(0, responseResult.getBusinessCode());
+	}
+
+	@Test
+	public void testPushTerminalSetLauncherActionBySN() {
+		String packageName = "com.orange.onekeylockscreen";
+		Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherActionBySN(serialNo, packageName);
 		Assert.assertEquals(0, responseResult.getBusinessCode());
 	}
 }

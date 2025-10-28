@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-	<version>9.8.0</version>
+	<version>10.0.0</version>
     <name>OpenAPI Java SDK</name>
     <description>OpenAPI Java SDK</description>
     <url>https://github.com/PAXSTORE/paxstore-openapi-java-sdk</url>
@@ -27,11 +27,11 @@
 		<javadoc.opts>-Xdoclint:none</javadoc.opts>
 
         <gson.version>2.9.1</gson.version>
-        <slf4j.version>1.7.12</slf4j.version>
-        <guava.version>32.0.0-jre</guava.version>
-        <common-lang.version>3.6</common-lang.version>
+        <slf4j.version>2.0.17</slf4j.version>
+        <guava.version>33.4.8-jre</guava.version>
+        <common-lang.version>3.18.0</common-lang.version>
         <junit.version>4.13.1</junit.version>
-        <logback.version>1.3.15</logback.version>
+        <logback.version>1.5.18</logback.version>
     </properties>
 
     <licenses>

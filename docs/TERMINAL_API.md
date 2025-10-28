@@ -117,6 +117,7 @@ Structure of class TerminalDTO
 |installedApks|List\<TerminalInstalledApkDTO\>| The installed applications of the terminal|
 |terminalDetail|TerminalDetailDTO| The terminal detail information |
 |terminalAccessoryList|List\<TerminalAccessoryDTO\>| The terminal accessory information list |
+|masterTerminalSerialNo|String| When the query terminal is an accessory device, return the master terminal serialNo (if any). <br/>Return only in getTerminal and getTerminalBySn |
 
 Structure of class TerminalLocationDTO
 
@@ -325,6 +326,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal);
 ```
 
 **Input parameter(s) description**
@@ -332,6 +334,10 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 |Parameter Name|Type|Nullable|Description|
 |:---|:---|:---|:---|
 |terminalId|Long|false|The terminal id.|
+|includeDetailInfoList|Boolean|true|Whether to return Detail Info and Accessory Info list, example: false|
+|includeInstalledApks|Boolean|true|Whether to return the installed applications, example: false|
+|includeInstalledFirmware|Boolean|true|Whether to return the installed firmware, example: false|
+|includeMasterTerminal|Boolean|true|whether to return the master terminal serialNo, example: false|
 
 **Sample codes**
 
@@ -345,6 +351,8 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,true);
 Result<TerminalDTO> result = terminalApi.getTerminal(908627L,false, true);
 //includeInstalledFirmware
 Result<TerminalDTO> result = terminalApi.getTerminal(1654906985381944L,false, false, true);
+//includeMasterTerminal
+Result<TerminalDTO> result = terminalApi.getTerminal(1687838810701873L,false, false, false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -679,6 +687,30 @@ Result<TerminalDTO> result = terminalApi.getTerminal(1654906985381944L,false, fa
 }
 ```
 
+```
+{
+    "businessCode": 0,
+    "data": {
+        "id": 1687838810701873,
+        "name": "TESTCLIENTACCESS",
+        "tid": "7QG5HB6Y",
+        "serialNo": "TESTCLIENTACCESS",
+        "status": "A",
+        "merchantName": "gxtest",
+        "modelName": "A960",
+        "resellerName": "shifan",
+        "location": "",
+        "createdDate": 1751509062000,
+        "updatedDate": 1751509062000,
+        "lastActiveTime": 1751509062000,
+        "masterTerminalSerialNo": "TESTPCI6"
+    },
+    "rateLimit": "3000",
+    "rateLimitRemain": "2998",
+    "rateLimitReset": "1751512410904"
+}
+```
+
 
 
 The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
@@ -705,6 +737,7 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware)
+public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal)
 ```
 
 **Input parameter(s) description**
@@ -712,6 +745,10 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetai
 | Parameter Name | Type   |Nullable| Description             |
 |:---------------|:-------|:---|:------------------------|
 | serialNo       | String |false| The terminal serial no. |
+| includeDetailInfoList | Boolean |true| Whether to return Detail Info and Accessory Info list, example: false |
+| includeInstalledApks | Boolean |true| Whether to return the installed applications, example: false |
+| includeInstalledFirmware | Boolean |true| Whether to return the installed firmware, example: false |
+| includeMasterTerminal | Boolean |true| whether to return the master terminal serialNo, example: false |
 
 **Sample codes**
 
@@ -719,12 +756,14 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetai
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 //simple info
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522");
-//includeDetailInfoList, whether to return Detail Info and Accessory List 
+//includeDetailInfoList
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",true);
 //includeInstalledApks
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",false,true);
 //includeInstalledFirmware
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENT",false,false, true);
+//includeMasterTerminal
+Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENTACCESS",false,false, false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -1052,6 +1091,32 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENT",false,fals
     "rateLimitReset": "1743041736048"
 }
 ```
+
+```
+{
+    "businessCode": 0,
+    "data": {
+        "id": 1687838810701873,
+        "name": "TESTCLIENTACCESS",
+        "tid": "7QG5HB6Y",
+        "serialNo": "TESTCLIENTACCESS",
+        "status": "A",
+        "merchantName": "gxtest",
+        "modelName": "A960",
+        "resellerName": "shifan",
+        "location": "",
+        "createdDate": 1751509062000,
+        "updatedDate": 1751509062000,
+        "lastActiveTime": 1751509062000,
+        "masterTerminalSerialNo": "TESTPCI6"
+    },
+    "rateLimit": "3000",
+    "rateLimitRemain": "2999",
+    "rateLimitReset": "1751512850573"
+}
+```
+
+
 
 The type of data in result is TerminalDTO. Its structure already shows in search terminal API.
 
@@ -2857,138 +2922,6 @@ Result<TerminalPedDTO> result = terminalApi.getTerminalPedBySn("SN6132522");
 | :------------ | :----------------- | :---------- |
 | 1800          | Terminal not found |             |
 
-### Move terminal
-
-Move a terminal to another reseller and merchant
-
-**API**
-
-```
-public Result<String> moveTerminal(Long terminalId, String resellerName, String merchantName)
-```
-
-**Input parameter(s) description**
-
-| Parameter Name | Type | Nullable | Description    |
-| :------------- | :--- | :------- | :------------- |
-| terminalId     | Long | false    | Terminal's id. |
-| resellerName| String | false | The target reseller name the terminal move to|
-| merchantName| String | false | The target merchant name the terminal move to|
-
-**Sample codes**
-
-```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<String> result = terminalApi.moveTerminal(terminalId, "PAX", "6666");
-```
-
-**Client side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": -1,
-	"validationErrors": ["Parameter resellerName is mandatory!"]
-}
-```
-
-**Server side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 1800,
-	"message": "Terminal not found"
-}
-```
-
-**Successful sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 0,
-}
-```
-
-**Possible client validation errors**
-
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
-> <font color=red>Parameter resellerName is mandatory!</font>  
-> <font color=red>Parameter merchantName is mandatory!</font>
-
-**Possible business codes**
-
-| Business Code | Message            | Description |
-| :------------ | :----------------- | :---------- |
-| 1800          | Terminal not found |             |
-| 1759          | Reseller doesn't exist |             |
-| 1720          | Merchant doesn't exist |             |
-| 1937          | Merchant is not belong to the given Reseller! |             |
-
-### Move terminal
-
-Move a terminal to another reseller and merchant
-
-**API**
-
-```
-public Result<String> moveTerminalBySn(String serialNo, String resellerName, String merchantName)
-```
-
-**Input parameter(s) description**
-
-| Parameter Name | Type   | Nullable | Description    |
-| :------------- |:-------| :------- | :------------- |
-| serialNo     | String | false    | Terminal's serialNo. |
-| resellerName| String | false | The target reseller name the terminal move to|
-| merchantName| String | false | The target merchant name the terminal move to|
-
-**Sample codes**
-
-```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<String> result = terminalApi.moveTerminalBySn("SN6132522", "PAX", "6666");
-```
-
-**Client side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": -1,
-	"validationErrors": ["Parameter resellerName is mandatory!"]
-}
-```
-
-**Server side validation failed sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 1800,
-	"message": "Terminal not found"
-}
-```
-
-**Successful sample result(JSON formatted)**
-
-```
-{
-	"businessCode": 0,
-}
-```
-
-**Possible client validation errors**
-
-> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>  
-> <font color=red>Parameter resellerName is mandatory!</font>  
-> <font color=red>Parameter merchantName is mandatory!</font>
-
-**Possible business codes**
-
-| Business Code | Message            | Description |
-| :------------ | :----------------- | :---------- |
-| 1800          | Terminal not found |             |
-| 1759          | Reseller doesn't exist |             |
-| 1720          | Merchant doesn't exist |             |
-| 1937          | Merchant is not belong to the given Reseller! |             |
-
 ### Push Command to Terminal
 
 Push lock, unlock and restart command to terminal
@@ -4101,8 +4034,6 @@ Structure of class EmptyResponse
 | :------------ | :------------------------- | :---------- |
 | 2028          | Terminal not found         |             |
 
-
-
 ### Change terminal model by Serial No
 
 Change terminal model by serialNo, modelName.
@@ -4115,10 +4046,10 @@ public Result<EmptyResponse> changeModelBySN(String serialNo, String modelName)
 
 **Input parameter(s) description**
 
-| Parameter Name | Type   | Nullable | Description                   |
-|:---------------| :----- |:---------|:------------------------------|
-| serialNo       | String | false    | serial No of terminal.        |
-| modelName      | String | false    | new model name of terminal.   |
+| Parameter Name | Type   | Nullable | Description                 |
+| :------------- | :----- | :------- | :-------------------------- |
+| serialNo       | String | false    | serial No of terminal.      |
+| modelName      | String | false    | new model name of terminal. |
 
 
 **Sample codes**
@@ -4160,9 +4091,9 @@ The type in dataSet of result is EmptyResponse. The structure shows below.
 Structure of class EmptyResponse
 
 | Property Name | Type   | Description   |
-| :------------ |:-------|:--------------|
-| businessCode           | Long   | 0 is success  |
-| message      | String | error message |
+| :------------ | :----- | :------------ |
+| businessCode  | Long   | 0 is success  |
+| message       | String | error message |
 
 **Possible client validation errors**
 
@@ -4170,7 +4101,167 @@ Structure of class EmptyResponse
 
 **Possible business codes**
 
-| Business Code | Message                    | Description |
-| :------------ | :------------------------- | :---------- |
-| 2028          | Terminal not found         |             |
+| Business Code | Message            | Description |
+| :------------ | :----------------- | :---------- |
+| 2028          | Terminal not found |             |
 
+
+
+### Push Terminal Set Launcher Action By TerminalId
+
+**API**
+
+```
+public Result<EmptyResponse> pushTerminalSetLauncherAction(Long terminalId, String packageName) 
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description |
+| :------------- | :----- | :------- | :---------- |
+| terminalId     | Long   | false    |             |
+| packageName    | String | false    |             |
+
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String packageName = "com.orange.onekeylockscreen";
+Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherAction(terminalId, packageName);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property packageName can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+    "businessCode": 0,
+    "rateLimit": "3000",
+    "rateLimitRemain": "2999",
+    "rateLimitReset": "1754622738547"
+}
+```
+
+The type in dataSet of result is EmptyResponse. The structure shows below.
+
+Structure of class EmptyResponse
+
+| Property Name | Type   | Description   |
+| :------------ | :----- | :------------ |
+| businessCode  | Long   | 0 is success  |
+| message       | String | error message |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                                          | Description |
+| :------------ | :----------------------------------------------- | :---------- |
+| 131           | Insufficient access right                        |             |
+| 1800          | Terminal not found                               |             |
+| 1896          | The terminal is offline!                         |             |
+| 2064          | Parameter packageName is mandatory               |             |
+| 2065          | Installed application not found                  |             |
+| 2066          | Application is not a launcher application        |             |
+| 2067          | Application has been set as launcher application |             |
+
+
+
+### Push Terminal Set Launcher Action By SN
+
+**API**
+
+```
+public Result<EmptyResponse> pushTerminalSetLauncherActionBySN(String serialNo, String packageName)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description |
+|:---------------|:-------| :------- | :---------- |
+| serialNo       | String | false    |             |
+| packageName    | String | false    |             |
+
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+private final String serialNo = "TESTCLIENT";
+String packageName = "com.orange.onekeylockscreen";
+Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherActionBySN(serialNo, packageName);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property packageName can't be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+    "businessCode": 0,
+    "rateLimit": "3000",
+    "rateLimitRemain": "2999",
+    "rateLimitReset": "1754622738547"
+}
+```
+
+The type in dataSet of result is EmptyResponse. The structure shows below.
+
+Structure of class EmptyResponse
+
+| Property Name | Type   | Description   |
+| :------------ | :----- | :------------ |
+| businessCode  | Long   | 0 is success  |
+| message       | String | error message |
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be empty!</font>
+
+**Possible business codes**
+
+| Business Code | Message                                          | Description |
+| :------------ | :----------------------------------------------- | :---------- |
+| 131           | Insufficient access right                        |             |
+| 1800          | Terminal not found                               |             |
+| 1896          | The terminal is offline!                         |             |
+| 2064          | Parameter packageName is mandatory               |             |
+| 2065          | Installed application not found                  |             |
+| 2066          | Application is not a launcher application        |             |
+| 2067          | Application has been set as launcher application |             |

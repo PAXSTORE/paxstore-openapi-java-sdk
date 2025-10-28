@@ -97,21 +97,21 @@ Result<TerminalGroupDTO> result =  terminalGroupApi.searchTerminalGroup(1,5, Ter
 
 The type in dataSet is TerminalGroupDTO. And the structure like below.
 
-| Name                       | Type         | Description                                                  |
-| :------------------------- | :----------- | :----------------------------------------------------------- |
-| id                         | Long         | the id of terminal group                                     |
-| resellerName               | String       | the name of reseller                                         |
-| modelName                  | String       | the name of model                                            |
-| name                       | String       | the name of terminal group                                   |
-| status                     | String       | the status of terminal group,value can be one of A(Active) and S(Suspend) and P(Pending) |
-| description                | String       | Description of terminal group                                |
-| createdByResellerId        | Long         | the id of the reseller that created the terminal group       |
-| createdDate                | Long         |                                                              |
-| updatedDate                | Long         |                                                              |
-| terminalCount              | int          | Number of terminals in the terminal group                    |
-| dynamic                    | Boolean      | Dynamic group or general group                               |
-| containSubResellerTerminal | Boolean      | Include sub resellers or not                                 |
-| merchantNames              | List\<String\> | the merchant names                                           |
+| Name                       | Type         | Description                                                                                           |
+| :------------------------- | :----------- |:------------------------------------------------------------------------------------------------------|
+| id                         | Long         | the id of terminal group                                                                              |
+| resellerName               | String       | the name of reseller                                                                                  |
+| modelName                  | String       | The names of model. Multiple names can be separated by ','                                            |
+| name                       | String       | the name of terminal group                                                                            |
+| status                     | String       | the status of terminal group,value can be one of A(Active) and S(Suspend) and P(Pending)              |
+| description                | String       | Description of terminal group                                                                         |
+| createdByResellerId        | Long         | the id of the reseller that created the terminal group                                                |
+| createdDate                | Long         |                                                                                                       |
+| updatedDate                | Long         |                                                                                                       |
+| terminalCount              | int          | Number of terminals in the terminal group                                                             |
+| dynamic                    | Boolean      | Dynamic group or general group                                                                        |
+| containSubResellerTerminal | Boolean      | Include sub resellers or not                                                                          |
+| merchantNames              | List\<String\> | the merchant names                                                                                    |
 
 **Possible validation errors**
 
@@ -189,21 +189,21 @@ Result<TerminalGroupDTO> result = terminalGroupApi.getTerminalGroup(groupId);
 
 The type in data is TerminalGroupDTO. And the structure like below.
 
-| Name                       | Type         | Description                                                  |
-| :------------------------- | :----------- | :----------------------------------------------------------- |
-| id                         | Long         | the id of terminal group                                     |
-| resellerName               | String       | the name of reseller                                         |
-| modelName                  | String       | the name of model                                            |
-| name                       | String       | the name of terminal group                                   |
+| Name                       | Type         | Description                                                                              |
+| :------------------------- | :----------- |:-----------------------------------------------------------------------------------------|
+| id                         | Long         | the id of terminal group                                                                 |
+| resellerName               | String       | the name of reseller                                                                     |
+| modelName                  | String       | the names of model. Multiple names can be separated by ','                               |
+| name                       | String       | the name of terminal group                                                               |
 | status                     | String       | the status of terminal group,value can be one of A(Active) and S(Suspend) and P(Pending) |
-| description                | String       | Description of terminal group                                |
-| createdByResellerId        | Long         | the id of the reseller that created the terminal group       |
-| createdDate                | Long         |                                                              |
-| updatedDate                | Long         |                                                              |
-| terminalCount              | int          | Number of terminals in the terminal group                    |
-| dynamic                    | Boolean      | Dynamic group or general group                               |
-| containSubResellerTerminal | Boolean      | Include sub resellers or not                                 |
-| merchantNames              | List\<String\> | the merchant names                                           |
+| description                | String       | Description of terminal group                                                            |
+| createdByResellerId        | Long         | the id of the reseller that created the terminal group                                   |
+| createdDate                | Long         |                                                                                          |
+| updatedDate                | Long         |                                                                                          |
+| terminalCount              | int          | Number of terminals in the terminal group                                                |
+| dynamic                    | Boolean      | Dynamic group or general group                                                           |
+| containSubResellerTerminal | Boolean      | Include sub resellers or not                                                             |
+| merchantNames              | List\<String\> | the merchant names                                                                       |
 
 **Possible client validation errors**
 
@@ -231,16 +231,16 @@ public Result<TerminalGroupDTO> createTerminalGroup(CreateTerminalGroupRequest c
 
 Structure of class CreateTerminalGroupRequest
 
-| Property Name              | Type         | Nullable | Description                                                  |
-| :------------------------- | :----------- | :------- | :----------------------------------------------------------- |
-| name                       | String       | false    | the name of group                                          |
-| modelName                  | String       | false    | the model name, only the same model termina can be add to this group                                |
-| resellerName               | String       | false    | reseller name, only the terminals in this reseller can be add to this group|
-| description                | String       | true     |                                                              |
-| status                     | String       | true     | the status of terminal group,the values can be 'P' and 'A', if the value is null will create group with default status P(Pending)|
-| dynamic                    | Boolean      | true     | Indicate whether the group is dynamic group or general group, the default value is false (general group)                                   |
-| containSubResellerTerminal | Boolean      | true     | Indicate whether to conatin sub reseller's termnal for dynamic group, this property is for dynamic group, if the value is null will use the default value false                                   |
-| merchantNameList           | List\<String\> | true     | merchant names, only terminals belong to those merchant can be add to group, this property is for dynamic group                                                            |
+| Property Name              | Type         | Nullable | Description                                                                                                                                                     |
+| :------------------------- | :----------- | :------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name                       | String       | false    | the name of group                                                                                                                                               |
+| modelName                  | String       | false    | the names of model, Multiple names can be separated by ',' , only the same model terminal can be add to this group                                              |
+| resellerName               | String       | false    | reseller name, only the terminals in this reseller can be add to this group                                                                                     |
+| description                | String       | true     |                                                                                                                                                                 |
+| status                     | String       | true     | the status of terminal group,the values can be 'P' and 'A', if the value is null will create group with default status P(Pending)                               |
+| dynamic                    | Boolean      | true     | Indicate whether the group is dynamic group or general group, the default value is false (general group)                                                        |
+| containSubResellerTerminal | Boolean      | true     | Indicate whether to conatin sub reseller's termnal for dynamic group, this property is for dynamic group, if the value is null will use the default value false |
+| merchantNameList           | List\<String\> | true     | merchant names, only terminals belong to those merchant can be add to group, this property is for dynamic group                                                 |
 
 **Sample codes**
 
@@ -305,21 +305,21 @@ Result<TerminalGroupDTO> result = terminalGroupApi.createTerminalGroup(createReq
 
 The type in data is TerminalGroupDTO. And the structure like below.
 
-| Name                       | Type         | Description                                                  |
-| :------------------------- | :----------- | :----------------------------------------------------------- |
-| id                         | Long         | the id of terminal group                                     |
-| resellerName               | String       | the name of reseller                                         |
-| modelName                  | String       | the name of model                                            |
-| name                       | String       | the name of terminal group                                   |
+| Name                       | Type         | Description                                                                              |
+| :------------------------- | :----------- |:-----------------------------------------------------------------------------------------|
+| id                         | Long         | the id of terminal group                                                                 |
+| resellerName               | String       | the name of reseller                                                                     |
+| modelName                  | String       | the names of model. Multiple names can be separated by ','                               |
+| name                       | String       | the name of terminal group                                                               |
 | status                     | String       | the status of terminal group,value can be one of A(Active) and S(Suspend) and P(Pending) |
-| description                | String       | Description of terminal group                                |
-| createdByResellerId        | Long         | the id of the reseller that created the terminal group       |
-| createdDate                | Long         |                                                              |
-| updatedDate                | Long         |                                                              |
-| terminalCount              | int          | Number of terminals in the terminal group                    |
-| dynamic                    | Boolean      | Dynamic group or general group                               |
-| containSubResellerTerminal | Boolean      | Include sub resellers or not                                 |
-| merchantNames              | List\<String\> | the merchant names                                           |
+| description                | String       | Description of terminal group                                                            |
+| createdByResellerId        | Long         | the id of the reseller that created the terminal group                                   |
+| createdDate                | Long         |                                                                                          |
+| updatedDate                | Long         |                                                                                          |
+| terminalCount              | int          | Number of terminals in the terminal group                                                |
+| dynamic                    | Boolean      | Dynamic group or general group                                                           |
+| containSubResellerTerminal | Boolean      | Include sub resellers or not                                                             |
+| merchantNames              | List\<String\> | the merchant names                                                                       |
 
 **Possible client validation errors**
 
@@ -346,6 +346,7 @@ The type in data is TerminalGroupDTO. And the structure like below.
 |1737| The associated merchant is not activate      ||
 |1713| The associated model is not activate         ||
 |1773| The associated reseller is not activate      ||
+|17203| The product types of the models are inconsistent ||
 
 ### Search terminal
 
@@ -365,7 +366,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.
 | pageSize       | int                               | false    | the record number per page, range is 1 to 100                |
 | orderBy        | TerminalApi.TerminalSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of TerminalApi.TerminalSearchOrderBy.Name and TerminalApi.TerminalSearchOrderBy.Tid and TerminalApi.TerminalSearchOrderBy.SerialNo. |
 | status         | TerminalStatus                    | true     | Terminal status. The value can be one of  TerminalApi.TerminalStatus.Active and TerminalApi.TerminalStatus.Inactive and TerminalApi.TerminalStatus.Suspend |
-| modelName      | String                            | true     | the model name                                               |
+| modelName      | String                            | true     | The names of model. Multiple names can be separated by ','                                             |
 | resellerName   | String                            | true     | the reseller name                                            |
 | serialNo       | String                            | true     | the serial number of terminal                                |
 | excludeGroupId | String                            | true     | group id which the terminals in this group will be excluded from search result. This search parameter does not support dynamic group |
@@ -469,13 +470,13 @@ public Result<TerminalGroupDTO> updateTerminalGroup(Long groupId ,UpdateTerminal
 
 Structure of class UpdateTerminalGroupRequest
 
-|Property Name|Type|Nullable|Description|
-|:---|:---|:---|:---|
-|name|String|true|the name of terminal group, if the value is null API won't update the origial value of this property|
-|description|String|true|the description of terminal group|
-|modelName|String|true| the name of model, if the value is null API won't update the origial value of this property|
-|resellerName|String|true|the name of reseller, if the value is null API won't update the origial value of this property|
-|merchantNameList|List\<String\>|true|the name of merchants|
+|Property Name|Type|Nullable| Description                                                                                                                           |
+|:---|:---|:---|:--------------------------------------------------------------------------------------------------------------------------------------|
+|name|String|true| the name of terminal group, if the value is null API won't update the origial value of this property                                  |
+|description|String|true| the description of terminal group                                                                                                     |
+|modelName|String|true| the names of model. multiple names can be separated by ',' , if the value is null API won't update the origial value of this property |
+|resellerName|String|true| the name of reseller, if the value is null API won't update the origial value of this property                                        |
+|merchantNameList|List\<String\>|true| the name of merchants                                                                                                                 |
 
 Note: name, description, modelName, resellerName, and merchantNameList cannot be empty at same time. When it is not
 inactive, only name and description can be modified.
