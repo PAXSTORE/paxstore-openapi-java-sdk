@@ -345,6 +345,7 @@ Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1647428843339813L)
 		"serialNo": "2252020022",
 		"type": "C",
 		"status": "A",
+		"securityStatus": "RU",
 		"registerTime": 1732240055000,
 		"model": {
 			"id": 13,
@@ -367,17 +368,18 @@ Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1647428843339813L)
 The type in data is EmmDeviceDetailDTO. The structure like below.
 
 
-| Property Name | Type           | Description                     |
-| :-------------- | :--------------- | :-------------------------------- |
-| id            | Long           | The id of EMM device            |
-| name          | String         | The name of EMM device          |
-| serialNo      | String         | The serial number of EMM device |
-| type          | String         | The type of EMM device          |
-| model         | EmmModelDTO    | The model of EMM device         |
-| reseller      | EmmResellerDTO | The reseller of EMM device      |
-| merchant      | EmmMerchantDTO | The merchant of EMM device      |
-| registerTime  | Date           | The register time of EMM device |
-| status        | String         | The status of EMM device        |
+| Property Name  | Type           | Description                       |
+| :--------------- | :--------------- | :---------------------------------- |
+| id             | Long           | The id of EMM device              |
+| name           | String         | The name of EMM device            |
+| serialNo       | String         | The serial number of EMM device   |
+| type           | String         | The type of EMM device            |
+| model          | EmmModelDTO    | The model of EMM device           |
+| reseller       | EmmResellerDTO | The reseller of EMM device        |
+| merchant       | EmmMerchantDTO | The merchant of EMM device        |
+| registerTime   | Date           | The register time of EMM device   |
+| status         | String         | The status of EMM device          |
+| securityStatus | String         | The security status of EMM device |
 
 Structure of class EmmModelDTO
 
@@ -1050,6 +1052,199 @@ Result<String> result = emmDeviceApi.startEmmDeviceLostMode(1647428843339813L, e
 | 61638         | Device not certified                                                                                            |             |
 | 61654         | EMM for Android not subscribed                                                                                  |             |
 | 61656         | The market is not bound to EMM for Android                                                                      |             |
+
+### Resume EMM device
+
+The resume EMM device API allows the thirdparty system resume EMM device.
+
+**API**
+
+```
+public Result<String> resumeEmmDevice(Long deviceId)
+```
+
+**Input parameter(s) description**
+
+
+| Parameter Name | Type | Nullable | Description          |
+| :--------------- | :----- | :--------- | :--------------------- |
+| deviceId       | Long | false    | The id of EMM device |
+
+**Sample codes**
+
+```
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = emmDeviceApi.resumeEmmDevice(1647428843339813L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	 validationErrors=["Parameter deviceId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 61617,
+	"message": "Device not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter deviceId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+
+| Business Code | Message                                                              | Description |
+| :-------------- | :--------------------------------------------------------------------- | :------------ |
+| 61617         | Device not found                                                     |             |
+| 61654         | EMM for Android not subscribed                                       |             |
+| 61656         | The market is not bound to EMM for Android                           |             |
+| 62045         | Failed to resume the device. The device is not in the disabled state |             |
+
+### Disable EMM device
+
+The disable EMM device API allows the thirdparty system disable EMM device.
+
+**API**
+
+```
+public Result<String> disableEmmDevice(Long deviceId)
+```
+
+**Input parameter(s) description**
+
+
+| Parameter Name | Type | Nullable | Description          |
+| :--------------- | :----- | :--------- | :--------------------- |
+| deviceId       | Long | false    | The id of EMM device |
+
+**Sample codes**
+
+```
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = emmDeviceApi.disableEmmDevice(1647428843339813L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	 validationErrors=["Parameter deviceId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 61617,
+	"message": "Device not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter deviceId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+
+| Business Code | Message                                                                | Description |
+| :-------------- | :----------------------------------------------------------------------- | :------------ |
+| 61617         | Device not found                                                       |             |
+| 61654         | EMM for Android not subscribed                                         |             |
+| 61656         | The market is not bound to EMM for Android                             |             |
+| 62046         | Failed to disable the device. The device is not in the activated state |             |
+
+### Sync EMM device detail
+
+The sync EMM device detail API allows the thirdparty system sync EMM device detail.
+
+**API**
+
+```
+public Result<String> syncDeviceDetail(Long deviceId)
+```
+
+**Input parameter(s) description**
+
+
+| Parameter Name | Type | Nullable | Description          |
+| :--------------- | :----- | :--------- | :--------------------- |
+| deviceId       | Long | false    | The id of EMM device |
+
+**Sample codes**
+
+```
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = emmDeviceApi.syncDeviceDetail(1647428843339813L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	 validationErrors=["Parameter deviceId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 61617,
+	"message": "Device not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter deviceId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+
+| Business Code | Message                                            | Description |
+| :-------------- | :--------------------------------------------------- | :------------ |
+| 61617         | Device not found                                   |             |
+| 61654         | EMM for Android not subscribed                     |             |
+| 61656         | The market is not bound to EMM for Android         |             |
+| 62047         | Sync failed. Please try again later                |             |
+| 62048         | Manual sync not supported in current device status |             |
 
 ### Stop EMM device lost mode
 

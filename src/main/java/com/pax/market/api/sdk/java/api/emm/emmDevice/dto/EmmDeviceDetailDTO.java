@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class EmmDeviceDetailDTO implements Serializable {
 
-    private static final long serialVersionUID = -3284158768280256339L;
+    private static final long serialVersionUID = 7090323697415577752L;
 
     private Long id;
 
@@ -17,11 +17,21 @@ public class EmmDeviceDetailDTO implements Serializable {
 
     private String status;
 
+    private String securityStatus;
+
     private Date registerTime;
 
     private EmmModelDTO model;
 
     private EmmResellerDTO reseller;
+
+    public String getSecurityStatus() {
+        return securityStatus;
+    }
+
+    public void setSecurityStatus(String securityStatus) {
+        this.securityStatus = securityStatus;
+    }
 
     private EmmMerchantDTO merchant;
 
@@ -105,6 +115,7 @@ public class EmmDeviceDetailDTO implements Serializable {
                 ", serialNo='" + serialNo + '\'' +
                 ", type='" + type + '\'' +
                 ", status='" + status + '\'' +
+                ", securityStatus='" + securityStatus + '\'' +
                 ", registerTime=" + registerTime +
                 ", model=" + model +
                 ", reseller=" + reseller +

@@ -7,10 +7,8 @@ import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
-import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.EmmPolicyDTO;
-import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.EmmPolicyResponse;
-import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.MerchantEmmPolicyCreateRequest;
-import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.ResellerEmmPolicyCreateRequest;
+import com.pax.market.api.sdk.java.api.emm.emmPolicy.dto.*;
+import com.pax.market.api.sdk.java.api.emm.emmPolicy.validator.DeviceEmmPolicyCreateRequestValidator;
 import com.pax.market.api.sdk.java.api.emm.emmPolicy.validator.MerchantEmmPolicyCreateRequestValidator;
 import com.pax.market.api.sdk.java.api.emm.emmPolicy.validator.ResellerEmmPolicyCreateRequestValidator;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
@@ -27,8 +25,10 @@ public class EmmPolicyApi extends BaseThirdPartySysApi {
 
     private static final String GET_RESELLER_EMM_POLICY_URL = "/v1/3rdsys/emm/policy/reseller";
     private static final String GET_MERCHANT_EMM_POLICY_URL = "/v1/3rdsys/emm/policy/merchant";
+    private static final String GET_DEVICE_EMM_POLICY_URL = "/v1/3rdsys/emm/policy/device";
     private static final String CREATE_RESELLER_EMM_POLICY_URL = "/v1/3rdsys/emm/policy/reseller";
     private static final String CREATE_MERCHANT_EMM_POLICY_URL = "/v1/3rdsys/emm/policy/merchant";
+    private static final String CREATE_DEVICE_EMM_POLICY_URL = "/v1/3rdsys/emm/policy/device";
 
 
     public EmmPolicyApi(String baseUrl, String apiKey, String apiSecret) {
@@ -83,6 +83,24 @@ public class EmmPolicyApi extends BaseThirdPartySysApi {
         return new Result<>(emmPolicyResponse);
     }
 
+    public Result<EmmPolicyDTO> getDeviceEmmPolicy(String serialNo) {
+        logger.debug("serialNo= {}", serialNo);
+
+        List<String> validationErr = Validators.validateStrNullAndMax(serialNo, "serialNo", Constants.MAX_16);
+        if (!validationErr.isEmpty()) {
+            return new Result<>(validationErr);
+        }
+
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_DEVICE_EMM_POLICY_URL);
+
+        request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", serialNo);
+        EmmPolicyResponse emmPolicyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmmPolicyResponse.class);
+        return new Result<>(emmPolicyResponse);
+    }
+
     public Result<String> createResellerEmmPolicy(ResellerEmmPolicyCreateRequest resellerEmmPolicyCreateRequest) {
 
         List<String> validationErrs = ResellerEmmPolicyCreateRequestValidator.validate(resellerEmmPolicyCreateRequest);
@@ -125,6 +143,25 @@ public class EmmPolicyApi extends BaseThirdPartySysApi {
     }
 
 
+    public Result<String> createDeviceEmmPolicy(DeviceEmmPolicyCreateRequest deviceEmmPolicyCreateRequest) {
+        List<String> validationErrs = DeviceEmmPolicyCreateRequestValidator.validate(deviceEmmPolicyCreateRequest);
+
+        if (validationErrs.size() > 0) {
+            return new Result<>(validationErrs);
+        }
+
+        logger.debug("deviceEmmPolicyCreateRequest= {}", new Gson().toJson(deviceEmmPolicyCreateRequest, DeviceEmmPolicyCreateRequest.class));
+
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+
+        SdkRequest request = createSdkRequest(CREATE_DEVICE_EMM_POLICY_URL);
+        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(deviceEmmPolicyCreateRequest, DeviceEmmPolicyCreateRequest.class));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+
+        return new Result<>(emptyResponse);
+    }
 
 
 
