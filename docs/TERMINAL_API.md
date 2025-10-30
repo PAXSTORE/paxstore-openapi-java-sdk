@@ -284,18 +284,21 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York",
 			},
 			"installedApks": [{
 				"appName": "WSPLink",
+				"source": "P",
 				"packageName": "com.soundpayments.wsplink",
 				"installTime": 1563639530000,
 				"versionName": "10.01.00.00",
 				"versionCode": 10010000
 			}, {
 				"appName": "NeptuneService",
+				"source": "P",
 				"packageName": "com.pax.ipp.neptune",
 				"installTime": 1230692400000,
 				"versionName": "V3.05.00_20190523",
 				"versionCode": 33
 			}, {
 				"appName": "releasedemo1",
+				"source": "P",
 				"packageName": "com.pax.new.release.demo1",
 				"installTime": 1563639280000,
 				"versionName": "V3.02.00_20190129",
@@ -1050,6 +1053,7 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENTACCESS",fals
 		 "installedApks": [
       {
         "appName": "cloudMsg1",
+        "source": "P",
         "packageName": "app1.clouldmsg.com.cloudmsg1",
         "versionName": "1.0",
         "versionCode": 1,
@@ -1057,6 +1061,7 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENTACCESS",fals
       },
       {
         "appName": "sdkDemo",
+        "source": "P",
         "packageName": "com.pax.android.demoapp",
         "versionName": "7.2.3",
         "versionCode": 135,
