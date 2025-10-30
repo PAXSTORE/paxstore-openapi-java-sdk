@@ -254,7 +254,7 @@ public class EmmDeviceApiTest {
 
     @Test
     public void testGetEmmDeviceSuccess() {
-        Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1647480353587234L);
+        Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1687529174597667L);
         logger.debug("Result of get emm device: {}", result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
     }
@@ -745,7 +745,62 @@ public class EmmDeviceApiTest {
         Assert.assertEquals(-1, lostMessageIsTooLongResult.getBusinessCode());
     }
 
+    @Test
+    public void testResumeEmmDeviceSuccess() {
+        Result<String> result = emmDeviceApi.resumeEmmDevice(1754297972098L);
+        logger.debug("Result of resume EMM device: {}", result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
 
+    @Test
+    public void testResumeEmmDeviceFailByDeviceIdIsInvalid() {
+        Result<String> deviceIdIsNullResult = emmDeviceApi.resumeEmmDevice(null);
+        logger.debug("Result of resume EMM device by deviceId is null: {}", deviceIdIsNullResult.toString());
+        Assert.assertEquals(-1, deviceIdIsNullResult.getBusinessCode());
+
+        Result<String> deviceIdIsNegativeResult = emmDeviceApi.resumeEmmDevice(-1L);
+        logger.debug("Result of resume EMM device by deviceId is negative: {}", deviceIdIsNegativeResult.toString());
+        Assert.assertEquals(-1, deviceIdIsNegativeResult.getBusinessCode());
+    }
+
+
+    @Test
+    public void testDisableEmmDeviceSuccess() {
+        Result<String> result = emmDeviceApi.disableEmmDevice(1754297972098L);
+        logger.debug("Result of disable EMM device: {}", result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
+
+
+    @Test
+    public void testDisableEmmDeviceFailByDeviceIdIsInvalid() {
+        Result<String> deviceIdIsNullResult = emmDeviceApi.disableEmmDevice(null);
+        logger.debug("Result of disable EMM device by deviceId is null: {}", deviceIdIsNullResult.toString());
+        Assert.assertEquals(-1, deviceIdIsNullResult.getBusinessCode());
+
+        Result<String> deviceIdIsNegativeResult = emmDeviceApi.disableEmmDevice(-1L);
+        logger.debug("Result of disable EMM device by deviceId is negative: {}", deviceIdIsNegativeResult.toString());
+        Assert.assertEquals(-1, deviceIdIsNegativeResult.getBusinessCode());
+    }
+
+
+    @Test
+    public void testSyncEmmDeviceDetailSuccess() {
+        Result<String> result = emmDeviceApi.syncDeviceDetail(1687529174597667L);
+        logger.debug("Result of sync EMM device detail: {}", result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
+
+    @Test
+    public void testSyncEmmDeviceDetailFailByDeviceIdIsInvalid() {
+        Result<String> deviceIdIsNullResult = emmDeviceApi.syncDeviceDetail(null);
+        logger.debug("Result of sync EMM device detail by deviceId is null: {}", deviceIdIsNullResult.toString());
+        Assert.assertEquals(-1, deviceIdIsNullResult.getBusinessCode());
+
+        Result<String> deviceIdIsNegativeResult = emmDeviceApi.syncDeviceDetail(-1L);
+        logger.debug("Result of sync EMM device detail by deviceId is negative: {}", deviceIdIsNegativeResult.toString());
+        Assert.assertEquals(-1, deviceIdIsNegativeResult.getBusinessCode());
+    }
 
     @Test
     public void testStopEmmDeviceLostModeSuccess() {

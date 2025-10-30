@@ -67,6 +67,34 @@ public class EmmPolicyApiTest {
         applicationPolicy.setAccessibleTrackId(1681160455323739L);
         applicationPolicy.setInstallType("AVAILABLE");
         policyUpdatedContentDTO.setApplications(Lists.newArrayList(applicationPolicy));
+
+        PolicyUpdatedContentDTO.DeviceConnectivityManagement deviceConnectivityManagement = new PolicyUpdatedContentDTO.DeviceConnectivityManagement();
+        PolicyUpdatedContentDTO.ApnPolicy apnPolicy = new PolicyUpdatedContentDTO.ApnPolicy();
+        apnPolicy.setOverrideApns(Boolean.TRUE);
+        PolicyUpdatedContentDTO.ApnSetting apnSetting = new PolicyUpdatedContentDTO.ApnSetting();
+        apnSetting.setApn("testApn");
+        apnSetting.setAuthType("PAP");
+        apnSetting.setApnTypes(Lists.newArrayList("DEFAULT"));
+        apnSetting.setAlwaysOnSetting("ALWAYS_ON");
+        apnSetting.setCarrierId(111);
+        apnSetting.setDisplayName("testDisplayName");
+        apnSetting.setMmsProxyAddress("test.mms.proxy");
+        apnSetting.setMmsProxyPort(80);
+        apnSetting.setMmsc("http://mmsc.test.com");
+        apnSetting.setMtuV4(111);
+        apnSetting.setMtuV6(111);
+        apnSetting.setMvnoType("SPN");
+        apnSetting.setNetworkTypes(Lists.newArrayList("GSM"));
+        apnSetting.setNumericOperatorId("46000");
+        apnSetting.setProtocol("IPV4V6");
+        apnSetting.setProxyAddress("test.proxy");
+        apnSetting.setProxyPort(80);
+        apnSetting.setRoamingProtocol("IPV4V6");
+        apnSetting.setUsername("testName");
+        apnSetting.setPassword("123456");
+        apnPolicy.setApnSettings(Lists.newArrayList(apnSetting));
+        deviceConnectivityManagement.setApnPolicy(apnPolicy);
+        policyUpdatedContentDTO.setDeviceConnectivityManagement(deviceConnectivityManagement);
         request.setContentInfo(policyUpdatedContentDTO);
 
         LockedPolicyUpdateDTO lockedPolicyUpdateDTO = new LockedPolicyUpdateDTO();
@@ -220,6 +248,33 @@ public class EmmPolicyApiTest {
     }
 
     @Test
+    public void testGetDeviceEmmPolicySuccess() {
+        Result<EmmPolicyDTO> result = emmPolicyApi.getDeviceEmmPolicy("5069796194");
+        logger.debug("Result of get device emm policy: {}", result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
+
+
+    @Test
+    public void testGetDeviceEmmPolicyBySerialNoIsInvalid() {
+        Result<EmmPolicyDTO> serialNoIsNullResult = emmPolicyApi.getDeviceEmmPolicy(null);
+        logger.debug("Result of get device emm policy by serialNo is null: {}", serialNoIsNullResult.toString());
+        Assert.assertEquals(-1, serialNoIsNullResult.getBusinessCode());
+
+        Result<EmmPolicyDTO> serialNoIsBlankResult = emmPolicyApi.getDeviceEmmPolicy("");
+        logger.debug("Result of get device emm policy by serialNo is blank: {}", serialNoIsBlankResult.toString());
+        Assert.assertEquals(-1, serialNoIsBlankResult.getBusinessCode());
+
+        Result<EmmPolicyDTO> serialNoIsTooLongResult = emmPolicyApi.getDeviceEmmPolicy("2870003453287000345328700034532287000345328700034532870003453");
+        logger.debug("Result of get device emm policy by serialNo is too long: {}", serialNoIsTooLongResult.toString());
+        Assert.assertEquals(-1, serialNoIsTooLongResult.getBusinessCode());
+
+        Result<EmmPolicyDTO> serialNoNotExistResult = emmPolicyApi.getDeviceEmmPolicy("serialNoNotExist");
+        logger.debug("Result of get device emm policy by serialNo is not exist: {}", serialNoNotExistResult.toString());
+        Assert.assertEquals(61617, serialNoNotExistResult.getBusinessCode());
+    }
+
+    @Test
     public void testCreateMerchantEmmPolicySuccess() {
         MerchantEmmPolicyCreateRequest request = new MerchantEmmPolicyCreateRequest();
         request.setResellerName("PAX");
@@ -239,6 +294,35 @@ public class EmmPolicyApiTest {
         applicationPolicy.setAccessibleTrackId(1681160455323739L);
         applicationPolicy.setInstallType("AVAILABLE");
         policyUpdatedContentDTO.setApplications(Lists.newArrayList(applicationPolicy));
+
+        PolicyUpdatedContentDTO.DeviceConnectivityManagement deviceConnectivityManagement = new PolicyUpdatedContentDTO.DeviceConnectivityManagement();
+        PolicyUpdatedContentDTO.ApnPolicy apnPolicy = new PolicyUpdatedContentDTO.ApnPolicy();
+        apnPolicy.setOverrideApns(Boolean.TRUE);
+
+        PolicyUpdatedContentDTO.ApnSetting apnSetting = new PolicyUpdatedContentDTO.ApnSetting();
+        apnSetting.setApn("testApn");
+        apnSetting.setAuthType("PAP");
+        apnSetting.setApnTypes(Lists.newArrayList("DEFAULT"));
+        apnSetting.setAlwaysOnSetting("ALWAYS_ON");
+        apnSetting.setCarrierId(111);
+        apnSetting.setDisplayName("testDisplayName");
+        apnSetting.setMmsProxyAddress("test.mms.proxy");
+        apnSetting.setMmsProxyPort(80);
+        apnSetting.setMmsc("http://mmsc.test.com");
+        apnSetting.setMtuV4(111);
+        apnSetting.setMtuV6(111);
+        apnSetting.setMvnoType("SPN");
+        apnSetting.setNetworkTypes(Lists.newArrayList("GSM"));
+        apnSetting.setNumericOperatorId("46000");
+        apnSetting.setProtocol("IPV4V6");
+        apnSetting.setProxyAddress("test.proxy");
+        apnSetting.setProxyPort(80);
+        apnSetting.setRoamingProtocol("IPV4V6");
+        apnSetting.setUsername("testName");
+        apnSetting.setPassword("123456");
+        apnPolicy.setApnSettings(Lists.newArrayList(apnSetting));
+        deviceConnectivityManagement.setApnPolicy(apnPolicy);
+        policyUpdatedContentDTO.setDeviceConnectivityManagement(deviceConnectivityManagement);
         request.setContentInfo(policyUpdatedContentDTO);
 
         Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
@@ -374,28 +458,172 @@ public class EmmPolicyApiTest {
     }
 
     @Test
-    public void testCreateMerchantEmmPolicyFailByLockInvalid() {
+    public void testCreateMerchantEmmPolicyFailByLockedPolicyKeyIsInvalid() {
         MerchantEmmPolicyCreateRequest request = new MerchantEmmPolicyCreateRequest();
         request.setResellerName("PAX");
-        request.setMerchantName("test");
+        request.setMerchantName("PAX");
+        PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
+        policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        request.setContentInfo(policyUpdatedContentDTO);
+        request.setInheritFlag(Boolean.FALSE);
+
+        LockedPolicyUpdateDTO lockedPolicyUpdateDTO = new LockedPolicyUpdateDTO();
+        lockedPolicyUpdateDTO.setKey(null);
+        lockedPolicyUpdateDTO.setLockFlag(Boolean.TRUE);
+        request.setLockedPolicyList(Lists.newArrayList(lockedPolicyUpdateDTO));
+        Result<String> lockedPolicyKeyIsInvalidResult = emmPolicyApi.createMerchantEmmPolicy(request);
+        logger.debug("Result of create merchant emm policy by locked policy key is invalid: {}", lockedPolicyKeyIsInvalidResult.toString());
+        Assert.assertEquals(61663, lockedPolicyKeyIsInvalidResult.getBusinessCode());
+    }
+
+    @Test
+    public void testCreateDeviceEmmPolicySuccess() {
+        DeviceEmmPolicyCreateRequest request = new DeviceEmmPolicyCreateRequest();
+        request.setSerialNo("5069796194");
+        PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
+        policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
+        request.setContentInfo(policyUpdatedContentDTO);
+        request.setInheritFlag(Boolean.FALSE);
+
+        PolicyUpdatedContentDTO.ApplicationPolicy applicationPolicy = new PolicyUpdatedContentDTO.ApplicationPolicy();
+        applicationPolicy.setPackageName("com.zolon.signrotatetest.com.zolon.signrotatetest");
+        applicationPolicy.setAutoUpdateMode("AUTO_UPDATE_DEFAULT");
+        applicationPolicy.setDefaultPermissionPolicy("PROMPT");
+        applicationPolicy.setInstallPriority("DEFAULT");
+        applicationPolicy.setAccessibleTrackId(1681160455323739L);
+        applicationPolicy.setInstallType("AVAILABLE");
+        policyUpdatedContentDTO.setApplications(Lists.newArrayList(applicationPolicy));
+
+        PolicyUpdatedContentDTO.DeviceConnectivityManagement deviceConnectivityManagement = new PolicyUpdatedContentDTO.DeviceConnectivityManagement();
+        PolicyUpdatedContentDTO.ApnPolicy apnPolicy = new PolicyUpdatedContentDTO.ApnPolicy();
+        apnPolicy.setOverrideApns(Boolean.TRUE);
+
+        PolicyUpdatedContentDTO.ApnSetting apnSetting = new PolicyUpdatedContentDTO.ApnSetting();
+        apnSetting.setApn("testApn");
+        apnSetting.setAuthType("PAP");
+        apnSetting.setApnTypes(Lists.newArrayList("DEFAULT"));
+        apnSetting.setAlwaysOnSetting("ALWAYS_ON");
+        apnSetting.setCarrierId(111);
+        apnSetting.setDisplayName("testDisplayName");
+        apnSetting.setMmsProxyAddress("test.mms.proxy");
+        apnSetting.setMmsProxyPort(80);
+        apnSetting.setMmsc("http://mmsc.test.com");
+        apnSetting.setMtuV4(111);
+        apnSetting.setMtuV6(111);
+        apnSetting.setMvnoType("SPN");
+        apnSetting.setNetworkTypes(Lists.newArrayList("GSM"));
+        apnSetting.setNumericOperatorId("46000");
+        apnSetting.setProtocol("IPV4V6");
+        apnSetting.setProxyAddress("test.proxy");
+        apnSetting.setProxyPort(80);
+        apnSetting.setRoamingProtocol("IPV4V6");
+        apnSetting.setUsername("testName");
+        apnSetting.setPassword("123456");
+        apnPolicy.setApnSettings(Lists.newArrayList(apnSetting));
+        deviceConnectivityManagement.setApnPolicy(apnPolicy);
+        policyUpdatedContentDTO.setDeviceConnectivityManagement(deviceConnectivityManagement);
+        request.setContentInfo(policyUpdatedContentDTO);
+
+        Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
+        logger.debug("Result of create device emm policy: {}", result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
+
+    @Test
+    public void testCreateDeviceEmmPolicyFailByDeviceEmmPolicyCreateRequestIsInvalid() {
+        Result<String> result = emmPolicyApi.createDeviceEmmPolicy(null);
+        logger.debug("Result of create device emm policy by deviceEmmPolicyCreateRequest is null: {}", result.toString());
+        Assert.assertEquals(-1, result.getBusinessCode());
+    }
+
+    @Test
+    public void testCreateDeviceEmmPolicyFailBySerialNoIsInvalid() {
+        DeviceEmmPolicyCreateRequest serialNoIsNull = new DeviceEmmPolicyCreateRequest();
+        serialNoIsNull.setSerialNo(null);
+        PolicyUpdatedContentDTO serialNoIsNullPolicyUpdatedContentDTO = new PolicyUpdatedContentDTO();
+        serialNoIsNullPolicyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        serialNoIsNull.setContentInfo(serialNoIsNullPolicyUpdatedContentDTO);
+        serialNoIsNull.setInheritFlag(Boolean.FALSE);
+        Result<String> serialNoIsNullResult = emmPolicyApi.createDeviceEmmPolicy(serialNoIsNull);
+        logger.debug("Result of create device emm policy by serialNo is null: {}", serialNoIsNullResult.toString());
+        Assert.assertEquals(-1, serialNoIsNullResult.getBusinessCode());
+
+        DeviceEmmPolicyCreateRequest serialNoIsBlank = new DeviceEmmPolicyCreateRequest();
+        serialNoIsBlank.setSerialNo("");
+        PolicyUpdatedContentDTO serialNoIsBlankPolicyUpdatedContentDTO = new PolicyUpdatedContentDTO();
+        serialNoIsBlankPolicyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        serialNoIsBlank.setContentInfo(serialNoIsBlankPolicyUpdatedContentDTO);
+        serialNoIsBlank.setInheritFlag(Boolean.FALSE);
+        Result<String> serialNoIsBlankResult = emmPolicyApi.createDeviceEmmPolicy(serialNoIsBlank);
+        logger.debug("Result of create device emm policy by serialNo is blank: {}", serialNoIsBlankResult.toString());
+        Assert.assertEquals(-1, serialNoIsBlankResult.getBusinessCode());
+
+        DeviceEmmPolicyCreateRequest serialNoIsTooLong = new DeviceEmmPolicyCreateRequest();
+        serialNoIsTooLong.setSerialNo("287000345328700034532870003453287000345328700034532870003453287000345328700034532870003453287000345328700034532870003453287000345328700034532870003453287000345328700034532870003453");
+        PolicyUpdatedContentDTO serialNoIsTooLongPolicyUpdatedContentDTO = new PolicyUpdatedContentDTO();
+        serialNoIsTooLongPolicyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        serialNoIsTooLong.setContentInfo(serialNoIsTooLongPolicyUpdatedContentDTO);
+        serialNoIsTooLong.setInheritFlag(Boolean.FALSE);
+        Result<String> serialNoIsTooLongResult = emmPolicyApi.createDeviceEmmPolicy(serialNoIsTooLong);
+        logger.debug("Result of create device emm policy by serialNo is too long: {}", serialNoIsTooLongResult.toString());
+        Assert.assertEquals(-1, serialNoIsTooLongResult.getBusinessCode());
+
+        DeviceEmmPolicyCreateRequest serialNoNotExist = new DeviceEmmPolicyCreateRequest();
+        serialNoNotExist.setSerialNo("serialNoNotExist");
+        PolicyUpdatedContentDTO serialNoNotExistPolicyUpdatedContentDTO = new PolicyUpdatedContentDTO();
+        serialNoNotExistPolicyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        serialNoNotExist.setContentInfo(serialNoNotExistPolicyUpdatedContentDTO);
+        serialNoNotExist.setInheritFlag(Boolean.FALSE);
+        Result<String> serialNoNotExistResult = emmPolicyApi.createDeviceEmmPolicy(serialNoNotExist);
+        logger.debug("Result of create device emm policy by serialNo is not exist: {}", serialNoNotExistResult.toString());
+        Assert.assertEquals(61617, serialNoNotExistResult.getBusinessCode());
+    }
+
+
+    @Test
+    public void testCreateDeviceEmmPolicyFailByContentInfoIsInvalid() {
+        DeviceEmmPolicyCreateRequest request = new DeviceEmmPolicyCreateRequest();
+        request.setSerialNo("2870003453");
+        request.setContentInfo(null);
+        request.setInheritFlag(Boolean.FALSE);
+        Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
+        logger.debug("Result of create device emm policy by contentInfo is null: {}", result.toString());
+        Assert.assertEquals(-1, result.getBusinessCode());
+    }
+
+    @Test
+    public void testCreateDeviceEmmPolicyFailByInheritFlagIsInvalid() {
+        DeviceEmmPolicyCreateRequest request = new DeviceEmmPolicyCreateRequest();
+        request.setSerialNo("2870003453");
+        PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
+        policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
+        request.setContentInfo(policyUpdatedContentDTO);
+        request.setInheritFlag(null);
+        Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
+        logger.debug("Result of create device emm policy by inheritFlag is null: {}", result.toString());
+        Assert.assertEquals(-1, result.getBusinessCode());
+    }
+
+    @Test
+    public void testCreateDeviceEmmPolicyFailByLockInvalid() {
+        DeviceEmmPolicyCreateRequest request = new DeviceEmmPolicyCreateRequest();
+        request.setSerialNo("2870003453");
 
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         request.setContentInfo(policyUpdatedContentDTO);
+        request.setInheritFlag(Boolean.FALSE);
 
         LockedPolicyUpdateDTO lockedPolicyUpdateDTO = new LockedPolicyUpdateDTO();
         lockedPolicyUpdateDTO.setKey("adjustVolumeDisabled");
         lockedPolicyUpdateDTO.setLockFlag(Boolean.TRUE);
         request.setLockedPolicyList(Lists.newArrayList(lockedPolicyUpdateDTO));
 
-        Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
-        logger.debug("Result of create merchant emm policy by lock is invalid: {}", result.toString());
-        Assert.assertEquals(-1, result.getBusinessCode());
+        Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
+        logger.debug("Result of create device emm policy by lock is invalid: {}", result.toString());
+        Assert.assertEquals(61664, result.getBusinessCode());
     }
-
-
-
-
 
 
 }
