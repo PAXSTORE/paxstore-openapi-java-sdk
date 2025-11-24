@@ -1310,6 +1310,86 @@ Result<String> result = emmDeviceApi.stopEmmDeviceLostMode(1647428843339813L);
 | 61654         | EMM for Android not subscribed                                                  |             |
 | 61656         | The market is not bound to EMM for Android                                      |             |
 
+### Clear EMM device app data
+
+The clear EMM device app data API allows the thirdparty system clear EMM device app data.
+
+**API**
+
+```
+public Result<String> clearEmmAppData(Long deviceId, String installedAppIds)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                                                                  |
+| :------------- | :----- | :------- |:-----------------------------------------------------------------------------|
+| deviceId       | Long   | false    | The id of EMM device                                                         |
+| installedAppIds| String | false    | The installedApps' record id to clear data, multiple ids separated by commas |
+
+**Sample codes**
+
+```
+EmmDeviceApi emmDeviceApi = new EmmDeviceApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = emmDeviceApi.clearEmmAppData(1647428843339813L, "1710719651282978,1710719651323432978");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter deviceId cannot be null and cannot be less than 1!"]
+}
+
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter installedAppIds cannot be null and cannot be less than 1!"]
+}
+```
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 61617,
+	"message": "Device not found"
+}
+
+{
+	"businessCode": 113,
+	"message": "Your request is invalid!"
+}
+
+{
+	"businessCode": 61621,
+	"message": "App not exists"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+<font color=red>Parameter deviceId cannot be null and cannot be less than 1!</font>
+<br>
+<font color=red>Parameter installedAppIds cannot be null !</font>
+
+**Possible business codes**
+
+| Business Code | Message                                    | Description |
+| :------------ | :----------------------------------------- | :---------- |
+| 113           | Your request is invalid                    |             |
+| 61617         | Device not found                           |             |
+| 61621         | App not exists                             |             |
+| 61654         | EMM for Android not subscribed             |             |
+| 61656         | The market is not bound to EMM for Android |             |
+
 ### Submit EMM zte quick upload record
 
 The submit EMM zte quick upload record API allows the thirdparty system submit EMM zte quick upload record
