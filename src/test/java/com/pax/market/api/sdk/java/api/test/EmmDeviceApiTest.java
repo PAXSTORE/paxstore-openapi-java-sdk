@@ -809,6 +809,14 @@ public class EmmDeviceApiTest {
         Assert.assertEquals(0, result.getBusinessCode());
     }
 
+
+    @Test
+    public void testClearEmmAppDataSuccess() {
+        Result<String> result = emmDeviceApi.clearEmmAppData(1713384305197097L,"4");
+        logger.debug("Result of clear app data: {}", result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
+
     @Test
     public void testStopEmmDeviceLostModeFailByDeviceIdIsInvalid() {
         Result<String> deviceIdIsNullResult = emmDeviceApi.stopEmmDeviceLostMode(null);
