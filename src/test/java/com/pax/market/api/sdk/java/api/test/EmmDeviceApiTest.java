@@ -172,89 +172,93 @@ public class EmmDeviceApiTest {
 
     @Test
     public void testSearchEmmDeviceSuccess() {
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult1 = emmDeviceApi.searchEmmDevice(1, 5, null, null, null,null, null, null, null, null);
-        logger.debug("Result1 of search emm device: {}", searchEmmDeviceSuccessResult1.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult1.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult1 = emmDeviceApi.searchEmmDevice(1, 5, null, null, null,null, null, null, null, null,null,null);
+         logger.debug("Result1 of search emm device: {}", searchEmmDeviceSuccessResult1.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult1.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult2 = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceSN_desc, null, null,null, null, null, null, null);
-        logger.debug("Result2 of search emm device: {}", searchEmmDeviceSuccessResult2.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult2.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult2 = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceSN_desc, null, null,null, null, null, null, null,null,null);
+         logger.debug("Result2 of search emm device: {}", searchEmmDeviceSuccessResult2.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult2.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult3 = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceSN_asc, null, null,null, null, null, null, null);
-        logger.debug("Result3 of search emm device: {}", searchEmmDeviceSuccessResult3.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult3.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult3 = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceSN_asc, null, null,null, null, null, null, null,null,null);
+         logger.debug("Result3 of search emm device: {}", searchEmmDeviceSuccessResult3.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult3.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult4 = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceRegisterTime_desc, null, null,null, null, null, null, null);
-        logger.debug("Result4 of search emm device: {}", searchEmmDeviceSuccessResult4.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult4.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult4 = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceRegisterTime_desc, null, null,null, null, null, null, null,null,null);
+         logger.debug("Result4 of search emm device: {}", searchEmmDeviceSuccessResult4.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult4.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult5 = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceRegisterTime_asc, null, null,null, null, null, null, null);
-        logger.debug("Result5 of search emm device: {}", searchEmmDeviceSuccessResult5.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult5.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult5 = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceRegisterTime_asc, null, null,null, null, null, null, null,null,null);
+         logger.debug("Result5 of search emm device: {}", searchEmmDeviceSuccessResult5.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult5.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult6 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", null,null, null, null, null, null);
-        logger.debug("Result6 of search emm device: {}", searchEmmDeviceSuccessResult6.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult6.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult6 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", null,null, null, null, null, null,null,null);
+         logger.debug("Result6 of search emm device: {}", searchEmmDeviceSuccessResult6.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult6.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult7 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908", null, null, null, null, null);
-        logger.debug("Result7 of search emm device: {}", searchEmmDeviceSuccessResult7.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult7.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult7 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908", null, null, null, null, null,null,null);
+         logger.debug("Result7 of search emm device: {}", searchEmmDeviceSuccessResult7.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult7.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult8 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", null, null, null);
-        logger.debug("Result8 of search emm device: {}", searchEmmDeviceSuccessResult8.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult8.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult8 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", null, null, null,null,null);
+         logger.debug("Result8 of search emm device: {}", searchEmmDeviceSuccessResult8.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult8.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult9 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", null, null);
-        logger.debug("Result9 of search emm device: {}", searchEmmDeviceSuccessResult9.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult9.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult9 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", null, null,null,null);
+         logger.debug("Result9 of search emm device: {}", searchEmmDeviceSuccessResult9.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult9.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult10 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", "sh1", null);
-        logger.debug("Result10 of search emm device: {}", searchEmmDeviceSuccessResult10.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult10.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult10 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", "sh1", null,null,null);
+         logger.debug("Result10 of search emm device: {}", searchEmmDeviceSuccessResult10.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult10.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult11 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE);
-        logger.debug("Result11 of search emm device: {}", searchEmmDeviceSuccessResult11.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult11.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult11 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE,null,null);
+         logger.debug("Result11 of search emm device: {}", searchEmmDeviceSuccessResult11.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult11.getBusinessCode());
 
-        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult12 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.LOST);
-        logger.debug("Result12 of search emm device: {}", searchEmmDeviceSuccessResult12.toString());
-        Assert.assertEquals(0, searchEmmDeviceSuccessResult12.getBusinessCode());
+         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult12 = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.LOST,"898600F1200000000000",null);
+         logger.debug("Result12 of search emm device with iccId: {}", searchEmmDeviceSuccessResult12.toString());
+         Assert.assertEquals(0, searchEmmDeviceSuccessResult12.getBusinessCode());
+
+        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult13 = emmDeviceApi.searchEmmDevice(1, 5, null, null, null, null, null, null, null, null, "861234567890123", null);
+        logger.debug("Result13 of search emm device with iccId and imei: {}", searchEmmDeviceSuccessResult13.toString());
+        Assert.assertEquals(0, searchEmmDeviceSuccessResult13.getBusinessCode());
 
     }
 
     @Test
     public void testSearchEmmDeviceFailByMfrNameAndModelNameIsInvalid() {
-        Result<EmmDeviceDTO> modelNameIsNullResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", null, "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.LOST);
+        Result<EmmDeviceDTO> modelNameIsNullResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", null, "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.LOST,"898600F1200000000000","861234567890123");
         logger.debug("Result of search emm device by model name is null: {}", modelNameIsNullResult.toString());
         Assert.assertEquals(61662, modelNameIsNullResult.getBusinessCode());
 
-        Result<EmmDeviceDTO> mfrNameIsNullResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908",null, "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE);
+        Result<EmmDeviceDTO> mfrNameIsNullResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908",null, "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE,"898600F1200000000000","861234567890123");
         logger.debug("Result of search emm device by manufacturer name is null: {}", mfrNameIsNullResult.toString());
         Assert.assertEquals(61662, mfrNameIsNullResult.getBusinessCode());
 
-        Result<EmmDeviceDTO> modelNameIsBlankResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.UN_CERTIFICATED);
+        Result<EmmDeviceDTO> modelNameIsBlankResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","ZOLON", "", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.UN_CERTIFICATED,"898600F1200000000000","861234567890123");
         logger.debug("Result of search emm device by model name is blank: {}", modelNameIsBlankResult.toString());
         Assert.assertEquals(61662, modelNameIsBlankResult.getBusinessCode());
 
-        Result<EmmDeviceDTO> mfrNameIsBlankResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE);
+        Result<EmmDeviceDTO> mfrNameIsBlankResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908","", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE,"898600F1200000000000","861234567890123");
         logger.debug("Result of search emm device by manufacturer name is blank: {}", mfrNameIsBlankResult.toString());
         Assert.assertEquals(61662, mfrNameIsBlankResult.getBusinessCode());
     }
 
     @Test
     public void testSearchEmmDeviceFailByResellerNameIsInvalid() {
-        Result<EmmDeviceDTO> resellerNameIsNullResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908", "ZOLON", null, null, "sh1", EmmDeviceApi.EmmDeviceStatus.LOST);
+        Result<EmmDeviceDTO> resellerNameIsNullResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908", "ZOLON", null, null, "sh1", EmmDeviceApi.EmmDeviceStatus.LOST,"898600F1200000000000","861234567890123");
         logger.debug("Result of search emm device by reseller name is null: {}", resellerNameIsNullResult.toString());
         Assert.assertEquals(1762, resellerNameIsNullResult.getBusinessCode());
 
-        Result<EmmDeviceDTO> resellerNameIsBlankResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908", null, "M9200", "", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE);
+        Result<EmmDeviceDTO> resellerNameIsBlankResult = emmDeviceApi.searchEmmDevice(1, 5, null, "M9200-0908", "2870000908", null, "M9200", "", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE,"898600F1200000000000","861234567890123");
         logger.debug("Result of search emm device by reseller name is blank: {}", resellerNameIsBlankResult.toString());
         Assert.assertEquals(1762, resellerNameIsBlankResult.getBusinessCode());
     }
 
     @Test
     public void testGetEmmDeviceSuccess() {
-        Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1687529174597667L);
+        Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1714690442919976L);
         logger.debug("Result of get emm device: {}", result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
     }
@@ -812,7 +816,7 @@ public class EmmDeviceApiTest {
 
     @Test
     public void testClearEmmAppDataSuccess() {
-        Result<String> result = emmDeviceApi.clearEmmAppData(1713384305197097L,"4");
+        Result<String> result = emmDeviceApi.clearEmmAppData(1714690442919976L,"4");
         logger.debug("Result of clear app data: {}", result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
     }

@@ -599,11 +599,27 @@ public class PolicyUpdatedContentDTO implements Serializable {
 
     public static class NetworkConfiguration implements Serializable {
 
-        private static final long serialVersionUID = 3634670332752051714L;
+        private static final long serialVersionUID = 7494207543833004157L;
 
         private String ssid;
 
         private String cipherType;
+
+        private String eapMethod;
+
+        private String phaseMethod;
+
+        private String userID;
+
+        private String userPass;
+
+        private String anoID;
+
+        private CertFileData idCert;
+
+        private CertFileData caCert;
+
+        private String domain;
 
         private String password;
 
@@ -614,6 +630,27 @@ public class PolicyUpdatedContentDTO implements Serializable {
         private Integer port;
 
         private String pacUrl;
+
+        @Override
+        public String toString() {
+            return "NetworkConfiguration{" +
+                    "ssid='" + ssid + '\'' +
+                    ", cipherType='" + cipherType + '\'' +
+                    ", eapMethod='" + eapMethod + '\'' +
+                    ", phaseMethod='" + phaseMethod + '\'' +
+                    ", userID='" + userID + '\'' +
+                    ", userPass='" + userPass + '\'' +
+                    ", anoID='" + anoID + '\'' +
+                    ", idCert=" + idCert +
+                    ", caCert=" + caCert +
+                    ", domain='" + domain + '\'' +
+                    ", password='" + password + '\'' +
+                    ", proxyType='" + proxyType + '\'' +
+                    ", hostName='" + hostName + '\'' +
+                    ", port=" + port +
+                    ", pacUrl='" + pacUrl + '\'' +
+                    '}';
+        }
 
         public String getSsid() {
             return ssid;
@@ -629,6 +666,70 @@ public class PolicyUpdatedContentDTO implements Serializable {
 
         public void setCipherType(String cipherType) {
             this.cipherType = cipherType;
+        }
+
+        public String getEapMethod() {
+            return eapMethod;
+        }
+
+        public void setEapMethod(String eapMethod) {
+            this.eapMethod = eapMethod;
+        }
+
+        public String getPhaseMethod() {
+            return phaseMethod;
+        }
+
+        public void setPhaseMethod(String phaseMethod) {
+            this.phaseMethod = phaseMethod;
+        }
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
+
+        public String getUserPass() {
+            return userPass;
+        }
+
+        public void setUserPass(String userPass) {
+            this.userPass = userPass;
+        }
+
+        public String getAnoID() {
+            return anoID;
+        }
+
+        public void setAnoID(String anoID) {
+            this.anoID = anoID;
+        }
+
+        public CertFileData getIdCert() {
+            return idCert;
+        }
+
+        public void setIdCert(CertFileData idCert) {
+            this.idCert = idCert;
+        }
+
+        public CertFileData getCaCert() {
+            return caCert;
+        }
+
+        public void setCaCert(CertFileData caCert) {
+            this.caCert = caCert;
+        }
+
+        public String getDomain() {
+            return domain;
+        }
+
+        public void setDomain(String domain) {
+            this.domain = domain;
         }
 
         public String getPassword() {
@@ -670,20 +771,53 @@ public class PolicyUpdatedContentDTO implements Serializable {
         public void setPacUrl(String pacUrl) {
             this.pacUrl = pacUrl;
         }
+    }
+
+    public static class CertFileData implements Serializable{
+
+        private static final long serialVersionUID = 4750840627579111760L;
+
+        private String fileKey;
+
+        private String fileName;
+
+        private String content;
+
+        public String getFileKey() {
+            return fileKey;
+        }
+
+        public void setFileKey(String fileKey) {
+            this.fileKey = fileKey;
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
 
         @Override
         public String toString() {
-            return "NetworkConfiguration{" +
-                    "ssid='" + ssid + '\'' +
-                    ", cipherType='" + cipherType + '\'' +
-                    ", password='" + password + '\'' +
-                    ", proxyType='" + proxyType + '\'' +
-                    ", hostName='" + hostName + '\'' +
-                    ", port=" + port +
-                    ", pacUrl='" + pacUrl + '\'' +
+            return "CertFileData{" +
+                    "fileKey='" + fileKey + '\'' +
+                    ", fileName='" + fileName + '\'' +
+                    ", content='" + content + '\'' +
                     '}';
         }
     }
+
+
 
     public static class AdvancedSecurityOverrides implements Serializable {
 

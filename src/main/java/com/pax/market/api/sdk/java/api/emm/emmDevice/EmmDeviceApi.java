@@ -77,7 +77,9 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
                                                 String modelName,
                                                 String resellerName,
                                                 String merchantName,
-                                                EmmDeviceStatus status) {
+                                                EmmDeviceStatus status,
+                                                String iccId,
+                                                String imei) {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -112,6 +114,12 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
         }
         if (status != null) {
             request.addRequestParam("status", status.val);
+        }
+        if (imei != null) {
+            request.addRequestParam("imei", imei);
+        }
+        if (iccId != null) {
+            request.addRequestParam("iccId", iccId);
         }
 
         EmmDevicePageResponse emmDevicePageResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmmDevicePageResponse.class);
