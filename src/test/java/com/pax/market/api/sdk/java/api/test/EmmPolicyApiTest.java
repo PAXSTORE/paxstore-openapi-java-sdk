@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class EmmPolicyApiTest {
 
     private static final Logger logger = LoggerFactory.getLogger(EmmPolicyApiTest.class.getSimpleName());
@@ -249,7 +251,7 @@ public class EmmPolicyApiTest {
 
     @Test
     public void testGetDeviceEmmPolicySuccess() {
-        Result<EmmPolicyDTO> result = emmPolicyApi.getDeviceEmmPolicy("5069796194");
+        Result<EmmPolicyDTO> result = emmPolicyApi.getDeviceEmmPolicy("41041JEKB06660");
         logger.debug("Result of get device emm policy: {}", result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
     }
@@ -523,12 +525,37 @@ public class EmmPolicyApiTest {
         apnPolicy.setApnSettings(Lists.newArrayList(apnSetting));
         deviceConnectivityManagement.setApnPolicy(apnPolicy);
         policyUpdatedContentDTO.setDeviceConnectivityManagement(deviceConnectivityManagement);
+        policyUpdatedContentDTO.setNetworkConfigurations(buildNetworkConfigurations());
         request.setContentInfo(policyUpdatedContentDTO);
+
 
         Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
         logger.debug("Result of create device emm policy: {}", result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
     }
+
+    private List<PolicyUpdatedContentDTO.NetworkConfiguration> buildNetworkConfigurations(){
+
+        PolicyUpdatedContentDTO.NetworkConfiguration eapConfig = new PolicyUpdatedContentDTO.NetworkConfiguration();
+        eapConfig.setSsid("Enterprise01");
+        eapConfig.setCipherType("WPA_WPA2_WPA3_ENTERPRISE");
+        eapConfig.setEapMethod(null);
+        eapConfig.setPhaseMethod("MSCHAPv2");
+        eapConfig.setAnoID("SDSDSDSD");
+        eapConfig.setUserID("tunglee");
+        eapConfig.setUserPass("tunglee");
+        eapConfig.setDomain("www.pax.com");
+        eapConfig.setProxyType("NONE");
+
+        PolicyUpdatedContentDTO.CertFileData data=new PolicyUpdatedContentDTO.CertFileData();
+        data.setContent("实打实的撒");
+        data.setFileKey("Entdds_CA_152224152");
+        data.setFileName("ca.der");
+        eapConfig.setCaCert(data);
+
+        return List.of(eapConfig);
+    }
+
 
     @Test
     public void testCreateDeviceEmmPolicyFailByDeviceEmmPolicyCreateRequestIsInvalid() {

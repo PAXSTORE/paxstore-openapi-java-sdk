@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class EmmDeviceDetailDTO implements Serializable {
 
-    private static final long serialVersionUID = 7090323697415577752L;
+    private static final long serialVersionUID = -7614345735938677210L;
 
     private Long id;
 
@@ -17,6 +17,8 @@ public class EmmDeviceDetailDTO implements Serializable {
 
     private String status;
 
+    private String imei;
+
     private String securityStatus;
 
     private Date registerTime;
@@ -24,16 +26,6 @@ public class EmmDeviceDetailDTO implements Serializable {
     private EmmModelDTO model;
 
     private EmmResellerDTO reseller;
-
-    public String getSecurityStatus() {
-        return securityStatus;
-    }
-
-    public void setSecurityStatus(String securityStatus) {
-        this.securityStatus = securityStatus;
-    }
-
-    private EmmMerchantDTO merchant;
 
     public Long getId() {
         return id;
@@ -75,6 +67,22 @@ public class EmmDeviceDetailDTO implements Serializable {
         this.status = status;
     }
 
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    public String getSecurityStatus() {
+        return securityStatus;
+    }
+
+    public void setSecurityStatus(String securityStatus) {
+        this.securityStatus = securityStatus;
+    }
+
     public Date getRegisterTime() {
         return registerTime;
     }
@@ -99,14 +107,6 @@ public class EmmDeviceDetailDTO implements Serializable {
         this.reseller = reseller;
     }
 
-    public EmmMerchantDTO getMerchant() {
-        return merchant;
-    }
-
-    public void setMerchant(EmmMerchantDTO merchant) {
-        this.merchant = merchant;
-    }
-
     @Override
     public String toString() {
         return "EmmDeviceDetailDTO{" +
@@ -115,11 +115,11 @@ public class EmmDeviceDetailDTO implements Serializable {
                 ", serialNo='" + serialNo + '\'' +
                 ", type='" + type + '\'' +
                 ", status='" + status + '\'' +
+                ", imei='" + imei + '\'' +
                 ", securityStatus='" + securityStatus + '\'' +
                 ", registerTime=" + registerTime +
                 ", model=" + model +
                 ", reseller=" + reseller +
-                ", merchant=" + merchant +
                 '}';
     }
 }

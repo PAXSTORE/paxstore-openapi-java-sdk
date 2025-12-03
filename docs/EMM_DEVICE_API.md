@@ -152,14 +152,14 @@ The search EMM devices API allows thirdparty system search EMM devices by page.
 **API**
 
 ```
-public Result<EmmDeviceDTO> searchEmmDevice(int pageNo, int pageSize, EmmDeviceSearchOrderBy orderBy, String name, String serialNo, String modelName, String resellerName, String merchantName, EmmDeviceStatus status)
+public Result<EmmDeviceDTO> searchEmmDevice(int pageNo, int pageSize, EmmDeviceSearchOrderBy orderBy, String name, String serialNo, String mfrName, String modelName, String resellerName, String merchantName, EmmDeviceStatus status, String iccId, String imei)
 ```
 
 **Input parameter(s) description**
 
 
 | Name         | Type                   | Nullable | Description                                                                                                                                                                                                                                                  |
-| :------------- | :----------------------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :------------- | :----------------------- | :--------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | pageNo       | int                    | false    | page number, value must >=1                                                                                                                                                                                                                                  |
 | pageSize     | int                    | false    | the record number per page, range is 1 to 100                                                                                                                                                                                                                |
 | orderBy      | EmmDeviceSearchOrderBy | true     | the sort order by field name. The value of this parameter can be one of EmmDeviceSearchOrderBy.EmmDeviceSN_desc, EmmDeviceSearchOrderBy.EmmDeviceSN_asc, EmmDeviceSearchOrderBy.EmmDeviceRegisterTime_desc, EmmDeviceSearchOrderBy.EmmDeviceRegisterTime_asc |
@@ -170,12 +170,14 @@ public Result<EmmDeviceDTO> searchEmmDevice(int pageNo, int pageSize, EmmDeviceS
 | resellerName | String                 | true     | search EMM devices under the reseller or it's sub-resellers                                                                                                                                                                                                  |
 | merchantName | String                 | true     | search EMM devices under the merchant                                                                                                                                                                                                                        |
 | status       | EmmDeviceStatus        | true     | search by device status. The value of this parameter can be one of EmmDeviceStatus.UN_CERTIFICATED, EmmDeviceStatus.ACTIVE, EmmDeviceStatus.LOST                                                                                                             |
+| iccId        | String                 | true     | search by SIM ICCID                                                                                                                                                                                                                                          |
+| imei         | String                 | true     | search by device IMEI                                                                                                                                                                                                                                        |
 
 **Sample codes**
 
 ```
 EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<EmmDeviceDTO> result = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceSN_asc, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE);
+Result<EmmDeviceDTO> result = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceSN_asc, "M9200-0908", "2870000908", "ZOLON", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE, "898600F1200000000000", "861234567890123");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -347,6 +349,7 @@ Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1647428843339813L)
 		"status": "A",
 		"securityStatus": "RU",
 		"registerTime": 1732240055000,
+		"imei": "85565656566645",
 		"model": {
 			"id": 13,
 			"name": "M50",
@@ -379,6 +382,7 @@ The type in data is EmmDeviceDetailDTO. The structure like below.
 | merchant       | EmmMerchantDTO | The merchant of EMM device        |
 | registerTime   | Date           | The register time of EMM device   |
 | status         | String         | The status of EMM device          |
+| imei           | String         | The IMEI of EMM device            |
 | securityStatus | String         | The security status of EMM device |
 
 Structure of class EmmModelDTO
