@@ -553,7 +553,7 @@ public class EmmPolicyApiTest {
         data.setFileName("ca.der");
         eapConfig.setCaCert(data);
 
-        return List.of(eapConfig);
+        return Lists.newArrayList(eapConfig);
     }
 
 
