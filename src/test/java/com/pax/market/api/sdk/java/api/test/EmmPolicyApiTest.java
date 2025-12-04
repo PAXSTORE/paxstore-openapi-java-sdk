@@ -60,7 +60,7 @@ public class EmmPolicyApiTest {
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
-
+        policyUpdatedContentDTO.setHideEnterpriseName(Boolean.TRUE);
         PolicyUpdatedContentDTO.ApplicationPolicy applicationPolicy = new PolicyUpdatedContentDTO.ApplicationPolicy();
         applicationPolicy.setPackageName("com.zolon.signrotatetest.com.zolon.signrotatetest");
         applicationPolicy.setAutoUpdateMode("AUTO_UPDATE_DEFAULT");
@@ -285,6 +285,7 @@ public class EmmPolicyApiTest {
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
+        policyUpdatedContentDTO.setHideEnterpriseName(Boolean.TRUE);
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
 
@@ -485,6 +486,7 @@ public class EmmPolicyApiTest {
         PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
+        policyUpdatedContentDTO.setHideEnterpriseName(Boolean.TRUE);
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
 

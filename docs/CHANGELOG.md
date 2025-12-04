@@ -3,7 +3,7 @@
 ## 10.1.0
 ### New Feature
 * The `source` attribute within the installedApks object is now returned in the API(TerminalApi-`getTerminal`, `getTerminalBySn`) response.
-
+* Add the return field `hideEnterpriseName` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API.
 
 ## 10.0.0
 ### New Feature
