@@ -3,10 +3,11 @@
 ## 10.1.0
 ### New Feature
 * The `source` attribute within the installedApks object is now returned in the API(TerminalApi-`getTerminal`, `getTerminalBySn`) response.
+* Add EmmDeviceApi - `clearEmmAppData` API
+* Add the return field `imei` in EmmDeviceApi - `getEmmDevice` API
+* Add parameter query `iccId` 、`imei` and  return in EmmDeviceApi-`searchEmmDevice` API
+* Change the structure of `NetworkConfiguration` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
 * Add the return field `hideEnterpriseName` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API.
-
-### Dependency Change
-* This Maven compiler plugin configuration specifies that the project should be compiled using JDK 17 as both source and target versions.
 
 
 ## 10.0.0
