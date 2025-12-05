@@ -5,6 +5,10 @@
 * The `source` attribute within the installedApks object is now returned in the API(TerminalApi-`getTerminal`, `getTerminalBySn`) response.
 * Add the return field `hideEnterpriseName` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API.
 
+### Dependency Change
+* This Maven compiler plugin configuration specifies that the project should be compiled using JDK 17 as both source and target versions.
+
+
 ## 10.0.0
 ### New Feature
 * Add parameter query `includeMasterTerminal` and return in TerminalApi-`getTerminal`, `getTerminalBySn` API
