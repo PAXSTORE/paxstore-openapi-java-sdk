@@ -7,6 +7,7 @@
 * Add the return field `imei` in EmmDeviceApi - `getEmmDevice` API
 * Add parameter query `iccId` 、`imei` and  return in EmmDeviceApi-`searchEmmDevice` API
 * Change the structure of `NetworkConfiguration` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
+* Add the return field `hideEnterpriseName` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API.
 
 
 ## 10.0.0

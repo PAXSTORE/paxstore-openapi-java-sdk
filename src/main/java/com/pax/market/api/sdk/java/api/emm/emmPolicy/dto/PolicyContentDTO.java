@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PolicyContentDTO implements Serializable {
 
-    private static final long serialVersionUID = 6989867119408868680L;
+    private static final long serialVersionUID = -8569930422289567601L;
 
     private Boolean adjustVolumeDisabled;
 
@@ -108,6 +108,8 @@ public class PolicyContentDTO implements Serializable {
     private DeviceConnectivityManagement deviceConnectivityManagement;
 
     private String deviceOwnerLockScreenInfo;
+
+    private Boolean hideEnterpriseName;
 
     private List<PolicyEnforcementRule> policyEnforcementRules;
 
@@ -521,6 +523,14 @@ public class PolicyContentDTO implements Serializable {
         this.deviceOwnerLockScreenInfo = deviceOwnerLockScreenInfo;
     }
 
+    public Boolean getHideEnterpriseName() {
+        return hideEnterpriseName;
+    }
+
+    public void setHideEnterpriseName(Boolean hideEnterpriseName) {
+        this.hideEnterpriseName = hideEnterpriseName;
+    }
+
     public List<PolicyEnforcementRule> getPolicyEnforcementRules() {
         return policyEnforcementRules;
     }
@@ -591,6 +601,7 @@ public class PolicyContentDTO implements Serializable {
                 ", vpnConfigDisabled=" + vpnConfigDisabled +
                 ", deviceConnectivityManagement=" + deviceConnectivityManagement +
                 ", deviceOwnerLockScreenInfo='" + deviceOwnerLockScreenInfo + '\'' +
+                ", hideEnterpriseName=" + hideEnterpriseName +
                 ", policyEnforcementRules=" + policyEnforcementRules +
                 ", applications=" + applications +
                 '}';
