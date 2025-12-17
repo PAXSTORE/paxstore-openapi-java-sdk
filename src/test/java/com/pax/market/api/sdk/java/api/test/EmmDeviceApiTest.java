@@ -221,8 +221,12 @@ public class EmmDeviceApiTest {
          Assert.assertEquals(0, searchEmmDeviceSuccessResult12.getBusinessCode());
 
         Result<EmmDeviceDTO> searchEmmDeviceSuccessResult13 = emmDeviceApi.searchEmmDevice(1, 5, null, null, null, null, null, null, null, null, "861234567890123", null);
-        logger.debug("Result13 of search emm device with iccId and imei: {}", searchEmmDeviceSuccessResult13.toString());
+        logger.debug("Result13 of search emm device with iccId: {}", searchEmmDeviceSuccessResult13.toString());
         Assert.assertEquals(0, searchEmmDeviceSuccessResult13.getBusinessCode());
+
+        Result<EmmDeviceDTO> searchEmmDeviceSuccessResult14 = emmDeviceApi.searchEmmDevice(1, 5, null, null, null, null, null, null, null, null, null, "352959490014371");
+        logger.debug("Result14 of search emm device with imei: {}", searchEmmDeviceSuccessResult14.toString());
+        Assert.assertEquals(0, searchEmmDeviceSuccessResult14.getBusinessCode());
 
     }
 
