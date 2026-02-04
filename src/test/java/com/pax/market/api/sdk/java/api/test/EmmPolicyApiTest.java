@@ -61,6 +61,10 @@ public class EmmPolicyApiTest {
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
         policyUpdatedContentDTO.setHideEnterpriseName(Boolean.TRUE);
+        policyUpdatedContentDTO.setEnableRemoteControl(true);
+        policyUpdatedContentDTO.setEnableUnattendedAccess(true);
+        policyUpdatedContentDTO.setUnattendedDeviceResponseTime(30);
+
         PolicyUpdatedContentDTO.ApplicationPolicy applicationPolicy = new PolicyUpdatedContentDTO.ApplicationPolicy();
         applicationPolicy.setPackageName("com.zolon.signrotatetest.com.zolon.signrotatetest");
         applicationPolicy.setAutoUpdateMode("AUTO_UPDATE_DEFAULT");
@@ -100,9 +104,16 @@ public class EmmPolicyApiTest {
         request.setContentInfo(policyUpdatedContentDTO);
 
         LockedPolicyUpdateDTO lockedPolicyUpdateDTO = new LockedPolicyUpdateDTO();
-        lockedPolicyUpdateDTO.setKey("adjustVolumeDisabled");
+        lockedPolicyUpdateDTO.setKey("enableRemoteControl");
         lockedPolicyUpdateDTO.setLockFlag(Boolean.TRUE);
-        request.setLockedPolicyList(Lists.newArrayList(lockedPolicyUpdateDTO));
+        LockedPolicyUpdateDTO unattended = new LockedPolicyUpdateDTO();
+        unattended.setKey("enableUnattendedAccess");
+        unattended.setLockFlag(Boolean.TRUE);
+        LockedPolicyUpdateDTO unattendedTime = new LockedPolicyUpdateDTO();
+        unattendedTime.setKey("unattendedDeviceResponseTime");
+        unattendedTime.setLockFlag(Boolean.TRUE);
+
+        request.setLockedPolicyList(Lists.newArrayList(lockedPolicyUpdateDTO,unattended,unattendedTime));
 
         Result<String> result = emmPolicyApi.createResellerEmmPolicy(request);
         logger.debug("Result of create reseller emm policy: {}", result.toString());
@@ -289,6 +300,9 @@ public class EmmPolicyApiTest {
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
 
+        policyUpdatedContentDTO.setEnableUnattendedAccess(true);
+        policyUpdatedContentDTO.setUnattendedDeviceResponseTime(10);
+
         PolicyUpdatedContentDTO.ApplicationPolicy applicationPolicy = new PolicyUpdatedContentDTO.ApplicationPolicy();
         applicationPolicy.setPackageName("com.zolon.signrotatetest.com.zolon.signrotatetest");
         applicationPolicy.setAutoUpdateMode("AUTO_UPDATE_DEFAULT");
@@ -327,7 +341,17 @@ public class EmmPolicyApiTest {
         deviceConnectivityManagement.setApnPolicy(apnPolicy);
         policyUpdatedContentDTO.setDeviceConnectivityManagement(deviceConnectivityManagement);
         request.setContentInfo(policyUpdatedContentDTO);
+        LockedPolicyUpdateDTO lockedPolicyUpdateDTO = new LockedPolicyUpdateDTO();
+        lockedPolicyUpdateDTO.setKey("enableRemoteControl");
+        lockedPolicyUpdateDTO.setLockFlag(Boolean.FALSE);
+        LockedPolicyUpdateDTO unattended = new LockedPolicyUpdateDTO();
+        unattended.setKey("enableUnattendedAccess");
+        unattended.setLockFlag(Boolean.FALSE);
+        LockedPolicyUpdateDTO unattendedTime = new LockedPolicyUpdateDTO();
+        unattendedTime.setKey("unattendedDeviceResponseTime");
+        unattendedTime.setLockFlag(Boolean.FALSE);
 
+        request.setLockedPolicyList(Lists.newArrayList(lockedPolicyUpdateDTO,unattended,unattendedTime));
         Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
         logger.debug("Result of create merchant emm policy: {}", result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
