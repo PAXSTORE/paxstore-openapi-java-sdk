@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PolicyUpdatedContentDTO implements Serializable {
 
-    private static final long serialVersionUID = 5419952166496115575L;
+    private static final long serialVersionUID = 1234567890123456789L;
 
     private Boolean adjustVolumeDisabled;
 
@@ -57,6 +57,10 @@ public class PolicyUpdatedContentDTO implements Serializable {
     private KioskCustomization kioskCustomization;
 
     private Boolean enableRemoteControl;
+
+    private Integer unattendedDeviceResponseTime;
+
+    private Boolean enableUnattendedAccess;
 
     private String locationMode;
 
@@ -210,6 +214,22 @@ public class PolicyUpdatedContentDTO implements Serializable {
 
     public void setFactoryResetDisabled(Boolean factoryResetDisabled) {
         this.factoryResetDisabled = factoryResetDisabled;
+    }
+
+    public Integer getUnattendedDeviceResponseTime() {
+        return unattendedDeviceResponseTime;
+    }
+
+    public void setUnattendedDeviceResponseTime(Integer unattendedDeviceResponseTime) {
+        this.unattendedDeviceResponseTime = unattendedDeviceResponseTime;
+    }
+
+    public Boolean getEnableUnattendedAccess() {
+        return enableUnattendedAccess;
+    }
+
+    public void setEnableUnattendedAccess(Boolean enableUnattendedAccess) {
+        this.enableUnattendedAccess = enableUnattendedAccess;
     }
 
     public Boolean getFunDisabled() {
@@ -576,6 +596,8 @@ public class PolicyUpdatedContentDTO implements Serializable {
                 ", kioskCustomLauncherEnabled=" + kioskCustomLauncherEnabled +
                 ", kioskCustomization=" + kioskCustomization +
                 ", enableRemoteControl=" + enableRemoteControl +
+                ", unattendedDeviceResponseTime=" + unattendedDeviceResponseTime +
+                ", enableUnattendedAccess=" + enableUnattendedAccess +
                 ", locationMode='" + locationMode + '\'' +
                 ", maximumTimeToLock=" + maximumTimeToLock +
                 ", microphoneAccess='" + microphoneAccess + '\'' +
