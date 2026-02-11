@@ -48,6 +48,7 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 	
 	private static final String SEARCH_TERMINAL_APK_LIST_URL = "/v1/3rdsys/terminalApks";
 	private static final String CREATE_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks";
+    private static final String CREATE_TERMINAL_APK_PARTIAL_PARAM_URL = "/v1/3rdsys/terminalApks/part/param";
 	private static final String GET_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/{terminalApkId}";
 	private static final String SUSPEND_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/suspend";
     private static final String DELETE_TERMINAL_APK_URL = "/v1/3rdsys/terminalApks/{terminalApkId}";
@@ -118,6 +119,20 @@ public class TerminalApkApi extends BaseThirdPartySysApi{
 		TerminalApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalApkResponse.class);
         return new Result<>(resp);
 	}
+
+    public Result<TerminalApkDTO> createTerminalApkWithPartialParams(CreateTerminalApkPartialParamRequest createTerminalApkRequest){
+        List<String> validationErrs = CreateTerminalApkRequestValidator.validate(createTerminalApkRequest);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(CREATE_TERMINAL_APK_PARTIAL_PARAM_URL);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(createTerminalApkRequest, CreateTerminalApkRequest.class));
+        TerminalApkResponse resp = EnhancedJsonUtils.fromJson(client.execute(request), TerminalApkResponse.class);
+        return new Result<>(resp);
+    }
 
 	public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId){
         return getTerminalApk(terminalApkId, null);

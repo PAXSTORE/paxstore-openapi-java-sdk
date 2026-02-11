@@ -362,6 +362,144 @@ The type of data is SimpleTerminalGroupApkDTO,TerminalGroupApkParamDTO , and Ref
 | 2032          | API does not support push non free applicationAPI does not support push non free application ||
 | 2150          | Terminal group not found                                                                     ||
 | 13100         | Invalid application parameter variables                                                      ||
+### Create and active group apk with partial parameters
+
+Create and active a group push apk task of partial params by CreateTerminalGroupApkPartialParamRequest.
+
+**API**
+
+```
+public Result<SimpleTerminalGroupApkDTO> createAndActiveGroupApkWithPartialParams(CreateTerminalGroupApkPartialParamRequest createRequest)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|createRequest|CreateTerminalGroupApkPartialParamRequest|false||
+
+Structure of class CreateTerminalGroupApkPartialParamRequest.
+
+| Property Name              | Type                  | Nullable | Description                                                                                                                                                                                                                                                                                                                                        |
+|:---------------------------|:----------------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| groupId                    | Long                  | false    | The id of the terminal group                                                                                                                                                                                                                                                                                                                       |
+| pushTemplateName           | String                | true     | the name of the push Template                                                                                                                                                                                                                                                                                                                      |
+| packageName                | String                | false    | the package name of push apk                                                                                                                                                                                                                                                                                                                       |
+| version                    | String                | true     | The package name which indicate the application you want to push                                                                                                                                                                                                                                                                                   |
+| templateName               | String                | true     | The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10. |
+| parameters                 | Map\<String, String\> | true     | The parameter key and value, the key the PID in template                                                                                                                                                                                                                                                                                           |
+| base64FileParameters       | List\<FileParameter\> | true     | The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb                                                                                                                                                                                                                         |
+| inheritPushHistory         | Boolean               | true     | Whether to inherit the latest success push history parameters, inherited parameter values have lower priority than passed-in parameter values                                                                                                                                                                                                      |
+| forceUpdate                | Boolean               | true     | Whether to force the app to update                                                                                                                                                                                                                                                                                                                 |
+| wifiOnly                   | Boolean               | true     | Whether to download over Wi-Fi or Cable network only, don’t allow to download over the cellular network                                                                                                                                                                                                                                            |
+| effectiveTime              | Date                  | true     | The time when to start the push task                                                                                                                                                                                                                                                                                                               |
+| expiredTime                | Date                  | true     | The time when to stop the push task                                                                                                                                                                                                                                                                                                                |
+| partialPid                 | String                | false    | The parameter pid which you want to push                                                                                                                                                                                                                                                                                                                |
+| validateUndefinedParameter | Boolean               | true     | Whether to validate undefined parameters                                                                                                                                                                                                                                                                                                             |
+
+Structure of class FileParameter
+
+| Property Name | Type   | Nullable | Description                                             |
+| :------------ | :----- | :------- | :------------------------------------------------------ |
+| pid           | String | true     | The PID in template                                     |
+| fileName      | String | true     | The parameter of file type, file name containing suffix |
+| fileData      | String | true     | The parameter of file type, file base64 data            |
+
+**Sample codes**
+
+```
+TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+CreateTerminalGroupApkPartialParamRequest createRequest = new CreateTerminalGroupApkPartialParamRequest();
+createRequest.setGroupId(16543L); 
+createRequest.setPushTemplateName("testCreate3RD-result-api-test-CREATEbY-newest-12334111");
+createRequest.setPackageName("com.baidu.tieba");
+createRequest.setTemplateName("123 (3).xml");
+//  Map<String, String> parameters = new HashMap<String, String>();
+//  parameters.put("sys_F1_sys_cap_test01", "abc");
+//  parameters.put("sys_F1_sys_cap_test02", "123");
+//  parameters.put("sys_F1_sys_cap_password", "123");
+createRequest.setParameters(null);
+//  FileParameter fileParameter = new FileParameter();
+//  fileParameter.setPid("PID.cardBinFile");
+//  fileParameter.setFileName("cardBinFile.jpeg");
+// fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
+// List<FileParameter> base64FileParameters = new ArrayList<>();
+// base64FileParameters.add(fileParameter);
+createRequest.setBase64FileParameters(null);
+createRequest.setPartialPid("pid1,pid2");
+Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.createAndActiveGroupApkWithPartialParams(createRequest);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter terminalGroupApkCreateRequest cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2150,
+	"message": "Terminal group not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+		"groupApkParam": {
+			"failedCount": 0,
+			"filteredCount": 0,
+			"pendingCount": 0,
+			"paramTemplateName": "123 (3).xml",
+			"successCount": 0
+		},
+		"apkVersionName": "10.3.8.30",
+		"failedCount": 0,
+		"filteredCount": 0,
+		"actionStatus": 0,
+		"apkPackageName": "com.baidu.tieba",
+		"pendingCount": 0,
+		"effectiveTime": 1583396340000,
+		"apkVersionCode": 167968776,
+		"successCount": 0,
+		"id": 1743,
+		"updatedDate": 1583396371789,
+		"status": "A"
+	}
+}
+```
+
+<br>
+The type of data is SimpleTerminalGroupApkDTO,TerminalGroupApkParamDTO , and Refer to Search terminal group apk Api for structure .
+
+**Possible client validation errors**
+
+
+> <font color="red">Parameter createRequest cannot be null!</font>
+
+**Possible business codes**
+
+| Business Code | Message                                                                                      | Description |
+|:--------------|:---------------------------------------------------------------------------------------------|:------------|
+| 135           | Request parameter is missing or invalid                                                      | &nbsp;      |
+| 1111          | Selected parameter templates exceeded the max limit                                          ||
+| 2027          | Package name is mandatory                                                                    ||
+| 2029          | Apk not found                                                                                ||
+| 2030          | Parameter template not found                                                                 ||
+| 2031          | Template Name cannot be empty                                                                ||
+| 2032          | API does not support push non free applicationAPI does not support push non free application ||
+| 2150          | Terminal group not found                                                                     ||
+| 3100          | The marketplace doesn't support parameter partial push                                       ||
+| 1276          | APK base type is must parameters app                                                         ||
+| 13100         | Invalid application parameter variables                                                      ||
 
 ### Suspend terminal group apk
 

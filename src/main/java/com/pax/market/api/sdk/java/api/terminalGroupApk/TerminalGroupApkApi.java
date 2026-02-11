@@ -19,10 +19,7 @@ import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.base.request.SdkRequest;
 import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
-import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.CreateTerminalGroupApkRequest;
-import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.SimpleTerminalGroupApkDTO;
-import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.TerminalGroupApkPageResponse;
-import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.TerminalGroupApkResponse;
+import com.pax.market.api.sdk.java.api.terminalGroupApk.dto.*;
 import com.pax.market.api.sdk.java.api.terminalGroupApk.validator.CreateTerminalGroupApkRequestValidator;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import com.pax.market.api.sdk.java.api.util.StringUtils;
@@ -53,6 +50,7 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
     private static final String GET_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks/{groupApkId}";
     private static final String SEARCH_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks";
     private static final String CREATE_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks";
+    private static final String CREATE_TERMINAL_GROUP_APK_PARTIAL_PARAM_URL = "/v1/3rdsys/terminalGroupApks/part/param";
     private static final String SUSPEND_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks/{groupApkId}/suspend";
     private static final String DELETE_TERMINAL_GROUP_APK_URL = "/v1/3rdsys/terminalGroupApks/{groupApkId}";
 
@@ -119,6 +117,20 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(CREATE_TERMINAL_GROUP_APK_URL);
+        request.setRequestMethod(SdkRequest.RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(createRequest, CreateTerminalGroupApkRequest.class));
+        TerminalGroupApkResponse terminalGroupApkResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupApkResponse.class);
+        return new Result<>(terminalGroupApkResponse);
+    }
+
+    public Result<SimpleTerminalGroupApkDTO> createAndActiveGroupApkWithPartialParams(CreateTerminalGroupApkPartialParamRequest createRequest){
+        List<String> validationErrs = CreateTerminalGroupApkRequestValidator.validate(createRequest);
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(CREATE_TERMINAL_GROUP_APK_PARTIAL_PARAM_URL);
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.setRequestBody(new Gson().toJson(createRequest, CreateTerminalGroupApkRequest.class));

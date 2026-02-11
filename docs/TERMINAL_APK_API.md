@@ -144,6 +144,137 @@ terminalApkApi.createTerminalApk(createTerminalApkRequest);
 | 13100         | Invalid application parameter variables             ||
 | 1111          | Selected parameter templates exceeded the max limit ||
 | 2031          | Template name cannot be empty                       | &nbsp;                                         |
+### Push apk with partial parameters
+
+Push apk API allow the third party system push a apk of partial params to terminal. And max request data size is 5MB.
+
+**API**
+
+```
+public Result<TerminalApkDTO> createTerminalApkWithPartialParams(CreateTerminalApkPartialParamRequest createTerminalApkRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name           | Type                                 | Nullable | Description                                           |
+|:-------------------------|:-------------------------------------|:---------|:------------------------------------------------------|
+| createTerminalApkRequest | CreateTerminalApkPartialParamRequest | false    | The create request object. The structure shows below. |
+
+Structure of class CreateTerminalApkPartialParamRequest
+
+| Property Name              | Type                  | Nullable | Description                                                                                                                                                                                                                                                                                                                                        |
+|:---------------------------|:----------------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| tid                        | String                | true     | The tid of terminal                                                                                                                                                                                                                                                                                                                                |
+| serialNo                   | String                | true     | The serial number of terminal                                                                                                                                                                                                                                                                                                                      |
+| packageName                | String                | false    | The package name which indicate the application you want to push to the terminal                                                                                                                                                                                                                                                                   |
+| version                    | String                | true     | The version name of application which you want to push, if it is blank API will use the latest version                                                                                                                                                                                                                                             |
+| templateName               | String                | true     | The template file name of paramter application. The template file name can be found in the detail of the parameter application. If user want to push more than one template the please use &#124; to concact the different template file names like tempate1.xml&#124;template2.xml&#124;template3.xml, the max size of template file names is 10. |
+| parameters                 | Map\<String, String\> | false    | The parameter key and value, the key the PID in template                                                                                                                                                                                                                                                                                           |
+| base64FileParameters       | List\<FileParameter\> | false    | The parameter of file type, the max counter of file type parameter is 10, and the max size of each parameter file is 500kb                                                                                                                                                                                                                         |
+| pushTemplateName           | String                | true     | The push template name                                                                                                                                                                                                                                                                                                                             |
+| inheritPushHistory         | Boolean               | true     | Whether to inherit the latest success push history parameters, inherited parameter values have lower priority than passed-in parameter values                                                                                                                                                                                                      |
+| forceUpdate                | Boolean               | true     | Whether to force the app to update                                                                                                                                                                                                                                                                                                                 |
+| wifiOnly                   | Boolean               | true     | Whether to download over Wi-Fi or Cable network only, don’t allow to download over the cellular network                                                                                                                                                                                                                                            |
+| effectiveTime              | Date                  | true     | The time when to start the push task                                                                                                                                                                                                                                                                                                               |
+| expiredTime                | Date                  | true     | The time when to stop the push task                                                                                                                                                                                                                                                                                                                |
+| partialPid                 | String                | false    | The parameter pid which you want to push                                                                                                                                                                                                                                                                                                           |
+| validateUndefinedParameter | Boolean               | true     | Whether to validate undefined parameters                                                                                                                                                                                                                                                                                                           |
+
+Structure of class FileParameter
+
+| Property Name | Type   | Nullable | Description                                             |
+|:--------------|:-------|:---------|:--------------------------------------------------------|
+| pid           | String | true     | The PID in template                                     |
+| fileName      | String | true     | The parameter of file type, file name containing suffix |
+| fileData      | String | true     | The parameter of file type, file base64 data            |
+
+Note: tid and serialNo cannot be empty at same time.
+
+**Sample codes**
+
+```
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+CreateTerminalApkPartialParamRequest createTerminalApkRequest = new CreateTerminalApkPartialParamRequest();
+createTerminalApkRequest.setTid("ABC09098989");
+createTerminalApkRequest.setPackageName("com.baidu.map");
+createTerminalApkRequest.setTemplateName("template_map");
+Map<String, String> parameters = new HashMap<String, String>();
+parameters.put("PID.locationCode", "cn_js_sz");
+parameters.put("PID.showtraffic", "true");
+FileParameter fileParameter = new FileParameter();
+fileParameter.setPid("PID.cardBinFile");
+fileParameter.setFileName("cardBinFile.jpeg");
+fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
+List<FileParameter> base64FileParameters = new ArrayList<>();
+base64FileParameters.add(fileParameter);
+createTerminalApkRequest.setBase64FileParameters(base64FileParameters);
+createTerminalApkRequest.setParameters(parameters);
+createTerminalApkRequest.setPartialPid("pid1,pid2");
+terminalApkApi.createTerminalApkWithPartialParams(createTerminalApkRequest);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["The property serialNo and tid in createTerminalApkRequest cannot be blank at same time!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 2028,
+	"message": "TerminalApk not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0,
+	"data": {
+    	"id": 51741,	
+    }
+}
+```
+
+**Possible validation errors**
+
+> <font color=red>Parameter createTerminalApkRequest cannot be null!</font>  
+> <font color=red>The property parameters of createTerminalApkRequest cannot be empty!</font>  
+> <font color=red>The property serialNo and tid in createTerminalApkRequest cannot be blank at same time!</font>  
+> <font color=red>packageName:may not be empty</font>  
+> <font color="red">The max size of template names is 10!</font>  
+> <font color=red>Exceed max counter (10) of file type parameters!</font>  
+> <font color=red>Exceed max size (500kb) per file type parameters!</font>
+
+
+**Possible business codes**
+
+| Business Code | Message                                                | Description                                    |
+|:--------------|:-------------------------------------------------------|:-----------------------------------------------|
+| 2028          | Terminal not found                                     | Please check the value of tid or serialNo      |
+| 2029          | Apk not found                                          | Cannot find apk by packagename and version     |
+| 2030          | Parameter template not found                           | The given template name(s) not exist in system |
+| 2039          | Tid mismatch with serialNo                             | Please check the value of tid and serialNo     |
+| 13100         | Invalid application parameter variables                ||
+| 2026          | Tid and serialNo cannot empty at same time             ||
+| 2027          | Package name cannot be empty                           ||
+| 2001          | Terminal app not found                                 ||
+| 2000          | Terminal app status is invalid                         ||
+| 9306          | App is not available                                   ||
+| 2022          | Same version of pending terminal app already exists    ||
+| 2023          | Same version of active terminal app already exists     ||
+| 1905          | Terminal task app parameter is invalid                 ||
+| 13100         | Invalid application parameter variables                ||
+| 1111          | Selected parameter templates exceeded the max limit    ||
+| 3100          | The marketplace doesn't support parameter partial push ||
+| 1276          | APK base type is must parameters app                   ||
+| 2031          | Template name cannot be empty                          | &nbsp;                                         |
 
 ### Search apk push history
 
