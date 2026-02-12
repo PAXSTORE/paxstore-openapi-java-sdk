@@ -5,6 +5,7 @@ import com.pax.market.api.sdk.java.api.emm.emmDeviceDetail.EmmDeviceDetailApi;
 import com.pax.market.api.sdk.java.api.emm.emmDeviceDetail.dto.EmmDeviceDashboardDetailDTO;
 import com.pax.market.api.sdk.java.api.emm.emmDeviceDetail.dto.EmmDeviceDashboardMonitorDTO;
 import com.pax.market.api.sdk.java.api.emm.emmDeviceDetail.dto.EmmDeviceInstalledAppDTO;
+import com.pax.market.api.sdk.java.api.emm.emmDeviceDetail.dto.EmmDeviceLocationDTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -99,5 +100,25 @@ public class EmmDeviceDetailApiTest {
         logger.debug("Result of search emm device installed app by appId is negative: {}", appIdIsNegativeResult.toString());
         Assert.assertEquals(-1, appIdIsNegativeResult.getBusinessCode());
     }
+
+    @Test
+    public void testGetEmmDeviceLocationSuccess() {
+        Result<EmmDeviceLocationDTO> result = emmDeviceDetailApi.getEmmDeviceLocation(1715778424406062L);
+        logger.debug("Result of emm device location: {}", result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
+
+    @Test
+    public void testGetEmmDeviceLocationByAppIdIsInvalid() {
+        Result<EmmDeviceLocationDTO> appIdIsNullResult = emmDeviceDetailApi.getEmmDeviceLocation(null);
+        logger.debug("Result of emm device location by appId is null: {}", appIdIsNullResult.toString());
+        Assert.assertEquals(-1, appIdIsNullResult.getBusinessCode());
+
+        Result<EmmDeviceLocationDTO> appIdIsNegativeResult = emmDeviceDetailApi.getEmmDeviceLocation(-1L);
+        logger.debug("Result of emm device location by appId is negative: {}", appIdIsNegativeResult.toString());
+        Assert.assertEquals(-1, appIdIsNegativeResult.getBusinessCode());
+    }
+
+
 
 }
