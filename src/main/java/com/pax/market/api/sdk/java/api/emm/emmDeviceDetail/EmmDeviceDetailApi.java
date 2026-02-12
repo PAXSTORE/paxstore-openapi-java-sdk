@@ -22,6 +22,7 @@ public class EmmDeviceDetailApi extends BaseThirdPartySysApi {
     private static final String GET_EMM_DEVICE_DASHBOARD_DETAIL_URL = "/v1/3rdsys/emm/device/detail/{deviceId}";
     private static final String GET_EMM_DEVICE_DASHBOARD_MONITOR_URL = "/v1/3rdsys/emm/device/detail/{deviceId}/monitor";
     private static final String GET_EMM_APP_DETAIL_URL = "/v1/3rdsys/emm/device/detail/{deviceId}/installed-apps";
+    private static final String GET_EMM_DEVICE_LOCATION_URL = "/v1/3rdsys/emm/device/detail/{deviceId}/location";
 
 
     public EmmDeviceDetailApi(String baseUrl, String apiKey, String apiSecret) {
@@ -97,6 +98,24 @@ public class EmmDeviceDetailApi extends BaseThirdPartySysApi {
         EmmDeviceInstalledAppPageResponse emmDeviceInstalledAppPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmmDeviceInstalledAppPageResponse.class);
 
         return new Result<>(emmDeviceInstalledAppPageResponse);
+    }
+
+
+    public Result<EmmDeviceLocationDTO> getEmmDeviceLocation(Long deviceId) {
+        logger.debug("deviceId= {}", deviceId);
+
+        List<String> validationErrs = Validators.validateId(deviceId, "parameter.id.invalid", "deviceId");
+
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(GET_EMM_DEVICE_LOCATION_URL.replace("{deviceId}", String.valueOf(deviceId)));
+        request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        EmmDeviceLocationResponse emmDeviceLocationResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmmDeviceLocationResponse.class);
+        return new Result<>(emmDeviceLocationResponse);
     }
 
 

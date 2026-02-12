@@ -3,6 +3,7 @@
 ## 10.2.0
 ### New Feature
 * Add the request parameter fields `enableUnattendedAccess` and `unattendedDeviceResponseTime` in EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
+* Add EmmDeviceDetailApi - `getEmmDeviceLocation` API
 
 ## 10.1.0
 ### New Feature
