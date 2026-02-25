@@ -152,14 +152,14 @@ The search EMM devices API allows thirdparty system search EMM devices by page.
 **API**
 
 ```
-public Result<EmmDeviceDTO> searchEmmDevice(int pageNo, int pageSize, EmmDeviceSearchOrderBy orderBy, String name, String serialNo, String modelName, String resellerName, String merchantName, EmmDeviceStatus status)
+public Result<EmmDeviceDTO> searchEmmDevice(int pageNo, int pageSize, EmmDeviceSearchOrderBy orderBy, String name, String serialNo, String mfrName, String modelName, String resellerName, String merchantName, EmmDeviceStatus status, String iccId, String imei)
 ```
 
 **Input parameter(s) description**
 
 
 | Name         | Type                   | Nullable | Description                                                                                                                                                                                                                                                  |
-| :------------- | :----------------------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :------------- | :----------------------- | :--------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | pageNo       | int                    | false    | page number, value must >=1                                                                                                                                                                                                                                  |
 | pageSize     | int                    | false    | the record number per page, range is 1 to 100                                                                                                                                                                                                                |
 | orderBy      | EmmDeviceSearchOrderBy | true     | the sort order by field name. The value of this parameter can be one of EmmDeviceSearchOrderBy.EmmDeviceSN_desc, EmmDeviceSearchOrderBy.EmmDeviceSN_asc, EmmDeviceSearchOrderBy.EmmDeviceRegisterTime_desc, EmmDeviceSearchOrderBy.EmmDeviceRegisterTime_asc |
@@ -170,12 +170,14 @@ public Result<EmmDeviceDTO> searchEmmDevice(int pageNo, int pageSize, EmmDeviceS
 | resellerName | String                 | true     | search EMM devices under the reseller or it's sub-resellers                                                                                                                                                                                                  |
 | merchantName | String                 | true     | search EMM devices under the merchant                                                                                                                                                                                                                        |
 | status       | EmmDeviceStatus        | true     | search by device status. The value of this parameter can be one of EmmDeviceStatus.UN_CERTIFICATED, EmmDeviceStatus.ACTIVE, EmmDeviceStatus.LOST                                                                                                             |
+| iccId        | String                 | true     | search by SIM ICCID,split by ','                                                                                                                                                                                                                             |
+| imei         | String                 | true     | search by device IMEI,split by ','                                                                                                                                                                                                                           |
 
 **Sample codes**
 
 ```
 EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<EmmDeviceDTO> result = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceSN_asc, "M9200-0908", "2870000908","ZOLON", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE);
+Result<EmmDeviceDTO> result = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceSN_asc, "M9200-0908", "2870000908", "ZOLON", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE, "898600F1200000000000", "861234567890123");
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -347,6 +349,7 @@ Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1647428843339813L)
 		"status": "A",
 		"securityStatus": "RU",
 		"registerTime": 1732240055000,
+		"imei": "85565656566645",
 		"model": {
 			"id": 13,
 			"name": "M50",
@@ -379,6 +382,7 @@ The type in data is EmmDeviceDetailDTO. The structure like below.
 | merchant       | EmmMerchantDTO | The merchant of EMM device        |
 | registerTime   | Date           | The register time of EMM device   |
 | status         | String         | The status of EMM device          |
+| imei           | String         | The IMEI of EMM device            |
 | securityStatus | String         | The security status of EMM device |
 
 Structure of class EmmModelDTO
@@ -1309,6 +1313,86 @@ Result<String> result = emmDeviceApi.stopEmmDeviceLostMode(1647428843339813L);
 | 61631         | Failed to turn off lost mode of the device. The device is not in the lost state |             |
 | 61654         | EMM for Android not subscribed                                                  |             |
 | 61656         | The market is not bound to EMM for Android                                      |             |
+
+### Clear EMM device app data
+
+The clear EMM device app data API allows the thirdparty system clear EMM device app data.
+
+**API**
+
+```
+public Result<String> clearEmmAppData(Long deviceId, String installedAppIds)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                                                                  |
+| :------------- | :----- | :------- |:-----------------------------------------------------------------------------|
+| deviceId       | Long   | false    | The id of EMM device                                                         |
+| installedAppIds| String | false    | The installedApps' record id to clear data, multiple ids separated by commas |
+
+**Sample codes**
+
+```
+EmmDeviceApi emmDeviceApi = new EmmDeviceApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = emmDeviceApi.clearEmmAppData(1647428843339813L, "1710719651282978,1710719651323432978");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter deviceId cannot be null and cannot be less than 1!"]
+}
+
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter installedAppIds cannot be null and cannot be less than 1!"]
+}
+```
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 61617,
+	"message": "Device not found"
+}
+
+{
+	"businessCode": 113,
+	"message": "Your request is invalid!"
+}
+
+{
+	"businessCode": 61621,
+	"message": "App not exists"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+<font color=red>Parameter deviceId cannot be null and cannot be less than 1!</font>
+<br>
+<font color=red>Parameter installedAppIds cannot be null !</font>
+
+**Possible business codes**
+
+| Business Code | Message                                    | Description |
+| :------------ | :----------------------------------------- | :---------- |
+| 113           | Your request is invalid                    |             |
+| 61617         | Device not found                           |             |
+| 61621         | App not exists                             |             |
+| 61654         | EMM for Android not subscribed             |             |
+| 61656         | The market is not bound to EMM for Android |             |
 
 ### Submit EMM zte quick upload record
 

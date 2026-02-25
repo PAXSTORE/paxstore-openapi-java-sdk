@@ -127,6 +127,22 @@ Result<EmmPolicyDTO> result = emmPolicyApi.getResellerEmmPolicy("PAX");
                     "proxyType": "MANUAL",
                     "hostName": "https://www.test",
                     "port": 50
+                },
+                {
+                    "ssid": "TEST_TLS",
+                    "cipherType": "WPA_WPA2_WPA3_ENTERPRISE",
+                    "eapMethod": "TTLS",
+                    "phaseMethod": "MSCHAPv2",
+                    "userID": "tunglee",
+                    "userPass": "KXQh565222",
+                    "anoID": "",
+                    "caCert": {
+                        "fileKey": "TEST_TLS_CA_1764664213384",
+                        "fileName": "ca.cer",
+                        "content": "MIIDiDCCAnCgAwIBAgIUFltn5dAz90wMD2iCFs1e/iCjic4wDQYJKoZIhvcNAQELBQAwXDELMAkGA1UEBhMCQ04xCzAJBgNVBAgMAk5BMQswCQYDVQQHDAJOQTEPMA0GA1UECgwGcGF4ZGV2MQ0wCwYDVQQLDARXaUZpMRMwEQYDVQQDDApwYXhkZXYuY29tMB4XDTI1MTExOTA3NTI1OVoXDTM1MTExNzA3NTI1OVowXDELMAkGA1UEBhMCQ04xCzAJBgNVBAgMAk5BMQswCQYDVQQHDAJOQTEPMA0GA1UECgwGcGF4ZGV2MQ0wCwYDVQQLDARXaUZpMRMwEQYDVQQDDApwYXhkZXYuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmvlXjxyHFYilbYXpDRizOcbm+WQ0O4k6DTkiYg6ZexLohaJO1PvznrbXHv2aiGKi1p3XkPjXSq9spxwnnBCVMc+rtBT1t/hOPmJjno6bnFMpIQt/HjjwWcPH1nw/fAw4cisg5KPOGjAfQtEJE6bDp9CycgWamR/vsNO8ZvU0jyfsF0fJ4m98FI3Tazm/eFALbMd6rXmZV4ZxHeeu7atmtLyEPGAQ0Usq36IJQ4xrb10BwWsT2DuVmwgmCqPg4rRAW57X0HTfJcXRmyZhh/C75VNM9Ew8lsrMdYyUcp/EcMicfOCxy4A5LIo2vG2UNylzJXbgfRfiJbwhMDyPuU7U/QIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4EFgQUeg3lBl8jK5gs0AMHVhAE56s9Fk4wDQYJKoZIhvcNAQELBQADggEBAGHpS/0Mozohc4+VI3iPJXGGTkqc1DlSLdS2/SWaf0K/YenlvHLyVHQQfICOxELGXZGjabLV0TjjEgxAkxXhaODr5eSdWS2DFnqsGVeWio6nXq1VtUsGjDGDyuQo9UmVKwXJ6+kMb9y6u6ciE7vvI8B1beMVJIgFzQpjJC5TIQV9CbXkPTwbFKbunKdm78IexoZsr/pB72nViAhz/xtCl5oXkAja8ei03L9y97jZWTVNpjiwPanplMj8LgnJjsrNPN/ZUgHDJYWvJU6Iq0SKF0vM/j0lw4xgtphVX7Nh3oAmnUaxQ0jvV4BLrFlhfseMMVY7ZBK6+DAx0afz0VTI/No="
+                    },
+                    "domain": "www.paxdev.com",
+                    "proxyType": "NONE"
                 }
             ],
             "outgoingCallsDisabled": true,
@@ -157,6 +173,7 @@ Result<EmmPolicyDTO> result = emmPolicyApi.getResellerEmmPolicy("PAX");
             "playStoreMode": "BLACKLIST",
             "printingPolicy": "PRINTING_DISALLOWED",
             "screenCaptureDisabled": true,
+            "hideEnterpriseName": true,
             "setWallpaperDisabled": true,
             "shareLocationDisabled": true,
             "smsDisabled": true,
@@ -322,6 +339,7 @@ Structure of class PolicyContentDTO
 | playStoreMode                               | String                        | This mode controls which apps are available to the user in the Play Store and the behavior on the device when apps are removed from the policy, value can be one of WHITELIST, BLACKLIST                                                                                                                                                                                                                                                                                                                           |
 | printingPolicy                              | String                        | Optional. Controls whether printing is allowed. This is supported on devices running Android 9 and above, value is PRINTING_DISALLOWED                                                                                                                                                                                                                                                                                                                                                                             |
 | screenCaptureDisabled                       | Boolean                       | Whether screen capture is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| hideEnterpriseName                          | Boolean                       | Whether the enterprise name is hidden on the device                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | setWallpaperDisabled                        | Boolean                       | Whether changing the wallpaper is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | shareLocationDisabled                       | Boolean                       | Whether location sharing is disabled. shareLocationDisabled is supported for both fully managed devices and personally owned work profiles                                                                                                                                                                                                                                                                                                                                                                         |
 | smsDisabled                                 | Boolean                       | Whether sending and receiving SMS messages is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -373,15 +391,31 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type    | Description                                                    |
-| :-------------- | :-------- | :--------------------------------------------------------------- |
-| ssid          | String  | Wi-Fi SSID                                                     |
-| cipherType    | String  | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK |
-| password      | String  | Wi-Fi password, for WEP password                               |
-| proxyType     | String  | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC        |
-| hostName      | String  | Wi-Fi proxy host name                                          |
-| port          | Integer | Wi-Fi proxy port                                               |
-| pacUrl        | String  | WIFI pac url                                                   |
+| Property Name | Type          | Description                                                                                                                                                        |
+| :-------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ssid          | String        | Wi-Fi SSID                                                                                                                                                         |
+| cipherType    | String        | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                            |
+| eapMethod     | String        | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                               |
+| phaseMethod   | String        | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                               |
+| userID        | String        | Enterprise Wi-Fi identity/username                                                                                                                                  |
+| userPass      | String        | Enterprise Wi-Fi password                                                                                                                                           |
+| anoID         | String        | Enterprise Wi-Fi anonymous identity                                                                                                                                 |
+| idCert        | CertFileData  | Identity certificate used for enterprise Wi-Fi authentication                                                                                                       |
+| caCert        | CertFileData  | CA certificate used to validate the enterprise Wi-Fi server                                                                                                         |
+| domain        | String        | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                    |
+| password      | String        | Wi-Fi password, for WEP passwords                                                                                                                                   |
+| proxyType     | String        | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                             |
+| hostName      | String        | Wi-Fi proxy host name                                                                                                                                               |
+| port          | Integer       | Wi-Fi proxy port                                                                                                                                                    |
+| pacUrl        | String        | WIFI pac url                                                                                                                                                        |
+
+Structure of class CertFileData
+
+| Property Name | Type   | Description                      |
+| :-------------- | :------- | :------------------------------- |
+| fileKey       | String | File key returned after upload    |
+| fileName      | String | Certificate file name             |
+| content       | String | Certificate file content payload  |
 
 Structure of class PasswordRequirements
 
@@ -621,6 +655,7 @@ Structure of class PolicyUpdatedContentDTO
 | playStoreMode                               | String                        | true     | This mode controls which apps are available to the user in the Play Store and the behavior on the device when apps are removed from the policy, value can be one of WHITELIST, BLACKLIST                                                                                                                                                                                                                                                                                                                           |
 | printingPolicy                              | String                        | true     | Optional. Controls whether printing is allowed. This is supported on devices running Android 9 and above, value is PRINTING_DISALLOWED                                                                                                                                                                                                                                                                                                                                                                             |
 | screenCaptureDisabled                       | Boolean                       | true     | Whether screen capture is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| hideEnterpriseName                          | Boolean                       | true     | Whether the enterprise name is hidden on the device                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | setWallpaperDisabled                        | Boolean                       | true     | Whether changing the wallpaper is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | shareLocationDisabled                       | Boolean                       | true     | Whether location sharing is disabled. shareLocationDisabled is supported for both fully managed devices and personally owned work profiles                                                                                                                                                                                                                                                                                                                                                                         |
 | smsDisabled                                 | Boolean                       | true     | Whether sending and receiving SMS messages is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -672,15 +707,32 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type    | Nullable | Description                                                                                                                        |
-| :-------------- | :-------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| ssid          | String  | true     | Wi-Fi SSID, max length is 32                                                                                                       |
-| cipherType    | String  | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK                                                                     |
-| password      | String  | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63 |
-| proxyType     | String  | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                            |
-| hostName      | String  | true     | Wi-Fi proxy host name                                                                                                              |
-| port          | Integer | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                |
-| pacUrl        | String  | true     | WIFI pac url                                                                                                                       |
+| Property Name | Type          | Nullable | Description                                                                                                                                                                                                           |
+| :-------------- | :-------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ssid          | String        | true     | Wi-Fi SSID, max length is 32                                                                                                                                                                                           |
+| cipherType    | String        | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                                                                               |
+| eapMethod     | String        | true     | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                                                                                  |
+| phaseMethod   | String        | true     | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                                                                                  |
+| userID        | String        | true     | Enterprise Wi-Fi identity/username                                                                                                                                                                                     |
+| userPass      | String        | true     | Enterprise Wi-Fi password                                                                                                                                                                                              |
+| anoID         | String        | true     | Enterprise Wi-Fi anonymous identity                                                                                                                                                                                    |
+| idCert        | CertFileData  | true     | Identity certificate used for enterprise Wi-Fi authentication                                                                                                                                                          |
+| caCert        | CertFileData  | true     | CA certificate used to validate the enterprise Wi-Fi server                                                                                                                                                            |
+| domain        | String        | true     | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                                                                        |
+| password      | String        | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63                                                                                    |
+| proxyType     | String        | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                                                                                |
+| hostName      | String        | true     | Wi-Fi proxy host name                                                                                                                                                                                                  |
+| port          | Integer       | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                                                                                                    |
+| pacUrl        | String        | true     | WIFI pac url                                                                                                                                                                                                           |
+
+Structure of class CertFileData
+
+
+| Property Name | Type   | Nullable | Description                     |
+| :-------------- | :------- | :--------- | :-------------------------------- |
+| fileKey       | String | true     | File key returned after upload   |
+| fileName      | String | true     | Certificate file name            |
+| content       | String | true     | Certificate file content payload |
 
 Structure of class PasswordRequirements
 
@@ -1052,6 +1104,7 @@ Result<EmmPolicyDTO> result = emmPolicyApi.getMerchantEmmPolicy("PAX","test");
             "playStoreMode": "BLACKLIST",
             "printingPolicy": "PRINTING_DISALLOWED",
             "screenCaptureDisabled": true,
+            "hideEnterpriseName": true,
             "setWallpaperDisabled": true,
             "shareLocationDisabled": true,
             "smsDisabled": true,
@@ -1218,6 +1271,7 @@ Structure of class PolicyContentDTO
 | playStoreMode                               | String                        | This mode controls which apps are available to the user in the Play Store and the behavior on the device when apps are removed from the policy, value can be one of WHITELIST, BLACKLIST                                                                                                                                                                                                                                                                                                                           |
 | printingPolicy                              | String                        | Optional. Controls whether printing is allowed. This is supported on devices running Android 9 and above, value is PRINTING_DISALLOWED                                                                                                                                                                                                                                                                                                                                                                             |
 | screenCaptureDisabled                       | Boolean                       | Whether screen capture is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| hideEnterpriseName                          | Boolean                       | Whether the enterprise name is hidden on the device                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | setWallpaperDisabled                        | Boolean                       | Whether changing the wallpaper is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | shareLocationDisabled                       | Boolean                       | Whether location sharing is disabled. shareLocationDisabled is supported for both fully managed devices and personally owned work profiles                                                                                                                                                                                                                                                                                                                                                                         |
 | smsDisabled                                 | Boolean                       | Whether sending and receiving SMS messages is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -1269,15 +1323,32 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type    | Description                                                    |
-| :-------------- | :-------- | :--------------------------------------------------------------- |
-| ssid          | String  | Wi-Fi SSID                                                     |
-| cipherType    | String  | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK |
-| password      | String  | Wi-Fi password, for WEP password                               |
-| proxyType     | String  | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC        |
-| hostName      | String  | Wi-Fi proxy host name                                          |
-| port          | Integer | Wi-Fi proxy port                                               |
-| pacUrl        | String  | WIFI pac url                                                   |
+| Property Name | Type          | Description                                                                                                                                                        |
+| :-------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ssid          | String        | Wi-Fi SSID                                                                                                                                                         |
+| cipherType    | String        | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                            |
+| eapMethod     | String        | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                               |
+| phaseMethod   | String        | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                               |
+| userID        | String        | Enterprise Wi-Fi identity/username                                                                                                                                  |
+| userPass      | String        | Enterprise Wi-Fi password                                                                                                                                           |
+| anoID         | String        | Enterprise Wi-Fi anonymous identity                                                                                                                                 |
+| idCert        | CertFileData  | Identity certificate used for enterprise Wi-Fi authentication                                                                                                       |
+| caCert        | CertFileData  | CA certificate used to validate the enterprise Wi-Fi server                                                                                                         |
+| domain        | String        | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                    |
+| password      | String        | Wi-Fi password, for WEP passwords                                                                                                                                   |
+| proxyType     | String        | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                             |
+| hostName      | String        | Wi-Fi proxy host name                                                                                                                                               |
+| port          | Integer       | Wi-Fi proxy port                                                                                                                                                    |
+| pacUrl        | String        | WIFI pac url                                                                                                                                                        |
+
+Structure of class CertFileData
+
+
+| Property Name | Type   | Description                      |
+| :-------------- | :------- | :------------------------------- |
+| fileKey       | String | File key returned after upload    |
+| fileName      | String | Certificate file name             |
+| content       | String | Certificate file content payload  |
 
 Structure of class PasswordRequirements
 
@@ -1523,6 +1594,7 @@ Structure of class PolicyUpdatedContentDTO
 | playStoreMode                               | String                        | true     | This mode controls which apps are available to the user in the Play Store and the behavior on the device when apps are removed from the policy, value can be one of WHITELIST, BLACKLIST                                                                                                                                                                                                                                                                                                                           |
 | printingPolicy                              | String                        | true     | Optional. Controls whether printing is allowed. This is supported on devices running Android 9 and above, value is PRINTING_DISALLOWED                                                                                                                                                                                                                                                                                                                                                                             |
 | screenCaptureDisabled                       | Boolean                       | true     | Whether screen capture is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| hideEnterpriseName                          | Boolean                       | true     | Whether the enterprise name is hidden on the device                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | setWallpaperDisabled                        | Boolean                       | true     | Whether changing the wallpaper is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | shareLocationDisabled                       | Boolean                       | true     | Whether location sharing is disabled. shareLocationDisabled is supported for both fully managed devices and personally owned work profiles                                                                                                                                                                                                                                                                                                                                                                         |
 | smsDisabled                                 | Boolean                       | true     | Whether sending and receiving SMS messages is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -1574,15 +1646,32 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type    | Nullable | Description                                                                                                                        |
-| :-------------- | :-------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| ssid          | String  | true     | Wi-Fi SSID, max length is 32                                                                                                       |
-| cipherType    | String  | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK                                                                     |
-| password      | String  | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63 |
-| proxyType     | String  | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                            |
-| hostName      | String  | true     | Wi-Fi proxy host name                                                                                                              |
-| port          | Integer | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                |
-| pacUrl        | String  | true     | WIFI pac url                                                                                                                       |
+| Property Name | Type          | Nullable | Description                                                                                                                                                                                                           |
+| :-------------- | :-------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ssid          | String        | true     | Wi-Fi SSID, max length is 32                                                                                                                                                                                           |
+| cipherType    | String        | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                                                                               |
+| eapMethod     | String        | true     | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                                                                                  |
+| phaseMethod   | String        | true     | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                                                                                  |
+| userID        | String        | true     | Enterprise Wi-Fi identity/username                                                                                                                                                                                     |
+| userPass      | String        | true     | Enterprise Wi-Fi password                                                                                                                                                                                              |
+| anoID         | String        | true     | Enterprise Wi-Fi anonymous identity                                                                                                                                                                                    |
+| idCert        | CertFileData  | true     | Identity certificate used for enterprise Wi-Fi authentication                                                                                                                                                          |
+| caCert        | CertFileData  | true     | CA certificate used to validate the enterprise Wi-Fi server                                                                                                                                                            |
+| domain        | String        | true     | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                                                                        |
+| password      | String        | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63                                                                                    |
+| proxyType     | String        | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                                                                                |
+| hostName      | String        | true     | Wi-Fi proxy host name                                                                                                                                                                                                  |
+| port          | Integer       | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                                                                                                    |
+| pacUrl        | String        | true     | WIFI pac url                                                                                                                                                                                                           |
+
+Structure of class CertFileData
+
+
+| Property Name | Type   | Nullable | Description                     |
+| :-------------- | :------- | :--------- | :-------------------------------- |
+| fileKey       | String | true     | File key returned after upload   |
+| fileName      | String | true     | Certificate file name            |
+| content       | String | true     | Certificate file content payload |
 
 Structure of class PasswordRequirements
 
@@ -1954,6 +2043,7 @@ Result<EmmPolicyDTO> result = emmPolicyApi.getDeviceEmmPolicy("2870003453");
             "playStoreMode": "BLACKLIST",
             "printingPolicy": "PRINTING_DISALLOWED",
             "screenCaptureDisabled": true,
+            "hideEnterpriseName": true,
             "setWallpaperDisabled": true,
             "shareLocationDisabled": true,
             "smsDisabled": true,
@@ -2125,6 +2215,7 @@ Structure of class PolicyContentDTO
 | playStoreMode                               | String                        | This mode controls which apps are available to the user in the Play Store and the behavior on the device when apps are removed from the policy, value can be one of WHITELIST, BLACKLIST                                                                                                                                                                                                                                                                                                                           |
 | printingPolicy                              | String                        | Optional. Controls whether printing is allowed. This is supported on devices running Android 9 and above, value is PRINTING_DISALLOWED                                                                                                                                                                                                                                                                                                                                                                             |
 | screenCaptureDisabled                       | Boolean                       | Whether screen capture is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| hideEnterpriseName                          | Boolean                       | Whether the enterprise name is hidden on the device                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | setWallpaperDisabled                        | Boolean                       | Whether changing the wallpaper is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | shareLocationDisabled                       | Boolean                       | Whether location sharing is disabled. shareLocationDisabled is supported for both fully managed devices and personally owned work profiles                                                                                                                                                                                                                                                                                                                                                                         |
 | smsDisabled                                 | Boolean                       | Whether sending and receiving SMS messages is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -2176,15 +2267,32 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type    | Description                                                    |
-| :-------------- | :-------- | :--------------------------------------------------------------- |
-| ssid          | String  | Wi-Fi SSID                                                     |
-| cipherType    | String  | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK |
-| password      | String  | Wi-Fi password, for WEP password                               |
-| proxyType     | String  | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC        |
-| hostName      | String  | Wi-Fi proxy host name                                          |
-| port          | Integer | Wi-Fi proxy port                                               |
-| pacUrl        | String  | WIFI pac url                                                   |
+| Property Name | Type          | Description                                                                                                                                                        |
+| :-------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ssid          | String        | Wi-Fi SSID                                                                                                                                                         |
+| cipherType    | String        | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                            |
+| eapMethod     | String        | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                               |
+| phaseMethod   | String        | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                               |
+| userID        | String        | Enterprise Wi-Fi identity/username                                                                                                                                  |
+| userPass      | String        | Enterprise Wi-Fi password                                                                                                                                           |
+| anoID         | String        | Enterprise Wi-Fi anonymous identity                                                                                                                                 |
+| idCert        | CertFileData  | Identity certificate used for enterprise Wi-Fi authentication                                                                                                       |
+| caCert        | CertFileData  | CA certificate used to validate the enterprise Wi-Fi server                                                                                                         |
+| domain        | String        | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                    |
+| password      | String        | Wi-Fi password, for WEP passwords                                                                                                                                   |
+| proxyType     | String        | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                             |
+| hostName      | String        | Wi-Fi proxy host name                                                                                                                                               |
+| port          | Integer       | Wi-Fi proxy port                                                                                                                                                    |
+| pacUrl        | String        | WIFI pac url                                                                                                                                                        |
+
+Structure of class CertFileData
+
+
+| Property Name | Type   | Description                      |
+| :-------------- | :------- | :------------------------------- |
+| fileKey       | String | File key returned after upload    |
+| fileName      | String | Certificate file name             |
+| content       | String | Certificate file content payload  |
 
 Structure of class PasswordRequirements
 
@@ -2427,6 +2535,7 @@ Structure of class PolicyUpdatedContentDTO
 | playStoreMode                               | String                        | true     | This mode controls which apps are available to the user in the Play Store and the behavior on the device when apps are removed from the policy, value can be one of WHITELIST, BLACKLIST                                                                                                                                                                                                                                                                                                                           |
 | printingPolicy                              | String                        | true     | Optional. Controls whether printing is allowed. This is supported on devices running Android 9 and above, value is PRINTING_DISALLOWED                                                                                                                                                                                                                                                                                                                                                                             |
 | screenCaptureDisabled                       | Boolean                       | true     | Whether screen capture is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| hideEnterpriseName                          | Boolean                       | true     | Whether the enterprise name is hidden on the device                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | setWallpaperDisabled                        | Boolean                       | true     | Whether changing the wallpaper is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | shareLocationDisabled                       | Boolean                       | true     | Whether location sharing is disabled. shareLocationDisabled is supported for both fully managed devices and personally owned work profiles                                                                                                                                                                                                                                                                                                                                                                         |
 | smsDisabled                                 | Boolean                       | true     | Whether sending and receiving SMS messages is disabled                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -2478,15 +2587,32 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type    | Nullable | Description                                                                                                                        |
-| :-------------- | :-------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| ssid          | String  | true     | Wi-Fi SSID, max length is 32                                                                                                       |
-| cipherType    | String  | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK                                                                     |
-| password      | String  | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63 |
-| proxyType     | String  | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                            |
-| hostName      | String  | true     | Wi-Fi proxy host name                                                                                                              |
-| port          | Integer | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                |
-| pacUrl        | String  | true     | WIFI pac url                                                                                                                       |
+| Property Name | Type          | Nullable | Description                                                                                                                                                                                                           |
+| :-------------- | :-------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ssid          | String        | true     | Wi-Fi SSID, max length is 32                                                                                                                                                                                           |
+| cipherType    | String        | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                                                                               |
+| eapMethod     | String        | true     | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                                                                                  |
+| phaseMethod   | String        | true     | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                                                                                  |
+| userID        | String        | true     | Enterprise Wi-Fi identity/username                                                                                                                                                                                     |
+| userPass      | String        | true     | Enterprise Wi-Fi password                                                                                                                                                                                              |
+| anoID         | String        | true     | Enterprise Wi-Fi anonymous identity                                                                                                                                                                                    |
+| idCert        | CertFileData  | true     | Identity certificate used for enterprise Wi-Fi authentication                                                                                                                                                          |
+| caCert        | CertFileData  | true     | CA certificate used to validate the enterprise Wi-Fi server                                                                                                                                                            |
+| domain        | String        | true     | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                                                                        |
+| password      | String        | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63                                                                                    |
+| proxyType     | String        | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                                                                                |
+| hostName      | String        | true     | Wi-Fi proxy host name                                                                                                                                                                                                  |
+| port          | Integer       | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                                                                                                    |
+| pacUrl        | String        | true     | WIFI pac url                                                                                                                                                                                                           |
+
+Structure of class CertFileData
+
+
+| Property Name | Type   | Nullable | Description                     |
+| :-------------- | :------- | :--------- | :-------------------------------- |
+| fileKey       | String | true     | File key returned after upload   |
+| fileName      | String | true     | Certificate file name            |
+| content       | String | true     | Certificate file content payload |
 
 Structure of class PasswordRequirements
 
@@ -2685,9 +2811,10 @@ Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
 
 
 | Business Code | Message                                                                                             | Description |
-| :-------------- | :---------------------------------------------------------------------------------------------------- | :------------ |
+|:--------------| :---------------------------------------------------------------------------------------------------- | :------------ |
 | 113           | Your request is invalid, please try again or contact marketplace administrator                      |             |
 | 1720          | Merchant doesn't exist                                                                              |             |
+| 37000          | File type error                                                                             |             |
 | 60703         | Locked "{0}" cannot be modified                                                                     |             |
 | 60704         | The Kiosk Mode of {0} cannot exist at the same time with the Multi-App Kiosk Mode                   |             |
 | 61606         | Unable to override the policy,the current marketplace cannot have more than {0} customized policies |             |
@@ -2710,6 +2837,8 @@ Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
 | 61671         | Parameter applications cannot be locked                                                             |             |
 | 61675         | {0} cannot configure accessibleTrackId                                                              |             |
 | 61677         | You cannot customize policies for no merchant devices                                               |             |
+| 61682         | Identity certificates are supported only in .p12/.pfx formats                                              |             |
+| 61683         | CA certificates are supported only in .cer/.pem/.der formats                                           |             |
 | 61708         | The Associated Configuration is locked and this "{0}" cannot be removed                             |             |
 | 61709         | The Associated Configuration is locked and this "{0}" cannot be turned off                          |             |
 | 62032         | EMM device Serial No. is too long                                                                   |             |

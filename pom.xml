@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-	<version>10.0.0</version>
+	<version>10.1.0-SNAPSHOT</version>
     <name>OpenAPI Java SDK</name>
     <description>OpenAPI Java SDK</description>
     <url>https://github.com/PAXSTORE/paxstore-openapi-java-sdk</url>
@@ -113,8 +113,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>

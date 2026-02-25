@@ -39,6 +39,7 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
     private static final String SYNC_EMM_DEVICE_DETAIL_URL = "/v1/3rdsys/emm/devices/{deviceId}/sync";
     private static final String STOP_EMM_DEVICE_LOST_MODE_URL = "/v1/3rdsys/emm/devices/{deviceId}/stoplost";
     private static final String SUBMIT_EMM_ZTE_QUICK_UPLOAD_RECORD_URL = "/v1/3rdsys/emm/devices/zte/quick-upload";
+    private static final String CLEAR_EMM_DEVICE_APP_DATA_URL = "/v1/3rdsys/emm/devices/{deviceId}/app/clear";
 
 
     public EmmDeviceApi(String baseUrl, String apiKey, String apiSecret) {
@@ -76,7 +77,9 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
                                                 String modelName,
                                                 String resellerName,
                                                 String merchantName,
-                                                EmmDeviceStatus status) {
+                                                EmmDeviceStatus status,
+                                                String iccId,
+                                                String imei) {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
@@ -111,6 +114,12 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
         }
         if (status != null) {
             request.addRequestParam("status", status.val);
+        }
+        if (imei != null) {
+            request.addRequestParam("imei", imei);
+        }
+        if (iccId != null) {
+            request.addRequestParam("iccId", iccId);
         }
 
         EmmDevicePageResponse emmDevicePageResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmmDevicePageResponse.class);
@@ -349,6 +358,29 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
 
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         SdkRequest request = createSdkRequest(STOP_EMM_DEVICE_LOST_MODE_URL.replace("{deviceId}", String.valueOf(deviceId)));
+        request.setRequestMethod(SdkRequest.RequestMethod.PUT);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+
+    public Result<String> clearEmmAppData(Long deviceId,String installedAppIds) {
+        logger.debug("deviceId= {},installedAppIds={}", deviceId,installedAppIds);
+
+        List<String> validationErrs = Validators.validateId(deviceId, "parameter.id.invalid", "deviceId");
+
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        validationErrs = Validators.validateStr(installedAppIds, "parameter.id.invalid", "installedAppIds");
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(CLEAR_EMM_DEVICE_APP_DATA_URL.replace("{deviceId}", String.valueOf(deviceId)));
+        request.addRequestParam("installedAppIds", installedAppIds);
         request.setRequestMethod(SdkRequest.RequestMethod.PUT);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);

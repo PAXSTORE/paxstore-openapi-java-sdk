@@ -178,14 +178,14 @@ Please keep the access key and access secret safely. Once the access key or acce
 
 ## Integrate with SDK  
 
-The minimal JDK version is 1.8.   
+The minimal JDK version is 17.   
 To integrate with this SDK please add below dependency by updating the pom.xml file in your maven project.
 
 ```
 <dependency>
     <groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-    <version>10.0.0</version>
+    <version>10.1.0</version>
 </dependency>
 ```
 
