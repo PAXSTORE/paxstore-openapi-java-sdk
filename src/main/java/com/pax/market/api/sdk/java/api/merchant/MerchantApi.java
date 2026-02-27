@@ -68,7 +68,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		super(baseUrl, apiKey, apiSecret, locale);
 	}
 	
-	public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, MerchantSearchOrderBy orderBy, String name, MerchantStatus status) {
+	public Result<MerchantPageDTO> searchMerchant(int pageNo, int pageSize, MerchantSearchOrderBy orderBy, String name, MerchantStatus status, Boolean includeEntityAttribute) {
 		logger.debug("name="+name+"|status="+status);
 		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
 		PageRequestDTO page = new PageRequestDTO();
@@ -87,6 +87,9 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		if(status!=null) {
 			request.addRequestParam("status", status.val);
 		}
+        if(includeEntityAttribute != null) {
+            request.addRequestParam("includeEntityAttribute", String.valueOf(includeEntityAttribute));
+        }
         MerchantPageResponse merchantPageDTO = EnhancedJsonUtils.fromJson(client.execute(request), MerchantPageResponse.class);
         Result<MerchantPageDTO> result = new Result<MerchantPageDTO>(merchantPageDTO);
         return result;

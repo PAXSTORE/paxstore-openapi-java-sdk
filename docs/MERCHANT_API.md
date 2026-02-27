@@ -33,13 +33,14 @@ public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, Merchan
 
 **Input parameter(s) description**
 
-| Name| Type | Nullable|Description |
-|:---- | :----|:----|:----|
-|pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 100|
-|orderBy|MerchantSearchOrderBy|true|the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of MerchantSearchOrderBy.Name, MerchantSearchOrderBy.Phone and MerchantSearchOrderBy.Contact.|
-|name|String|true|search filter by merchant name|
-|status|MerchantStatus|true|the reseller status<br/> the value can be MerchantStatus.Active, MerchantStatus.Inactive, MerchantStatus.Suspend|
+| Name| Type                  | Nullable| Description                                                                                                                                                                                                                                     |
+|:---- |:----------------------|:----|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|pageNo| int                   |false| page number, value must >=1                                                                                                                                                                                                                     |
+|pageSize| int                   |false| the record number per page, range is 1 to 100                                                                                                                                                                                                   |
+|orderBy| MerchantSearchOrderBy |true| the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of MerchantSearchOrderBy.Name, MerchantSearchOrderBy.Phone and MerchantSearchOrderBy.Contact.|
+|name| String                |true| search filter by merchant name                                                                                                                                                                                                                  |
+|status| MerchantStatus        |true| the reseller status<br/> the value can be MerchantStatus.Active, MerchantStatus.Inactive, MerchantStatus.Suspend                                                                                                                                |
+|includeEntityAttribute| Boolean               |true| The data returned when querying the merchant list includes entity attributes |
 
 **Sample codes**
 
