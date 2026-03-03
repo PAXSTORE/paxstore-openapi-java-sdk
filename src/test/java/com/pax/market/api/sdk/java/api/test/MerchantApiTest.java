@@ -49,7 +49,7 @@ public class MerchantApiTest {
     
     @Test
     public void testSearchMerchant() {
-    	Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, MerchantSearchOrderBy.Contact, "", MerchantStatus.Active);
+    	Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, MerchantSearchOrderBy.Contact, "", MerchantStatus.Active, Boolean.FALSE);
     	logger.debug("Result of search merchant: {}", result.toString()); 
     	Assert.assertTrue(result.getBusinessCode() == 0);
     }

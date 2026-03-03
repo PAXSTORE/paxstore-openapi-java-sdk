@@ -60,7 +60,7 @@ public class ResellerApi extends BaseThirdPartySysApi {
         super(baseUrl, apiKey, apiSecret, locale);
     }
 
-    public Result<ResellerPageDTO> searchReseller(int pageNo, int pageSize, ResellerSearchOrderBy orderBy, String name, ResellerStatus status) {
+    public Result<ResellerPageDTO> searchReseller(int pageNo, int pageSize, ResellerSearchOrderBy orderBy, String name, ResellerStatus status, Boolean includeEntityAttribute) {
         logger.debug("name= {} | status= {}", name, status);
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
@@ -77,6 +77,9 @@ public class ResellerApi extends BaseThirdPartySysApi {
         request.addRequestParam("name", name);
         if (status != null) {
             request.addRequestParam("status", status.val);
+        }
+        if(includeEntityAttribute != null) {
+            request.addRequestParam("includeEntityAttribute", String.valueOf(includeEntityAttribute));
         }
         ResellerPageResponse resellerPageDTO = EnhancedJsonUtils.fromJson(client.execute(request), ResellerPageResponse.class);
         return new Result<>(resellerPageDTO);
