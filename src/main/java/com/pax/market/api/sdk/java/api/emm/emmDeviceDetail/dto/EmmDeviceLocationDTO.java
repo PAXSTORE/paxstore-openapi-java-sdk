@@ -1,12 +1,10 @@
 package com.pax.market.api.sdk.java.api.emm.emmDeviceDetail.dto;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 public class EmmDeviceLocationDTO implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 604992194977690763L;
 
     private Long terminalId;
