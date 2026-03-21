@@ -133,7 +133,7 @@ public class TerminalGroupApkApi extends BaseThirdPartySysApi {
         SdkRequest request = createSdkRequest(CREATE_TERMINAL_GROUP_APK_PARTIAL_PARAM_URL);
         request.setRequestMethod(SdkRequest.RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
-        request.setRequestBody(new Gson().toJson(createRequest, CreateTerminalGroupApkRequest.class));
+        request.setRequestBody(new Gson().toJson(createRequest, CreateTerminalGroupApkPartialParamRequest.class));
         TerminalGroupApkResponse terminalGroupApkResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalGroupApkResponse.class);
         return new Result<>(terminalGroupApkResponse);
     }
