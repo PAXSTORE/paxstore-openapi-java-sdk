@@ -120,7 +120,7 @@ public class EmmDeviceApiTest {
 
         EmmDeviceRegisterQRCodeCreateRequest merchantNameTooLong = new EmmDeviceRegisterQRCodeCreateRequest();
         merchantNameTooLong.setResellerName("PAX");
-        merchantNameTooLong.setMerchantName("PAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAX");
+        merchantNameTooLong.setMerchantName("PAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAX");
         merchantNameTooLong.setType(EmmDeviceApi.EmmDeviceType.COMPANY_OWNER);
         merchantNameTooLong.setExpireDate(nextDate);
         Result<EmmDeviceRegisterQRCodeCreateDTO> merchantNameIsTooLongResult = emmDeviceApi.createRegisterQRCode(merchantNameTooLong);

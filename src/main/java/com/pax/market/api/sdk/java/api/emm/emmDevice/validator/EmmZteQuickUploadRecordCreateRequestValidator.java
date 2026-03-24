@@ -21,7 +21,7 @@ public class EmmZteQuickUploadRecordCreateRequestValidator {
             validationErrs.add(getMessage("parameter.not.null", "emmZteQuickUploadRecordCreateRequest"));
         } else {
             validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getResellerName(), "resellerName", Constants.MAX_64));
-            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getMerchantName(), "merchantName", Constants.MAX_64));
+            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getMerchantName(), "merchantName", Constants.MAX_128));
             validationErrs.addAll(Validators.validateObject(validateTarget.getIdentifierType(), "identifierType"));
             validationErrs.addAll(Validators.validateStr(validateTarget.getNumbers(), "parameter.not.null", "numbers"));
         }

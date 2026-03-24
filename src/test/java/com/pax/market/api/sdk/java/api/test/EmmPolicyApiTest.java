@@ -251,7 +251,7 @@ public class EmmPolicyApiTest {
         logger.debug("Result of get merchant emm policy by merchant name is blank: {}", merchantNameIsBlankResult.toString());
         Assert.assertEquals(-1, merchantNameIsBlankResult.getBusinessCode());
 
-        Result<EmmPolicyDTO> merchantNameIsTooLongResult = emmPolicyApi.getMerchantEmmPolicy("PAX","PAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAX");
+        Result<EmmPolicyDTO> merchantNameIsTooLongResult = emmPolicyApi.getMerchantEmmPolicy("PAX","PAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAX");
         logger.debug("Result of get merchant emm policy by merchant name is too long: {}", merchantNameIsTooLongResult.toString());
         Assert.assertEquals(-1, merchantNameIsTooLongResult.getBusinessCode());
 
@@ -437,7 +437,7 @@ public class EmmPolicyApiTest {
 
         MerchantEmmPolicyCreateRequest merchantNameIsTooLong = new MerchantEmmPolicyCreateRequest();
         merchantNameIsTooLong.setResellerName("PAX");
-        merchantNameIsTooLong.setMerchantName("PAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAX");
+        merchantNameIsTooLong.setMerchantName("PAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAXPAX");
         PolicyUpdatedContentDTO merchantNameIsTooLongPolicyUpdatedContentDTO = new PolicyUpdatedContentDTO();
         merchantNameIsTooLongPolicyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         merchantNameIsTooLong.setContentInfo(merchantNameIsTooLongPolicyUpdatedContentDTO);

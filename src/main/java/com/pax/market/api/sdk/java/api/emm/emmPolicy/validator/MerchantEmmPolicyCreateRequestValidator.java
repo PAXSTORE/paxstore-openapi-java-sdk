@@ -21,7 +21,7 @@ public class MerchantEmmPolicyCreateRequestValidator {
             validationErrs.add(getMessage("parameter.not.null", "merchantEmmPolicyCreateRequest"));
         } else {
             validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getResellerName(), "resellerName", Constants.MAX_64));
-            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getMerchantName(), "merchantName", Constants.MAX_64));
+            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getMerchantName(), "merchantName", Constants.MAX_128));
             if (BooleanUtils.isFalse(validateTarget.getInheritFlag())) {
                 validationErrs.addAll(Validators.validateObject(validateTarget.getContentInfo(), "contentInfo"));
             }
