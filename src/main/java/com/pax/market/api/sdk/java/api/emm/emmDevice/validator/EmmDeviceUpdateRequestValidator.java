@@ -20,7 +20,7 @@ public class EmmDeviceUpdateRequestValidator {
             validationErrs.add(getMessage("parameter.not.null", "emmDeviceUpdateRequest"));
         } else {
             validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getResellerName(), "resellerName", Constants.MAX_64));
-            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getMerchantName(), "merchantName", Constants.MAX_64));
+            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getMerchantName(), "merchantName", Constants.MAX_128));
             validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getDeviceName(), "deviceName", Constants.MAX_64));
         }
         return validationErrs;

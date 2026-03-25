@@ -40,12 +40,12 @@ public Result<EmmDeviceRegisterQRCodeCreateDTO> createRegisterQRCode(EmmDeviceRe
 Structure of class EmmDeviceRegisterQRCodeCreateRequest
 
 
-| Property Name | Type   | Nullable | Description                                                                            |
-| :-------------- | :------- | :--------- | :--------------------------------------------------------------------------------------- |
-| resellerName  | String | false    | The name of the reseller associated with the device register QR code. Max length is 64 |
-| merchantName  | String | false    | The name of the merchant associated with the device register QR code. Max length is 64 |
-| type          | String | false    | The type of the register EMM device QR code. The value is EmmDeviceType.COMPANY_OWNER  |
-| expireDate    | Date   | false    | The expired date of EMM device QR code                                                 |
+| Property Name | Type   | Nullable | Description                                                                             |
+| :-------------- | :------- | :--------- |:----------------------------------------------------------------------------------------|
+| resellerName  | String | false    | The name of the reseller associated with the device register QR code. Max length is 64  |
+| merchantName  | String | false    | The name of the merchant associated with the device register QR code. Max length is 128 |
+| type          | String | false    | The type of the register EMM device QR code. The value is EmmDeviceType.COMPANY_OWNER   |
+| expireDate    | Date   | false    | The expired date of EMM device QR code                                                  |
 
 **Sample codes**
 
@@ -118,7 +118,7 @@ The type in data is EmmDeviceRegisterQRCodeCreateDTO. The structure like below.
 > <font color=red>Parameter resellerName cannot be null!</font>
 > <font color=red>Parameter resellerName is too long, maxlength is 64!</font>
 > <font color=red>Parameter merchantName cannot be null!</font>
-> <font color=red>Parameter merchantName is too long, maxlength is 64!</font>
+> <font color=red>Parameter merchantName is too long, maxlength is 128!</font>
 > <font color=red>Parameter type cannot be null!</font>
 > <font color=red>Parameter expireDate cannot be null!</font>
 
@@ -445,11 +445,11 @@ public Result<String> updateEmmDevice(Long deviceId, EmmDeviceUpdateRequest emmD
 Structure of class EmmDeviceUpdateRequest
 
 
-| Property Name | Type   | Nullable | Description                                       |
-| :-------------- | :------- | :--------- | :-------------------------------------------------- |
-| deviceName    | String | false    | The name of the EMM device. Max length is 64      |
-| resellerName  | String | false    | The reseller name of EMM device. Max length is 64 |
-| merchantName  | String | false    | The merchant name of EMM device. Max length is 64 |
+| Property Name | Type   | Nullable | Description                                        |
+| :-------------- | :------- | :--------- |:---------------------------------------------------|
+| deviceName    | String | false    | The name of the EMM device. Max length is 64       |
+| resellerName  | String | false    | The reseller name of EMM device. Max length is 64  |
+| merchantName  | String | false    | The merchant name of EMM device. Max length is 128 |
 
 **Sample codes**
 
@@ -497,7 +497,7 @@ Result<String> result = emmDeviceApi.updateEmmDevice(1647428843339813L, emmDevic
 > <font color=red>Parameter resellerName cannot be null!</font>
 > <font color=red>Parameter resellerName is too long, maxlength is 64</font>
 > <font color=red>Parameter merchantName cannot be null!</font>
-> <font color=red>Parameter merchantName is too long, maxlength is 64</font>
+> <font color=red>Parameter merchantName is too long, maxlength is 128</font>
 
 **Possible business codes**
 
@@ -543,11 +543,11 @@ public Result<String> updateEmmDevice(Long deviceId, EmmDeviceUpdateRequest emmD
 Structure of class EmmDeviceBatchMoveRequest
 
 
-| Property Name | Type   | Nullable | Description                                       |
-| :-------------- | :------- | :--------- | :-------------------------------------------------- |
-| deviceIds     | Long   | false    | The id list of the EMM device                     |
-| resellerName  | String | false    | The reseller name of EMM device. Max length is 64 |
-| merchantName  | String | false    | The merchant name of EMM device. Max length is 64 |
+| Property Name | Type   | Nullable | Description                                        |
+| :-------------- | :------- | :--------- |:---------------------------------------------------|
+| deviceIds     | Long   | false    | The id list of the EMM device                      |
+| resellerName  | String | false    | The reseller name of EMM device. Max length is 64  |
+| merchantName  | String | false    | The merchant name of EMM device. Max length is 128 |
 
 **Sample codes**
 
@@ -592,7 +592,7 @@ Result<String> result = emmDeviceApi.batchMoveEmmDevice(emmDeviceBatchMoveReques
 > <font color=red>Parameter resellerName cannot be null!</font>
 > <font color=red>Parameter resellerName is too long, maxlength is 64</font>
 > <font color=red>Parameter merchantName cannot be null!</font>
-> <font color=red>Parameter merchantName is too long, maxlength is 64</font>
+> <font color=red>Parameter merchantName is too long, maxlength is 128</font>
 
 **Possible business codes**
 
@@ -1415,9 +1415,9 @@ Structure of class EmmZteQuickUploadRecordCreateRequest
 
 
 | Property Name  | Type   | Nullable | Description                                                                                                                                                                                                                                                                                 |
-| :--------------- | :------- | :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :--------------- | :------- | :--------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | resellerName   | String | false    | The name of the reseller associated with the emm device. Max length is 64                                                                                                                                                                                                                   |
-| merchantName   | String | false    | The name of the merchant associated with the emm device. Max length is 64                                                                                                                                                                                                                   |
+| merchantName   | String | false    | The name of the merchant associated with the emm device. Max length is 128                                                                                                                                                                                                                  |
 | identifierType | String | false    | Batch device registration type, value can be one of EmmDeviceApi.EmmZteIdentifierType.IMEI, EmmDeviceApi.EmmZteIdentifierType.SERIAL_NUMBER                                                                                                                                                 |
 | manufacturer   | String | true     | Device manufacturer, value is ZOLON. When the value of identifierType is EmmDeviceApi.EmmZteIdentifierType.IMEI, the manufacturer parameter is ignored. When the value of identifierType is EmmDeviceApi.EmmZteIdentifierType.SERIAL_NUMBER, the manufacturer parameter is mandatory        |
 | model          | String | true     | Device model, value can be one of L16xx, M30, M50, M9200. When the value of identifierType is EmmDeviceApi.EmmZteIdentifierType.IMEI, the model parameter is ignored. When the value of identifierType is EmmDeviceApi.EmmZteIdentifierType.SERIAL_NUMBER, the model parameter is mandatory |
@@ -1467,7 +1467,7 @@ Result<String> result = emmDeviceApi.submitEmmZteQuickUploadRecord(emmZteQuickUp
 > <font color=red>Parameter resellerName cannot be null!</font>
 > <font color=red>Parameter resellerName is too long, maxlength is 64!</font>
 > <font color=red>Parameter merchantName cannot be null!</font>
-> <font color=red>Parameter merchantName is too long, maxlength is 64!</font>
+> <font color=red>Parameter merchantName is too long, maxlength is 128!</font>
 > <font color=red>Parameter identifierType cannot be null!</font>
 > <font color=red>Parameter numbers cannot be null!</font>
 

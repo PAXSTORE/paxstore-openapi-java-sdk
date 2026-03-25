@@ -21,7 +21,7 @@ public class EmmDeviceRegisterQRCodeCreateRequestValidator {
             validationErrs.add(getMessage("parameter.not.null", "emmDeviceRegisterQRCodeCreateRequest"));
         } else {
             validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getResellerName(), "resellerName", Constants.MAX_64));
-            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getMerchantName(), "merchantName", Constants.MAX_64));
+            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getMerchantName(), "merchantName", Constants.MAX_128));
             validationErrs.addAll(Validators.validateStr(validateTarget.getType(), "parameter.not.null", "type"));
             validationErrs.addAll(Validators.validateObject(validateTarget.getExpireDate(), "expireDate"));
         }
