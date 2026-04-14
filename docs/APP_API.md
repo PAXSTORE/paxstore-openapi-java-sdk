@@ -395,7 +395,7 @@ Result<ApkParamPidDTO> result = appApi.searchApkParamPidList(paramTemplateName, 
 
 ```
 {
-	"businessCode": 1003,
+	"businessCode": 1002,
 	"message": "APK not found"
 }
 ```
@@ -448,7 +448,124 @@ The type in dataSet is ApkParameterPidDTO. And the structure like below.
 
 | Business Code | Message                                                      | Description |
 | :------------ | :----------------------------------------------------------- | :---------- |
-| 1003          | APK not found                                                |             |
+| 1002          | APK not found                                                |             |
 | 1111          | Selected parameter templates exceeded the max limit          |             |
 | 1254          | Parameter template not found                                 |             |
 | 12541         | Parameter template {0} can not be found in application {1}({2}) |             |
+
+
+
+### Search Apk Model List
+
+**API**
+
+```
+public Result<ApkModelDTO> searchApkModelList(String packageName, String versionName)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                               |
+| :------------- | :----- | :------- | :---------------------------------------- |
+| packageName    | String | false    | Apk packageName, example: com.app.package |
+| versionName    | String | false    | Apk versionName, example: 1.0             |
+
+**Sample codes**
+
+```
+AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String packageName = "com.zolon.signrotatetest1";
+String versionName = "1.0.13";
+Result<ApkFactoryModelDTO> result = appApi.searchApkModelList("com.zolon.signrotatetest1", "1.0.13");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter packageName cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1002,
+	"message": "APK not found"
+}
+```
+
+**Successful sample result**
+
+```
+{
+    "businessCode": 0,
+    "data": {
+        "modelList": [
+            {
+                "factory": {
+                    "id": 1,
+                    "name": "PAX"
+                },
+                "id": 7833,
+                "name": "A77"
+            },
+            {
+                "factory": {
+                    "id": 1,
+                    "name": "PAX"
+                },
+                "id": 1554,
+                "name": "A80"
+            },
+            {
+                "factory": {
+                    "id": 1,
+                    "name": "PAX"
+                },
+                "id": 7808,
+                "name": "A9000"
+            }
+        ]
+    },
+    "rateLimit": "1",
+    "rateLimitRemain": "0",
+    "rateLimitReset": "1776151018657"
+}
+```
+
+
+
+The type in dataSet is ApkModelDTO. And the structure like below.
+
+| Property Name | Type           | Description   |
+| ------------- | -------------- | ------------- |
+| modelList     | List<ModelDTO> | The modelList |
+
+The type in dataSet is ModelDTO. And the structure like below.
+
+| Property Name | Type       | Description |
+| ------------- | ---------- | ----------- |
+| id            | Long       |             |
+| name          | String     |             |
+| factory       | FactoryDTO |             |
+
+The type in dataSet is FactoryDTO. And the structure like below.
+
+| Property Name | Type   | Description |
+| ------------- | ------ | ----------- |
+| id            | Long   |             |
+| name          | String |             |
+
+**Possible validation errors**
+
+> <font color=red>Parameter packageName cannot be null!</font>  
+> <font color=red>Parameter versionName cannot be null!</font>  
+
+**Possible business codes**
+
+| Business Code | Message       | Description |
+| :------------ | :------------ | :---------- |
+| 1002          | APK not found |             |

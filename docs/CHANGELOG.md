@@ -1,5 +1,9 @@
 # Changelog  
 
+## 11.0.0
+### New Feature
+* Add EmmDeviceDetailApi - `searchApkModelList` API
+
 ## 10.2.0
 ### New Feature
 * Add the request parameter fields `enableUnattendedAccess` and `unattendedDeviceResponseTime` in EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API

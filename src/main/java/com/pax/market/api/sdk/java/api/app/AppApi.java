@@ -23,6 +23,7 @@ public class AppApi extends BaseThirdPartySysApi {
     private static final String GET_APP_COST_URL = "/v1/3rdsys/apps/app-cost";
 
     private static final String SEARCH_APK_PARAM_PID_LIST_URL = "/v1/3rdsys/apps/param/pid/list";
+    private static final String SEARCH_APK_MODEL_LIST_URL = "/v1/3rdsys/apps/apk/model/list";
 
     public AppApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -146,6 +147,21 @@ public class AppApi extends BaseThirdPartySysApi {
         request.addRequestParam("versionName", versionName);
         ApkParamPidResponse resp =  EnhancedJsonUtils.fromJson(client.execute(request), ApkParamPidResponse.class);
         return new Result<ApkParamPidDTO>(resp);
+    }
+    public Result<ApkModelDTO> searchApkModelList(String packageName, String versionName){
+        List<String> validationErrs = Lists.newArrayList();
+        validationErrs.addAll(Validators.validateStr(packageName, "parameter.not.null", "packageName"));
+        validationErrs.addAll(Validators.validateStr(versionName, "parameter.not.null", "versionName"));
+        if(!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SEARCH_APK_MODEL_LIST_URL);
+        request.setRequestMethod(SdkRequest.RequestMethod.GET);
+        request.addRequestParam("packageName", packageName);
+        request.addRequestParam("versionName", versionName);
+        ApkModelResponse resp =  EnhancedJsonUtils.fromJson(client.execute(request), ApkModelResponse.class);
+        return new Result<ApkModelDTO>(resp);
     }
 
     public enum ApkStatus {

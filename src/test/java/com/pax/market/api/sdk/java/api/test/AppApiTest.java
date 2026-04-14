@@ -7,9 +7,7 @@ import com.pax.market.api.sdk.java.api.app.AppApi.AppStatus;
 import com.pax.market.api.sdk.java.api.app.AppApi.AppBaseType;
 import com.pax.market.api.sdk.java.api.app.AppApi.AppChargeType;
 import com.pax.market.api.sdk.java.api.app.AppApi.AppOsType;
-import com.pax.market.api.sdk.java.api.app.dto.ApkParamPidDTO;
-import com.pax.market.api.sdk.java.api.app.dto.AppCostDTO;
-import com.pax.market.api.sdk.java.api.app.dto.AppPageDTO;
+import com.pax.market.api.sdk.java.api.app.dto.*;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import org.junit.Assert;
 import org.junit.Before;
@@ -77,6 +75,13 @@ public class AppApiTest  {
         String versionName = "2.5.7";
         Result<ApkParamPidDTO> result = appApi.searchApkParamPidList(paramTemplateName, packageName, versionName);
         logger.debug("Result of find terminal apk parameter pidList: {}",result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
+
+    @Test
+    public void testSearchApKModel() {
+        Result<ApkModelDTO> result = appApi.searchApkModelList("com.zolon.signrotatetest1", "1.0.13");
+        logger.debug("Result of search apk factory model: {}",result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
     }
 }
