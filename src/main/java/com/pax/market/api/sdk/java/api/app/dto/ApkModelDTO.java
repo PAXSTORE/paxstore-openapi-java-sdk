@@ -40,6 +40,14 @@ public class ApkModelDTO implements Serializable {
         public void setName(String name) {
             this.name = name;
         }
+
+        @Override
+        public String toString() {
+            return "FactoryDTO{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
 
     public static class ModelDTO implements Serializable {
@@ -74,11 +82,19 @@ public class ApkModelDTO implements Serializable {
             this.factory = factory;
         }
 
+        @Override
+        public String toString() {
+            return "ModelDTO{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", factory=" + factory +
+                    '}';
+        }
     }
 
     @Override
     public String toString() {
-        return "ApkFactoryModelDTO{" +
+        return "ApkModelDTO{" +
                 "modelList=" + modelList +
                 '}';
     }
