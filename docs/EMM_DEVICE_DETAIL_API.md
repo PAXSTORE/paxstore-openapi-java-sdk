@@ -1,6 +1,6 @@
 ## EMM Device Detail APIs
 
-EMM Device Detail APIs allow thirdparty system get EMM device dashboard detail, get EMM device dashboard monitor, search EMM device installed apps.
+EMM Device Detail APIs allow thirdparty system get EMM device dashboard detail, get EMM device dashboard monitor, search EMM device installed apps, get EMM device location.
 
 All the EMM device detail APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmDeviceDetail.EmmDeviceDetailApi*.
 
@@ -285,6 +285,86 @@ The type in dataSet is EmmDeviceInstalledAppDTO. And the structure like below.
 
 > <font color=red>Parameter pageNo Minimum cannot be less than 1!</font>
 > <font color=red>Parameter pageSize must be range is 1 to 100!</font>
+> <font color=red>Parameter deviceId cannot be null and cannot be less than 1!</font>
+
+**Possible business codes**
+
+
+| Business Code | Message                                    | Description |
+| :-------------- | :------------------------------------------- | :------------ |
+| 61617         | Device not found                           |             |
+| 61654         | EMM for Android not subscribed             |             |
+| 61655         | EMM for Android not distributed            |             |
+| 61656         | The market is not bound to EMM for Android |             |
+
+### Get EMM device location
+
+The get EMM device location API allows thirdparty system get EMM device location.
+
+**API**
+
+```
+public Result<EmmDeviceLocationDTO> getEmmDeviceLocation(Long deviceId)
+```
+
+**Input parameter(s) description**
+
+
+| Name     | Type | Nullable | Description          |
+| :--------- | :----- | :--------- | :--------------------- |
+| deviceId | Long | false    | The id of EMM device |
+
+**Sample codes**
+
+```
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<EmmDeviceLocationDTO> result = emmDeviceDetailApi.getEmmDeviceLocation(1644892713386019L);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter deviceId cannot be null and cannot be less than 1!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 61617,
+	"message": "Device not found"
+}
+```
+
+**Successful sample result**
+
+```
+{
+    "businessCode": 0,
+    "data": {
+        "terminalId": 1644892713386019,
+        "lat": 32.3208077,
+        "lng": 189.7724395,
+        "updatedDate": 1575451257000
+    }
+}
+```
+
+The type in data is EmmDeviceLocationDTO. The structure like below.
+
+
+| Property Name | Type   | Description                               |
+| :-------------- | :------- | :------------------------------------------ |
+| terminalId    | Long   | The id of EMM device                      |
+| lat           | Double | The latitude of the device location       |
+| lng           | Double | The longitude of the device location      |
+| updatedDate   | Date   | The timestamp of the last location update |
+
+**Possible client validation errors**
+
 > <font color=red>Parameter deviceId cannot be null and cannot be less than 1!</font>
 
 **Possible business codes**

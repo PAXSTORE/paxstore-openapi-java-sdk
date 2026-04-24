@@ -40,6 +40,7 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 |orderBy|ResellerSearchOrderBy|true|the field name of sort order by, if it is null the search result will sort by id by default, and the value of the parameter can be one of ResellerSearchOrderBy.Name, ResellerSearchOrderBy.Phone and ResellerSearchOrderBy.Contact|
 |name|String|true|search filter by reseller name|
 |status|ResellerStatus|true|the reseller status<br/> the value can be ResellerStatus.Active, ResellerStatus.Inactive, ResellerStatus.Suspend|
+|includeEntityAttribute| Boolean               |true| The data returned when querying the agent list includes entity attributes |
 
 <br/>
 

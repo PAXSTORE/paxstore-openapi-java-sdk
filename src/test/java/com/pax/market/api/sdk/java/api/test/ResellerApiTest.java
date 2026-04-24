@@ -42,7 +42,7 @@ public class ResellerApiTest {
     
     @Test
     public void testSearchReseller() {
-    	Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Contact, null, null);
+    	Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Contact, null, null, Boolean.FALSE);
     	logger.debug("Result of search reseller: {}",result.toString());
 	    Assert.assertTrue(result.getBusinessCode() == 0);
     }

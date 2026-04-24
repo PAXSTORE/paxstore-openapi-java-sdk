@@ -111,6 +111,8 @@ Result<EmmPolicyDTO> result = emmPolicyApi.getResellerEmmPolicy("PAX");
                 "systemNavigation": "NAVIGATION_ENABLED"
             },
             "enableRemoteControl": true,
+            "enableUnattendedAccess": true,
+            "unattendedDeviceResponseTime": 15,
             "locationMode": "LOCATION_DISABLED",
             "maximumTimeToLock": 15000,
             "microphoneAccess": "MICROPHONE_ACCESS_DISABLED",
@@ -322,6 +324,8 @@ Structure of class PolicyContentDTO
 | kioskCustomLauncherEnabled                  | Boolean                       | Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. Apps appear on a single page in alphabetical order. Use kioskCustomization to further configure the kiosk device behavior                                                                                                                                                                                                               |
 | kioskCustomization                          | KioskCustomization            | Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK                                                                                                                                                                                                                                                                                                                                   |
 | enableRemoteControl                         | Boolean                       | Enable the remote control feature. This will install the AirViewer app on supported models, and the device can be viewed and controlled remotely from the device details page and the AirViewer menu                                                                                                                                                                                                                                                                                                               |
+| enableUnattendedAccess                      | Boolean                       | Enable the unattended access feature for remote control. When enabled, allows remote control access without requiring user confirmation on the device                                                                                                                                                                                                                                                                                                                                                              |
+| unattendedDeviceResponseTime                | Integer                       | Device response timeout for unattended access in seconds. Specifies how long to wait for device response during unattended remote control access                                                                                                                                                                                                                                                                                                                                                                   |
 | locationMode                                | String                        | The degree of location detection enabled, value can be one of LOCATION_USER_CHOICE, LOCATION_ENFORCED, LOCATION_DISABLED                                                                                                                                                                                                                                                                                                                                                                                           |
 | maximumTimeToLock                           | Long                          | Maximum time in milliseconds for user activity until the device locks. A value of 0 means there is no restriction, value can be one of 0, 15000, 30000, 60000, 120000, 300000, 600000, 1800000                                                                                                                                                                                                                                                                                                                     |
 | microphoneAccess                            | String                        | Controls the use of the microphone and whether the user has access to the microphone access toggle. This applies only on fully managed devices, value can be one of MICROPHONE_ACCESS_USER_CHOICE, MICROPHONE_ACCESS_DISABLED, MICROPHONE_ACCESS_ENFORCED                                                                                                                                                                                                                                                          |
@@ -391,31 +395,32 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type          | Description                                                                                                                                                        |
-| :-------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ssid          | String        | Wi-Fi SSID                                                                                                                                                         |
-| cipherType    | String        | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                            |
-| eapMethod     | String        | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                               |
-| phaseMethod   | String        | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                               |
-| userID        | String        | Enterprise Wi-Fi identity/username                                                                                                                                  |
-| userPass      | String        | Enterprise Wi-Fi password                                                                                                                                           |
-| anoID         | String        | Enterprise Wi-Fi anonymous identity                                                                                                                                 |
-| idCert        | CertFileData  | Identity certificate used for enterprise Wi-Fi authentication                                                                                                       |
-| caCert        | CertFileData  | CA certificate used to validate the enterprise Wi-Fi server                                                                                                         |
-| domain        | String        | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                    |
-| password      | String        | Wi-Fi password, for WEP passwords                                                                                                                                   |
-| proxyType     | String        | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                             |
-| hostName      | String        | Wi-Fi proxy host name                                                                                                                                               |
-| port          | Integer       | Wi-Fi proxy port                                                                                                                                                    |
-| pacUrl        | String        | WIFI pac url                                                                                                                                                        |
+| Property Name | Type         | Description                                                                                           |
+| :-------------- | :------------- | :------------------------------------------------------------------------------------------------------ |
+| ssid          | String       | Wi-Fi SSID                                                                                            |
+| cipherType    | String       | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE              |
+| eapMethod     | String       | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS) |
+| phaseMethod   | String       | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                 |
+| userID        | String       | Enterprise Wi-Fi identity/username                                                                    |
+| userPass      | String       | Enterprise Wi-Fi password                                                                             |
+| anoID         | String       | Enterprise Wi-Fi anonymous identity                                                                   |
+| idCert        | CertFileData | Identity certificate used for enterprise Wi-Fi authentication                                         |
+| caCert        | CertFileData | CA certificate used to validate the enterprise Wi-Fi server                                           |
+| domain        | String       | Domain used to validate the enterprise Wi-Fi server certificate                                       |
+| password      | String       | Wi-Fi password, for WEP passwords                                                                     |
+| proxyType     | String       | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                               |
+| hostName      | String       | Wi-Fi proxy host name                                                                                 |
+| port          | Integer      | Wi-Fi proxy port                                                                                      |
+| pacUrl        | String       | WIFI pac url                                                                                          |
 
 Structure of class CertFileData
 
+
 | Property Name | Type   | Description                      |
-| :-------------- | :------- | :------------------------------- |
-| fileKey       | String | File key returned after upload    |
-| fileName      | String | Certificate file name             |
-| content       | String | Certificate file content payload  |
+| :-------------- | :------- | :--------------------------------- |
+| fileKey       | String | File key returned after upload   |
+| fileName      | String | Certificate file name            |
+| content       | String | Certificate file content payload |
 
 Structure of class PasswordRequirements
 
@@ -638,6 +643,8 @@ Structure of class PolicyUpdatedContentDTO
 | kioskCustomLauncherEnabled                  | Boolean                       | true     | Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. Apps appear on a single page in alphabetical order. Use kioskCustomization to further configure the kiosk device behavior                                                                                                                                                                                                               |
 | kioskCustomization                          | KioskCustomization            | true     | Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK                                                                                                                                                                                                                                                                                                                                   |
 | enableRemoteControl                         | Boolean                       | true     | Enable the remote control feature. This will install the AirViewer app on supported models, and the device can be viewed and controlled remotely from the device details page and the AirViewer menu                                                                                                                                                                                                                                                                                                               |
+| enableUnattendedAccess                      | Boolean                       | true     | Enable the unattended access feature for remote control. When enabled, allows remote control access without requiring user confirmation on the device                                                                                                                                                                                                                                                                                                                                                              |
+| unattendedDeviceResponseTime                | Integer                       | true     | Device response timeout for unattended access in seconds. Specifies how long to wait for device response during unattended remote control access                                                                                                                                                                                                                                                                                                                                                                   |
 | locationMode                                | String                        | true     | The degree of location detection enabled, value can be one of LOCATION_USER_CHOICE, LOCATION_ENFORCED, LOCATION_DISABLED                                                                                                                                                                                                                                                                                                                                                                                           |
 | maximumTimeToLock                           | Long                          | true     | Maximum time in milliseconds for user activity until the device locks. A value of 0 means there is no restriction, value can be one of 0, 15000, 30000, 60000, 120000, 300000, 600000, 1800000                                                                                                                                                                                                                                                                                                                     |
 | microphoneAccess                            | String                        | true     | Controls the use of the microphone and whether the user has access to the microphone access toggle. This applies only on fully managed devices, value can be one of MICROPHONE_ACCESS_USER_CHOICE, MICROPHONE_ACCESS_DISABLED, MICROPHONE_ACCESS_ENFORCED                                                                                                                                                                                                                                                          |
@@ -707,29 +714,29 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type          | Nullable | Description                                                                                                                                                                                                           |
-| :-------------- | :-------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ssid          | String        | true     | Wi-Fi SSID, max length is 32                                                                                                                                                                                           |
-| cipherType    | String        | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                                                                               |
-| eapMethod     | String        | true     | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                                                                                  |
-| phaseMethod   | String        | true     | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                                                                                  |
-| userID        | String        | true     | Enterprise Wi-Fi identity/username                                                                                                                                                                                     |
-| userPass      | String        | true     | Enterprise Wi-Fi password                                                                                                                                                                                              |
-| anoID         | String        | true     | Enterprise Wi-Fi anonymous identity                                                                                                                                                                                    |
-| idCert        | CertFileData  | true     | Identity certificate used for enterprise Wi-Fi authentication                                                                                                                                                          |
-| caCert        | CertFileData  | true     | CA certificate used to validate the enterprise Wi-Fi server                                                                                                                                                            |
-| domain        | String        | true     | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                                                                        |
-| password      | String        | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63                                                                                    |
-| proxyType     | String        | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                                                                                |
-| hostName      | String        | true     | Wi-Fi proxy host name                                                                                                                                                                                                  |
-| port          | Integer       | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                                                                                                    |
-| pacUrl        | String        | true     | WIFI pac url                                                                                                                                                                                                           |
+| Property Name | Type         | Nullable | Description                                                                                                                        |
+| :-------------- | :------------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| ssid          | String       | true     | Wi-Fi SSID, max length is 32                                                                                                       |
+| cipherType    | String       | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                           |
+| eapMethod     | String       | true     | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                              |
+| phaseMethod   | String       | true     | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                              |
+| userID        | String       | true     | Enterprise Wi-Fi identity/username                                                                                                 |
+| userPass      | String       | true     | Enterprise Wi-Fi password                                                                                                          |
+| anoID         | String       | true     | Enterprise Wi-Fi anonymous identity                                                                                                |
+| idCert        | CertFileData | true     | Identity certificate used for enterprise Wi-Fi authentication                                                                      |
+| caCert        | CertFileData | true     | CA certificate used to validate the enterprise Wi-Fi server                                                                        |
+| domain        | String       | true     | Domain used to validate the enterprise Wi-Fi server certificate                                                                    |
+| password      | String       | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63 |
+| proxyType     | String       | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                            |
+| hostName      | String       | true     | Wi-Fi proxy host name                                                                                                              |
+| port          | Integer      | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                |
+| pacUrl        | String       | true     | WIFI pac url                                                                                                                       |
 
 Structure of class CertFileData
 
 
-| Property Name | Type   | Nullable | Description                     |
-| :-------------- | :------- | :--------- | :-------------------------------- |
+| Property Name | Type   | Nullable | Description                      |
+| :-------------- | :------- | :--------- | :--------------------------------- |
 | fileKey       | String | true     | File key returned after upload   |
 | fileName      | String | true     | Certificate file name            |
 | content       | String | true     | Certificate file content payload |
@@ -1058,6 +1065,8 @@ Result<EmmPolicyDTO> result = emmPolicyApi.getMerchantEmmPolicy("PAX","test");
                 "systemNavigation": "NAVIGATION_ENABLED"
             },
             "enableRemoteControl": true,
+            "enableUnattendedAccess": true,
+            "unattendedDeviceResponseTime": 15,
             "locationMode": "LOCATION_DISABLED",
             "maximumTimeToLock": 15000,
             "microphoneAccess": "MICROPHONE_ACCESS_DISABLED",
@@ -1254,6 +1263,8 @@ Structure of class PolicyContentDTO
 | kioskCustomLauncherEnabled                  | Boolean                       | Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. Apps appear on a single page in alphabetical order. Use kioskCustomization to further configure the kiosk device behavior                                                                                                                                                                                                               |
 | kioskCustomization                          | KioskCustomization            | Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK                                                                                                                                                                                                                                                                                                                                   |
 | enableRemoteControl                         | Boolean                       | Enable the remote control feature. This will install the AirViewer app on supported models, and the device can be viewed and controlled remotely from the device details page and the AirViewer menu                                                                                                                                                                                                                                                                                                               |
+| enableUnattendedAccess                      | Boolean                       | Enable the unattended access feature for remote control. When enabled, allows remote control access without requiring user confirmation on the device                                                                                                                                                                                                                                                                                                                                                              |
+| unattendedDeviceResponseTime                | Integer                       | Device response timeout for unattended access in seconds. Specifies how long to wait for device response during unattended remote control access                                                                                                                                                                                                                                                                                                                                                                   |
 | locationMode                                | String                        | The degree of location detection enabled, value can be one of LOCATION_USER_CHOICE, LOCATION_ENFORCED, LOCATION_DISABLED                                                                                                                                                                                                                                                                                                                                                                                           |
 | maximumTimeToLock                           | Long                          | Maximum time in milliseconds for user activity until the device locks. A value of 0 means there is no restriction, value can be one of 0, 15000, 30000, 60000, 120000, 300000, 600000, 1800000                                                                                                                                                                                                                                                                                                                     |
 | microphoneAccess                            | String                        | Controls the use of the microphone and whether the user has access to the microphone access toggle. This applies only on fully managed devices, value can be one of MICROPHONE_ACCESS_USER_CHOICE, MICROPHONE_ACCESS_DISABLED, MICROPHONE_ACCESS_ENFORCED                                                                                                                                                                                                                                                          |
@@ -1323,32 +1334,32 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type          | Description                                                                                                                                                        |
-| :-------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ssid          | String        | Wi-Fi SSID                                                                                                                                                         |
-| cipherType    | String        | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                            |
-| eapMethod     | String        | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                               |
-| phaseMethod   | String        | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                               |
-| userID        | String        | Enterprise Wi-Fi identity/username                                                                                                                                  |
-| userPass      | String        | Enterprise Wi-Fi password                                                                                                                                           |
-| anoID         | String        | Enterprise Wi-Fi anonymous identity                                                                                                                                 |
-| idCert        | CertFileData  | Identity certificate used for enterprise Wi-Fi authentication                                                                                                       |
-| caCert        | CertFileData  | CA certificate used to validate the enterprise Wi-Fi server                                                                                                         |
-| domain        | String        | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                    |
-| password      | String        | Wi-Fi password, for WEP passwords                                                                                                                                   |
-| proxyType     | String        | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                             |
-| hostName      | String        | Wi-Fi proxy host name                                                                                                                                               |
-| port          | Integer       | Wi-Fi proxy port                                                                                                                                                    |
-| pacUrl        | String        | WIFI pac url                                                                                                                                                        |
+| Property Name | Type         | Description                                                                                           |
+| :-------------- | :------------- | :------------------------------------------------------------------------------------------------------ |
+| ssid          | String       | Wi-Fi SSID                                                                                            |
+| cipherType    | String       | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE              |
+| eapMethod     | String       | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS) |
+| phaseMethod   | String       | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                 |
+| userID        | String       | Enterprise Wi-Fi identity/username                                                                    |
+| userPass      | String       | Enterprise Wi-Fi password                                                                             |
+| anoID         | String       | Enterprise Wi-Fi anonymous identity                                                                   |
+| idCert        | CertFileData | Identity certificate used for enterprise Wi-Fi authentication                                         |
+| caCert        | CertFileData | CA certificate used to validate the enterprise Wi-Fi server                                           |
+| domain        | String       | Domain used to validate the enterprise Wi-Fi server certificate                                       |
+| password      | String       | Wi-Fi password, for WEP passwords                                                                     |
+| proxyType     | String       | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                               |
+| hostName      | String       | Wi-Fi proxy host name                                                                                 |
+| port          | Integer      | Wi-Fi proxy port                                                                                      |
+| pacUrl        | String       | WIFI pac url                                                                                          |
 
 Structure of class CertFileData
 
 
 | Property Name | Type   | Description                      |
-| :-------------- | :------- | :------------------------------- |
-| fileKey       | String | File key returned after upload    |
-| fileName      | String | Certificate file name             |
-| content       | String | Certificate file content payload  |
+| :-------------- | :------- | :--------------------------------- |
+| fileKey       | String | File key returned after upload   |
+| fileName      | String | Certificate file name            |
+| content       | String | Certificate file content payload |
 
 Structure of class PasswordRequirements
 
@@ -1503,7 +1514,7 @@ Structure of class LockedPolicyDTO
 > <font color=red>Parameter resellerName cannot be null!</font>
 > <font color=red>Parameter resellerName is too long, maxlength is 64!</font>
 > <font color=red>Parameter merchantName cannot be null!</font>
-> <font color=red>Parameter merchantName is too long, maxlength is 64!</font>
+> <font color=red>Parameter merchantName is too long, maxlength is 128!</font>
 
 **Possible business codes**
 
@@ -1542,7 +1553,7 @@ Structure of class MerchantEmmPolicyCreateRequest
 | Property Name    | Type                          | Nullable | Description                                                                                                                                                 |
 | :----------------- | :------------------------------ | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | resellerName     | String                        | false    | The reseller of EMM device belongs to. Max length is 64                                                                                                     |
-| merchantName     | String                        | false    | The merchant of EMM device belongs to. Max length is 64                                                                                                     |
+| merchantName     | String                        | false    | The merchant of EMM device belongs to. Max length is 128                                                                                                    |
 | contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, the contentInfo value is required |
 | lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                              |
 | inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                  |
@@ -1577,6 +1588,8 @@ Structure of class PolicyUpdatedContentDTO
 | kioskCustomLauncherEnabled                  | Boolean                       | true     | Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. Apps appear on a single page in alphabetical order. Use kioskCustomization to further configure the kiosk device behavior                                                                                                                                                                                                               |
 | kioskCustomization                          | KioskCustomization            | true     | Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK                                                                                                                                                                                                                                                                                                                                   |
 | enableRemoteControl                         | Boolean                       | true     | Enable the remote control feature. This will install the AirViewer app on supported models, and the device can be viewed and controlled remotely from the device details page and the AirViewer menu                                                                                                                                                                                                                                                                                                               |
+| enableUnattendedAccess                      | Boolean                       | true     | Enable the unattended access feature for remote control. When enabled, allows remote control access without requiring user confirmation on the device                                                                                                                                                                                                                                                                                                                                                              |
+| unattendedDeviceResponseTime                | Integer                       | true     | Device response timeout for unattended access in seconds. Specifies how long to wait for device response during unattended remote control access                                                                                                                                                                                                                                                                                                                                                                   |
 | locationMode                                | String                        | true     | The degree of location detection enabled, value can be one of LOCATION_USER_CHOICE, LOCATION_ENFORCED, LOCATION_DISABLED                                                                                                                                                                                                                                                                                                                                                                                           |
 | maximumTimeToLock                           | Long                          | true     | Maximum time in milliseconds for user activity until the device locks. A value of 0 means there is no restriction, value can be one of 0, 15000, 30000, 60000, 120000, 300000, 600000, 1800000                                                                                                                                                                                                                                                                                                                     |
 | microphoneAccess                            | String                        | true     | Controls the use of the microphone and whether the user has access to the microphone access toggle. This applies only on fully managed devices, value can be one of MICROPHONE_ACCESS_USER_CHOICE, MICROPHONE_ACCESS_DISABLED, MICROPHONE_ACCESS_ENFORCED                                                                                                                                                                                                                                                          |
@@ -1646,29 +1659,29 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type          | Nullable | Description                                                                                                                                                                                                           |
-| :-------------- | :-------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ssid          | String        | true     | Wi-Fi SSID, max length is 32                                                                                                                                                                                           |
-| cipherType    | String        | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                                                                               |
-| eapMethod     | String        | true     | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                                                                                  |
-| phaseMethod   | String        | true     | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                                                                                  |
-| userID        | String        | true     | Enterprise Wi-Fi identity/username                                                                                                                                                                                     |
-| userPass      | String        | true     | Enterprise Wi-Fi password                                                                                                                                                                                              |
-| anoID         | String        | true     | Enterprise Wi-Fi anonymous identity                                                                                                                                                                                    |
-| idCert        | CertFileData  | true     | Identity certificate used for enterprise Wi-Fi authentication                                                                                                                                                          |
-| caCert        | CertFileData  | true     | CA certificate used to validate the enterprise Wi-Fi server                                                                                                                                                            |
-| domain        | String        | true     | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                                                                        |
-| password      | String        | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63                                                                                    |
-| proxyType     | String        | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                                                                                |
-| hostName      | String        | true     | Wi-Fi proxy host name                                                                                                                                                                                                  |
-| port          | Integer       | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                                                                                                    |
-| pacUrl        | String        | true     | WIFI pac url                                                                                                                                                                                                           |
+| Property Name | Type         | Nullable | Description                                                                                                                        |
+| :-------------- | :------------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| ssid          | String       | true     | Wi-Fi SSID, max length is 32                                                                                                       |
+| cipherType    | String       | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                           |
+| eapMethod     | String       | true     | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                              |
+| phaseMethod   | String       | true     | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                              |
+| userID        | String       | true     | Enterprise Wi-Fi identity/username                                                                                                 |
+| userPass      | String       | true     | Enterprise Wi-Fi password                                                                                                          |
+| anoID         | String       | true     | Enterprise Wi-Fi anonymous identity                                                                                                |
+| idCert        | CertFileData | true     | Identity certificate used for enterprise Wi-Fi authentication                                                                      |
+| caCert        | CertFileData | true     | CA certificate used to validate the enterprise Wi-Fi server                                                                        |
+| domain        | String       | true     | Domain used to validate the enterprise Wi-Fi server certificate                                                                    |
+| password      | String       | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63 |
+| proxyType     | String       | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                            |
+| hostName      | String       | true     | Wi-Fi proxy host name                                                                                                              |
+| port          | Integer      | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                |
+| pacUrl        | String       | true     | WIFI pac url                                                                                                                       |
 
 Structure of class CertFileData
 
 
-| Property Name | Type   | Nullable | Description                     |
-| :-------------- | :------- | :--------- | :-------------------------------- |
+| Property Name | Type   | Nullable | Description                      |
+| :-------------- | :------- | :--------- | :--------------------------------- |
 | fileKey       | String | true     | File key returned after upload   |
 | fileName      | String | true     | Certificate file name            |
 | content       | String | true     | Certificate file content payload |
@@ -1865,7 +1878,7 @@ Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
 > <font color=red>Parameter resellerName cannot be null!</font>
 > <font color=red>Parameter resellerName is too long, maxlength is 64!</font>
 > <font color=red>Parameter merchantName cannot be null!</font>
-> <font color=red>Parameter merchantName is too long, maxlength is 64!</font>
+> <font color=red>Parameter merchantName is too long, maxlength is 128!</font>
 > <font color=red>Parameter contentInfo cannot be null!</font>
 > <font color=red>Parameter inheritFlag cannot be null!</font>
 
@@ -1997,6 +2010,8 @@ Result<EmmPolicyDTO> result = emmPolicyApi.getDeviceEmmPolicy("2870003453");
                 "systemNavigation": "NAVIGATION_ENABLED"
             },
             "enableRemoteControl": true,
+            "enableUnattendedAccess": true,
+            "unattendedDeviceResponseTime": 15,
             "locationMode": "LOCATION_DISABLED",
             "maximumTimeToLock": 15000,
             "microphoneAccess": "MICROPHONE_ACCESS_DISABLED",
@@ -2198,6 +2213,8 @@ Structure of class PolicyContentDTO
 | kioskCustomLauncherEnabled                  | Boolean                       | Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. Apps appear on a single page in alphabetical order. Use kioskCustomization to further configure the kiosk device behavior                                                                                                                                                                                                               |
 | kioskCustomization                          | KioskCustomization            | Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK                                                                                                                                                                                                                                                                                                                                   |
 | enableRemoteControl                         | Boolean                       | Enable the remote control feature. This will install the AirViewer app on supported models, and the device can be viewed and controlled remotely from the device details page and the AirViewer menu                                                                                                                                                                                                                                                                                                               |
+| enableUnattendedAccess                      | Boolean                       | Enable the unattended access feature for remote control. When enabled, allows remote control access without requiring user confirmation on the device                                                                                                                                                                                                                                                                                                                                                              |
+| unattendedDeviceResponseTime                | Integer                       | Device response timeout for unattended access in seconds. Specifies how long to wait for device response during unattended remote control access                                                                                                                                                                                                                                                                                                                                                                   |
 | locationMode                                | String                        | The degree of location detection enabled, value can be one of LOCATION_USER_CHOICE, LOCATION_ENFORCED, LOCATION_DISABLED                                                                                                                                                                                                                                                                                                                                                                                           |
 | maximumTimeToLock                           | Long                          | Maximum time in milliseconds for user activity until the device locks. A value of 0 means there is no restriction, value can be one of 0, 15000, 30000, 60000, 120000, 300000, 600000, 1800000                                                                                                                                                                                                                                                                                                                     |
 | microphoneAccess                            | String                        | Controls the use of the microphone and whether the user has access to the microphone access toggle. This applies only on fully managed devices, value can be one of MICROPHONE_ACCESS_USER_CHOICE, MICROPHONE_ACCESS_DISABLED, MICROPHONE_ACCESS_ENFORCED                                                                                                                                                                                                                                                          |
@@ -2267,32 +2284,32 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type          | Description                                                                                                                                                        |
-| :-------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ssid          | String        | Wi-Fi SSID                                                                                                                                                         |
-| cipherType    | String        | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                            |
-| eapMethod     | String        | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                               |
-| phaseMethod   | String        | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                               |
-| userID        | String        | Enterprise Wi-Fi identity/username                                                                                                                                  |
-| userPass      | String        | Enterprise Wi-Fi password                                                                                                                                           |
-| anoID         | String        | Enterprise Wi-Fi anonymous identity                                                                                                                                 |
-| idCert        | CertFileData  | Identity certificate used for enterprise Wi-Fi authentication                                                                                                       |
-| caCert        | CertFileData  | CA certificate used to validate the enterprise Wi-Fi server                                                                                                         |
-| domain        | String        | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                    |
-| password      | String        | Wi-Fi password, for WEP passwords                                                                                                                                   |
-| proxyType     | String        | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                             |
-| hostName      | String        | Wi-Fi proxy host name                                                                                                                                               |
-| port          | Integer       | Wi-Fi proxy port                                                                                                                                                    |
-| pacUrl        | String        | WIFI pac url                                                                                                                                                        |
+| Property Name | Type         | Description                                                                                           |
+| :-------------- | :------------- | :------------------------------------------------------------------------------------------------------ |
+| ssid          | String       | Wi-Fi SSID                                                                                            |
+| cipherType    | String       | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE              |
+| eapMethod     | String       | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS) |
+| phaseMethod   | String       | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                 |
+| userID        | String       | Enterprise Wi-Fi identity/username                                                                    |
+| userPass      | String       | Enterprise Wi-Fi password                                                                             |
+| anoID         | String       | Enterprise Wi-Fi anonymous identity                                                                   |
+| idCert        | CertFileData | Identity certificate used for enterprise Wi-Fi authentication                                         |
+| caCert        | CertFileData | CA certificate used to validate the enterprise Wi-Fi server                                           |
+| domain        | String       | Domain used to validate the enterprise Wi-Fi server certificate                                       |
+| password      | String       | Wi-Fi password, for WEP passwords                                                                     |
+| proxyType     | String       | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                               |
+| hostName      | String       | Wi-Fi proxy host name                                                                                 |
+| port          | Integer      | Wi-Fi proxy port                                                                                      |
+| pacUrl        | String       | WIFI pac url                                                                                          |
 
 Structure of class CertFileData
 
 
 | Property Name | Type   | Description                      |
-| :-------------- | :------- | :------------------------------- |
-| fileKey       | String | File key returned after upload    |
-| fileName      | String | Certificate file name             |
-| content       | String | Certificate file content payload  |
+| :-------------- | :------- | :--------------------------------- |
+| fileKey       | String | File key returned after upload   |
+| fileName      | String | Certificate file name            |
+| content       | String | Certificate file content payload |
 
 Structure of class PasswordRequirements
 
@@ -2518,6 +2535,8 @@ Structure of class PolicyUpdatedContentDTO
 | kioskCustomLauncherEnabled                  | Boolean                       | true     | Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. Apps appear on a single page in alphabetical order. Use kioskCustomization to further configure the kiosk device behavior                                                                                                                                                                                                               |
 | kioskCustomization                          | KioskCustomization            | true     | Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK                                                                                                                                                                                                                                                                                                                                   |
 | enableRemoteControl                         | Boolean                       | true     | Enable the remote control feature. This will install the AirViewer app on supported models, and the device can be viewed and controlled remotely from the device details page and the AirViewer menu                                                                                                                                                                                                                                                                                                               |
+| enableUnattendedAccess                      | Boolean                       | true     | Enable the unattended access feature for remote control. When enabled, allows remote control access without requiring user confirmation on the device                                                                                                                                                                                                                                                                                                                                                              |
+| unattendedDeviceResponseTime                | Integer                       | true     | Device response timeout for unattended access in seconds. Specifies how long to wait for device response during unattended remote control access                                                                                                                                                                                                                                                                                                                                                                   |
 | locationMode                                | String                        | true     | The degree of location detection enabled, value can be one of LOCATION_USER_CHOICE, LOCATION_ENFORCED, LOCATION_DISABLED                                                                                                                                                                                                                                                                                                                                                                                           |
 | maximumTimeToLock                           | Long                          | true     | Maximum time in milliseconds for user activity until the device locks. A value of 0 means there is no restriction, value can be one of 0, 15000, 30000, 60000, 120000, 300000, 600000, 1800000                                                                                                                                                                                                                                                                                                                     |
 | microphoneAccess                            | String                        | true     | Controls the use of the microphone and whether the user has access to the microphone access toggle. This applies only on fully managed devices, value can be one of MICROPHONE_ACCESS_USER_CHOICE, MICROPHONE_ACCESS_DISABLED, MICROPHONE_ACCESS_ENFORCED                                                                                                                                                                                                                                                          |
@@ -2587,29 +2606,29 @@ Structure of class KioskCustomization
 Structure of class NetworkConfiguration
 
 
-| Property Name | Type          | Nullable | Description                                                                                                                                                                                                           |
-| :-------------- | :-------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ssid          | String        | true     | Wi-Fi SSID, max length is 32                                                                                                                                                                                           |
-| cipherType    | String        | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                                                                                                               |
-| eapMethod     | String        | true     | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                                                                                                                  |
-| phaseMethod   | String        | true     | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                                                                                                                  |
-| userID        | String        | true     | Enterprise Wi-Fi identity/username                                                                                                                                                                                     |
-| userPass      | String        | true     | Enterprise Wi-Fi password                                                                                                                                                                                              |
-| anoID         | String        | true     | Enterprise Wi-Fi anonymous identity                                                                                                                                                                                    |
-| idCert        | CertFileData  | true     | Identity certificate used for enterprise Wi-Fi authentication                                                                                                                                                          |
-| caCert        | CertFileData  | true     | CA certificate used to validate the enterprise Wi-Fi server                                                                                                                                                            |
-| domain        | String        | true     | Domain used to validate the enterprise Wi-Fi server certificate                                                                                                                                                        |
-| password      | String        | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63                                                                                    |
-| proxyType     | String        | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                                                                                                                |
-| hostName      | String        | true     | Wi-Fi proxy host name                                                                                                                                                                                                  |
-| port          | Integer       | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                                                                                                    |
-| pacUrl        | String        | true     | WIFI pac url                                                                                                                                                                                                           |
+| Property Name | Type         | Nullable | Description                                                                                                                        |
+| :-------------- | :------------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| ssid          | String       | true     | Wi-Fi SSID, max length is 32                                                                                                       |
+| cipherType    | String       | true     | Wi-Fi cipher type, value can be one of NONE, WEP, WPA_WPA2_PSK, WPA_WPA2_WPA3_ENTERPRISE                                           |
+| eapMethod     | String       | true     | Enterprise Wi-Fi EAP method when cipherType is WPA_WPA2_WPA3_ENTERPRISE (for example PEAP, TLS, TTLS)                              |
+| phaseMethod   | String       | true     | Inner authentication method for enterprise EAP (for example MSCHAPv2)                                                              |
+| userID        | String       | true     | Enterprise Wi-Fi identity/username                                                                                                 |
+| userPass      | String       | true     | Enterprise Wi-Fi password                                                                                                          |
+| anoID         | String       | true     | Enterprise Wi-Fi anonymous identity                                                                                                |
+| idCert        | CertFileData | true     | Identity certificate used for enterprise Wi-Fi authentication                                                                      |
+| caCert        | CertFileData | true     | CA certificate used to validate the enterprise Wi-Fi server                                                                        |
+| domain        | String       | true     | Domain used to validate the enterprise Wi-Fi server certificate                                                                    |
+| password      | String       | true     | Wi-Fi password, for WEP password, the password length is 10 or 26, for WPA_WPA2_PSK password, the password length range is 8 to 63 |
+| proxyType     | String       | true     | Wi-Fi proxy type, value can be one of NONE, MANUAL, PAC                                                                            |
+| hostName      | String       | true     | Wi-Fi proxy host name                                                                                                              |
+| port          | Integer      | true     | Wi-Fi proxy port, The range of values is 1 to 65535                                                                                |
+| pacUrl        | String       | true     | WIFI pac url                                                                                                                       |
 
 Structure of class CertFileData
 
 
-| Property Name | Type   | Nullable | Description                     |
-| :-------------- | :------- | :--------- | :-------------------------------- |
+| Property Name | Type   | Nullable | Description                      |
+| :-------------- | :------- | :--------- | :--------------------------------- |
 | fileKey       | String | true     | File key returned after upload   |
 | fileName      | String | true     | Certificate file name            |
 | content       | String | true     | Certificate file content payload |
@@ -2811,10 +2830,10 @@ Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
 
 
 | Business Code | Message                                                                                             | Description |
-|:--------------| :---------------------------------------------------------------------------------------------------- | :------------ |
+| :-------------- | :---------------------------------------------------------------------------------------------------- | :------------ |
 | 113           | Your request is invalid, please try again or contact marketplace administrator                      |             |
 | 1720          | Merchant doesn't exist                                                                              |             |
-| 37000          | File type error                                                                             |             |
+| 37000         | File type error                                                                                     |             |
 | 60703         | Locked "{0}" cannot be modified                                                                     |             |
 | 60704         | The Kiosk Mode of {0} cannot exist at the same time with the Multi-App Kiosk Mode                   |             |
 | 61606         | Unable to override the policy,the current marketplace cannot have more than {0} customized policies |             |
@@ -2837,8 +2856,8 @@ Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
 | 61671         | Parameter applications cannot be locked                                                             |             |
 | 61675         | {0} cannot configure accessibleTrackId                                                              |             |
 | 61677         | You cannot customize policies for no merchant devices                                               |             |
-| 61682         | Identity certificates are supported only in .p12/.pfx formats                                              |             |
-| 61683         | CA certificates are supported only in .cer/.pem/.der formats                                           |             |
+| 61682         | Identity certificates are supported only in .p12/.pfx formats                                       |             |
+| 61683         | CA certificates are supported only in .cer/.pem/.der formats                                        |             |
 | 61708         | The Associated Configuration is locked and this "{0}" cannot be removed                             |             |
 | 61709         | The Associated Configuration is locked and this "{0}" cannot be turned off                          |             |
 | 62032         | EMM device Serial No. is too long                                                                   |             |

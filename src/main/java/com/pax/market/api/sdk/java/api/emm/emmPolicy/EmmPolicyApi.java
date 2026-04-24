@@ -67,7 +67,7 @@ public class EmmPolicyApi extends BaseThirdPartySysApi {
             return new Result<>(validationErrR);
         }
 
-        List<String> validationErrM = Validators.validateStrNullAndMax(merchantName, "merchantName", Constants.MAX_64);
+        List<String> validationErrM = Validators.validateStrNullAndMax(merchantName, "merchantName", Constants.MAX_128);
         if (!validationErrM.isEmpty()) {
             return new Result<>(validationErrM);
         }

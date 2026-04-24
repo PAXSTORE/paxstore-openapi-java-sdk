@@ -1,5 +1,15 @@
 # Changelog  
 
+## 10.2.0
+### New Feature
+* Add the request parameter fields `enableUnattendedAccess` and `unattendedDeviceResponseTime` in EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
+* Add EmmDeviceDetailApi - `getEmmDeviceLocation` API
+* The max length of Merchant Name increased to 128
+* Add parameter query `includeEntityAttribute` and  return in MerchantApi-`searchMerchant` API
+* Add parameter query `includeEntityAttribute` and  return in ResellerApi-`searchReseller` API
+* Add TerminalApkApi - `createTerminalApkWithPartialParams` API
+* Add TerminalGroupApkApi - `createAndActiveGroupApkWithPartialParams` API
+
 ## 10.1.0
 ### New Feature
 * The `source` attribute within the installedApks object is now returned in the API(TerminalApi-`getTerminal`, `getTerminalBySn`) response.
@@ -9,6 +19,7 @@
 * Add the return fields `clearStatus`,`clearFlag`,`reason` and`lastClearTime` in EMMDeviceDetail API - `findEmmDeviceInstalledAppPage` API
 * Change the structure of `NetworkConfiguration` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
 * Add the return field `hideEnterpriseName` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API.
+* Add the request parameter fields `enableUnattendedAccess` and `unattendedDeviceResponseTime` in EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
 
 
 ## 10.0.0
