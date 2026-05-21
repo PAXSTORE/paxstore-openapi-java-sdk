@@ -41,6 +41,7 @@ public class CreateTerminalGroupApkRequest implements Serializable {
     private String effectiveTime;
     private String expiredTime;
     private Boolean validateUndefinedParameter;
+    private Boolean launcher;
 
     /**
      * Gets group id.
@@ -278,5 +279,13 @@ public class CreateTerminalGroupApkRequest implements Serializable {
      */
     public void setValidateUndefinedParameter(Boolean validateUndefinedParameter) {
         this.validateUndefinedParameter = validateUndefinedParameter;
+    }
+
+    public Boolean getLauncher() {
+        return launcher;
+    }
+
+    public void setLauncher(Boolean launcher) {
+        this.launcher = launcher;
     }
 }
