@@ -2,7 +2,7 @@
 
 ## 11.0.0
 ### New Feature
-* Add EmmDeviceDetailApi - `searchApkModelList` API
+* Add AppApi - `searchApkSupportedModels` API
 
 ## 10.2.0
 ### New Feature
