@@ -455,12 +455,12 @@ The type in dataSet is ApkParameterPidDTO. And the structure like below.
 
 
 
-### Search Apk Model List
+### Search Apk Supported Models
 
 **API**
 
 ```
-public Result<ApkModelDTO> searchApkModelList(String packageName, String versionName)
+public Result<ApkModelDTO> searchApkSupportedModels(String packageName, String versionName)
 ```
 
 **Input parameter(s) description**

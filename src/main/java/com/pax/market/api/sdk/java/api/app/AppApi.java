@@ -148,7 +148,7 @@ public class AppApi extends BaseThirdPartySysApi {
         ApkParamPidResponse resp =  EnhancedJsonUtils.fromJson(client.execute(request), ApkParamPidResponse.class);
         return new Result<ApkParamPidDTO>(resp);
     }
-    public Result<ApkModelDTO> searchApkModelList(String packageName, String versionName){
+    public Result<ApkModelDTO> searchApkSupportedModels(String packageName, String versionName){
         List<String> validationErrs = Lists.newArrayList();
         validationErrs.addAll(Validators.validateStr(packageName, "parameter.not.null", "packageName"));
         validationErrs.addAll(Validators.validateStr(versionName, "parameter.not.null", "versionName"));

@@ -80,7 +80,7 @@ public class AppApiTest  {
 
     @Test
     public void testSearchApKModel() {
-        Result<ApkModelDTO> result = appApi.searchApkModelList("com.zolon.signrotatetest1", "1.0.13");
+        Result<ApkModelDTO> result = appApi.searchApkSupportedModels("com.zolon.signrotatetest1", "1.0.13");
         logger.debug("Result of search apk factory model: {}",result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
     }
