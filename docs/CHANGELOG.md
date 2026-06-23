@@ -4,6 +4,12 @@
 ### New Feature
 * Add AppApi - `searchApkSupportedModels` API
 
+
+
+## 10.2.1  
+### Security Issue Fix  
+* Fix security issue(CWE-295) 
+
 ## 10.2.0
 ### New Feature
 * Add the request parameter fields `enableUnattendedAccess` and `unattendedDeviceResponseTime` in EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
@@ -11,6 +17,8 @@
 * The max length of Merchant Name increased to 128
 * Add parameter query `includeEntityAttribute` and  return in MerchantApi-`searchMerchant` API
 * Add parameter query `includeEntityAttribute` and  return in ResellerApi-`searchReseller` API
+* Add TerminalApkApi - `createTerminalApkWithPartialParams` API
+* Add TerminalGroupApkApi - `createAndActiveGroupApkWithPartialParams` API
 
 ## 10.1.0
 ### New Feature
