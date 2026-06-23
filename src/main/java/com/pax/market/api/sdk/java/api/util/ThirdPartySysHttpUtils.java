@@ -22,10 +22,6 @@ import org.slf4j.LoggerFactory;
 import javax.net.ssl.*;
 import java.io.*;
 import java.net.*;
-import java.security.GeneralSecurityException;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
@@ -56,17 +52,6 @@ public abstract class ThirdPartySysHttpUtils {
     /**
      * The type Trust all trust manager.
      */
-    public static class TrustAllTrustManager implements X509TrustManager {
-		public X509Certificate[] getAcceptedIssuers() {
-			return null;
-		}
-
-		public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-		}
-
-		public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-		}
-	}
 
 	private ThirdPartySysHttpUtils() {
 	}
@@ -359,28 +344,6 @@ public abstract class ThirdPartySysHttpUtils {
 	private static HttpURLConnection getConnection(String requestUrl, int connectTimeout, int readTimeout) throws IOException {
 		URL url = new URL(requestUrl);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		if (conn instanceof HttpsURLConnection) {
-			HttpsURLConnection connHttps = (HttpsURLConnection) conn;
-			try {
-				SSLContext ctx = SSLContext.getInstance("TLS");
-				ctx.init(null, new TrustManager[] { new TrustAllTrustManager() }, new SecureRandom());
-				connHttps.setSSLSocketFactory(ctx.getSocketFactory());
-				connHttps.setHostnameVerifier(new HostnameVerifier() {
-					public boolean verify(String hostname, SSLSession session) {
-						return true;
-					}
-				});
-			} catch (GeneralSecurityException e){
-				logger.error("GeneralSecurityException Occurred. Details: {}", e.toString());
-			}
-			connHttps.setHostnameVerifier(new HostnameVerifier() {
-				public boolean verify(String hostname, SSLSession session) {
-					return true;
-				}
-			});
-			conn = connHttps;
-		}
-
 		conn.setConnectTimeout(connectTimeout);
 		conn.setReadTimeout(readTimeout);
 		return conn;

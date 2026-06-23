@@ -1,5 +1,9 @@
 # Changelog  
 
+## 10.2.1  
+### Security Issue Fix  
+* Fix security issue(CWE-295) 
+
 ## 10.2.0
 ### New Feature
 * Add the request parameter fields `enableUnattendedAccess` and `unattendedDeviceResponseTime` in EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
