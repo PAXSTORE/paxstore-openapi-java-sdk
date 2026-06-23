@@ -554,10 +554,17 @@ public class TerminalApiTest {
 		Assert.assertEquals(0, responseResult.getBusinessCode());
 	}
 
-	@Test
-	public void testPushTerminalSetLauncherActionBySN() {
-		String packageName = "com.orange.onekeylockscreen";
-		Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherActionBySN(serialNo, packageName);
-		Assert.assertEquals(0, responseResult.getBusinessCode());
-	}
+    @Test
+    public void testPushTerminalSetLauncherActionBySN() {
+        String packageName = "com.orange.onekeylockscreen";
+        Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherActionBySN(serialNo, packageName);
+        Assert.assertEquals(0, responseResult.getBusinessCode());
+    }
+
+    @Test
+    public void testSearchTerminalTamperAlarm() {
+        Result<TerminalAlarmDTO> result = terminalApi.searchTerminalTamperAlarm(1, 10, null, null, null);
+        logger.debug("Result of search terminal tamper alarm: {}", result.toString());
+        Assert.assertEquals(0, result.getBusinessCode());
+    }
 }

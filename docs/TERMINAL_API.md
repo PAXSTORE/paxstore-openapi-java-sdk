@@ -4193,8 +4193,6 @@ Structure of class EmptyResponse
 | 2066          | Application is not a launcher application        |             |
 | 2067          | Application has been set as launcher application |             |
 
-
-
 ### Push Terminal Set Launcher Action By SN
 
 **API**
@@ -4273,3 +4271,82 @@ Structure of class EmptyResponse
 | 2065          | Installed application not found                  |             |
 | 2066          | Application is not a launcher application        |             |
 | 2067          | Application has been set as launcher application |             |
+
+
+### Search Terminal Tamper Alarm
+
+Search terminal tamper alarm records by page.
+
+**API**
+
+```
+public Result<TerminalAlarmDTO> searchTerminalTamperAlarm(int pageNo, int pageSize, String serialNo, String tid, String name)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                                   |
+| :------------- | :----- |:---------| :-------------------------------------------- |
+| pageNo         | int    | false    | page number, value must >=1                   |
+| pageSize       | int    | false    | the record number per page, range is 1 to 100 |
+| serialNo       | String | true     | search by terminal serial no.                 |
+| tid            | String | true     | search by terminal tid.                       |
+| name           | String | true     | search by terminal name.                      |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalAlarmDTO> result = terminalApi.searchTerminalTamperAlarm(1, 10, null, null, null);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageSize:must be greater than or equal to 1", "pageNo:must be greater than or equal to 1"]
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+    "businessCode": 0,
+    "dataset": [
+        {
+            "terminalId": 1694932481867814,
+            "serialNo": "TESTPCI7",
+            "name": "TESTPCI7",
+            "tid": "Y82041SO",
+            "alertTime": 1754891648000
+        }
+    ],
+    "limit": 10,
+    "pageNo": 1,
+    "totalCount": 1,
+    "hasNext": false,
+    "rateLimit": "1",
+    "rateLimitRemain": "0",
+    "rateLimitReset": "1782204146518"
+}
+```
+
+The type in dataSet of result is TerminalAlarmDTO. The structure shows below.
+
+Structure of class TerminalAlarmDTO
+
+| Property Name | Type   | Description              |
+| ------------- | ------ | ------------------------ |
+| terminalId    | Long   | Terminal's id.           |
+| serialNo      | String | Terminal's serial no.    |
+| name          | String | Terminal's name.         |
+| tid           | String | Terminal's tid.          |
+| alertTime     | Date   | The tamper alert time.   |
+
+**Possible validation errors**
+
+> <font color=red>pageSize:must be greater than or equal to 1</font>   
+> <font color=red>pageNo:must be greater than or equal to 1</font>   
+> <font color=red>pageSize:must be less than or equal to 100</font>

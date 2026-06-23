@@ -1,5 +1,9 @@
 # Changelog  
 
+## 11.1.0
+### New Feature
+* Add TerminalApi - `searchTerminalTamperAlarm` API
+
 ## 11.0.0
 ### New Feature
 * Add AppApi - `searchApkSupportedModels` API

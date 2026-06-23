@@ -110,6 +110,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String CHANGE_TERMINAL_MODEL_BY_SN = "/v1/3rdsys/terminal/model";
     protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION = "/v1/3rdsys/terminals/{terminalId}/launcher";
     protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN = "/v1/3rdsys/terminal/launcher";
+    protected static final String SEARCH_TERMINAL_TAMPER_URL = "/v1/3rdsys/terminals/tamper";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -870,6 +871,29 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addRequestParam("packageName", StringUtils.trim(packageName));
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<>(emptyResponse);
+    }
+
+    public Result<TerminalAlarmDTO> searchTerminalTamperAlarm(int pageNo, int pageSize, String serialNo, String tid, String name) {
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        PageRequestDTO page = new PageRequestDTO();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        SdkRequest request = getPageRequest(SEARCH_TERMINAL_TAMPER_URL, page);
+        if (StringUtils.isNotEmpty(serialNo)) {
+            request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        }
+        if (StringUtils.isNotEmpty(tid)) {
+            request.addRequestParam("tid", StringUtils.trim(tid));
+        }
+        if (StringUtils.isNotEmpty(name)) {
+            request.addRequestParam("name", StringUtils.trim(name));
+        }
+        TerminalAlarmPageResponse terminalAlarmPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalAlarmPageResponse.class);
+        return new Result<>(terminalAlarmPageResponse);
     }
 
 
