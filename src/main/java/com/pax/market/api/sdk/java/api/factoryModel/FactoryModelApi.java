@@ -46,7 +46,7 @@ public class FactoryModelApi extends BaseThirdPartySysApi {
         }
         SdkRequest request = getPageRequest(SEARCH_FACTORY_MODELS_URL, page);
         request.addRequestParam("factoryName", factoryName);
-        request.addRequestParam("modelName", factoryName);
+        request.addRequestParam("modelName", modelName);
         request.addRequestParam("productType", productType);
         FactoryPageResponse factoryPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), FactoryPageResponse.class);
         return new Result<FactoryDTO>(factoryPageResponse);
