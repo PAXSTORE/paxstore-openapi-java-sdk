@@ -149,7 +149,6 @@
                             <aggregate>true</aggregate>
                             <charset>UTF-8</charset>
                             <docencoding>UTF-8</docencoding>
-                            <additionalparam>${javadoc.opts}</additionalparam>
                             <additionalOptions>
                                 <additionalOption>-Xdoclint:none</additionalOption>
                             </additionalOptions>

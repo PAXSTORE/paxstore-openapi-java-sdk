@@ -42,12 +42,23 @@ jobs:
       - name: Compute next snapshot version
         id: versions
         run: |
-          BASE=${{ env.RELEASE_VERSION }}
-          MAJOR=$(echo $BASE | cut -d. -f1)
-          MINOR=$(echo $BASE | cut -d. -f2)
-          PATCH=$(echo $BASE | cut -d. -f3)
-          NEXT_PATCH=$((PATCH + 1))
-          echo "nextSnapshot=${MAJOR}.${MINOR}.${NEXT_PATCH}-SNAPSHOT" >> $GITHUB_ENV
+            BASE=${{ env.RELEASE_VERSION }}
+            MAJOR=$(echo $BASE | cut -d. -f1)
+            MINOR=$(echo $BASE | cut -d. -f2)
+            PATCH=$(echo $BASE | cut -d. -f3)
+            NEXT_PATCH=$((PATCH + 1))
+            NEXT="${MAJOR}.${MINOR}.${NEXT_PATCH}-SNAPSHOT"
+            echo "nextSnapshot=$NEXT" >> $GITHUB_OUTPUT
+
+            - name: Set next snapshot version
+              if: steps.get_version.outputs.currentVersion != steps.versions.outputs.nextSnapshot
+              run: |
+                mvn -B versions:set \
+                  -DnewVersion=${{ steps.versions.outputs.nextSnapshot }} \
+                  -DgenerateBackupPoms=false
+                git add pom.xml
+                git commit -m "chore: prepare next development iteration ${{ steps.versions.outputs.nextSnapshot }}"
+                git push
 
       # ✅ 获取当前 pom 版本
       - name: Get current version
