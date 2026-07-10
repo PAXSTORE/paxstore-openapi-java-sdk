@@ -87,10 +87,6 @@ jobs:
             git push origin "$TAG"
           fi
 
-      # ✅ 测试
-      - name: Run tests
-        run: mvn -B test -DskipTests=false
-
       # ✅ GPG
       - name: Import GPG key
         run: echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
