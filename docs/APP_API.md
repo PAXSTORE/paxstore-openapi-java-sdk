@@ -35,22 +35,22 @@ String name, AppOsType osType, AppChargeType chargeType, AppBaseType baseType, A
 
 **Input parameter(s) description**
 
-| Name                     | Type             | Nullable | Description                                                  |
-| :----------------------- | :--------------- | :------- | :----------------------------------------------------------- |
-| pageNo                   | int              | false    | page number, value must >=1                                  |
-| pageSize                 | int              | false    | the record number per page, range is 1 to 100                |
-| orderBy                  | AppSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of AppSearchOrderBy.AppName_desc, AppSearchOrderBy.AppName_asc, AppSearchOrderBy.Emial_desc, AppSearchOrderBy.Emial_asc, AppSearchOrderBy.UpdatedDate_desc and AppSearchOrderBy.UpdatedDate_asc. |
-| name                     | String           | true     | search filter by app name(parsed from apk file）, package name or the developer's name |
-| appStatus                | AppStatus        | true     | the app status<br/> the value can be AppStatus.Active, AppStatus.Suspend |
-| apkStatus                | ApkStatus        | true     | the apk status<br/> the value can be ApkStatus.Pending, ApkStatus.Online, ApkStatus.Rejected, ApkStatus.Offline |
-| osType                   | AppOsType        | true     | the app osType<br/> the value can be AppOsType.Android, AppOsType.Traditional |
-| baseType                 | AppBaseType      | true     | the app baseType<br/> the value can be AppBaseType.Normal, AppBaseType.Parameter |
-| chargeType               | AppChargeType    | true     | the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging |
-| specificReseller         | Boolean          | true     | specific reseller<br/> value can be one of true(yes) and false(no) |
-| specificMerchantCategory | Boolean          | true     | specific merchant category<br/> value can be one of true(yes) and false(no) |
-| includeSubscribedApp     | Boolean          | true     | include the subscribed app, value can be one of true(yes) and false(no) |
-| resellerName             | String           | true     | search filter by reseller name, search out the app to which the reseller belongs |
-| modelName                | String           | true     | search filter by model name, search out the app to which the model belongs |
+| Name                     | Type             | Nullable | Description                                                                                                                                                                                                                                                                                  |
+| :----------------------- | :--------------- | :------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pageNo                   | int              | false    | page number, value must >=1                                                                                                                                                                                                                                                                  |
+| pageSize                 | int              | false    | the record number per page, range is 1 to 100                                                                                                                                                                                                                                                |
+| orderBy                  | AppSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of AppSearchOrderBy.AppName_desc, AppSearchOrderBy.AppName_asc, AppSearchOrderBy.UpdatedDate_desc and AppSearchOrderBy.UpdatedDate_asc. |
+| name                     | String           | true     | search filter by app name(parsed from apk file）, package name or the developer's name                                                                                                                                                                                                        |
+| appStatus                | AppStatus        | true     | the app status<br/> the value can be AppStatus.Active, AppStatus.Suspend                                                                                                                                                                                                                     |
+| apkStatus                | ApkStatus        | true     | the apk status<br/> the value can be ApkStatus.Pending, ApkStatus.Online, ApkStatus.Rejected, ApkStatus.Offline                                                                                                                                                                              |
+| osType                   | AppOsType        | true     | the app osType<br/> the value can be AppOsType.Android, AppOsType.Traditional                                                                                                                                                                                                                |
+| baseType                 | AppBaseType      | true     | the app baseType<br/> the value can be AppBaseType.Normal, AppBaseType.Parameter                                                                                                                                                                                                             |
+| chargeType               | AppChargeType    | true     | the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging                                                                                                                                                                                                          |
+| specificReseller         | Boolean          | true     | specific reseller<br/> value can be one of true(yes) and false(no)                                                                                                                                                                                                                           |
+| specificMerchantCategory | Boolean          | true     | specific merchant category<br/> value can be one of true(yes) and false(no)                                                                                                                                                                                                                  |
+| includeSubscribedApp     | Boolean          | true     | include the subscribed app, value can be one of true(yes) and false(no)                                                                                                                                                                                                                      |
+| resellerName             | String           | true     | search filter by reseller name, search out the app to which the reseller belongs                                                                                                                                                                                                             |
+| modelName                | String           | true     | search filter by model name, search out the app to which the model belongs                                                                                                                                                                                                                   |
 
 **Sample codes**
 
@@ -168,20 +168,20 @@ public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy 
 
 **Input parameter(s) description**
 
-| Name                     | Type             | Nullable | Description                                                                                                                                                                                                                                                                                                                                           |
-|:-------------------------|:-----------------|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pageNo                   | int              | false    | page number, value must >=1                                                                                                                                                                                                                                                                                                                           |
-| pageSize                 | int              | false    | the record number per page, range is 1 to 1000                                                                                                                                                                                                                                                                                                        |
-| orderBy                  | AppSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of AppSearchOrderBy.AppName_desc, AppSearchOrderBy.AppName_asc, AppSearchOrderBy.Emial_desc, AppSearchOrderBy.Emial_asc, AppSearchOrderBy.UpdatedDate_desc and AppSearchOrderBy.UpdatedDate_asc. |
-| name                     | String           | true     | search filter by app name(parsed from apk file）, package name or the developer's name                                                                                                                                                                                                                                                                 |
-| appStatus                | AppStatus        | true     | the app status<br/> the value can be AppStatus.Active, AppStatus.Suspend                                                                                                                                                                                                                                                                              |
-| apkStatus                | ApkStatus        | true     | the apk status<br/> the value can be ApkStatus.Pending, ApkStatus.Online, ApkStatus.Rejected, ApkStatus.Offline                                                                                                                                                                                                                                       |
-| osType                   | AppOsType        | true     | the app osType<br/> the value can be AppOsType.Android, AppOsType.Traditional                                                                                                                                                                                                                                                                         |
-| baseType                 | AppBaseType      | true     | the app baseType<br/> the value can be AppBaseType.Normal, AppBaseType.Parameter                                                                                                                                                                                                                                                                      |
-| chargeType               | AppChargeType    | true     | the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging                                                                                                                                                                                                                                                                   |
-| specificReseller         | Boolean          | true     | specific reseller<br/> make app private to some reseller, the value can be true or false                                                                                                                                                                                                                                                              |
-| specificMerchantCategory | Boolean          | true     | sperific merchant category<br/> make app only visible by specific merchants in store client, the value can be true or false                                                                                                                                                                                                                           |
-| includeSubscribedApp     | Boolean          | true     | whether to include the subscribed applications from global market                                                                                                                                                                                                                                                                                     |
+| Name                     | Type             | Nullable | Description                                                                                                                                                                                                                                                                                  |
+|:-------------------------|:-----------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pageNo                   | int              | false    | page number, value must >=1                                                                                                                                                                                                                                                                  |
+| pageSize                 | int              | false    | the record number per page, range is 1 to 1000                                                                                                                                                                                                                                               |
+| orderBy                  | AppSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of AppSearchOrderBy.AppName_desc, AppSearchOrderBy.AppName_asc, AppSearchOrderBy.UpdatedDate_desc and AppSearchOrderBy.UpdatedDate_asc. |
+| name                     | String           | true     | search filter by app name(parsed from apk file）, package name or the developer's name                                                                                                                                                                                                        |
+| appStatus                | AppStatus        | true     | the app status<br/> the value can be AppStatus.Active, AppStatus.Suspend                                                                                                                                                                                                                     |
+| apkStatus                | ApkStatus        | true     | the apk status<br/> the value can be ApkStatus.Pending, ApkStatus.Online, ApkStatus.Rejected, ApkStatus.Offline                                                                                                                                                                              |
+| osType                   | AppOsType        | true     | the app osType<br/> the value can be AppOsType.Android, AppOsType.Traditional                                                                                                                                                                                                                |
+| baseType                 | AppBaseType      | true     | the app baseType<br/> the value can be AppBaseType.Normal, AppBaseType.Parameter                                                                                                                                                                                                             |
+| chargeType               | AppChargeType    | true     | the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging                                                                                                                                                                                                          |
+| specificReseller         | Boolean          | true     | specific reseller<br/> make app private to some reseller, the value can be true or false                                                                                                                                                                                                     |
+| specificMerchantCategory | Boolean          | true     | sperific merchant category<br/> make app only visible by specific merchants in store client, the value can be true or false                                                                                                                                                                  |
+| includeSubscribedApp     | Boolean          | true     | whether to include the subscribed applications from global market                                                                                                                                                                                                                            |
 
 **Sample codes**
 
@@ -395,7 +395,7 @@ Result<ApkParamPidDTO> result = appApi.searchApkParamPidList(paramTemplateName, 
 
 ```
 {
-	"businessCode": 1003,
+	"businessCode": 1002,
 	"message": "APK not found"
 }
 ```
@@ -448,7 +448,124 @@ The type in dataSet is ApkParameterPidDTO. And the structure like below.
 
 | Business Code | Message                                                      | Description |
 | :------------ | :----------------------------------------------------------- | :---------- |
-| 1003          | APK not found                                                |             |
+| 1002          | APK not found                                                |             |
 | 1111          | Selected parameter templates exceeded the max limit          |             |
 | 1254          | Parameter template not found                                 |             |
 | 12541         | Parameter template {0} can not be found in application {1}({2}) |             |
+
+
+
+### Search Apk Supported Models
+
+**API**
+
+```
+public Result<ApkModelDTO> searchApkSupportedModels(String packageName, String versionName)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                               |
+| :------------- | :----- | :------- | :---------------------------------------- |
+| packageName    | String | false    | Apk packageName, example: com.app.package |
+| versionName    | String | false    | Apk versionName, example: 1.0             |
+
+**Sample codes**
+
+```
+AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+String packageName = "com.zolon.signrotatetest1";
+String versionName = "1.0.13";
+Result<ApkFactoryModelDTO> result = appApi.searchApkModelList("com.zolon.signrotatetest1", "1.0.13");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter packageName cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1002,
+	"message": "APK not found"
+}
+```
+
+**Successful sample result**
+
+```
+{
+    "businessCode": 0,
+    "data": {
+        "modelList": [
+            {
+                "factory": {
+                    "id": 1,
+                    "name": "PAX"
+                },
+                "id": 7833,
+                "name": "A77"
+            },
+            {
+                "factory": {
+                    "id": 1,
+                    "name": "PAX"
+                },
+                "id": 1554,
+                "name": "A80"
+            },
+            {
+                "factory": {
+                    "id": 1,
+                    "name": "PAX"
+                },
+                "id": 7808,
+                "name": "A9000"
+            }
+        ]
+    },
+    "rateLimit": "1",
+    "rateLimitRemain": "0",
+    "rateLimitReset": "1776151018657"
+}
+```
+
+
+
+The type in dataSet is ApkModelDTO. And the structure like below.
+
+| Property Name | Type           | Description   |
+| ------------- | -------------- | ------------- |
+| modelList     | List<ModelDTO> | The modelList |
+
+The type in dataSet is ModelDTO. And the structure like below.
+
+| Property Name | Type       | Description |
+| ------------- | ---------- | ----------- |
+| id            | Long       |             |
+| name          | String     |             |
+| factory       | FactoryDTO |             |
+
+The type in dataSet is FactoryDTO. And the structure like below.
+
+| Property Name | Type   | Description |
+| ------------- | ------ | ----------- |
+| id            | Long   |             |
+| name          | String |             |
+
+**Possible validation errors**
+
+> <font color=red>Parameter packageName cannot be null!</font>  
+> <font color=red>Parameter versionName cannot be null!</font>  
+
+**Possible business codes**
+
+| Business Code | Message       | Description |
+| :------------ | :------------ | :---------- |
+| 1002          | APK not found |             |

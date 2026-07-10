@@ -35,6 +35,12 @@ public class CreateTerminalApkRequest implements Serializable{
 	private Boolean validateUndefinedParameter;
 	private Boolean launcher;
 
+	public Boolean getLauncher() {
+		return launcher;
+	}
+	public void setLauncher(Boolean launcher) {
+		this.launcher = launcher;
+	}
 
 	/**
 	 * Gets tid.

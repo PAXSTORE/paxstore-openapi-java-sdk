@@ -14,9 +14,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-	<groupId>com.whatspos.sdk</groupId>
+    <groupId>com.whatspos.sdk</groupId>
     <artifactId>3rdsys-openapi</artifactId>
-	<version>10.2.1</version>
+    <version>11.0.0-SNAPSHOT</version>
     <name>OpenAPI Java SDK</name>
     <description>OpenAPI Java SDK</description>
     <url>https://github.com/PAXSTORE/paxstore-openapi-java-sdk</url>
@@ -24,7 +24,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
-		<javadoc.opts>-Xdoclint:none</javadoc.opts>
+        <javadoc.opts>-Xdoclint:none</javadoc.opts>
 
         <gson.version>2.9.1</gson.version>
         <slf4j.version>2.0.17</slf4j.version>
@@ -60,15 +60,15 @@
     </developers>
 
     <dependencies>
-		<dependency>
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-			<version>${gson.version}</version>
+            <version>${gson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -130,7 +130,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
+                        <version>3.3.0</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -143,7 +143,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.10.4</version>
+                        <version>3.6.3</version>
                         <configuration>
                             <encoding>UTF-8</encoding>
                             <aggregate>true</aggregate>
@@ -163,7 +163,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -174,7 +174,10 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <keyname>Derek</keyname>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
                         </configuration>
                     </plugin>
                     <plugin>
