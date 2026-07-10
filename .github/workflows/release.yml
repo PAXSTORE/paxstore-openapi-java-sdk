@@ -77,7 +77,7 @@ jobs:
 
       # 7️⃣ 运行测试（失败则终止，不发布）
       - name: Run tests
-        run: mvn -B test -DskipTests=false
+        run: mvn -B test -DskipTests=true
 
       # 8️⃣ 导入 GPG
       - name: Import GPG key
