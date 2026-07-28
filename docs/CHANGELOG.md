@@ -1,6 +1,11 @@
 # Changelog  
 
-## 11.0.0
+## 11.0.1
+### Bug Fix
+* "Add entityAttributeValues support for reseller and merchant APIs
+
+
+* ## 11.0.0
 ### New Feature
 * Add AppApi - `searchApkSupportedModels` API
 

@@ -96,15 +96,16 @@ Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super"
 
 The type in dataSet of is ResellerPageDTO. And the structure shows like below.
 
-|Property Name|Type|Description|
-|:---|:---|:---|
-|id|Long|the id of reseller|
-|name|String|the name of reseller|
-|phone|String|the phone number of reseller|
-|country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
-|postcode|String|the postcode of reseller|
-|email|String|the email of reseller|
-|status|String|the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)|
+|Property Name|Type| Description                                                                               |
+|:---|:---|:------------------------------------------------------------------------------------------|
+|id|Long| the id of reseller                                                                        |
+|name|String| the name of reseller                                                                      |
+|phone|String| the phone number of reseller                                                              |
+|country|String| the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes) |
+|postcode|String| the postcode of reseller                                                                  |
+|email|String| the email of reseller                                                                     |
+|status|String| the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)         |
+|entityAttributeValues|LinkedHashMap<String, String>| Dynamic attributes of reseller.                                                           |
 
 <br>
 
