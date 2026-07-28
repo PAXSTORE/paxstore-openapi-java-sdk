@@ -12,6 +12,7 @@
 package com.pax.market.api.sdk.java.api.merchant.dto;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -37,8 +38,9 @@ public class MerchantPageDTO implements Serializable{
 	protected String phone;        // phone
 	protected String status;         // status
 	protected String description;        // description
-	
-	
+	protected LinkedHashMap<String, String> entityAttributeValues;
+
+
 	public Long getId() {
 		return id;
 	}
@@ -121,6 +123,14 @@ public class MerchantPageDTO implements Serializable{
 		this.city = city;
 	}
 
+	public LinkedHashMap<String, String> getEntityAttributeValues() {
+		return entityAttributeValues;
+	}
+
+	public void setEntityAttributeValues(LinkedHashMap<String, String> entityAttributeValues) {
+		this.entityAttributeValues = entityAttributeValues;
+	}
+
 	@Override
 	public String toString() {
 		return "MerchantPageDTO{" +
@@ -137,6 +147,7 @@ public class MerchantPageDTO implements Serializable{
 				", phone='" + phone + '\'' +
 				", status='" + status + '\'' +
 				", description='" + description + '\'' +
+				", entityAttributeValues=" + entityAttributeValues +
 				'}';
 	}
 }

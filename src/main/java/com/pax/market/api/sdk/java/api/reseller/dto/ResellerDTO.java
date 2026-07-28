@@ -23,23 +23,11 @@ import com.pax.market.api.sdk.java.api.merchant.dto.SimpleResellerDTO;
  */
 public class ResellerDTO extends ResellerPageDTO{
 
-		
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 8969464555556400805L;
 
-	private LinkedHashMap<String, String> entityAttributeValues;
-	
+
 	private SimpleResellerDTO parent;
-
-	public LinkedHashMap<String, String> getEntityAttributeValues() {
-		return entityAttributeValues;
-	}
-
-	public void setEntityAttributeValues(LinkedHashMap<String, String> entityAttributeValues) {
-		this.entityAttributeValues = entityAttributeValues;
-	}
 	
 	
 
