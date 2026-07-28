@@ -5,9 +5,21 @@
 * Add TerminalApi - `searchTerminalTamperAlarm` API
 * Add parameter query `includeGroupInfo` and return `groups` in TerminalApi - `getTerminal`, `getTerminalBySn` API
 
-## 11.0.0
+
+## 11.0.1
+### Bug Fix
+* "Add entityAttributeValues support for reseller and merchant APIs
+
+
+* ## 11.0.0
 ### New Feature
 * Add AppApi - `searchApkSupportedModels` API
+
+
+
+## 10.2.1  
+### Security Issue Fix  
+* Fix security issue(CWE-295) 
 
 ## 10.2.0
 ### New Feature
@@ -16,6 +28,8 @@
 * The max length of Merchant Name increased to 128
 * Add parameter query `includeEntityAttribute` and  return in MerchantApi-`searchMerchant` API
 * Add parameter query `includeEntityAttribute` and  return in ResellerApi-`searchReseller` API
+* Add TerminalApkApi - `createTerminalApkWithPartialParams` API
+* Add TerminalGroupApkApi - `createAndActiveGroupApkWithPartialParams` API
 
 ## 10.1.0
 ### New Feature
