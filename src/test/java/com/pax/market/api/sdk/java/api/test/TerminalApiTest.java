@@ -64,7 +64,13 @@ public class TerminalApiTest {
 		logger.debug("Result of search terminal: {}",result.toString());
 		Assert.assertTrue(result.getBusinessCode() == 0);
 	}
-    
+
+	@Test
+	public void testGetTerminalIncludeGroupInfo(){
+		Result<TerminalDTO> result = terminalApi.getTerminal(1654906985381944L, false, false, false, false, true);
+		logger.debug("Result of search terminal: {}",result.toString());
+		Assert.assertTrue(result.getBusinessCode() == 0);
+	}
 
     @Test
     public void testCreateTerminal() {
@@ -455,6 +461,14 @@ public class TerminalApiTest {
 		logger.debug("Result of testGetTerminalBySn {}", terminalBySn.toString());
 		Assert.assertEquals(0, terminalBySn.getBusinessCode());
 	}
+
+	@Test
+	public void testGetTerminalBySnIncludeGroupInfo() {
+		Result<TerminalDTO> terminalBySn = terminalApi.getTerminalBySn("testclient", false, false, false,  true, true);
+		logger.debug("Result of testGetTerminalBySn {}", terminalBySn.toString());
+		Assert.assertEquals(0, terminalBySn.getBusinessCode());
+	}
+
 
 	@Test
 	public void testSendTerminalMessage() {

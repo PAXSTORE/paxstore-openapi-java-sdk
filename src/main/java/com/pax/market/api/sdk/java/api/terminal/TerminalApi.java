@@ -169,19 +169,19 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
 
     public Result<TerminalDTO> getTerminal(Long terminalId) {
-       return getTerminal(terminalId,false,false,false, false);
+       return getTerminal(terminalId,false,false,false, false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList) {
-        return getTerminal(terminalId, includeDetailInfoList, false, false, false);
+        return getTerminal(terminalId, includeDetailInfoList, false, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks) {
-        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, false, false);
+        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware) {
-        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false);
+        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId,
@@ -189,6 +189,15 @@ public class TerminalApi extends BaseThirdPartySysApi {
                                            boolean includeInstalledApks,
                                            boolean includeInstalledFirmware,
                                            boolean includeMasterTerminal) {
+        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, includeMasterTerminal, false);
+    }
+
+    public Result<TerminalDTO> getTerminal(Long terminalId,
+                                           boolean includeDetailInfoList,
+                                           boolean includeInstalledApks,
+                                           boolean includeInstalledFirmware,
+                                           boolean includeMasterTerminal,
+                                           boolean includeGroupInfo) {
         logger.debug("terminalId = {}", terminalId);
         List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
         if (!validationErrs.isEmpty()) {
@@ -200,6 +209,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
         request.addRequestParam("includeInstalledFirmware", String.valueOf(includeInstalledFirmware));
         request.addRequestParam("includeMasterTerminal", String.valueOf(includeMasterTerminal));
+        request.addRequestParam("includeGroupInfo", String.valueOf(includeGroupInfo));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<>(terminalResponse);
     }
@@ -439,22 +449,26 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo) {
-        return getTerminalBySn(serialNo, false, false, false, false);
+        return getTerminalBySn(serialNo, false, false, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList) {
-        return getTerminalBySn(serialNo, includeDetailInfoList, false, false, false);
+        return getTerminalBySn(serialNo, includeDetailInfoList, false, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks) {
-        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, false, false);
+        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware) {
-        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false);
+        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal) {
+        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, includeMasterTerminal, false);
+    }
+
+    public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal, boolean includeGroupInfo) {
         logger.debug("serialNo= {}", serialNo);
         List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
         if (!validationErrs.isEmpty()) {
@@ -466,6 +480,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
         request.addRequestParam("includeInstalledFirmware", String.valueOf(includeInstalledFirmware));
         request.addRequestParam("includeMasterTerminal", String.valueOf(includeMasterTerminal));
+        request.addRequestParam("includeGroupInfo", String.valueOf(includeGroupInfo));
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<>(terminalResponse);

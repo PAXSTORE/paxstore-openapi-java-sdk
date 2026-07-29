@@ -118,6 +118,7 @@ Structure of class TerminalDTO
 |terminalDetail|TerminalDetailDTO| The terminal detail information |
 |terminalAccessoryList|List\<TerminalAccessoryDTO\>| The terminal accessory information list |
 |masterTerminalSerialNo|String| When the query terminal is an accessory device, return the master terminal serialNo (if any). <br/>Return only in getTerminal and getTerminalBySn |
+|groups|List\<TerminalGroupInfoDTO\>| Terminal group info list. <br/>Return only in getTerminal and getTerminalBySn when includeGroupInfo=true |
 
 Structure of class TerminalLocationDTO
 
@@ -192,6 +193,15 @@ Structure of class TerminalDeviceHistoryDTO
 | fileType      | String | The type of the file pushed by the accessory device          |
 | source        | String | The file source                                              |
 | remarks       | String | The remarks information                                      |
+
+Structure of class TerminalGroupInfoDTO
+
+_**tips: Only return this information in getTerminal or getTerminalBySn when includeGroupInfo=true**_
+
+| Property Name | Type   | Description       |
+|:--------------|:-------|:------------------|
+| groupId       | Long   | Group id          |
+| groupName     | String | Group name        |
 
 **Possible validation errors**
 
@@ -331,6 +341,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal, boolean includeGroupInfo);
 ```
 
 **Input parameter(s) description**
@@ -342,6 +353,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 |includeInstalledApks|Boolean|true|Whether to return the installed applications, example: false|
 |includeInstalledFirmware|Boolean|true|Whether to return the installed firmware, example: false|
 |includeMasterTerminal|Boolean|true|whether to return the master terminal serialNo, example: false|
+|includeGroupInfo|Boolean|true|Whether to return terminal group info list, example: false|
 
 **Sample codes**
 
@@ -357,6 +369,8 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,false, true);
 Result<TerminalDTO> result = terminalApi.getTerminal(1654906985381944L,false, false, true);
 //includeMasterTerminal
 Result<TerminalDTO> result = terminalApi.getTerminal(1687838810701873L,false, false, false, true);
+//includeGroupInfo
+Result<TerminalDTO> result = terminalApi.getTerminal(908627L,false, false, false, false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -744,6 +758,7 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetai
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal)
+public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal, boolean includeGroupInfo)
 ```
 
 **Input parameter(s) description**
@@ -755,6 +770,7 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetai
 | includeInstalledApks | Boolean |true| Whether to return the installed applications, example: false |
 | includeInstalledFirmware | Boolean |true| Whether to return the installed firmware, example: false |
 | includeMasterTerminal | Boolean |true| whether to return the master terminal serialNo, example: false |
+| includeGroupInfo | Boolean |true| Whether to return terminal group info list, example: false |
 
 **Sample codes**
 
@@ -770,6 +786,8 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",false,true)
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENT",false,false, true);
 //includeMasterTerminal
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENTACCESS",false,false, false, true);
+//includeGroupInfo
+Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",false,false, false, false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**

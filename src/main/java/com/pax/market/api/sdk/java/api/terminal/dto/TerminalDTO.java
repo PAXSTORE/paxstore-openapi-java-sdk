@@ -65,6 +65,8 @@ public class TerminalDTO implements Serializable{
 
 	private String masterTerminalSerialNo;
 
+	private List<TerminalGroupInfoDTO> groups;
+
 
 	public Long getId() {
 		return id;
@@ -226,6 +228,14 @@ public class TerminalDTO implements Serializable{
 		this.masterTerminalSerialNo = masterTerminalSerialNo;
 	}
 
+	public List<TerminalGroupInfoDTO> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<TerminalGroupInfoDTO> groups) {
+		this.groups = groups;
+	}
+
 	@Override
 	public String toString() {
 		return "TerminalDTO{" +
@@ -249,6 +259,7 @@ public class TerminalDTO implements Serializable{
 				", terminalDetail=" + terminalDetail +
 				", terminalAccessoryList=" + terminalAccessoryList +
 				", masterTerminalSerialNo='" + masterTerminalSerialNo + '\'' +
+				", groups=" + groups +
 				'}';
 	}
 }
