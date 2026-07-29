@@ -1,0 +1,125 @@
+name: Release to Maven Central
+run-name: Release ${{ inputs.releaseVersion }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        description: 'Release version (e.g. 10.2.1)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    env:
+      RELEASE_VERSION: ${{ inputs.releaseVersion }}
+      NEXT_SNAPSHOT: ''
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+          server-id: maven-central-portal
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # ✅ 计算下一个 SNAPSHOT
+      - name: Compute next snapshot version
+        id: versions
+        run: |
+            BASE=${{ env.RELEASE_VERSION }}
+            MAJOR=$(echo $BASE | cut -d. -f1)
+            MINOR=$(echo $BASE | cut -d. -f2)
+            PATCH=$(echo $BASE | cut -d. -f3)
+            NEXT_PATCH=$((PATCH + 1))
+            NEXT="${MAJOR}.${MINOR}.${NEXT_PATCH}-SNAPSHOT"
+            echo "nextSnapshot=$NEXT" >> $GITHUB_OUTPUT
+
+            - name: Set next snapshot version
+              if: steps.get_version.outputs.currentVersion != steps.versions.outputs.nextSnapshot
+              run: |
+                mvn -B versions:set \
+                  -DnewVersion=${{ steps.versions.outputs.nextSnapshot }} \
+                  -DgenerateBackupPoms=false
+                git add pom.xml
+                git commit -m "chore: prepare next development iteration ${{ steps.versions.outputs.nextSnapshot }}"
+                git push
+
+      # ✅ 获取当前 pom 版本
+      - name: Get current version
+        id: get_version
+        run: |
+          CURRENT=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "currentVersion=$CURRENT" >> $GITHUB_OUTPUT
+          echo "Current pom version: $CURRENT"
+
+      # ✅ 仅在需要时修改版本
+      - name: Set release version (idempotent)
+        if: steps.get_version.outputs.currentVersion != env.RELEASE_VERSION
+        run: |
+          mvn -B versions:set \
+            -DnewVersion=${{ env.RELEASE_VERSION }} \
+            -DgenerateBackupPoms=false
+
+      # ✅ 智能提交（无变化不提交）
+      - name: Commit release version
+        run: |
+          git add pom.xml
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: release ${{ env.RELEASE_VERSION }}"
+            git push
+          else
+            echo "pom.xml unchanged, skip commit"
+          fi
+
+      # ✅ 打 tag（已存在则跳过）
+      - name: Create Git tag
+        run: |
+          TAG="v${{ env.RELEASE_VERSION }}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists, skip creation"
+          else
+            git tag "$TAG"
+            git push origin "$TAG"
+          fi
+
+      # ✅ GPG
+      - name: Import GPG key
+        run: echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+
+      # ✅ 发布
+      - name: Publish to Maven Central
+        run: mvn --batch-mode -Prelease deploy -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}"
+        env:
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+
+      # ✅ Bump 下一 SNAPSHOT（幂等）
+      - name: Set next snapshot version
+        run: |
+          CURRENT=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          if [ "$CURRENT" != "${{ env.NEXT_SNAPSHOT }}" ]; then
+            mvn -B versions:set \
+              -DnewVersion=${{ env.NEXT_SNAPSHOT }} \
+              -DgenerateBackupPoms=false
+            git add pom.xml
+            git commit -m "chore: prepare next development iteration ${{ env.NEXT_SNAPSHOT }}"
+            git push
+          else
+            echo "Already at ${{ env.NEXT_SNAPSHOT }}, skip bump"
+          fi

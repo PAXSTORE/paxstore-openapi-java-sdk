@@ -130,7 +130,7 @@ public class TerminalRkiApi extends BaseThirdPartySysApi {
             return new Result<>(validationErrs);
         }
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
-        SdkRequest request = createSdkRequest(DELETE_TERMINAL_RKI_KEY_URL.replace("{terminalFirmwareId}", terminalRkiId.toString()));
+        SdkRequest request = createSdkRequest(DELETE_TERMINAL_RKI_KEY_URL.replace("{terminalRkiId}", terminalRkiId.toString()));
         request.setRequestMethod(SdkRequest.RequestMethod.DELETE);
         EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return new Result<>(emptyResponse);
