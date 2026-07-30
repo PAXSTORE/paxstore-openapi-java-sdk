@@ -48,7 +48,9 @@ jobs:
             PATCH=$(echo $BASE | cut -d. -f3)
             echo "PATCH=${PATCH}"
             NEXT_PATCH=$((PATCH + 1))
+            echo "NEXT_PATCH=${NEXT_PATCH}"
             NEXT="${MAJOR}.${MINOR}.${NEXT_PATCH}-SNAPSHOT"
+            echo "NEXT=${NEXT}"
             echo "nextSnapshot=$NEXT" >> $GITHUB_OUTPUT
 
             - name: Set next snapshot version
