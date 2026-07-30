@@ -46,6 +46,7 @@ jobs:
           MAJOR=$(echo $BASE | cut -d. -f1)
           MINOR=$(echo $BASE | cut -d. -f2)
           PATCH=$(echo $BASE | cut -d. -f3)
+          echo "PATCH=${patch}"
           NEXT_PATCH=$((PATCH + 1))
           echo "nextSnapshot=${MAJOR}.${MINOR}.${NEXT_PATCH}-SNAPSHOT" >> $GITHUB_ENV
 
