@@ -53,7 +53,7 @@ jobs:
           NEXT_PATCH=$((PATCH + 1))
           NEXT="${MAJOR}.${MINOR}.${NEXT_PATCH}-SNAPSHOT"
 
-          echo "nextSnapshot=$NEXT" >> $GITHUB_ENV
+          echo "nextSnapshot=$NEXT" >> $GITHUB_OUTPUT
           echo "Next snapshot version: $NEXT"
 
       # 5️⃣ 移除 -SNAPSHOT
@@ -95,8 +95,8 @@ jobs:
       - name: Set next snapshot version
         run: |
           mvn -B versions:set \
-            -DnewVersion=${{ env.NEXT_SNAPSHOT }} \
+            -DnewVersion=${{ steps.versions.outputs.nextSnapshot }} \
             -DgenerateBackupPoms=false
           git add pom.xml
-          git commit -m "chore: prepare next development iteration ${{ env.NEXT_SNAPSHOT }}"
+          git commit -m "chore: prepare next development iteration ${{ steps.versions.outputs.nextSnapshot }}"
           git push
