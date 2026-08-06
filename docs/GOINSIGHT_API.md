@@ -67,17 +67,19 @@ public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, Timestam
 public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, Integer pageNo, Integer pageSize)
 public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize)
 public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, List<GoInsightCustomFilter> customFilterList, Integer pageNo, Integer pageSize)
+public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, List<GoInsightCustomFilter> customFilterList, Boolean useNewFilter, Integer pageNo, Integer pageSize)
 ```
 
 **Input parameter(s) description**
 
-| Name| Type | Nullable| Description                                                                                                        |
-|:---- | :----|:----|:-------------------------------------------------------------------------------------------------------------------|
-|queryCode|String|false| search by GoInsight api query code                                                                                 |
-|rangeType|TimestampRangeType|true| you can choose the range of data results for search                                                                |
-|customFilterList|List<GoInsightCustomFilter>|true| you can add custom filter for search                                                                               |
-|pageNo|int|true| page number, value must >= 1                                                                                       |
-|pageSize|int|true| the record number per page, range is 1 to 100 for details data query, range is 1 to 1000 for statistics data query |
+| Name| Type | Nullable| Description                                                                                                            |
+|:---- | :----|:----|:-----------------------------------------------------------------------------------------------------------------------|
+|queryCode|String|false| search by GoInsight api query code                                                                                     |
+|rangeType|TimestampRangeType|true| you can choose the range of data results for search                                                                    |
+|customFilterList|List<GoInsightCustomFilter>|true| you can add custom filter for search                                                                                   |
+|useNewFilter|Boolean|true| Set to true for datasets created after 2025-01-12 (recommended)                                                        |
+|pageNo|int|true| page number, value must >= 1                                                                                           |
+|pageSize|int|true| the record number per page, range is 1 to 100 for details data query, range is 1 to 1000 for statistics data query     |
 
 Note: The pageNo param will be ignore when your query result set type is statistics chart.
 
