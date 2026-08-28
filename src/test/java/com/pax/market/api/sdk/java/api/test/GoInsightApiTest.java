@@ -66,7 +66,8 @@ public class GoInsightApiTest {
         resellers.setFilterValue("sub2_reseller1");
         customFilterList.add(terminalSNs);
         customFilterList.add(resellers);
-        Result<DataQueryResultDTO> result = goInsightApi.findDataFromInsight(queryCode, rangeType,customFilterList, 1,10);
+        Result<DataQueryResultDTO> result = goInsightApi.findDataFromInsight(queryCode, rangeType, customFilterList, false,
+                1,10);
         logger.debug("Result of search data from insight: {}",result.toString());
         Assert.assertTrue(result.getBusinessCode() == 0);
     }
