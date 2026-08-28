@@ -4291,7 +4291,7 @@ Structure of class EmptyResponse
 | 2067          | Application has been set as launcher application |             |
 
 
-### Search Terminal Tamper Alarm
+### Search Tampered Terminal
 
 Search terminal tamper alarm records by page.
 
