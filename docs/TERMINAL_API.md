@@ -4298,7 +4298,7 @@ Search terminal tamper alarm records by page.
 **API**
 
 ```
-public Result<TerminalAlarmDTO> searchTerminalTamperAlarm(int pageNo, int pageSize, String serialNo, String tid, String name)
+public Result<TerminalAlarmDTO> searchTamperedTerminal(int pageNo, int pageSize, String serialNo, String tid, String name)
 ```
 
 **Input parameter(s) description**
@@ -4315,7 +4315,7 @@ public Result<TerminalAlarmDTO> searchTerminalTamperAlarm(int pageNo, int pageSi
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<TerminalAlarmDTO> result = terminalApi.searchTerminalTamperAlarm(1, 10, null, null, null);
+Result<TerminalAlarmDTO> result = terminalApi.searchTamperedTerminal(1, 10, null, null, null);
 ```
 
 **Client side validation failed sample result(JSON formatted)**

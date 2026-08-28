@@ -2,7 +2,7 @@
 
 ## 11.1.0
 ### New Feature
-* Add TerminalApi - `searchTerminalTamperAlarm` API
+* Add TerminalApi - `searchTamperedTerminal` API
 * Add parameter query `includeGroupInfo` and return `groups` in TerminalApi - `getTerminal`, `getTerminalBySn` API
 
 

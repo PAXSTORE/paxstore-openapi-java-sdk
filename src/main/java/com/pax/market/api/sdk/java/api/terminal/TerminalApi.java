@@ -888,7 +888,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return new Result<>(emptyResponse);
     }
 
-    public Result<TerminalAlarmDTO> searchTerminalTamperAlarm(int pageNo, int pageSize, String serialNo, String tid, String name) {
+    public Result<TerminalAlarmDTO> searchTamperedTerminal(int pageNo, int pageSize, String serialNo, String tid, String name) {
         ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
         PageRequestDTO page = new PageRequestDTO();
         page.setPageNo(pageNo);
