@@ -606,12 +606,12 @@ public Result<String> createResellerEmmPolicy(ResellerEmmPolicyCreateRequest res
 Structure of class ResellerEmmPolicyCreateRequest
 
 
-| Property Name    | Type                          | Nullable | Description                                                                                                                                                 |
-| :----------------- | :------------------------------ | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| resellerName     | String                        | false    | The reseller of EMM device belongs to. Max length is 64                                                                                                     |
-| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, the contentInfo value is required |
-| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                              |
-| inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                  |
+| Property Name    | Type                          | Nullable | Description                                                                                                                                                          |
+| :----------------- | :------------------------------ | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| resellerName     | String                        | false    | The reseller of EMM device belongs to. Max length is 64                                                                                                              |
+| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, all of the contentInfo values are required |
+| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                                       |
+| inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                           |
 
 Structure of class PolicyUpdatedContentDTO
 
@@ -1550,13 +1550,13 @@ public Result<String> createMerchantEmmPolicy(MerchantEmmPolicyCreateRequest mer
 Structure of class MerchantEmmPolicyCreateRequest
 
 
-| Property Name    | Type                          | Nullable | Description                                                                                                                                                 |
-| :----------------- | :------------------------------ | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| resellerName     | String                        | false    | The reseller of EMM device belongs to. Max length is 64                                                                                                     |
-| merchantName     | String                        | false    | The merchant of EMM device belongs to. Max length is 128                                                                                                    |
-| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, the contentInfo value is required |
-| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                              |
-| inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                  |
+| Property Name    | Type                          | Nullable | Description                                                                                                                                                          |
+| :----------------- | :------------------------------ | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| resellerName     | String                        | false    | The reseller of EMM device belongs to. Max length is 64                                                                                                              |
+| merchantName     | String                        | false    | The merchant of EMM device belongs to. Max length is 128                                                                                                             |
+| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, all of the contentInfo values are required |
+| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                                       |
+| inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                           |
 
 Structure of class PolicyUpdatedContentDTO
 
@@ -2498,12 +2498,12 @@ public Result<String> createDeviceEmmPolicy(DeviceEmmPolicyCreateRequest deviceE
 Structure of class DeviceEmmPolicyCreateRequest
 
 
-| Property Name    | Type                          | Nullable | Description                                                                                                                                                 |
-| :----------------- | :------------------------------ | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| serialNo         | String                        | false    | The serialNo of EMM device. Max length is 16                                                                                                                |
-| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, the contentInfo value is required |
-| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                              |
-| inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                  |
+| Property Name    | Type                          | Nullable | Description                                                                                                                                                          |
+| :----------------- | :------------------------------ | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| serialNo         | String                        | false    | The serialNo of EMM device. Max length is 16                                                                                                                         |
+| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, all of the contentInfo values are required |
+| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                                       |
+| inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                           |
 
 Structure of class PolicyUpdatedContentDTO
 
