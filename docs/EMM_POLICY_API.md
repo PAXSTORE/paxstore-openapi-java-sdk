@@ -588,7 +588,7 @@ Structure of class LockedPolicyDTO
 
 ### Create reseller EMM policy
 
-Create reseller EMM policy API allow the thirdparty system create reseller EMM policy remotely.
+Create or update reseller EMM policy API allow the thirdparty system create reseller EMM policy remotely.
 
 **API**
 
@@ -1532,7 +1532,7 @@ Structure of class LockedPolicyDTO
 
 ### Create merchant EMM policy
 
-Create merchant EMM policy API allow the thirdparty system create merchant EMM policy remotely.
+Create or update merchant EMM policy API allow the thirdparty system create merchant EMM policy remotely.
 
 **API**
 
@@ -2480,7 +2480,7 @@ Structure of class LockedPolicyDTO
 
 ### Create device EMM policy
 
-Create device EMM policy API allow the thirdparty system create device EMM policy remotely.
+Create or update device EMM policy API allow the thirdparty system create device EMM policy remotely.
 
 **API**
 
