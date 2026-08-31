@@ -4,7 +4,7 @@
 ### New Feature
 * Add TerminalApi - `searchTamperedTerminal` API
 * Add parameter query `includeGroupInfo` and return `groups` in TerminalApi - `getTerminal`, `getTerminalBySn` API
-
+* EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy`, Optimize parameter description
 
 ## 11.0.1
 ### Bug Fix
