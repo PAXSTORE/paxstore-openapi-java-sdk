@@ -1,6 +1,6 @@
 ## EMM Policy APIs
 
-EMM Policy APIs allow thirdparty system get reseller EMM policy, create reseller EMM policy, get merchant EMM policy, create merchant EMM policy.
+AirEMM Policy APIs allow thirdparty system get reseller AirEMM policy, create/update reseller AirEMM policy, get merchant AirEMM policy, create/update merchant AirEMM policy, get device AirEMM policy, create/update device AirEMM policy.
 
 All the EMM policy APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmPolicy.EmmPolicyApi*.
 
@@ -592,7 +592,7 @@ Structure of class LockedPolicyDTO
 
 ### Create reseller EMM policy
 
-Create or update reseller EMM policy API allow the thirdparty system create reseller EMM policy remotely.
+Create reseller AirEMM policy API allow the thirdparty system create/update reseller AirEMM policy remotely.
 
 **API**
 
@@ -1542,7 +1542,7 @@ Structure of class LockedPolicyDTO
 
 ### Create merchant EMM policy
 
-Create or update merchant EMM policy API allow the thirdparty system create merchant EMM policy remotely.
+Create merchant AirEMM policy API allow the thirdparty system create/update merchant AirEMM policy remotely.
 
 **API**
 
@@ -2496,7 +2496,7 @@ Structure of class LockedPolicyDTO
 
 ### Create device EMM policy
 
-Create or update device EMM policy API allow the thirdparty system create device EMM policy remotely.
+Create device AirEMM policy API allow the thirdparty system create/update device AirEMM policy remotely.
 
 **API**
 
