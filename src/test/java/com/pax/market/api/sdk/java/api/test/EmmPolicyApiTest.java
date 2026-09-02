@@ -64,11 +64,13 @@ public class EmmPolicyApiTest {
         policyUpdatedContentDTO.setEnableRemoteControl(true);
         policyUpdatedContentDTO.setEnableUnattendedAccess(true);
         policyUpdatedContentDTO.setUnattendedDeviceResponseTime(30);
+        policyUpdatedContentDTO.setCredentialProviderPolicyDefault("CREDENTIAL_PROVIDER_DEFAULT_DISALLOWED_EXCEPT_SYSTEM");
 
         PolicyUpdatedContentDTO.ApplicationPolicy applicationPolicy = new PolicyUpdatedContentDTO.ApplicationPolicy();
         applicationPolicy.setPackageName("com.zolon.signrotatetest.com.zolon.signrotatetest");
         applicationPolicy.setAutoUpdateMode("AUTO_UPDATE_DEFAULT");
         applicationPolicy.setDefaultPermissionPolicy("PROMPT");
+        applicationPolicy.setCredentialProviderPolicy("CREDENTIAL_PROVIDER_ALLOWED");
         applicationPolicy.setInstallPriority("DEFAULT");
         applicationPolicy.setAccessibleTrackId(1681160455323739L);
         applicationPolicy.setInstallType("AVAILABLE");
@@ -297,6 +299,7 @@ public class EmmPolicyApiTest {
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
         policyUpdatedContentDTO.setHideEnterpriseName(Boolean.TRUE);
+        policyUpdatedContentDTO.setCredentialProviderPolicyDefault("CREDENTIAL_PROVIDER_DEFAULT_DISALLOWED_EXCEPT_SYSTEM");
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
 
@@ -307,6 +310,7 @@ public class EmmPolicyApiTest {
         applicationPolicy.setPackageName("com.zolon.signrotatetest.com.zolon.signrotatetest");
         applicationPolicy.setAutoUpdateMode("AUTO_UPDATE_DEFAULT");
         applicationPolicy.setDefaultPermissionPolicy("PROMPT");
+        applicationPolicy.setCredentialProviderPolicy("CREDENTIAL_PROVIDER_ALLOWED");
         applicationPolicy.setInstallPriority("DEFAULT");
         applicationPolicy.setAccessibleTrackId(1681160455323739L);
         applicationPolicy.setInstallType("AVAILABLE");
@@ -511,6 +515,7 @@ public class EmmPolicyApiTest {
         policyUpdatedContentDTO.setAdjustVolumeDisabled(Boolean.TRUE);
         policyUpdatedContentDTO.setEnableRemoteControl(Boolean.TRUE);
         policyUpdatedContentDTO.setHideEnterpriseName(Boolean.TRUE);
+        policyUpdatedContentDTO.setCredentialProviderPolicyDefault("CREDENTIAL_PROVIDER_DEFAULT_DISALLOWED_EXCEPT_SYSTEM");
         request.setContentInfo(policyUpdatedContentDTO);
         request.setInheritFlag(Boolean.FALSE);
 
@@ -518,6 +523,7 @@ public class EmmPolicyApiTest {
         applicationPolicy.setPackageName("com.zolon.signrotatetest.com.zolon.signrotatetest");
         applicationPolicy.setAutoUpdateMode("AUTO_UPDATE_DEFAULT");
         applicationPolicy.setDefaultPermissionPolicy("PROMPT");
+        applicationPolicy.setCredentialProviderPolicy("CREDENTIAL_PROVIDER_ALLOWED");
         applicationPolicy.setInstallPriority("DEFAULT");
         applicationPolicy.setAccessibleTrackId(1681160455323739L);
         applicationPolicy.setInstallType("AVAILABLE");
