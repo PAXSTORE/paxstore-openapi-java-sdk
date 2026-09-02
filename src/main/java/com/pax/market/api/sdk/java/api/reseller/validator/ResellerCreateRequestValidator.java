@@ -44,9 +44,9 @@ public class ResellerCreateRequestValidator {
             }
 
             validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getName(), "name", Constants.MAX_64));
-            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getCountry(), "country", Constants.MAX_64));
-            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getContact(), "concat", Constants.MAX_64));
-            validationErrs.addAll(Validators.validateStrNullAndMax(validateTarget.getPhone(), "phone", Constants.MAX_32));
+            validationErrs.addAll(Validators.validateStrMax(validateTarget.getCountry(), "country", Constants.MAX_64));
+            validationErrs.addAll(Validators.validateStrMax(validateTarget.getContact(), "concat", Constants.MAX_64));
+            validationErrs.addAll(Validators.validateStrMax(validateTarget.getPhone(), "phone", Constants.MAX_32));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getPostcode(), "postcode", Constants.MAX_16));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getAddress(), "address", Constants.MAX_255));
             validationErrs.addAll(Validators.validateStrMax(validateTarget.getCompany(), "company", Constants.MAX_255));

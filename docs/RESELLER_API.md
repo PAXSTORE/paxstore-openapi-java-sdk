@@ -235,9 +235,9 @@ Structure of class ResellerCreateRequest
 |:---|:---|:---|:---|
 |name|String|false|Name of reseller, max length is 64.|
 |email|String|false|Email of reseller, max length is 255.|
-|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
-|contact|String|false|contact of reseller, max length is 64.|
-|phone|String|false|Phone number of reseller, max length is 32. Sample value 400-86554555.|
+|country|String|true|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
+|contact|String|true|contact of reseller, max length is 64.|
+|phone|String|true|Phone number of reseller, max length is 32. Sample value 400-86554555.|
 |postcode|String|true|Post code, max length is 32. Sample value 510250.|
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
@@ -267,7 +267,7 @@ Result<ResellerDTO> result = resellerApi.createReseller(request);
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["email:may not be empty", "country:may not be empty"]
+	"validationErrors": ["email:may not be empty", "name:may not be empty"]
 }
 ```
 
@@ -309,15 +309,12 @@ Type of data is ResellerDTO, same as the API get reseller.
 **Possible client validation errors**
 
 > <font color="red">Parameter resellerCreateRequest cannot be null!</font><br/>
-> <font color="red">contact:may not be empty</font><br/>
 > <font color="red">email:may not be empty</font><br/>
 > <font color="red">name:may not be empty</font><br/>
-> <font color="red">country:may not be empty</font><br/>
 > <font color="red">name:length must be between 0 and 64</font><br/>
 > <font color="red">email:length must be between 0 and 255</font><br/>
 > <font color="red">country:length must be between 0 and 64</font><br/>
 > <font color="red">contact:length must be between 0 and 64</font><br/>
-> <font color="red">phone:may not be empty</font><br/>
 > <font color="red">phone:length must be between 0 and 32</font><br/>
 > <font color="red">postcode:length must be between 0 and 16</font><br/>
 > <font color="red">address:length must be between 0 and 255</font><br/>
@@ -335,10 +332,7 @@ Type of data is ResellerDTO, same as the API get reseller.
 |1782|At most 10 level resellers are supported|&nbsp;|
 |1760|Reseller name already exists|&nbsp;|
 |1762|Reseller name is mandatory|&nbsp;|
-|1763|Reseller contact is mandatory|&nbsp;|
-|1764|Reseller phone is mandatory|&nbsp;|
 |1765|Reseller email is mandatory|&nbsp;|
-|1606|Country is mandatory|&nbsp;|
 |1767|Reseller name is too long|&nbsp;|
 |1768|Reseller contact is too long|&nbsp;|
 |1769|Reseller phone is too long|&nbsp;|
@@ -372,9 +366,9 @@ Structure of class ResellerUpdateRequest
 |:---|:---|:---|:---|
 |name|String|false|Name of reseller, max length is 64.|
 |email|String|true|Email of reseller, max length is 255. Only the pending reseller can update the email. For other reseller change email please call replaceResellerEmail API. If email is empty API won't update the email.|
-|country|String|false|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
-|contact|String|false|contact of reseller, max length is 64.|
-|phone|String|false|Phone number of reseller, max length is 32. Sample value 400-86554555.|
+|country|String|true|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
+|contact|String|true|contact of reseller, max length is 64.|
+|phone|String|true|Phone number of reseller, max length is 32. Sample value 400-86554555.|
 |postcode|String|true|Post code, max length is 32. Sample value 510250.|
 |address|String|true|Address of reseller, max length is 255.|
 |company|String|true|Company of reseller, max length is 255.|
@@ -402,7 +396,7 @@ Result<ResellerDTO> result = resellerApi.updateReseller(17850L, request);
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["country:may not be empty", "contact:may not be empty", "name:may not be empty"]
+	"validationErrors": ["name:may not be empty"]
 }
 ```
 
@@ -447,14 +441,11 @@ Type of data is ResellerDTO, same as the API get reseller.
 
 > <font color="red">Parameter resellerId cannot be null and cannot be less than 1!</font><br/>
 > <font color="red">Parameter resellerUpdateRequest cannot be null!</font><br/>
-> <font color="red">contact:may not be empty</font><br/>
 > <font color="red">name:may not be empty</font><br/>
-> <font color="red">country:may not be empty</font><br/>
 > <font color="red">name:length must be between 0 and 64</font><br/>
 > <font color="red">email:length must be between 0 and 255</font><br/>
 > <font color="red">country:length must be between 0 and 64</font><br/>
 > <font color="red">contact:length must be between 0 and 64</font><br/>
-> <font color="red">phone:may not be empty</font><br/>
 > <font color="red">phone:length must be between 0 and 32</font><br/>
 > <font color="red">postcode:length must be between 0 and 16</font><br/>
 > <font color="red">address:length must be between 0 and 255</font><br/>
@@ -470,9 +461,6 @@ Type of data is ResellerDTO, same as the API get reseller.
 |:---|:---|:---|
 |1759|Reseller doesn't exist|&nbsp;|
 |1762|Reseller name is mandatory|&nbsp;|
-|1764|Reseller phone is mandatory|&nbsp;|
-|1606|Country is mandatory|&nbsp;|
-|1763|Reseller contact is mandatory|&nbsp;|
 |1767|Reseller name is too long|&nbsp;|
 |1769|Reseller phone is too long|&nbsp;|
 |1768|Reseller contact is too long|&nbsp;|
