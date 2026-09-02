@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PolicyUpdatedContentDTO implements Serializable {
 
-    private static final long serialVersionUID = 1234567890123456789L;
+    private static final long serialVersionUID = -4703274048422303131L;
 
     private Boolean adjustVolumeDisabled;
 
@@ -27,6 +27,8 @@ public class PolicyUpdatedContentDTO implements Serializable {
     private Boolean dataRoamingDisabled;
 
     private DeviceRadioState deviceRadioState;
+
+    private String credentialProviderPolicyDefault;
 
     private String encryptionPolicy;
 
@@ -198,6 +200,14 @@ public class PolicyUpdatedContentDTO implements Serializable {
 
     public void setDeviceRadioState(DeviceRadioState deviceRadioState) {
         this.deviceRadioState = deviceRadioState;
+    }
+
+    public String getCredentialProviderPolicyDefault() {
+        return credentialProviderPolicyDefault;
+    }
+
+    public void setCredentialProviderPolicyDefault(String credentialProviderPolicyDefault) {
+        this.credentialProviderPolicyDefault = credentialProviderPolicyDefault;
     }
 
     public String getEncryptionPolicy() {
@@ -581,6 +591,7 @@ public class PolicyUpdatedContentDTO implements Serializable {
                 ", cellBroadcastsConfigDisabled=" + cellBroadcastsConfigDisabled +
                 ", dataRoamingDisabled=" + dataRoamingDisabled +
                 ", deviceRadioState=" + deviceRadioState +
+                ", credentialProviderPolicyDefault='" + credentialProviderPolicyDefault + '\'' +
                 ", encryptionPolicy='" + encryptionPolicy + '\'' +
                 ", factoryResetDisabled=" + factoryResetDisabled +
                 ", funDisabled=" + funDisabled +
@@ -1752,13 +1763,15 @@ public class PolicyUpdatedContentDTO implements Serializable {
 
     public static class ApplicationPolicy implements Serializable {
 
-        private static final long serialVersionUID = 2578807097334044142L;
+        private static final long serialVersionUID = -4400619118789519601L;
 
         private String packageName;
 
         private String autoUpdateMode;
 
         private String defaultPermissionPolicy;
+
+        private String credentialProviderPolicy;
 
         private String installPriority;
 
@@ -1786,6 +1799,14 @@ public class PolicyUpdatedContentDTO implements Serializable {
 
         public String getDefaultPermissionPolicy() {
             return defaultPermissionPolicy;
+        }
+
+        public String getCredentialProviderPolicy() {
+            return credentialProviderPolicy;
+        }
+
+        public void setCredentialProviderPolicy(String credentialProviderPolicy) {
+            this.credentialProviderPolicy = credentialProviderPolicy;
         }
 
         public void setDefaultPermissionPolicy(String defaultPermissionPolicy) {
@@ -1830,6 +1851,7 @@ public class PolicyUpdatedContentDTO implements Serializable {
                     "packageName='" + packageName + '\'' +
                     ", autoUpdateMode='" + autoUpdateMode + '\'' +
                     ", defaultPermissionPolicy='" + defaultPermissionPolicy + '\'' +
+                    ", credentialProviderPolicy='" + credentialProviderPolicy + '\'' +
                     ", installPriority='" + installPriority + '\'' +
                     ", accessibleTrackId=" + accessibleTrackId +
                     ", installType='" + installType + '\'' +
