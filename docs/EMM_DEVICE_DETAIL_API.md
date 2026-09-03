@@ -1,8 +1,8 @@
-## EMM Device Detail APIs
+## AirEMM Device Detail APIs
 
-EMM Device Detail APIs allow thirdparty system get EMM device dashboard detail, get EMM device dashboard monitor, search EMM device installed apps, get EMM device location.
+AirEMM Device Detail APIs allow thirdparty system get AirEMM device dashboard detail, get AirEMM device dashboard monitor, search AirEMM device installed apps, get AirEMM device location.
 
-All the EMM device detail APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmDeviceDetail.EmmDeviceDetailApi*.
+All the AirEMM device detail APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmDeviceDetail.EmmDeviceDetailApi*.
 
 **Constructors of EmmDeviceDetailAPI**
 
@@ -19,9 +19,9 @@ Constructor parameters description
 | apiKey    | String | the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights |
 | apiSecret | String | apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights               |
 
-### Get EMM device dashboard detail
+### Get AirEMM device dashboard detail
 
-The get EMM device dashboard detail API allows thirdparty system get EMM device dashboard detail.
+The get AirEMM device dashboard detail API allows thirdparty system get AirEMM device dashboard detail.
 
 **API**
 
@@ -34,7 +34,7 @@ public Result<EmmDeviceDashboardDetailDTO> getEmmDeviceDashboardDetail(Long devi
 
 | Name     | Type | Nullable | Description          |
 | :--------- | :----- | :--------- | :--------------------- |
-| deviceId | Long | false    | The id of EMM device |
+| deviceId | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -88,10 +88,10 @@ The type in dataSet is EmmDeviceDashboardDetailDTO. The structure like below.
 
 | Property Name | Type   | Description                                  |
 | :-------------- | :------- | :--------------------------------------------- |
-| terminalId    | Long   | The id of EMM device                         |
-| key           | String | The key of EMM device dashboard detail       |
-| value         | String | The value of EMM device dashboard detail     |
-| syncDate      | Date   | The sync date of EMM device dashboard detail |
+| terminalId    | Long   | The id of AirEMM device                         |
+| key           | String | The key of AirEMM device dashboard detail       |
+| value         | String | The value of AirEMM device dashboard detail     |
+| syncDate      | Date   | The sync date of AirEMM device dashboard detail |
 
 **Possible client validation errors**
 
@@ -103,13 +103,13 @@ The type in dataSet is EmmDeviceDashboardDetailDTO. The structure like below.
 | Business Code | Message                                    | Description |
 | :-------------- | :------------------------------------------- | :------------ |
 | 61617         | Device not found                           |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61655         | EMM for Android not distributed            |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61655         | AirEMM for Android not distributed            |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Get EMM device dashboard monitor
+### Get AirEMM device dashboard monitor
 
-The get EMM device dashboard monitor API allows thirdparty system get EMM device dashboard monitor.
+The get AirEMM device dashboard monitor API allows thirdparty system get AirEMM device dashboard monitor.
 
 **API**
 
@@ -122,7 +122,7 @@ public Result<EmmDeviceDashboardMonitorDTO> getEmmDeviceDashboardMonitor(Long de
 
 | Name     | Type | Nullable | Description          |
 | :--------- | :----- | :--------- | :--------------------- |
-| deviceId | Long | false    | The id of EMM device |
+| deviceId | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -169,11 +169,11 @@ The type in data is EmmDeviceDashboardMonitorDTO. The structure like below.
 
 | Property Name | Type  | Description                                       |
 | :-------------- | :------ | :-------------------------------------------------- |
-| terminalId    | Long  | The id of EMM device                              |
-| battery       | Float | The battery of EMM device dashboard monitor       |
-| ramUsed       | Long  | The ram usage of EMM device dashboard monitor     |
-| storageUsed   | Long  | The storage usage of EMM device dashboard monitor |
-| syncDate      | Date  | The sync date of EMM device dashboard monitor     |
+| terminalId    | Long  | The id of AirEMM device                              |
+| battery       | Float | The battery of AirEMM device dashboard monitor       |
+| ramUsed       | Long  | The ram usage of AirEMM device dashboard monitor     |
+| storageUsed   | Long  | The storage usage of AirEMM device dashboard monitor |
+| syncDate      | Date  | The sync date of AirEMM device dashboard monitor     |
 
 **Possible client validation errors**
 
@@ -185,13 +185,13 @@ The type in data is EmmDeviceDashboardMonitorDTO. The structure like below.
 | Business Code | Message                                    | Description |
 | :-------------- | :------------------------------------------- | :------------ |
 | 61617         | Device not found                           |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61655         | EMM for Android not distributed            |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61655         | AirEMM for Android not distributed            |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Search EMM device installed app
+### Search AirEMM device installed app
 
-The EMM search device installed apps API allows thirdparty system search EMM device installed apps.
+The AirEMM search device installed apps API allows thirdparty system search AirEMM device installed apps.
 
 **API**
 
@@ -207,7 +207,7 @@ Result<EmmDeviceInstalledAppDTO> searchDeviceInstalledApp(int pageNo, int pageSi
 | pageNo   | int                          | false    | page number, value must >=1                                                                                                                                                                                                                                                                                                                                                                                                         |
 | pageSize | int                          | false    | the record number per page, range is 1 to 100                                                                                                                                                                                                                                                                                                                                                                                       |
 | orderBy  | EmmDeviceInstalledAppOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by install time descend. The value of this parameter can be one of EmmDeviceInstalledAppOrderBy.AppName_desc, EmmDeviceInstalledAppOrderBy.AppName_asc, EmmDeviceInstalledAppOrderBy.AppSize_desc, EmmDeviceInstalledAppOrderBy.AppSize_asc, EmmDeviceInstalledAppOrderBy.AppInstallTime_desc, EmmDeviceInstalledAppOrderBy.AppInstallTime_asc |
-| deviceId | Long                         | false    | The id of EMM device                                                                                                                                                                                                                                                                                                                                                                                                                |
+| deviceId | Long                         | false    | The id of AirEMM device                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 **Sample codes**
 
@@ -269,7 +269,7 @@ The type in dataSet is EmmDeviceInstalledAppDTO. And the structure like below.
 | Property Name     | Type    | Description                               |
 | :------------------ | :-------- | :------------------------------------------ |
 | id                | Long    | The id of installation app                |
-| terminalId        | Long    | The EMM device id of installation app     |
+| terminalId        | Long    | The AirEMM device id of installation app     |
 | name              | String  | The name of installation app              |
 | packageName       | String  | The package name of installation app      |
 | version           | String  | The version of installation app           |
@@ -293,13 +293,13 @@ The type in dataSet is EmmDeviceInstalledAppDTO. And the structure like below.
 | Business Code | Message                                    | Description |
 | :-------------- | :------------------------------------------- | :------------ |
 | 61617         | Device not found                           |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61655         | EMM for Android not distributed            |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61655         | AirEMM for Android not distributed            |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Get EMM device location
+### Get AirEMM device location
 
-The get EMM device location API allows thirdparty system get EMM device location.
+The get AirEMM device location API allows thirdparty system get AirEMM device location.
 
 **API**
 
@@ -312,7 +312,7 @@ public Result<EmmDeviceLocationDTO> getEmmDeviceLocation(Long deviceId)
 
 | Name     | Type | Nullable | Description          |
 | :--------- | :----- | :--------- | :--------------------- |
-| deviceId | Long | false    | The id of EMM device |
+| deviceId | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -358,7 +358,7 @@ The type in data is EmmDeviceLocationDTO. The structure like below.
 
 | Property Name | Type   | Description                               |
 | :-------------- | :------- | :------------------------------------------ |
-| terminalId    | Long   | The id of EMM device                      |
+| terminalId    | Long   | The id of AirEMM device                      |
 | lat           | Double | The latitude of the device location       |
 | lng           | Double | The longitude of the device location      |
 | updatedDate   | Date   | The timestamp of the last location update |
@@ -373,6 +373,6 @@ The type in data is EmmDeviceLocationDTO. The structure like below.
 | Business Code | Message                                    | Description |
 | :-------------- | :------------------------------------------- | :------------ |
 | 61617         | Device not found                           |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61655         | EMM for Android not distributed            |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61655         | AirEMM for Android not distributed            |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
