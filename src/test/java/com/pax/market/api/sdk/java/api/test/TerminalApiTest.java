@@ -18,6 +18,7 @@ import com.pax.market.api.sdk.java.api.terminal.dto.TerminalLogRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.*;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalSnGroupRequest;
+import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -305,9 +306,9 @@ public class TerminalApiTest {
 		Assert.assertTrue(result.getBusinessCode() == 0);
 	}
 
-	private final String serialNo = "TESTBYSN";
-	private final Long terminalId = 1620067374596136L;
-	private final String modelName = "E500";
+	private final String serialNo = "TESTCLIENT";
+	private final Long terminalId = 1654906985381944L;
+	private final String modelName = "A970";
 
 	@Test
 	public void testTerminalBySn() {
@@ -580,5 +581,35 @@ public class TerminalApiTest {
         Result<TerminalAlarmDTO> result = terminalApi.searchTamperedTerminal(1, 10, null, null, null);
         logger.debug("Result of search terminal tamper alarm: {}", result.toString());
         Assert.assertEquals(0, result.getBusinessCode());
+    }
+
+    @Test
+    public void testSetTerminalGeoFenceBySn_validationFailure() {
+        //client side validation failure happens before any network call, businessCode must be -1
+        Result<String> result = terminalApi.setTerminalGeoFenceBySn(null, null);
+        logger.debug("Result of set terminal geofence by sn with empty params: {}", result.toString());
+        Assert.assertEquals(-1, result.getBusinessCode());
+        Assert.assertNotNull(result.getValidationErrors());
+    }
+
+    @Test
+    public void testSetTerminalGeoFence_missingTemplateName() {
+        //missing templateName is rejected by client side validation before any network call
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+        Result<String> result = terminalApi.setTerminalGeoFence(terminalId, request);
+        logger.debug("Result of set terminal geofence with missing templateName: {}", result.toString());
+        Assert.assertEquals(-1, result.getBusinessCode());
+        Assert.assertTrue(result.getValidationErrors().stream().anyMatch(e -> e.contains("templateName")));
+    }
+
+    @Test
+    public void testSetTerminalGeoFenceSuccess() {
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setTemplateName("123");
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CustomizeCoordinatePoint);
+		Result<String> result = terminalApi.setTerminalGeoFence(terminalId, request);
+		logger.debug("Result of set terminal geofence: {}", result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
     }
 }
