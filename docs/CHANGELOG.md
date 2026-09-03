@@ -5,6 +5,7 @@
 * Add TerminalApi - `searchTamperedTerminal` API
 * Add parameter query `includeGroupInfo` and return `groups` in TerminalApi - `getTerminal`, `getTerminalBySn` API
 * EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy`, Optimize parameter description
+* Add TerminalApi - `setTerminalGeoFence`, `setTerminalGeoFenceBySn` API to set terminal security geofence according to a geofence template
 
 ### Improvement
 * Make fields `contact`, `country` and `phone` not mandatory in ResellerApi - `createReseller`, `updateReseller` API

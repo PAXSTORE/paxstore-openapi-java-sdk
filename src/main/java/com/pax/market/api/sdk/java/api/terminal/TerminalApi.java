@@ -112,6 +112,9 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN = "/v1/3rdsys/terminal/launcher";
     protected static final String SEARCH_TERMINAL_TAMPER_URL = "/v1/3rdsys/terminals/tamper";
 
+    protected static final String SET_TERMINAL_GEOFENCE_BY_ID = "/v1/3rdsys/terminals/{terminalId}/safe-range";
+    protected static final String SET_TERMINAL_GEOFENCE_BY_SN = "/v1/3rdsys/terminal/safe-range";
+
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
         super(baseUrl, apiKey, apiSecret);
@@ -912,6 +915,68 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
 
+    /**
+     * Set a security geofence for a terminal according to a geofence template(by terminal id).
+     *
+     * @param terminalId the id of the terminal
+     * @param terminalGeoFenceRequest the set geofence request which contains the template name and geofence type
+     * @return Result&lt;String&gt; empty data means set geofence successfully
+     */
+    public Result<String> setTerminalGeoFence(Long terminalId, TerminalGeoFenceRequest terminalGeoFenceRequest) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
+        validationErrs.addAll(validateGeoFenceRequest(terminalGeoFenceRequest));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SET_TERMINAL_GEOFENCE_BY_ID.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(terminalGeoFenceRequest, TerminalGeoFenceRequest.class));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    /**
+     * Set a security geofence for a terminal according to a geofence template(by serial number).
+     *
+     * @param serialNo the serial number of the terminal
+     * @param terminalGeoFenceRequest the set geofence request which contains the template name and geofence type
+     * @return Result&lt;String&gt; empty data means set geofence successfully
+     */
+    public Result<String> setTerminalGeoFenceBySn(String serialNo, TerminalGeoFenceRequest terminalGeoFenceRequest) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(validateGeoFenceRequest(terminalGeoFenceRequest));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SET_TERMINAL_GEOFENCE_BY_SN);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.setRequestBody(new Gson().toJson(terminalGeoFenceRequest, TerminalGeoFenceRequest.class));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    private List<String> validateGeoFenceRequest(TerminalGeoFenceRequest terminalGeoFenceRequest) {
+        List<String> validationErrs = new ArrayList<>();
+        if (terminalGeoFenceRequest == null) {
+            validationErrs.add(getMessage("parameter.not.null", "terminalGeoFenceRequest"));
+            return validationErrs;
+        }
+        if (StringUtils.isEmpty(terminalGeoFenceRequest.getTemplateName())) {
+            validationErrs.add(getMessage("parameter.not.empty", "templateName"));
+        }
+        if (StringUtils.isEmpty(terminalGeoFenceRequest.getGeofenceType())) {
+            validationErrs.add(getMessage("parameter.not.empty", "geofenceType"));
+        }
+        return validationErrs;
+    }
+
     public enum TerminalStatus {
         Active("A"),
         Inactive("P"),
@@ -955,6 +1020,25 @@ public class TerminalApi extends BaseThirdPartySysApi {
             this.val = type;
         }
         public String val(){
+            return this.val;
+        }
+    }
+
+    /**
+     * The geofence type used when setting a security geofence according to a template.
+     */
+    public enum TerminalGeoFenceType {
+        CenterPoint("P"),
+        CustomizeCoordinatePoint("C"),
+        BoundariesGeofencing("B");
+
+        private final String val;
+
+        TerminalGeoFenceType(String type) {
+            this.val = type;
+        }
+
+        public String val() {
             return this.val;
         }
     }

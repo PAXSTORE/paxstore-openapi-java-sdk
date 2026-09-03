@@ -4368,3 +4368,135 @@ Structure of class TerminalAlarmDTO
 > <font color=red>pageSize:must be greater than or equal to 1</font>   
 > <font color=red>pageNo:must be greater than or equal to 1</font>   
 > <font color=red>pageSize:must be less than or equal to 100</font>
+
+### Set Terminal Security GeoFence (by terminal id)
+
+Set a security geofence for a terminal according to a geofence template, by terminal id.
+
+**API**
+
+```
+public Result<String> setTerminalGeoFence(Long terminalId, TerminalGeoFenceRequest terminalGeoFenceRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name           | Type                   | Nullable | Description                                      |
+| :----------------------- | :--------------------- | :------- | :----------------------------------------------- |
+| terminalId               | Long                   | false    | Terminal's id.                                   |
+| terminalGeoFenceRequest  | TerminalGeoFenceRequest | false   | the set geofence request object, the structure like below |
+
+Structure of class TerminalGeoFenceRequest
+
+| Property Name | Type   | Nullable | Description |
+| :------------ | :----- | :------- | :---------- |
+| templateName  | String | false    | the name of the geofence template |
+| geofenceType  | String | false    | the geofence type, the value can be P(CenterPoint), C(Polygon) and B(Boundary), pass via `TerminalApi.TerminalGeoFenceType` enum |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+request.setTemplateName("geo-fence-template");
+request.setGeofenceType(TerminalApi.TerminalGeoFenceType.Polygon);
+Result<String> result = terminalApi.setTerminalGeoFence(123L, request);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter templateName cannot be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
+> <font color=red>Parameter templateName cannot be empty!</font>
+> <font color=red>Parameter geofenceType cannot be empty!</font>
+
+### Set Terminal Security GeoFence (by serial number)
+
+Set a security geofence for a terminal according to a geofence template, by serial number.
+
+**API**
+
+```
+public Result<String> setTerminalGeoFenceBySn(String serialNo, TerminalGeoFenceRequest terminalGeoFenceRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name           | Type                   | Nullable | Description                                      |
+| :----------------------- | :--------------------- | :------- | :----------------------------------------------- |
+| serialNo                 | String                 | false    | Serial number of terminal.                       |
+| terminalGeoFenceRequest  | TerminalGeoFenceRequest | false   | the set geofence request object, the structure like below |
+
+Structure of class TerminalGeoFenceRequest
+
+| Property Name | Type   | Nullable | Description |
+| :------------ | :----- | :------- | :---------- |
+| templateName  | String | false    | the name of the geofence template |
+| geofenceType  | String | false    | the geofence type, the value can be P(CenterPoint), C(Polygon) and B(Boundary), pass via `TerminalApi.TerminalGeoFenceType` enum |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+request.setTemplateName("geo-fence-template");
+request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+Result<String> result = terminalApi.setTerminalGeoFenceBySn("SUBSN108", request);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter serialNo cannot be empty!", "Parameter templateName cannot be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter serialNo cannot be empty!</font>
+> <font color=red>Parameter templateName cannot be empty!</font>
+> <font color=red>Parameter geofenceType cannot be empty!</font>
