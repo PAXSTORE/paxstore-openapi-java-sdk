@@ -1,9 +1,9 @@
-## EMM Device APIs
+## AirEMM Device APIs
 
-EMM Device APIs allow thirdparty system create register QR code, search EMM device, get EMM device, update EMM device, batch move EMM device, delete EMM device,
-batch delete EMM device, reboot EMM device, lock EMM device screen, reset EMM device password, start EMM device lost mode, stop EMM device lost mode, submit EMM zte quick upload record.
+AirEMM Device APIs allow thirdparty system create register QR code, search AirEMM device, get AirEMM device, update AirEMM device, batch move AirEMM device, delete AirEMM device,
+batch delete AirEMM device, reboot AirEMM device, lock AirEMM device screen, reset AirEMM device password, start AirEMM device lost mode, stop AirEMM device lost mode, submit AirEMM zte quick upload record.
 
-All the EMM device APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmDevice.EmmDeviceApi*.
+All the AirEMM device APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmDevice.EmmDeviceApi*.
 
 **Constructors of EmmDeviceAPI**
 
@@ -44,8 +44,8 @@ Structure of class EmmDeviceRegisterQRCodeCreateRequest
 | :-------------- | :------- | :--------- |:----------------------------------------------------------------------------------------|
 | resellerName  | String | false    | The name of the reseller associated with the device register QR code. Max length is 64  |
 | merchantName  | String | false    | The name of the merchant associated with the device register QR code. Max length is 128 |
-| type          | String | false    | The type of the register EMM device QR code. The value is EmmDeviceType.COMPANY_OWNER   |
-| expireDate    | Date   | false    | The expired date of EMM device QR code                                                  |
+| type          | String | false    | The type of the register AirEMM device QR code. The value is EmmDeviceType.COMPANY_OWNER   |
+| expireDate    | Date   | false    | The expired date of AirEMM device QR code                                                  |
 
 **Sample codes**
 
@@ -104,13 +104,13 @@ The type in data is EmmDeviceRegisterQRCodeCreateDTO. The structure like below.
 
 | Property Name  | Type   | Description                                                          |
 | :--------------- | :------- | :--------------------------------------------------------------------- |
-| id             | Long   | The register EMM device QR code id                                   |
+| id             | Long   | The register AirEMM device QR code id                                   |
 | marketName     | String | The market name                                                      |
 | resellerName   | String | The name of the reseller associated with the device register QR code |
 | merchantName   | String | The name of the merchant associated with the device register QR code |
-| deviceType     | String | The type of the register EMM device QR code. The value is C          |
-| registerQRCode | String | The content of the register EMM device QR code                       |
-| expireDate     | Long   | The expired date of EMM device QR code                               |
+| deviceType     | String | The type of the register AirEMM device QR code. The value is C          |
+| registerQRCode | String | The content of the register AirEMM device QR code                       |
+| expireDate     | Long   | The expired date of AirEMM device QR code                               |
 
 **Possible client validation errors**
 
@@ -141,13 +141,13 @@ The type in data is EmmDeviceRegisterQRCodeCreateDTO. The structure like below.
 | 61612         | Device type is not supported                                                   |             |
 | 61613         | The expiration time is invalid                                                 |             |
 | 61614         | The expiration time is mandatory                                               |             |
-| 61654         | EMM for Android not subscribed                                                 |             |
-| 61655         | EMM for Android not distributed                                                |             |
-| 61656         | The market is not bound to EMM for Android                                     |             |
+| 61654         | AirEMM for Android not subscribed                                                 |             |
+| 61655         | AirEMM for Android not distributed                                                |             |
+| 61656         | The market is not bound to AirEMM for Android                                     |             |
 
-### Search EMM device
+### Search AirEMM device
 
-The search EMM devices API allows thirdparty system search EMM devices by page.
+The search AirEMM devices API allows thirdparty system search AirEMM devices by page.
 
 **API**
 
@@ -167,8 +167,8 @@ public Result<EmmDeviceDTO> searchEmmDevice(int pageNo, int pageSize, EmmDeviceS
 | serialNo     | String                 | true     | search by device serial number                                                                                                                                                                                                                               |
 | mfrName      | String                 | true     | search by device manufacturer, manufacturer and modelName must exist simultaneously                                                                                                                                                                          |
 | modelName    | String                 | true     | search by device model name, manufacturer and modelName must exist simultaneously                                                                                                                                                                            |
-| resellerName | String                 | true     | search EMM devices under the reseller or it's sub-resellers                                                                                                                                                                                                  |
-| merchantName | String                 | true     | search EMM devices under the merchant                                                                                                                                                                                                                        |
+| resellerName | String                 | true     | search AirEMM devices under the reseller or it's sub-resellers                                                                                                                                                                                                  |
+| merchantName | String                 | true     | search AirEMM devices under the merchant                                                                                                                                                                                                                        |
 | status       | EmmDeviceStatus        | true     | search by device status. The value of this parameter can be one of EmmDeviceStatus.UN_CERTIFICATED, EmmDeviceStatus.ACTIVE, EmmDeviceStatus.LOST                                                                                                             |
 | iccId        | String                 | true     | search by SIM ICCID,split by ','                                                                                                                                                                                                                             |
 | imei         | String                 | true     | search by device IMEI,split by ','                                                                                                                                                                                                                           |
@@ -194,7 +194,7 @@ Result<EmmDeviceDTO> result = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.Em
 ```
 {
 	"businessCode": 61666,
-	"message": "The EMM device status is invalid"
+	"message": "The AirEMM device status is invalid"
 }
 ```
 
@@ -238,40 +238,40 @@ The type in dataSet is EmmDeviceDTO. The structure like below.
 
 | Property Name | Type           | Description                     |
 | :-------------- | :--------------- | :-------------------------------- |
-| id            | Long           | The id of EMM device            |
-| name          | String         | The name of EMM device          |
-| serialNo      | String         | The serial number of EMM device |
-| model         | EmmModelDTO    | The model of EMM device         |
-| reseller      | EmmResellerDTO | The reseller of EMM device      |
-| merchant      | EmmMerchantDTO | The merchant of EMM device      |
-| registerTime  | Date           | The register time of EMM device |
-| status        | String         | The status of EMM device        |
+| id            | Long           | The id of AirEMM device            |
+| name          | String         | The name of AirEMM device          |
+| serialNo      | String         | The serial number of AirEMM device |
+| model         | EmmModelDTO    | The model of AirEMM device         |
+| reseller      | EmmResellerDTO | The reseller of AirEMM device      |
+| merchant      | EmmMerchantDTO | The merchant of AirEMM device      |
+| registerTime  | Date           | The register time of AirEMM device |
+| status        | String         | The status of AirEMM device        |
 
 Structure of class EmmModelDTO
 
 
 | Property Name | Type   | Description                               |
 | :-------------- | :------- | :------------------------------------------ |
-| id            | Long   | The id of EMM device model                |
-| name          | String | The name of EMM device model              |
-| mfrName       | String | The manufacturer name of EMM device model |
+| id            | Long   | The id of AirEMM device model                |
+| name          | String | The name of AirEMM device model              |
+| mfrName       | String | The manufacturer name of AirEMM device model |
 
 Structure of class EmmResellerDTO
 
 
 | Property Name | Type   | Description                                |
 | :-------------- | :------- | :------------------------------------------- |
-| id            | Long   | The reseller id of EMM device belongs to   |
-| name          | String | The reseller name of EMM device belongs to |
-| parentIds     | String | The reseller parent id list of EMM device  |
+| id            | Long   | The reseller id of AirEMM device belongs to   |
+| name          | String | The reseller name of AirEMM device belongs to |
+| parentIds     | String | The reseller parent id list of AirEMM device  |
 
 Structure of class EmmMerchantDTO
 
 
 | Property Name | Type   | Description                                |
 | :-------------- | :------- | :------------------------------------------- |
-| id            | Long   | The merchant id of EMM device belongs to   |
-| name          | String | The merchant name of EMM device belongs to |
+| id            | Long   | The merchant id of AirEMM device belongs to   |
+| name          | String | The merchant name of AirEMM device belongs to |
 
 **Possible client validation errors**
 
@@ -289,14 +289,14 @@ Structure of class EmmMerchantDTO
 | 1762          | Reseller name is mandatory                                                     |             |
 | 61615         | Please enter three characters at least                                         |             |
 | 61616         | The input character is too long                                                |             |
-| 61654         | EMM for Android not subscribed                                                 |             |
-| 61656         | The market is not bound to EMM for Android                                     |             |
+| 61654         | AirEMM for Android not subscribed                                                 |             |
+| 61656         | The market is not bound to AirEMM for Android                                     |             |
 | 61662         | Both the manufacturer name and the model name must exist                       |             |
-| 61666         | The EMM device status is invalid                                               |             |
+| 61666         | The AirEMM device status is invalid                                               |             |
 
-### Get EMM device
+### Get AirEMM device
 
-The get EMM device API allows thirdparty system get EMM device.
+The get AirEMM device API allows thirdparty system get AirEMM device.
 
 **API**
 
@@ -309,7 +309,7 @@ Result<EmmDeviceDetailDTO> getEmmDevice(Long deviceId)
 
 | Name     | Type | Nullable | Description          |
 | :--------- | :----- | :--------- | :--------------------- |
-| deviceId | Long | false    | The id of emm device |
+| deviceId | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -373,43 +373,43 @@ The type in data is EmmDeviceDetailDTO. The structure like below.
 
 | Property Name  | Type           | Description                       |
 | :--------------- | :--------------- | :---------------------------------- |
-| id             | Long           | The id of EMM device              |
-| name           | String         | The name of EMM device            |
-| serialNo       | String         | The serial number of EMM device   |
-| type           | String         | The type of EMM device            |
-| model          | EmmModelDTO    | The model of EMM device           |
-| reseller       | EmmResellerDTO | The reseller of EMM device        |
-| merchant       | EmmMerchantDTO | The merchant of EMM device        |
-| registerTime   | Date           | The register time of EMM device   |
-| status         | String         | The status of EMM device          |
-| imei           | String         | The IMEI of EMM device            |
-| securityStatus | String         | The security status of EMM device |
+| id             | Long           | The id of AirEMM device              |
+| name           | String         | The name of AirEMM device            |
+| serialNo       | String         | The serial number of AirEMM device   |
+| type           | String         | The type of AirEMM device            |
+| model          | EmmModelDTO    | The model of AirEMM device           |
+| reseller       | EmmResellerDTO | The reseller of AirEMM device        |
+| merchant       | EmmMerchantDTO | The merchant of AirEMM device        |
+| registerTime   | Date           | The register time of AirEMM device   |
+| status         | String         | The status of AirEMM device          |
+| imei           | String         | The IMEI of AirEMM device            |
+| securityStatus | String         | The security status of AirEMM device |
 
 Structure of class EmmModelDTO
 
 
 | Property Name | Type   | Description                               |
 | :-------------- | :------- | :------------------------------------------ |
-| id            | Long   | The id of EMM device model                |
-| name          | String | The name of EMM device model              |
-| mfrName       | String | The manufacturer name of EMM device model |
+| id            | Long   | The id of AirEMM device model                |
+| name          | String | The name of AirEMM device model              |
+| mfrName       | String | The manufacturer name of AirEMM device model |
 
 Structure of class EmmResellerDTO
 
 
 | Property Name | Type   | Description                                |
 | :-------------- | :------- | :------------------------------------------- |
-| id            | Long   | The reseller id of EMM device belongs to   |
-| name          | String | The reseller name of EMM device belongs to |
-| parentIds     | String | The reseller parent id list of EMM device  |
+| id            | Long   | The reseller id of AirEMM device belongs to   |
+| name          | String | The reseller name of AirEMM device belongs to |
+| parentIds     | String | The reseller parent id list of AirEMM device  |
 
 Structure of class EmmMerchantDTO
 
 
 | Property Name | Type   | Description                                |
 | :-------------- | :------- | :------------------------------------------- |
-| id            | Long   | The merchant id of EMM device belongs to   |
-| name          | String | The merchant name of EMM device belongs to |
+| id            | Long   | The merchant id of AirEMM device belongs to   |
+| name          | String | The merchant name of AirEMM device belongs to |
 
 **Possible client validation errors**
 
@@ -421,12 +421,12 @@ Structure of class EmmMerchantDTO
 | Business Code | Message                                    | Description |
 | :-------------- | :------------------------------------------- | :------------ |
 | 61617         | Device not found                           |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Update EMM device
+### Update AirEMM device
 
-The update EMM device API allows the thirdparty system update EMM device.
+The update AirEMM device API allows the thirdparty system update AirEMM device.
 
 **API**
 
@@ -439,7 +439,7 @@ public Result<String> updateEmmDevice(Long deviceId, EmmDeviceUpdateRequest emmD
 
 | Parameter Name         | Type                   | Nullable | Description                                          |
 | :----------------------- | :----------------------- | :--------- | :----------------------------------------------------- |
-| deviceId               | Long                   | false    | The id of EMM device                                 |
+| deviceId               | Long                   | false    | The id of AirEMM device                                 |
 | emmDeviceUpdateRequest | EmmDeviceUpdateRequest | false    | The update request object. The structure shows below |
 
 Structure of class EmmDeviceUpdateRequest
@@ -447,9 +447,9 @@ Structure of class EmmDeviceUpdateRequest
 
 | Property Name | Type   | Nullable | Description                                        |
 | :-------------- | :------- | :--------- |:---------------------------------------------------|
-| deviceName    | String | false    | The name of the EMM device. Max length is 64       |
-| resellerName  | String | false    | The reseller name of EMM device. Max length is 64  |
-| merchantName  | String | false    | The merchant name of EMM device. Max length is 128 |
+| deviceName    | String | false    | The name of the AirEMM device. Max length is 64       |
+| resellerName  | String | false    | The reseller name of AirEMM device. Max length is 64  |
+| merchantName  | String | false    | The merchant name of AirEMM device. Max length is 128 |
 
 **Sample codes**
 
@@ -519,13 +519,13 @@ Result<String> result = emmDeviceApi.updateEmmDevice(1647428843339813L, emmDevic
 | 61623         | Device name is too long                                                                       |             |
 | 61624         | The reseller is mandatory                                                                     |             |
 | 61625         | The merchant is mandatory                                                                     |             |
-| 61653         | The target reseller has not subscribed to EMM for Android service, and is not allowed to move |             |
-| 61654         | EMM for Android not subscribed                                                                |             |
-| 61656         | The market is not bound to EMM for Android                                                    |             |
+| 61653         | The target reseller has not subscribed to AirEMM for Android service, and is not allowed to move |             |
+| 61654         | AirEMM for Android not subscribed                                                                |             |
+| 61656         | The market is not bound to AirEMM for Android                                                    |             |
 
-### Batch move EMM device
+### Batch move AirEMM device
 
-The batch move EMM device API allows the thirdparty system batch move EMM device
+The batch move AirEMM device API allows the thirdparty system batch move AirEMM device
 
 **API**
 
@@ -545,9 +545,9 @@ Structure of class EmmDeviceBatchMoveRequest
 
 | Property Name | Type   | Nullable | Description                                        |
 | :-------------- | :------- | :--------- |:---------------------------------------------------|
-| deviceIds     | Long   | false    | The id list of the EMM device                      |
-| resellerName  | String | false    | The reseller name of EMM device. Max length is 64  |
-| merchantName  | String | false    | The merchant name of EMM device. Max length is 128 |
+| deviceIds     | Long   | false    | The id list of the AirEMM device                      |
+| resellerName  | String | false    | The reseller name of AirEMM device. Max length is 64  |
+| merchantName  | String | false    | The merchant name of AirEMM device. Max length is 128 |
 
 **Sample codes**
 
@@ -614,13 +614,13 @@ Result<String> result = emmDeviceApi.batchMoveEmmDevice(emmDeviceBatchMoveReques
 | 61618         | Not able to create/update/delete over {0} devices at one time                                 |             |
 | 61624         | The reseller is mandatory                                                                     |             |
 | 61625         | The merchant is mandatory                                                                     |             |
-| 61653         | The target reseller has not subscribed to EMM for Android service, and is not allowed to move |             |
-| 61654         | EMM for Android not subscribed                                                                |             |
-| 61656         | The market is not bound to EMM for Android                                                    |             |
+| 61653         | The target reseller has not subscribed to AirEMM for Android service, and is not allowed to move |             |
+| 61654         | AirEMM for Android not subscribed                                                                |             |
+| 61656         | The market is not bound to AirEMM for Android                                                    |             |
 
-### Delete EMM device
+### Delete AirEMM device
 
-The delete EMM device API allows the thirdparty system delete EMM device by deviceId.
+The delete AirEMM device API allows the thirdparty system delete AirEMM device by deviceId.
 
 **API**
 
@@ -633,7 +633,7 @@ public Result<String> deleteEmmDevice(Long deviceId)
 
 | Parameter Name | Type | Nullable | Description              |
 | :--------------- | :----- | :--------- | :------------------------- |
-| deviceId       | Long | false    | The id of the EMM device |
+| deviceId       | Long | false    | The id of the AirEMM device |
 
 **Sample codes**
 
@@ -679,12 +679,12 @@ Result<String> result = emmDeviceApi.deleteEmmDevice(1647428843339813L);
 | :-------------- | :------------------------------------------- | :------------ |
 | 1895          | The merchant is in migrating               |             |
 | 61617         | Device not found                           |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Batch delete EMM device
+### Batch delete AirEMM device
 
-The batch delete EMM device API allows the thirdparty system batch delete EMM device
+The batch delete AirEMM device API allows the thirdparty system batch delete AirEMM device
 
 **API**
 
@@ -704,7 +704,7 @@ Structure of class EmmDeviceBatchDeleteRequest
 
 | Property Name | Type         | Nullable | Description                   |
 | :-------------- | :------------- | :--------- | :------------------------------ |
-| deviceIds     | List\<Long\> | false    | The id list of the EMM device |
+| deviceIds     | List\<Long\> | false    | The id list of the AirEMM device |
 
 **Sample codes**
 
@@ -754,12 +754,12 @@ Result<String> result = emmDeviceApi.batchDeleteEmmDevice(emmDeviceBatchDeleteRe
 | 998           | Bad request                                                   |             |
 | 1895          | The merchant is in migrating                                  |             |
 | 61618         | Not able to create/update/delete over {0} devices at one time |             |
-| 61654         | EMM for Android not subscribed                                |             |
-| 61656         | The market is not bound to EMM for Android                    |             |
+| 61654         | AirEMM for Android not subscribed                                |             |
+| 61656         | The market is not bound to AirEMM for Android                    |             |
 
-### Reboot EMM device
+### Reboot AirEMM device
 
-The reboot EMM device API allows the thirdparty system reboot EMM device.
+The reboot AirEMM device API allows the thirdparty system reboot AirEMM device.
 
 **API**
 
@@ -772,7 +772,7 @@ public Result<String> rebootEmmDevice(Long deviceId)
 
 | Parameter Name | Type | Nullable | Description          |
 | :--------------- | :----- | :--------- | :--------------------- |
-| deviceId       | Long | false    | The id of EMM device |
+| deviceId       | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -819,12 +819,12 @@ Result<String> result = emmDeviceApi.rebootEmmDevice(1647428843339813L);
 | 61617         | Device not found                           |             |
 | 61626         | Reboot control unsupported on this device  |             |
 | 61638         | Device not certified                       |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Lock EMM device screen
+### Lock AirEMM device screen
 
-The lock EMM device screen API allows the thirdparty system lock EMM device screen.
+The lock AirEMM device screen API allows the thirdparty system lock AirEMM device screen.
 
 **API**
 
@@ -837,7 +837,7 @@ public Result<String> lockEmmDeviceScreen(Long deviceId)
 
 | Parameter Name | Type | Nullable | Description          |
 | :--------------- | :----- | :--------- | :--------------------- |
-| deviceId       | Long | false    | The id of EMM device |
+| deviceId       | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -883,12 +883,12 @@ Result<String> result = emmDeviceApi.lockEmmDeviceScreen(1647428843339813L);
 | :-------------- | :------------------------------------------- | :------------ |
 | 61617         | Device not found                           |             |
 | 61638         | Device not certified                       |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Reset EMM device password
+### Reset AirEMM device password
 
-The reset EMM device password API allows the thirdparty system reset EMM device password.
+The reset AirEMM device password API allows the thirdparty system reset AirEMM device password.
 
 **API**
 
@@ -901,7 +901,7 @@ public Result<String> resetEmmDevicePassword(Long deviceId, EmmDeviceResetPasswo
 
 | Parameter Name                | Type                          | Nullable | Description                                   |
 | :------------------------------ | :------------------------------ | :--------- | :---------------------------------------------- |
-| deviceId                      | Long                          | false    | The id of emm device                          |
+| deviceId                      | Long                          | false    | The id of AirEMM device                          |
 | emmDeviceResetPasswordRequest | EmmDeviceResetPasswordRequest | false    | The request object. The structure shows below |
 
 Structure of class EmmDeviceResetPasswordRequest
@@ -965,12 +965,12 @@ Result<String> result = emmDeviceApi.resetEmmDevicePassword(1647428843339813L, e
 | 61617         | Device not found                              |             |
 | 61627         | Password must be at least {0} characters long |             |
 | 61638         | Device not certified                          |             |
-| 61654         | EMM for Android not subscribed                |             |
-| 61656         | The market is not bound to EMM for Android    |             |
+| 61654         | AirEMM for Android not subscribed                |             |
+| 61656         | The market is not bound to AirEMM for Android    |             |
 
-### Start EMM device lost mode
+### Start AirEMM device lost mode
 
-The start EMM device lost mode API allows the thirdparty system start EMM device lost mode.
+The start AirEMM device lost mode API allows the thirdparty system start AirEMM device lost mode.
 
 **API**
 
@@ -983,7 +983,7 @@ public Result<String> startEmmDeviceLostMode(Long deviceId, EmmDeviceLostModeReq
 
 | Parameter Name           | Type                     | Nullable | Description                                   |
 | :------------------------- | :------------------------- | :--------- | :---------------------------------------------- |
-| deviceId                 | Long                     | false    | The id of EMM device                          |
+| deviceId                 | Long                     | false    | The id of AirEMM device                          |
 | emmDeviceLostModeRequest | EmmDeviceLostModeRequest | false    | The request object. The structure shows below |
 
 Structure of class EmmDeviceLostModeRequest
@@ -1054,12 +1054,12 @@ Result<String> result = emmDeviceApi.startEmmDeviceLostMode(1647428843339813L, e
 | 61630         | Failed to set the device to lost mode. The device is already in the lost state                                  |             |
 | 61632         | Failed to set the device to lost mode                                                                           |             |
 | 61638         | Device not certified                                                                                            |             |
-| 61654         | EMM for Android not subscribed                                                                                  |             |
-| 61656         | The market is not bound to EMM for Android                                                                      |             |
+| 61654         | AirEMM for Android not subscribed                                                                                  |             |
+| 61656         | The market is not bound to AirEMM for Android                                                                      |             |
 
-### Resume EMM device
+### Resume AirEMM device
 
-The resume EMM device API allows the thirdparty system resume EMM device.
+The resume AirEMM device API allows the thirdparty system resume AirEMM device.
 
 **API**
 
@@ -1072,7 +1072,7 @@ public Result<String> resumeEmmDevice(Long deviceId)
 
 | Parameter Name | Type | Nullable | Description          |
 | :--------------- | :----- | :--------- | :--------------------- |
-| deviceId       | Long | false    | The id of EMM device |
+| deviceId       | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -1117,13 +1117,13 @@ Result<String> result = emmDeviceApi.resumeEmmDevice(1647428843339813L);
 | Business Code | Message                                                              | Description |
 | :-------------- | :--------------------------------------------------------------------- | :------------ |
 | 61617         | Device not found                                                     |             |
-| 61654         | EMM for Android not subscribed                                       |             |
-| 61656         | The market is not bound to EMM for Android                           |             |
+| 61654         | AirEMM for Android not subscribed                                       |             |
+| 61656         | The market is not bound to AirEMM for Android                           |             |
 | 62045         | Failed to resume the device. The device is not in the disabled state |             |
 
-### Disable EMM device
+### Disable AirEMM device
 
-The disable EMM device API allows the thirdparty system disable EMM device.
+The disable AirEMM device API allows the thirdparty system disable AirEMM device.
 
 **API**
 
@@ -1136,7 +1136,7 @@ public Result<String> disableEmmDevice(Long deviceId)
 
 | Parameter Name | Type | Nullable | Description          |
 | :--------------- | :----- | :--------- | :--------------------- |
-| deviceId       | Long | false    | The id of EMM device |
+| deviceId       | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -1181,13 +1181,13 @@ Result<String> result = emmDeviceApi.disableEmmDevice(1647428843339813L);
 | Business Code | Message                                                                | Description |
 | :-------------- | :----------------------------------------------------------------------- | :------------ |
 | 61617         | Device not found                                                       |             |
-| 61654         | EMM for Android not subscribed                                         |             |
-| 61656         | The market is not bound to EMM for Android                             |             |
+| 61654         | AirEMM for Android not subscribed                                         |             |
+| 61656         | The market is not bound to AirEMM for Android                             |             |
 | 62046         | Failed to disable the device. The device is not in the activated state |             |
 
-### Sync EMM device detail
+### Sync AirEMM device detail
 
-The sync EMM device detail API allows the thirdparty system sync EMM device detail.
+The sync AirEMM device detail API allows the thirdparty system sync AirEMM device detail.
 
 **API**
 
@@ -1200,7 +1200,7 @@ public Result<String> syncDeviceDetail(Long deviceId)
 
 | Parameter Name | Type | Nullable | Description          |
 | :--------------- | :----- | :--------- | :--------------------- |
-| deviceId       | Long | false    | The id of EMM device |
+| deviceId       | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -1245,14 +1245,14 @@ Result<String> result = emmDeviceApi.syncDeviceDetail(1647428843339813L);
 | Business Code | Message                                            | Description |
 | :-------------- | :--------------------------------------------------- | :------------ |
 | 61617         | Device not found                                   |             |
-| 61654         | EMM for Android not subscribed                     |             |
-| 61656         | The market is not bound to EMM for Android         |             |
+| 61654         | AirEMM for Android not subscribed                     |             |
+| 61656         | The market is not bound to AirEMM for Android         |             |
 | 62047         | Sync failed. Please try again later                |             |
 | 62048         | Manual sync not supported in current device status |             |
 
-### Stop EMM device lost mode
+### Stop AirEMM device lost mode
 
-The stop EMM device lost mode API allows the thirdparty system stop EMM device lost mode.
+The stop AirEMM device lost mode API allows the thirdparty system stop AirEMM device lost mode.
 
 **API**
 
@@ -1265,7 +1265,7 @@ public Result<String> stopEmmDeviceLostMode(Long deviceId)
 
 | Parameter Name | Type | Nullable | Description          |
 | :--------------- | :----- | :--------- | :--------------------- |
-| deviceId       | Long | false    | The id of emm device |
+| deviceId       | Long | false    | The id of AirEMM device |
 
 **Sample codes**
 
@@ -1311,12 +1311,12 @@ Result<String> result = emmDeviceApi.stopEmmDeviceLostMode(1647428843339813L);
 | :-------------- | :-------------------------------------------------------------------------------- | :------------ |
 | 61617         | Device not found                                                                |             |
 | 61631         | Failed to turn off lost mode of the device. The device is not in the lost state |             |
-| 61654         | EMM for Android not subscribed                                                  |             |
-| 61656         | The market is not bound to EMM for Android                                      |             |
+| 61654         | AirEMM for Android not subscribed                                                  |             |
+| 61656         | The market is not bound to AirEMM for Android                                      |             |
 
-### Clear EMM device app data
+### Clear AirEMM device app data
 
-The clear EMM device app data API allows the thirdparty system clear EMM device app data.
+The clear AirEMM device app data API allows the thirdparty system clear AirEMM device app data.
 
 **API**
 
@@ -1328,7 +1328,7 @@ public Result<String> clearEmmAppData(Long deviceId, String installedAppIds)
 
 | Parameter Name | Type   | Nullable | Description                                                                  |
 | :------------- | :----- | :------- |:-----------------------------------------------------------------------------|
-| deviceId       | Long   | false    | The id of EMM device                                                         |
+| deviceId       | Long   | false    | The id of AirEMM device                                                         |
 | installedAppIds| String | false    | The installedApps' record id to clear data, multiple ids separated by commas |
 
 **Sample codes**
@@ -1391,12 +1391,12 @@ Result<String> result = emmDeviceApi.clearEmmAppData(1647428843339813L, "1710719
 | 113           | Your request is invalid                    |             |
 | 61617         | Device not found                           |             |
 | 61621         | App not exists                             |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Submit EMM zte quick upload record
+### Submit AirEMM zte quick upload record
 
-The submit EMM zte quick upload record API allows the thirdparty system submit EMM zte quick upload record
+The submit AirEMM zte quick upload record API allows the thirdparty system submit AirEMM zte quick upload record
 
 **API**
 
@@ -1416,8 +1416,8 @@ Structure of class EmmZteQuickUploadRecordCreateRequest
 
 | Property Name  | Type   | Nullable | Description                                                                                                                                                                                                                                                                                 |
 | :--------------- | :------- | :--------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| resellerName   | String | false    | The name of the reseller associated with the emm device. Max length is 64                                                                                                                                                                                                                   |
-| merchantName   | String | false    | The name of the merchant associated with the emm device. Max length is 128                                                                                                                                                                                                                  |
+| resellerName   | String | false    | The name of the reseller associated with the AirEMM device. Max length is 64                                                                                                                                                                                                                   |
+| merchantName   | String | false    | The name of the merchant associated with the AirEMM device. Max length is 128                                                                                                                                                                                                                  |
 | identifierType | String | false    | Batch device registration type, value can be one of EmmDeviceApi.EmmZteIdentifierType.IMEI, EmmDeviceApi.EmmZteIdentifierType.SERIAL_NUMBER                                                                                                                                                 |
 | manufacturer   | String | true     | Device manufacturer, value is ZOLON. When the value of identifierType is EmmDeviceApi.EmmZteIdentifierType.IMEI, the manufacturer parameter is ignored. When the value of identifierType is EmmDeviceApi.EmmZteIdentifierType.SERIAL_NUMBER, the manufacturer parameter is mandatory        |
 | model          | String | true     | Device model, value can be one of L16xx, M30, M50, M9200. When the value of identifierType is EmmDeviceApi.EmmZteIdentifierType.IMEI, the model parameter is ignored. When the value of identifierType is EmmDeviceApi.EmmZteIdentifierType.SERIAL_NUMBER, the model parameter is mandatory |
@@ -1501,7 +1501,7 @@ Result<String> result = emmDeviceApi.submitEmmZteQuickUploadRecord(emmZteQuickUp
 | 62019         | Identifiertype is invalid                                |             |
 | 61624         | The reseller is mandatory                                |             |
 | 61625         | The merchant is mandatory                                |             |
-| 61654         | EMM for Android not subscribed                           |             |
-| 61655         | EMM for Android not distributed                          |             |
-| 61656         | The market is not bound to EMM for Android               |             |
+| 61654         | AirEMM for Android not subscribed                           |             |
+| 61655         | AirEMM for Android not distributed                          |             |
+| 61656         | The market is not bound to AirEMM for Android               |             |
 | 61662         | Both the manufacturer name and the model name must exist |             |

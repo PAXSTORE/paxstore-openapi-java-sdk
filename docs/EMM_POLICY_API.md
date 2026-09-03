@@ -1,8 +1,8 @@
-## EMM Policy APIs
+## AirEMM Policy APIs
 
 AirEMM Policy APIs allow thirdparty system get reseller AirEMM policy, create/update reseller AirEMM policy, get merchant AirEMM policy, create/update merchant AirEMM policy, get device AirEMM policy, create/update device AirEMM policy.
 
-All the EMM policy APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmPolicy.EmmPolicyApi*.
+All the AirEMM policy APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmPolicy.EmmPolicyApi*.
 
 **Constructors of EmmPolicyApi**
 
@@ -19,9 +19,9 @@ Constructor parameters description
 | apiKey    | String | the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights |
 | apiSecret | String | apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights               |
 
-### Get reseller EMM policy
+### Get reseller AirEMM policy
 
-The get reseller EMM policy API allows thirdparty system get reseller EMM policy.
+The get reseller AirEMM policy API allows thirdparty system get reseller AirEMM policy.
 
 **API**
 
@@ -34,7 +34,7 @@ public Result<EmmPolicyDTO> getResellerEmmPolicy(String resellerName);
 
 | Name         | Type   | Nullable | Description                       |
 | :------------- | :------- | :--------- | :---------------------------------- |
-| resellerName | String | false    | get EMM policy under the reseller |
+| resellerName | String | false    | get AirEMM policy under the reseller |
 
 **Sample codes**
 
@@ -290,11 +290,11 @@ The type in data is EmmPolicyDTO. The structure like below.
 
 | Property Name     | Type                    | Description                    |
 | :------------------ | :------------------------ | :------------------------------- |
-| customPolicyCount | Integer                 | The count of EMM custom policy |
-| name              | String                  | The name of EMM policy         |
-| contentInfo       | PolicyContentDTO        | The content of EMM policy      |
-| lockedPolicyList  | List\<LockedPolicyDTO\> | The content of lock EMM policy |
-| inheritFlag       | Boolean                 | Whether inherit EMM policy     |
+| customPolicyCount | Integer                 | The count of AirEMM custom policy |
+| name              | String                  | The name of AirEMM policy         |
+| contentInfo       | PolicyContentDTO        | The content of AirEMM policy      |
+| lockedPolicyList  | List\<LockedPolicyDTO\> | The content of lock AirEMM policy |
+| inheritFlag       | Boolean                 | Whether inherit AirEMM policy     |
 
 Structure of class PolicyContentDTO
 
@@ -547,8 +547,8 @@ Structure of class ApplicationPolicy
 
 | Property Name           | Type                       | Description                                                                                                                                                                                                                                                                |
 | :------------------------ | :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| appId                   | Long                       | The id of the emm app                                                                                                                                                                                                                                                      |
-| packageName             | String                     | The package name of the emm app                                                                                                                                                                                                                                            |
+| appId                   | Long                       | The id of the AirEMM app                                                                                                                                                                                                                                                      |
+| packageName             | String                     | The package name of the AirEMM app                                                                                                                                                                                                                                            |
 | autoUpdateMode          | String                     | Controls the auto-update mode for the app, value can be one of AUTO_UPDATE_DEFAULT, AUTO_UPDATE_POSTPONED, AUTO_UPDATE_HIGH_PRIORITY                                                                                                                                       |
 | defaultPermissionPolicy | String                     | The default policy for all permissions requested by the app. If specified, this overrides the policy-level defaultPermissionPolicy which applies to all apps. It does not override the permissionGrants which applies to all apps, value can be one of PROMPT, GRANT, DENY |
 | credentialProviderPolicy| String                     | Optional. Whether the app is allowed to act as a credential provider on Android 14 and above, value can be one of CREDENTIAL_PROVIDER_POLICY_UNSPECIFIED, CREDENTIAL_PROVIDER_ALLOWED                                                                                      |
@@ -588,9 +588,9 @@ Structure of class LockedPolicyDTO
 | 1762          | Reseller name is mandatory                |             |
 | 1767          | Reseller name is too long                 |             |
 | 61621         | App not exists                            |             |
-| 61673         | EMM application install version not exist |             |
+| 61673         | AirEMM application install version not exist |             |
 
-### Create reseller EMM policy
+### Create reseller AirEMM policy
 
 Create reseller AirEMM policy API allow the thirdparty system create/update reseller AirEMM policy remotely.
 
@@ -612,10 +612,10 @@ Structure of class ResellerEmmPolicyCreateRequest
 
 | Property Name    | Type                          | Nullable | Description                                                                                                                                                          |
 | :----------------- | :------------------------------ | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| resellerName     | String                        | false    | The reseller of EMM device belongs to. Max length is 64                                                                                                              |
-| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, all of the contentInfo values are required |
-| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                                       |
-| inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                           |
+| resellerName     | String                        | false    | The reseller of AirEMM device belongs to. Max length is 64                                                                                                              |
+| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of AirEMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, all of the contentInfo values are required |
+| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock AirEMM policy                                                                                                                                       |
+| inheritFlag      | Boolean                       | false    | Whether inherit AirEMM policy                                                                                                                                           |
 
 Structure of class PolicyUpdatedContentDTO
 
@@ -868,7 +868,7 @@ Structure of class ApplicationPolicy
 
 | Property Name           | Type                       | Nullable | Description                                                                                                                                                                                                                                                                |
 | :------------------------ | :--------------------------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| packageName             | String                     | false    | The package name of the emm app, max length is 128                                                                                                                                                                                                                         |
+| packageName             | String                     | false    | The package name of the AirEMM app, max length is 128                                                                                                                                                                                                                         |
 | autoUpdateMode          | String                     | false    | Controls the auto-update mode for the app, value can be one of AUTO_UPDATE_DEFAULT, AUTO_UPDATE_POSTPONED, AUTO_UPDATE_HIGH_PRIORITY                                                                                                                                       |
 | defaultPermissionPolicy | String                     | false    | The default policy for all permissions requested by the app. If specified, this overrides the policy-level defaultPermissionPolicy which applies to all apps. It does not override the permissionGrants which applies to all apps, value can be one of PROMPT, GRANT, DENY |
 | credentialProviderPolicy| String                     | false    | Optional. Whether the app is allowed to act as a credential provider on Android 14 and above, value can be one of CREDENTIAL_PROVIDER_POLICY_UNSPECIFIED, CREDENTIAL_PROVIDER_ALLOWED                                                                                      |
@@ -960,14 +960,14 @@ Result<String> result = emmPolicyApi.createResellerEmmPolicy(request);
 | 61609         | Adding application failed. Exceeded {0} limit                                                       |             |
 | 61610         | Action failed. Only one app in the policy can be installed in Kiosk mode                            |             |
 | 61636         | {0} applications do not exist                                                                       |             |
-| 61641         | EMM policy is invalid                                                                               |             |
+| 61641         | AirEMM policy is invalid                                                                               |             |
 | 61645         | Locked application policies cannot be operated                                                      |             |
-| 61651         | EMM application configuration is invalid                                                            |             |
-| 61654         | EMM for Android not subscribed                                                                      |             |
-| 61655         | EMM for Android not distributed                                                                     |             |
-| 61656         | The market is not bound to EMM for Android                                                          |             |
-| 61660         | EMM app package name is mandatory                                                                   |             |
-| 61661         | EMM app package name is too long                                                                    |             |
+| 61651         | AirEMM application configuration is invalid                                                            |             |
+| 61654         | AirEMM for Android not subscribed                                                                      |             |
+| 61655         | AirEMM for Android not distributed                                                                     |             |
+| 61656         | The market is not bound to AirEMM for Android                                                          |             |
+| 61660         | AirEMM app package name is mandatory                                                                   |             |
+| 61661         | AirEMM app package name is too long                                                                    |             |
 | 61663         | {0} is invalid                                                                                      |             |
 | 61665         | The root policy cannot be modified to inherited policy                                              |             |
 | 61669         | {0} is not in the application list                                                                  |             |
@@ -978,9 +978,9 @@ Result<String> result = emmPolicyApi.createResellerEmmPolicy(request);
 | 61708         | The Associated Configuration is locked and this "{0}" cannot be removed                             |             |
 | 61709         | The Associated Configuration is locked and this "{0}" cannot be turned off                          |             |
 
-### Get merchant EMM policy
+### Get merchant AirEMM policy
 
-The get merchant EMM policy API allows thirdparty system to get merchant EMM policy.
+The get merchant AirEMM policy API allows thirdparty system to get merchant AirEMM policy.
 
 **API**
 
@@ -993,8 +993,8 @@ public Result<EmmPolicyDTO> getMerchantEmmPolicy(String resellerName, String mer
 
 | Name         | Type   | Nullable | Description                       |
 | :------------- | :------- | :--------- | :---------------------------------- |
-| resellerName | String | false    | get EMM policy under the reseller |
-| merchantName | String | false    | get EMM policy under the merchant |
+| resellerName | String | false    | get AirEMM policy under the reseller |
+| merchantName | String | false    | get AirEMM policy under the merchant |
 
 **Sample codes**
 
@@ -1235,11 +1235,11 @@ The type in data is EmmPolicyDTO. The structure like below.
 
 | Property Name     | Type                    | Description                    |
 | :------------------ | :------------------------ | :------------------------------- |
-| customPolicyCount | Integer                 | The custom policy count of EMM |
-| name              | String                  | The name of EMM policy         |
-| contentInfo       | PolicyContentDTO        | The content of EMM policy      |
-| lockedPolicyList  | List\<LockedPolicyDTO\> | The content of lock EMM policy |
-| inheritFlag       | Boolean                 | Whether inherit EMM policy     |
+| customPolicyCount | Integer                 | The custom policy count of AirEMM |
+| name              | String                  | The name of AirEMM policy         |
+| contentInfo       | PolicyContentDTO        | The content of AirEMM policy      |
+| lockedPolicyList  | List\<LockedPolicyDTO\> | The content of lock AirEMM policy |
+| inheritFlag       | Boolean                 | Whether inherit AirEMM policy     |
 
 Structure of class PolicyContentDTO
 
@@ -1492,8 +1492,8 @@ Structure of class ApplicationPolicy
 
 | Property Name           | Type                       | Description                                                                                                                                                                                                                                                                |
 | :------------------------ | :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| appId                   | Long                       | The id of the emm app                                                                                                                                                                                                                                                      |
-| packageName             | String                     | The package name of the emm app                                                                                                                                                                                                                                            |
+| appId                   | Long                       | The id of the AirEMM app                                                                                                                                                                                                                                                      |
+| packageName             | String                     | The package name of the AirEMM app                                                                                                                                                                                                                                            |
 | autoUpdateMode          | String                     | Controls the auto-update mode for the app, value can be one of AUTO_UPDATE_DEFAULT, AUTO_UPDATE_POSTPONED, AUTO_UPDATE_HIGH_PRIORITY                                                                                                                                       |
 | defaultPermissionPolicy | String                     | The default policy for all permissions requested by the app. If specified, this overrides the policy-level defaultPermissionPolicy which applies to all apps. It does not override the permissionGrants which applies to all apps, value can be one of PROMPT, GRANT, DENY |
 | credentialProviderPolicy| String                     | Optional. Whether the app is allowed to act as a credential provider on Android 14 and above, value can be one of CREDENTIAL_PROVIDER_POLICY_UNSPECIFIED, CREDENTIAL_PROVIDER_ALLOWED                                                                                      |
@@ -1538,9 +1538,9 @@ Structure of class LockedPolicyDTO
 | 1762          | Reseller name is mandatory                |             |
 | 1767          | Reseller name is too long                 |             |
 | 61621         | App not exists                            |             |
-| 61673         | EMM application install version not exist |             |
+| 61673         | AirEMM application install version not exist |             |
 
-### Create merchant EMM policy
+### Create merchant AirEMM policy
 
 Create merchant AirEMM policy API allow the thirdparty system create/update merchant AirEMM policy remotely.
 
@@ -1562,11 +1562,11 @@ Structure of class MerchantEmmPolicyCreateRequest
 
 | Property Name    | Type                          | Nullable | Description                                                                                                                                                          |
 | :----------------- | :------------------------------ | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| resellerName     | String                        | false    | The reseller of EMM device belongs to. Max length is 64                                                                                                              |
-| merchantName     | String                        | false    | The merchant of EMM device belongs to. Max length is 128                                                                                                             |
-| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, all of the contentInfo values are required |
-| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                                       |
-| inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                           |
+| resellerName     | String                        | false    | The reseller of AirEMM device belongs to. Max length is 64                                                                                                              |
+| merchantName     | String                        | false    | The merchant of AirEMM device belongs to. Max length is 128                                                                                                             |
+| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of AirEMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, all of the contentInfo values are required |
+| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock AirEMM policy                                                                                                                                       |
+| inheritFlag      | Boolean                       | false    | Whether inherit AirEMM policy                                                                                                                                           |
 
 Structure of class PolicyUpdatedContentDTO
 
@@ -1819,7 +1819,7 @@ Structure of class ApplicationPolicy
 
 | Property Name           | Type                       | Nullable | Description                                                                                                                                                                                                                                                                |
 | :------------------------ | :--------------------------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| packageName             | String                     | false    | The package name of the emm app, max length is 128                                                                                                                                                                                                                         |
+| packageName             | String                     | false    | The package name of the AirEMM app, max length is 128                                                                                                                                                                                                                         |
 | autoUpdateMode          | String                     | false    | Controls the auto-update mode for the app, value can be one of AUTO_UPDATE_DEFAULT, AUTO_UPDATE_POSTPONED, AUTO_UPDATE_HIGH_PRIORITY                                                                                                                                       |
 | defaultPermissionPolicy | String                     | false    | The default policy for all permissions requested by the app. If specified, this overrides the policy-level defaultPermissionPolicy which applies to all apps. It does not override the permissionGrants which applies to all apps, value can be one of PROMPT, GRANT, DENY |
 | credentialProviderPolicy| String                     | false    | Optional. Whether the app is allowed to act as a credential provider on Android 14 and above, value can be one of CREDENTIAL_PROVIDER_POLICY_UNSPECIFIED, CREDENTIAL_PROVIDER_ALLOWED                                                                                      |
@@ -1913,14 +1913,14 @@ Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
 | 61609         | Adding application failed. Exceeded {0} limit                                                       |             |
 | 61610         | Action failed. Only one app in the policy can be installed in Kiosk mode                            |             |
 | 61636         | {0} applications do not exist                                                                       |             |
-| 61641         | EMM policy is invalid                                                                               |             |
+| 61641         | AirEMM policy is invalid                                                                               |             |
 | 61645         | Locked application policies cannot be operated                                                      |             |
-| 61651         | EMM application configuration is invalid                                                            |             |
-| 61654         | EMM for Android not subscribed                                                                      |             |
-| 61655         | EMM for Android not distributed                                                                     |             |
-| 61656         | The market is not bound to EMM for Android                                                          |             |
-| 61660         | EMM app package name is mandatory                                                                   |             |
-| 61661         | EMM app package name is too long                                                                    |             |
+| 61651         | AirEMM application configuration is invalid                                                            |             |
+| 61654         | AirEMM for Android not subscribed                                                                      |             |
+| 61655         | AirEMM for Android not distributed                                                                     |             |
+| 61656         | The market is not bound to AirEMM for Android                                                          |             |
+| 61660         | AirEMM app package name is mandatory                                                                   |             |
+| 61661         | AirEMM app package name is too long                                                                    |             |
 | 61663         | {0} is invalid                                                                                      |             |
 | 61669         | {0} is not in the application list                                                                  |             |
 | 61671         | Parameter applications cannot be locked                                                             |             |
@@ -1930,9 +1930,9 @@ Result<String> result = emmPolicyApi.createMerchantEmmPolicy(request);
 | 61708         | The Associated Configuration is locked and this "{0}" cannot be removed                             |             |
 | 61709         | The Associated Configuration is locked and this "{0}" cannot be turned off                          |             |
 
-### Get device EMM policy
+### Get device AirEMM policy
 
-The get device EMM policy API allows thirdparty system to get device EMM policy.
+The get device AirEMM policy API allows thirdparty system to get device AirEMM policy.
 
 **API**
 
@@ -1945,7 +1945,7 @@ public Result<EmmPolicyDTO> getDeviceEmmPolicy(String serialNo);
 
 | Name     | Type   | Nullable | Description                     |
 | :--------- | :------- | :--------- | :-------------------------------- |
-| serialNo | String | false    | get EMM policy under the device |
+| serialNo | String | false    | get AirEMM policy under the device |
 
 **Sample codes**
 
@@ -2191,11 +2191,11 @@ The type in data is EmmPolicyDTO. The structure like below.
 
 | Property Name     | Type                    | Description                    |
 | :------------------ | :------------------------ | :------------------------------- |
-| customPolicyCount | Integer                 | The custom policy count of EMM |
-| name              | String                  | The name of EMM policy         |
-| contentInfo       | PolicyContentDTO        | The content of EMM policy      |
-| lockedPolicyList  | List\<LockedPolicyDTO\> | The content of lock EMM policy |
-| inheritFlag       | Boolean                 | Whether inherit EMM policy     |
+| customPolicyCount | Integer                 | The custom policy count of AirEMM |
+| name              | String                  | The name of AirEMM policy         |
+| contentInfo       | PolicyContentDTO        | The content of AirEMM policy      |
+| lockedPolicyList  | List\<LockedPolicyDTO\> | The content of lock AirEMM policy |
+| inheritFlag       | Boolean                 | Whether inherit AirEMM policy     |
 
 Structure of class PolicyContentDTO
 
@@ -2448,8 +2448,8 @@ Structure of class ApplicationPolicy
 
 | Property Name           | Type                       | Description                                                                                                                                                                                                                                                                |
 | :------------------------ | :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| appId                   | Long                       | The id of the emm app                                                                                                                                                                                                                                                      |
-| packageName             | String                     | The package name of the emm app                                                                                                                                                                                                                                            |
+| appId                   | Long                       | The id of the AirEMM app                                                                                                                                                                                                                                                      |
+| packageName             | String                     | The package name of the AirEMM app                                                                                                                                                                                                                                            |
 | autoUpdateMode          | String                     | Controls the auto-update mode for the app, value can be one of AUTO_UPDATE_DEFAULT, AUTO_UPDATE_POSTPONED, AUTO_UPDATE_HIGH_PRIORITY                                                                                                                                       |
 | defaultPermissionPolicy | String                     | The default policy for all permissions requested by the app. If specified, this overrides the policy-level defaultPermissionPolicy which applies to all apps. It does not override the permissionGrants which applies to all apps, value can be one of PROMPT, GRANT, DENY |
 | credentialProviderPolicy| String                     | Optional. Whether the app is allowed to act as a credential provider on Android 14 and above, value can be one of CREDENTIAL_PROVIDER_POLICY_UNSPECIFIED, CREDENTIAL_PROVIDER_ALLOWED                                                                                      |
@@ -2490,11 +2490,11 @@ Structure of class LockedPolicyDTO
 | 1759          | Reseller doesn't exist                    |             |
 | 61617         | Device not found                          |             |
 | 61621         | App not exists                            |             |
-| 61673         | EMM application install version not exist |             |
-| 62032         | EMM device Serial No. is too long         |             |
-| 62044         | EMM device SN is mandatory                |             |
+| 61673         | AirEMM application install version not exist |             |
+| 62032         | AirEMM device Serial No. is too long         |             |
+| 62044         | AirEMM device SN is mandatory                |             |
 
-### Create device EMM policy
+### Create device AirEMM policy
 
 Create device AirEMM policy API allow the thirdparty system create/update device AirEMM policy remotely.
 
@@ -2516,10 +2516,10 @@ Structure of class DeviceEmmPolicyCreateRequest
 
 | Property Name    | Type                          | Nullable | Description                                                                                                                                                          |
 | :----------------- | :------------------------------ | :--------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| serialNo         | String                        | false    | The serialNo of EMM device. Max length is 16                                                                                                                         |
-| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of EMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, all of the contentInfo values are required |
-| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock EMM policy                                                                                                                                       |
-| inheritFlag      | Boolean                       | false    | Whether inherit EMM policy                                                                                                                                           |
+| serialNo         | String                        | false    | The serialNo of AirEMM device. Max length is 16                                                                                                                         |
+| contentInfo      | PolicyUpdatedContentDTO       | true     | The content of AirEMM policy. When inheritFlag is true, the contentInfo value can be ignored, and when inheritFlag is false, all of the contentInfo values are required |
+| lockedPolicyList | List\<LockedPolicyUpdateDTO\> | true     | The content of lock AirEMM policy                                                                                                                                       |
+| inheritFlag      | Boolean                       | false    | Whether inherit AirEMM policy                                                                                                                                           |
 
 Structure of class PolicyUpdatedContentDTO
 
@@ -2772,7 +2772,7 @@ Structure of class ApplicationPolicy
 
 | Property Name           | Type                       | Nullable | Description                                                                                                                                                                                                                                                                |
 | :------------------------ | :--------------------------- | :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| packageName             | String                     | false    | The package name of the emm app, max length is 128                                                                                                                                                                                                                         |
+| packageName             | String                     | false    | The package name of the AirEMM app, max length is 128                                                                                                                                                                                                                         |
 | autoUpdateMode          | String                     | false    | Controls the auto-update mode for the app, value can be one of AUTO_UPDATE_DEFAULT, AUTO_UPDATE_POSTPONED, AUTO_UPDATE_HIGH_PRIORITY                                                                                                                                       |
 | defaultPermissionPolicy | String                     | false    | The default policy for all permissions requested by the app. If specified, this overrides the policy-level defaultPermissionPolicy which applies to all apps. It does not override the permissionGrants which applies to all apps, value can be one of PROMPT, GRANT, DENY |
 | credentialProviderPolicy| String                     | false    | Optional. Whether the app is allowed to act as a credential provider on Android 14 and above, value can be one of CREDENTIAL_PROVIDER_POLICY_UNSPECIFIED, CREDENTIAL_PROVIDER_ALLOWED                                                                                      |
@@ -2860,14 +2860,14 @@ Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
 | 61610         | Action failed. Only one app in the policy can be installed in Kiosk mode                            |             |
 | 61617         | Device not found                                                                                    |             |
 | 61636         | {0} applications do not exist                                                                       |             |
-| 61641         | EMM policy is invalid                                                                               |             |
+| 61641         | AirEMM policy is invalid                                                                               |             |
 | 61645         | Locked application policies cannot be operated                                                      |             |
-| 61651         | EMM application configuration is invalid                                                            |             |
-| 61654         | EMM for Android not subscribed                                                                      |             |
-| 61655         | EMM for Android not distributed                                                                     |             |
-| 61656         | The market is not bound to EMM for Android                                                          |             |
-| 61660         | EMM app package name is mandatory                                                                   |             |
-| 61661         | EMM app package name is too long                                                                    |             |
+| 61651         | AirEMM application configuration is invalid                                                            |             |
+| 61654         | AirEMM for Android not subscribed                                                                      |             |
+| 61655         | AirEMM for Android not distributed                                                                     |             |
+| 61656         | The market is not bound to AirEMM for Android                                                          |             |
+| 61660         | AirEMM app package name is mandatory                                                                   |             |
+| 61661         | AirEMM app package name is too long                                                                    |             |
 | 61663         | {0} is invalid                                                                                      |             |
 | 61664         | Devices are not allowed to lock policy                                                              |             |
 | 61669         | {0} is not in the application list                                                                  |             |
@@ -2878,5 +2878,5 @@ Result<String> result = emmPolicyApi.createDeviceEmmPolicy(request);
 | 61683         | CA certificates are supported only in .cer/.pem/.der formats                                        |             |
 | 61708         | The Associated Configuration is locked and this "{0}" cannot be removed                             |             |
 | 61709         | The Associated Configuration is locked and this "{0}" cannot be turned off                          |             |
-| 62032         | EMM device Serial No. is too long                                                                   |             |
-| 62044         | EMM device SN is mandatory                                                                          |             |
+| 62032         | AirEMM device Serial No. is too long                                                                   |             |
+| 62044         | AirEMM device SN is mandatory                                                                          |             |
