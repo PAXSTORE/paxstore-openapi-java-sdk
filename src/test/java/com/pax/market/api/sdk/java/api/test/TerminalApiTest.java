@@ -18,6 +18,7 @@ import com.pax.market.api.sdk.java.api.terminal.dto.TerminalLogRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.*;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupRequest;
 import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalSnGroupRequest;
+import com.google.gson.Gson;
 import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
 import org.junit.Assert;
 import org.junit.Before;
