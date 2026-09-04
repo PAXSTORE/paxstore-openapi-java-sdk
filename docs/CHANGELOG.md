@@ -13,7 +13,7 @@
 
 ## 11.0.1
 ### Bug Fix
-* "Add entityAttributeValues support for reseller and merchant APIs
+* Add entityAttributeValues support for reseller and merchant APIs
 
 
 * ## 11.0.0
