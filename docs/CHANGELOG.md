@@ -1,4 +1,6 @@
 # Changelog  
+## 11.2.0
+* Add TerminalApi - `setTerminalGeoFence`, `setTerminalGeoFenceBySn` API support direct center-point mode (omit `templateName`, provide `lat`/`lng`/`radius` with `geofenceType`=P), no new endpoints added
 
 ## 11.1.0
 ### New Feature

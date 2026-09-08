@@ -16,7 +16,9 @@ import com.pax.market.api.sdk.java.api.terminal.TerminalApi;
 import java.io.Serializable;
 
 /**
- * The request to set a security geofence for a terminal according to a geofence template.
+ * Request to set a terminal geographic fence (safe-range): either by referencing an existing
+ * reseller geofence template (templateName + geofenceType), or directly with center-point
+ * coordinates (lat/lng/radius + geofenceType=P) when templateName is omitted.
  *
  * @author sdk
  */
@@ -26,6 +28,9 @@ public class TerminalGeoFenceRequest implements Serializable {
 
 	private String templateName;
 	private String geofenceType;
+	private Double lat;
+	private Double lng;
+	private Integer radius;
 
 	public String getTemplateName() {
 		return templateName;
@@ -52,5 +57,29 @@ public class TerminalGeoFenceRequest implements Serializable {
 		if (geofenceType != null) {
 			this.geofenceType = geofenceType.val();
 		}
+	}
+
+	public Double getLat() {
+		return lat;
+	}
+
+	public void setLat(Double lat) {
+		this.lat = lat;
+	}
+
+	public Double getLng() {
+		return lng;
+	}
+
+	public void setLng(Double lng) {
+		this.lng = lng;
+	}
+
+	public Integer getRadius() {
+		return radius;
+	}
+
+	public void setRadius(Integer radius) {
+		this.radius = radius;
 	}
 }

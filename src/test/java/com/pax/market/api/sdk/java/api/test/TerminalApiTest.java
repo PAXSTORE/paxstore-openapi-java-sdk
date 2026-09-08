@@ -32,6 +32,7 @@ import com.pax.market.api.sdk.java.api.terminal.TerminalApi.TerminalStatus;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalCreateRequest;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalDTO;
 import com.pax.market.api.sdk.java.api.terminal.dto.TerminalUpdateRequest;
+import com.pax.market.api.sdk.java.api.terminal.validator.TerminalGeoFenceRequestValidator;
 
 import java.util.*;
 
@@ -593,18 +594,101 @@ public class TerminalApiTest {
     }
 
     @Test
-    public void testSetTerminalGeoFence_missingTemplateName() {
-        //missing templateName is rejected by client side validation before any network call
+    public void testTerminalGeoFenceRequestValidator_templateModeValid() {
+        //template mode: templateName + geofenceType(P/C/B), lat/lng/radius are ignored
         TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
-        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
-        Result<String> result = terminalApi.setTerminalGeoFence(terminalId, request);
-        logger.debug("Result of set terminal geofence with missing templateName: {}", result.toString());
-        Assert.assertEquals(-1, result.getBusinessCode());
-        Assert.assertTrue(result.getValidationErrors().stream().anyMatch(e -> e.contains("templateName")));
+        request.setTemplateName("geo-fence-template");
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CustomizeCoordinatePoint);
+        Assert.assertTrue(TerminalGeoFenceRequestValidator.validate(request).isEmpty());
     }
 
     @Test
-    public void testSetTerminalGeoFenceSuccess() {
+    public void testTerminalGeoFenceRequestValidator_centerPointModeValid() {
+        //direct center-point mode: templateName empty + geofenceType=P + lat/lng/radius
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+        request.setLat(39.816975090490004);
+        request.setLng(116.10763549804689);
+        request.setRadius(2000);
+        Assert.assertTrue(TerminalGeoFenceRequestValidator.validate(request).isEmpty());
+    }
+
+    @Test
+    public void testTerminalGeoFenceRequestValidator_centerPointTypeMustBeP() {
+        //direct center-point mode only supports P, C is rejected by client validation
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CustomizeCoordinatePoint);
+        request.setLat(39.816975090490004);
+        request.setLng(116.10763549804689);
+        request.setRadius(2000);
+        List<String> errs = TerminalGeoFenceRequestValidator.validate(request);
+        Assert.assertFalse(errs.isEmpty());
+        Assert.assertTrue(errs.stream().anyMatch(e -> e.contains("geofenceType")));
+    }
+
+    @Test
+    public void testTerminalGeoFenceRequestValidator_invalidGeofenceType() {
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setTemplateName("tpl");
+        request.setGeofenceType("X");
+        List<String> errs = TerminalGeoFenceRequestValidator.validate(request);
+        Assert.assertFalse(errs.isEmpty());
+        Assert.assertTrue(errs.stream().anyMatch(e -> e.contains("geofenceType")));
+    }
+
+    @Test
+    public void testTerminalGeoFenceRequestValidator_centerPointLatOutOfRange() {
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+        request.setLat(91.0);
+        request.setLng(116.10763549804689);
+        request.setRadius(2000);
+        List<String> errs = TerminalGeoFenceRequestValidator.validate(request);
+        Assert.assertFalse(errs.isEmpty());
+        Assert.assertTrue(errs.stream().anyMatch(e -> e.toLowerCase().contains("lat")));
+    }
+
+    @Test
+    public void testTerminalGeoFenceRequestValidator_centerPointLngOutOfRange() {
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+        request.setLat(39.816975090490004);
+        request.setLng(181.0);
+        request.setRadius(2000);
+        List<String> errs = TerminalGeoFenceRequestValidator.validate(request);
+        Assert.assertFalse(errs.isEmpty());
+        Assert.assertTrue(errs.stream().anyMatch(e -> e.toLowerCase().contains("lng")));
+    }
+
+    @Test
+    public void testTerminalGeoFenceRequestValidator_centerPointRadiusOutOfRange() {
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+        request.setLat(39.816975090490004);
+        request.setLng(116.10763549804689);
+        request.setRadius(0);
+        List<String> errs = TerminalGeoFenceRequestValidator.validate(request);
+        Assert.assertFalse(errs.isEmpty());
+        Assert.assertTrue(errs.stream().anyMatch(e -> e.toLowerCase().contains("radius")));
+    }
+
+    @Test
+    public void testTerminalGeoFenceRequestSerialization() {
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+        request.setLat(39.816975090490004);
+        request.setLng(116.10763549804689);
+        request.setRadius(2000);
+        String json = new Gson().toJson(request, TerminalGeoFenceRequest.class);
+        logger.debug("Serialized terminal geofence request: {}", json);
+        Assert.assertTrue(json.contains("\"geofenceType\":\"P\""));
+        Assert.assertTrue(json.contains("\"lat\":39.816975090490004"));
+        Assert.assertTrue(json.contains("\"lng\":116.10763549804689"));
+        Assert.assertTrue(json.contains("\"radius\":2000"));
+    }
+
+    @Test
+    public void testSetTerminalGeoFenceByTemplateName() {
         TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
         request.setTemplateName("123");
         request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CustomizeCoordinatePoint);
@@ -612,4 +696,21 @@ public class TerminalApiTest {
 		logger.debug("Result of set terminal geofence: {}", result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
     }
+
+	@Test
+	public void testSetTerminalGeoFenceByCenterPoint() {
+		//empty templateName switches to direct center-point mode, lat/lng/radius are mandatory,
+		TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+		request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+		request.setLat(39.92);
+		request.setLng(116.42);
+		request.setRadius(2000);
+		Result<String> resultById = terminalApi.setTerminalGeoFence(terminalId, request);
+		Assert.assertEquals(0, resultById.getBusinessCode());
+		request.setLat(49.92);
+		request.setLng(120.42);
+		request.setRadius(2000);
+		Result<String> resultBySn = terminalApi.setTerminalGeoFenceBySn(serialNo, request);
+		Assert.assertEquals(0, resultBySn.getBusinessCode());
+	}
 }

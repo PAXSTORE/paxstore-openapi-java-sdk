@@ -4371,7 +4371,9 @@ Structure of class TerminalAlarmDTO
 
 ### Set Terminal Security GeoFence (by terminal id)
 
-Set a security geofence for a terminal according to a geofence template, by terminal id.
+Set a geographic fence (safe-range) on a terminal, by terminal id. Two modes are supported:
+- Template mode: provide `templateName` + `geofenceType` (P/C/B) to reference an existing reseller geofence template, the `lat`/`lng`/`radius` are ignored.
+- Direct center-point mode: omit `templateName` and provide `lat`/`lng`/`radius` with `geofenceType`=P.
 
 **API**
 
@@ -4390,17 +4392,29 @@ Structure of class TerminalGeoFenceRequest
 
 | Property Name | Type   | Nullable | Description |
 | :------------ | :----- | :------- | :---------- |
-| templateName  | String | false    | the name of the geofence template |
-| geofenceType  | String | false    | the geofence type, the value can be P(CenterPoint), C(Polygon) and B(Boundary), pass via `TerminalApi.TerminalGeoFenceType` enum |
+| templateName  | String | true     | the name of the geofence template. When present(non-blank) it works in template mode; when omitted/blank it works in direct center-point mode and `lat`/`lng`/`radius` must be provided with `geofenceType`=P |
+| geofenceType  | String | false    | the geofence type, the value can be P(CenterPoint), C(CustomizeCoordinatePoint) and B(BoundariesGeofencing), pass via `TerminalApi.TerminalGeoFenceType` enum. In direct center-point mode only P is supported |
+| lat           | Double | true     | Latitude of the center point. Required in direct center-point mode, range is [-90, 90] |
+| lng           | Double | true     | Longitude of the center point. Required in direct center-point mode, range is [-180, 180] |
+| radius        | Integer | true    | Radius in meters. Required in direct center-point mode, must be between 500 and 999999 |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+//template mode
 TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
 request.setTemplateName("geo-fence-template");
-request.setGeofenceType(TerminalApi.TerminalGeoFenceType.Polygon);
+request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CustomizeCoordinatePoint);
 Result<String> result = terminalApi.setTerminalGeoFence(123L, request);
+
+//direct center-point mode
+TerminalGeoFenceRequest centerPointRequest = new TerminalGeoFenceRequest();
+centerPointRequest.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+centerPointRequest.setLat(39.816975090490004);
+centerPointRequest.setLng(116.10763549804689);
+centerPointRequest.setRadius(2000);
+Result<String> centerPointResult = terminalApi.setTerminalGeoFence(123L, centerPointRequest);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -4408,7 +4422,7 @@ Result<String> result = terminalApi.setTerminalGeoFence(123L, request);
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["Parameter templateName cannot be empty!"]
+	"validationErrors": ["Parameter lat cannot be null!", "Parameter lng cannot be null!", "Parameter radius cannot be null!"]
 }
 ```
 
@@ -4432,12 +4446,21 @@ Result<String> result = terminalApi.setTerminalGeoFence(123L, request);
 **Possible client validation errors**
 
 > <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
-> <font color=red>Parameter templateName cannot be empty!</font>
 > <font color=red>Parameter geofenceType cannot be empty!</font>
+> <font color=red>Parameter geofenceType is invalid, the value must be one of P, C or B!</font>
+> <font color=red>Parameter geofenceType must be P(CenterPoint) when templateName is empty!</font>
+> <font color=red>Parameter lat cannot be null!</font>
+> <font color=red>Parameter lat must be between -90 and 90!</font>
+> <font color=red>Parameter lng cannot be null!</font>
+> <font color=red>Parameter lng must be between -180 and 180!</font>
+> <font color=red>Parameter radius cannot be null!</font>
+> <font color=red>Parameter radius must be between 500 and 999999!</font>
 
 ### Set Terminal Security GeoFence (by serial number)
 
-Set a security geofence for a terminal according to a geofence template, by serial number.
+Set a geographic fence (safe-range) on a terminal identified by serial number. Two modes are supported:
+- Template mode: provide `templateName` + `geofenceType` (P/C/B) to reference an existing reseller geofence template, the `lat`/`lng`/`radius` are ignored.
+- Direct center-point mode: omit `templateName` and provide `lat`/`lng`/`radius` with `geofenceType`=P.
 
 **API**
 
@@ -4456,16 +4479,22 @@ Structure of class TerminalGeoFenceRequest
 
 | Property Name | Type   | Nullable | Description |
 | :------------ | :----- | :------- | :---------- |
-| templateName  | String | false    | the name of the geofence template |
-| geofenceType  | String | false    | the geofence type, the value can be P(CenterPoint), C(Polygon) and B(Boundary), pass via `TerminalApi.TerminalGeoFenceType` enum |
+| templateName  | String | true     | the name of the geofence template. When present(non-blank) it works in template mode; when omitted/blank it works in direct center-point mode and `lat`/`lng`/`radius` must be provided with `geofenceType`=P |
+| geofenceType  | String | false    | the geofence type, the value can be P(CenterPoint), C(CustomizeCoordinatePoint) and B(BoundariesGeofencing), pass via `TerminalApi.TerminalGeoFenceType` enum. In direct center-point mode only P is supported |
+| lat           | Double | true     | Latitude of the center point. Required in direct center-point mode, range is [-90, 90] |
+| lng           | Double | true     | Longitude of the center point. Required in direct center-point mode, range is [-180, 180] |
+| radius        | Integer | true    | Radius in meters. Required in direct center-point mode, must be between 500 and 999999 |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+//direct center-point mode
 TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
-request.setTemplateName("geo-fence-template");
 request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+request.setLat(39.816975090490004);
+request.setLng(116.10763549804689);
+request.setRadius(2000);
 Result<String> result = terminalApi.setTerminalGeoFenceBySn("SUBSN108", request);
 ```
 
@@ -4474,7 +4503,7 @@ Result<String> result = terminalApi.setTerminalGeoFenceBySn("SUBSN108", request)
 ```
 {
 	"businessCode": -1,
-	"validationErrors": ["Parameter serialNo cannot be empty!", "Parameter templateName cannot be empty!"]
+	"validationErrors": ["Parameter serialNo cannot be empty!", "Parameter lat cannot be null!", "Parameter lng cannot be null!", "Parameter radius cannot be null!"]
 }
 ```
 
@@ -4498,5 +4527,12 @@ Result<String> result = terminalApi.setTerminalGeoFenceBySn("SUBSN108", request)
 **Possible client validation errors**
 
 > <font color=red>Parameter serialNo cannot be empty!</font>
-> <font color=red>Parameter templateName cannot be empty!</font>
 > <font color=red>Parameter geofenceType cannot be empty!</font>
+> <font color=red>Parameter geofenceType is invalid, the value must be one of P, C or B!</font>
+> <font color=red>Parameter geofenceType must be P(CenterPoint) when templateName is empty!</font>
+> <font color=red>Parameter lat cannot be null!</font>
+> <font color=red>Parameter lat must be between -90 and 90!</font>
+> <font color=red>Parameter lng cannot be null!</font>
+> <font color=red>Parameter lng must be between -180 and 180!</font>
+> <font color=red>Parameter radius cannot be null!</font>
+> <font color=red>Parameter radius must be between 500 and 999999!</font>
