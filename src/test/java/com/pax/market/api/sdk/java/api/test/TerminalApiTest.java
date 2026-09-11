@@ -294,9 +294,15 @@ public class TerminalApiTest {
 
 	@Test
 	public void testPushTerminalAction() {
-		Long terminalId = 515006L;
 		Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalApi.TerminalPushCmd.Unlock);
 		logger.debug("Result of push terminal action {}",result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testPushTerminalFactoryResetAction() {
+		Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalApi.TerminalPushCmd.FactoryReset);
+		logger.debug("Result of push terminal factory reset action {}",result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
 	}
 
@@ -399,6 +405,13 @@ public class TerminalApiTest {
 	public void testPushTerminalActionBySn() {
 		Result<String> result = terminalApi.pushCmdToTerminalBySn(serialNo, TerminalApi.TerminalPushCmd.Lock);
 		logger.debug("Result of push terminal action {}",result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testPushTerminalFactoryResetActionBySn() {
+		Result<String> result = terminalApi.pushCmdToTerminalBySn(serialNo, TerminalApi.TerminalPushCmd.FactoryReset);
+		logger.debug("Result of push terminal factory reset action by sn {}",result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
 	}
 

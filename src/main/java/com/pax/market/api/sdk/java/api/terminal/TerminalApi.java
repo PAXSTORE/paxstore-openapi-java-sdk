@@ -1002,7 +1002,16 @@ public class TerminalApi extends BaseThirdPartySysApi {
     public enum TerminalPushCmd {
         Restart("Restart"),
         Lock("Lock"),
-        Unlock("Unlock");
+        Unlock("Unlock"),
+        /**
+         * Remote factory reset the terminal. Only available when the marketplace has enabled the
+         * remote factory reset API, and not supported by traditional terminals.
+         * <p>
+         * The data stored on the terminal will be cleared, including the installed applications,
+         * firmware, settings, geolocation and so on. The terminal will perform the factory reset
+         * after receiving the command.
+         */
+        FactoryReset("FactoryReset");
 
 
         private final String val;

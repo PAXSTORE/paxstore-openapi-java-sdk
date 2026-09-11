@@ -2950,7 +2950,11 @@ Result<TerminalPedDTO> result = terminalApi.getTerminalPedBySn("SN6132522");
 
 ### Push Command to Terminal
 
-Push lock, unlock and restart command to terminal
+Push lock, unlock, restart and factory reset command to terminal
+
+> **Note**: The `FactoryReset` command is only available when the marketplace has enabled the remote factory reset API, and it is not supported for traditional terminals.
+>
+> **Warning**: The data stored on the terminal will be cleared, including the installed applications, firmware, settings, geolocation and so on. The terminal will perform the factory reset after receiving the command.
 
 **API**
 
@@ -2963,7 +2967,7 @@ public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command
 | Parameter Name              | Type                        | Nullable | Description                     |
 | :-------------------------- | :-------------------------- | :------- | :------------------------------ |
 | terminalId                  | Long                        | false    | Terminal's id.                  |
-| command | TerminalPushCmd | false    | Value can be TerminalPushCmd.Lock, TerminalPushCmd.Unlock and TerminalPushCmd.Restart |
+| command | TerminalPushCmd | false    | Value can be TerminalPushCmd.Lock, TerminalPushCmd.Unlock, TerminalPushCmd.Restart and TerminalPushCmd.FactoryReset |
 
 **Sample codes**
 
@@ -3016,10 +3020,17 @@ Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCm
 | 15096         | The terminal is being locked            |             |
 | 15097         | The terminal is being unlocked            |             |
 | 15099         | Terminal restart in progress            |             |
+| 15100         | The marketplace has not enabled the Factory Reset API |  |
+| 15101         | The terminal type does not support factory reset |      |
+| 15102         | Terminal factory reset in progress      |             |
 
 ### Push Command to Terminal by serialNo
 
-Push lock, unlock and restart command to terminal
+Push lock, unlock, restart and factory reset command to terminal
+
+> **Note**: The `FactoryReset` command is only available when the marketplace has enabled the remote factory reset API, and it is not supported for traditional terminals.
+>
+> **Warning**: The data stored on the terminal will be cleared, including the installed applications, firmware, settings, geolocation and so on. The terminal will perform the factory reset after receiving the command.
 
 **API**
 
@@ -3032,7 +3043,7 @@ public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.Termina
 | Parameter Name              | Type            | Nullable | Description                     |
 | :-------------------------- |:----------------| :------- | :------------------------------ |
 | serialNo                  | String          | false    | Terminal's serialNo.                  |
-| command | TerminalPushCmd | false    | Value can be TerminalPushCmd.Lock, TerminalPushCmd.Unlock and TerminalPushCmd.Restart |
+| command | TerminalPushCmd | false    | Value can be TerminalPushCmd.Lock, TerminalPushCmd.Unlock, TerminalPushCmd.Restart and TerminalPushCmd.FactoryReset |
 
 **Sample codes**
 
@@ -3085,6 +3096,9 @@ Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCm
 | 15096         | The terminal is being locked            |             |
 | 15097         | The terminal is being unlocked            |             |
 | 15099         | Terminal restart in progress            |             |
+| 15100         | The marketplace has not enabled the Factory Reset API |  |
+| 15101         | The terminal type does not support factory reset |      |
+| 15102         | Terminal factory reset in progress      |             |
 
 
 ### Get terminal network information

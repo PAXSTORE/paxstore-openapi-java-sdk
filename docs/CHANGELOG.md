@@ -1,6 +1,7 @@
 # Changelog  
 ## 11.2.0
 * Add TerminalApi - `setTerminalGeoFence`, `setTerminalGeoFenceBySn` API support direct center-point mode (omit `templateName`, provide `lat`/`lng`/`radius` with `geofenceType`=P), no new endpoints added
+* Add TerminalApi - `pushCmdToTerminal`, `pushCmdToTerminalBySn` support the new `TerminalPushCmd.FactoryReset` command to remotely factory reset a terminal (by terminal id and by serialNo), no new endpoints added; note that all the data stored on the terminal (installed applications, firmware, settings, geolocation, etc.) will be cleared and the terminal will perform the factory reset after receiving the command
 
 ## 11.1.0
 ### New Feature
