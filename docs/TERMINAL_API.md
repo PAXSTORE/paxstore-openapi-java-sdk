@@ -2955,11 +2955,14 @@ Push lock, unlock, restart and factory reset command to terminal
 > **Note**: The `FactoryReset` command is only available when the marketplace has enabled the remote factory reset API, and it is not supported for traditional terminals.
 >
 > **Warning**: The data stored on the terminal will be cleared, including the installed applications, firmware, settings, geolocation and so on. The terminal will perform the factory reset after receiving the command.
+>
+> **Cancel**: `cancel=true` removes the not-yet-acknowledged task of the given command from the terminal instead of pushing it. Nothing is pushed to the terminal when cancelling, and cancel is idempotent(returns success even when there is nothing to cancel).
 
 **API**
 
 ```
-public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command)
+public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command);
+public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command, boolean cancel);
 ```
 
 **Input parameter(s) description**
@@ -2968,12 +2971,14 @@ public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command
 | :-------------------------- | :-------------------------- | :------- | :------------------------------ |
 | terminalId                  | Long                        | false    | Terminal's id.                  |
 | command | TerminalPushCmd | false    | Value can be TerminalPushCmd.Lock, TerminalPushCmd.Unlock, TerminalPushCmd.Restart and TerminalPushCmd.FactoryReset |
+| cancel | boolean | true    | Set to true to cancel the pending task of the given command instead of pushing it. Omitted or false keeps the original push behavior. Returns success even when there is nothing to cancel. |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
 Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCmd.Lock);
+Result<String> cancelResult = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCmd.Lock, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -3032,10 +3037,13 @@ Push lock, unlock, restart and factory reset command to terminal
 >
 > **Warning**: The data stored on the terminal will be cleared, including the installed applications, firmware, settings, geolocation and so on. The terminal will perform the factory reset after receiving the command.
 
+> **Cancel**: `cancel=true` removes the not-yet-acknowledged task of the given command from the terminal instead of pushing it. Nothing is pushed to the terminal when cancelling, and cancel is idempotent(returns success even when there is nothing to cancel).
+
 **API**
 
 ```
-public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.TerminalPushCmd command)
+public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.TerminalPushCmd command);
+public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.TerminalPushCmd command, boolean cancel);
 ```
 
 **Input parameter(s) description**
@@ -3044,12 +3052,14 @@ public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.Termina
 | :-------------------------- |:----------------| :------- | :------------------------------ |
 | serialNo                  | String          | false    | Terminal's serialNo.                  |
 | command | TerminalPushCmd | false    | Value can be TerminalPushCmd.Lock, TerminalPushCmd.Unlock, TerminalPushCmd.Restart and TerminalPushCmd.FactoryReset |
+| cancel | boolean | true    | Set to true to cancel the pending task of the given command instead of pushing it. Omitted or false keeps the original push behavior. Returns success even when there is nothing to cancel. |
 
 **Sample codes**
 
 ```
 TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
-Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCmd.Lock);
+Result<String> result = terminalApi.pushCmdToTerminalBySn(serialNo, TerminalPushCmd.Lock);
+Result<String> cancelResult = terminalApi.pushCmdToTerminalBySn(serialNo, TerminalPushCmd.Lock, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**

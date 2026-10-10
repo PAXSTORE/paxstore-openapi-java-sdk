@@ -396,7 +396,21 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command){
-        logger.debug("terminalId={}", terminalId);
+        return pushCmdToTerminal(terminalId, command, false);
+    }
+
+    /**
+     * Push a command to the terminal, or cancel the pending task of the command.
+     *
+     * @param terminalId the terminal id
+     * @param command    the command to push
+     * @param cancel     true to cancel the pending task of the given command instead of pushing it;
+     *                   false keeps the original push behavior. Cancelling is idempotent, the server
+     *                   returns success even when there is nothing to cancel
+     * @return the result
+     */
+    public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command, boolean cancel){
+        logger.debug("terminalId={}, cancel={}", terminalId, cancel);
         List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
         validationErrs.addAll(Validators.validateObject(command,"terminalPushCmdRequest"));
         if (!validationErrs.isEmpty()) {
@@ -407,6 +421,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.setRequestMethod(RequestMethod.POST);
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("command", command.val());
+        request.addRequestParam("cancel", String.valueOf(cancel));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<>(emptyResponse);
     }
@@ -654,7 +669,21 @@ public class TerminalApi extends BaseThirdPartySysApi {
     }
 
     public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.TerminalPushCmd command){
-        logger.debug("serialNo={}", serialNo);
+        return pushCmdToTerminalBySn(serialNo, command, false);
+    }
+
+    /**
+     * Push a command to the terminal, or cancel the pending task of the command.
+     *
+     * @param serialNo the terminal serial number
+     * @param command  the command to push
+     * @param cancel   true to cancel the pending task of the given command instead of pushing it;
+     *                 false keeps the original push behavior. Cancelling is idempotent, the server
+     *                 returns success even when there is nothing to cancel
+     * @return the result
+     */
+    public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.TerminalPushCmd command, boolean cancel){
+        logger.debug("serialNo={}, cancel={}", serialNo, cancel);
         List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
         validationErrs.addAll(Validators.validateObject(command,"terminalPushCmdRequest"));
         if (!validationErrs.isEmpty()) {
@@ -666,6 +695,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
         request.addRequestParam("command", command.val());
+        request.addRequestParam("cancel", String.valueOf(cancel));
         EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
         return  new Result<>(emptyResponse);
     }

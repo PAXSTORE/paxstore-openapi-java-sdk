@@ -307,6 +307,13 @@ public class TerminalApiTest {
 	}
 
 	@Test
+	public void testCancelTerminalAction() {
+		Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalApi.TerminalPushCmd.Lock, true);
+		logger.debug("Result of cancel terminal action {}",result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
 	public void testGetTerminalNetwork(){
 		Result<TerminalNetworkDTO> result = terminalApi.getTerminalNetwork("TEST8000999","BTG7KFTY");
 		logger.debug("Result of get Terminal network: {}",result.toString());
@@ -412,6 +419,13 @@ public class TerminalApiTest {
 	public void testPushTerminalFactoryResetActionBySn() {
 		Result<String> result = terminalApi.pushCmdToTerminalBySn(serialNo, TerminalApi.TerminalPushCmd.FactoryReset);
 		logger.debug("Result of push terminal factory reset action by sn {}",result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
+
+	@Test
+	public void testCancelTerminalActionBySn() {
+		Result<String> result = terminalApi.pushCmdToTerminalBySn(serialNo, TerminalApi.TerminalPushCmd.Lock, true);
+		logger.debug("Result of cancel terminal action by sn {}",result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
 	}
 
@@ -703,9 +717,19 @@ public class TerminalApiTest {
     @Test
     public void testSetTerminalGeoFenceByTemplateName() {
         TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
-        request.setTemplateName("123");
-        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CustomizeCoordinatePoint);
+        request.setTemplateName("111");
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
 		Result<String> result = terminalApi.setTerminalGeoFence(terminalId, request);
+		logger.debug("Result of set terminal geofence: {}", result.toString());
+		Assert.assertEquals(0, result.getBusinessCode());
+    }
+
+	@Test
+    public void testSetTerminalGeoFenceBysnTemplateName() {
+        TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+        request.setTemplateName("111");
+        request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+		Result<String> result = terminalApi.setTerminalGeoFenceBySn(serialNo, request);
 		logger.debug("Result of set terminal geofence: {}", result.toString());
 		Assert.assertEquals(0, result.getBusinessCode());
     }
