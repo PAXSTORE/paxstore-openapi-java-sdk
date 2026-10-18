@@ -118,6 +118,7 @@ Structure of class TerminalDTO
 |terminalDetail|TerminalDetailDTO| The terminal detail information |
 |terminalAccessoryList|List\<TerminalAccessoryDTO\>| The terminal accessory information list |
 |masterTerminalSerialNo|String| When the query terminal is an accessory device, return the master terminal serialNo (if any). <br/>Return only in getTerminal and getTerminalBySn |
+|groups|List\<TerminalGroupInfoDTO\>| Terminal group info list. <br/>Return only in getTerminal and getTerminalBySn when includeGroupInfo=true |
 
 Structure of class TerminalLocationDTO
 
@@ -192,6 +193,15 @@ Structure of class TerminalDeviceHistoryDTO
 | fileType      | String | The type of the file pushed by the accessory device          |
 | source        | String | The file source                                              |
 | remarks       | String | The remarks information                                      |
+
+Structure of class TerminalGroupInfoDTO
+
+_**tips: Only return this information in getTerminal or getTerminalBySn when includeGroupInfo=true**_
+
+| Property Name | Type   | Description       |
+|:--------------|:-------|:------------------|
+| groupId       | Long   | Group id          |
+| groupName     | String | Group name        |
 
 **Possible validation errors**
 
@@ -331,6 +341,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware);
 public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal);
+public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal, boolean includeGroupInfo);
 ```
 
 **Input parameter(s) description**
@@ -342,6 +353,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 |includeInstalledApks|Boolean|true|Whether to return the installed applications, example: false|
 |includeInstalledFirmware|Boolean|true|Whether to return the installed firmware, example: false|
 |includeMasterTerminal|Boolean|true|whether to return the master terminal serialNo, example: false|
+|includeGroupInfo|Boolean|true|Whether to return terminal group info list, example: false|
 
 **Sample codes**
 
@@ -357,6 +369,8 @@ Result<TerminalDTO> result = terminalApi.getTerminal(908627L,false, true);
 Result<TerminalDTO> result = terminalApi.getTerminal(1654906985381944L,false, false, true);
 //includeMasterTerminal
 Result<TerminalDTO> result = terminalApi.getTerminal(1687838810701873L,false, false, false, true);
+//includeGroupInfo
+Result<TerminalDTO> result = terminalApi.getTerminal(908627L,false, false, false, false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -744,6 +758,7 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetai
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware)
 public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal)
+public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal, boolean includeGroupInfo)
 ```
 
 **Input parameter(s) description**
@@ -755,6 +770,7 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetai
 | includeInstalledApks | Boolean |true| Whether to return the installed applications, example: false |
 | includeInstalledFirmware | Boolean |true| Whether to return the installed firmware, example: false |
 | includeMasterTerminal | Boolean |true| whether to return the master terminal serialNo, example: false |
+| includeGroupInfo | Boolean |true| Whether to return terminal group info list, example: false |
 
 **Sample codes**
 
@@ -770,6 +786,8 @@ Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",false,true)
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENT",false,false, true);
 //includeMasterTerminal
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("TESTCLIENTACCESS",false,false, false, true);
+//includeGroupInfo
+Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522",false,false, false, false, true);
 ```
 
 **Client side validation failed sample result(JSON formatted)**
@@ -4193,8 +4211,6 @@ Structure of class EmptyResponse
 | 2066          | Application is not a launcher application        |             |
 | 2067          | Application has been set as launcher application |             |
 
-
-
 ### Push Terminal Set Launcher Action By SN
 
 **API**
@@ -4273,3 +4289,214 @@ Structure of class EmptyResponse
 | 2065          | Installed application not found                  |             |
 | 2066          | Application is not a launcher application        |             |
 | 2067          | Application has been set as launcher application |             |
+
+
+### Search Tampered Terminal
+
+Search terminal tamper alarm records by page.
+
+**API**
+
+```
+public Result<TerminalAlarmDTO> searchTamperedTerminal(int pageNo, int pageSize, String serialNo, String tid, String name)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name | Type   | Nullable | Description                                   |
+| :------------- | :----- |:---------| :-------------------------------------------- |
+| pageNo         | int    | false    | page number, value must >=1                   |
+| pageSize       | int    | false    | the record number per page, range is 1 to 100 |
+| serialNo       | String | true     | search by terminal serial no.                 |
+| tid            | String | true     | search by terminal tid.                       |
+| name           | String | true     | search by terminal name.                      |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<TerminalAlarmDTO> result = terminalApi.searchTamperedTerminal(1, 10, null, null, null);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["pageSize:must be greater than or equal to 1", "pageNo:must be greater than or equal to 1"]
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+    "businessCode": 0,
+    "dataset": [
+        {
+            "terminalId": 1694932481867814,
+            "serialNo": "TESTPCI7",
+            "name": "TESTPCI7",
+            "tid": "Y82041SO",
+            "alertTime": 1754891648000
+        }
+    ],
+    "limit": 10,
+    "pageNo": 1,
+    "totalCount": 1,
+    "hasNext": false,
+    "rateLimit": "1",
+    "rateLimitRemain": "0",
+    "rateLimitReset": "1782204146518"
+}
+```
+
+The type in dataSet of result is TerminalAlarmDTO. The structure shows below.
+
+Structure of class TerminalAlarmDTO
+
+| Property Name | Type   | Description              |
+| ------------- | ------ | ------------------------ |
+| terminalId    | Long   | Terminal's id.           |
+| serialNo      | String | Terminal's serial no.    |
+| name          | String | Terminal's name.         |
+| tid           | String | Terminal's tid.          |
+| alertTime     | Date   | The tamper alert time.   |
+
+**Possible validation errors**
+
+> <font color=red>pageSize:must be greater than or equal to 1</font>   
+> <font color=red>pageNo:must be greater than or equal to 1</font>   
+> <font color=red>pageSize:must be less than or equal to 100</font>
+
+### Set Terminal Security GeoFence (by terminal id)
+
+Set a security geofence for a terminal according to a geofence template, by terminal id.
+
+**API**
+
+```
+public Result<String> setTerminalGeoFence(Long terminalId, TerminalGeoFenceRequest terminalGeoFenceRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name           | Type                   | Nullable | Description                                      |
+| :----------------------- | :--------------------- | :------- | :----------------------------------------------- |
+| terminalId               | Long                   | false    | Terminal's id.                                   |
+| terminalGeoFenceRequest  | TerminalGeoFenceRequest | false   | the set geofence request object, the structure like below |
+
+Structure of class TerminalGeoFenceRequest
+
+| Property Name | Type   | Nullable | Description |
+| :------------ | :----- | :------- | :---------- |
+| templateName  | String | false    | the name of the geofence template |
+| geofenceType  | String | false    | the geofence type, the value can be P(CenterPoint), C(Polygon) and B(Boundary), pass via `TerminalApi.TerminalGeoFenceType` enum |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+request.setTemplateName("geo-fence-template");
+request.setGeofenceType(TerminalApi.TerminalGeoFenceType.Polygon);
+Result<String> result = terminalApi.setTerminalGeoFence(123L, request);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter templateName cannot be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter terminalId cannot be null and cannot be less than 1!</font>
+> <font color=red>Parameter templateName cannot be empty!</font>
+> <font color=red>Parameter geofenceType cannot be empty!</font>
+
+### Set Terminal Security GeoFence (by serial number)
+
+Set a security geofence for a terminal according to a geofence template, by serial number.
+
+**API**
+
+```
+public Result<String> setTerminalGeoFenceBySn(String serialNo, TerminalGeoFenceRequest terminalGeoFenceRequest)
+```
+
+**Input parameter(s) description**
+
+| Parameter Name           | Type                   | Nullable | Description                                      |
+| :----------------------- | :--------------------- | :------- | :----------------------------------------------- |
+| serialNo                 | String                 | false    | Serial number of terminal.                       |
+| terminalGeoFenceRequest  | TerminalGeoFenceRequest | false   | the set geofence request object, the structure like below |
+
+Structure of class TerminalGeoFenceRequest
+
+| Property Name | Type   | Nullable | Description |
+| :------------ | :----- | :------- | :---------- |
+| templateName  | String | false    | the name of the geofence template |
+| geofenceType  | String | false    | the geofence type, the value can be P(CenterPoint), C(Polygon) and B(Boundary), pass via `TerminalApi.TerminalGeoFenceType` enum |
+
+**Sample codes**
+
+```
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
+request.setTemplateName("geo-fence-template");
+request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);
+Result<String> result = terminalApi.setTerminalGeoFenceBySn("SUBSN108", request);
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter serialNo cannot be empty!", "Parameter templateName cannot be empty!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1800,
+	"message": "Terminal not found"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter serialNo cannot be empty!</font>
+> <font color=red>Parameter templateName cannot be empty!</font>
+> <font color=red>Parameter geofenceType cannot be empty!</font>

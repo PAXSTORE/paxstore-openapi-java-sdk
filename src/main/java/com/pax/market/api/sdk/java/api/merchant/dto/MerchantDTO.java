@@ -25,7 +25,6 @@ public class MerchantDTO extends MerchantPageDTO{
 
 	private static final long serialVersionUID = -643337628724546554L;
 	
-	private LinkedHashMap<String, String> entityAttributeValues;
 	private List<MerchantCategoryDTO> merchantCategory;
 	
 	public List<MerchantCategoryDTO> getMerchantCategory() {
@@ -36,13 +35,6 @@ public class MerchantDTO extends MerchantPageDTO{
 		this.merchantCategory = merchantCategory;
 	}
 
-	public LinkedHashMap<String, String> getEntityAttributeValues() {
-		return entityAttributeValues;
-	}
-
-	public void setEntityAttributeValues(LinkedHashMap<String, String> entityAttributeValues) {
-		this.entityAttributeValues = entityAttributeValues;
-	}
 
 	@Override
 	public String toString() {

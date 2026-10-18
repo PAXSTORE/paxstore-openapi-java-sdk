@@ -43,19 +43,21 @@ public class GoInsightApi extends BaseThirdPartySysApi {
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode){
-        return findDataFromInsight(queryCode, null, null,null, null);
+        return findDataFromInsight(queryCode, null);
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType){
-        return findDataFromInsight(queryCode, rangeType, null,null, null);
+        return findDataFromInsight(queryCode, rangeType, null,null);
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType, Integer pageNo, Integer pageSize){
-        return findDataFromInsight(queryCode, rangeType, null,pageNo, pageSize);
+        return findDataFromInsight(queryCode, rangeType, null, false, pageNo, pageSize);
     }
 
     public Result<DataQueryResultDTO> findDataFromInsight(String queryCode, TimestampRangeType rangeType,
-                                                          List<GoInsightCustomFilter> customFilterList, Integer pageNo, Integer pageSize){
+                                                          List<GoInsightCustomFilter> customFilterList,
+                                                          Boolean useNewFilter,
+                                                          Integer pageNo, Integer pageSize){
         List<String> validationErrs = Validators.validateStr(queryCode, "parameter.queryCode.invalid");
         if (queryCode != null && queryCode.length() != QUERY_CODE_LENGTH){
             validationErrs.add(getMessage("parameter.queryCode.length.invalid"));
@@ -82,9 +84,8 @@ public class GoInsightApi extends BaseThirdPartySysApi {
         if(rangeType != null){
             queryRequest.setTimeRangeType(rangeType.val);
         }
-        if(Objects.nonNull(customFilterList)){
-            queryRequest.setCustomFilterList(customFilterList);
-        }
+        queryRequest.setCustomFilterList(customFilterList);
+        queryRequest.setUseNewFilter(useNewFilter);
         if(pageNo != null && pageNo > 0 && pageSize != null){
             queryRequest.setPageNo(pageNo);
             queryRequest.setPageSize(pageSize);

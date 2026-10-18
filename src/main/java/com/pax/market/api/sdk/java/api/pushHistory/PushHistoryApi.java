@@ -80,7 +80,7 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      */
     public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
         Type responseType = new TypeToken<ParameterPushHistoryPageResponse<ParameterPushHistoryDTO>>(){}.getType();
-        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "false", "false", responseType);
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, null, pushStatus, pushTime, "false", "false", responseType);
     }
 
     /**
@@ -96,7 +96,7 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      */
     public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
         Type responseType = new TypeToken<ParameterPushHistoryPageResponse<OptimizedParameterPushHistoryDTO>>(){}.getType();
-        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "false", "true", responseType);
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, null, pushStatus, pushTime, "false", "true", responseType);
     }
 
     /**
@@ -112,7 +112,7 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      */
     public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
         Type responseType = new TypeToken<ParameterPushHistoryPageResponse<ParameterPushHistoryDTO>>(){}.getType();
-        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "true", "false", responseType);
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, null, pushStatus, pushTime, "true", "false", responseType);
     }
 
     /**
@@ -128,10 +128,74 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
      */
     public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime) {
         Type responseType = new TypeToken<ParameterPushHistoryPageResponse<OptimizedParameterPushHistoryDTO>>(){}.getType();
-        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, pushStatus, pushTime, "true", "true", responseType);
+        return searchParameterPushHistory(pageNo, pageSize, packageName, serialNo, null, pushStatus, pushTime, "true", "true", responseType);
     }
 
-    private <T extends Serializable> Result<T> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, PushStatus pushStatus, Date pushTime, String onlyLastPushHistory, String optimizeParameters, Type responseType) {
+    /**
+     * Search parameter push history by tid result.
+     *
+     * @param pageNo      the page no
+     * @param pageSize    the page size
+     * @param packageName the package name
+     * @param tid         the tid
+     * @param pushStatus  the push status
+     * @param pushTime    the push time
+     * @return the result
+     */
+    public Result<ParameterPushHistoryDTO> searchParameterPushHistoryByTid(int pageNo, int pageSize, String packageName, String tid, PushStatus pushStatus, Date pushTime) {
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<ParameterPushHistoryDTO>>(){}.getType();
+        return searchParameterPushHistory(pageNo, pageSize, packageName, null, tid, pushStatus, pushTime, "false", "false", responseType);
+    }
+
+    /**
+     * Search optimized parameter push history by tid result.
+     *
+     * @param pageNo      the page no
+     * @param pageSize    the page size
+     * @param packageName the package name
+     * @param tid         the tid
+     * @param pushStatus  the push status
+     * @param pushTime    the push time
+     * @return the result
+     */
+    public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHistoryByTid(int pageNo, int pageSize, String packageName, String tid, PushStatus pushStatus, Date pushTime) {
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<OptimizedParameterPushHistoryDTO>>(){}.getType();
+        return searchParameterPushHistory(pageNo, pageSize, packageName, null, tid, pushStatus, pushTime, "false", "true", responseType);
+    }
+
+    /**
+     * Search latest parameter push history by tid result.
+     *
+     * @param pageNo      the page no
+     * @param pageSize    the page size
+     * @param packageName the package name
+     * @param tid         the tid
+     * @param pushStatus  the push status
+     * @param pushTime    the push time
+     * @return the result
+     */
+    public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistoryByTid(int pageNo, int pageSize, String packageName, String tid, PushStatus pushStatus, Date pushTime) {
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<ParameterPushHistoryDTO>>(){}.getType();
+        return searchParameterPushHistory(pageNo, pageSize, packageName, null, tid, pushStatus, pushTime, "true", "false", responseType);
+    }
+
+    /**
+     * Search latest optimized parameter push history by tid result.
+     *
+     * @param pageNo      the page no
+     * @param pageSize    the page size
+     * @param packageName the package name
+     * @param tid         the tid
+     * @param pushStatus  the push status
+     * @param pushTime    the push time
+     * @return the result
+     */
+    public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPushHistoryByTid(int pageNo, int pageSize, String packageName, String tid, PushStatus pushStatus, Date pushTime) {
+        Type responseType = new TypeToken<ParameterPushHistoryPageResponse<OptimizedParameterPushHistoryDTO>>(){}.getType();
+        return searchParameterPushHistory(pageNo, pageSize, packageName, null, tid, pushStatus, pushTime, "true", "true", responseType);
+    }
+
+    private <T extends Serializable> Result<T> searchParameterPushHistory(int pageNo, int pageSize, String packageName, String serialNo, String tid, PushStatus pushStatus, Date pushTime, String onlyLastPushHistory, String optimizeParameters, Type responseType) {
         List<String> validationErrsP = Validators.validateStr(packageName, "parameter.not.null", "packageName");
         if(!validationErrsP.isEmpty()){
             return new Result<>(validationErrsP);
@@ -153,6 +217,7 @@ public class PushHistoryApi extends BaseThirdPartySysApi {
         }
         request.addRequestParam("packageName", packageName);
         request.addRequestParam("serialNo", serialNo);
+        request.addRequestParam("tid", tid);
         request.addRequestParam("onlyLastPushHistory", onlyLastPushHistory);
         request.addRequestParam("optimizeParameters", optimizeParameters);
 

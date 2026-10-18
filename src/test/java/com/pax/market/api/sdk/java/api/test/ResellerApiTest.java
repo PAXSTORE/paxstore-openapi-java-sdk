@@ -21,6 +21,9 @@ import org.slf4j.LoggerFactory;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.reseller.ResellerApi;
 import com.pax.market.api.sdk.java.api.reseller.ResellerApi.ResellerSearchOrderBy;
+import com.pax.market.api.sdk.java.api.reseller.validator.ResellerCreateRequestValidator;
+
+import java.util.List;
 
 /**
  *
@@ -121,6 +124,23 @@ public class ResellerApiTest {
         logger.debug("Result of search reseller rki key list: {}",resultRkiKey.toString());
         Assert.assertTrue(resultRkiKey.getBusinessCode() == 0);
     }
-    
+
+	@Test
+	public void testCreateReseller_optionalFieldsMayBeEmpty() {
+		//contact, country, phone are no longer mandatory, so the request should pass client side validation
+		ResellerCreateRequest request = new ResellerCreateRequest();
+		request.setName("optional-fields-reseller2");
+		request.setEmail("optional.fields@gmail.com");
+		request.setContact(null);
+		request.setCountry(null);
+		request.setPhone(null);
+		request.setParentResellerName("shifan");
+		List<String> validationErrs = ResellerCreateRequestValidator.validate(request);
+		logger.debug("Create validation errors when optional fields are empty: {}", validationErrs);
+		request.setActivateWhenCreate(Boolean.TRUE);
+		Result<ResellerDTO> result = resellerApi.createReseller(request);
+		logger.debug("Result of reseller id: {}",result.getData().getId());
+		Assert.assertEquals(0, result.getBusinessCode());
+	}
     
 }

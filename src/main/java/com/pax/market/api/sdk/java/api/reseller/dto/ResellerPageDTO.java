@@ -12,6 +12,7 @@
 package com.pax.market.api.sdk.java.api.reseller.dto;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -33,7 +34,9 @@ public class ResellerPageDTO implements Serializable{
 	protected String contact;        // contact
 	protected String email;
 	protected String status;        // status
-	
+	protected LinkedHashMap<String, String> entityAttributeValues;
+
+
 	public Long getId() {
 		return id;
 	}
@@ -94,13 +97,29 @@ public class ResellerPageDTO implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public LinkedHashMap<String, String> getEntityAttributeValues() {
+		return entityAttributeValues;
+	}
+
+	public void setEntityAttributeValues(LinkedHashMap<String, String> entityAttributeValues) {
+		this.entityAttributeValues = entityAttributeValues;
+	}
+
 	@Override
 	public String toString() {
-		return "ResellerPageDTO [id=" + id + ", name=" + name + ", phone=" + phone + ", country=" + country
-				+ ", postcode=" + postcode + ", address=" + address + ", company=" + company + ", contact=" + contact
-				+ ", email=" + email + ", status=" + status + "]";
+		return "ResellerPageDTO{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", phone='" + phone + '\'' +
+				", country='" + country + '\'' +
+				", postcode='" + postcode + '\'' +
+				", address='" + address + '\'' +
+				", company='" + company + '\'' +
+				", contact='" + contact + '\'' +
+				", email='" + email + '\'' +
+				", status='" + status + '\'' +
+				", entityAttributeValues=" + entityAttributeValues +
+				'}';
 	}
-	
-	
-
 }

@@ -7,6 +7,7 @@ public class DataQueryRequest implements Serializable {
 
     private String timeRangeType;
     private List<GoInsightCustomFilter> customFilterList;
+    private Boolean useNewFilter;
 
     private Integer pageNo = 1;
     private Integer pageSize;
@@ -28,6 +29,14 @@ public class DataQueryRequest implements Serializable {
 
     public void setCustomFilterList(List<GoInsightCustomFilter> customFilterList) {
         this.customFilterList = customFilterList;
+    }
+
+    public Boolean getUseNewFilter() {
+        return useNewFilter;
+    }
+
+    public void setUseNewFilter(Boolean useNewFilter) {
+        this.useNewFilter = useNewFilter;
     }
 
     public Integer getPageNo() {

@@ -110,6 +110,10 @@ public class TerminalApi extends BaseThirdPartySysApi {
     protected static final String CHANGE_TERMINAL_MODEL_BY_SN = "/v1/3rdsys/terminal/model";
     protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION = "/v1/3rdsys/terminals/{terminalId}/launcher";
     protected static final String PUSH_TERMINAL_SET_LAUNCHER_ACTION_BY_SN = "/v1/3rdsys/terminal/launcher";
+    protected static final String SEARCH_TERMINAL_TAMPER_URL = "/v1/3rdsys/terminals/tamper";
+
+    protected static final String SET_TERMINAL_GEOFENCE_BY_ID = "/v1/3rdsys/terminals/{terminalId}/safe-range";
+    protected static final String SET_TERMINAL_GEOFENCE_BY_SN = "/v1/3rdsys/terminal/safe-range";
 
 
     public TerminalApi(String baseUrl, String apiKey, String apiSecret) {
@@ -168,19 +172,19 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
 
     public Result<TerminalDTO> getTerminal(Long terminalId) {
-       return getTerminal(terminalId,false,false,false, false);
+       return getTerminal(terminalId,false,false,false, false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList) {
-        return getTerminal(terminalId, includeDetailInfoList, false, false, false);
+        return getTerminal(terminalId, includeDetailInfoList, false, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks) {
-        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, false, false);
+        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware) {
-        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false);
+        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false, false);
     }
 
     public Result<TerminalDTO> getTerminal(Long terminalId,
@@ -188,6 +192,15 @@ public class TerminalApi extends BaseThirdPartySysApi {
                                            boolean includeInstalledApks,
                                            boolean includeInstalledFirmware,
                                            boolean includeMasterTerminal) {
+        return getTerminal(terminalId, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, includeMasterTerminal, false);
+    }
+
+    public Result<TerminalDTO> getTerminal(Long terminalId,
+                                           boolean includeDetailInfoList,
+                                           boolean includeInstalledApks,
+                                           boolean includeInstalledFirmware,
+                                           boolean includeMasterTerminal,
+                                           boolean includeGroupInfo) {
         logger.debug("terminalId = {}", terminalId);
         List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
         if (!validationErrs.isEmpty()) {
@@ -199,6 +212,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
         request.addRequestParam("includeInstalledFirmware", String.valueOf(includeInstalledFirmware));
         request.addRequestParam("includeMasterTerminal", String.valueOf(includeMasterTerminal));
+        request.addRequestParam("includeGroupInfo", String.valueOf(includeGroupInfo));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<>(terminalResponse);
     }
@@ -438,22 +452,26 @@ public class TerminalApi extends BaseThirdPartySysApi {
 
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo) {
-        return getTerminalBySn(serialNo, false, false, false, false);
+        return getTerminalBySn(serialNo, false, false, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList) {
-        return getTerminalBySn(serialNo, includeDetailInfoList, false, false, false);
+        return getTerminalBySn(serialNo, includeDetailInfoList, false, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks) {
-        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, false, false);
+        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, false, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware) {
-        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false);
+        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, false, false);
     }
 
     public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal) {
+        return getTerminalBySn(serialNo, includeDetailInfoList, includeInstalledApks, includeInstalledFirmware, includeMasterTerminal, false);
+    }
+
+    public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetailInfoList, boolean includeInstalledApks, boolean includeInstalledFirmware, boolean includeMasterTerminal, boolean includeGroupInfo) {
         logger.debug("serialNo= {}", serialNo);
         List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
         if (!validationErrs.isEmpty()) {
@@ -465,6 +483,7 @@ public class TerminalApi extends BaseThirdPartySysApi {
         request.addRequestParam("includeInstalledApks", String.valueOf(includeInstalledApks));
         request.addRequestParam("includeInstalledFirmware", String.valueOf(includeInstalledFirmware));
         request.addRequestParam("includeMasterTerminal", String.valueOf(includeMasterTerminal));
+        request.addRequestParam("includeGroupInfo", String.valueOf(includeGroupInfo));
         request.addRequestParam("serialNo", StringUtils.trim(serialNo));
         TerminalResponseDTO terminalResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalResponseDTO.class);
         return new Result<>(terminalResponse);
@@ -872,6 +891,91 @@ public class TerminalApi extends BaseThirdPartySysApi {
         return new Result<>(emptyResponse);
     }
 
+    public Result<TerminalAlarmDTO> searchTamperedTerminal(int pageNo, int pageSize, String serialNo, String tid, String name) {
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        PageRequestDTO page = new PageRequestDTO();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        List<String> validationErrs = Validators.validatePageRequest(page);
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        SdkRequest request = getPageRequest(SEARCH_TERMINAL_TAMPER_URL, page);
+        if (StringUtils.isNotEmpty(serialNo)) {
+            request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        }
+        if (StringUtils.isNotEmpty(tid)) {
+            request.addRequestParam("tid", StringUtils.trim(tid));
+        }
+        if (StringUtils.isNotEmpty(name)) {
+            request.addRequestParam("name", StringUtils.trim(name));
+        }
+        TerminalAlarmPageResponse terminalAlarmPageResponse = EnhancedJsonUtils.fromJson(client.execute(request), TerminalAlarmPageResponse.class);
+        return new Result<>(terminalAlarmPageResponse);
+    }
+
+
+    /**
+     * Set a security geofence for a terminal according to a geofence template(by terminal id).
+     *
+     * @param terminalId the id of the terminal
+     * @param terminalGeoFenceRequest the set geofence request which contains the template name and geofence type
+     * @return Result&lt;String&gt; empty data means set geofence successfully
+     */
+    public Result<String> setTerminalGeoFence(Long terminalId, TerminalGeoFenceRequest terminalGeoFenceRequest) {
+        logger.debug("terminalId= {}", terminalId);
+        List<String> validationErrs = Validators.validateId(terminalId, "parameter.id.invalid", "terminalId");
+        validationErrs.addAll(validateGeoFenceRequest(terminalGeoFenceRequest));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SET_TERMINAL_GEOFENCE_BY_ID.replace("{terminalId}", terminalId.toString()));
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.setRequestBody(new Gson().toJson(terminalGeoFenceRequest, TerminalGeoFenceRequest.class));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    /**
+     * Set a security geofence for a terminal according to a geofence template(by serial number).
+     *
+     * @param serialNo the serial number of the terminal
+     * @param terminalGeoFenceRequest the set geofence request which contains the template name and geofence type
+     * @return Result&lt;String&gt; empty data means set geofence successfully
+     */
+    public Result<String> setTerminalGeoFenceBySn(String serialNo, TerminalGeoFenceRequest terminalGeoFenceRequest) {
+        logger.debug("serialNo= {}", serialNo);
+        List<String> validationErrs = Validators.validateStr(serialNo, "parameter.not.empty", "serialNo");
+        validationErrs.addAll(validateGeoFenceRequest(terminalGeoFenceRequest));
+        if (!validationErrs.isEmpty()) {
+            return new Result<>(validationErrs);
+        }
+        ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+        SdkRequest request = createSdkRequest(SET_TERMINAL_GEOFENCE_BY_SN);
+        request.setRequestMethod(RequestMethod.POST);
+        request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+        request.addRequestParam("serialNo", StringUtils.trim(serialNo));
+        request.setRequestBody(new Gson().toJson(terminalGeoFenceRequest, TerminalGeoFenceRequest.class));
+        EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+        return new Result<>(emptyResponse);
+    }
+
+    private List<String> validateGeoFenceRequest(TerminalGeoFenceRequest terminalGeoFenceRequest) {
+        List<String> validationErrs = new ArrayList<>();
+        if (terminalGeoFenceRequest == null) {
+            validationErrs.add(getMessage("parameter.not.null", "terminalGeoFenceRequest"));
+            return validationErrs;
+        }
+        if (StringUtils.isEmpty(terminalGeoFenceRequest.getTemplateName())) {
+            validationErrs.add(getMessage("parameter.not.empty", "templateName"));
+        }
+        if (StringUtils.isEmpty(terminalGeoFenceRequest.getGeofenceType())) {
+            validationErrs.add(getMessage("parameter.not.empty", "geofenceType"));
+        }
+        return validationErrs;
+    }
 
     public enum TerminalStatus {
         Active("A"),
@@ -916,6 +1020,25 @@ public class TerminalApi extends BaseThirdPartySysApi {
             this.val = type;
         }
         public String val(){
+            return this.val;
+        }
+    }
+
+    /**
+     * The geofence type used when setting a security geofence according to a template.
+     */
+    public enum TerminalGeoFenceType {
+        CenterPoint("P"),
+        CustomizeCoordinatePoint("C"),
+        BoundariesGeofencing("B");
+
+        private final String val;
+
+        TerminalGeoFenceType(String type) {
+            this.val = type;
+        }
+
+        public String val() {
             return this.val;
         }
     }

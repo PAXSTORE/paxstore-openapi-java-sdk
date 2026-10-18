@@ -1,9 +1,9 @@
-## EMM Application APIs
+## AirEMM Application APIs
 
-EMM Application APIs allow thirdparty system search EMM apps, create EMM app, get EMM app detail,
-remove EMM app, search subscribed EMM apps, subscribe EMM app, unsubscribe EMM app, get EMM app permission list.
+AirEMM Application APIs allow thirdparty system search AirEMM apps, create AirEMM app, get AirEMM app detail,
+remove AirEMM app, search subscribed AirEMM apps, subscribe AirEMM app, unsubscribe AirEMM app, get AirEMM app permission list.
 
-All the EMM app APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmApp.EmmAppApi*.
+All the AirEMM app APIs are in the class *com.pax.market.api.sdk.java.api.emm.emmApp.EmmAppApi*.
 
 **Constructors of EmmAppAPI**
 
@@ -20,9 +20,9 @@ Constructor parameters description
 | apiKey    | String | the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights |
 | apiSecret | String | apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights               |
 
-### Search EMM apps
+### Search AirEMM apps
 
-The search EMM apps API allows thirdparty system search EMM apps by page.
+The search AirEMM apps API allows thirdparty system search AirEMM apps by page.
 
 **API**
 
@@ -38,9 +38,9 @@ public Result<EmmAppDTO> searchEmmApp(int pageNo, int pageSize, EmmAppSearchOrde
 | pageNo          | int                 | false    | page number, value must >=1                                                                                                                                                                                                                                                                                                 |
 | pageSize        | int                 | false    | the record number per page, range is 1 to 100                                                                                                                                                                                                                                                                               |
 | orderBy         | EmmAppSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of EmmAppSearchOrderBy.EmmAppName_desc, EmmAppSearchOrderBy.EmmAppName_asc, EmmAppSearchOrderBy.EmmUpdatedDate_desc, EmmAppSearchOrderBy.EmmUpdatedDate_asc            |
-| resellerName    | String              | false    | search EMM apps under the reseller or it's sub-resellers                                                                                                                                                                                                                                                                    |
-| keyWords        | String              | true     | search by EMM app name or package name                                                                                                                                                                                                                                                                                      |
-| type            | EmmAppType          | true     | the EMM app type, the value can be one of EmmAppType.GOOGLE, EmmAppType.PRIVATE                                                                                                                                                                                                                                             |
+| resellerName    | String              | false    | search AirEMM apps under the reseller or it's sub-resellers                                                                                                                                                                                                                                                                    |
+| keyWords        | String              | true     | search by AirEMM app name or package name                                                                                                                                                                                                                                                                                      |
+| type            | EmmAppType          | true     | the AirEMM app type, the value can be one of EmmAppType.GOOGLE, EmmAppType.PRIVATE                                                                                                                                                                                                                                             |
 
 **Sample codes**
 
@@ -97,12 +97,12 @@ The type in dataSet is EmmAppDTO. The structure like below.
 
 | Property Name        | Type    | Description                                                   |
 | :--------------------- | :-------- | :-------------------------------------------------------------- |
-| id                   | Long    | The id of EMM app                                             |
-| name                 | String  | The name of EMM app                                           |
-| packageName          | String  | The packageName of EMM app                                    |
-| iconUrl              | String  | The icon url of EMM app                                       |
-| type                 | String  | Type of EMM app. Value can be one of G(Google) and P(Private) |
-| developerName        | String  | The developer name of EMM app                                 |
+| id                   | Long    | The id of AirEMM app                                             |
+| name                 | String  | The name of AirEMM app                                           |
+| packageName          | String  | The packageName of AirEMM app                                    |
+| iconUrl              | String  | The icon url of AirEMM app                                       |
+| type                 | String  | Type of AirEMM app. Value can be one of G(Google) and P(Private) |
+| developerName        | String  | The developer name of AirEMM app                                 |
 | supportManagedConfig | Boolean | Whether support managed config                                |
 
 **Possible client validation errors**
@@ -120,13 +120,13 @@ The type in dataSet is EmmAppDTO. The structure like below.
 | 1759          | Reseller doesn't exist                     |             |
 | 1762          | Reseller name is mandatory                 |             |
 | 1767          | Reseller name is too long                  |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61655         | EMM for Android not distributed            |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61655         | AirEMM for Android not distributed            |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Create EMM app
+### Create AirEMM app
 
-Create EMM app API allow the thirdparty system create an emm app remotely.
+Create AirEMM app API allow the thirdparty system create an AirEMM app remotely.
 
 **API**
 
@@ -146,8 +146,8 @@ Structure of class EmmAppCreateRequest
 
 | Property Name | Type   | Nullable | Description                                          |
 | :-------------- | :------- | :--------- | :----------------------------------------------------- |
-| resellerName  | String | false    | The reseller of EMM app belongs to. Max length is 64 |
-| packageName   | String | false    | The package name of EMM app. Max length is 128       |
+| resellerName  | String | false    | The reseller of AirEMM app belongs to. Max length is 64 |
+| packageName   | String | false    | The package name of AirEMM app. Max length is 128       |
 
 **Sample codes**
 
@@ -194,7 +194,7 @@ Result<EmmAppDTO> result = emmAppApi.createEmmApp(emmAppCreateRequest);
 }
 ```
 
-The type of data in result is same as search emm app API.
+The type of data in result is same as search AirEMM app API.
 
 **Possible validation errors**
 
@@ -215,13 +215,13 @@ The type of data in result is same as search emm app API.
 | 61619         | App already exists                  |             |
 | 61620         | App package name is invalid         |             |
 | 61633         | The app type does not match the app |             |
-| 61655         | EMM for Android not distributed     |             |
-| 61660         | EMM app package name is mandatory   |             |
-| 61661         | EMM app package name is too long    |             |
+| 61655         | AirEMM for Android not distributed     |             |
+| 61660         | AirEMM app package name is mandatory   |             |
+| 61661         | AirEMM app package name is too long    |             |
 
-### Get EMM app detail by app id.
+### Get AirEMM app detail by app id.
 
-The get EMM app detail API allows the thirdparty system get EMM app detail by app id.
+The get AirEMM app detail API allows the thirdparty system get AirEMM app detail by app id.
 
 **API**
 
@@ -234,7 +234,7 @@ public Result<EmmAppDetailDTO> getEmmAppDetail(Long appId)
 
 | Parameter Name | Type | Nullable | Description       |
 | :--------------- | :----- | :--------- | :------------------ |
-| appId          | Long | false    | The id of EMM app |
+| appId          | Long | false    | The id of AirEMM app |
 
 **Sample codes**
 
@@ -298,16 +298,16 @@ The type in data is EmmAppDetailDTO. The structure like below.
 
 | Property Name        | Type           | Description                                                                                        |
 | :--------------------- | :--------------- | :--------------------------------------------------------------------------------------------------- |
-| id                   | Long           | The id of EMM app                                                                                  |
-| name                 | String         | The name of EMM app                                                                                |
-| packageName          | String         | The packageName of EMM app                                                                         |
-| iconUrl              | String         | The icon url of EMM app                                                                            |
-| type                 | String         | Type of EMM app. Value can be one of G(Google) and P(Private)                                      |
-| developerName        | String         | The developer name of EMM app                                                                      |
+| id                   | Long           | The id of AirEMM app                                                                                  |
+| name                 | String         | The name of AirEMM app                                                                                |
+| packageName          | String         | The packageName of AirEMM app                                                                         |
+| iconUrl              | String         | The icon url of AirEMM app                                                                            |
+| type                 | String         | Type of AirEMM app. Value can be one of G(Google) and P(Private)                                      |
+| developerName        | String         | The developer name of AirEMM app                                                                      |
 | supportManagedConfig | Boolean        | Whether support managed config                                                                     |
 | minAndroidSdkVersion | Integer        | The app min Android SDK version,there is a correspondence between numbers and Android SDK versions |
 | screenshotUrls       | List\<String\> | List of screenshot links representing the app                                                      |
-| updateTime           | Date           | The update time of EMM app                                                                         |
+| updateTime           | Date           | The update time of AirEMM app                                                                         |
 | appPricing           | String         | Whether this app is free(F), free with in-app purchases(FP), or paid(P)                            |
 | fullDescription      | String         | Full app description, if available                                                                 |
 | appVersions          | List\<String\> | Versions currently available for this app                                                          |
@@ -323,9 +323,9 @@ The type in data is EmmAppDetailDTO. The structure like below.
 | :-------------- | :--------------- | :------------ |
 | 61621         | App not exists |             |
 
-### Remove EMM app
+### Remove AirEMM app
 
-The remove EMM app API allows the thirdparty system remove EMM app by appId and resellerName.
+The remove AirEMM app API allows the thirdparty system remove AirEMM app by appId and resellerName.
 
 **API**
 
@@ -338,8 +338,8 @@ public Result<String> removeEmmApp(Long appId, String resellerName)
 
 | Parameter Name | Type   | Nullable | Description                        |
 | :--------------- | :------- | :--------- | :----------------------------------- |
-| appId          | Long   | false    | The id of EMM app                  |
-| resellerName   | String | false    | The reseller of EMM app belongs to |
+| appId          | Long   | false    | The id of AirEMM app                  |
+| resellerName   | String | false    | The reseller of AirEMM app belongs to |
 
 **Sample codes**
 
@@ -390,9 +390,9 @@ Result<String> result = emmAppApi.removeEmmApp(1646714366722087L, "PAX");
 | 1767          | Reseller name is too long  |             |
 | 61621         | App not exists             |             |
 
-### Search subscribed EMM apps
+### Search subscribed AirEMM apps
 
-The search subscribed EMM apps API allows thirdparty system search current reseller subscribed EMM apps by page.
+The search subscribed AirEMM apps API allows thirdparty system search current reseller subscribed AirEMM apps by page.
 
 **API**
 
@@ -407,8 +407,8 @@ public Result<SubscribeEmmAppDTO> searchSubscribedEmmApp(int pageNo, int pageSiz
 | :------------- | :-------- | :--------- | :---------------------------------------------- |
 | pageNo       | int     | false    | page number, value must >=1                   |
 | pageSize     | int     | false    | the record number per page, range is 1 to 100 |
-| name         | String  | true     | search by EMM app name                        |
-| isSubscribed | Boolean | false    | whether subscribe EMM app                     |
+| name         | String  | true     | search by AirEMM app name                        |
+| isSubscribed | Boolean | false    | whether subscribe AirEMM app                     |
 
 **Sample codes**
 
@@ -461,11 +461,11 @@ The type in dataSet is SubscribeEmmAppDTO. The structure like below.
 
 | Property Name | Type   | Description                                                   |
 | :-------------- | :------- | :-------------------------------------------------------------- |
-| id            | Long   | The id of EMM app                                             |
-| name          | String | The name of EMM app                                           |
-| packageName   | String | The package name of EMM app                                   |
-| iconUrl       | String | The icon url of EMM app                                       |
-| type          | String | Type of EMM app. Value can be one of G(Google) and P(Private) |
+| id            | Long   | The id of AirEMM app                                             |
+| name          | String | The name of AirEMM app                                           |
+| packageName   | String | The package name of AirEMM app                                   |
+| iconUrl       | String | The icon url of AirEMM app                                       |
+| type          | String | Type of AirEMM app. Value can be one of G(Google) and P(Private) |
 
 **Possible client validation errors**
 
@@ -480,9 +480,9 @@ The type in dataSet is SubscribeEmmAppDTO. The structure like below.
 | :-------------- | :-------------------------- | :------------ |
 | 131           | Insufficient access right |             |
 
-### Subscribe EMM app
+### Subscribe AirEMM app
 
-The subscribe EMM app API allows the thirdparty system subscribe current reseller EMM app.
+The subscribe AirEMM app API allows the thirdparty system subscribe current reseller AirEMM app.
 
 **API**
 
@@ -495,7 +495,7 @@ public Result<String> subscribeEmmApp(Long appId)
 
 | Parameter Name | Type | Nullable | Description       |
 | :--------------- | :----- | :--------- | :------------------ |
-| appId          | Long | false    | The id of EMM app |
+| appId          | Long | false    | The id of AirEMM app |
 
 **Sample codes**
 
@@ -545,9 +545,9 @@ Result<String> result = emmAppApi.subscribeEmmApp(1646714366722087L);
 | 1767          | Reseller name is too long  |             |
 | 61621         | App not exists             |             |
 
-### Unsubscribe EMM app
+### Unsubscribe AirEMM app
 
-The unsubscribe EMM app API allows the thirdparty system unsubscribe current reseller EMM app.
+The unsubscribe AirEMM app API allows the thirdparty system unsubscribe current reseller AirEMM app.
 
 **API**
 
@@ -560,7 +560,7 @@ public Result<String> unSubscribeEmmApp(Long appId)
 
 | Parameter Name | Type | Nullable | Description       |
 | :--------------- | :----- | :--------- | :------------------ |
-| appId          | Long | false    | The id of EMM app |
+| appId          | Long | false    | The id of AirEMM app |
 
 **Sample codes**
 
@@ -610,9 +610,9 @@ Result<String> result = emmAppApi.unSubscribeEmmApp(1646714366722087L);
 | 1767          | Reseller name is too long  |             |
 | 61621         | App not exists             |             |
 
-### Get EMM app permission list.
+### Get AirEMM app permission list.
 
-The get EMM app permission list API allows the thirdparty system get EMM app permission list by app id.
+The get AirEMM app permission list API allows the thirdparty system get AirEMM app permission list by app id.
 
 **API**
 
@@ -625,7 +625,7 @@ public Result<EmmAppPermissionDTO> getEmmAppPermissionList(Long appId)
 
 | Parameter Name | Type | Nullable | Description       |
 | :--------------- | :----- | :--------- | :------------------ |
-| appId          | Long | false    | The id of EMM app |
+| appId          | Long | false    | The id of AirEMM app |
 
 **Sample codes**
 
@@ -686,7 +686,7 @@ The type of data in result is EmmAppPermissionDTO. The structure like below.
 
 | Property Name | Type           | Description                |
 | :-------------- | :--------------- | :--------------------------- |
-| permissions   | List\<String\> | The permissions of emm app |
+| permissions   | List\<String\> | The permissions of AirEMM app |
 
 **Possible validation errors**
 
@@ -698,12 +698,12 @@ The type of data in result is EmmAppPermissionDTO. The structure like below.
 | Business Code | Message                                    | Description |
 | :-------------- | :------------------------------------------- | :------------ |
 | 61621         | App not exists                             |             |
-| 61654         | EMM for Android not subscribed             |             |
-| 61656         | The market is not bound to EMM for Android |             |
+| 61654         | AirEMM for Android not subscribed             |             |
+| 61656         | The market is not bound to AirEMM for Android |             |
 
-### Get EMM app available test track version list.
+### Get AirEMM app available test track version list.
 
-The get EMM app available test track version list API allows the thirdparty system get EMM app available test track version list by app id.
+The get AirEMM app available test track version list API allows the thirdparty system get AirEMM app available test track version list by app id.
 
 **API**
 
@@ -716,7 +716,7 @@ public Result<EmmAppAvailableTestVersionDTO> getAvailableTestTrackVersionList(Lo
 
 | Parameter Name | Type | Nullable | Description       |
 | :--------------- | :----- | :--------- | :------------------ |
-| appId          | Long | false    | The id of EMM app |
+| appId          | Long | false    | The id of AirEMM app |
 
 **Sample codes**
 
@@ -770,16 +770,16 @@ The type of data in result is EmmAppAvailableTestVersionDTO. The structure like 
 
 | Property Name               | Type                                 | Description                           |
 |:----------------------------|:-------------------------------------|:--------------------------------------|
-| appAvailableTestVersionList | List\<EmmAppAvailableTestVersion\>   | The available test version of emm app |
+| appAvailableTestVersionList | List\<EmmAppAvailableTestVersion\>   | The available test version of AirEMM app |
 
 Structure of class EmmAppAvailableTestVersion
 
 
 | Property Name | Type   | Description                      |
 |:--------------|:-------|:---------------------------------|
-| trackId       | Long   | The track id of emm app          |
-| trackAlias    | String | The track alias of emm app       |
-| versionName   | String | The track version of emm app     |
+| trackId       | Long   | The track id of AirEMM app          |
+| trackAlias    | String | The track alias of AirEMM app       |
+| versionName   | String | The track version of AirEMM app     |
 
 **Possible validation errors**
 
@@ -790,5 +790,5 @@ Structure of class EmmAppAvailableTestVersion
 | Business Code   | Message                                     | Description |
 |:----------------|:--------------------------------------------| :------------ |
 | 61621           | App not exists                              |             |
-| 61654           | EMM for Android not subscribed              |             |
-| 61656           | The market is not bound to EMM for Android  |             |
+| 61654           | AirEMM for Android not subscribed              |             |
+| 61656           | The market is not bound to AirEMM for Android  |             |

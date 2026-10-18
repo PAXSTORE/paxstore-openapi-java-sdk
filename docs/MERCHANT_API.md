@@ -107,6 +107,7 @@ The type in dataSet is MerchantPageDTO. And the structure like below.
 |phone|String| Phone number of merchant.                                                                 |
 |status|String| Status of merchant. Value can be one of A(Active), P(Pendding) and S(Suspend)             |
 |description|String| The description of the merchant                                                           |
+|entityAttributeValues|LinkedHashMap<String, String>| Dynamic attributes of merchant.                                                           |
 
 The structure of class SimpleResellerDTO
 
