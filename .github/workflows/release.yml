@@ -34,7 +34,13 @@ jobs:
           server-id: maven-central-portal
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
-
+          
+      # ✅ 固定 Maven 版本为 3.9.9（覆盖 Runner 默认版本）
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.9.9
+          
       # 3️⃣ Git 身份
       - name: Configure Git
         run: |
