@@ -4,6 +4,8 @@
 ### New Feature
 * Add TerminalApi - `searchTamperedTerminal` API
 * Add parameter query `includeGroupInfo` and return `groups` in TerminalApi - `getTerminal`, `getTerminalBySn` API
+* Add parameter query `tid` in ParameterPushHistoryApi - `searchParameterPushHistory`,  `searchParameterPushHistoryByTid`, `searchOptimizedParameterPushHistoryByTid`, `searchLatestParameterPushHistoryByTid`, `searchLatestOptimizedParameterPushHistoryByTid` API
+* Add post data field `useNewFilter` in GoInsightApi - `findDataFromInsight` API
 * EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy`, Optimize parameter description
 * Rebrand EMM to AirEMM in third-party EMM related APIs (documentation names and descriptions only, no changes to endpoints, parameters or responses), Please refer to the corresponding API doc for details
 * Add TerminalApi - `setTerminalGeoFence`, `setTerminalGeoFenceBySn` API to set terminal security geofence according to a geofence template
