@@ -3,6 +3,10 @@
 * Add TerminalApi - `setTerminalGeoFence`, `setTerminalGeoFenceBySn` API support direct center-point mode (omit `templateName`, provide `lat`/`lng`/`radius` with `geofenceType`=P), no new endpoints added
 * Add TerminalApi - `pushCmdToTerminal`, `pushCmdToTerminalBySn` support the new `TerminalPushCmd.FactoryReset` command to remotely factory reset a terminal (by terminal id and by serialNo), no new endpoints added; note that all the data stored on the terminal (installed applications, firmware, settings, geolocation, etc.) will be cleared and the terminal will perform the factory reset after receiving the command
 * Add TerminalApi - `pushCmdToTerminal`, `pushCmdToTerminalBySn` new overloads with the `cancel` parameter to cancel the pending task of a command instead of pushing it, no new endpoints added; the previous overloads are kept and behave as `cancel=false`
+* Add post data field `type` in AirEMMDeviceApi - `createRegisterQRCode` API to replace the deprecated `deviceType` field. C(Company Owner - Device Owner mode), E(Employee Owner - Profile Owner mode)
+* Add `type` field to describe the device management mode in AirEMMDeviceApi - `findEmmDevices`, `getEmmDevice` APIs. F(Fully Managed - Device Owner mode), C(COPE - Profile Owner mode), B(BYOD - Profile Owner mode), U(Unknown)
+* Deprecate the `securityStatus` field in AirEMMDeviceApi - `getEmmDevice` API; use key `EMM_DEVICE_RISK` in AirEMMDeviceDetailApi - `getEmmDeviceDashboardDetail` API instead
+* Add key `EMM_DEVICE_BUILD_NUMBER` in AirEMMDeviceDetailApi - `getEmmDeviceDashboardDetail` API
 
 ## 11.1.0
 ### New Feature
