@@ -2,7 +2,6 @@ package com.pax.market.api.sdk.java.api.emm.emmDevice.validator;
 
 import com.google.common.collect.Lists;
 import com.pax.market.api.sdk.java.api.constant.Constants;
-import com.pax.market.api.sdk.java.api.emm.emmApp.dto.EmmAppCreateRequest;
 import com.pax.market.api.sdk.java.api.emm.emmDevice.dto.EmmDeviceRegisterQRCodeCreateRequest;
 import com.pax.market.api.sdk.java.api.validate.Validators;
 

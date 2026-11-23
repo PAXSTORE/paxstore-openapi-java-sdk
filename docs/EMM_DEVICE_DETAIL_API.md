@@ -86,12 +86,12 @@ Result<EmmDeviceDashboardDetailDTO> result = emmDeviceDetailApi.getEmmDeviceDash
 The type in dataSet is EmmDeviceDashboardDetailDTO. The structure like below.
 
 
-| Property Name | Type   | Description                                  |
-| :-------------- | :------- | :--------------------------------------------- |
-| terminalId    | Long   | The id of AirEMM device                         |
-| key           | String | The key of AirEMM device dashboard detail       |
-| value         | String | The value of AirEMM device dashboard detail     |
-| syncDate      | Date   | The sync date of AirEMM device dashboard detail |
+| Property Name | Type   | Description                                                                                                                                                                                                                                                                                                       |
+| :-------------- | :------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| terminalId    | Long   | The id of AirEMM device                                                                                                                                                                                                                                                                                           |
+| key           | String | Detail metric key. Possible values: RAM_TOTAL, IMEI, REAL_SIZE_Y, REAL_SIZE_X, OS_VERSION, NETWORK, NETWORK_IP, SIM, STORAGE_TOTAL, BLUETOOTH_SWITCH, GPS_SWITCH, EMM_PHONE_NO_1, EMM_PHONE_NO_2, ICCID_1, ICCID_2, CARRIER_NAME_1, CARRIER_NAME_2, EMM_DEVICE_RISK, EMM_DEVICE_BUILD_NUMBER, CELL_ID, SIM_SIGNAL |
+| value         | String | The value of AirEMM device dashboard detail                                                                                                                                                                                                                                                                       |
+| syncDate      | Date   | The sync date of AirEMM device dashboard detail                                                                                                                                                                                                                                                                   |
 
 **Possible client validation errors**
 

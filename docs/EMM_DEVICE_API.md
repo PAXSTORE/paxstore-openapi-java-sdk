@@ -40,12 +40,12 @@ public Result<EmmDeviceRegisterQRCodeCreateDTO> createRegisterQRCode(EmmDeviceRe
 Structure of class EmmDeviceRegisterQRCodeCreateRequest
 
 
-| Property Name | Type   | Nullable | Description                                                                             |
-| :-------------- | :------- | :--------- |:----------------------------------------------------------------------------------------|
-| resellerName  | String | false    | The name of the reseller associated with the device register QR code. Max length is 64  |
-| merchantName  | String | false    | The name of the merchant associated with the device register QR code. Max length is 128 |
-| type          | String | false    | The type of the register AirEMM device QR code. The value is EmmDeviceType.COMPANY_OWNER   |
-| expireDate    | Date   | false    | The expired date of AirEMM device QR code                                                  |
+| Property Name | Type   | Nullable | Description                                                                                                                                                                                   |
+| :-------------- | :------- | :--------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| resellerName  | String | false    | The name of the reseller associated with the device register QR code. Max length is 64                                                                                                        |
+| merchantName  | String | false    | The name of the merchant associated with the device register QR code. Max length is 128                                                                                                       |
+| type          | String | false    | AirEMM device registration QR code type, value is C(Company Owner - Device Owner mode, fully managed device), E(Employee Owner - Profile Owner mode, work profile on personally-owned device) |
+| expireDate    | Date   | false    | The expired date of AirEMM device QR code                                                                                                                                                     |
 
 **Sample codes**
 
@@ -93,6 +93,7 @@ Result<EmmDeviceRegisterQRCodeCreateDTO> result = emmDeviceApi.createRegisterQRC
 		"resellerName": "PAX",
 		"merchantName": "test",
 		"deviceType": "C",
+		"type": "C",
 		"registerQRCode": "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",
 		"expireDate": 173134079999911
 	}
@@ -102,15 +103,16 @@ Result<EmmDeviceRegisterQRCodeCreateDTO> result = emmDeviceApi.createRegisterQRC
 The type in data is EmmDeviceRegisterQRCodeCreateDTO. The structure like below.
 
 
-| Property Name  | Type   | Description                                                          |
-| :--------------- | :------- | :--------------------------------------------------------------------- |
-| id             | Long   | The register AirEMM device QR code id                                   |
-| marketName     | String | The market name                                                      |
-| resellerName   | String | The name of the reseller associated with the device register QR code |
-| merchantName   | String | The name of the merchant associated with the device register QR code |
-| deviceType     | String | The type of the register AirEMM device QR code. The value is C          |
-| registerQRCode | String | The content of the register AirEMM device QR code                       |
-| expireDate     | Long   | The expired date of AirEMM device QR code                               |
+| Property Name  | Type   | Description                                                                                                                                                                                                                                                          |
+|:---------------| :------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id             | Long   | The register AirEMM device QR code id                                                                                                                                                                                                                                |
+| marketName     | String | The market name                                                                                                                                                                                                                                                      |
+| resellerName   | String | The name of the reseller associated with the device register QR code                                                                                                                                                                                                 |
+| merchantName   | String | The name of the merchant associated with the device register QR code                                                                                                                                                                                                 |
+| deviceType     | String | AirEMM device registration QR code type. C(Company Owner - Device Owner mode, fully managed device), E(Employee Owner - Profile Owner mode, work profile on personally-owned device). Deprecated, use 'type' instead. This field will be removed in a future release |
+| type           | String | AirEMM device registration QR code type. C(Company Owner - Device Owner mode, fully managed device), E(Employee Owner - Profile Owner mode, work profile on personally-owned device)                                                                                 |
+| registerQRCode | String | The content of the register AirEMM device QR code                                                                                                                                                                                                                    |
+| expireDate     | Long   | The expired date of AirEMM device QR code                                                                                                                                                                                                                            |
 
 **Possible client validation errors**
 
@@ -222,6 +224,7 @@ Result<EmmDeviceDTO> result = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.Em
                 "id": 1000055178,
                 "name": "sh1"
             },
+            "type": "C",
             "registerTime": 1733294274000,
             "status": "A"
         }
@@ -236,16 +239,17 @@ Result<EmmDeviceDTO> result = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.Em
 The type in dataSet is EmmDeviceDTO. The structure like below.
 
 
-| Property Name | Type           | Description                     |
-| :-------------- | :--------------- | :-------------------------------- |
-| id            | Long           | The id of AirEMM device            |
-| name          | String         | The name of AirEMM device          |
-| serialNo      | String         | The serial number of AirEMM device |
-| model         | EmmModelDTO    | The model of AirEMM device         |
-| reseller      | EmmResellerDTO | The reseller of AirEMM device      |
-| merchant      | EmmMerchantDTO | The merchant of AirEMM device      |
-| registerTime  | Date           | The register time of AirEMM device |
-| status        | String         | The status of AirEMM device        |
+| Property Name | Type            | Description                                                                                                                                                                                                                                                                                     |
+|:--------------|:----------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id            | Long            | The id of AirEMM device                                                                                                                                                                                                                                                                         |
+| name          | String          | The name of AirEMM device                                                                                                                                                                                                                                                                       |
+| serialNo      | String          | The serial number of AirEMM device                                                                                                                                                                                                                                                              |
+| model         | EmmModelDTO     | The model of AirEMM device                                                                                                                                                                                                                                                                      |
+| reseller      | EmmResellerDTO  | The reseller of AirEMM device                                                                                                                                                                                                                                                                   |
+| merchant      | EmmMerchantDTO  | The merchant of AirEMM device                                                                                                                                                                                                                                                                   |
+| type          | String          | Management mode type of the AirEMM device. F(Fully Managed - Device Owner mode, company-owned device with personal usage disallowed), C(COPE - Profile Owner mode, company-owned device with work profile), B(BYOD - Profile Owner mode, personally-owned device with work profile), U(Unknown) |
+| registerTime  | Date            | The register time of AirEMM device                                                                                                                                                                                                                                                              |
+| status        | String          | The status of AirEMM device                                                                                                                                                                                                                                                                     |
 
 Structure of class EmmModelDTO
 
@@ -371,19 +375,19 @@ Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1647428843339813L)
 The type in data is EmmDeviceDetailDTO. The structure like below.
 
 
-| Property Name  | Type           | Description                       |
-| :--------------- | :--------------- | :---------------------------------- |
-| id             | Long           | The id of AirEMM device              |
-| name           | String         | The name of AirEMM device            |
-| serialNo       | String         | The serial number of AirEMM device   |
-| type           | String         | The type of AirEMM device            |
-| model          | EmmModelDTO    | The model of AirEMM device           |
-| reseller       | EmmResellerDTO | The reseller of AirEMM device        |
-| merchant       | EmmMerchantDTO | The merchant of AirEMM device        |
-| registerTime   | Date           | The register time of AirEMM device   |
-| status         | String         | The status of AirEMM device          |
-| imei           | String         | The IMEI of AirEMM device            |
-| securityStatus | String         | The security status of AirEMM device |
+| Property Name  | Type           | Description                                                                                                                                                                                                                                                                                     |
+| :--------------- | :--------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id             | Long           | The id of AirEMM device                                                                                                                                                                                                                                                                         |
+| name           | String         | The name of AirEMM device                                                                                                                                                                                                                                                                       |
+| serialNo       | String         | The serial number of AirEMM device                                                                                                                                                                                                                                                              |
+| type           | String         | Management mode type of the AirEMM device. F(Fully Managed - Device Owner mode, company-owned device with personal usage disallowed), C(COPE - Profile Owner mode, company-owned device with work profile), B(BYOD - Profile Owner mode, personally-owned device with work profile), U(Unknown) |
+| model          | EmmModelDTO    | The model of AirEMM device                                                                                                                                                                                                                                                                      |
+| reseller       | EmmResellerDTO | The reseller of AirEMM device                                                                                                                                                                                                                                                                   |
+| merchant       | EmmMerchantDTO | The merchant of AirEMM device                                                                                                                                                                                                                                                                   |
+| registerTime   | Date           | The register time of AirEMM device                                                                                                                                                                                                                                                              |
+| status         | String         | The status of AirEMM device                                                                                                                                                                                                                                                                     |
+| imei           | String         | The IMEI of AirEMM device                                                                                                                                                                                                                                                                       |
+| securityStatus | String         | Security risk level of the device. S(Secure), AR(At Risk), HR(High Risk), RU(Risk Unknown). This field is deprecated and will be removed in a future API version. Migrate to the device dashboard detail endpoint using key 'EMM_DEVICE_RISK' for equivalent data                               |
 
 Structure of class EmmModelDTO
 

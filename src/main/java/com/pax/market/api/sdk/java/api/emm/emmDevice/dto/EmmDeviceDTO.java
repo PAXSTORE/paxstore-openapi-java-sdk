@@ -20,6 +20,8 @@ public class EmmDeviceDTO implements Serializable {
 
     private EmmMerchantDTO merchant;
 
+    private String type;
+
     private Date registerTime;
 
     private String status;
@@ -72,6 +74,14 @@ public class EmmDeviceDTO implements Serializable {
         this.merchant = merchant;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Date getRegisterTime() {
         return registerTime;
     }
@@ -97,6 +107,7 @@ public class EmmDeviceDTO implements Serializable {
                 ", model=" + model +
                 ", reseller=" + reseller +
                 ", merchant=" + merchant +
+                ", type='" + type + '\'' +
                 ", registerTime=" + registerTime +
                 ", status='" + status + '\'' +
                 '}';

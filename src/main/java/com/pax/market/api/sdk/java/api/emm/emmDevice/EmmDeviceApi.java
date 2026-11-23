@@ -425,7 +425,8 @@ public class EmmDeviceApi extends BaseThirdPartySysApi {
 
 
     public enum EmmDeviceType {
-        COMPANY_OWNER("C");
+        COMPANY_OWNER("C"),
+        EMPLOYEE_OWNER("E");
         private String val;
 
         EmmDeviceType(String sign) {

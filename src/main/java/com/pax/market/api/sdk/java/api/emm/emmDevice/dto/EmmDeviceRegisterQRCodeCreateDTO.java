@@ -17,6 +17,8 @@ public class EmmDeviceRegisterQRCodeCreateDTO implements Serializable {
 
     private String deviceType;
 
+    private String type;
+
     private String registerQRCode;
 
     private Date expireDate;
@@ -61,6 +63,15 @@ public class EmmDeviceRegisterQRCodeCreateDTO implements Serializable {
         this.deviceType = deviceType;
     }
 
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getRegisterQRCode() {
         return registerQRCode;
     }
@@ -85,6 +96,7 @@ public class EmmDeviceRegisterQRCodeCreateDTO implements Serializable {
                 ", resellerName='" + resellerName + '\'' +
                 ", merchantName='" + merchantName + '\'' +
                 ", deviceType='" + deviceType + '\'' +
+                ", type='" + type + '\'' +
                 ", registerQRCode='" + registerQRCode + '\'' +
                 ", expireDate=" + expireDate +
                 '}';
