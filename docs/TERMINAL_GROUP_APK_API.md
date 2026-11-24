@@ -38,7 +38,7 @@ Get terminal group apk by groupApkId and pidList
 **Sample codes**
 
 ```
-TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 List<String> pidList = new ArrayList<>();
 pidList.add("sys.cap.test01");
 pidList.add("sys.cap.test02");
@@ -130,7 +130,7 @@ public Result<SimpleTerminalGroupApkDTO> searchTerminalGroupApk(int pageNo, int 
 **Sample codes**
 
 ```
-TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.searchTerminalGroupApk(1,1, TerminalGroupApkApi.SearchOrderBy.CreatedDate_asc,16526L,true,null,null);
 ```
 
@@ -274,7 +274,7 @@ Structure of class FileParameter
 **Sample codes**
 
 ```
-TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 CreateTerminalGroupApkRequest createRequest = new CreateTerminalGroupApkRequest();
 createRequest.setGroupId(16543L); 
 createRequest.setPushTemplateName("testCreate3RD-result-api-test-CREATEbY-newest-12334111");
@@ -409,7 +409,7 @@ Structure of class FileParameter
 **Sample codes**
 
 ```
-TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 CreateTerminalGroupApkPartialParamRequest createRequest = new CreateTerminalGroupApkPartialParamRequest();
 createRequest.setGroupId(16543L); 
 createRequest.setPushTemplateName("testCreate3RD-result-api-test-CREATEbY-newest-12334111");
@@ -521,7 +521,7 @@ public Result<SimpleTerminalGroupApkDTO> suspendTerminalGroupApk(Long groupApkId
 **Sample codes**
 
 ```
-TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<SimpleTerminalGroupApkDTO> result = terminalGroupApkApi.suspendTerminalGroupApk(1743L);
 ```
 
@@ -601,7 +601,7 @@ public Result<String> deleteTerminalGroupApk(Long groupApkId)
 **Sample codes**
 
 ```
-TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApkApi terminalGroupApkApi = new TerminalGroupApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalGroupApkApi.deleteTerminalGroupApk(1743L);
 ```
 

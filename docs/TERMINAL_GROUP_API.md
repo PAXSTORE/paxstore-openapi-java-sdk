@@ -44,7 +44,7 @@ public Result<TerminalGroupDTO> searchTerminalGroup(int pageNo, int pageSize, Te
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalGroupDTO> result =  terminalGroupApi.searchTerminalGroup(1,5, TerminalGroupApi.TerminalGroupSearchOrderBy.CreatedDate_asc, TerminalGroupApi.TerminalGroupStatus.ACTIVE,null,"test-8992","A920,E800",true);
 ```
 
@@ -143,7 +143,7 @@ Get terminal group by id.
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalGroupDTO> result = terminalGroupApi.getTerminalGroup(groupId);
 ```
 
@@ -245,7 +245,7 @@ Structure of class CreateTerminalGroupRequest
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
   CreateTerminalGroupRequest createRequest = new CreateTerminalGroupRequest();
   createRequest.setName("test-create");
   createRequest.setModelName("A920");
@@ -374,7 +374,7 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, TerminalApi.
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalDTO> result = terminalGroupApi.searchTerminal(1,5, TerminalApi.TerminalSearchOrderBy.Name, TerminalApi.TerminalStatus.Active,"A920","test-8992",null,null);
 ```
 
@@ -484,7 +484,7 @@ inactive, only name and description can be modified.
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
         Long groupId = 16576L;
         UpdateTerminalGroupRequest updateRequest = new UpdateTerminalGroupRequest();
         updateRequest.setName("3rdsUpdateTerminalGroupName");
@@ -581,7 +581,7 @@ public Result<String> activeGroup(Long groupId)
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalGroupApi.activeGroup(16549L);
 ```
 
@@ -641,7 +641,7 @@ public Result<String> disableGroup(Long groupId)
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalGroupApi.disableGroup(16549L);
 ```
 
@@ -697,7 +697,7 @@ public Result<String> deleteGroup(Long groupId)
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalGroupApi.deleteGroup(16549L);
 ```
 
@@ -758,7 +758,7 @@ public  Result<SimpleTerminalDTO> searchTerminalsInGroup(int pageNo, int pageSiz
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<SimpleTerminalDTO> result = terminalGroupApi.searchTerminalsInGroup(1,5, TerminalApi.TerminalSearchOrderBy.SerialNo,16541L,null,"12343543,123445489");
 ```
 
@@ -859,7 +859,7 @@ This api allows the third party system add terminal to group.
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
         Long groupId = 1L;
         Set<Long> terminalIds = new HashSet<>();
         terminalIds.add(908654L);
@@ -927,7 +927,7 @@ public Result<String> removeTerminalOutGroup(Long groupId, Set<Long> terminalIds
 **Sample codes**
 
 ```
-TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupApi terminalGroupApi = new TerminalGroupApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
         Long groupId = 1L;
         Set<Long> terminalIds = new HashSet<>();
         terminalIds.add(908654L);

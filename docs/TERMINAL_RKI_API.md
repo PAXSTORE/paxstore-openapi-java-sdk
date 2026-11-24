@@ -58,7 +58,7 @@ Note: tid and serialNo cannot be empty at same time.
 **Sample codes**
 
 ```
-TerminalRkiApi terminalRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalRkiApi terminalRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 PushRki2TerminalRequest pushRki2TerminalRequest = new PushRki2TerminalRequest();
 pushRki2TerminalRequest.setTid("ABC09098989");
 pushRki2TerminalRequest.setRkiKey("PIN_TEST");
@@ -140,7 +140,7 @@ public Result<PushRkiTaskDTO> searchPushRkiTasks(int pageNo, int pageSize, Searc
 **Sample codes**
 
 ```
-TerminalRkiApi terminalRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalRkiApi terminalRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<PushRkiTaskDTO> result = terminalRkiApi.searchPushRkiTasks(1,12,SearchOrderBy.CreatedDate_desc,
                                 terminalTid, rkiKey, PushStatus.Active);
 ```
@@ -221,7 +221,7 @@ public Result<PushRkiTaskDTO> getPushRkiTask(Long pushRkiTaskId)
 **Sample codes**
 
 ```
-TerminalRkiApi terminalRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalRkiApi terminalRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<PushRkiTaskDTO> result = terminalRkiApi.getPushRkiTask(17850L);
 ```
 
@@ -333,7 +333,7 @@ Note: tid and serialNo cannot be empty at same time.
 **Sample codes**
 
 ```
-TerminalRkiApi terminalRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalRkiApi terminalRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 DisablePushRkiTask disablePushRkiTask = new DisablePushRkiTask();
 disablePushRkiTask.setTid("ABC09098989");
 disablePushRkiTask.setRkiKey("PIN_TEST");
@@ -401,7 +401,7 @@ public Result<String> deleteTerminalRki(Long terminalRkiId)
 **Sample codes**
 
 ```
-TerminalRkiApi terminaRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalRkiApi terminaRkiApi = new TerminalRkiApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminaRkiApi.deleteTerminalRki(1743L);
 ```
 

@@ -4,15 +4,10 @@
 <br/>
 <br/>
 
-## Security Announcement  
-This Open API SDK depends on log4j-1.2.7. It won't affected by the vulnerability CVE-2021-44228. But a similar vulnerability(CVE-2021-4104) is found in log4j 1.2.x. If the developer is not using JMSAppender it won't affected. Also developer can remove JMSAppender using command(zip -q -d log4j-1.2.17.jar org/apache/log4j/net/JMSAppender.class). Below is the description about CVE-2021-44228.  
+## Security Announcement (Historical)
+Versions before 8.3.0 of this SDK depended on log4j 1.2.7, which is not affected by CVE-2021-44228. A similar vulnerability (CVE-2021-4104) exists in log4j 1.2.x when the non-default JMSAppender is explicitly configured; in that case the log4j jar can be patched by removing the class with `zip -q -d log4j-1.2.17.jar org/apache/log4j/net/JMSAppender.class`. Apache Log4j 1.2 reached end of life in August 2015 and should be upgraded to Log4j 2.
 
-```  
-JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data when the attacker has write access to the Log4j configuration. The attacker can provide TopicBindingName and TopicConnectionFactoryBindingName configurations causing JMSAppender to perform JNDI requests that result in remote code execution in a similar fashion to CVE-2021-44228. Note this issue only affects Log4j 1.2 when specifically configured to use JMSAppender, which is not the default. Apache Log4j 1.2 reached end of life in August 2015. Users should upgrade to Log4j 2 as it addresses numerous other issues from the previous versions.
-```
-
-The SDK is using slf4j as the log facade and the log4j as the log implementation. Developers can using other log implementation to replace the log4j.
-From version 8.3.0 we removed log4j dependecy from this SDK, developer need to choose the log implementation by self.
+From version 8.3.0 onwards this SDK no longer depends on log4j. It uses slf4j as the logging facade, and developers may choose any slf4j-compatible logging implementation. The current release has no log4j dependency.
 
 
 ## Introduction
@@ -35,10 +30,10 @@ Below is the structure of class *com.pax.market.api.sdk.java.api.base.dto.Result
 
 |Property|Type|Description|
 |:--|:--|:--|
-|businessCode|int|The business code, it reprensent the API invoke result. 0 means invoke the API success, if it is -1 means the the parameter length and required validation failed. For other business codes please refer to the message property|
+|businessCode|int|The business code, it reprensent the API invoke result. 0 means invoke the API success, if it is -1 means the parameter length and required validation failed. For other business codes please refer to the message property|
 |message|String|The description of businessCode|
 |validationErrors|List|Client side validation errors.|
-|data|T(generic)|The actural DTO, the structure will be described in each APIs. And for pagination search the search result data will be in another property *pageInfo&lt;T&gt;*|
+|data|T(generic)|The actual DTO, the structure will be described in each APIs. And for pagination search the search result data will be in another property *pageInfo&lt;T&gt;*|
 |pageInfo|PageInfo&lt;T&gt;|The search result. If the operation is a search operation the data property is null. For the structure of PageInfo please refer to below|
 |rateLimit|string(int format)|The maximum number of requests you're permitted to make per 10 minutes.|
 |rateLimitRemain|string(int format)|The number of requests remaining in the current rate limit window.|
@@ -77,7 +72,7 @@ Below figure listed the global business codes, those business codes may appear i
 |429|Too many request|Request number exceed the maximum number in the current rate limit window|
 |997|Malformed or illegal request|The JSON in request body is not a valid JSON|
 |998|Bad request||
-|999|Unknown error|Unknow error, please contact with support.|
+|999|Unknown error|Unknown error, please contact with support.|
 |1005|Marketplace not found||
 |1006|Marketplace is expired||
 |1309|Marketplace has been suspended||
@@ -101,7 +96,7 @@ Below figure listed the global business codes, those business codes may appear i
 
 ## Request rate limit
 
-The rate of successful authorised api requests is 3000 per 10min, which means that all third party systems using the same External System Access Key and External System Access Secre from one same reseller share the quota of 3000 requests per 10 minutes.
+The rate of successful authorised api requests is 3000 per 10min, which means that all third party systems using the same External System Access Key and External System Access Secret from one same reseller share the quota of 3000 requests per 10 minutes.
 Successfully authorised connections must be used with the correct External System Access Key and External System Access Secret, and the Exit IP of the external system integration server must be successfully configured in the External System Configuration.
 
 Failed requests with unsuccessful authorisation will first report an error code as below, and the rate of failed requests with unsuccessful authorisation is limited to 20 requests every 30 minutes, and after reaching 20 requests in 30mins, a mandatory wait of 30 minutes is required for the next attempt, in order to prevent customers from unlimited requests for guessing the real key Secret or other important information, and protect the security of the customer's system integration.

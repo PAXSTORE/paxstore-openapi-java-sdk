@@ -38,7 +38,7 @@ public Result<ArrayList<MerchantCategoryDTO>> getMerchantCategories(String name)
 **Sample codes**
 
 ```
-MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ArrayList<MerchantCategoryDTO>> obj = merchantCategoryApi.getMerchantCategories("Fast Foods");
 ```
 
@@ -87,7 +87,7 @@ Structure of class MerchantCategoryCreateRequest
 **Sample codes**
 
 ```
-MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 MerchantCategoryCreateRequest createRequest = new MerchantCategoryCreateRequest();
 createRequest.setName("Retail");
 createRequest.setRemarks("Retail");
@@ -168,7 +168,7 @@ Structure of class MerchantCategoryUpdateRequest
 **Sample codes**
 
 ```
-MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 MerchantCategoryUpdateRequest updateRequest = new MerchantCategoryUpdateRequest();
 updateRequest.setName("Retail");
 updateRequest.setRemarks("This is a retail category");
@@ -245,7 +245,7 @@ public Result<String> deleteMerchantCategory(Long merchantCategoryId)
 **Sample codes**
 
 ```
-MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = merchantCategoryApi.deleteMerchantCategory(12L);
 ```
 
@@ -304,7 +304,7 @@ public Result<ArrayList<MerchantCategoryDTO>> batchCreateMerchantCategory(List<M
 **Sample codes**
 
 ```
-MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantCategoryApi merchantCategoryApi = new  MerchantCategoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 List<MerchantCategoryCreateRequest> batchCreateRequest = new ArrayList<MerchantCategoryCreateRequest>();
 MerchantCategoryCreateRequest create1 = new MerchantCategoryCreateRequest();
 create1.setName("Retail");

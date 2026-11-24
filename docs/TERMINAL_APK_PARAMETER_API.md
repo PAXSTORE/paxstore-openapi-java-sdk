@@ -41,7 +41,7 @@ search terminal apk parameter history by templateName ,packageName ,versionName.
 **Sample codes**
 
 ```
-TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ApkParameterDTO> result = terminalApkParameterApi.searchTerminalApkParameter(1,2, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc,"12312","com.ss.android.article.lite","6.6.4");
 ```
 
@@ -124,7 +124,7 @@ The structure of class ApkFileDTO
 | Property Name | Type   | Description               |
 | :------------ | :----- | :------------------------ |
 | permissions   | String | Android OS Authorization. |
-| paxPermission | String | Paydroid Authorizationr.  |
+| paxPermission | String | Paydroid Authorization.  |
 
 **Possible client validation errors**
 
@@ -153,7 +153,7 @@ public Result<ApkParameterDTO> getTerminalApkParameter(Long apkParameterId, List
 **Sample codes**
 
 ```
-TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long apkParameterId = 1149L;
 Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(apkParameterId);
 
@@ -251,7 +251,7 @@ Structure of class FileParameter
 **Sample codes**
 
 ```
-TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
   CreateApkParameterRequest createApkParameterRequest = new CreateApkParameterRequest();
 createApkParameterRequest.setParamTemplateName("3243.xml");
 createApkParameterRequest.setName("testCreate3RD-result-api-test-CREATEbY-newest-12334111");
@@ -338,7 +338,7 @@ Note:UpdateApkParameterRequest cannot be empty or paramTemplateName and paramete
 **Sample codes**
 
 ```
-TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long apkParameterId = 1149L;
 UpdateApkParameterRequest updateApkParameterRequest = new UpdateApkParameterRequest();
 updateApkParameterRequest.setParamTemplateName(null);
@@ -415,7 +415,7 @@ public Result<String> deleteApkParameter(Long apkParameterId)
 **Sample codes**
 
 ```
-TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkParameterApi terminalApkParameterApi = new TerminalApkParameterApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 terminalApkParameterApi.deleteApkParameter(apkParameterId);
 ```
 

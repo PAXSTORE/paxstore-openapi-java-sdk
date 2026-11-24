@@ -28,7 +28,7 @@
 * Add entityAttributeValues support for reseller and merchant APIs
 
 
-* ## 11.0.0
+## 11.0.0
 ### New Feature
 * Add AppApi - `searchApkSupportedModels` API
 
@@ -53,8 +53,8 @@
 * The `source` attribute within the installedApks object is now returned in the API(TerminalApi-`getTerminal`, `getTerminalBySn`) response.
 * Add EmmDeviceApi - `clearEmmAppData` API
 * Add the return field `imei` in EmmDeviceApi - `getEmmDevice` API
-* Add parameter query `iccId` 、`imei` and  return in EmmDeviceApi-`searchEmmDevice` API
-* Add the return fields `clearStatus`,`clearFlag`,`reason` and`lastClearTime` in EMMDeviceDetail API - `findEmmDeviceInstalledAppPage` API
+* Add parameter query `iccId` and `imei` and return in EmmDeviceApi - `searchEmmDevice` API
+* Add the return fields `clearStatus`, `clearFlag`, `reason` and `lastClearTime` in EmmDeviceDetail API - `findEmmDeviceInstalledAppPage` API
 * Change the structure of `NetworkConfiguration` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API
 * Add the return field `hideEnterpriseName` in EmmPolicyApi - `getResellerEmmPolicy`,`getMerchantEmmPolicy`,`getDeviceEmmPolicy`,`createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API.
 * Add the request parameter fields `enableUnattendedAccess` and `unattendedDeviceResponseTime` in EmmPolicyApi - `createResellerEmmPolicy`,`createMerchantEmmPolicy`,`createDeviceEmmPolicy` API

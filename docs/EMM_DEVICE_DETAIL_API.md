@@ -39,7 +39,7 @@ public Result<EmmDeviceDashboardDetailDTO> getEmmDeviceDashboardDetail(Long devi
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmDeviceDashboardDetailDTO> result = emmDeviceDetailApi.getEmmDeviceDashboardDetail(1644892713386019L);
 ```
 
@@ -127,7 +127,7 @@ public Result<EmmDeviceDashboardMonitorDTO> getEmmDeviceDashboardMonitor(Long de
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmDeviceDashboardMonitorDTO> result = emmDeviceDetailApi.getEmmDeviceDashboardMonitor(1644892713386019L);
 ```
 
@@ -212,7 +212,7 @@ Result<EmmDeviceInstalledAppDTO> searchDeviceInstalledApp(int pageNo, int pageSi
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmDeviceInstalledAppDTO> result = emmDeviceDetailApi.searchDeviceInstalledApp(1, 5, EmmDeviceDetailApi.EmmDeviceInstalledAppOrderBy.AppInstallTime_asc, 1644892713386019L);
 ```
 
@@ -317,7 +317,7 @@ public Result<EmmDeviceLocationDTO> getEmmDeviceLocation(Long deviceId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmDeviceLocationDTO> result = emmDeviceDetailApi.getEmmDeviceLocation(1644892713386019L);
 ```
 

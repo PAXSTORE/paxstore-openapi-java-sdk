@@ -44,7 +44,7 @@ public Result<ParameterVariableDTO> getTerminalVariable(int pageNo, int pageSize
 **Sample codes**
 
 ```
-TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ParameterVariableDTO> result = terminalVariableApi.getTerminalVariable(1,2,TerminalVariableApi.SearchOrderBy.Variable_asc,"124465D345",null,null,null,null);
 ```
 
@@ -153,7 +153,7 @@ Structure of class ParameterVariable
 **Sample codes**
 
 ```
-TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalParameterVariableRequest createRequest = new TerminalParameterVariableRequest();
 ParameterVariable parameterVariable1 = new ParameterVariable();
 parameterVariable1.setType("T");
@@ -251,7 +251,7 @@ Note: parameterVariable cannot be empty
 **Sample codes**
 
 ```
-TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long terminalVariableId = 1000001148L;
 ParameterVariable updateRequest = new ParameterVariable();
 updateRequest.setType("T");
@@ -317,7 +317,7 @@ public Result<String> deleteTerminalVariable(Long terminalVariableId)
 **Sample codes**
 
 ```
-TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long terminalVariableId = 1000001156L;
 Result<String> deleteResult = terminalVariableApi.deleteTerminalVariable(terminalVariableId);
 ```
@@ -376,7 +376,7 @@ Structure of class ParameterVariable
 **Sample codes**
 
 ```
-TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalVariableApi terminalVariableApi = new TerminalVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalParameterVariableDeleteRequest batchDeletionRequest = new TerminalParameterVariableDeleteRequest();
 List<Long> variableIds = new ArrayList<>();
 variableIds.add(1000001137L);

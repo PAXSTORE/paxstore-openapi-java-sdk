@@ -30,7 +30,7 @@ public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy 
 public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
 String name, AppOsType osType, AppChargeType chargeType, AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,Boolean specificReseller,Boolean specificMerchantCategory, Boolean includeSubscribedApp);
 public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy orderBy,
-String name, AppOsType osType, AppChargeType chargeType, AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,Boolean specificReseller,Boolean pecificMerchantCategory);
+String name, AppOsType osType, AppChargeType chargeType, AppBaseType baseType, AppStatus appStatus, ApkStatus apkStatus,Boolean specificReseller,Boolean specificMerchantCategory);
 ```
 
 **Input parameter(s) description**
@@ -55,7 +55,7 @@ String name, AppOsType osType, AppChargeType chargeType, AppBaseType baseType, A
 **Sample codes**
 
 ```
-AppApi AppApi = new  AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+AppApi AppApi = new  AppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate_desc,"", AppOsType.Android, AppChargeType.Free, AppBaseType.Normal, AppStatus.Active, ApkStatus.Online, false, false, null, null);
 ```
 
@@ -75,7 +75,7 @@ Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate
 	"businessCode": 0,
 	"pageInfo": {
 		"pageNo": 1,
-		"limit": 12,
+		"limit": 10,
 		"totalCount": 1,
 		"hasNext": false,
 		"dataSet": [{
@@ -118,7 +118,7 @@ The type in dataSet is AppPageDTO. And the structure like below.
 | packageName           | String                        | The packageName of app. |
 | status                | String                        | Status of app. Value can be one of A(Active) and S(Suspend) |
 | osType                | String                        | OsType of app. Value can be one of A(Android) and T(Traditional) |
-| chargeType            | Integer                       | chargeType of app. Value can be one of 0(Free) and 1(Charing) |
+| chargeType            | Integer                       | chargeType of app. Value can be one of 0(Free) and 1(Charging) |
 | price                 | BigDecimal                    | The price |
 | text                  | String                        | The app price, when app cost use |
 | specificReseller      | Boolean                       | whether make app specific reseller. |
@@ -144,7 +144,7 @@ The structure of class ApkFileDTO
 | Property Name | Type   | Description               |
 |:--------------|:-------|:--------------------------|
 | permissions   | String | Android OS Authorization. |
-| paxPermission | String | Paydroid Authorizationr.  |
+| paxPermission | String | Paydroid Authorization.  |
 
 **Possible client validation errors**
 
@@ -171,7 +171,7 @@ public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy 
 | Name                     | Type             | Nullable | Description                                                                                                                                                                                                                                                                                  |
 |:-------------------------|:-----------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | pageNo                   | int              | false    | page number, value must >=1                                                                                                                                                                                                                                                                  |
-| pageSize                 | int              | false    | the record number per page, range is 1 to 1000                                                                                                                                                                                                                                               |
+| pageSize                 | int              | false    | the record number per page, range is 1 to 100                                                                                                                                                                                                                                                |
 | orderBy                  | AppSearchOrderBy | true     | the sort order by field name, if this parameter is null the search result will order by created date descend. The value of this parameter can be one of AppSearchOrderBy.AppName_desc, AppSearchOrderBy.AppName_asc, AppSearchOrderBy.UpdatedDate_desc and AppSearchOrderBy.UpdatedDate_asc. |
 | name                     | String           | true     | search filter by app name(parsed from apk file）, package name or the developer's name                                                                                                                                                                                                        |
 | appStatus                | AppStatus        | true     | the app status<br/> the value can be AppStatus.Active, AppStatus.Suspend                                                                                                                                                                                                                     |
@@ -180,13 +180,13 @@ public Result<AppPageDTO>  searchApp(int pageNo, int pageSize, AppSearchOrderBy 
 | baseType                 | AppBaseType      | true     | the app baseType<br/> the value can be AppBaseType.Normal, AppBaseType.Parameter                                                                                                                                                                                                             |
 | chargeType               | AppChargeType    | true     | the app chargeType<br/> the value can be AppChargeType.Free, AppChargeType.Charging                                                                                                                                                                                                          |
 | specificReseller         | Boolean          | true     | specific reseller<br/> make app private to some reseller, the value can be true or false                                                                                                                                                                                                     |
-| specificMerchantCategory | Boolean          | true     | sperific merchant category<br/> make app only visible by specific merchants in store client, the value can be true or false                                                                                                                                                                  |
+| specificMerchantCategory | Boolean          | true     | specific merchant category<br/> make app only visible by specific merchants in store client, the value can be true or false                                                                                                                                                                  |
 | includeSubscribedApp     | Boolean          | true     | whether to include the subscribed applications from global market                                                                                                                                                                                                                            |
 
 **Sample codes**
 
 ```
-AppApi AppApi = new  AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+AppApi AppApi = new  AppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate_desc,
                                                  "", AppOsType.Android, AppChargeType.Free, AppBaseType.Normal, 
                                                  AppStatus.Active, ApkStatus.Online, false, false, true);
@@ -208,7 +208,7 @@ Result<AppPageDTO> result = AppApi.searchApp(1, 10, AppSearchOrderBy.UpdatedDate
     "businessCode": 0,
     "pageInfo": {
         "pageNo": 1,
-        "limit": 12,
+        "limit": 10,
         "totalCount": 2,
         "hasNext": false,
         "dataSet": [
@@ -293,7 +293,7 @@ public Result<AppCostDTO> getAppCost(Long resellerId, Long appId) {
 **Sample codes**
 
 ```
-AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<AppCostDTO> result = appApi.getAppCost(1L, 1L);
 ```
 
@@ -375,7 +375,7 @@ public Result<ApkParamPidDTO> searchApkParamPidList(String paramTemplateName, St
 **Sample codes**
 
 ```
-AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 String paramTemplateName = "jesse_password.xml";
 String packageName = "com.orange.onekeylockscreen";
 String versionName = "2.5.7";
@@ -473,7 +473,7 @@ public Result<ApkModelDTO> searchApkSupportedModels(String packageName, String v
 **Sample codes**
 
 ```
-AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+AppApi appApi = new AppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 String packageName = "com.zolon.signrotatetest1";
 String versionName = "1.0.13";
 Result<ApkFactoryModelDTO> result = appApi.searchApkModelList("com.zolon.signrotatetest1", "1.0.13");

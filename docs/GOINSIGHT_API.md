@@ -143,7 +143,7 @@ terminalSNs.setCloName(CustomColName.TERMINAL);
 terminalSNs.setFilterValue("SN123,SN456,SN789");
 customFilterList.add(terminalSNs);
 
-GoInsightApi goInsightApi = new GoInsightApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN", tz);
+GoInsightApi goInsightApi = new GoInsightApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET", tz);
 Result<DataQueryResultDTO> resultData = goInsightApi.findDataFromInsight("ahh3y62t");
 ```
 
@@ -156,7 +156,7 @@ Result<DataQueryResultDTO> resultData = goInsightApi.findDataFromInsight("ahh3y6
 }
 ```
 
-**Succssful sample result(JSON formatted)**
+**Successful sample result(JSON formatted)**
 
 ```
 {

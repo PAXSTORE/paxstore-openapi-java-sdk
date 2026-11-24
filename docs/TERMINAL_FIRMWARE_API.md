@@ -14,7 +14,7 @@ public TerminalFirmwareApi(String baseUrl, String apiKey, String apiSecret);
 | Name | Type | Description |
 | :--- | :--- | :--- |
 | baseUrl | String | the base url of REST API |
-|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refe to chapter Apply access rights|
+|apiKey|String|the apiKey of marketplace, get this key from PAXSTORE admin console, refer to chapter Apply access rights|
 |apiSecret|String|apiSecret, get api secret from PAXSTORE admin console, refer to chapter Apply access rights|
 
 ### Push firmware
@@ -49,7 +49,7 @@ Note: tid and serialNo cannot be empty at same time.
 **Sample codes**
 
 ```
-TerminalFirmwareApi terminalFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalFirmwareApi terminalFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 PushFirmware2TerminalRequest createTerminalFirmwareRequest = new PushFirmware2TerminalRequest();
 pushFirmware2TerminalRequest.setTid("ABC09098989");
 pushFirmware2TerminalRequest.setFmName("A920_PayDroid_4.4.2_Capricorn_V01.1.10_20171226_OTA");
@@ -133,7 +133,7 @@ String serialNo)
 **Sample codes**
 
 ```
-TerminalFirmwareApi terminalFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalFirmwareApi terminalFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<PushFirmwareTaskDTO> result = terminalFirmwareApi.searchPushFirmwareTasks(1,12,SearchOrderBy.CreatedDate_desc,
                                 terminalTid, fmName, PushStatus.Active);
 ```
@@ -212,7 +212,7 @@ public Result<PushFirmwareTaskDTO> getPushFirmwareTask(Long pushFirmwareTaskId)
 **Sample codes**
 
 ```
-TerminalFirmwareApi terminalFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalFirmwareApi terminalFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<PushFirmwareTaskDTO> result = terminalFirmwareApi.getPushFirmwareTask(17850L);
 ```
 
@@ -305,7 +305,7 @@ Note: tid and serialNo cannot be empty at same time.
 **Sample codes**
 
 ```
-TerminalFirmwareApi terminalFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalFirmwareApi terminalFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 DisablePushFirmwareTask disablePushFirmwareTask = new DisablePushFirmwareTask();
 disablePushFirmwareTask.setTid("ABC09098989");
 disablePushFirmwareTask.setFmName("A920_PayDroid_4.4.2_Capricorn_V01.1.10_20171226_OTA");
@@ -374,7 +374,7 @@ public Result<String> deleteTerminalFirmware(Long terminalFirmwareId)
 **Sample codes**
 
 ```
-TerminalFirmwareApi terminaFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalFirmwareApi terminaFirmwareApi = new TerminalFirmwareApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminaFirmwareApi.deleteTerminalFirmware(1743L);
 ```
 

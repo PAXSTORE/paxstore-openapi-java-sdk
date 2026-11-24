@@ -39,7 +39,7 @@ public Result<EmmPolicyDTO> getResellerEmmPolicy(String resellerName);
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmPolicyDTO> result = emmPolicyApi.getResellerEmmPolicy("PAX");
 ```
 
@@ -896,7 +896,7 @@ Structure of class LockedPolicyUpdateDTO
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 ResellerEmmPolicyCreateRequest request = new ResellerEmmPolicyCreateRequest();
 request.setResellerName("PAX");
 PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();
@@ -999,7 +999,7 @@ public Result<EmmPolicyDTO> getMerchantEmmPolicy(String resellerName, String mer
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmPolicyDTO> result = emmPolicyApi.getMerchantEmmPolicy("PAX","test");
 ```
 
@@ -1847,7 +1847,7 @@ Structure of class LockedPolicyUpdateDTO
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 MerchantEmmPolicyCreateRequest request = new MerchantEmmPolicyCreateRequest();
 request.setResellerName("PAX");
 request.setMerchantName("test");
@@ -1950,7 +1950,7 @@ public Result<EmmPolicyDTO> getDeviceEmmPolicy(String serialNo);
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmPolicyDTO> result = emmPolicyApi.getDeviceEmmPolicy("2870003453");
 ```
 
@@ -2800,7 +2800,7 @@ Structure of class LockedPolicyUpdateDTO
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 DeviceEmmPolicyCreateRequest request = new DeviceEmmPolicyCreateRequest();
 request.setSerialNo("2870003453");
 PolicyUpdatedContentDTO policyUpdatedContentDTO = new PolicyUpdatedContentDTO();

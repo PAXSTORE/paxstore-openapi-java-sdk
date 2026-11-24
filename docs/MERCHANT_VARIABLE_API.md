@@ -42,7 +42,7 @@ public Result<MerchantVariableDTO> searchMerchantVariable(int pageNo, int pageSi
 **Sample codes**
 
 ```
-MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<MerchantVariableDTO> result = merchantVariableApi.searchMerchantVariable(1,2,MerchantVariableApi.SearchOrderBy.Variable_asc, 113781L, null,null , MerchantVariableApi.VariableSource.MERCHANT);
 ```
 
@@ -149,7 +149,7 @@ Structure of class ParameterVariable
 **Sample codes**
 
 ```
-MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long merchantId = 113781L;
 MerchantVariableCreateRequest createRequest = new MerchantVariableCreateRequest();
 ParameterVariable parameterVariable1 = new ParameterVariable();
@@ -253,7 +253,7 @@ Note: updateRequest cannot be empty
 **Sample codes**
 
 ```
-MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long merchantVariableId = 1000000008L;
 MerchantVariableUpdateRequest updateRequest = new MerchantVariableUpdateRequest();
 updateRequest.setKey("testUpdateVariable-key1");
@@ -325,7 +325,7 @@ public Result<String> deleteMerchantVariable(Long merchantVariableId)
 **Sample codes**
 
 ```
-MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long merchantVariableId = 1000000008L;
 Result<String> deleteResult = merchantVariableApi.deleteMerchantVariable(merchantVariableId);
 ```
@@ -386,7 +386,7 @@ Structure of class MerchantVariableDeleteRequest
 **Sample codes**
 
 ```
-MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantVariableApi merchantVariableApi = new MerchantVariableApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 MerchantVariableDeleteRequest batchDeletionRequest = new MerchantVariableDeleteRequest();
 List<Long> variableIds = new ArrayList<>();
 variableIds.add(1000000007L);

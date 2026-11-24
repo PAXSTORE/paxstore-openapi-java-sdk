@@ -45,7 +45,7 @@ public FactoryModelApi(String baseUrl, String apiKey, String apiSecret)
 **Sample codes**
 
 ```
-FactoryModelApi factoryModelApi = new  FactoryModelApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+FactoryModelApi factoryModelApi = new  FactoryModelApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<FactoryDTO> result = factoryModelApi.searchFactoryModels(1,5, FactoryModelApi.SearchOrderBy.name_asc, null, null, null);
 ```
 

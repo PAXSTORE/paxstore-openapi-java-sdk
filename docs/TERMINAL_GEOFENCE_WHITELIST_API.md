@@ -41,7 +41,7 @@ public Result<TerminalGeoFenceWhiteListDTO> searchGeoFenceWhiteList(int pageNo, 
 **Sample codes**
 
 ```
-TerminalGeoFenceWhiteListApi terminalGeoFenceWhiteListApi = new TerminalGeoFenceWhiteListApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGeoFenceWhiteListApi terminalGeoFenceWhiteListApi = new TerminalGeoFenceWhiteListApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 String serialNo = "";
 Result<TerminalGeoFenceWhiteListDTO> result = terminalGeoFenceWhiteListApi.searchGeoFenceWhiteList(1,10, TerminalGeoFenceWhiteListApi.SearchOrderBy.CreatedDate_desc, serialNo);
 ```
@@ -55,7 +55,7 @@ Result<TerminalGeoFenceWhiteListDTO> result = terminalGeoFenceWhiteListApi.searc
 }
 ```
 
-**Succssful sample result(JSON formatted)**
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -121,7 +121,7 @@ Structure of class TerminalGeoFenceWhiteListRequest
 **Sample codes**
 
 ```
-TerminalGeoFenceWhiteListApi terminalGeoFenceWhiteListApi = new TerminalGeoFenceWhiteListApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGeoFenceWhiteListApi terminalGeoFenceWhiteListApi = new TerminalGeoFenceWhiteListApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalGeoFenceWhiteListRequest createRequest = new TerminalGeoFenceWhiteListRequest();
 createRequest.setSerialNo("1123321123sn");
 Result<String> result =  terminalGeoFenceWhiteListApi.createGeoFenceWhiteList(createRequest);
@@ -197,7 +197,7 @@ Note: deleteRequest cannot be empty
 **Sample codes**
 
 ```
-TerminalGeoFenceWhiteListApi terminalGeoFenceWhiteListApi = new TerminalGeoFenceWhiteListApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGeoFenceWhiteListApi terminalGeoFenceWhiteListApi = new TerminalGeoFenceWhiteListApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalGeoFenceWhiteListRequest deleteRequest = new TerminalGeoFenceWhiteListRequest();
 deleteRequest.setSerialNo("1123321123sn");
 Result<String> result = terminalGeoFenceWhiteListApi.deleteGeoFenceWhiteList(deleteRequest);

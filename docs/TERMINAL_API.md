@@ -49,11 +49,11 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, String resel
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225");
 ```
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York", "KFC", TerminalStatus.Active, "sn0101012225");
 ```
 
@@ -66,7 +66,7 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York",
 }
 ```
 
-**Succssful sample result(JSON formatted)**
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -102,7 +102,7 @@ Structure of class TerminalDTO
 |name|String|Terminal's name.|
 |tid|String|Terminal's tid.|
 |serialNo|String|Serial number of terminal.|
-|status|String|Status of terminal. Value can be one of A(active), P(Pendding) and S(Suspend).|
+|status|String|Status of terminal. Value can be one of A(Active), P(Inactive) and S(Suspend).|
 |merchantName|String|The merchant of terminal belongs to.|
 |modelName|String|Model name of terminal.|
 |resellerName|String|The reseller of terminal belongs to.|
@@ -143,7 +143,6 @@ Structure of class TerminalInstalledApkDTO
 |packageName|String|Package name of application|
 |versionName|String|Version name of application|
 |versionCode|Long|Version code of application|
-|packageName|String|Package name of application|
 |installTime|Date|Installed time of application|
 
 Structure of class TerminalDetailDTO
@@ -241,11 +240,11 @@ public Result<TerminalDTO> searchTerminal(int pageNo, int pageSize, String resel
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, TerminalStatus.Active, "sn0101012225", true, true, true);
 ```
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York", "KFC", TerminalStatus.Active, "sn0101012225", true, true, true);
 ```
 
@@ -258,7 +257,7 @@ Result<TerminalDTO> result = terminalApi.searchTerminal(1, 10, null, "New York",
 }
 ```
 
-**Succssful sample result(JSON formatted)**
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -358,7 +357,7 @@ public Result<TerminalDTO> getTerminal(Long terminalId, boolean includeDetailInf
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 //simple info
 Result<TerminalDTO> result = terminalApi.getTerminal(908627L);
 //includeDetailInfoList, whether to return Detail Info and Accessory List 
@@ -775,7 +774,7 @@ public Result<TerminalDTO> getTerminalBySn(String serialNo, boolean includeDetai
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 //simple info
 Result<TerminalDTO> result = terminalApi.getTerminalBySn("SN6132522");
 //includeDetailInfoList
@@ -1184,12 +1183,12 @@ Structure of class TerminalCreateRequest
 |modelName|String|true|The model name of terminal. Max length is 64.|
 |location|String|true|The location of terminal, max length is 64.|
 |remark|String|true|The remark of terminal, max length is 500.|
-|status|String|true|Status of terminal, value can be one of A(Active) and P(Pendding). If status is null the initial status is P(Pendding) when creating.|
+|status|String|true|Status of terminal, value can be one of A(Active) and P(Inactive). If status is null the initial status is P(Inactive) when creating.|
 
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalCreateRequest createReq = new TerminalCreateRequest();
 createReq.setName("KFC-TML-001");
 createReq.setMerchantName("KFC");
@@ -1310,7 +1309,7 @@ Structure of class TerminalUpdateRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
 updateReq.setName("KFC-TML-001");
 updateReq.setModelName("A920");
@@ -1449,7 +1448,7 @@ Structure of class TerminalUpdateRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalUpdateRequest updateReq = new TerminalUpdateRequest();
 updateReq.setName("KFC-TML-001");
 updateReq.setModelName("A920");
@@ -1579,12 +1578,12 @@ Structure of class TerminalCopyRequest
 | name          | String | false    | The name of terminal, max length is 64.                                                                                                                                                            |
 | tid           | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16.                                                                                |
 | serialNo      | String | true     | The serial number of terminal. If the status is active the serial number is mandatory.                                                                                                             |
-| status        | String | false    | Status of terminal, value can be one of A(Active) and P(Pendding). A is for Active and P is for Pendding |
+| status        | String | false    | Status of terminal, value can be one of A(Active) and P(Inactive). A is for Active and P is for Inactive |
 
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalCopyRequest copyRequest = new TerminalCopyRequest();
 copyRequest.setTerminalId(13453434534L);
 copyRequest.setName("COPY_FROM_13453434534");
@@ -1673,12 +1672,12 @@ Structure of class TerminalCopyRequest
 | tid              | String | true     | The tid of terminal. If it is empty system will generate a tid when creating. And the length range is from 8 to 16. |
 | sourceSerialNo   | String | false    | The serial number of source terminal. The serial number is mandatory.                                               |
 | serialNo         | String | false    | The serial number of terminal. If the status is active the serial number is mandatory.                              |
-| status           | String | false    | Status of terminal, value can be one of A(Active) and P(Pendding). A is for Active and P is for Pendding            |
+| status           | String | false    | Status of terminal, value can be one of A(Active) and P(Inactive). A is for Active and P is for Inactive           |
 
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalCopyRequest copyRequest = new TerminalCopyRequest();
 copyRequest.setTerminalId(13453434534L);
 copyRequest.setName("COPY_FROM_13453434534");
@@ -1764,7 +1763,7 @@ public Result<String> activateTerminal(Long terminalId)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.activateTerminal(907560L);
 ```
 
@@ -1828,7 +1827,7 @@ public Result<String> activateTerminalBySn(String serialNo)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.activateTerminalBySn("SN6132522");
 ```
 
@@ -1894,7 +1893,7 @@ public Result<String> disableTerminal(Long terminalId)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.disableTerminal(907560L);
 ```
 
@@ -1955,7 +1954,7 @@ public Result<String> disableTerminalBySn(String serialNo)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.disableTerminalBySn("TJ00001002");
 ```
 
@@ -2019,7 +2018,7 @@ public Result<String> moveTerminal(Long terminalId, String resellerName, String 
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.moveTerminal(907560L, "targetReseller", "targetMerchant");
 ```
 
@@ -2091,7 +2090,7 @@ public Result<String> moveTerminalBySn(String serialNo, String resellerName, Str
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.moveTerminalBySn("SN6132522", "targetReseller", "targetMerchant");
 ```
 
@@ -2159,7 +2158,7 @@ public Result<String> deleteTerminal(Long terminalId)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.deleteTerminal(907560L);
 ```
 
@@ -2220,7 +2219,7 @@ public Result<String> deleteTerminalBySn(String serialNo)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.deleteTerminal(907560L);
 ```
 
@@ -2287,7 +2286,7 @@ Structure of class TerminalGroupRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalGroupRequest groupRequest = new TerminalGroupRequest();
 Set<Long> terminalIds = new HashSet<>();
 terminalIds.add(909744L);
@@ -2366,7 +2365,7 @@ Structure of class TerminalGroupRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 TerminalSnGroupRequest groupRequest = new TerminalSnGroupRequest();
 Set<String> serialNoList = new HashSet<>();
 serialNoList.add("SN6132522");
@@ -2526,7 +2525,7 @@ Structure of class BlackListConfig
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long terminalId = 909744L;
 TerminalReplacementUpdateRequest terminalReplacementUpdateRequest = new TerminalReplacementUpdateRequest();
 terminalReplacementUpdateRequest.setAllowReplacement(true);
@@ -2710,7 +2709,7 @@ public Result<TerminalConfigDTO> getTerminalConfig(Long terminalId)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalConfigDTO> result = terminalApi.getTerminalConfig(909744L);
 ```
 
@@ -2780,7 +2779,7 @@ public Result<TerminalConfigDTO> getTerminalConfigBySn(String serialNo)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalConfigDTO> result = terminalApi.getTerminalConfigBySn("SN6132522");
 ```
 
@@ -2843,7 +2842,7 @@ public Result<TerminalPedDTO> getTerminalPed(Long terminalId)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalPedDTO> result = terminalApi.getTerminalPed(909755L);
 ```
 
@@ -2905,7 +2904,7 @@ public Result<TerminalPedDTO> getTerminalPedBySn(String serialNo)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalPedDTO> result = terminalApi.getTerminalPedBySn("SN6132522");
 ```
 
@@ -2976,7 +2975,7 @@ public Result<String> pushCmdToTerminal(Long terminalId, TerminalPushCmd command
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCmd.Lock);
 Result<String> cancelResult = terminalApi.pushCmdToTerminal(terminalId, TerminalPushCmd.Lock, true);
 ```
@@ -3057,7 +3056,7 @@ public Result<String> pushCmdToTerminalBySn(String serialNo, TerminalApi.Termina
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalApi.pushCmdToTerminalBySn(serialNo, TerminalPushCmd.Lock);
 Result<String> cancelResult = terminalApi.pushCmdToTerminalBySn(serialNo, TerminalPushCmd.Lock, true);
 ```
@@ -3131,7 +3130,7 @@ public Result<TerminalNetworkDTO> getTerminalNetwork(String serialNo, String tid
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalNetworkDTO> result = terminalApi.getTerminalNetwork("TEST8000999", "BTG7KFTY");
 ```
 
@@ -3226,7 +3225,7 @@ Structure of class TerminalMessageRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long terminalId = 162006737459222L
 TerminalMessageRequest request = new TerminalMessageRequest();
 request.setTitle("Test Title");
@@ -3303,7 +3302,7 @@ Structure of class TerminalMessageRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 String serialNo = "TESTBYSN"
 TerminalMessageRequest request = new TerminalMessageRequest();
 request.setTitle("Test Title");
@@ -3370,7 +3369,7 @@ public Result<TerminalSystemUsageDTO> getTerminalSystemUsageById(Long terminalId
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalSystemUsageDTO> terminalSystemUsage = terminalApi.getTerminalSystemUsageById(1639491781525547L);
 ```
 
@@ -3450,7 +3449,7 @@ public Result<TerminalSystemUsageDTO> getTerminalSystemUsageBySn(String serialNo
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalSystemUsageDTO> terminalSystemUsage = terminalApi.getTerminalSystemUsageBySn("SUBSN108");
 ```
 
@@ -3538,7 +3537,7 @@ Structure of class TerminalLogRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long terminalId = "908627L"
 TerminalLogRequest request = new TerminalLogRequest();
 request.setType("L");
@@ -3611,7 +3610,7 @@ Structure of class TerminalLogRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 String serialNo = "SUBSN108"
 TerminalLogRequest request = new TerminalLogRequest();
 request.setType("L");
@@ -3677,7 +3676,7 @@ public Result<TerminalLogDTO> searchTerminalLog(int pageNo, int pageSize, Long t
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long terminalId = "908627L"
 Result<TerminalLogDTO> result = terminalApi.searchTerminalLog(1,10,terminalId);
 
@@ -3765,7 +3764,7 @@ public Result<TerminalLogDTO> searchTerminalLog(int pageNo, int pageSize, String
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 String serialNo = "SUBSN108"
 Result<TerminalLogDTO> result = terminalApi.searchTerminalLog(1,10,serialNo);
 
@@ -3852,7 +3851,7 @@ get terminal log download task.
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Long terminalId = "908627L";
 Long terminalLogId = "908624L";
 Result<DownloadTaskDTO> result = terminalApi.getTerminalLogDownloadTask(terminalId,terminalLogId);
@@ -3941,7 +3940,7 @@ public Result<DownloadTaskDTO> getTerminalLogDownloadTaskBySn(String serialNo, L
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 String serialNo = "SUBSN108";
 Long terminalLogId = "908624L";
 Result<DownloadTaskDTO> result = terminalApi.getTerminalLogDownloadTaskBySn(serialNo,terminalLogId);
@@ -4034,7 +4033,7 @@ public Result<EmptyResponse> changeModel(Long terminalId, String modelName)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmptyResponse> responseResult = terminalApi.changeModelBySN("SUBSN108", "A920");
 ```
 
@@ -4105,7 +4104,7 @@ public Result<EmptyResponse> changeModelBySN(String serialNo, String modelName)
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmptyResponse> responseResult = terminalApi.changeModel("POS10008", "A920");
 ```
 
@@ -4176,7 +4175,7 @@ public Result<EmptyResponse> pushTerminalSetLauncherAction(Long terminalId, Stri
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 String packageName = "com.orange.onekeylockscreen";
 Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherAction(terminalId, packageName);
 ```
@@ -4254,7 +4253,7 @@ public Result<EmptyResponse> pushTerminalSetLauncherActionBySN(String serialNo, 
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 private final String serialNo = "TESTCLIENT";
 String packageName = "com.orange.onekeylockscreen";
 Result<EmptyResponse> responseResult = terminalApi.pushTerminalSetLauncherActionBySN(serialNo, packageName);
@@ -4338,7 +4337,7 @@ public Result<TerminalAlarmDTO> searchTamperedTerminal(int pageNo, int pageSize,
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalAlarmDTO> result = terminalApi.searchTamperedTerminal(1, 10, null, null, null);
 ```
 
@@ -4425,7 +4424,7 @@ Structure of class TerminalGeoFenceRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 //template mode
 TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
 request.setTemplateName("geo-fence-template");
@@ -4512,7 +4511,7 @@ Structure of class TerminalGeoFenceRequest
 **Sample codes**
 
 ```
-TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApi terminalApi = new TerminalApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 //direct center-point mode
 TerminalGeoFenceRequest request = new TerminalGeoFenceRequest();
 request.setGeofenceType(TerminalApi.TerminalGeoFenceType.CenterPoint);

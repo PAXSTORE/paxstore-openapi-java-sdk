@@ -45,7 +45,7 @@ public Result<MerchantPageDTO>  searchMerchant(int pageNo, int pageSize, Merchan
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<MerchantPageDTO> result = merchantApi.searchMerchant(1, 10, null, "2fecc", MerchantStatus.Active);
 ```
 
@@ -105,7 +105,7 @@ The type in dataSet is MerchantPageDTO. And the structure like below.
 |contact|String| Contact of merchant.                                                                      |
 |email|String| Email of merchant.                                                                        |
 |phone|String| Phone number of merchant.                                                                 |
-|status|String| Status of merchant. Value can be one of A(Active), P(Pendding) and S(Suspend)             |
+|status|String| Status of merchant. Value can be one of A(Active), P(Inactive) and S(Suspend)             |
 |description|String| The description of the merchant                                                           |
 |entityAttributeValues|LinkedHashMap<String, String>| Dynamic attributes of merchant.                                                           |
 
@@ -142,7 +142,7 @@ public Result<MerchantDTO>  getMerchant(Long merchantId)
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<MerchantDTO> result = merchantApi.getMerchant(72590L);
 ```
 
@@ -211,7 +211,7 @@ The type of data in result is MerchantDTO, and the structure shows below.
 |contact|String|Contact of merchant.|
 |email|String|Email of merchant.|
 |phone|String|Phone number of merchant.|
-|status|String|Status of merchant. Value can be one of A(Active), P(Pendding) and S(Suspend)|
+|status|String|Status of merchant. Value can be one of A(Active), P(Inactive) and S(Suspend)|
 |description|String|The description of merchant, max length is 3000|
 |entityAttributeValues|LinkedHashMap&lt;String, String&gt;|Dynamic attributes of merchant.|
 |merchantCategory|List\<MerchantCategoryDTO\>|Categories of merchant belongs to.|
@@ -268,7 +268,7 @@ Structure of class MerchantCreateRequest
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 MerchantCreateRequest request = new MerchantCreateRequest();
 request.setName("KFC Suzhou");
 request.setResellerName("New York");
@@ -409,7 +409,7 @@ Structure of class MerchantUpdateRequest
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 MerchantUpdateRequest request = new MerchantUpdateRequest();
 request.setName("KFC Suzhou");
 request.setResellerName("New York");
@@ -534,7 +534,7 @@ public Result<String> activateMerchant(Long merchantId)
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = merchantApi.activateMerchant(72590L);
 ```
 
@@ -579,7 +579,7 @@ Result<String> result = merchantApi.activateMerchant(72590L);
 
 ### Disable a merchant
 
-Disable merchant API allows the thirdparty system disable a Active/Pendding merchant.
+Disable merchant API allows the thirdparty system disable an Active/Inactive merchant.
 If disable successfully there's not response content from remote server.
 
 **API**
@@ -597,7 +597,7 @@ public Result<String> disableMerchant(Long merchantId)
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = merchantApi.disableMerchant(72594L);
 ```
 
@@ -660,7 +660,7 @@ public Result<String> deleteMerchant(Long merchantId)
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = merchantApi.deleteMerchant(72593L);
 ```
 
@@ -724,7 +724,7 @@ public Result<String> replaceMerchantEmail(Long merchantId, String email, boolea
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = merchantApi.replaceMerchantEmail(72593L, "zhangsan@pax.com", true);
 ```
 
@@ -791,7 +791,7 @@ public Result<String> moveMerchant(Long merchantId, String targetResellerName)
 **Sample codes**
 
 ```
-MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = merchantApi.moveMerchant(1000000000L, "Reseller B");
 ```
 

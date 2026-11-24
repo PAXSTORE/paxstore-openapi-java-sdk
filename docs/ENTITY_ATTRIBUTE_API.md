@@ -36,7 +36,7 @@ public Result<EntityAttributeDTO> getEntityAttribute(Long attributeId)
 **Sample codes**
 
 ```
-EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EntityAttributeDTO> result = entityAttributeApi.getEntityAttribute(1000000218L);
 ```
 
@@ -142,7 +142,7 @@ public Result<EntityAttributeDTO> searchEntityAttributes(int pageNo, int pageSiz
 **Sample codes**
 
 ```
-EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EntityAttributeDTO> result = entityAttributeApi.searchEntityAttributes(1,1,EntityAttributeApi.SearchOrderBy.EntityType_asc,null,null);
 ```
 
@@ -245,7 +245,7 @@ Structure of class EntityAttributeCreateRequest.
 **Sample codes**
 
 ```
-EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 EntityAttributeCreateRequest createRequest = new EntityAttributeCreateRequest();       createRequest.setEntityType(EntityAttributeApi.EntityAttributeType.Reseller);
 createRequest.setDefaultLabel("testCreateApi-label-1");
 createRequest.setInputType(EntityAttributeApi.EntityInputType.Text);
@@ -367,7 +367,7 @@ Structure of class EntityAttributeUpdateRequest.
 **Sample codes**
 
 ```
-EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 EntityAttributeUpdateRequest updateRequest = new EntityAttributeUpdateRequest();
 updateRequest.setDefaultLabel("testCreateApi-label-update");
 updateRequest.setInputType(EntityAttributeApi.EntityInputType.Text);
@@ -457,7 +457,7 @@ Structure of class EntityAttributeLabelInfo.
 **Sample codes**
 
 ```
-EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 
 EntityAttributeLabelInfo labelInfoJp = new EntityAttributeLabelInfo();
 EntityAttributeLabelInfo labelInfoEn = new EntityAttributeLabelInfo();
@@ -534,7 +534,7 @@ public Result<String> deleteEntityAttribute(Long attributeId)
 **Sample codes**
 
 ```
-EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EntityAttributeApi entityAttributeApi = new EntityAttributeApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = entityAttributeApi.deleteEntityAttribute(1000000416L);
 ```
 

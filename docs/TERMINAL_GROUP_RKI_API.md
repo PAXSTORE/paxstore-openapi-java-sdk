@@ -53,7 +53,7 @@ public Result<TerminalGroupRkiDTO> searchGroupPushRkiTask(int pageNo, int pageSi
 **Sample codes**
 
 ```
-TerminalGroupRkiApi terminalGroupRkiApi = new TerminalGroupRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupRkiApi terminalGroupRkiApi = new TerminalGroupRkiApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalGroupRkiDTO> result = terminalGroupRkiApi.searchGroupPushRkiTask(
 1,12,SearchOrderBy.CreatedDate_desc,null, true, null);
 ```
@@ -149,7 +149,7 @@ public Result<TerminalGroupRkiDTO> getGroupPushRkiTask(Long groupPushRkiTaskId)
 **Sample codes**
 
 ```
-TerminalGroupRkiApi terminalGroupRkiApi = new TerminalGroupRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupRkiApi terminalGroupRkiApi = new TerminalGroupRkiApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalGroupRkiDTO> result = terminalGroupRkiApi.getGroupPushRkiTask(6L);
 ```
 
@@ -254,7 +254,7 @@ Structure of class CreateTerminalGroupRkiRequest
 **Sample codes**
 
 ```
-TerminalGroupRkiApi terminalGroupRkiApi = new TerminalGroupRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupRkiApi terminalGroupRkiApi = new TerminalGroupRkiApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 CreateTerminalGroupRkiRequest createRequest = new CreateTerminalGroupRkiRequest();
 createRequest.setGroupId(16601L);
 createRequest.setRkiKey("TEST_8");
@@ -342,7 +342,7 @@ public Result<TerminalGroupRkiDTO> disableGroupRkiPushTask(Long groupPushRkiTask
 **Sample codes**
 
 ```
-TerminalGroupRkiApi terminalGroupRkiApi = new TerminalGroupRkiApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalGroupRkiApi terminalGroupRkiApi = new TerminalGroupRkiApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalGroupRkiDTO> result = terminalGroupRkiApi.disableGroupRkiPushTask(6L);
 ```
 

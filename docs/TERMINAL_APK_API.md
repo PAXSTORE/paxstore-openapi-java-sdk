@@ -66,7 +66,7 @@ Note: tid and serialNo cannot be empty at same time.
 **Sample codes**
 
 ```
-TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
 createTerminalApkRequest.setTid("ABC09098989");
 createTerminalApkRequest.setPackageName("com.baidu.map");
@@ -194,7 +194,7 @@ Note: tid and serialNo cannot be empty at same time.
 **Sample codes**
 
 ```
-TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 CreateTerminalApkPartialParamRequest createTerminalApkRequest = new CreateTerminalApkPartialParamRequest();
 createTerminalApkRequest.setTid("ABC09098989");
 createTerminalApkRequest.setPackageName("com.baidu.map");
@@ -315,7 +315,7 @@ public Result<TerminalApkDTO> searchTerminalApk(int pageNo, int pageSize, Search
 **Sample codes**
 
 ```
-TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 String terminalTid = "LNFAJ1HC";
 String testPackageName = "com.orange.onekeylockscreen";
 
@@ -431,7 +431,7 @@ public Result<TerminalApkDTO> getTerminalApk(Long terminalApkId, List<String> pi
 **Sample codes**
 
 ```
-TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<TerminalApkDTO> result = terminalApkApi.getTerminalApk(17850L);
 
 List<String> pidList = new ArrayList<>();
@@ -532,7 +532,7 @@ Note: tid and serialNo cannot be empty at same time.
 **Sample codes**
 
 ```
-TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 UpdateTerminalApkRequest disableTerminalApkRequest = new UpdateTerminalApkRequest();
 disableTerminalApkRequest.setTid("ABC09098989");
 disableTerminalApkRequest.setPackageName("com.baidu.map");
@@ -613,7 +613,7 @@ Note: tid and serialNo cannot be empty at same time.
 **Sample codes**
 
 ```
-TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkApi terminalApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 UpdateTerminalApkRequest uninstallApkRequest = new UpdateTerminalApkRequest();
 uninstallApkRequest.setTid("ABC09098989");
 uninstallApkRequest.setPackageName("com.baidu.map");
@@ -683,7 +683,7 @@ public Result<String> deleteTerminalApk(Long terminalApkId)
 **Sample codes**
 
 ```
-TerminalApkApi terminaApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalApkApi terminaApkApi = new TerminalApkApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminaApkApi.deleteTerminalApk(1743L);
 ```
 

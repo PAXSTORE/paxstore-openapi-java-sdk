@@ -47,7 +47,7 @@ public Result<ResellerPageDTO>  searchReseller(int pageNo, int pageSize, Reselle
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, null, "super", ResellerStatus.Suspend);
 ```
 
@@ -104,7 +104,7 @@ The type in dataSet of is ResellerPageDTO. And the structure shows like below.
 |country|String| the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes) |
 |postcode|String| the postcode of reseller                                                                  |
 |email|String| the email of reseller                                                                     |
-|status|String| the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)         |
+|status|String| the status of reseller, value can be one of A(Active), P(Inactive) and S(Suspend)         |
 |entityAttributeValues|LinkedHashMap<String, String>| Dynamic attributes of reseller.                                                           |
 
 <br>
@@ -134,7 +134,7 @@ public Result<ResellerDTO>  getReseller(Long resellerId)
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ResellerDTO> result = resellerApi.getReseller(17850L);
 ```
 
@@ -191,7 +191,7 @@ The type of data is ResellerDTO, and the structure shows below.
 |country|String|the country code, please refer to [Country Codes](APPENDIX.md#user-content-country-codes)|
 |postcode|String|the postcode of reseller|
 |email|String|the email of reseller|
-|status|String|the status of reseller, value can be one of A(Active), P(Pendding) and S(Suspend)|
+|status|String|the status of reseller, value can be one of A(Active), P(Inactive) and S(Suspend)|
 |parent|SimpleResellerDTO|reseller's parent|
 |entityAttributeValues|LinkedHashMap\<String, String\>|dynamic attributes|
 
@@ -248,7 +248,7 @@ Structure of class ResellerCreateRequest
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 ResellerCreateRequest request = new ResellerCreateRequest();
 request.setName("reseller_abc");
 request.setContact("Sam");
@@ -378,7 +378,7 @@ Structure of class ResellerUpdateRequest
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 ResellerUpdateRequest request = new ResellerUpdateRequest();
 request.setName("FVFFF");
 request.setContact("FFF");
@@ -495,7 +495,7 @@ public Result<String> activateReseller(Long resellerId)
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = resellerApi.activateReseller(51739L);
 ```
 
@@ -517,7 +517,7 @@ Result<String> result = resellerApi.activateReseller(51739L);
 }
 ```
 
-**Succssful sample result(JSON formatted)**
+**Successful sample result(JSON formatted)**
 
 ```
 {
@@ -559,7 +559,7 @@ public Result<String> disableReseller(Long resellerId)
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = resellerApi.disableReseller(51739L);
 ```
 
@@ -626,7 +626,7 @@ public Result<String> deleteReseller(Long resellerId)
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = resellerApi.deleteReseller(51739L);
 ```
 
@@ -692,7 +692,7 @@ public Result<String> replaceResellerEmail(Long resellerId, String email)
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = resellerApi.replaceResellerEmail(51739L, "zhangsan@pax.com");
 ```
 
@@ -755,7 +755,7 @@ public Result<ResellerRkiKeyPageDTO> searchResellerRkiKeyList(Long resellerId, i
 |:--- | :---|:---|:---|
 |resellerId|Long|false|The reseller's id.|
 |pageNo|int|false|page number, value must >=1|
-|pageSize|int|false|the record number per page, range is 1 to 1000|
+|pageSize|int|false|the record number per page, range is 1 to 100|
 |rkiKey|String|true|search filter by RKI key|
 
 <br/>
@@ -763,7 +763,7 @@ public Result<ResellerRkiKeyPageDTO> searchResellerRkiKeyList(Long resellerId, i
 **Sample codes**
 
 ```
-ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+ResellerApi resellerApi = new  ResellerApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ResellerRkiKeyPageDTO> resultRkiKey = resellerApi.searchResellerRkiKeyList(51739L, 1, 10, null);
 ```
 

@@ -42,7 +42,7 @@ public Result<ParameterPushHistoryDTO> searchParameterPushHistory(int pageNo, in
 **Sample codes**
 
 ```
-PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHistory(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
@@ -151,7 +151,7 @@ public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistory(int page
 **Sample codes**
 
 ```
-PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchLatestParameterPushHistory(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
@@ -243,7 +243,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHist
 **Sample codes**
 
 ```
-PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchOptimizedParameterPushHistory(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
@@ -348,7 +348,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPu
 **Sample codes**
 
 ```
-PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchLatestOptimizedParameterPushHistory(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
@@ -437,7 +437,7 @@ public Result<ParameterPushHistoryDTO> searchParameterPushHistoryByTid(int pageN
 **Sample codes**
 
 ```
-PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchParameterPushHistoryByTid(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
@@ -546,7 +546,7 @@ public Result<ParameterPushHistoryDTO> searchLatestParameterPushHistoryByTid(int
 **Sample codes**
 
 ```
-PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<ParameterPushHistoryDTO> result = pushHistoryApi.searchLatestParameterPushHistoryByTid(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
@@ -638,7 +638,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchOptimizedParameterPushHist
 **Sample codes**
 
 ```
-PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchOptimizedParameterPushHistoryByTid(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 
@@ -743,7 +743,7 @@ public Result<OptimizedParameterPushHistoryDTO> searchLatestOptimizedParameterPu
 **Sample codes**
 
 ```
-PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+PushHistoryApi pushHistoryApi = new PushHistoryApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<OptimizedParameterPushHistoryDTO> result = pushHistoryApi.searchLatestOptimizedParameterPushHistoryByTid(1, 2,  "com.pax.android.demoapp", "1170000652", PushHistoryApi.PushStatus.Success, StringUtils.parseDateTime("2019-11-20 00:00:00"));
 ```
 

@@ -38,7 +38,7 @@ public Result<String> verifyTerminalEstate(terminalSerialNo)
 **Sample codes**
 
 ```
-TerminalEstateApi terminalEstateApi = new TerminalEstateApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+TerminalEstateApi terminalEstateApi = new TerminalEstateApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = terminalEstateApi.verifyTerminalEstate("1350001853");
 ```
 

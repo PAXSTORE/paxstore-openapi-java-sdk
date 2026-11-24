@@ -50,7 +50,7 @@ Structure of class EmmDeviceRegisterQRCodeCreateRequest
 **Sample codes**
 
 ```
-EmmDeviceApi emmDeviceApi = new EmmDeviceApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmDeviceApi emmDeviceApi = new EmmDeviceApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 EmmDeviceRegisterQRCodeCreateRequest emmDeviceRegisterQRCodeCreateRequest = new EmmDeviceRegisterQRCodeCreateRequest();
 emmDeviceRegisterQRCodeCreateRequest.setResellerName("PAX");
 emmDeviceRegisterQRCodeCreateRequest.setMerchantName("test");
@@ -178,7 +178,7 @@ public Result<EmmDeviceDTO> searchEmmDevice(int pageNo, int pageSize, EmmDeviceS
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmDeviceDTO> result = emmDeviceApi.searchEmmDevice(1, 5, EmmDeviceApi.EmmDeviceSearchOrderBy.EmmDeviceSN_asc, "M9200-0908", "2870000908", "ZOLON", "M9200", "suyunlong", "sh1", EmmDeviceApi.EmmDeviceStatus.ACTIVE, "898600F1200000000000", "861234567890123");
 ```
 
@@ -318,7 +318,7 @@ Result<EmmDeviceDetailDTO> getEmmDevice(Long deviceId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmDeviceDetailDTO> result = emmDeviceApi.getEmmDevice(1647428843339813L);
 ```
 
@@ -458,7 +458,7 @@ Structure of class EmmDeviceUpdateRequest
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 EmmDeviceUpdateRequest emmDeviceUpdateRequest = new EmmDeviceUpdateRequest();
 emmDeviceUpdateRequest.setDeviceName("testDevice");
 emmDeviceUpdateRequest.setResellerName("suyunlong");
@@ -642,7 +642,7 @@ public Result<String> deleteEmmDevice(Long deviceId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmDeviceApi.deleteEmmDevice(1647428843339813L);
 ```
 
@@ -713,7 +713,7 @@ Structure of class EmmDeviceBatchDeleteRequest
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 EmmDeviceBatchDeleteRequest emmDeviceBatchDeleteRequest = new EmmDeviceBatchDeleteRequest();
 emmDeviceBatchDeleteRequest.setDeviceIds(Collections.singletonList(1647428843339813L));
 Result<String> result = emmDeviceApi.batchDeleteEmmDevice(emmDeviceBatchDeleteRequest);
@@ -781,7 +781,7 @@ public Result<String> rebootEmmDevice(Long deviceId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmDeviceApi.rebootEmmDevice(1647428843339813L);
 ```
 
@@ -846,7 +846,7 @@ public Result<String> lockEmmDeviceScreen(Long deviceId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmDeviceApi.lockEmmDeviceScreen(1647428843339813L);
 ```
 
@@ -919,7 +919,7 @@ Structure of class EmmDeviceResetPasswordRequest
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 EmmDeviceResetPasswordRequest emmDeviceResetPasswordRequest = new EmmDeviceResetPasswordRequest();
 emmDeviceResetPasswordRequest.setPassword("1234");
 Result<String> result = emmDeviceApi.resetEmmDevicePassword(1647428843339813L, emmDeviceResetPasswordRequest);
@@ -1001,7 +1001,7 @@ Structure of class EmmDeviceLostModeRequest
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 EmmDeviceLostModeRequest emmDeviceLostModeRequest = new EmmDeviceLostModeRequest();
 emmDeviceLostModeRequest.setLostMessage("test message");
 emmDeviceLostModeRequest.setLostPhoneNumber("12345678910");
@@ -1081,7 +1081,7 @@ public Result<String> resumeEmmDevice(Long deviceId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmDeviceApi.resumeEmmDevice(1647428843339813L);
 ```
 
@@ -1145,7 +1145,7 @@ public Result<String> disableEmmDevice(Long deviceId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmDeviceApi.disableEmmDevice(1647428843339813L);
 ```
 
@@ -1209,7 +1209,7 @@ public Result<String> syncDeviceDetail(Long deviceId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmDeviceApi.syncDeviceDetail(1647428843339813L);
 ```
 
@@ -1274,7 +1274,7 @@ public Result<String> stopEmmDeviceLostMode(Long deviceId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmDeviceApi.stopEmmDeviceLostMode(1647428843339813L);
 ```
 
@@ -1338,7 +1338,7 @@ public Result<String> clearEmmAppData(Long deviceId, String installedAppIds)
 **Sample codes**
 
 ```
-EmmDeviceApi emmDeviceApi = new EmmDeviceApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmDeviceApi emmDeviceApi = new EmmDeviceApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmDeviceApi.clearEmmAppData(1647428843339813L, "1710719651282978,1710719651323432978");
 ```
 
@@ -1430,7 +1430,7 @@ Structure of class EmmZteQuickUploadRecordCreateRequest
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 EmmZteQuickUploadRecordCreateRequest emmZteQuickUploadRecordCreateRequest = new EmmZteQuickUploadRecordCreateRequest();
 emmZteQuickUploadRecordCreateRequest.setResellerName("PAX");
 emmZteQuickUploadRecordCreateRequest.setMerchantName("test");

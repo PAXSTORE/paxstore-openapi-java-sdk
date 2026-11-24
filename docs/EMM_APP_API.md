@@ -45,7 +45,7 @@ public Result<EmmAppDTO> searchEmmApp(int pageNo, int pageSize, EmmAppSearchOrde
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmAppDTO> result = emmAppApi.searchEmmApp(1, 10, EmmAppSearchOrderBy.EmmAppName_desc, null, null, EmmAppType.GOOGLE);
 ```
 
@@ -152,7 +152,7 @@ Structure of class EmmAppCreateRequest
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 EmmAppCreateRequest emmAppCreateRequest = new EmmAppCreateRequest();
 emmAppCreateRequest.setResellerName("PAX");
 emmAppCreateRequest.setPackageName("com.paperpile");
@@ -239,7 +239,7 @@ public Result<EmmAppDetailDTO> getEmmAppDetail(Long appId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmAppDetailDTO> result = emmAppApi.getEmmAppDetail(1646714366722087L);
 ```
 
@@ -344,7 +344,7 @@ public Result<String> removeEmmApp(Long appId, String resellerName)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmAppApi.removeEmmApp(1646714366722087L, "PAX");
 ```
 
@@ -413,7 +413,7 @@ public Result<SubscribeEmmAppDTO> searchSubscribedEmmApp(int pageNo, int pageSiz
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<SubscribeEmmAppDTO> result = emmAppApi.searchSubscribeEmmApp(1, 5, null, true);
 ```
 
@@ -500,7 +500,7 @@ public Result<String> subscribeEmmApp(Long appId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmAppApi.subscribeEmmApp(1646714366722087L);
 ```
 
@@ -565,7 +565,7 @@ public Result<String> unSubscribeEmmApp(Long appId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<String> result = emmAppApi.unSubscribeEmmApp(1646714366722087L);
 ```
 
@@ -630,7 +630,7 @@ public Result<EmmAppPermissionDTO> getEmmAppPermissionList(Long appId)
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmAppPermissionDTO> result = emmAppApi.getEmmAppPermissionList(1646714366722087L);
 ```
 
@@ -721,7 +721,7 @@ public Result<EmmAppAvailableTestVersionDTO> getAvailableTestTrackVersionList(Lo
 **Sample codes**
 
 ```
-EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+EmmAppApi emmAppApi = new  EmmAppApi("https://api.whatspos.com/p-market-api", "YOUR_API_KEY", "YOUR_API_SECRET");
 Result<EmmAppAvailableTestVersionDTO> result = emmAppApi.getAvailableTestTrackVersionList(1646714366722087L);
 ```
 
