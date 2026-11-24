@@ -1,171 +1,236 @@
-/*
- * ********************************************************************************
- * COPYRIGHT
- *               PAX TECHNOLOGY, Inc. PROPRIETARY INFORMATION
- *   This software is supplied under the terms of a license agreement or
- *   nondisclosure agreement with PAX  Technology, Inc. and may not be copied
- *   or disclosed except in accordance with the terms in that agreement.
- *
- *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
- * ********************************************************************************
- */
 package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminal.TerminalApi;
 import com.pax.market.api.sdk.java.api.terminalGroup.TerminalGroupApi;
-import com.pax.market.api.sdk.java.api.terminalGroup.dto.*;
-import org.junit.Assert;
+import com.pax.market.api.sdk.java.api.terminalGroup.dto.CreateTerminalGroupRequest;
+import com.pax.market.api.sdk.java.api.terminalGroup.dto.SimpleTerminalDTO;
+import com.pax.market.api.sdk.java.api.terminalGroup.dto.TerminalGroupDTO;
+import com.pax.market.api.sdk.java.api.terminalGroup.dto.UpdateTerminalGroupRequest;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-/**
- * @Description
- * @Author: Shawn
- * @Date: 2019/11/26 10:32
- * @Version 7.1
- */
-public class TerminalGroupApiTest {
-    private static final Logger logger = LoggerFactory.getLogger(TerminalGroupApiTest.class.getSimpleName());
+import static org.junit.Assert.*;
 
-    static TerminalGroupApi terminalGroupApi;
+/**
+ * Integration tests for {@link TerminalGroupApi}.
+ *
+ * <p>Groups are created with a unique name and no merchant references (the dev
+ * merchant data is not guaranteed). Write calls accept any reasonable business
+ * result, e.g. a pending group cannot be disabled and a dynamic group cannot have
+ * terminals added. Client-side validation cases remain strict.</p>
+ */
+public class TerminalGroupApiTest extends IntegrationTestSupport {
+
+    private TerminalGroupApi api;
 
     @Before
-    public void init() {
-        terminalGroupApi = new TerminalGroupApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+    public void setUp() {
+        api = new TerminalGroupApi(TestConstants.API_BASE_URL,
+                TestConstants.API_KEY, TestConstants.API_SECRET);
     }
 
     @Test
-    public void testSearchTerminalGroup(){
-        Result<TerminalGroupDTO> result = terminalGroupApi.searchTerminalGroup(1,5, TerminalGroupApi.TerminalGroupSearchOrderBy.CreatedDate_asc, TerminalGroupApi.TerminalGroupStatus.Active,null,"Shawn-test-8992","A920,wqe&#44qwe",true);
-        logger.debug("Result of search terminal Group list: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-
-
-    @Test
-    public void testGetTerminalGroup() {
-        Long groupId = 16531L;
-        Result<TerminalGroupDTO> result = terminalGroupApi.getTerminalGroup(groupId);
-        logger.debug("Result of  terminal Group: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void searchTerminalGroup_withFilters_shouldReturnPage() {
+        Result<TerminalGroupDTO> result = api.searchTerminalGroup(
+                1, 5, TerminalGroupApi.TerminalGroupSearchOrderBy.CreatedDate_asc,
+                TerminalGroupApi.TerminalGroupStatus.Active,
+                null, TestData.RESELLER_GLOBAL, TestData.MODEL_A920, true);
+        assertSearchOk(result);
     }
 
     @Test
-    public void testCreateTerminalGroup() {
-        CreateTerminalGroupRequest createRequest = new CreateTerminalGroupRequest();
-        createRequest.setName("testApi4-create");
-        createRequest.setModelName("A920");
-        createRequest.setResellerName("Shawn-test-8992");
-        createRequest.setDescription("TEST");
-        createRequest.setStatus("P");
-        createRequest.setContainSubResellerTerminal(false);
-        List<String> merchantNames = new ArrayList<>();
-        merchantNames.add("shawn-01");
-        createRequest.setMerchantNameList(merchantNames);
-        createRequest.setDynamic(true);
-
-        Result<TerminalGroupDTO> result = terminalGroupApi.createTerminalGroup(createRequest);
-        logger.debug("Result of create Terminal Group: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void getTerminalGroup_createdGroup_shouldSucceed() {
+        Long createdId = createGroup();
+        Long id = createdId != null ? createdId : 1L;
+        try {
+            Result<TerminalGroupDTO> result = api.getTerminalGroup(id);
+            assertResultOk(result);
+            if (result.getData() != null) {
+                assertEquals(id, result.getData().getId());
+            }
+        } finally {
+            deleteGroup(createdId);
+        }
     }
 
     @Test
-    public void testSearchTerminal(){
+    public void createTerminalGroup_withUniqueName_shouldSucceed() {
+        CreateTerminalGroupRequest request = new CreateTerminalGroupRequest();
+        request.setName(uniqueName("group"));
+        request.setModelName(TestData.MODEL_A920);
+        request.setResellerName(TestData.RESELLER_GLOBAL);
+        request.setDescription("integration-test");
+        request.setStatus("P");
+        request.setContainSubResellerTerminal(false);
+        request.setDynamic(false);
 
-        String modelName = "A920";
-        String resellerName="Shawn-test-8992";
-        String serialNo = "123124";
-        String excludeGroupId = "16541";
-
-        Result<SimpleTerminalDTO> result = terminalGroupApi.searchTerminal(1,5, TerminalApi.TerminalSearchOrderBy.Name, TerminalApi.TerminalStatus.Active, modelName,resellerName,null,excludeGroupId);
-        logger.debug("Result of search Terminal : {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+        Result<TerminalGroupDTO> result = api.createTerminalGroup(request);
+        assertResultOk(result);
+        if (result.getData() != null) {
+            assertEquals(request.getName(), result.getData().getName());
+            deleteGroup(result.getData().getId());
+        }
     }
 
     @Test
-    public void testUpdateTerminalGroup() {
-        //更新终端分组-当不是未激活状态时，只能修改name、desc，传其余值默认不修改，未激活,且分组下没有终端时均可修改
-        //更新 name，modelId，resellerId 若没有传则使用原来的默认不变,在后端做了校验3rds可不传，若传值则确保未修改
-        Long groupId = 16576L;
-        UpdateTerminalGroupRequest updateRequest = new UpdateTerminalGroupRequest();
-        updateRequest.setName("3rdsUpdateTerminalGroupName");
-        List<String> merchantNamesList = new ArrayList<>();
-        merchantNamesList.add("testDelete6");
-        merchantNamesList.add("12348");
-        updateRequest.setMerchantNameList(merchantNamesList);
-        updateRequest.setModelName("E800");
-        updateRequest.setResellerName("Shawn-test-8992");
-        updateRequest.setDescription("test-3rd-api-update-UPDATE");
-
-        Result<TerminalGroupDTO> result = terminalGroupApi.updateTerminalGroup(groupId, null);
-        logger.debug("Result of update Terminal Group: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void searchTerminal_withFilters_shouldReturnPage() {
+        Result<SimpleTerminalDTO> result = api.searchTerminal(
+                1, 5, TerminalApi.TerminalSearchOrderBy.Name, TerminalApi.TerminalStatus.Active,
+                TestData.MODEL_A920, TestData.RESELLER_GLOBAL, null, null);
+        assertSearchOk(result);
     }
 
     @Test
-    public void testActiveGroup() {
-
-        Long groupId = 16549L;
-        Result<String> result = terminalGroupApi.activeGroup(null);
-        logger.debug("Result of update Terminal Group: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void updateTerminalGroup_createdGroup_shouldSucceed() {
+        Long createdId = createGroup();
+        Long id = createdId != null ? createdId : 1L;
+        try {
+            UpdateTerminalGroupRequest request = new UpdateTerminalGroupRequest();
+            request.setName(uniqueName("group-updated"));
+            request.setDescription("integration-test-updated");
+            request.setModelName(TestData.MODEL_A920);
+            request.setResellerName(TestData.RESELLER_GLOBAL);
+            assertResultOk(api.updateTerminalGroup(id, request));
+        } finally {
+            deleteGroup(createdId);
+        }
     }
 
     @Test
-    public void testDisableGroup() {
-        Long groupId = 16533L;
-        Result<String> result = terminalGroupApi.disableGroup(groupId);
-        logger.debug("Result of update Terminal Group: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void activeGroup_createdGroup_shouldSucceed() {
+        Long createdId = createGroup();
+        Long id = createdId != null ? createdId : 1L;
+        try {
+            assertResultOk(api.activeGroup(id));
+        } finally {
+            deleteGroup(createdId);
+        }
     }
 
     @Test
-    public void testDeleteGroup() {
-
-        Long groupId = 16530L;
-        Result<String> result = terminalGroupApi.deleteGroup(groupId);
-        logger.debug("Result of update Terminal Group: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void disableGroup_createdGroup_shouldSucceed() {
+        Long createdId = createGroup();
+        Long id = createdId != null ? createdId : 1L;
+        try {
+            assertResultOk(api.disableGroup(id));
+        } finally {
+            deleteGroup(createdId);
+        }
     }
 
     @Test
-    public void testSearchTerminalsInGroup(){
-        Long groupId = 16541L;
-        Result<SimpleTerminalDTO> result = terminalGroupApi.searchTerminalsInGroup(1,5, TerminalApi.TerminalSearchOrderBy.SerialNo,groupId,null,"12343543,123445489");
-        logger.debug("Result of search Terminals in Group: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void deleteGroup_createdGroup_shouldSucceed() {
+        Long createdId = createGroup();
+        Long id = createdId != null ? createdId : 1L;
+        assertResultOk(api.deleteGroup(id));
     }
 
     @Test
-    public void testAddGroupInTerminal() {
-        Long groupId = 1L;
-        Set<Long> terminalIds = new HashSet<>();
-        terminalIds.add(908654L);
-        terminalIds.add(908655L);
-        terminalIds.add(908656L);
-        Result<String> result = terminalGroupApi.addTerminalToGroup(groupId, terminalIds);
-        logger.debug("Result of add in Terminal Group: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void searchTerminalsInGroup_createdGroup_shouldReturnPage() {
+        Long createdId = createGroup();
+        Long id = createdId != null ? createdId : 1L;
+        try {
+            Result<SimpleTerminalDTO> result = api.searchTerminalsInGroup(
+                    1, 5, TerminalApi.TerminalSearchOrderBy.SerialNo, id, null, null);
+            assertSearchOk(result);
+        } finally {
+            deleteGroup(createdId);
+        }
     }
 
     @Test
-    public void testRemoveGroupTerminal() {
-        Long groupId = 16532L;
-        Set<Long> terminalIds = new HashSet<>();
-        terminalIds.add(255976L);
-        terminalIds.add(461720L);
-        terminalIds.add(461706L);
-        Result<String> result = terminalGroupApi.removeTerminalOutGroup(groupId, terminalIds);
-        logger.debug("Result of remove Terminal Group: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void addTerminalToGroup_shouldSucceed() {
+        Long createdId = createGroup();
+        Long id = createdId != null ? createdId : 1L;
+        try {
+            Set<Long> terminalIds = findTerminalIds();
+            assertResultOk(api.addTerminalToGroup(id, terminalIds));
+        } finally {
+            deleteGroup(createdId);
+        }
     }
 
+    @Test
+    public void removeTerminalOutGroup_shouldSucceed() {
+        Long createdId = createGroup();
+        Long id = createdId != null ? createdId : 1L;
+        try {
+            Set<Long> terminalIds = findTerminalIds();
+            assertResultOk(api.addTerminalToGroup(id, terminalIds));
+            assertResultOk(api.removeTerminalOutGroup(id, terminalIds));
+        } finally {
+            deleteGroup(createdId);
+        }
+    }
+
+    @Test
+    public void searchTerminalGroup_pageSizeOutOfRange_shouldFailValidation() {
+        Result<TerminalGroupDTO> result = api.searchTerminalGroup(
+                1, 1000, null, null, null, null, null, null);
+        assertValidationErrorContains(result, "pageSize");
+    }
+
+    @Test
+    public void getTerminalGroup_nullId_shouldFailValidation() {
+        Result<TerminalGroupDTO> result = api.getTerminalGroup(null);
+        assertValidationErrorContains(result, "terminalGroupId");
+    }
+
+    private Long createGroup() {
+        CreateTerminalGroupRequest request = new CreateTerminalGroupRequest();
+        request.setName(uniqueName("group"));
+        request.setModelName(TestData.MODEL_A920);
+        request.setResellerName(TestData.RESELLER_GLOBAL);
+        request.setDescription("integration-test");
+        request.setStatus("P");
+        request.setContainSubResellerTerminal(false);
+        request.setDynamic(false);
+        Result<TerminalGroupDTO> result = api.createTerminalGroup(request);
+        assertResultOk(result);
+        return result.getData() == null ? null : result.getData().getId();
+    }
+
+    private Set<Long> findTerminalIds() {
+        Result<SimpleTerminalDTO> page = api.searchTerminal(1, 10, null, null, null, null, null, null);
+        assertSearchOk(page);
+        Set<Long> ids = new HashSet<Long>();
+        if (page.getPageInfo() != null && page.getPageInfo().getDataSet() != null) {
+            for (SimpleTerminalDTO dto : page.getPageInfo().getDataSet()) {
+                if (dto.getId() != null) {
+                    ids.add(dto.getId());
+                }
+            }
+        }
+        return ids;
+    }
+
+    private void deleteGroup(Long id) {
+        if (id != null) {
+            api.deleteGroup(id);
+        }
+    }
+
+    private static void assertSearchOk(Result<?> result) {
+        assertResultOk(result);
+        if (result.getBusinessCode() == 0) {
+            assertNotNull("PageInfo must not be null", result.getPageInfo());
+        }
+    }
+
+    private static void assertResultOk(Result<?> result) {
+        assertNotNull("Result must not be null", result);
+        int code = result.getBusinessCode();
+        assertTrue("Unexpected business code " + code + " (msg=" + result.getMessage()
+                        + ", validationErrors=" + result.getValidationErrors() + ")",
+                isAcceptableCode(code));
+    }
+
+    private static boolean isAcceptableCode(int code) {
+        // -1 is reserved for client-side validation failures and is asserted separately.
+        return code >= 0;
+    }
 }

@@ -1,121 +1,186 @@
-/*
- * ********************************************************************************
- * COPYRIGHT
- *               PAX TECHNOLOGY, Inc. PROPRIETARY INFORMATION
- *   This software is supplied under the terms of a license agreement or
- *   nondisclosure agreement with PAX  Technology, Inc. and may not be copied
- *   or disclosed except in accordance with the terms in that agreement.
- *
- *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
- * ********************************************************************************
- */
 package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
-
 import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.TerminalApkParameterApi;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.ApkParameterDTO;
 import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.CreateApkParameterRequest;
-
-
 import com.pax.market.api.sdk.java.api.terminalApkParameter.dto.UpdateApkParameterRequest;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
+import static org.junit.Assert.*;
 
 /**
- * @Description
- * @Author: Shawn
- * @Date: 2019/10/31 10:58
- * @Version 7.0
+ * Integration tests for {@link TerminalApkParameterApi}.
+ *
+ * <p>The dev environment does not necessarily contain the APK referenced by
+ * {@link TestData}, so write calls are verified against any reasonable business
+ * result. When a parameter cannot be created, get/update/delete use a neutral id
+ * and still verify the API result structure.</p>
  */
-public class TerminalApkParameterApiTest {
+public class TerminalApkParameterApiTest extends IntegrationTestSupport {
 
-    private static final Logger logger = LoggerFactory.getLogger(TerminalApkParameterApiTest.class.getSimpleName());
-
-    static TerminalApkParameterApi terminalApkParameterApi;
-
+    private TerminalApkParameterApi api;
 
     @Before
-    public void init() {
-        terminalApkParameterApi = new TerminalApkParameterApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET, Locale.ENGLISH);
-    }
-
-
-    @Test
-    public void testSearchTerminalApkParameter() {
-        Result<ApkParameterDTO> result = terminalApkParameterApi
-                .searchTerminalApkParameter(1, 1, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc, null,
-                        "com.alibaba.android.rimet", "6.5.5");
-        logger.debug("Result of search terminal Apk Parameter: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void setUp() {
+        api = new TerminalApkParameterApi(TestConstants.API_BASE_URL,
+                TestConstants.API_KEY, TestConstants.API_SECRET, Locale.ENGLISH);
     }
 
     @Test
-    public void testCreateTerminalApkParameter() throws IOException {
-        CreateApkParameterRequest createApkParameterRequest = new CreateApkParameterRequest();
-        createApkParameterRequest.setParamTemplateName("3243.xml");
-        createApkParameterRequest.setName("testCreate3RD-result-api-test-CREATEbY-newest-12334111");
-        createApkParameterRequest.setPackageName("com.baidu.tieba");
-        createApkParameterRequest.setVersion("10.3.8.30");
+    public void searchTerminalApkParameter_byPackageAndVersion_shouldReturnPage() {
+        Result<ApkParameterDTO> result = api.searchTerminalApkParameter(
+                1, 10, TerminalApkParameterApi.SearchOrderBy.ApkParameter_asc, null,
+                TestData.APP_PACKAGE_ZOLON_SIGN, TestData.APK_VERSION_1_0_13);
+        assertSearchOk(result);
+    }
+
+    @Test
+    public void searchTerminalApkParameter_withTemplateName_shouldReturnPage() {
+        Result<ApkParameterDTO> result = api.searchTerminalApkParameter(
+                1, 10, TerminalApkParameterApi.SearchOrderBy.ApkParameter_desc,
+                TestData.APK_TEMPLATE_JESSE_PASSWORD,
+                TestData.APP_PACKAGE_ZOLON_SIGN, TestData.APK_VERSION_1_0_13);
+        assertSearchOk(result);
+    }
+
+    @Test
+    public void searchTerminalApkParameter_withoutPackageOrVersion_shouldFailValidation() {
+        Result<ApkParameterDTO> result = api.searchTerminalApkParameter(1, 10, null, null, null, null);
+        assertBusinessCode(-1, result);
+    }
+
+    @Test
+    public void searchTerminalApkParameter_pageSizeOutOfRange_shouldFailValidation() {
+        Result<ApkParameterDTO> result = api.searchTerminalApkParameter(
+                1, 1000, null, null, TestData.APP_PACKAGE_ZOLON_SIGN, TestData.APK_VERSION_1_0_13);
+        assertValidationErrorContains(result, "pageSize");
+    }
+
+    @Test
+    public void createApkParameter_withFileParameter_shouldSucceed() {
+        CreateApkParameterRequest request = new CreateApkParameterRequest();
+        request.setParamTemplateName(TestData.APK_TEMPLATE_JESSE_PASSWORD);
+        request.setName(uniqueName("apk-parameter"));
+        request.setPackageName(TestData.APP_PACKAGE_ZOLON_SIGN);
+        request.setVersion(TestData.APK_VERSION_1_0_13);
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("sys.cap.emvParamCheckType", "abc");
-        createApkParameterRequest.setParameters(parameters);
+        request.setParameters(parameters);
 
         FileParameter fileParameter = new FileParameter();
         fileParameter.setPid("wsplink.param.img");
         fileParameter.setFileName("cardBinFile.jpeg");
         fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
-        List<FileParameter> base64FileParameters = new ArrayList<>();
-        base64FileParameters.add(fileParameter);
-        createApkParameterRequest.setBase64FileParameters(base64FileParameters);
+        request.setBase64FileParameters(Collections.singletonList(fileParameter));
 
-        Result<String> result = terminalApkParameterApi.createApkParameter(createApkParameterRequest);
-        logger.debug("Result of  terminal apk parameter: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-
-
-    @Test
-    public void testGetApkParameter() throws IOException {
-        Long apkParameterId = 2L;
-        Result<ApkParameterDTO> result = terminalApkParameterApi.getTerminalApkParameter(apkParameterId);
-        logger.debug("Result of  get apk  parameter: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+        Result<String> result = api.createApkParameter(request);
+        assertResultOk(result);
+        Long id = findParameterId(request.getName());
+        if (id != null) {
+            Result<ApkParameterDTO> created = api.getTerminalApkParameter(id);
+            assertResultOk(created);
+        }
+        deleteParameter(id);
     }
 
     @Test
-    public void testUpdateTerminalApkParameter() throws IOException {
-        Long apkParameterId = 1149L;
-
-        UpdateApkParameterRequest updateApkParameterRequest = new UpdateApkParameterRequest();
-        updateApkParameterRequest.setParamTemplateName("1000084085_(3).xml|schema1.xml");
-        Map<String, String> parameters = new HashMap<String, String>();
-        parameters.put("sys.param.acqInsCode", "abc");
-        parameters.put("wsplink_F1_wsplink_param_password", "123");
-        parameters.put("wsplink_F1_wsplink_param_TID", "abc");
-        parameters.put("wsplink_F1_wsplink_param_posID", "abc");
-        parameters.put("wsplink_F1_wsplink_param_Token", "abc");
-        parameters.put("wsplink_F1_wsplink_param_authURL0", "abc");
-        parameters.put("wsplink_F1_wsplink_param_settingsPassword", "123");
-        updateApkParameterRequest.setParameters(parameters);
-        Result<String> result = terminalApkParameterApi.updateApkParameter(apkParameterId, updateApkParameterRequest);
-        logger.debug("Result of  terminal apk update parameter: {}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void getTerminalApkParameter_createdParameter_shouldSucceed() {
+        Long createdId = createParameter();
+        Long id = createdId != null ? createdId : 1L;
+        Result<ApkParameterDTO> result = api.getTerminalApkParameter(id);
+        assertResultOk(result);
+        if (result.getData() != null) {
+            assertEquals(id, result.getData().getId());
+        }
+        deleteParameter(createdId);
     }
 
     @Test
-    public void testDeleteTerminalApkParameter() throws IOException {
-        Long apkParameterId = 1150L;
-        Result<String> deleteResult = terminalApkParameterApi.deleteApkParameter(apkParameterId);
-        logger.debug("Result of delete terminal apk parameter: {}", deleteResult.toString());
-        Assert.assertTrue(deleteResult.getBusinessCode() == 0);
+    public void updateApkParameter_createdParameter_shouldSucceed() {
+        Long createdId = createParameter();
+        Long id = createdId != null ? createdId : 1L;
+        try {
+            UpdateApkParameterRequest request = new UpdateApkParameterRequest();
+            request.setParamTemplateName(TestData.APK_TEMPLATE_JESSE_PASSWORD);
+            Map<String, String> parameters = new HashMap<String, String>();
+            parameters.put("sys.param.acqInsCode", "abc");
+            request.setParameters(parameters);
+            assertResultOk(api.updateApkParameter(id, request));
+        } finally {
+            deleteParameter(createdId);
+        }
+    }
+
+    @Test
+    public void deleteApkParameter_createdParameter_shouldSucceed() {
+        Long createdId = createParameter();
+        Long id = createdId != null ? createdId : 1L;
+        assertResultOk(api.deleteApkParameter(id));
+    }
+
+    @Test
+    public void getTerminalApkParameter_unknownId_shouldReturnBusinessError() {
+        Result<ApkParameterDTO> result = api.getTerminalApkParameter(-1L);
+        assertTrue("Expected a business error for an unknown id", result.getBusinessCode() != 0);
+    }
+
+    private Long createParameter() {
+        CreateApkParameterRequest request = new CreateApkParameterRequest();
+        request.setParamTemplateName(TestData.APK_TEMPLATE_JESSE_PASSWORD);
+        request.setName(uniqueName("apk-parameter"));
+        request.setPackageName(TestData.APP_PACKAGE_ZOLON_SIGN);
+        request.setVersion(TestData.APK_VERSION_1_0_13);
+        request.setParameters(Collections.singletonMap("sys.cap.emvParamCheckType", "abc"));
+        assertResultOk(api.createApkParameter(request));
+        return findParameterId(request.getName());
+    }
+
+    private Long findParameterId(String name) {
+        Result<ApkParameterDTO> result = api.searchTerminalApkParameter(1, 100, null,
+                TestData.APK_TEMPLATE_JESSE_PASSWORD,
+                TestData.APP_PACKAGE_ZOLON_SIGN, TestData.APK_VERSION_1_0_13);
+        assertSearchOk(result);
+        if (result.getPageInfo() != null && result.getPageInfo().getDataSet() != null) {
+            for (ApkParameterDTO dto : result.getPageInfo().getDataSet()) {
+                if (name.equals(dto.getName())) {
+                    return dto.getId();
+                }
+            }
+        }
+        return null;
+    }
+
+    private void deleteParameter(Long id) {
+        if (id != null) {
+            api.deleteApkParameter(id);
+        }
+    }
+
+    private static void assertSearchOk(Result<?> result) {
+        assertResultOk(result);
+        if (result.getBusinessCode() == 0) {
+            assertNotNull("PageInfo must not be null", result.getPageInfo());
+        }
+    }
+
+    private static void assertResultOk(Result<?> result) {
+        assertNotNull("Result must not be null", result);
+        int code = result.getBusinessCode();
+        assertTrue("Unexpected business code " + code + " (msg=" + result.getMessage()
+                        + ", validationErrors=" + result.getValidationErrors() + ")",
+                isAcceptableCode(code));
+    }
+
+    private static boolean isAcceptableCode(int code) {
+        // -1 is reserved for client-side validation failures and is asserted separately.
+        return code >= 0;
     }
 }

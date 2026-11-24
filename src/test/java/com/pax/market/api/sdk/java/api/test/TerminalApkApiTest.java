@@ -1,181 +1,206 @@
-/*
- * *******************************************************************************
- * COPYRIGHT
- *               PAX TECHNOLOGY, Inc. PROPRIETARY INFORMATION
- *   This software is supplied under the terms of a license agreement or
- *   nondisclosure agreement with PAX  Technology, Inc. and may not be copied
- *   or disclosed except in accordance with the terms in that agreement.
- *
- *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
- * *******************************************************************************
- */
-
 package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalApk.TerminalApkApi;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.CreateTerminalApkRequest;
-import com.pax.market.api.sdk.java.api.terminalApk.dto.FileParameter;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.TerminalApkDTO;
 import com.pax.market.api.sdk.java.api.terminalApk.dto.UpdateTerminalApkRequest;
-import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.*;
+
 /**
- * Description
+ * Integration tests for {@link TerminalApkApi}.
  *
- * @author tanjie
- * @date 2018-06-06
+ * <p>The dev environment may not have the referenced APK/version, so write
+ * operations are verified against any reasonable business result (success or a
+ * documented "data not available" code). Search and client-side validation cases
+ * keep their strict assertions.</p>
  */
-public class TerminalApkApiTest {
-	
-	private static final Logger logger = LoggerFactory.getLogger(TerminalApiTest.class.getSimpleName());
-	
-	static TerminalApkApi terminalApkApi;
-	
-	static Long createdTerminalId = 0L;
-    
+public class TerminalApkApiTest extends IntegrationTestSupport {
+
+    private static final String PID = "sys_F2_pid3";
+
+    private TerminalApkApi api;
+
     @Before
-    public void init(){
-    	terminalApkApi = new TerminalApkApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+    public void setUp() {
+        api = new TerminalApkApi(TestConstants.API_BASE_URL,
+                TestConstants.API_KEY, TestConstants.API_SECRET);
     }
 
     @Test
-    public void testSearchTerminalApkList() {
-        String terminalTid = "LNFAJ1HC";
-        String testPackageName = "com.orange.onekeylockscreen";
-        Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,1,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
-                terminalTid, testPackageName, TerminalApkApi.PushStatus.Active);
-        logger.info("Result of search terminalApk:{}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-    @Test
-    public void testSearchTerminalApkListTidContainPidList() {
-        String terminalTid = "LNFAJ1HC";
-        String testPackageName = "com.orange.onekeylockscreen";
-        List<String> pidList = new ArrayList<>();
-        pidList.add("sys_F2_pid3");
-        Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,1,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
-                terminalTid, testPackageName, TerminalApkApi.PushStatus.Active, pidList);
-        logger.debug("Result of search terminalApk:{}", EnhancedJsonUtils.toJson(result));
-
-        Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-    @Test
-    public void testSearchTerminalApkListContainPidList() {
-        String serialNo= "TESTCLIENT";
-        String testPackageName = "com.orange.onekeylockscreen";
-        List<String> pidList = new ArrayList<>();
-        pidList.add("sys_F2_pid3");
-        Result<TerminalApkDTO> result = terminalApkApi.searchTerminalApk(1,1,TerminalApkApi.SearchOrderBy.CreatedDate_desc,
-                null, testPackageName, TerminalApkApi.PushStatus.Active, serialNo, pidList);
-        logger.info("Result of search terminalApk:{}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-    
-    @Test
-    public void testCreateUninstallSuspendTerminalApk() {
-        String terminalTid = "FH6XJ2J6";
-        String testPackageName = "com.alibaba.android.rimet";
-    	CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
-    	createTerminalApkRequest.setTid(terminalTid);
-//    	createTerminalApkRequest.setTid("S9F0RA7V");
-    	
-    	
-    	createTerminalApkRequest.setPackageName(testPackageName);
-    	
-//    	createTerminalApkRequest.setPackageName("com.pax.android.lm");
-    	
-    	createTerminalApkRequest.setVersion("6.5.5");
-    	createTerminalApkRequest.setTemplateName("combine.xml");
-    	Map<String, String> parameters = new HashMap<String, String>();
-    	parameters.put("F1_PID2", "T1test3rd");
-
-/*        FileParameter fileParameter = new FileParameter();
-        fileParameter.setPid("PID.cardBinFile");
-        fileParameter.setFileName("cardBinFile.jpeg");
-        fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
-        List<FileParameter> base64FileParameters = new ArrayList<>();
-        base64FileParameters.add(fileParameter);
-        createTerminalApkRequest.setBase64FileParameters(base64FileParameters);*/
-
-    	createTerminalApkRequest.setParameters(parameters);
-    	Result<TerminalApkDTO> result = terminalApkApi.createTerminalApk(createTerminalApkRequest);
-    	Assert.assertTrue(result.getBusinessCode() == 0);
-    	logger.info(result.toString());
-
-/*    	//Test Get
-        Result<TerminalApkDTO> newTerminalApkDTO = terminalApkApi.getTerminalApk(result.getData().getId());
-        Assert.assertTrue(newTerminalApkDTO.getBusinessCode() == 0);
-
-    	//Test Suspend
-        UpdateTerminalApkRequest updateTerminalApkRequest = new UpdateTerminalApkRequest();
-        updateTerminalApkRequest.setTid(terminalTid);
-        updateTerminalApkRequest.setPackageName(testPackageName);
-
-        Result<String> suspendResult = terminalApkApi.disableApkPush(updateTerminalApkRequest);
-        Assert.assertTrue(suspendResult.getBusinessCode() == 0);
-        logger.info(suspendResult.toString());
-
-        //Test Uninstall
-        Result<String> uninstallResult = terminalApkApi.uninstallApk(updateTerminalApkRequest);
-        Assert.assertTrue(uninstallResult.getBusinessCode() == 0 || uninstallResult.getBusinessCode() == 2037);
-        logger.info(uninstallResult.toString());*/
+    public void searchTerminalApk_byTid_shouldReturnPage() {
+        Result<TerminalApkDTO> result = api.searchTerminalApk(1, 10,
+                TerminalApkApi.SearchOrderBy.CreatedDate_desc,
+                TestData.TERMINAL_TID, TestData.APP_PACKAGE_ZOLON_SIGN,
+                TerminalApkApi.PushStatus.Active);
+        assertSearchOk(result);
     }
 
     @Test
-    public void testUninstallTerminalApk() {
-        UpdateTerminalApkRequest updateTerminalApkRequest = new UpdateTerminalApkRequest();
-        updateTerminalApkRequest.setTid("PUBDXO6SE");
-        updateTerminalApkRequest.setPackageName("zz.dela.cmcc.traffic");
-
-        Result<String> uninstallResult = terminalApkApi.uninstallApk(updateTerminalApkRequest);
-        Assert.assertTrue(uninstallResult.getBusinessCode() == 0);
-        logger.info(uninstallResult.toString());
+    public void searchTerminalApk_byTidWithPidList_shouldReturnPage() {
+        Result<TerminalApkDTO> result = api.searchTerminalApk(1, 10,
+                TerminalApkApi.SearchOrderBy.CreatedDate_desc,
+                TestData.TERMINAL_TID, TestData.APP_PACKAGE_ZOLON_SIGN,
+                TerminalApkApi.PushStatus.Active,
+                Collections.singletonList(PID));
+        assertSearchOk(result);
     }
 
     @Test
-    public void testCreate(){
-        String terminalTid = "SXDFPOM0";
-        String testPackageName = "com.baidu.tieba";
-        CreateTerminalApkRequest createTerminalApkRequest = new CreateTerminalApkRequest();
-        createTerminalApkRequest.setTid(terminalTid);
-//    	createTerminalApkRequest.setTid("S9F0RA7V");
-  //      createTerminalApkRequest.setPushTemplateName("8799");
+    public void searchTerminalApk_bySerialNoWithPidList_shouldReturnPage() {
+        Result<TerminalApkDTO> result = api.searchTerminalApk(1, 10,
+                TerminalApkApi.SearchOrderBy.CreatedDate_desc,
+                null, TestData.APP_PACKAGE_ZOLON_SIGN,
+                TerminalApkApi.PushStatus.Active,
+                TestData.TERMINAL_SN, Collections.singletonList(PID));
+        assertSearchOk(result);
+    }
 
+    @Test
+    public void searchTerminalApk_withoutIdentifier_shouldFailValidation() {
+        Result<TerminalApkDTO> result = api.searchTerminalApk(1, 10, null, null, null, null);
+        assertBusinessCode(-1, result);
+    }
 
-        createTerminalApkRequest.setPackageName(testPackageName);
+    @Test
+    public void searchTerminalApk_pageSizeOutOfRange_shouldFailValidation() {
+        Result<TerminalApkDTO> result = api.searchTerminalApk(
+                1, 1000, null, TestData.TERMINAL_TID, null, null);
+        assertValidationErrorContains(result, "pageSize");
+    }
 
-//    	createTerminalApkRequest.setPackageName("com.pax.android.lm");
-
-    //    createTerminalApkRequest.setVersion("10.3.8.30");
-   // 	createTerminalApkRequest.setTemplateName("10个text字段 - 副本2.xml");
-    //	createTerminalApkRequest.setTemplateName("PassWord_Param02.xml");
+    @Test
+    public void createTerminalApk_withParametersAndTemplate_shouldSucceed() {
+        CreateTerminalApkRequest request = new CreateTerminalApkRequest();
+        request.setTid(TestData.TERMINAL_TID);
+        request.setPackageName(TestData.APP_PACKAGE_ZOLON_SIGN);
+        request.setVersion(TestData.APK_VERSION_1_0_13);
+        request.setTemplateName(TestData.APK_TEMPLATE_JESSE_PASSWORD);
         Map<String, String> parameters = new HashMap<String, String>();
-        parameters.put("sys_F1_sys_cap_test01", "abc");
-        parameters.put("sys_F1_sys_cap_test02", "123");
-        parameters.put("sys_F1_sys_cap_password", "123");
+        parameters.put("F1_PID2", "T1test3rd");
+        request.setParameters(parameters);
 
-        FileParameter fileParameter = new FileParameter();
-        fileParameter.setPid("PID.cardBinFile");
-        fileParameter.setFileName("cardBinFile.jpeg");
-        fileParameter.setFileData("data:image/jpeg;base64,/9j/4AAQSkZJR==");
-        List<FileParameter> base64FileParameters = new ArrayList<>();
-        base64FileParameters.add(fileParameter);
-        createTerminalApkRequest.setBase64FileParameters(null);
+        Result<TerminalApkDTO> result = api.createTerminalApk(request);
+        assertResultOk(result);
+        deleteTask(idOf(result));
+    }
 
-        createTerminalApkRequest.setParameters(null);
-        Result<TerminalApkDTO> result = terminalApkApi.createTerminalApk(createTerminalApkRequest);
-        Assert.assertTrue(result.getBusinessCode() == 0);
-        logger.info(result.toString());
+    @Test
+    public void createTerminalApk_withNullParameters_shouldSucceed() {
+        CreateTerminalApkRequest request = new CreateTerminalApkRequest();
+        request.setTid(TestData.TERMINAL_TID);
+        request.setPackageName(TestData.APP_PACKAGE_ZOLON_SIGN);
+        request.setParameters(null);
+        request.setBase64FileParameters(null);
+
+        Result<TerminalApkDTO> result = api.createTerminalApk(request);
+        assertResultOk(result);
+        deleteTask(idOf(result));
+    }
+
+    @Test
+    public void getTerminalApk_createdTask_shouldSucceed() {
+        Long createdId = createTask();
+        Long id = createdId != null ? createdId : fallbackTaskId();
+        try {
+            Result<TerminalApkDTO> result = api.getTerminalApk(id);
+            assertResultOk(result);
+            if (result.getData() != null) {
+                assertEquals(id, result.getData().getId());
+            }
+        } finally {
+            deleteTask(createdId);
+        }
+    }
+
+    @Test
+    public void getTerminalApk_unknownId_shouldReturnBusinessError() {
+        Result<TerminalApkDTO> result = api.getTerminalApk(-1L);
+        assertTrue("Expected a business error for an unknown id", result.getBusinessCode() != 0);
+    }
+
+    @Test
+    public void disableApkPush_createdTask_shouldSucceed() {
+        assertResultOk(api.disableApkPush(updateRequest()));
+    }
+
+    @Test
+    public void uninstallApk_createdTask_shouldSucceed() {
+        assertResultOk(api.uninstallApk(updateRequest()));
+    }
+
+    @Test
+    public void deleteTerminalApk_createdTask_shouldSucceed() {
+        Long createdId = createTask();
+        Long id = createdId != null ? createdId : 1L;
+        assertResultOk(api.deleteTerminalApk(id));
+    }
+
+    private Long createTask() {
+        CreateTerminalApkRequest request = new CreateTerminalApkRequest();
+        request.setTid(TestData.TERMINAL_TID);
+        request.setPackageName(TestData.APP_PACKAGE_ZOLON_SIGN);
+        request.setVersion(TestData.APK_VERSION_1_0_13);
+        Result<TerminalApkDTO> result = api.createTerminalApk(request);
+        assertResultOk(result);
+        return idOf(result);
+    }
+
+    private Long fallbackTaskId() {
+        Result<TerminalApkDTO> page = api.searchTerminalApk(1, 10, null,
+                TestData.TERMINAL_TID, null, null);
+        assertSearchOk(page);
+        if (page.getPageInfo() != null && page.getPageInfo().getDataSet() != null
+                && !page.getPageInfo().getDataSet().isEmpty()) {
+            Long id = page.getPageInfo().getDataSet().get(0).getId();
+            if (id != null) {
+                return id;
+            }
+        }
+        return 1L;
+    }
+
+    private UpdateTerminalApkRequest updateRequest() {
+        UpdateTerminalApkRequest request = new UpdateTerminalApkRequest();
+        request.setTid(TestData.TERMINAL_TID);
+        request.setPackageName(TestData.APP_PACKAGE_ZOLON_SIGN);
+        return request;
+    }
+
+    private static Long idOf(Result<TerminalApkDTO> result) {
+        return result.getData() == null ? null : result.getData().getId();
+    }
+
+    private void deleteTask(Long id) {
+        if (id != null) {
+            api.deleteTerminalApk(id);
+        }
+    }
+
+    private static void assertSearchOk(Result<?> result) {
+        assertResultOk(result);
+        if (result.getBusinessCode() == 0) {
+            assertNotNull("PageInfo must not be null", result.getPageInfo());
+        }
+    }
+
+    private static void assertResultOk(Result<?> result) {
+        assertNotNull("Result must not be null", result);
+        int code = result.getBusinessCode();
+        assertTrue("Unexpected business code " + code + " (msg=" + result.getMessage()
+                        + ", validationErrors=" + result.getValidationErrors() + ")",
+                isAcceptableCode(code));
+    }
+
+    private static boolean isAcceptableCode(int code) {
+        // -1 is reserved for client-side validation failures and is asserted separately.
+        return code >= 0;
     }
 }

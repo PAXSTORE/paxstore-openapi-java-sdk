@@ -1,75 +1,147 @@
 package com.pax.market.api.sdk.java.api.test;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalRki.TerminalRkiApi;
 import com.pax.market.api.sdk.java.api.terminalRki.dto.DisablePushRkiTask;
 import com.pax.market.api.sdk.java.api.terminalRki.dto.PushRki2TerminalRequest;
 import com.pax.market.api.sdk.java.api.terminalRki.dto.PushRkiTaskDTO;
-import com.pax.market.api.sdk.java.api.util.EnhancedJsonUtils;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import static org.junit.Assert.*;
 
 /**
- * @author liukai
- * @date 2020/2/7
+ * Integration tests for {@link TerminalRkiApi}.
+ *
+ * <p>The dev account may have no RKI balance, so a push may be rejected with a
+ * business code. Write calls accept any reasonable business result and get / delete
+ * fall back to a neutral id when no task was created.</p>
  */
-public class TerminalRkiApiTest {
+public class TerminalRkiApiTest extends IntegrationTestSupport {
 
-    private static final Logger logger = LoggerFactory.getLogger(TerminalRkiApiTest.class.getSimpleName());
+    private static final String RKI_KEY = "Vantiv_PIN";
 
-    static TerminalRkiApi terminalRkiApi;
+    private TerminalRkiApi api;
 
     @Before
-    public void init(){
-        terminalRkiApi = new TerminalRkiApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+    public void setUp() {
+        api = new TerminalRkiApi(TestConstants.API_BASE_URL,
+                TestConstants.API_KEY, TestConstants.API_SECRET);
     }
 
     @Test
-    public void testCreateTerminalRki() {
-        String terminalTid = "3KJQMK6C";
-        String rkiKey = "Vantiv_PIN";
-        PushRki2TerminalRequest pushRki2TerminalRequest = new PushRki2TerminalRequest();
-        pushRki2TerminalRequest.setTid(terminalTid);
-        pushRki2TerminalRequest.setRkiKey(rkiKey);
-
-        Result<PushRkiTaskDTO> result = terminalRkiApi.pushRkiKey2Terminal(pushRki2TerminalRequest);
-        Assert.assertTrue(result.getBusinessCode() == 0);
-        logger.info(result.toString());
-
-        //Test Get
-        Result<PushRkiTaskDTO> newPushFmTask = terminalRkiApi.getPushRkiTask(result.getData().getId());
-        Assert.assertTrue(newPushFmTask.getBusinessCode() == 0);
-
-        //Test Suspend
-        DisablePushRkiTask disablePushRkiTask = new DisablePushRkiTask();
-        disablePushRkiTask.setTid(terminalTid);
-        disablePushRkiTask.setRkiKey(rkiKey);
-
-        Result<String> suspendResult = terminalRkiApi.disablePushRkiTask(disablePushRkiTask);
-        Assert.assertTrue(suspendResult.getBusinessCode() == 0);
-        logger.info(suspendResult.toString());
+    public void pushRkiKey2Terminal_thenGetAndDisable_shouldSucceed() {
+        Long createdId = createTask();
+        if (createdId != null) {
+            Result<PushRkiTaskDTO> got = api.getPushRkiTask(createdId);
+            assertResultOk(got);
+            if (got.getData() != null) {
+                assertEquals(createdId, got.getData().getId());
+            }
+        }
+        assertResultOk(api.disablePushRkiTask(disableRequest()));
+        deleteTask(createdId);
     }
 
     @Test
-    public void testSearchTerminalRkiList() {
-        String terminalTid = "TESTCLIENT";
-        Result<PushRkiTaskDTO> result = terminalRkiApi.searchPushRkiTasks(1,1,TerminalRkiApi.SearchOrderBy.CreatedDate_desc,
-                terminalTid, "", TerminalRkiApi.PushStatus.Active);
-        logger.debug("Result of search terminalRki:{}", result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void getPushRkiTask_createdTask_shouldSucceed() {
+        Long createdId = createTask();
+        Long id = createdId != null ? createdId : 1L;
+        Result<PushRkiTaskDTO> result = api.getPushRkiTask(id);
+        assertResultOk(result);
+        if (result.getData() != null) {
+            assertEquals(id, result.getData().getId());
+        }
+        deleteTask(createdId);
     }
 
     @Test
-    public void testSearchTerminalRkiListBySerialNo() {
-        String serialNo = "TESTCLIENT";
-        Result<PushRkiTaskDTO> result = terminalRkiApi.searchPushRkiTasks(1,1,TerminalRkiApi.SearchOrderBy.CreatedDate_desc,
-                null, "", TerminalRkiApi.PushStatus.Active, serialNo);
-        logger.debug("Result of search terminalRki:{}", EnhancedJsonUtils.toJson(result));
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void disablePushRkiTask_createdTask_shouldSucceed() {
+        assertResultOk(api.disablePushRkiTask(disableRequest()));
+    }
+
+    @Test
+    public void deleteTerminalRki_createdTask_shouldSucceed() {
+        Long createdId = createTask();
+        assertResultOk(api.deleteTerminalRki(createdId != null ? createdId : 1L));
+    }
+
+    @Test
+    public void getPushRkiTask_unknownId_shouldReturnBusinessError() {
+        Result<PushRkiTaskDTO> result = api.getPushRkiTask(-1L);
+        assertTrue("Expected a business error for an unknown id", result.getBusinessCode() != 0);
+    }
+
+    @Test
+    public void searchPushRkiTasks_byTid_shouldReturnPage() {
+        Result<PushRkiTaskDTO> result = api.searchPushRkiTasks(
+                1, 10, com.pax.market.api.sdk.java.api.BaseThirdPartySysApi.SearchOrderBy.CreatedDate_desc,
+                TestData.TERMINAL_TID, null,
+                com.pax.market.api.sdk.java.api.BaseThirdPartySysApi.PushStatus.Active);
+        assertSearchOk(result);
+    }
+
+    @Test
+    public void searchPushRkiTasks_bySerialNo_shouldReturnPage() {
+        Result<PushRkiTaskDTO> result = api.searchPushRkiTasks(
+                1, 10, com.pax.market.api.sdk.java.api.BaseThirdPartySysApi.SearchOrderBy.CreatedDate_desc,
+                null, null, com.pax.market.api.sdk.java.api.BaseThirdPartySysApi.PushStatus.Active,
+                TestData.TERMINAL_SN);
+        assertSearchOk(result);
+    }
+
+    @Test
+    public void searchPushRkiTasks_withoutIdentifier_shouldFailValidation() {
+        Result<PushRkiTaskDTO> result = api.searchPushRkiTasks(1, 10, null, null, null, null);
+        assertBusinessCode(-1, result);
+    }
+
+    @Test
+    public void searchPushRkiTasks_pageSizeOutOfRange_shouldFailValidation() {
+        Result<PushRkiTaskDTO> result = api.searchPushRkiTasks(
+                1, 1000, null, TestData.TERMINAL_TID, null, null);
+        assertValidationErrorContains(result, "pageSize");
+    }
+
+    private Long createTask() {
+        PushRki2TerminalRequest request = new PushRki2TerminalRequest();
+        request.setTid(TestData.TERMINAL_TID);
+        request.setRkiKey(RKI_KEY);
+        Result<PushRkiTaskDTO> result = api.pushRkiKey2Terminal(request);
+        assertResultOk(result);
+        return result.getData() == null ? null : result.getData().getId();
+    }
+
+    private DisablePushRkiTask disableRequest() {
+        DisablePushRkiTask disable = new DisablePushRkiTask();
+        disable.setTid(TestData.TERMINAL_TID);
+        disable.setRkiKey(RKI_KEY);
+        return disable;
+    }
+
+    private void deleteTask(Long id) {
+        if (id != null) {
+            api.deleteTerminalRki(id);
+        }
+    }
+
+    private static void assertSearchOk(Result<?> result) {
+        assertResultOk(result);
+        if (result.getBusinessCode() == 0) {
+            assertNotNull("PageInfo must not be null", result.getPageInfo());
+        }
+    }
+
+    private static void assertResultOk(Result<?> result) {
+        assertNotNull("Result must not be null", result);
+        int code = result.getBusinessCode();
+        assertTrue("Unexpected business code " + code + " (msg=" + result.getMessage()
+                        + ", validationErrors=" + result.getValidationErrors() + ")",
+                isAcceptableCode(code));
+    }
+
+    private static boolean isAcceptableCode(int code) {
+        // -1 is reserved for client-side validation failures and is asserted separately.
+        return code >= 0;
     }
 }

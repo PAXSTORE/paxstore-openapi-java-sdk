@@ -1,113 +1,157 @@
-/*
- * ********************************************************************************
- * COPYRIGHT
- *               PAX TECHNOLOGY, Inc. PROPRIETARY INFORMATION
- *   This software is supplied under the terms of a license agreement or
- *   nondisclosure agreement with PAX  Technology, Inc. and may not be copied
- *   or disclosed except in accordance with the terms in that agreement.
- *
- *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
- * ********************************************************************************
- */
 package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.terminalVariable.TerminalVariableApi;
-import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariable;
-import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariableDTO;
 import com.pax.market.api.sdk.java.api.terminalVariable.dto.TerminalParameterVariableDeleteRequest;
 import com.pax.market.api.sdk.java.api.terminalVariable.dto.TerminalParameterVariableRequest;
-import org.junit.Assert;
+import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariable;
+import com.pax.market.api.sdk.java.api.variable.dto.ParameterVariableDTO;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-/**
- * @Description
- * @Author: Shawn
- * @Date: 2019/11/11 18:27
- * @Version 1.0
- */
-public class TerminalVariableApiTest {
-    private static final Logger logger = LoggerFactory.getLogger(TerminalVariableApiTest.class.getSimpleName());
+import static org.junit.Assert.*;
 
-    static TerminalVariableApi terminalVariableApi;
+/**
+ * Integration tests for {@link TerminalVariableApi}.
+ *
+ * <p>Write operations create variables for the known dev terminal using unique
+ * keys and clean up afterwards. The create API returns no id, so tests resolve
+ * ids by querying the terminal's variables for the unique key.</p>
+ */
+public class TerminalVariableApiTest extends IntegrationTestSupport {
+
+    private TerminalVariableApi api;
 
     @Before
-    public void init(){
-        terminalVariableApi = new TerminalVariableApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+    public void setUp() {
+        api = new TerminalVariableApi(TestConstants.API_BASE_URL,
+                TestConstants.API_KEY, TestConstants.API_SECRET);
+    }
+
+    private static ParameterVariable variable(String key, String value) {
+        ParameterVariable pv = new ParameterVariable();
+        pv.setKey(key);
+        pv.setValue(value);
+        pv.setRemarks("integration test " + key);
+        return pv;
+    }
+
+    private void createVariables(String... keys) {
+        List<ParameterVariable> variables = new ArrayList<>();
+        for (String key : keys) {
+            variables.add(variable(key, "value-" + key));
+        }
+        TerminalParameterVariableRequest request = new TerminalParameterVariableRequest();
+        request.setTid(TestData.TERMINAL_TID);
+        request.setVariableList(variables);
+        assertOk(api.createTerminalVariable(request));
+    }
+
+    private Long tryFindVariableIdByKey(String key) {
+        Result<ParameterVariableDTO> page = api.getTerminalVariable(
+                1, 50, null, TestData.TERMINAL_TID, null, null, key, null);
+        if (page.getBusinessCode() != 0 || page.getPageInfo() == null
+                || page.getPageInfo().getDataSet() == null) {
+            return null;
+        }
+        for (ParameterVariableDTO dto : page.getPageInfo().getDataSet()) {
+            if (key.equals(dto.getKey())) {
+                return dto.getId();
+            }
+        }
+        return null;
+    }
+
+    private Long findVariableIdByKey(String key) {
+        Long id = tryFindVariableIdByKey(key);
+        assertNotNull("Created variable not found by key: " + key, id);
+        return id;
+    }
+
+    private void deleteVariables(String... keys) {
+        for (String key : keys) {
+            Long id = tryFindVariableIdByKey(key);
+            if (id != null) {
+                api.deleteTerminalVariable(id);
+            }
+        }
     }
 
     @Test
-    public void testGetTerminalVariable(){
-        Result<ParameterVariableDTO> result = terminalVariableApi.getTerminalVariable(1,2,TerminalVariableApi.SearchOrderBy.Variable_asc,"124465D345",null,null,null,null);
-        logger.debug("Result of  terminal variable: {}",result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-
-
-    @Test
-    public void  testCreateTerminalVariable() throws IOException {
-        TerminalParameterVariableRequest createRequest = new TerminalParameterVariableRequest();
-        ParameterVariable parameterVariable1 = new ParameterVariable();
-        parameterVariable1.setKey("testUpdateVariable-key-WITHOUT-APPiD-BO");
-        parameterVariable1.setValue("testUpdateVariable-value1");
-        parameterVariable1.setRemarks("今日头条app testCreateApi3");
-        ParameterVariable parameterVariable2 = new ParameterVariable();
-        parameterVariable2.setKey("testCreateVariable1Api4-BO");
-        parameterVariable2.setValue(null);
-        parameterVariable2.setPackageName("");
-        parameterVariable2.setRemarks("今日头条app testCreateApi4");
-        List<ParameterVariable> variableList = new ArrayList<>();
-      //  variableList.add(parameterVariable1);
-        variableList.add(parameterVariable2);
-        createRequest.setTid("124465D345");
-        createRequest.setVariableList(null);
-        Result<String> createResult = terminalVariableApi.createTerminalVariable(createRequest);
-        logger.debug("Result of create terminal variable: {}",createResult.toString());
-        Assert.assertTrue(createResult.getBusinessCode() == 0);
-
+    public void getTerminalVariable_shouldReturnPage() {
+        Result<ParameterVariableDTO> result = api.getTerminalVariable(
+                1, 2, TerminalVariableApi.SearchOrderBy.Variable_asc,
+                TestData.TERMINAL_TID, null, null, null, null);
+        assertPage(result);
     }
 
     @Test
-    public void  testUpdateTerminalVariable() throws IOException {
-        Long terminalVariableId = 1000001148L;
-
-        ParameterVariable updateRequest = new ParameterVariable();
-        updateRequest.setKey("testUpdateVariable-key2-appid-BO-UPDATE");
-        updateRequest.setValue("testUpdateVariable-value1");
-        updateRequest.setRemarks("updateRemarks1");
-        updateRequest.setPackageName("com.ss.android.article.lite");
-
-        Result<String> updateResult = terminalVariableApi.updateTerminalVariable(terminalVariableId,updateRequest);
-        logger.debug("Result of update terminal variable: {}",updateResult.toString());
-        Assert.assertTrue(updateResult.getBusinessCode() == 0);
-
-    }
-
-
-    @Test
-    public void  testDeleteTerminalVariable() throws IOException {
-        Long terminalVariableId = 1000001156L;
-        Result<String> deleteResult = terminalVariableApi.deleteTerminalVariable(terminalVariableId);
-        logger.debug("Result of delete terminal variable: {}",deleteResult.toString());
-        Assert.assertTrue(deleteResult.getBusinessCode() == 0);
+    public void createTerminalVariable_shouldSucceed() {
+        String key = uniqueName("it-tv-create");
+        try {
+            createVariables(key);
+            assertNotNull(findVariableIdByKey(key));
+        } finally {
+            deleteVariables(key);
+        }
     }
 
     @Test
-    public void  testBatchDeletionTerminalVariable() throws IOException {
-        TerminalParameterVariableDeleteRequest batchDeletionRequest = new TerminalParameterVariableDeleteRequest();
-        List<Long> variableIds = new ArrayList<>();
-        variableIds.add(1000001137L);
-        variableIds.add(32423523L);
-        batchDeletionRequest.setVariableIds(variableIds);
-        Result<String> batchDeletionResult = terminalVariableApi.batchDeletionTerminalVariable(batchDeletionRequest);
-        logger.debug("Result of batch deletion terminal variable: {}",batchDeletionResult.toString());
-        Assert.assertTrue(batchDeletionResult.getBusinessCode() == 0);
+    public void updateTerminalVariable_shouldSucceed() {
+        String key = uniqueName("it-tv-update");
+        try {
+            createVariables(key);
+            Long id = findVariableIdByKey(key);
+
+            ParameterVariable update = variable(key, "updated-value");
+            assertOk(api.updateTerminalVariable(id, update));
+        } finally {
+            deleteVariables(key);
+        }
+    }
+
+    @Test
+    public void deleteTerminalVariable_shouldSucceed() {
+        String key = uniqueName("it-tv-delete");
+        createVariables(key);
+        Long id = findVariableIdByKey(key);
+        assertOk(api.deleteTerminalVariable(id));
+        assertNull("Variable should be gone after delete", tryFindVariableIdByKey(key));
+    }
+
+    @Test
+    public void batchDeletionTerminalVariable_shouldSucceed() {
+        String key1 = uniqueName("it-tv-batch-1");
+        String key2 = uniqueName("it-tv-batch-2");
+        createVariables(key1, key2);
+
+        Long id1 = findVariableIdByKey(key1);
+        Long id2 = findVariableIdByKey(key2);
+        TerminalParameterVariableDeleteRequest request = new TerminalParameterVariableDeleteRequest();
+        request.setVariableIds(Arrays.asList(id1, id2));
+        assertOk(api.batchDeletionTerminalVariable(request));
+        assertNull(tryFindVariableIdByKey(key1));
+        assertNull(tryFindVariableIdByKey(key2));
+    }
+
+    @Test
+    public void getTerminalVariable_noIdentifier_shouldFail() {
+        Result<ParameterVariableDTO> result = api.getTerminalVariable(
+                1, 10, null, null, null, null, null, null);
+        assertNotNull(result);
+        assertTrue("Request without tid/serialNo should fail, got " + result.getBusinessCode(),
+                result.getBusinessCode() != 0);
+    }
+
+    @Test
+    public void deleteTerminalVariable_invalidId_shouldFail() {
+        Result<String> result = api.deleteTerminalVariable(-1L);
+        assertNotNull(result);
+        assertTrue("Invalid id should fail, got " + result.getBusinessCode(),
+                result.getBusinessCode() != 0);
     }
 }

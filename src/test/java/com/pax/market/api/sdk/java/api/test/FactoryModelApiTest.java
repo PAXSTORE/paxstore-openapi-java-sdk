@@ -1,43 +1,44 @@
-/*
- * ********************************************************************************
- * COPYRIGHT
- *               PAX TECHNOLOGY, Inc. PROPRIETARY INFORMATION
- *   This software is supplied under the terms of a license agreement or
- *   nondisclosure agreement with PAX  Technology, Inc. and may not be copied
- *   or disclosed except in accordance with the terms in that agreement.
- *
- *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
- * ********************************************************************************
- */
 package com.pax.market.api.sdk.java.api.test;
 
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.factoryModel.FactoryModelApi;
+import com.pax.market.api.sdk.java.api.factoryModel.FactoryModelApi.SearchOrderBy;
 import com.pax.market.api.sdk.java.api.factoryModel.dto.FactoryDTO;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import static org.junit.Assert.*;
 
-public class FactoryModelApiTest {
-    private static final Logger logger = LoggerFactory.getLogger(FactoryModelApiTest.class.getSimpleName());
+/**
+ * Integration tests for {@link FactoryModelApi}.
+ */
+public class FactoryModelApiTest extends IntegrationTestSupport {
 
-    static FactoryModelApi factoryModelApi;
+    private FactoryModelApi factoryModelApi;
 
     @Before
-    public void init(){
-        factoryModelApi = new FactoryModelApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
+    public void setUp() {
+        factoryModelApi = new FactoryModelApi(TestConstants.API_BASE_URL,
+                TestConstants.API_KEY, TestConstants.API_SECRET);
     }
 
     @Test
-    public void testSearchFactoryModels(){
-        Result<FactoryDTO> result = factoryModelApi.searchFactoryModels(1,5, FactoryModelApi.SearchOrderBy.name_asc, null, null, null);
-        logger.debug("Result of  factory models: {}",result.toString());
-        Assert.assertTrue(result.getBusinessCode() == 0);
+    public void searchFactoryModels_shouldReturnPage() {
+        Result<FactoryDTO> result = factoryModelApi.searchFactoryModels(
+                1, 5, SearchOrderBy.name_asc, null, null, null);
+        assertPage(result);
     }
 
+    @Test
+    public void searchFactoryModels_byModelName_shouldReturnPage() {
+        Result<FactoryDTO> result = factoryModelApi.searchFactoryModels(
+                1, 10, SearchOrderBy.name_desc, null, TestData.MODEL_A920, null);
+        assertPage(result);
+    }
 
-
+    @Test
+    public void searchFactoryModels_pageSizeOutOfRange_shouldFailValidation() {
+        Result<FactoryDTO> result = factoryModelApi.searchFactoryModels(1, 0, null, null, null, null);
+        assertValidationErrorContains(result, "pageSize");
+    }
 }

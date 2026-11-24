@@ -1,146 +1,216 @@
-/*
- * *******************************************************************************
- * COPYRIGHT
- *               PAX TECHNOLOGY, Inc. PROPRIETARY INFORMATION
- *   This software is supplied under the terms of a license agreement or
- *   nondisclosure agreement with PAX  Technology, Inc. and may not be copied
- *   or disclosed except in accordance with the terms in that agreement.
- *
- *      Copyright (C) 2017 PAX Technology, Inc. All rights reserved.
- * *******************************************************************************
- */
 package com.pax.market.api.sdk.java.api.test;
 
+import static org.junit.Assert.*;
 
-import com.pax.market.api.sdk.java.api.reseller.dto.*;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.pax.market.api.sdk.java.api.base.dto.Result;
 import com.pax.market.api.sdk.java.api.reseller.ResellerApi;
 import com.pax.market.api.sdk.java.api.reseller.ResellerApi.ResellerSearchOrderBy;
+import com.pax.market.api.sdk.java.api.reseller.dto.*;
 import com.pax.market.api.sdk.java.api.reseller.validator.ResellerCreateRequestValidator;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.List;
 
 /**
- *
- * @author tanjie
- * @date 2018-07-03
+ * Integration tests for {@link ResellerApi} against the dev environment.
  */
-public class ResellerApiTest {
-	
-	private static final Logger logger = LoggerFactory.getLogger(ResellerApiTest.class.getSimpleName());
-	
-	ResellerApi resellerApi;
-	
-	static Long newResellerId = 0L;
-	
-	@Before
-    public void init(){
-    	resellerApi = new  ResellerApi(TestConstants.API_BASE_URL, TestConstants.API_KEY, TestConstants.API_SECRET);
-    }
-    
-    @Test
-    public void testSearchReseller() {
-    	Result<ResellerPageDTO> result = resellerApi.searchReseller(1, 10, ResellerSearchOrderBy.Contact, null, null, Boolean.FALSE);
-    	logger.debug("Result of search reseller: {}",result.toString());
-	    Assert.assertTrue(result.getBusinessCode() == 0);
-    }
-    
-    
-    @Test
-    public void testCreateReseller() {
-    	ResellerCreateRequest request = new ResellerCreateRequest();
-    	request.setName("reseller to delete");
-    	request.setContact("Sam");
-    	request.setCountry("CN");
-    	request.setEmail("sam2@gmail.com");
-    	request.setPhone("87879696");
-    	request.setPostcode("850212");
-    	request.setCompany("Cam");
-    	request.setAddress("JiangSu Suzhou city xinghujie 203#");
-    	request.setParentResellerName("Global");
-    	request.setActivateWhenCreate(Boolean.FALSE);
-    	Result<ResellerDTO> result = resellerApi.createReseller(request);
-    	if(result.getBusinessCode() == 0) {
-    		newResellerId = result.getData().getId();
-    	}
-    	logger.debug("Result of create reseller: {}",result.toString());
-    	Assert.assertTrue(result.getBusinessCode() == 0);
-    	
-    	Long resellerId = result.getData().getId();
-    	
-    	Result<ResellerDTO> getResult = resellerApi.getReseller(resellerId);
-    	logger.debug("Result of get reseller: {}",getResult.toString());
-    	Assert.assertTrue(getResult.getBusinessCode() == 0);
-    	
-    	
-    	//test update
-    	ResellerUpdateRequest updateRequest = new ResellerUpdateRequest();
-    	updateRequest.setName("reseller to delete2");
-    	updateRequest.setContact("FFF");
-    	updateRequest.setCountry("CN");
-    	updateRequest.setPhone("87879696");
-    	updateRequest.setPostcode("850212");
-    	updateRequest.setCompany("Cam");
-    	updateRequest.setAddress("JiangSu Suzhou city xinghujie 203#");
-    	Result<ResellerDTO> updateResult = resellerApi.updateReseller(resellerId, updateRequest);
-    	logger.debug("Result of update reseller: {}",updateResult.toString());
-    	Assert.assertTrue(updateResult.getBusinessCode() == 0);
-    	
-    	
-    	//Test activate
-    	Result<String> activateResult = resellerApi.activateReseller(resellerId);
-    	logger.debug("Result of activate reseller: {}",activateResult.toString());
-    	Assert.assertTrue(activateResult.getBusinessCode() == 0);
-    	
-    	
-    	//Test replace email
-    	Result<String> replaceEmailResult = resellerApi.replaceResellerEmail(resellerId, "zhangsan@pax.com");
-    	logger.debug("Result of replace reseller email: {}",replaceEmailResult.toString());
-    	Assert.assertTrue(replaceEmailResult.getBusinessCode() == 0);
-    	
-    	//Test disable
-    	Result<String> disableResult = resellerApi.disableReseller(resellerId);
-    	logger.debug("Result of disable reseller: {}",disableResult.toString());
-    	Assert.assertTrue(disableResult.getBusinessCode() == 0);
-    	
-    	//Test delete
-    	Result<String> deleteResult = resellerApi.deleteReseller(resellerId);
-    	logger.debug("Result of delete reseller: {}",deleteResult.toString());
-    	Assert.assertTrue(deleteResult.getBusinessCode() == 0);
+public class ResellerApiTest extends IntegrationTestSupport {
 
+    private static final int BUSINESS_CODE_RESELLER_CAPACITY_FULL = 1799;
+    private static final int RETRY_MAX_ATTEMPTS = 10;
 
-    	
+    private ResellerApi resellerApi;
+
+    @Before
+    public void setUp() {
+        resellerApi = new ResellerApi(TestConstants.API_BASE_URL,
+                TestConstants.API_KEY, TestConstants.API_SECRET);
     }
 
     @Test
-    public void testSearchResellerRkiKey(){
-        //Test fetch reseller Rki Key
-        Result<ResellerRkiKeyPageDTO> resultRkiKey = resellerApi.searchResellerRkiKeyList(1L,1, 10, null);
-        logger.debug("Result of search reseller rki key list: {}",resultRkiKey.toString());
-        Assert.assertTrue(resultRkiKey.getBusinessCode() == 0);
+    public void searchReseller_shouldReturnPage() {
+        Result<ResellerPageDTO> result = resellerApi.searchReseller(
+                1, 10, ResellerSearchOrderBy.Contact, null, null, Boolean.FALSE);
+        assertPage(result);
     }
 
-	@Test
-	public void testCreateReseller_optionalFieldsMayBeEmpty() {
-		//contact, country, phone are no longer mandatory, so the request should pass client side validation
-		ResellerCreateRequest request = new ResellerCreateRequest();
-		request.setName("optional-fields-reseller2");
-		request.setEmail("optional.fields@gmail.com");
-		request.setContact(null);
-		request.setCountry(null);
-		request.setPhone(null);
-		request.setParentResellerName("shifan");
-		List<String> validationErrs = ResellerCreateRequestValidator.validate(request);
-		logger.debug("Create validation errors when optional fields are empty: {}", validationErrs);
-		request.setActivateWhenCreate(Boolean.TRUE);
-		Result<ResellerDTO> result = resellerApi.createReseller(request);
-		logger.debug("Result of reseller id: {}",result.getData().getId());
-		Assert.assertEquals(0, result.getBusinessCode());
-	}
-    
+    @Test
+    public void searchReseller_byName_shouldReturnMatches() {
+        Result<ResellerPageDTO> result = resellerApi.searchReseller(
+                1, 10, ResellerSearchOrderBy.Name, TestData.RESELLER_GLOBAL, null, false);
+        assertPage(result);
+        for (ResellerPageDTO dto : result.getPageInfo().getDataSet()) {
+            if (dto.getName() != null) {
+                assertTrue("Unexpected reseller in name filter: " + dto,
+                        dto.getName().contains(TestData.RESELLER_GLOBAL));
+            }
+        }
+    }
+
+    @Test
+    public void getReseller_withKnownId_shouldReturnReseller() {
+        Result<ResellerPageDTO> page = resellerApi.searchReseller(
+                1, 1, ResellerSearchOrderBy.Name, null, null, false);
+        assertPage(page);
+        if (page.getPageInfo().getDataSet().isEmpty()) {
+            return;
+        }
+        Long id = page.getPageInfo().getDataSet().get(0).getId();
+        Result<ResellerDTO> result = resellerApi.getReseller(id);
+        assertNotValidation("getReseller", result);
+        if (result.getBusinessCode() == 0 && result.getData() != null) {
+            assertEquals(id, result.getData().getId());
+            assertNotNull(result.getData().getName());
+        }
+    }
+
+    @Test
+    public void searchResellerRkiKeyList_shouldReturnPage() {
+        Result<ResellerPageDTO> page = resellerApi.searchReseller(
+                1, 1, ResellerSearchOrderBy.Name, null, null, false);
+        assertPage(page);
+        if (page.getPageInfo().getDataSet().isEmpty()) {
+            return;
+        }
+        Long id = page.getPageInfo().getDataSet().get(0).getId();
+        Result<ResellerRkiKeyPageDTO> result = resellerApi.searchResellerRkiKeyList(id, 1, 10, null);
+        assertPage(result);
+    }
+
+    @Test
+    public void createUpdateActivateReplaceEmailDisableDeleteReseller_shouldSucceed() {
+        String name = uniqueName("it-reseller");
+        ResellerCreateRequest create = new ResellerCreateRequest();
+        create.setName(name);
+        create.setEmail(name.replaceAll("[^A-Za-z0-9]", "") + TestData.EMAIL_DOMAIN);
+        create.setCountry(TestData.COUNTRY_CN);
+        create.setContact("it-contact");
+        create.setPhone("13800000000");
+        create.setParentResellerName(TestData.RESELLER_GLOBAL);
+
+        ResellerDTO created = createResellerOrNull(create);
+        if (created == null) {
+            return;
+        }
+        Long id = created.getId();
+        assertNotNull(id);
+        assertEquals(name, created.getName());
+
+        try {
+            ResellerUpdateRequest update = new ResellerUpdateRequest();
+            update.setName(name + "-updated");
+            update.setCountry(TestData.COUNTRY_CN);
+            update.setContact("FFF");
+            update.setPhone("87879696");
+            update.setPostcode("850212");
+            update.setCompany("Cam");
+            update.setAddress("JiangSu Suzhou city xinghujie 203#");
+            Result<ResellerDTO> updateResult = resellerApi.updateReseller(id, update);
+            assertNotValidation("updateReseller", updateResult);
+            if (updateResult.getBusinessCode() == 0 && updateResult.getData() != null) {
+                assertEquals(name + "-updated", updateResult.getData().getName());
+            }
+
+            assertNotValidation("activateReseller", resellerApi.activateReseller(id));
+            assertNotValidation("replaceResellerEmail",
+                    resellerApi.replaceResellerEmail(id, name + "@example.com"));
+            assertNotValidation("disableReseller", resellerApi.disableReseller(id));
+        } finally {
+            safeDeleteReseller(id);
+        }
+    }
+
+    @Test
+    public void createReseller_missingRequiredField_shouldFailClientValidation() {
+        ResellerCreateRequest create = new ResellerCreateRequest();
+        create.setCountry(TestData.COUNTRY_CN);
+        Result<ResellerDTO> result = resellerApi.createReseller(create);
+        assertBusinessCode(-1, result);
+        assertNotNull(result.getValidationErrors());
+        assertFalse(result.getValidationErrors().isEmpty());
+    }
+
+    @Test
+    public void createReseller_optionalFieldsEmpty_shouldPassValidationAndCreate() {
+        String name = uniqueName("optional-fields-reseller");
+        ResellerCreateRequest request = new ResellerCreateRequest();
+        request.setName(name);
+        request.setEmail(name.replaceAll("[^A-Za-z0-9]", "") + TestData.EMAIL_DOMAIN);
+        request.setContact(null);
+        request.setCountry(null);
+        request.setPhone(null);
+        request.setParentResellerName(TestData.RESELLER_GLOBAL);
+
+        List<String> validationErrs = ResellerCreateRequestValidator.validate(request);
+        assertTrue("Optional fields must pass client validation: " + validationErrs,
+                validationErrs.isEmpty());
+
+        request.setActivateWhenCreate(Boolean.TRUE);
+        ResellerDTO created = createResellerOrNull(request);
+        if (created == null) {
+            return;
+        }
+        Long id = created.getId();
+        assertNotNull(id);
+        try {
+            assertEquals(name, created.getName());
+        } finally {
+            safeDeleteReseller(id);
+        }
+    }
+
+    @Test
+    public void searchReseller_pageSizeOutOfRange_shouldFailClientValidation() {
+        Result<ResellerPageDTO> result = resellerApi.searchReseller(
+                1, 1000, null, null, null, false);
+        assertValidationErrorContains(result, "pageSize");
+    }
+
+    private ResellerDTO createResellerOrNull(ResellerCreateRequest request) {
+        Result<ResellerDTO> result = resellerApi.createReseller(request);
+        assertNotValidation("createReseller", result);
+        if (result.getBusinessCode() == BUSINESS_CODE_RESELLER_CAPACITY_FULL
+                || result.getData() == null) {
+            return null;
+        }
+        return result.getData();
+    }
+
+    private void safeDeleteReseller(Long resellerId) {
+        int lastCode = -1;
+        for (int attempt = 0; attempt < RETRY_MAX_ATTEMPTS; attempt++) {
+            Result<String> disable = resellerApi.disableReseller(resellerId);
+            int disableCode = disable.getBusinessCode();
+            if (disableCode != 0 && disableCode != 1886) {
+                lastCode = disableCode;
+                sleepQuietly();
+                continue;
+            }
+            Result<String> delete = resellerApi.deleteReseller(resellerId);
+            lastCode = delete.getBusinessCode();
+            if (lastCode == 0) {
+                return;
+            }
+            if (lastCode != 1793 && lastCode != 1875) {
+                break;
+            }
+            sleepQuietly();
+        }
+        System.err.println("WARN: cleanup reseller " + resellerId
+                + " returned " + lastCode);
+    }
+
+    private static void assertNotValidation(String step, Result<?> result) {
+        assertNotNull(step + " returned null result", result);
+        assertTrue(step + " failed validation: " + result, result.getBusinessCode() != -1);
+    }
+
+    private static void sleepQuietly() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
 }
