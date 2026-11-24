@@ -17,6 +17,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import com.pax.market.api.sdk.java.api.merchant.validator.MerchantCreateRequestValidator;
+import com.pax.market.api.sdk.java.api.merchant.validator.MerchantMoveRequestValidator;
 import com.pax.market.api.sdk.java.api.merchant.validator.MerchantUpdateRequestValidator;
 import com.pax.market.api.sdk.java.api.validate.Validators;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ import com.pax.market.api.sdk.java.api.client.ThirdPartySysApiClient;
 import com.pax.market.api.sdk.java.api.constant.Constants;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantCreateRequest;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantDTO;
+import com.pax.market.api.sdk.java.api.merchant.dto.MerchantMoveRequest;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantPageResponse;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantResponseDTO;
 import com.pax.market.api.sdk.java.api.merchant.dto.MerchantUpdateRequest;
@@ -57,6 +59,7 @@ public class MerchantApi extends BaseThirdPartySysApi{
 	private static final String DISABLE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}/disable";
 	private static final String DELETE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}";
 	private static final String REPLACE_MERCHANT_EMAIL_URL = "/v1/3rdsys/merchants/{merchantId}/replaceEmail";
+	private static final String MOVE_MERCHANT_URL = "/v1/3rdsys/merchants/{merchantId}/move";
 	private static final String INVALID_ID = "parameter.id.invalid";
 	private static final String MERCHANT_ID = "merchantId";
 
@@ -202,6 +205,23 @@ public class MerchantApi extends BaseThirdPartySysApi{
 		request.setRequestBody(new Gson().toJson(requestBodyMap, Map.class));
 
 		EmptyResponse emptyResponse =  EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
+		return new Result<>(emptyResponse);
+	}
+
+	public Result<String> moveMerchant(Long merchantId, String targetResellerName) {
+		logger.debug("merchantId= {}", merchantId);
+		List<String> validationErrs = MerchantMoveRequestValidator.validate(merchantId, targetResellerName);
+		if (!validationErrs.isEmpty()) {
+			return new Result<>(validationErrs);
+		}
+		ThirdPartySysApiClient client = new ThirdPartySysApiClient(getBaseUrl(), getApiKey(), getApiSecret());
+		SdkRequest request = createSdkRequest(MOVE_MERCHANT_URL.replace("{merchantId}", merchantId.toString()));
+		request.setRequestMethod(RequestMethod.POST);
+		request.addHeader(Constants.CONTENT_TYPE, Constants.CONTENT_TYPE_JSON);
+		MerchantMoveRequest merchantMoveRequest = new MerchantMoveRequest();
+		merchantMoveRequest.setTargetResellerName(targetResellerName);
+		request.setRequestBody(new Gson().toJson(merchantMoveRequest, MerchantMoveRequest.class));
+		EmptyResponse emptyResponse = EnhancedJsonUtils.fromJson(client.execute(request), EmptyResponse.class);
 		return new Result<>(emptyResponse);
 	}
 

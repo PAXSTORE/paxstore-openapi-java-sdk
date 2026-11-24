@@ -1,7 +1,7 @@
 ## Merchant APIs
 
 The merchant APIs allow thirdparty system search merchants, get a merchant, create/update a merchant, activate/disable a
-merchant and delete a exist merchant.
+merchant, move a merchant to another reseller and delete a exist merchant.
 All the merchant APIs are in the class *com.pax.market.api.sdk.java.api.merchant.MerchantApi*.
 
 User can customize the additional attributes for merchant. To add/delete/update merchant's additional entity attributes
@@ -770,6 +770,73 @@ Result<String> result = merchantApi.replaceMerchantEmail(72593L, "zhangsan@pax.c
 |1934|The merchant is not active,unable to replace user!|This API can only update the email of active merchants|
 |1105|Email is invalid|The inputted email address is invalid|
 |1933|The user email not update.|The inputted email address is same as the original email|
+
+### Move a merchant
+
+This API is used to move a merchant to another reseller. The migration is processed asynchronously: a successful response (204) means the migration request has been accepted, not that the migration has completed.
+
+**API**
+
+```
+public Result<String> moveMerchant(Long merchantId, String targetResellerName)
+```
+
+**Input parameter(s) description**
+
+|Parameter Name|Type|Nullable|Description|
+|:---|:---|:---|:---|
+|merchantId|Long|false|Unique ID of the merchant to move, for example 1000000000|
+|targetResellerName|String|false|Name of the target reseller. Max length is 64 characters, for example "Reseller B"|
+
+**Sample codes**
+
+```
+MerchantApi merchantApi = new  MerchantApi("https://api.whatspos.com/p-market-api", "RCA9MDH6YN3WSSGPW6TJ", "TUNLDZVZECHNKZ4FW07XFCKN2W0N8ZDEA5ENKZYN");
+Result<String> result = merchantApi.moveMerchant(1000000000L, "Reseller B");
+```
+
+**Client side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": -1,
+	"validationErrors": ["Parameter targetResellerName cannot be null!"]
+}
+```
+
+**Server side validation failed sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 1720,
+	"message": "Merchant doesn't exist"
+}
+```
+
+**Successful sample result(JSON formatted)**
+
+```
+{
+	"businessCode": 0
+}
+```
+
+**Possible client validation errors**
+
+> <font color=red>Parameter merchantId cannot be null and cannot be less than 1!</font>  
+> <font color=red>Parameter targetResellerName cannot be null!</font>
+> <font color=red>Parameter targetResellerName is too long, maxlength is 64!</font>
+
+**Possible business codes**
+
+The following are common business codes related to this API; the actual code returned is defined by the server.
+
+|Business Code|Message|Description|
+|:---|:---|:---|
+|1720|Merchant doesn't exist|The specified merchant does not exist|
+|1759|Reseller doesn't exist|The target reseller was not found|
+|1773|The associated reseller is not activate|The target reseller is not active|
+|1927|The merchant is not inactive,reseller cannot be updated!|The merchant cannot be moved in its current status|
 
 
 
